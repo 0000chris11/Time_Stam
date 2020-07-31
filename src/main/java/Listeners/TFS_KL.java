@@ -1,0 +1,191 @@
+package Listeners;
+
+import First.VF_R;
+import MC.DT;
+import MC.MM;
+import MC.MethodM;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Christopher
+ */
+public class TFS_KL implements KeyListener {
+
+      String CName = this.getClass().getName();
+      
+      //private MethodM mm = new MethodM(CName, DT.CCount++);
+      //private Data dt = new Data("TFS_KL");
+
+      private final Color[] C = new Color[]{new Color(51, 51, 51), new Color(0, 0, 51),
+            new Color(0, 0, 81)};
+
+      private final ArrayList<String>[] listsD = new ArrayList[5];
+      private final ArrayList<String>[] listsS = new ArrayList[4];
+      int[] sizeS = new int[]{DT.getList_S23().size(), DT.getList_S34().size(),
+            DT.getList_S45().size(), DT.getList_S56().size()};
+
+      private int SC = -1;
+
+      public TFS_KL(int sc) {
+            SC = sc;
+
+            listsD[0] = DT.getListD_2();
+            listsD[1] = DT.getListD_3();
+            listsD[2] = DT.getListD_4();
+            listsD[3] = DT.getListD_5();
+            listsD[4] = DT.getListD_6();
+
+            listsS[0] = DT.getList_S23();
+            listsS[1] = DT.getList_S34();
+            listsS[2] = DT.getList_S45();
+            listsS[3] = DT.getList_S56();
+      }
+
+      @Override
+      public void keyTyped(KeyEvent evt) {
+            //System.out.println("keyTyped");
+      }
+
+      @Override
+      public void keyPressed(KeyEvent evt) {
+            //System.out.println("keyPressed");
+            //int sizeC = dt.getList_C().size();
+            if (KeyEvent.VK_DOWN == evt.getKeyCode()) {
+                  if (evt.isControlDown()) {
+                        //System.out.println("CRTL + DOWN");
+                        changeFocusDown();
+                  }
+            } else if (KeyEvent.VK_UP == evt.getKeyCode()) {
+                  if (evt.isControlDown()) {
+                        //System.out.println("CRTL + UP");
+                        changeFocusUp();
+                  }
+            } else if (KeyEvent.VK_RIGHT == evt.getKeyCode()) {
+                  if (evt.isControlDown()) {
+                        //System.out.println("\tCTRL + RIGHT");
+                        for (int a = 1; a < 6; a++) {
+                              if (VF_R.getJTFS()[a].hasFocus()) {
+                                    VF_R.getTFS_MD()[a - 1].requestFocus();
+                              }
+                        }
+                  }
+            } else if (KeyEvent.VK_LEFT == evt.getKeyCode()) {
+                  if (evt.isControlDown()) {
+                        //System.out.println("\tCTRL + LEFT");
+                        for (int a = 1; a < 6; a++) {
+                              if (VF_R.getJTFS()[a].hasFocus()) {
+                                    VF_R.getTFS_SU()[a - 1].requestFocus();
+                              }
+                        }
+                  }
+            }
+      }
+
+      @Override
+      public void keyReleased(KeyEvent evt) {
+            //System.out.println("keyReleased");
+            if (KeyEvent.VK_RIGHT == evt.getKeyCode()) {
+            } else if (KeyEvent.VK_LEFT == evt.getKeyCode()) {
+            } else {
+                  TFAllButR_L(evt);
+            }
+
+      }
+      //++++++++++++++++++++++++++++++++++++++++
+      private void changeFocusDown() {
+            for (int a = 0; a < SC; a++) {
+                  //System.out.println("\tDOWN// B: a = " + a);
+                  if (a == 0) {//Without asking for background
+                        if (VF_R.getJTFS()[a].hasFocus()) {
+                              //System.out.println("\tDOWN// tf_1 has the focus");
+                              VF_R.getJTFS()[a + 1].requestFocus();
+                        }
+                  } else if (a == SC - 1) {//Last one to the First one                  
+                        //if (VF_R.getJTFS()[a].getBackground().equals(C)) {
+                        if (VF_R.getJTFS()[a].hasFocus()) {
+                              //System.out.println("\tDOWN// Last One to First One");
+                              VF_R.getJTFS()[0].requestFocus();
+                        }
+                        //}
+                  } else {
+                        //if (VF_R.getJTFS()[a].getBackground().equals(C)) {
+                        if (VF_R.getJTFS()[a].hasFocus()) {
+                              //System.out.println("\tDOWN// normal");
+                              VF_R.getJTFS()[a + 1].requestFocus();
+                        }
+                        //}
+                  }
+            }
+      }
+
+      private void changeFocusUp() {
+            //System.out.println("SC Size = " + SC);
+            for (int a = 0; a < SC; a++) {
+                  //System.out.println("\tUP// B: a = " + a);
+                  if (a == 0) {//Without asking for background && First to the Last one
+                        if (VF_R.getJTFS()[a].hasFocus()) {
+                              //System.out.println("\tUP// First One to Last One");
+                              VF_R.getJTFS()[SC - 1].requestFocus();
+                        }
+                  } else {
+                        //if (VF_R.getJTFS()[a].getBackground().equals(C)) {
+                        if (VF_R.getJTFS()[a].hasFocus()) {
+                              //System.out.println("\tUP// normal");
+                              VF_R.getJTFS()[a - 1].requestFocus();
+                        }
+                        //}
+                  }
+            }
+      }
+
+      private void TFAllButR_L(KeyEvent evt) {
+            if (!evt.isControlDown()) {
+                  //System.out.println("\tKEY: BUT LEFT & RIGHT");
+
+                  if (VF_R.getJTFS()[0].hasFocus()) {
+                        MM.keyReleasedN_T(VF_R.getJTFS()[0], evt);
+                  }
+                  if (VF_R.getJTFS()[1].hasFocus()) {
+                        //System.out.println("\t\tTF_2");
+                        if (VF_R.getJTFS()[1].getBackground().equals(C[1])
+                                || VF_R.getJTFS()[1].getBackground().equals(C[2])) {
+                              MM.tf_ConfigDists_K(VF_R.getJLBS()[1],
+                                      VF_R.getJTFS()[1], VF_R.getJLSTS()[0],
+                                      listsD[0], evt);
+                        } else {
+                              MM.keyReleasedN_T(VF_R.getJTFS()[1], evt);
+                        }
+                  } else {
+                        //++++++++++++++++++++++++++++++++++++++++++++
+                        for (int a = 2; a < 6; a++) {
+                              if (VF_R.getJTFS()[a].hasFocus()) {
+                                    //System.out.println("\t\tTF_" + (a + 1));
+                                    if (VF_R.getJTFS()[a].getBackground().equals(C[1])
+                                            || VF_R.getJTFS()[a].getBackground().equals(C[2])) {
+                                          if (sizeS[a - 2] > 0) {
+                                                //System.out.println("\t\tTF_" + (a + 1) + " KeyReleased FUSED");
+                                                MM.tf_ConfigDists_K(VF_R.getJLBS()[a],
+                                                        VF_R.getJTFS()[a - 1], VF_R.getJTFS()[a],
+                                                        VF_R.getJLSTS()[a - 1],
+                                                        listsS[a - 2], evt);
+                                          } else {
+                                                //System.out.println("\t\tTF_" + (a + 1) + " KeyReleased NORMAL");
+                                                MM.tf_ConfigDists_K(VF_R.getJLBS()[a],
+                                                        VF_R.getJTFS()[a - 1], VF_R.getJTFS()[a],
+                                                        VF_R.getJLSTS()[a - 1],
+                                                        listsD[a - 1], evt);
+                                          }
+                                    } else {
+                                          MM.keyReleasedN_T(VF_R.getJTFS()[a], evt);
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+
+}
