@@ -1,6 +1,6 @@
 package Listeners;
 
-import First.DataCom;
+import First.VF_R_DataCom;
 import First.VF_R;
 import MC.DT;
 import MC.MM;
@@ -33,7 +33,8 @@ public class MIOptions_IL implements ActionListener {
             //+++++++++++++++++++++++++
             if (e.getActionCommand().contains("Save")) {
                   //Data dt = new Data("MIOptions_IL");
-                  MakeCon mc = new MakeCon();
+                  MakeCon mc = new MakeCon(this.getClass().getName(), 
+                          DT.CCount++);
 
                   if (VF_R.getMI_AOT().getState() != DT.getList_BL().get(0)) {
                         mc.UpdateConfig(VF_R.getMI_AOT().getState(), 1);

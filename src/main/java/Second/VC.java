@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  *
  * @author Christopher
  */
-public class View_Create extends javax.swing.JFrame {
+public class VC extends javax.swing.JFrame {
 
       Connection con;
 
@@ -39,7 +39,7 @@ public class View_Create extends javax.swing.JFrame {
       int i;
 
       VF vf = new VF();
-      //Data dt = new Data("View_Create");
+      //Data dt = new Data("VC");
 
       private void listConvert(ArrayList<String> list_then, ArrayList<String> list_now) {
             for (int a = 0; a < list_then.size(); a++) {
@@ -320,11 +320,11 @@ public class View_Create extends javax.swing.JFrame {
             t1.start();
       }
 
-      public View_Create() {
+      public VC() {
 
       }
 
-      public View_Create(ArrayList<String> tables, ArrayList<String> dists1,
+      public VC(ArrayList<String> tables, ArrayList<String> dists1,
               ArrayList<String> dists2, ArrayList<String> tabls, ArrayList<String> tags1,
               ArrayList<String> tags2) {
             //list_Table = tables;
@@ -960,20 +960,21 @@ public class View_Create extends javax.swing.JFrame {
                         }
                   }
             } catch (ClassNotFoundException ex) {
-                  java.util.logging.Logger.getLogger(View_Create.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                  java.util.logging.Logger.getLogger(VC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             } catch (InstantiationException ex) {
-                  java.util.logging.Logger.getLogger(View_Create.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                  java.util.logging.Logger.getLogger(VC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             } catch (IllegalAccessException ex) {
-                  java.util.logging.Logger.getLogger(View_Create.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                  java.util.logging.Logger.getLogger(VC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                  java.util.logging.Logger.getLogger(View_Create.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                  java.util.logging.Logger.getLogger(VC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
+            //</editor-fold>
             //</editor-fold>
 
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                   public void run() {
-                        new View_Create().setVisible(true);
+                        new VC().setVisible(true);
                   }
             });
       }

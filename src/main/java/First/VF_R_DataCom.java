@@ -38,7 +38,7 @@ import smallComponenets.smallMenu;
  *
  * @author Christopher
  */
-public class DataCom {
+public class VF_R_DataCom {
 
       //Data dt = new Data();
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -116,9 +116,9 @@ public class DataCom {
       JMenu JM_Table = new JMenu("Table");
       static JMenu JMS_ChangeDTable = new JMenu("Change Default Table");
       Separator sep3 = new Separator();
-      JMenuItem mi_CreateTable = new JMenuItem("Create Table");
-      JMenuItem mi_UpdateTable = new JMenuItem("Update Table");
-      JMenuItem mi_DeleteTable = new JMenuItem("Delete Table");
+      static JMenuItem mi_CreateTable = new JMenuItem("Create Table");
+      static JMenuItem mi_UpdateTable = new JMenuItem("Update Table");
+      static JMenuItem mi_DeleteTable = new JMenuItem("Delete Table");
       //+++++++++++++++++++++++++++++++++++
       static JButton btn_minus = new smallBTN_C("-");
       static JButton btn_plus = new smallBTN_C("+");
@@ -286,7 +286,18 @@ public class DataCom {
       public static JMenu getJMS_ShowListeners() {
             return JMS_ShowListeners;
       }
+      
+      public static JMenuItem getMI_CreateTable(){
+            return mi_CreateTable;
+      }
 
+      public static JMenuItem getMI_UpdateTable(){
+            return mi_UpdateTable;
+      }
+      
+      public static JMenuItem getMI_DeleteTable(){
+            return mi_DeleteTable;
+      }
       //+++++++++++++++++++++++++++++++++++++++++++++++++
       public static JMenuItem getMI_SEEL() {
             return mi_seeL;

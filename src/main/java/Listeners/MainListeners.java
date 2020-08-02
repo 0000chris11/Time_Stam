@@ -39,6 +39,8 @@ public class MainListeners {
             addItemListenersToMIS();
 
             addActionListenerToBTNS_MC();
+            addActionListenerToBTNS_P_M();
+            addActionListenerToMITable();
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
@@ -194,6 +196,12 @@ public class MainListeners {
             }
             //System.out.println("\tEND OF addActionListenerToBTNS_MC");
       }
+      
+      private void addActionListenerToBTNS_P_M(){
+            BTNS_TBActionListener BTNS_TB = new BTNS_TBActionListener();
+            VF_R.getBTN_PLUS().addActionListener(BTNS_TB);
+            VF_R.getBTN_MINUS().addActionListener(BTNS_TB);
+      }
 
       ///================================================
       private void addFocusListenersToJC_PC() {
@@ -270,6 +278,12 @@ public class MainListeners {
             VF_R.getSaveOp().addActionListener(mio);
       }
 
+      private void addActionListenerToMITable(){
+            MITableActionListener MITAL = new MITableActionListener();
+            VF_R.getMI_CreateTable().addActionListener(MITAL);
+            VF_R.getMI_UpdateTable().addActionListener(MITAL);
+            VF_R.getMI_DeleteTable().addActionListener(MITAL);
+      }
       //================================================
       private void addKeyListenerToLSTS() {
 

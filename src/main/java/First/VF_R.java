@@ -1,9 +1,9 @@
 package First;
 
-import static First.DataCom.JT;
-import static First.DataCom.btn_plus;
-import static First.DataCom.p1;
-import static First.DataCom.tfs;
+import static First.VF_R_DataCom.JT;
+import static First.VF_R_DataCom.btn_plus;
+import static First.VF_R_DataCom.p1;
+import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import java.sql.Connection;
 import MC.*;
@@ -65,7 +65,7 @@ import net.miginfocom.swing.MigLayout;
  *
  * @author Christopher
  */
-public class VF_R extends DataCom {
+public class VF_R extends VF_R_DataCom {
 
       //Connection con;
       String CName = this.getClass().getName();
@@ -103,18 +103,22 @@ public class VF_R extends DataCom {
                   for (int a = 0; a < JMS_ChangeDTable.getItemCount(); a++) {
                         String itemText = JM_Select.getItem(a).getText();
                         //System.out.println(CC.PURPLE + "ItemText: " + itemText + CC.RESET);
-                        //System.out.println(CC.PURPLE + "\tdt.getTable: " + dt.getTable() + CC.RESET);
-                        //System.out.println(CC.PURPLE + "\tdt.getDTable: " + dt.getDTable() + CC.RESET);
-                        if (itemText.contains(table) && 
-                                itemText.contains(dtable)) {
+                        //System.out.println(CC.PURPLE + "\tdt.getTable: " + DT.getTable() + CC.RESET);
+                        //System.out.println(CC.PURPLE + "\tdt.getDTable: " + DT.getDTable() + CC.RESET);
+                        if(itemText.contains(" ")){
+                              itemText = itemText.replaceAll(" ", "_");
+                        }
+                        
+                        if (itemText.equals(table) && 
+                                itemText.equals(dtable)) {
                               JM_Select.getItem(a).setBackground(new Color(100, 100, 100));
                               JMS_ChangeDTable.getItem(a).setBackground(new Color(100, 100, 100));
-                        }else if(itemText.contains(table) && 
-                                !itemText.contains(dtable)){
+                        }else if(itemText.equals(table) && 
+                                !itemText.equals(dtable)){
                               JM_Select.getItem(a).setBackground(new Color(50, 50, 50));
                               JMS_ChangeDTable.getItem(a).setBackground(new Color(50, 50, 50));
-                        }else if(!itemText.contains(table) &&
-                                itemText.contains(dtable)){
+                        }else if(!itemText.equals(table) &&
+                                itemText.equals(dtable)){
                               JM_Select.getItem(a).setBackground(new Color(80, 80, 80));
                               JMS_ChangeDTable.getItem(a).setBackground(new Color(80, 80, 80));
                         }
@@ -529,7 +533,7 @@ public class VF_R extends DataCom {
             //System.out.println("Toolbar UI: " + TB.getUI());
             //MetalButtonUI mbUI = new MetalButtonUI();
             TB.add(btns_TB[0]);
-            btns_TB[0].setBounds(4, 8, 32, 30);//+30Y
+            btns_TB[0].setBounds(6, 8, 32, 30);//+30Y
             btns_TB[0].setEnabled(true);
             //mm.setImageIcon(btns_TB[0], "C:\\C0F\\Image\\X Icons\\H small.png");
             //+++++++++++++++++++++++++++++++
@@ -538,10 +542,10 @@ public class VF_R extends DataCom {
             TB.add(btn_minus);
             TB.add(btn_plus);
             //btn_minus.setUI(mbUI);
-            btn_minus.setBounds(4, 44, 32, 20);
+            btn_minus.setBounds(6, 44, 32, 20);
             btn_minus.setMargin(in);
             //btn_plus.setUI(mbUI);
-            btn_plus.setBounds(4, 70, 32, 20);
+            btn_plus.setBounds(6, 70, 32, 20);
             btn_plus.setMargin(in);
             //btn_minus.setBackground(new ColorUIResource(238,238,238));
             //btn_plus.setBackground(null);

@@ -1,6 +1,6 @@
 package First;
 
-import static First.DataCom.btn_plus;
+import static First.VF_R_DataCom.btn_plus;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,7 +38,7 @@ public class VT {
             new JButton("Ad to TB"),
             new JButton("getP1 UI"),
             new JButton("add Gradient"),
-            new JButton("BTNS_MC Listeners")};
+            new JButton("BTNS plus and minus Listeners")};
       int count = 0;
 
       public VT() {
@@ -111,18 +111,29 @@ public class VT {
 
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
-                        for (int a = 0; a < VF_R.getBTNS_MC().length; a++) {
-                              System.out.println("\tName: " + VF_R.getBTNS_MC()[a].getName());
-                              int length = VF_R.getBTNS_MC()[a].getActionListeners().length;
+                        
+                              System.out.println("\tName: " + VF_R.getBTN_PLUS().getName());
+                              int length = VF_R.getBTN_PLUS().getActionListeners().length;
                               if (length == 0) {
                                     System.out.println("\t\tlenght is 0");
                               } else {
                                     for (int b = 0; b < length; b++) {
                                           System.out.println("\t\t" + b + ": " + 
-                                                  VF_R.getBTNS_MC()[a].getActionListeners()[b].getClass());
+                                                  VF_R.getBTN_PLUS().getActionListeners()[b].getClass());
                                     }
                               }
-                        }
+                              //+++++++++++
+                              System.out.println("\tName: " + VF_R.getBTN_MINUS().getName());
+                              int length2 = VF_R.getBTN_MINUS().getActionListeners().length;
+                              if (length2 == 0) {
+                                    System.out.println("\t\tlenght is 0");
+                              } else {
+                                    for (int b = 0; b < length2; b++) {
+                                          System.out.println("\t\t" + b + ": " + 
+                                                  VF_R.getBTN_MINUS().getActionListeners()[b].getClass());
+                                    }
+                              }
+                        
 
                   }
             }
