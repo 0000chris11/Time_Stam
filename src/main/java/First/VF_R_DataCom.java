@@ -31,6 +31,7 @@ import java.util.EventObject;
 import javax.swing.JProgressBar;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
+import smallComponenets.PanelGradient;
 import smallComponenets.smallBTN_C;
 import smallComponenets.smallMenu;
 
@@ -44,23 +45,7 @@ public class VF_R_DataCom {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
       static JFrame JF = new JFrame();
 
-      static JPanel p1 = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                  //System.out.println("painComponent");
-                  //System.out.println("\tpaintComponent");
-                  Graphics2D g2 = (Graphics2D) g;
-                  //if (g2 != null) {
-                  //System.out.println("\tENTER");
-                  g2.setPaint(new GradientPaint(
-                          0, 0, DT.GP_darkRed[0],
-                          getWidth(), getHeight(),
-                          DT.GP_darkRed[1]));
-                  g2.fillRect(0, 0, getWidth(), getHeight());
-                  //}
-                  super.paintComponents(g);
-            }
-      };
+      static JPanel p1 = new PanelGradient();
       static JScrollPane sc_p1 = new JScrollPane(p1);
 
       static JPanel pt = new JPanel();

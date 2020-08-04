@@ -7,6 +7,7 @@ package Listeners;
 
 import First.VF_R;
 import Second.VC;
+import Second.VC_R;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +24,7 @@ public class MITableActionListener implements ActionListener{
             
             if(ac.equals(VF_R.getMI_CreateTable().getText())){
                   System.out.println("\t" + VF_R.getMI_CreateTable().getText());
-                  new VC();
+                  new VC_R();
             }else if(ac.equals(VF_R.getMI_UpdateTable().getText())){
                   System.out.println("\t" + VF_R.getMI_UpdateTable().getText());
                   

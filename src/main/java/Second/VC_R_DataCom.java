@@ -5,8 +5,13 @@
  */
 package Second;
 
+import MC.DT;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import smallComponenets.PanelGradient;
 
 /**
  *
@@ -14,7 +19,14 @@ import javax.swing.JPanel;
  */
 public class VC_R_DataCom {
       
-      JFrame JF = new JFrame();
+      JFrame JF = new JFrame("Create Table");
       
-      JPanel JP = new JPanel();
+      JPanel JP = new PanelGradient();
+      
+      JLabel[] lbs = new JLabel[DT.maxColumns];
+      
+      JTextField[] tfs = new JTextField[DT.maxColumns];
+      
+      JButton[] btns_p = new JButton[DT.maxColumns];
+      JButton[] btns_m = new JButton[DT.maxColumns];
 }
