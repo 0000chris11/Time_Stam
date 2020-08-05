@@ -31,7 +31,7 @@ public class smallBTN_C extends JButton {
       int H;
       GradientPaint[] GPS = new GradientPaint[3];
       Shape Outline;
-      
+
       ImageIcon ii = new ImageIcon("C:\\C0F\\Image\\X Icons\\H small.png");
 
       @Override
@@ -46,7 +46,7 @@ public class smallBTN_C extends JButton {
                         //System.out.println("\tNORMAL");
                         g2.setPaint(GPS[0]);
                   }
-            }else{
+            } else {
                   g2.setPaint(GPS[2]);
             }
             g2.fillRect(0, 0, getWidth(), getHeight());
@@ -54,11 +54,13 @@ public class smallBTN_C extends JButton {
                   //System.out.println("\tShape: " + Outline);
                   //System.out.println("\tG2: " + g2);
                   setCenter(g2, Outline, getWidth(), getHeight());
-            }else{
-                  if(getName().equals("BTN_H")){
-                        //g2.drawImage(img, W, W, this)
-                        g2.drawImage(ii.getImage(), -1, 4, null);
-                        
+            } else {
+                  if (getName() != null) {
+                        if (getName().equals("BTN_H")) {
+                              //g2.drawImage(img, W, W, this)
+                              g2.drawImage(ii.getImage(), -1, 4, null);
+
+                        }
                   }
             }
             super.paintComponents(g);
@@ -91,7 +93,7 @@ public class smallBTN_C extends JButton {
             g2.setRenderingHint(RenderingHints.KEY_RENDERING,
                     RenderingHints.VALUE_RENDER_QUALITY);
 
-            g2.setColor(new Color(0,0,0,255));
+            g2.setColor(new Color(0, 0, 0, 255));
             g2.translate(x, y);
             g2.draw(shape);
             g2.translate(-x, -y);
@@ -101,7 +103,7 @@ public class smallBTN_C extends JButton {
 
             g2.setRenderingHint(RenderingHints.KEY_RENDERING,
                     RenderingHints.VALUE_RENDER_QUALITY);
-            
+
             g2.setColor(new Color(204, 0, 0, 220));
             g2.setFont(F);
             g2.drawString(Title, x, y);
@@ -139,7 +141,7 @@ public class smallBTN_C extends JButton {
                                     GPS[1]
                                             = new GradientPaint(0, 0, Data.GP_brightCeleste[0],
                                                     W, H, Data.GP_brightCeleste[1].darker());
-                                    
+
                                     GPS[2]
                                             = new GradientPaint(0, 0, Data.GP_brightCeleste[0].darker(),
                                                     W, H, Data.GP_brightCeleste[1].darker());

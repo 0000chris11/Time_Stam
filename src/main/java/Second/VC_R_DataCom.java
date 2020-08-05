@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import smallComponenets.PanelGradient;
 
@@ -29,4 +30,6 @@ public class VC_R_DataCom {
       
       JButton[] btns_p = new JButton[DT.maxColumns];
       JButton[] btns_m = new JButton[DT.maxColumns];
+      
+      JSeparator SP1 = new JSeparator();
 }
