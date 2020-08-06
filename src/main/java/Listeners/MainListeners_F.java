@@ -2,6 +2,7 @@ package Listeners;
 
 import First.VF_R;
 import MC.DT;
+import Second.VC_R;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JList;
@@ -11,9 +12,9 @@ import javax.swing.ListSelectionModel;
  *
  * @author Christopher
  */
-public class MainListeners {
+public class MainListeners_F {
 
-      //Data dt = new Data("MainListeners");
+      //Data dt = new Data("MainListeners_F");
 
       public void addAllListenerLoop() {
             addTableModelListenerToJT();
@@ -205,7 +206,7 @@ public class MainListeners {
 
       ///================================================
       private void addFocusListenersToJC_PC() {
-            JC_FL jcfl = new JC_FL();
+            FocusBorder jcfl = new FocusBorder();
             for (int a = 0; a < VF_R.getJTFS().length; a++) {
                   VF_R.getJTFS()[a].addFocusListener(jcfl);
                   if (a != 0) {

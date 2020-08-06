@@ -1,6 +1,7 @@
 package Second;
 
 import First.VF_R;
+import Listeners.MainListeners_C;
 import MC.DT;
 import Others.CC;
 import java.awt.Color;
@@ -16,6 +17,8 @@ import smallComponenets.smallTF;
  * @author Christopher
  */
 public class VC_R extends VC_R_DataCom {
+
+      MainListeners_C ml = new MainListeners_C();
 
       private void frameConfig() {
             VF_R.getJF().setAlwaysOnTop(false);
@@ -66,7 +69,7 @@ public class VC_R extends VC_R_DataCom {
                         lbs[a].setBounds(6, 12, 100, 27);
                   } else {
                         lbs[a].setBounds(6, lby, 100, 27);
-                        lbs[a].setText("Column " + (a + 2));
+                        lbs[a].setText("Column " + (a + 1));
                   }
                   tfs[a] = new smallTF();
                   JP.add(tfs[a]);
@@ -74,13 +77,13 @@ public class VC_R extends VC_R_DataCom {
                   if (a >= 1) {
                         tfs[a].setBounds(108, lby, 200, 27);
 
-                        btns_m[a] = new smallBTN_C(null);
+                        btns_m[a] = new smallBTN_C("-");
                         JP.add(btns_m[a]);
-                        btns_m[a].setLocation(314, lby);
+                        btns_m[a].setBounds(314, lby, 22, 27);
 
-                        btns_p[a] = new smallBTN_C(null);
+                        btns_p[a] = new smallBTN_C("+");
                         JP.add(btns_p[a]);
-                        btns_p[a].setLocation(336, lby);
+                        btns_p[a].setBounds(336, lby, 22, 27);
                   } else {
                         tfs[a].setBounds(108, 12, 200, 27);
                   }
@@ -88,27 +91,43 @@ public class VC_R extends VC_R_DataCom {
                   lby += 33;
             }
             JP.add(SP1);
-            SP1.setBounds(4,tfs[1].getY() - 10, JP.getWidth() - 10, 1);
+            SP1.setBounds(4, tfs[1].getY() - 10, JP.getWidth() - 10, 1);
             SP1.setForeground(Color.LIGHT_GRAY);
+      }
+
+      private void componentsConfig2() {
+            for (int a = 0; a < DT.maxColumns - 2; a++) {
+                  lbs[a + 2].setVisible(false);
+                  tfs[a + 2].setVisible(false);
+                  btns_m[a + 2].setVisible(false);
+                  btns_p[a + 2].setVisible(false);
+            }
+            btns_m[1].setEnabled(false);
+            btns_p[DT.maxColumns - 1].setEnabled(false);
       }
 
       private void setNameToComponents() {
             for (int a = 0; a < DT.maxColumns; a++) {
-                  lbs[a].setName("LB_" + (a + 2));
-                  //tfs[a].setName("TF_" + (a + 2));
-                  //btns_p[a].setName("BNT_P" + (a + 2));
-                  //btns_m[a].setName("BNT_M" + (a + 2));
+                  if (a == 0) {
+                        lbs[a].setName("LB_Title");
+                        tfs[a].setName("TF_Title");
+                  } else {
+                        lbs[a].setName("LB_" + (a + 1));
+                        tfs[a].setName("TF_" + (a + 1));
+                        btns_p[a].setName("BNT_P" + (a + 1));
+                        btns_m[a].setName("BNT_M" + (a + 1));
+                  }
             }
       }
 
       public VC_R() {
             frameConfig();
             componentsConfig();
+            componentsConfig2();
+
             setNameToComponents();
 
-            System.out.println(CC.PURPLE + "Parent: " + lbs[0].getParent() + CC.RESET);
-            System.out.println(CC.PURPLE + "Bounds: " + lbs[0].getBounds() + CC.RESET);
-            System.out.println(CC.PURPLE + "Font: " + lbs[0].getFont() + CC.RESET);
+            ml.addAllListeners();
 
       }
 }

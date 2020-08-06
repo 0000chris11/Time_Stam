@@ -13,7 +13,7 @@ import javax.swing.JComponent;
  *
  * @author Christopher
  */
-public class JC_FL implements FocusListener{
+public class FocusBorder implements FocusListener{
 
       @Override
       public void focusGained(FocusEvent evt) {

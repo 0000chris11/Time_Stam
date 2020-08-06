@@ -7,7 +7,7 @@ import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import java.sql.Connection;
 import MC.*;
-import Listeners.MainListeners;
+import Listeners.MainListeners_F;
 import Listeners.MIActionListener;
 import Listeners.MIShow_AL;
 import Listeners.MIV_AL;
@@ -75,7 +75,7 @@ public class VF_R extends VF_R_DataCom {
       notMyMethods n_mm = new notMyMethods();
       //Data dt = new Data("VF_R");
       Status st = new Status();
-      MainListeners ml = new MainListeners();
+      MainListeners_F ml = new MainListeners_F();
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);
       //ArraysM am = new ArraysM();

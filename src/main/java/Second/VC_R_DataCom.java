@@ -24,12 +24,30 @@ public class VC_R_DataCom {
       
       JPanel JP = new PanelGradient();
       
-      JLabel[] lbs = new JLabel[DT.maxColumns];
+      static JLabel[] lbs = new JLabel[DT.maxColumns];
       
-      JTextField[] tfs = new JTextField[DT.maxColumns];
+      static JTextField[] tfs = new JTextField[DT.maxColumns];
       
-      JButton[] btns_p = new JButton[DT.maxColumns];
-      JButton[] btns_m = new JButton[DT.maxColumns];
+      static JButton[] btns_p = new JButton[DT.maxColumns];
+      static JButton[] btns_m = new JButton[DT.maxColumns];
       
       JSeparator SP1 = new JSeparator();
+      
+      //++++++++++++++++++++++++++++++++++++++++++
+      
+      public static JLabel[] getJLBS(){
+            return lbs;
+      }
+      
+      public static JTextField[] getJTFS(){
+            return tfs;
+      }
+      
+      public static JButton[] getJBTNS_P(){
+            return btns_p;
+      }
+      public static JButton[] getJBTNS_M(){
+            return btns_m;
+      }
+      
 }
