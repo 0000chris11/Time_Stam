@@ -7,8 +7,11 @@ import Others.CC;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import smallComponenets.smallBTN_C;
+import smallComponenets.smallBTN_TG;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
 
@@ -29,28 +32,10 @@ public class VC_R extends VC_R_DataCom {
 
             JF.add(JP);
             JP.setLayout(null);
-            JP.setBounds(2, 2, 600, 500);
+            JP.setBounds(2, 2, 800, 500);
 
             JF.setSize(JP.getWidth() + 20, JP.getHeight() + 44);
             JF.setVisible(true);
-            /*
-            JF.setAlwaysOnTop(true);
-            new Thread() {
-                  public void run() {
-                        do {
-                              try {
-                                    Thread.sleep(500);
-                              } catch (InterruptedException ex) {
-                                    ex.printStackTrace();
-                              }
-                              if (VC_R.this.JF.isShowing()) {
-                                    System.out.println(CC.PURPLE + "VC_R False" + CC.RESET);
-                                    JF.setAlwaysOnTop(false);
-                              }
-                        } while (!VC_R.this.JF.isShowing());
-                  }
-            }.start();
-             */
       }
 
       private void componentsConfig() {
@@ -90,11 +75,60 @@ public class VC_R extends VC_R_DataCom {
                   //++++++++++++++
                   lby += 33;
             }
-            JP.add(SP1);
-            SP1.setBounds(4, tfs[1].getY() - 10, JP.getWidth() - 10, 1);
-            SP1.setForeground(Color.LIGHT_GRAY);
+            JP.add(SP_H1);
+            SP_H1.setBounds(4, tfs[1].getY() - 10, JP.getWidth() - 10, 1);
+            SP_H1.setForeground(Color.LIGHT_GRAY);
+            
+            JP.add(SP_V1);
+            SP_V1.setOrientation(SwingConstants.VERTICAL);
+            SP_V1.setBounds(btns_p[1].getX() + btns_p[1].getWidth() + 6, 
+                    4, 1, JP.getHeight() - 10);
+            SP_V1.setForeground(Color.LIGHT_GRAY);
+            //++++++++++++++++++++++++++++++
+            int y = 10;
+            int w = 80;
+            int h = 27;
+            JP.add(lb_Dist);
+            lb_Dist.setBounds(SP_V1.getX() + 12, y, w, h);
+            
+            JP.add(lb_Dist2);
+            lb_Dist2.setBounds(lb_Dist.getX() + 80, y, w, h);
+            
+            JP.add(lb_Tabl);
+            lb_Tabl.setBounds(lb_Dist2.getX() + 80, y, w, h);
+            
+            JP.add(lb_Tag);
+            lb_Tag.setBounds(lb_Tabl.getX() + 80, y, w, h);
+            
+            JP.add(lb_Clock);
+            lb_Clock.setBounds(lb_Tag.getX() + 80, y, w, h);
+                  
+            int xs = SP_V1.getX() + 80;
+            for(int a = 0; a < SP_VS.length; a++){
+                  SP_VS[a] = new JSeparator();
+                  
+                  JP.add(SP_VS[a]);
+                  SP_VS[a].setOrientation(SwingConstants.VERTICAL);
+                  SP_VS[a].setBounds(xs, y, 1, JP.getHeight() - 10);
+                  SP_VS[a].setForeground(Color.LIGHT_GRAY);
+                  xs += 80;
+            }
+            //+++++++++++++++++
+            BTNS_DistsConfig();
       }
 
+      private void BTNS_DistsConfig(){
+            int w = 40;
+            int h = 27;
+            int gp = smallBTN_TG.blueWhite;
+            for(int a = 0; a < DT.maxColumns - 1; a++){
+                  btns_Dist[a] = new smallBTN_TG(w, h, gp);
+                  
+                  JP.add(btns_Dist[a]);
+                  btns_Dist[a].setBounds(lb_Dist.getX(), lbs[a + 1].getY(), w, h);
+            }
+      }
+      
       private void componentsConfig2() {
             for (int a = 0; a < DT.maxColumns - 2; a++) {
                   lbs[a + 2].setVisible(false);

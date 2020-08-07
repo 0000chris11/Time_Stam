@@ -156,7 +156,8 @@ public class smallBTN_C extends JButton {
                         } while (!smallBTN_C.this.isDisplayable());
                   }
             }.start();
-
             //++++++++++++++++++++++++
       }
+      
+      
 }

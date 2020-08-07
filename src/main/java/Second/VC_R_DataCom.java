@@ -12,7 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import smallComponenets.PanelGradient;
+import smallComponenets.smallLB;
 
 /**
  *
@@ -31,7 +33,21 @@ public class VC_R_DataCom {
       static JButton[] btns_p = new JButton[DT.maxColumns];
       static JButton[] btns_m = new JButton[DT.maxColumns];
       
-      JSeparator SP1 = new JSeparator();
+      JSeparator SP_H1 = new JSeparator();
+      JSeparator SP_V1 = new JSeparator();
+      JSeparator[] SP_VS = new JSeparator[4];
+      
+      JLabel lb_Dist = new smallLB("Dist");
+      JLabel lb_Dist2 = new smallLB("Dist2");
+      JLabel lb_Tabl = new smallLB("Tabl");
+      JLabel lb_Tag = new smallLB("Tag");
+      JLabel lb_Clock = new smallLB("Clock");
+      
+      JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns];
+      JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns];
+      JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns];
+      JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns];
+      JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns];
       
       //++++++++++++++++++++++++++++++++++++++++++
       

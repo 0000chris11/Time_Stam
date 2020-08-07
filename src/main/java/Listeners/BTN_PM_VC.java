@@ -17,8 +17,8 @@ public class BTN_PM_VC implements ActionListener {
             
             
             for (int a = 0; a < DT.maxColumns - 2; a++) {
-                  System.out.println(CC.YELLOW + 
-                          "a = " + a + " // JC = " + VC_R.getJBTNS_P()[a + 1].getName());
+                  //System.out.println(CC.YELLOW + 
+                    //      "a = " + a + " // JC = " + VC_R.getJBTNS_P()[a + 1].getName());
                   
                   if(e.getSource() == VC_R.getJBTNS_M()[a + 2]){
                         VC_R.getJLBS()[a + 2].setVisible(false);
