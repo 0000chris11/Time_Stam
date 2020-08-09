@@ -78,10 +78,10 @@ public class VC_R extends VC_R_DataCom {
             JP.add(SP_H1);
             SP_H1.setBounds(4, tfs[1].getY() - 10, JP.getWidth() - 10, 1);
             SP_H1.setForeground(Color.LIGHT_GRAY);
-            
+
             JP.add(SP_V1);
             SP_V1.setOrientation(SwingConstants.VERTICAL);
-            SP_V1.setBounds(btns_p[1].getX() + btns_p[1].getWidth() + 6, 
+            SP_V1.setBounds(btns_p[1].getX() + btns_p[1].getWidth() + 6,
                     4, 1, JP.getHeight() - 10);
             SP_V1.setForeground(Color.LIGHT_GRAY);
             //++++++++++++++++++++++++++++++
@@ -90,23 +90,23 @@ public class VC_R extends VC_R_DataCom {
             int h = 27;
             JP.add(lb_Dist);
             lb_Dist.setBounds(SP_V1.getX() + 12, y, w, h);
-            
+
             JP.add(lb_Dist2);
             lb_Dist2.setBounds(lb_Dist.getX() + 80, y, w, h);
-            
+
             JP.add(lb_Tabl);
             lb_Tabl.setBounds(lb_Dist2.getX() + 80, y, w, h);
-            
+
             JP.add(lb_Tag);
             lb_Tag.setBounds(lb_Tabl.getX() + 80, y, w, h);
-            
+
             JP.add(lb_Clock);
             lb_Clock.setBounds(lb_Tag.getX() + 80, y, w, h);
-                  
+
             int xs = SP_V1.getX() + 80;
-            for(int a = 0; a < SP_VS.length; a++){
+            for (int a = 0; a < SP_VS.length; a++) {
                   SP_VS[a] = new JSeparator();
-                  
+
                   JP.add(SP_VS[a]);
                   SP_VS[a].setOrientation(SwingConstants.VERTICAL);
                   SP_VS[a].setBounds(xs, y, 1, JP.getHeight() - 10);
@@ -117,18 +117,56 @@ public class VC_R extends VC_R_DataCom {
             BTNS_DistsConfig();
       }
 
-      private void BTNS_DistsConfig(){
-            int w = 40;
+      private void BTNS_DistsConfig() {
+            int w = 54;
             int h = 27;
-            int gp = smallBTN_TG.blueWhite;
-            for(int a = 0; a < DT.maxColumns - 1; a++){
-                  btns_Dist[a] = new smallBTN_TG(w, h, gp);
-                  
+
+            int gB = smallBTN_TG.blueWhite;
+            int gC = smallBTN_TG.cyanWhite;
+            int gG = smallBTN_TG.greenWhite;
+            int gY = smallBTN_TG.yellowWhite;
+
+            for (int a = 0; a < DT.maxColumns - 1; a++) {
+                  btns_Dist[a] = new smallBTN_TG(w, h, gB);
+                  btns_Dist2[a] = new smallBTN_TG(w, h, gB);
+                  btns_Tabl[a] = new smallBTN_TG(w, h, gC);
+                  btns_Tag[a] = new smallBTN_TG(w, h, gG);
+                  btns_Clock[a] = new smallBTN_TG(w, h, gY);
+
                   JP.add(btns_Dist[a]);
                   btns_Dist[a].setBounds(lb_Dist.getX(), lbs[a + 1].getY(), w, h);
+
+                  JP.add(btns_Dist2[a]);
+                  btns_Dist2[a].setBounds(lb_Dist2.getX(), lbs[a + 1].getY(), w, h);
+
+                  JP.add(btns_Tabl[a]);
+                  btns_Tabl[a].setBounds(lb_Tabl.getX(), lbs[a + 1].getY(), w, h);
+
+                  JP.add(btns_Tag[a]);
+                  btns_Tag[a].setBounds(lb_Tag.getX(), lbs[a + 1].getY(), w, h);
+
+                  JP.add(btns_Clock[a]);
+                  btns_Clock[a].setBounds(lb_Clock.getX(), lbs[a + 1].getY(), w, h);
+            }
+            BTNS_DistsConfig2();
+      }
+
+      private void BTNS_DistsConfig2() {
+            System.out.println("btns_Dist.length: " + btns_Dist.length);
+            System.out.println("btns_Dist2.length: " + btns_Dist2.length);
+            System.out.println("btns_Tabl.length: " + btns_Tabl.length);
+            System.out.println("btns_Tag.length: " + btns_Tag.length);
+            System.out.println("btns_Clock.length: " + btns_Clock.length);
+            for (int a = 0; a < DT.maxColumns - 2; a++) {
+                  System.out.println(btns_Dist[a]);
+                  btns_Dist[a + 1].setVisible(false);
+                  btns_Dist2[a + 1].setVisible(false);
+                  btns_Tabl[a + 1].setVisible(false);
+                  btns_Tag[a + 1].setVisible(false);
+                  btns_Clock[a + 1].setVisible(false);
             }
       }
-      
+
       private void componentsConfig2() {
             for (int a = 0; a < DT.maxColumns - 2; a++) {
                   lbs[a + 2].setVisible(false);
@@ -151,6 +189,18 @@ public class VC_R extends VC_R_DataCom {
                         btns_p[a].setName("BNT_P" + (a + 1));
                         btns_m[a].setName("BNT_M" + (a + 1));
                   }
+            }
+            lb_Dist.setName("lb_Dist");
+            lb_Dist2.setName("lb_Dist2");
+            lb_Tabl.setName("lb_Tabl");
+            lb_Tag.setName("lb_Tag");
+            lb_Clock.setName("lb_Clock");
+            for (int a = 0; a < DT.maxColumns - 1; a++) {
+                  btns_Dist[a].setName("btn_Dist_" + (a + 2));
+                  btns_Dist2[a].setName("btn_Dist2_" + (a + 2));
+                  btns_Tabl[a].setName("btn_Tabl_" + (a + 2));
+                  btns_Tag[a].setName("btn_Tag_" + (a + 2));
+                  btns_Clock[a].setName("btn_Clock_" + (a + 2));
             }
       }
 

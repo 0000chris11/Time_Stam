@@ -38,7 +38,7 @@ public class VT {
             new JButton("Ad to TB"),
             new JButton("getP1 UI"),
             new JButton("add Gradient"),
-            new JButton("BTNS plus and minus Listeners")};
+            new JButton("")};
       int count = 0;
 
       public VT() {

@@ -43,11 +43,11 @@ public class VC_R_DataCom {
       JLabel lb_Tag = new smallLB("Tag");
       JLabel lb_Clock = new smallLB("Clock");
       
-      JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns];
-      JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns];
-      JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns];
-      JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns];
-      JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns];
+      JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns - 1];
+      JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns - 1];
+      JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns - 1];
+      JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns - 1];
+      JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns - 1];
       
       //++++++++++++++++++++++++++++++++++++++++++
       

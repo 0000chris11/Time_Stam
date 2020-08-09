@@ -14,8 +14,6 @@ public class BTN_PM_VC implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            
-            
             for (int a = 0; a < DT.maxColumns - 2; a++) {
                   //System.out.println(CC.YELLOW + 
                     //      "a = " + a + " // JC = " + VC_R.getJBTNS_P()[a + 1].getName());
