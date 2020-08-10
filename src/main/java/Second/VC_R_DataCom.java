@@ -25,13 +25,16 @@ public class VC_R_DataCom {
       JFrame JF = new JFrame("Create Table");
       
       JPanel JP = new PanelGradient();
+      JPanel JP2 = new JPanel();
+      
+      JLabel lb_Status = new JLabel("Waiting for action...");
       
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       
-      static JButton[] btns_p = new JButton[DT.maxColumns];
-      static JButton[] btns_m = new JButton[DT.maxColumns];
+      static JButton[] btns_p = new JButton[DT.maxColumns - 1];
+      static JButton[] btns_m = new JButton[DT.maxColumns - 1];
       
       JSeparator SP_H1 = new JSeparator();
       JSeparator SP_V1 = new JSeparator();
@@ -43,11 +46,11 @@ public class VC_R_DataCom {
       JLabel lb_Tag = new smallLB("Tag");
       JLabel lb_Clock = new smallLB("Clock");
       
-      JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns - 1];
-      JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns - 1];
-      JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns - 1];
-      JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns - 1];
-      JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns - 1];
+      static JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns - 1];
+      static JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns - 1];
+      static JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns - 1];
+      static JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns - 1];
+      static JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns - 1];
       
       //++++++++++++++++++++++++++++++++++++++++++
       
@@ -66,4 +69,19 @@ public class VC_R_DataCom {
             return btns_m;
       }
       
+      public static JToggleButton[] getBTNS_Dist(){
+            return btns_Dist;
+      }
+      public static JToggleButton[] getBTNS_Dist2(){
+            return btns_Dist2;
+      }
+      public static JToggleButton[] getBTNS_Tabl(){
+            return btns_Tabl;
+      }
+      public static JToggleButton[] getBTNS_Tag(){
+            return btns_Tag;
+      }
+      public static JToggleButton[] getBTNS_Clock(){
+            return btns_Clock;
+      }
 }

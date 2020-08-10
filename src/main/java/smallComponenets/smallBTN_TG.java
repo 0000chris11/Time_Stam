@@ -49,10 +49,10 @@ public class smallBTN_TG extends JToggleButton {
             Graphics2D g2 = (Graphics2D) g;
             //System.out.println("paintComponent");
             if (isSelected()) {
-                  System.out.println("\tis Selcted");
+                  //System.out.println("\tis Selcted");
                   g2.setPaint(GP_O);
             } else {
-                  System.out.println("\tNOT");
+                  //System.out.println("\tNOT");
                   g2.setPaint(GP_OD);
             }
             g2.fillRect(0, 0, getWidth(), getHeight());

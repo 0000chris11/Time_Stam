@@ -1,6 +1,8 @@
 package First;
 
 import static First.VF_R_DataCom.btn_plus;
+import Others.CC;
+import Second.VC_R;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,7 +27,6 @@ import javax.swing.plaf.metal.MetalButtonUI;
 public class VT {
 
       //Data dt = new Data("VT");
-
       private static JFrame JF = new JFrame();
 
       public static JFrame getJF() {
@@ -38,7 +39,7 @@ public class VT {
             new JButton("Ad to TB"),
             new JButton("getP1 UI"),
             new JButton("add Gradient"),
-            new JButton("")};
+            new JButton("Arrays of VC")};
       int count = 0;
 
       public VT() {
@@ -111,30 +112,41 @@ public class VT {
 
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
-                        
-                              System.out.println("\tName: " + VF_R.getBTN_PLUS().getName());
-                              int length = VF_R.getBTN_PLUS().getActionListeners().length;
-                              if (length == 0) {
-                                    System.out.println("\t\tlenght is 0");
-                              } else {
-                                    for (int b = 0; b < length; b++) {
-                                          System.out.println("\t\t" + b + ": " + 
-                                                  VF_R.getBTN_PLUS().getActionListeners()[b].getClass());
-                                    }
-                              }
-                              //+++++++++++
-                              System.out.println("\tName: " + VF_R.getBTN_MINUS().getName());
-                              int length2 = VF_R.getBTN_MINUS().getActionListeners().length;
-                              if (length2 == 0) {
-                                    System.out.println("\t\tlenght is 0");
-                              } else {
-                                    for (int b = 0; b < length2; b++) {
-                                          System.out.println("\t\t" + b + ": " + 
-                                                  VF_R.getBTN_MINUS().getActionListeners()[b].getClass());
-                                    }
-                              }
-                        
 
+                        System.out.println("\tJBTNS_P");
+                        if (VC_R.getJBTNS_P().length != 0) {
+                              for (int a = 0; a < VC_R.getJBTNS_P().length; a++) {
+                                    try {
+                                          System.out.println("\t\t" + VC_R.getJBTNS_P()[a].getName());
+                                    } catch (NullPointerException ex) {
+                                          System.out.println(CC.YELLOW + "\t\t\tNO ELEMENTS"
+                                                  + CC.RESET);
+                                    }
+                              }
+                        } else {
+                              System.out.println("\t\tJBTNS_P is empty");
+                        }
+                        System.out.println("\tJBTNS_M");
+                        if (VC_R.getJBTNS_M().length != 0) {
+                              for (int a = 0; a < VC_R.getJBTNS_M().length; a++) {
+                                    try {
+                                          System.out.println("\t\t" + VC_R.getJBTNS_M()[a].getName());
+                                    } catch (NullPointerException ex) {
+                                          System.out.println(CC.YELLOW + "\t\t\tNO ELEMENTS"
+                                                  + CC.RESET);
+                                    }
+                              }
+                        } else {
+                              System.out.println("\t\tJBTNS_M is empty");
+                        }
+                        System.out.println("\tBTN_Dist");
+                        if (VC_R.getBTNS_Dist().length != 0) {
+                              for (int a = 0; a < VC_R.getBTNS_Dist().length; a++) {
+                                    System.out.println("\t\t" + VC_R.getBTNS_Dist()[a].getName());
+                              }
+                        } else {
+                              System.out.println("\t\tgetBTNS_Dist is empty");
+                        }
                   }
             }
 

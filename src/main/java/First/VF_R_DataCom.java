@@ -43,7 +43,7 @@ public class VF_R_DataCom {
 
       //Data dt = new Data();
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      static JFrame JF = new JFrame();
+      static JFrame JF = new JFrame("Time Stamp");
 
       static JPanel p1 = new PanelGradient();
       static JScrollPane sc_p1 = new JScrollPane(p1);
