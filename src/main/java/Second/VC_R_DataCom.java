@@ -7,6 +7,7 @@ package Second;
 
 import MC.DT;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,6 +29,7 @@ public class VC_R_DataCom {
       JPanel JP2 = new JPanel();
       
       JLabel lb_Status = new JLabel("Waiting for action...");
+      JButton btn_ADD = new JButton();
       
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       
@@ -51,7 +53,8 @@ public class VC_R_DataCom {
       static JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns - 1];
       static JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns - 1];
       static JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns - 1];
-      
+      //++++++++++++++++++++++++++++++++++++++++++
+      static JComponent[][] row = new JComponent[DT.maxColumns - 1][9];
       //++++++++++++++++++++++++++++++++++++++++++
       
       public static JLabel[] getJLBS(){
@@ -83,5 +86,9 @@ public class VC_R_DataCom {
       }
       public static JToggleButton[] getBTNS_Clock(){
             return btns_Clock;
+      }
+      
+      public static JComponent[][] getRow(){
+            return row;
       }
 }

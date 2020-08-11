@@ -37,22 +37,22 @@ public class VC_R extends VC_R_DataCom {
             JF.add(JP);
             JP.setLayout(null);
             JP.setBounds(2, 2, 800, 500 - VF_R.getP3().getHeight() - 2);
-            
+
             JF.add(JP2);
             JP2.setLayout(null);
             JP2.setBackground(Color.BLACK);
             JP2.setBounds(2, JP.getHeight() + 6, JP.getWidth(), VF_R.getP3().getHeight());
-            
+
             JP2.add(lb_Status);
             Border bb = BorderFactory.createBevelBorder(BevelBorder.RAISED);
             Border be = BorderFactory.createEmptyBorder(1, 3, 1, 3);
             lb_Status.setBorder(new CompoundBorder(bb, be));
-            
+
             lb_Status.setForeground(Color.WHITE);
             lb_Status.setFont(VF_R.getLB_Status().getFont());
-            lb_Status.setBounds(VF_R.getLB_Status().getX(), VF_R.getLB_Status().getY(), 
+            lb_Status.setBounds(VF_R.getLB_Status().getX(), VF_R.getLB_Status().getY(),
                     JP2.getWidth() - 10, VF_R.getLB_Status().getHeight());
-            
+
             JF.setSize(JP.getWidth() + 20, JP.getHeight() + JP2.getHeight() + 48);
             JF.setVisible(true);
       }
@@ -210,6 +210,20 @@ public class VC_R extends VC_R_DataCom {
             }
       }
 
+      private void setRowArray() {
+            for (int a = 0; a < row.length; a++) {
+                  row[a][0] = lbs[a + 1];
+                  row[a][1] = tfs[a + 1];
+                  row[a][2] = btns_m[a];
+                  row[a][3] = btns_p[a];
+                  row[a][4] = btns_Dist[a];
+                  row[a][5] = btns_Dist2[a];
+                  row[a][6] = btns_Tabl[a];
+                  row[a][7] = btns_Tag[a];
+                  row[a][8] = btns_Clock[a];
+            }
+      }
+
       //+++++++++++++++++++++++++++++++++++++++++++
       private void setNameToComponents() {
             //System.out.println("setNameToComponents");
@@ -259,12 +273,15 @@ public class VC_R extends VC_R_DataCom {
             System.out.println(CC.CYAN + "VC +++++ BTNS_DistsConfig" + CC.RESET);
             BTNS_DistsConfig();
             
+            System.out.println(CC.CYAN + "VC +++++ setRowArray" + CC.RESET);
+            setRowArray();
+
             System.out.println(CC.CYAN + "VC +++++ setNameToComponents" + CC.RESET);
             setNameToComponents();
-            
+
             System.out.println(CC.CYAN + "VC +++++ addAllListeners" + CC.RESET);
             ml.addAllListeners();
-            
+
             System.out.println(CC.CYAN + "VC ### ENDS" + CC.RESET);
       }
 }
