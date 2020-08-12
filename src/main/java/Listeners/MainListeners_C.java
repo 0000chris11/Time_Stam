@@ -13,8 +13,10 @@ public class MainListeners_C {
       public void addAllListeners() {
             addFocusListenerToJC();
             addActionListenersToBTNS_PM();
+            addKeyListenerToTFS();
       }
 
+      //++++++++++++++++++++++++++++++++++++++++++
       private void addFocusListenerToJC() {
             FocusBorder FB = new FocusBorder();
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -27,6 +29,13 @@ public class MainListeners_C {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   VC_R.getJBTNS_P()[a].addActionListener(PMC);
                   VC_R.getJBTNS_M()[a].addActionListener(PMC);
+            }
+      }
+
+      private void addKeyListenerToTFS() {
+            TF_KL_VC KLVC = new TF_KL_VC();
+            for (int a = 0; a < VC_R.getJTFS().length; a++) {
+                  VC_R.getJTFS()[a].addKeyListener(KLVC);
             }
       }
 }

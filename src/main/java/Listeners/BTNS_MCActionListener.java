@@ -8,10 +8,12 @@ import First.VF_R;
 import First.VF_R;
 import MC.DT;
 import MC.MakeCon;
+import MC.Status;
 import MC.notMyMethods;
 import Others.CC;
 import Others.LSTD;
 import Threads.Threads;
+import java.awt.Color;
 import java.util.concurrent.BrokenBarrierException;
 
 /**
@@ -27,6 +29,7 @@ public class BTNS_MCActionListener implements ActionListener {
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
       Threads th = new Threads(CName, DT.CCount++);
+      Status st = new Status();
 
       
       //public static Thread scrollThread;
@@ -48,6 +51,7 @@ public class BTNS_MCActionListener implements ActionListener {
       }
       
       private void updOp() {
+            
             DT.bool_Upd = true;
 
             ArrayList<Integer> colIndexs = new ArrayList<Integer>();
@@ -61,6 +65,8 @@ public class BTNS_MCActionListener implements ActionListener {
             for (int a = 0; a < DT.maxColumns; a++) {
                   //System.out.println("UPD ListR " + a + ": "+ dt.getList_R().get(a));
             }
+            //+++++++++++++++++++++++++++++++++++++++++
+            System.out.println("\tUPD ++++ starts");
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VF_R.getJT().getColumnCount() == a + 2) {
                         for (int b = 0; b < a + 2; b++) {
@@ -71,6 +77,9 @@ public class BTNS_MCActionListener implements ActionListener {
                                     newData.add(VF_R.getJTFS()[b].getText());
                                     colIndexs.add(b);
                                     //hc++;
+                              }else{
+                                    st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, 
+                                            "??????", 10000);
                               }
                         }
                         colN = a + 2;

@@ -5,6 +5,7 @@ import Listeners.MainListeners_C;
 import MC.DT;
 import Others.CC;
 import java.awt.Color;
+import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -51,7 +52,12 @@ public class VC_R extends VC_R_DataCom {
             lb_Status.setForeground(Color.WHITE);
             lb_Status.setFont(VF_R.getLB_Status().getFont());
             lb_Status.setBounds(VF_R.getLB_Status().getX(), VF_R.getLB_Status().getY(),
-                    JP2.getWidth() - 10, VF_R.getLB_Status().getHeight());
+                    JP2.getWidth() - 100, VF_R.getLB_Status().getHeight());
+            
+            JP2.add(btn_Create);
+            btn_Create.setMargin(new Insets(3, 1, 3, 1));
+            btn_Create.setBounds(JP2.getWidth() - 90, lb_Status.getY(),
+                    84, lb_Status.getHeight());
 
             JF.setSize(JP.getWidth() + 20, JP.getHeight() + JP2.getHeight() + 48);
             JF.setVisible(true);

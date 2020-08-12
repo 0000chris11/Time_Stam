@@ -81,7 +81,8 @@ public class DT {
       private static DefaultListModel dm_5 = new DefaultListModel();
       private static DefaultListModel dm_6 = new DefaultListModel();
 
-      private static String[] bw = {" FROM", " WHERE", " SHOW", " WITH", "-"};
+      private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-", 
+            " TABLE "};
       private static ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
       //++++++++++++++++++++
       private final static Border line1 = BorderFactory.createLineBorder(Color.LIGHT_GRAY);

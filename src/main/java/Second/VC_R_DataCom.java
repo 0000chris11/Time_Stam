@@ -29,7 +29,7 @@ public class VC_R_DataCom {
       JPanel JP2 = new JPanel();
       
       JLabel lb_Status = new JLabel("Waiting for action...");
-      JButton btn_ADD = new JButton();
+      JButton btn_Create = new JButton("CREATE");
       
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       

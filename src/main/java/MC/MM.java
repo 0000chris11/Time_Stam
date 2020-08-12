@@ -114,8 +114,8 @@ public class MM extends Status {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static boolean getMatch(String text, String comp) {
-            Pattern pat = Pattern.compile(Pattern.quote(text), Pattern.CASE_INSENSITIVE);
+      public static boolean getMatch(String text, String comp, int pattern) {
+            Pattern pat = Pattern.compile(Pattern.quote(text), pattern);
             Matcher match = pat.matcher(comp);
             return match.find();
       }

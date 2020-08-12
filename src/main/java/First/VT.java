@@ -1,6 +1,7 @@
 package First;
 
 import static First.VF_R_DataCom.btn_plus;
+import MC.DT;
 import Others.CC;
 import Second.VC_R;
 import java.awt.BorderLayout;
@@ -38,7 +39,7 @@ public class VT {
             new JButton("Add to P1"),
             new JButton("Ad to TB"),
             new JButton("getP1 UI"),
-            new JButton("add Gradient"),
+            new JButton("BandW elements"),
             new JButton("Arrays of VC")};
       int count = 0;
 
@@ -106,46 +107,19 @@ public class VT {
                         System.out.println("P1 BG: " + VF_R.getP1().getBackground());
                   } else if (ac.equals(btns[5].getText())) {
                         System.out.println("add Gradient");
-                        VF_R.getP1().repaint();
-                        //GradientPaint gp = new GradientPaint();
-                        //VF_R.getP1()
+                        for(int a = 0; a < DT.getBandW().size(); a++){
+                              System.out.println("\t" + a + ": " + DT.getBandW().get(a));
+                        }
 
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
 
-                        System.out.println("\tJBTNS_P");
-                        if (VC_R.getJBTNS_P().length != 0) {
-                              for (int a = 0; a < VC_R.getJBTNS_P().length; a++) {
-                                    try {
-                                          System.out.println("\t\t" + VC_R.getJBTNS_P()[a].getName());
-                                    } catch (NullPointerException ex) {
-                                          System.out.println(CC.YELLOW + "\t\t\tNO ELEMENTS"
-                                                  + CC.RESET);
-                                    }
+                        for(int a = 0; a < VC_R.getRow().length; a++){
+                              for(int b = 0; b < 9; b++){
+                                    System.out.println("\t" + a + "-" + b + ": "+     
+                                            VC_R.getRow()[a][b].getName() + " (" + 
+                                            VC_R.getRow()[a][b].getClass().toString() + ")");
                               }
-                        } else {
-                              System.out.println("\t\tJBTNS_P is empty");
-                        }
-                        System.out.println("\tJBTNS_M");
-                        if (VC_R.getJBTNS_M().length != 0) {
-                              for (int a = 0; a < VC_R.getJBTNS_M().length; a++) {
-                                    try {
-                                          System.out.println("\t\t" + VC_R.getJBTNS_M()[a].getName());
-                                    } catch (NullPointerException ex) {
-                                          System.out.println(CC.YELLOW + "\t\t\tNO ELEMENTS"
-                                                  + CC.RESET);
-                                    }
-                              }
-                        } else {
-                              System.out.println("\t\tJBTNS_M is empty");
-                        }
-                        System.out.println("\tBTN_Dist");
-                        if (VC_R.getBTNS_Dist().length != 0) {
-                              for (int a = 0; a < VC_R.getBTNS_Dist().length; a++) {
-                                    System.out.println("\t\t" + VC_R.getBTNS_Dist()[a].getName());
-                              }
-                        } else {
-                              System.out.println("\t\tgetBTNS_Dist is empty");
                         }
                   }
             }
