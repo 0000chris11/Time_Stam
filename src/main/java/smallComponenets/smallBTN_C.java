@@ -114,7 +114,7 @@ public class smallBTN_C extends JButton {
             if (title == null) {
                   setSize(18, 27);
             } else {
-                  if (title.isBlank()) {
+                  if (title.isEmpty()) {
                         title = null;
                   }
             }

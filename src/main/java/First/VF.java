@@ -117,6 +117,7 @@ import Others.LSTD;
 import java.lang.reflect.Method;
 import javax.swing.JToggleButton;
 import Listeners.MainListeners_F;
+import MC.DT;
 import javax.swing.SwingUtilities;
 
 /**
@@ -127,16 +128,18 @@ public class VF extends JFrame{
 
       Connection con;
 
-      MethodM mm = new MethodM();
-      Components cp = new Components();
+      String CName = this.getClass().getName();
+      
+      MethodM mm = new MethodM(CName, DT.CCount++);
+      Components cp = new Components(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       Data dt = new Data();
       Status st = new Status();
       MainListeners_F ml = new MainListeners_F();
       LSTD lstd = new LSTD();
-      Threads th = new Threads();
+      Threads th = new Threads(CName, DT.CCount++);
       //ArraysM am = new ArraysM();
-      MakeCon mc = new MakeCon();
+      MakeCon mc = new MakeCon(CName, DT.CCount++);
       //+++++++++++++++++++++++++++++++++++++++++++++
       
       private static JFrame JF = new JFrame();
@@ -311,7 +314,7 @@ public class VF extends JFrame{
       //JScroller scThread = new JScroller();
       Thread addThread;
       //++++++++++++++++++++++++++++++++++++++++++++++
-
+      /*
       private void V_sbThread() {
             scrollThread = new Thread() {
                   public void run() {
@@ -361,7 +364,7 @@ public class VF extends JFrame{
                   }
             }.start();
       }
-
+      */
       private void setColorToDItem(ArrayList<String> listTables, JMenu jm) {
             if (listTables.isEmpty()) {
             } else {

@@ -12,6 +12,7 @@
                   <artifactId>mysql-connector-java</artifactId>
                   <version>5.1.48</version>
             </dependency>
+            
             <dependency>
                   <groupId>com.miglayout</groupId>
                   <artifactId>miglayout-swing</artifactId>
@@ -21,47 +22,28 @@
       
       <properties>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            <maven.compiler.source>12</maven.compiler.source>
-            <maven.compiler.target>12</maven.compiler.target>
+            <maven.compiler.source>8</maven.compiler.source>
+            <maven.compiler.target>8</maven.compiler.target>
       </properties>
       
       <build>
             <plugins>
                   <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
+                        
                         <configuration>
-                              <!--
-                              <groupId>org.codehaus.mojo</groupId>
-                                    <artifactId>exec-maven-plugin</artifactId>
-                                          <version>1.6.0</version>
-                                          <executions>
-                                                <execution>
-                                                      <goals>
-                                                            <goal>exec</goal>
-                                                      </goals>
-                                                </execution>
-                                          </executions>
-                              
-                  
-                              <executable>maven</executable>
-                              <mainClass>First.View_First</mainClass>
-                              <release>8</release>
-                              
-                              <fork>true</fork>
-                              <executable>C:\Program Files\Java\jdk-12.0.2_windows-x64_bin</executable>
-                              -->
                               <compilerArgument>-Xlint:unchecked</compilerArgument>
-                              
                               <archive>
                                     <manifest>
-                                          <mainClass>First.VFirst</mainClass>
+                                          <addClasspath>true</addClasspath>
+                                          <mainClass>First.VF_R</mainClass>
                                     </manifest>
                               </archive>
+                              
                               <descriptorRefs>
                                     <descriptorRef>jar-with-dependencies</descriptorRef>
                               </descriptorRefs>
                               <release>8</release>
-                              
                         </configuration>
                   </plugin>
             </plugins>

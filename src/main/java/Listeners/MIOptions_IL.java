@@ -80,7 +80,7 @@ public class MIOptions_IL implements ActionListener {
             JFrame JF = VF_R.getJF();
             JPanel p3 = VF_R.getP3();
 
-            if (MM.getMatch(VF_R.getMI_SEEL().getName(), item)) {
+            if (MM.getMatch(VF_R.getMI_SEEL().getName(), item, Pattern.CASE_INSENSITIVE)) {
                   System.out.println("\tMI_SEEL");
                   if (VF_R.getMI_SEEL().isSelected()) {//UNHIDE LEFT PANEL
                         System.out.println("\t\tOPEN");
@@ -123,7 +123,7 @@ public class MIOptions_IL implements ActionListener {
                               VF_R.getMI_SEEL().setSelected(true);
                         }
                   }
-            } else if (MM.getMatch(VF_R.getMI_SEER().getName(), item)) {
+            } else if (MM.getMatch(VF_R.getMI_SEER().getName(), item, Pattern.CASE_INSENSITIVE)) {
                   System.out.println("\tMI_SEER");
                   if (VF_R.getMI_SEER().isSelected()) {//UNHIDE TABLE
                         System.out.println("\t\tOPEN");

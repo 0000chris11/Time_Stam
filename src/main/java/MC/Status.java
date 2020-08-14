@@ -1,6 +1,6 @@
 package MC;
 
-import First.VF;
+
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +18,7 @@ public class Status {
                               Thread.sleep(time);
 
                         } catch (InterruptedException ex1) {
-                              Logger.getLogger(VF.class
-                                      .getName()).log(Level.SEVERE, null, ex1);
+                              ex1.printStackTrace();
                         }
                         status.setForeground(Color.WHITE);
                         status.setText("Waiting for action...");
