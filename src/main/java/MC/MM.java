@@ -603,7 +603,7 @@ public class MM extends Status {
 
       public static String filterTableName(String table, String op) {
             //System.out.println(CC.PURPLE + "FilterTableName" + CC.RESET);
-            //System.out.println("\tTable: " + table);
+            System.out.println("\tTable: " + table);
             if (op.equals("ADD")) {
                   if (table.contains(" ")) {
                         //table.replaceAll(" ", "_");

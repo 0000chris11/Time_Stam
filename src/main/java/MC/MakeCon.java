@@ -18,7 +18,7 @@ import Others.CC;
  * @author Christopher
  */
 public class MakeCon {
-      
+
       String CName = this.getClass().getName();
       //Data dt = new Data("MakeCon");
       Status st = new Status();
@@ -27,27 +27,36 @@ public class MakeCon {
             DT.getList_3(), DT.getList_4(), DT.getList_5(), DT.getList_6()};
 
       Connection con;
+      final String urlConnection
+              = "jdbc:mysql://localhost:3306/"
+              + "TIME_STAM?allowPublicKeyRetrieval=true&"
+              + "useSSL=false&"
+              + "useJDBCCompliantTimezoneShift=true&"
+              + "useLegacyDatetimeCode=false&"
+              + "serverTimezone=UTC";
+      final String user = "root";
+      final String passw = "ccfmps00112";
+
       String query;
       Statement stt;
       PreparedStatement pstt;
       ResultSet rs;
-      
-      public MakeCon(String from, int CC){
+
+      public MakeCon(String from, int CC) {
             DT.getConstructorName(DT.cons, CName, from, CC);
       }
+
       //++++++++++++++++++++++++++++++++++
       public void SelectConfig() {
             System.out.println(CC.YELLOW + "MakeCon ++++ SelectConfig" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
-                  
+                          urlConnection, user, passw);
+
                   String query = "SELECT * FROM Table_Config";
                   stt = con.createStatement();
                   rs = stt.executeQuery(query);
-                  
+
                   DT.getList_TC().clear();
                   DT.getList_BL().clear();
                   while (rs.next()) {
@@ -57,7 +66,7 @@ public class MakeCon {
                   //System.out.println("0 AOT: " + DT.getList_BL().get(0));
                   //System.out.println("1: AutoR" + dt.getList_BL().get(1));
                   //System.out.println("2: Grid" + dt.getList_BL().get(2));
-                  
+
             } catch (SQLException ex) {
                   st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0], ex.toString(), 8000);
             }
@@ -67,9 +76,7 @@ public class MakeCon {
             System.out.println(CC.YELLOW + "MakeCon ++++ UpdateConfig" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   pstt = con.prepareStatement(
                           "UPDATE Table_Config SET Value = " + newnv + " WHERE id = " + id);
@@ -88,14 +95,14 @@ public class MakeCon {
                   st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0], ex.toString(), 8000);
             }
       }
+
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       public void SelectDefaultTable() {
             System.out.println(CC.YELLOW + "MakeCon ++++ SelectDefaultTable" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
+                  //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
                   //Table_Names ON Default_Table.id = Table_Names.id;
                   String query = "SELECT Default_Table.id, Name, Dist1, Dist2, Tabl, Tag1, Clock FROM Default_Table "
@@ -114,19 +121,21 @@ public class MakeCon {
                         DT.setClock(rs.getString(7));
                   }
 
+                  System.out.println("\t0 Table: " + DT.getTable());
+
             } catch (SQLException ex) {
+                  ex.printStackTrace();
                   st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0], ex.toString(), 8000);
             }
 
       }
 
       public void SelectTables() {
-            System.out.println(CC.YELLOW + "MakeCon ++++ SelectTables"+ CC.RESET);
+            System.out.println(CC.YELLOW + "MakeCon ++++ SelectTables" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
+                  
                   String query = "SELECT * FROM Table_Names";
                   Statement st = con.createStatement();
                   ResultSet rs = st.executeQuery(query);
@@ -158,9 +167,7 @@ public class MakeCon {
             System.out.println("\tTable: " + table);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   String query = "SELECT * FROM Table_Names WHERE Table_Names = \""
                           + table.replaceAll("_", " ") + "\"";
@@ -188,9 +195,8 @@ public class MakeCon {
             System.out.println("\tTable: " + table);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
+                  
                   String query = "SHOW COLUMNS FROM " + table;
                   //System.out.println("SHOW COLUMNS FROM " + table);
                   stt = con.createStatement();
@@ -238,9 +244,7 @@ public class MakeCon {
             System.out.println("\tCols: " + cols);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   query = "SELECT * FROM " + table + " ORDER BY id";
                   stt = con.createStatement();
@@ -296,14 +300,13 @@ public class MakeCon {
             System.out.println(CC.YELLOW + "MakeCon ++++ ChangeDefault" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
+                  
                   String sql = "UPDATE Default_Table SET id = "
                           + idd + ", Name = '" + title + "' WHERE id = " + old_idd;
-                  
+
                   System.out.println(sql);
-                  
+
                   PreparedStatement stmt = con.prepareStatement(sql);
                   int i = stmt.executeUpdate();
                   if (i > 0) {
@@ -330,14 +333,12 @@ public class MakeCon {
       public void Insert(String table, int n, ArrayList<String> nvs) {
             System.out.println(CC.YELLOW + "MakeCon ++++ Insert" + CC.RESET);
             System.out.println("\tTable: " + table);
-            for(int a = 0; a < nvs.size(); a++){
-                  System.out.println("\tnv "+ (a + 1) + ": " + nvs.get(a));
+            for (int a = 0; a < nvs.size(); a++) {
+                  System.out.println("\tnv " + (a + 1) + ": " + nvs.get(a));
             }
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   String sql = "INSERT INTO "
                           + table
@@ -386,15 +387,14 @@ public class MakeCon {
                   st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0], ex.toString(), 8000);
             }
       }
+
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       public void UpdateRow(String table, Object[] cols, Object[] newvs, String id) {
             System.out.println(CC.YELLOW + "MakeCon ++++ UpdateRow[]" + CC.RESET);
 
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   //int newnv = -1;
                   String upd = upd = "UPDATE " + table + " SET ";;
@@ -440,9 +440,7 @@ public class MakeCon {
 
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   String upd = "ERROR";
                   if (col.equals("id")) {
@@ -466,14 +464,13 @@ public class MakeCon {
                           DT.RGY[0], ex.toString(), 8000);
             }
       }
+
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
       public void Delete(String table, String id) {
             System.out.println(CC.YELLOW + "MakeCon ++++ Delete" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   pstt = con.prepareStatement("DELETE FROM " + table
                           + " WHERE id = " + id);
@@ -540,14 +537,13 @@ public class MakeCon {
             //+++++++++++++++++++++++++++++++++++++++
             //System.out.println("INSERT SQL TEST: " + sql);
       }
+
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
       public void MCInsertSelectD1(String table, String c1, ArrayList<String> list1) {//DISTINCT
             System.out.println(CC.YELLOW + "MakeCon ++++ MCInsertSelectD1" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   String query = "SELECT DISTINCT " + c1 + " FROM " + table + " ORDER BY " + c1;
                   stt = con.createStatement();
@@ -571,9 +567,7 @@ public class MakeCon {
             System.out.println(CC.YELLOW + "MakeCon ++++ MCInsertSelectD2" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
-                          "jdbc:mysql://localhost:3306/TIME_STAM?allowPublicKeyRetrieval=true&useSSL=false",
-                          "root",
-                          "ccfmps00112");
+                          urlConnection, user, passw);
 
                   String query = "SELECT DISTINCT " + c1 + ", " + c2 + " FROM " + table + " ORDER BY " + c1;
                   System.out.println("\t" + query);
