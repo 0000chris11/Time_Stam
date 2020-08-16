@@ -1,6 +1,7 @@
 package First;
 
 import static First.VF_R_DataCom.btn_plus;
+import static First.VF_R_DataCom.pt;
 import MC.DT;
 import Others.CC;
 import Second.VC_R;
@@ -38,7 +39,7 @@ public class VT {
             new JButton("UIManager PUT"),
             new JButton("Add to P1"),
             new JButton("Ad to TB"),
-            new JButton("getP1 UI"),
+            new JButton("get Table Size"),
             new JButton("BandW elements"),
             new JButton("Arrays of VC")};
       int count = 0;
@@ -103,22 +104,25 @@ public class VT {
                         //VF_R.getTB().setUI(new ToolBarUI());
                         VF_R.getTB().add(btn);
                   } else if (ac.equals(btns[4].getText())) {
-                        System.out.println("P1 UI: " + VF_R.getP1().getUI());
-                        System.out.println("P1 BG: " + VF_R.getP1().getBackground());
+                        System.out.println(btns[4].getText());
+                        System.out.println("\tPT size: " + VF_R..getSize());
+                        System.out.println("\tSC_JT size: " + VF_R.getSC_JT().getSize());
+                        System.out.println("\tJT size: " + VF_R.getJT().getSize());
+
                   } else if (ac.equals(btns[5].getText())) {
                         System.out.println("add Gradient");
-                        for(int a = 0; a < DT.getBandW().size(); a++){
+                        for (int a = 0; a < DT.getBandW().size(); a++) {
                               System.out.println("\t" + a + ": " + DT.getBandW().get(a));
                         }
 
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
 
-                        for(int a = 0; a < VC_R.getRow().length; a++){
-                              for(int b = 0; b < 9; b++){
-                                    System.out.println("\t" + a + "-" + b + ": "+     
-                                            VC_R.getRow()[a][b].getName() + " (" + 
-                                            VC_R.getRow()[a][b].getClass().toString() + ")");
+                        for (int a = 0; a < VC_R.getRow().length; a++) {
+                              for (int b = 0; b < 9; b++) {
+                                    System.out.println("\t" + a + "-" + b + ": "
+                                            + VC_R.getRow()[a][b].getName() + " ("
+                                            + VC_R.getRow()[a][b].getClass().toString() + ")");
                               }
                         }
                   }

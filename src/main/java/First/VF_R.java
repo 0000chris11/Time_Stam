@@ -61,6 +61,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalToolBarUI;
 import net.miginfocom.swing.MigLayout;
+
 /**
  *
  * @author Christopher
@@ -379,8 +380,9 @@ public class VF_R extends VF_R_DataCom {
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JT.setRowSelectionAllowed(true);
             JT.setSelectionBackground(DT.TFColor[2]);
-            JT.setPreferredScrollableViewportSize(JT.getSize());
-
+            //JT.setPreferredScrollableViewportSize();
+            JT.setPreferredScrollableViewportSize(pt.getSize());
+            
             //System.out.println("PT size: " + pt.getSize());
             //System.out.println("SC_JT size: " + sc_JT.getSize());
             //System.out.println("JT size: " + JT.getSize());
