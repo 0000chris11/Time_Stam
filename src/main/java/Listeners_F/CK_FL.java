@@ -1,4 +1,4 @@
-package Listeners;
+package Listeners_F;
 
 import First.VF;
 import java.awt.Color;
@@ -10,7 +10,7 @@ import javax.swing.JTextField;
  *
  * @author Christopher
  */
-public class ClockFocus implements FocusListener{
+public class CK_FL implements FocusListener{
 
       //private Color C = new Color(0, 0, 80);
       

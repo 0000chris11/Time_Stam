@@ -6,8 +6,8 @@ import MC.Data;
 import MC.MM;
 import MC.MethodM;
 import Threads.Threads;
-import java.awt.Color;
 import MC.MakeCon;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -55,6 +55,8 @@ public class LSTD {
             } else if (TB.contains("C")) {
                   //System.out.println(CC.RED + "TEST: "+ TB + CC.RESET);
                   VF_R.getLB_Icon().setText("Loading");
+                  VF_R.getJT().setEnabled(false);
+                  JTCellRenderer.setForegroundCell(Color.GRAY);
                   th.addLBIconThread(TB);
             }
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

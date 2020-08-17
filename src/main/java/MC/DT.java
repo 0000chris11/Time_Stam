@@ -81,7 +81,7 @@ public class DT {
       private static DefaultListModel dm_5 = new DefaultListModel();
       private static DefaultListModel dm_6 = new DefaultListModel();
 
-      private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-", 
+      private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-","_",  
             " TABLE "};
       private static ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
       //++++++++++++++++++++

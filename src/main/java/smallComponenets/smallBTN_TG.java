@@ -22,9 +22,11 @@ public class smallBTN_TG extends JToggleButton {
       int H;
       GradientPaint GP;
       GradientPaint GP_D;
-      
+
       GradientPaint GP_O;
       GradientPaint GP_OD;
+      
+      GradientPaint GP_EF; 
 
       Color[] colors = new Color[]{
             Color.BLUE, Color.BLUE.darker(),
@@ -48,12 +50,16 @@ public class smallBTN_TG extends JToggleButton {
       public void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
             //System.out.println("paintComponent");
-            if (isSelected()) {
-                  //System.out.println("\tis Selcted");
-                  g2.setPaint(GP_O);
-            } else {
-                  //System.out.println("\tNOT");
-                  g2.setPaint(GP_OD);
+            if (isEnabled()) {
+                  if (isSelected()) {
+                        //System.out.println("\tis Selcted");
+                        g2.setPaint(GP_O);
+                  } else {
+                        //System.out.println("\tNOT");
+                        g2.setPaint(GP_OD);
+                  }
+            }else{
+                  g2.setPaint(GP_EF);
             }
             g2.fillRect(0, 0, getWidth(), getHeight());
 
@@ -63,8 +69,10 @@ public class smallBTN_TG extends JToggleButton {
       public smallBTN_TG(int w, int h, int colorGradient) {
             W = w;
             H = h;
+            
             GP_O = new GradientPaint(0, 0, Color.CYAN, w, h, Color.WHITE);
             GP_OD = new GradientPaint(0, 0, Color.BLUE.darker(), w, h, Color.WHITE.darker());
+            GP_EF = new GradientPaint(0, 0, Color.GRAY.darker(), w, h, Color.WHITE.darker());
             /*
             for (int a = 0; a < 5; a++) {
                   if (colorGradient == a) {
@@ -73,6 +81,6 @@ public class smallBTN_TG extends JToggleButton {
                         GP_D = new GradientPaint(0, 0, colors[a + 1], w, h, Color.WHITE);
                   }
             }
-            */
+             */
       }
 }

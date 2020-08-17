@@ -38,7 +38,7 @@ public class VT {
             new JButton("Font to PLAIN"),
             new JButton("UIManager PUT"),
             new JButton("Add to P1"),
-            new JButton("Ad to TB"),
+            new JButton("Change FG of JTB"),
             new JButton("get Table Size"),
             new JButton("BandW elements"),
             new JButton("Arrays of VC")};
@@ -97,17 +97,14 @@ public class VT {
                         btn.setBounds(30, 400, 40, 40);
 
                   } else if (ac.equals(btns[3].getText())) {
-                        System.out.println("\nAdd to TB");
-                        JButton btn = VF_R.getBTNS_MC()[1];
-                        //VF_R.getTB().add(btn);
-                        btn.setBounds(6, 400, 40, 40);
-                        //VF_R.getTB().setUI(new ToolBarUI());
-                        VF_R.getTB().add(btn);
+                        System.out.println(btns[3].getText());
+                        
+                        VF_R.getJT().setForeground(Color.RED);
                   } else if (ac.equals(btns[4].getText())) {
                         System.out.println(btns[4].getText());
-                        System.out.println("\tPT size: " + VF_R..getSize());
-                        System.out.println("\tSC_JT size: " + VF_R.getSC_JT().getSize());
-                        System.out.println("\tJT size: " + VF_R.getJT().getSize());
+                        //System.out.println("\tPT size: " + VF_R.getSize());
+                        //System.out.println("\tSC_JT size: " + VF_R.getSC_JT().getSize());
+                        //System.out.println("\tJT size: " + VF_R.getJT().getSize());
 
                   } else if (ac.equals(btns[5].getText())) {
                         System.out.println("add Gradient");

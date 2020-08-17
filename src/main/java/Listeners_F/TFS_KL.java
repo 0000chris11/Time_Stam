@@ -1,4 +1,4 @@
-package Listeners;
+package Listeners_F;
 
 import First.VF_R;
 import MC.DT;
@@ -15,11 +15,11 @@ import java.util.ArrayList;
  */
 public class TFS_KL implements KeyListener {
 
+      //CLASS FOR FOCUS CHANGE
       String CName = this.getClass().getName();
-      
+
       //private MethodM mm = new MethodM(CName, DT.CCount++);
       //private Data dt = new Data("TFS_KL");
-
       private final Color[] C = new Color[]{new Color(51, 51, 51), new Color(0, 0, 51),
             new Color(0, 0, 81)};
 
@@ -28,11 +28,8 @@ public class TFS_KL implements KeyListener {
       int[] sizeS = new int[]{DT.getList_S23().size(), DT.getList_S34().size(),
             DT.getList_S45().size(), DT.getList_S56().size()};
 
-      private int SC = -1;
-
-      public TFS_KL(int sc) {
-            SC = sc;
-
+      //private int SC = -1;
+      public TFS_KL() {
             listsD[0] = DT.getListD_2();
             listsD[1] = DT.getListD_3();
             listsD[2] = DT.getListD_4();
@@ -95,16 +92,12 @@ public class TFS_KL implements KeyListener {
             }
 
       }
+
       //++++++++++++++++++++++++++++++++++++++++
       private void changeFocusDown() {
-            for (int a = 0; a < SC; a++) {
+            for (int a = 0; a < VF_R.getJT().getColumnCount(); a++) {
                   //System.out.println("\tDOWN// B: a = " + a);
-                  if (a == 0) {//Without asking for background
-                        if (VF_R.getJTFS()[a].hasFocus()) {
-                              //System.out.println("\tDOWN// tf_1 has the focus");
-                              VF_R.getJTFS()[a + 1].requestFocus();
-                        }
-                  } else if (a == SC - 1) {//Last one to the First one                  
+                  if (a == VF_R.getJT().getColumnCount() - 1) {//Last one to the First one                  
                         //if (VF_R.getJTFS()[a].getBackground().equals(C)) {
                         if (VF_R.getJTFS()[a].hasFocus()) {
                               //System.out.println("\tDOWN// Last One to First One");
@@ -112,24 +105,22 @@ public class TFS_KL implements KeyListener {
                         }
                         //}
                   } else {
-                        //if (VF_R.getJTFS()[a].getBackground().equals(C)) {
                         if (VF_R.getJTFS()[a].hasFocus()) {
-                              //System.out.println("\tDOWN// normal");
+                              //System.out.println("\tDOWN// tf_1 has the focus");
                               VF_R.getJTFS()[a + 1].requestFocus();
                         }
-                        //}
                   }
             }
       }
 
       private void changeFocusUp() {
             //System.out.println("SC Size = " + SC);
-            for (int a = 0; a < SC; a++) {
+            for (int a = 0; a < VF_R.getJT().getColumnCount(); a++) {
                   //System.out.println("\tUP// B: a = " + a);
                   if (a == 0) {//Without asking for background && First to the Last one
                         if (VF_R.getJTFS()[a].hasFocus()) {
                               //System.out.println("\tUP// First One to Last One");
-                              VF_R.getJTFS()[SC - 1].requestFocus();
+                              VF_R.getJTFS()[VF_R.getJT().getColumnCount() - 1].requestFocus();
                         }
                   } else {
                         //if (VF_R.getJTFS()[a].getBackground().equals(C)) {

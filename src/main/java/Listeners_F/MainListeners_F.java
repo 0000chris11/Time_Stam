@@ -1,4 +1,4 @@
-package Listeners;
+package Listeners_F;
 
 import First.VF_R;
 import MC.DT;
@@ -231,7 +231,7 @@ public class MainListeners_F {
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addKeyListenersToTFS() {
-            TFS_KL tkt = new TFS_KL(DT.getList_C().size());
+            TFS_KL tkt = new TFS_KL();
             for (int a = 0; a < VF_R.getJTFS().length; a++) {
                   VF_R.getJTFS()[a].addKeyListener(tkt);
                   /*

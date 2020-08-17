@@ -18,8 +18,13 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class JTCellRenderer extends DefaultTableCellRenderer {
 
-      int count = 0;
-      int columns;
+     //private int count = 0;
+     private int columns;
+     private static Color Colr = Color.WHITE;
+      
+      public static void setForegroundCell(Color color){
+            Colr = color;
+      }
 /*
       public JTCellRenderer(int cols) {
             columns = cols;
@@ -31,11 +36,11 @@ public class JTCellRenderer extends DefaultTableCellRenderer {
             Component c = super.getTableCellRendererComponent(
                     table, value, isSelected, hasFocus, row, column);
 
-            count++;
+            //count++;
 
             setBorder(new EmptyBorder(1, 4, 1, 4));
             c.setFont(new Font("Dialog", Font.PLAIN, 20));
-            c.setForeground(Color.WHITE);
+            c.setForeground(Colr);
 
             if (isSelected) {
                   /*

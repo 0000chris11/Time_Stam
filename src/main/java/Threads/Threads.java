@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import MC.Data;
 import MC.MethodM;
 import java.util.concurrent.BrokenBarrierException;
-import Listeners.BTNS_MCActionListener;
+import Listeners_F.BTNS_MCActionListener;
 import MC.DT;
 import MC.MM;
 import MC.MakeCon;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 import javax.swing.JProgressBar;
 import javax.swing.table.AbstractTableModel;
+import Others.JTCellRenderer;
 
 /**
  *
@@ -251,6 +252,8 @@ public class Threads {
                               VF_R.getJPB().setForeground(Color.GREEN);
                         }
                         VF_R.getLB_Icon().setText("Ready!");
+                        
+                        JTCellRenderer.setForegroundCell(Color.WHITE);
                         VF_R.getJT().setEnabled(true);
                   }
             };

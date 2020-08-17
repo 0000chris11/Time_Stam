@@ -1,6 +1,8 @@
-package Listeners;
+package Listeners_C;
 
-import Listeners.FocusBorder;
+import Listeners_C.BTN_PM_VC;
+import Listeners_F.FocusBorder;
+import Listeners_F.FocusBorder;
 import MC.DT;
 import Second.VC_R;
 
@@ -13,7 +15,9 @@ public class MainListeners_C {
       public void addAllListeners() {
             addFocusListenerToJC();
             addActionListenersToBTNS_PM();
+            addActionListenersToBTNS_CK_TB();
             addKeyListenerToTFS();
+            
       }
 
       //++++++++++++++++++++++++++++++++++++++++++
@@ -31,6 +35,15 @@ public class MainListeners_C {
                   VC_R.getJBTNS_M()[a].addActionListener(PMC);
             }
       }
+      //SHARED LISTENER --- CHANGE LATER
+      private void addActionListenersToBTNS_CK_TB(){
+            BTN_CK_AL CKAL = new BTN_CK_AL();
+            for(int a = 0; a < DT.maxColumns - 1; a++){
+                  VC_R.getBTNS_Clock()[a].addActionListener(CKAL);
+                  VC_R.getBTNS_Tabl()[a].addActionListener(CKAL);
+            }
+      }
+      
 
       private void addKeyListenerToTFS() {
             TF_KL_VC KLVC = new TF_KL_VC();

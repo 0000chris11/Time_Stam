@@ -7,11 +7,11 @@ import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import java.sql.Connection;
 import MC.*;
-import Listeners.MainListeners_F;
-import Listeners.MIActionListener;
-import Listeners.MIShow_AL;
-import Listeners.MIV_AL;
-import Listeners.ClockFocus;
+import Listeners_F.MainListeners_F;
+import Listeners_F.MIActionListener;
+import Listeners_F.MIShow_AL;
+import Listeners_F.MIV_AL;
+import Listeners_F.CK_FL;
 import Others.*;
 import Threads.*;
 import javax.swing.*;
@@ -374,7 +374,7 @@ public class VF_R extends VF_R_DataCom {
             JT.setBackground(Color.BLACK);
             JT.setFont(new Font("Dialog", Font.PLAIN, 20));
             JT.setRowHeight(23);
-            JT.setForeground(Color.WHITE);
+            //JT.setForeground(Color.WHITE);
             JT.setAutoCreateRowSorter(true);
             JT.setGridColor(Color.GRAY);
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -382,7 +382,6 @@ public class VF_R extends VF_R_DataCom {
             JT.setSelectionBackground(DT.TFColor[2]);
             //JT.setPreferredScrollableViewportSize();
             JT.setPreferredScrollableViewportSize(pt.getSize());
-            
             //System.out.println("PT size: " + pt.getSize());
             //System.out.println("SC_JT size: " + sc_JT.getSize());
             //System.out.println("JT size: " + JT.getSize());
@@ -400,7 +399,7 @@ public class VF_R extends VF_R_DataCom {
             int tf_y = tfs[1].getY() - 4;
             int tf_h = tfs[b].getHeight() + 4;
 
-            ClockFocus CF = new ClockFocus();
+            CK_FL CF = new CK_FL();
             //System.out.println("tfs Heights: " + tf_h);
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);

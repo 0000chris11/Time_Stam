@@ -1,7 +1,7 @@
 package Second;
 
 import First.VF_R;
-import Listeners.MainListeners_C;
+import Listeners_C.MainListeners_C;
 import MC.DT;
 import Others.CC;
 import java.awt.Color;
@@ -85,6 +85,7 @@ public class VC_R extends VC_R_DataCom {
                         tfs[a].setBounds(108, lby, 200, 27);
                   } else {
                         tfs[a].setBounds(108, 12, 200, 27);
+                        tfs[a].setBackground(new Color(102,0,0));
                         //System.out.println(CC.PURPLE + "A: " + a + CC.RESET);
                   }
                   //++++++++++++++
@@ -187,6 +188,7 @@ public class VC_R extends VC_R_DataCom {
 
                   JP.add(btns_Dist2[a]);
                   btns_Dist2[a].setBounds(lb_Dist2.getX(), lbs[a + 1].getY(), w, h);
+                  btns_Dist2[a].setEnabled(false);
 
                   JP.add(btns_Tabl[a]);
                   btns_Tabl[a].setBounds(lb_Tabl.getX(), lbs[a + 1].getY(), w, h);
