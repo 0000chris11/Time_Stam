@@ -35,7 +35,7 @@ public class TF_KL_VC implements KeyListener {
       @Override
       public void keyReleased(KeyEvent e) {
             boolean bool = false;
-            System.out.println(e.getComponent().getName());
+            //System.out.println(e.getComponent().getName());
 
             for (int a = 0; a < VC_R.getJTFS().length; a++) {
                   String text = VC_R.getJTFS()[a].getText().toUpperCase();

@@ -46,7 +46,7 @@ public class VC extends javax.swing.JFrame {
                   list_now.add(list_then.get(a));
             }
       }
-
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void MCCreateTable(String tablename, String col) {
             try {
                   con = DriverManager.getConnection(
@@ -66,7 +66,6 @@ public class VC extends javax.swing.JFrame {
                   }
 
             } catch (SQLException ex) {
-                  Logger.getLogger(VF.class.getName()).log(Level.SEVERE, null, ex);
                   
                   lbStatus(false, ex.toString());
             }
@@ -202,7 +201,8 @@ public class VC extends javax.swing.JFrame {
                           "root",
                           "ccfmps00112");
 
-                  PreparedStatement stmt = con.prepareStatement("INSERT INTO Table_Names "
+                  PreparedStatement stmt = con.prepareStatement(
+                          "INSERT INTO Table_Names "
                           + "(Table_Names, Dist1, Dist2, Tabl, Tag1, Tag2) VALUES (?,?,?,?,?,?)");
                   stmt.setString(1, d1);
                   stmt.setString(2, d2);
@@ -228,7 +228,7 @@ public class VC extends javax.swing.JFrame {
                   lbStatus(false, ex.toString());
             }
       }
-
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void tableExist(JTextField tf) {
             int z = 0;
             if (tf.getText().equals("")) {

@@ -17,7 +17,8 @@ public class MainListeners_C {
             addActionListenersToBTNS_PM();
             addActionListenersToBTNS_CK_TB();
             addKeyListenerToTFS();
-            
+            //+++++++++++++++++++++++
+            addActionListenerToBTN_CREATE();
       }
 
       //++++++++++++++++++++++++++++++++++++++++++
@@ -35,20 +36,26 @@ public class MainListeners_C {
                   VC_R.getJBTNS_M()[a].addActionListener(PMC);
             }
       }
+
       //SHARED LISTENER --- CHANGE LATER
-      private void addActionListenersToBTNS_CK_TB(){
+      private void addActionListenersToBTNS_CK_TB() {
             BTN_CK_AL CKAL = new BTN_CK_AL();
-            for(int a = 0; a < DT.maxColumns - 1; a++){
+            for (int a = 0; a < DT.maxColumns - 1; a++) {
                   VC_R.getBTNS_Clock()[a].addActionListener(CKAL);
                   VC_R.getBTNS_Tabl()[a].addActionListener(CKAL);
             }
       }
-      
 
       private void addKeyListenerToTFS() {
             TF_KL_VC KLVC = new TF_KL_VC();
             for (int a = 0; a < VC_R.getJTFS().length; a++) {
                   VC_R.getJTFS()[a].addKeyListener(KLVC);
             }
+      }
+
+      //+++++++++++++++++++++++++++++++++++++++++++++
+      private void addActionListenerToBTN_CREATE() {
+            BTN_Create_AL CAL = new BTN_Create_AL();
+            VC_R.getBTN_Create().addActionListener(CAL);
       }
 }

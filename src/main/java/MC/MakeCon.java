@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import ArrayMethods.Instance;
 import Others.CC;
+import Second.VC_R;
+import java.awt.Color;
 
 /**
  *
@@ -101,7 +103,42 @@ public class MakeCon {
                           "UpdateConfig: " + ex.toString(), 8000);
             }
       }
-
+      //++++++++++++++++++++++++++++++++++++++++++++++++++
+      public void CreateTable(String table, int cols){
+            System.out.println(CC.YELLOW + "MakeCon ++++ CreateTable" + CC.RESET);
+            try{
+                  con = DriverManager.getConnection(
+                          urlConnection, user, passw);
+             
+                  String TYPE = "VARCHAR(150)";
+                  String TYPE2 = "NOT NULL";
+                  //2
+                  for()
+                  String beg = "CREATE TABLE " + table
+                          + " (id INT NOT NULL AUTO_INCREMENT, ";
+                  
+                  String sql = "CREATE TABLE " + table
+                          + " (id INT NOT NULL AUTO_INCREMENT, "
+                          + col + " VARCHAR(150) NOT NULL, "
+                          + "PRIMARY KEY(id))ENGINE=INNODB";
+                  
+                  String sql2 = "CREATE TABLE " + table
+                          + " (id INT NOT NULL AUTO_INCREMENT, "
+                          + col1 + " VARCHAR(150) NOT NULL, "
+                          + col2 + " VARCHAR(150) NOT NULL, "
+                          + "PRIMARY KEY(id))ENGINE=INNODB";
+                  
+            }catch(SQLException ex){
+                  ex.printStackTrace();
+                  st.startLBStatus(VC_R.getLB_Status(), Color.RED, 
+                          "CreateTable - " + ex.toString(), 7000);
+            }
+      }
+      
+      public void InsertTable(String table, String dist, String dist2, String tabl,
+              String tag, String clock){
+            
+      }
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       public void SelectDefaultTable() {
             System.out.println(CC.YELLOW + "MakeCon ++++ SelectDefaultTable" + CC.RESET);

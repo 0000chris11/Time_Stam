@@ -28,8 +28,8 @@ public class VC_R_DataCom {
       JPanel JP = new PanelGradient();
       JPanel JP2 = new JPanel();
       
-      JLabel lb_Status = new JLabel("Waiting for action...");
-      JButton btn_Create = new JButton("CREATE");
+      static JLabel lb_Status = new JLabel("Waiting for action...");
+      static JButton btn_Create = new JButton("CREATE");
       
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       
@@ -90,5 +90,12 @@ public class VC_R_DataCom {
       
       public static JComponent[][] getRow(){
             return row;
+      }
+      //++++++++++++++++++++++++++++++++++++++++++
+      public static JLabel getLB_Status(){
+            return lb_Status;
+      }
+      public static JButton getBTN_Create(){
+            return btn_Create;
       }
 }
