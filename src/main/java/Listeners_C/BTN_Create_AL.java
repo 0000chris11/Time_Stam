@@ -35,7 +35,8 @@ public class BTN_Create_AL implements ActionListener {
             }
             System.out.println("'\tColumns Visible: " + countV);
 
-            TFSControl(countV);
+            String[] cols = TFSControl(countV);
+            
             System.out.println("'\tColumns OK: " + countO);
             System.out.print("'\tMATCH ");
             //MATCH BETWEEN -VISIBLE COLS- AND -OK COLUMNS-
@@ -59,13 +60,20 @@ public class BTN_Create_AL implements ActionListener {
             String Clock = getValue("Clock", tb_ck[1][0].toString(), (int) tb_ck[1][1]);
 
             if (access == true) {
-                  mc.CreateTable(VC_R.getJTFS()[0].getText(), countV);
-                  mc.InsertTable();
+                  System.out.println(CC.GREEN + "\tAcces TRUE" + CC.RESET);
+                  //mc.CreateTable(VC_R.getJTFS()[0].getText(), countV);
+                  mc.CreateTableTEST(VC_R.getJTFS()[0].getText(), 
+                          cols, countV);
+                  //mc.InsertTable();
+            }else{
+                  System.out.println(CC.GREEN + "\tAcces FALSE" + CC.RESET);
             }
       }
 
-      private void TFSControl(int cv) {
+      private String[] TFSControl(int cv) {
             countO = 0;
+            int countC = 0;
+            String[] cols = new String[cv];
             //IF EACH JTF HAS TEXT AND THE RIGHT CHARS
             for (int a = 0; a < cv; a++) {
                   if (!VC_R.getJTFS()[a].getText().isEmpty()) {
@@ -77,11 +85,15 @@ public class BTN_Create_AL implements ActionListener {
 
                               } else {
                                     //IF THE COLUMNS ARE OK
+                                    System.out.println("\t\tCNEEDED " + (cv - 1) + " = " + countC);
+                                    cols[countC] = VC_R.getJTFS()[a].getText();
+                                    countC++;
                                     countO++;
                               }
                         }
                   }
             }
+            return cols;
       }
 
       private void tableControl() {
