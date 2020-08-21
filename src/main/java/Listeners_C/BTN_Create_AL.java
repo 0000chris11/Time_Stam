@@ -62,9 +62,11 @@ public class BTN_Create_AL implements ActionListener {
             if (access == true) {
                   System.out.println(CC.GREEN + "\tAcces TRUE" + CC.RESET);
                   //mc.CreateTable(VC_R.getJTFS()[0].getText(), countV);
-                  mc.CreateTableTEST(VC_R.getJTFS()[0].getText(), 
+                  mc.CreateTable(VC_R.getJTFS()[0].getText(), 
                           cols, countV);
-                  //mc.InsertTable();
+                  
+                  mc.InsertTable(VC_R.getJTFS()[0].getText(), Dist, "NONE", Tabl, Tag, 
+                          Clock);
             }else{
                   System.out.println(CC.GREEN + "\tAcces FALSE" + CC.RESET);
             }

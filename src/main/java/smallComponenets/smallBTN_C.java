@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 /**
  *
@@ -86,6 +88,7 @@ public class smallBTN_C extends JButton {
             //int x = (w - FM.stringWidth(s)) / 2;
             int x = (w - (int) shape.getBounds().getWidth()) / 2;
             int y = (FM.getAscent() + (h - (FM.getAscent() + FM.getDescent())) / 2);
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //int y = (h - (int) shape.getBounds().getHeight()) / 2;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
@@ -108,6 +111,8 @@ public class smallBTN_C extends JButton {
             g2.setFont(F);
             g2.drawString(Title, x, y);
       }
+      
+      
 
       public smallBTN_C(String title) {
             //System.out.println("\nConstructor Title: " + title);

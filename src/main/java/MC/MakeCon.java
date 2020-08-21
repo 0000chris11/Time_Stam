@@ -105,19 +105,43 @@ public class MakeCon {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
-      public void CreateTable(String table, String[] cols, int CC) {
+      public void CreateTable(String table, String[] cols, int c) {
             System.out.println(CC.YELLOW + "MakeCon ++++ CreateTable" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
                           urlConnection, user, passw);
 
+                  stt = con.createStatement();
                   String TYPE = "VARCHAR(150)";
                   String TYPE2 = "NOT NULL";
                   //2
                   //++++++++++++++++++++++++++++++++++++++++
-                  
-                  //++++++++++++++++++++++++++++++++++++++++
+                  String sql = "CREATE TABLE " + table.replaceAll(" ", "_") 
+                          + " (id INT NOT NULL AUTO_INCREMENT, ";
 
+                  for (int a = 0; a < c - 1; a++) {
+                        sql += cols[a] + " " + TYPE + " " + TYPE2 + ", ";
+                  }
+
+                  sql += "PRIMARY KEY(id))ENGINE=INNODB";
+                  //++++++++++++++++++++++++++++++++++++++++
+                  System.out.println("\tTable: " + table);
+                  for (int a = 0; a < cols.length - 1; a++) {
+                        System.out.println("\tCol " + (a + 2) + ": " + cols[a]);
+                  }
+                  System.out.println("\tC: " + c);
+                  System.out.println("\t" + sql);
+                  //+++++++++++++++++++++++++++++++++++++++
+                  int i = stt.executeUpdate(sql);
+                  
+                  if (i > 0) {
+                        st.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
+                          "MC-CreateTable Done!", 5000);
+                  }else{
+                        st.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
+                          DT.inter, 7000);
+                  }
+                  //++++++++++++++++++++++++++++++++++++++++
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
@@ -150,7 +174,59 @@ public class MakeCon {
 
       public void InsertTable(String table, String dist, String dist2, String tabl,
               String tag, String clock) {
-
+            System.out.println(CC.YELLOW + "MakeCon ++++ InsertTable" + CC.RESET);
+            try{
+                  con = DriverManager.getConnection(urlConnection, user, passw);
+                  
+                  String sql = "INSERT INTO Table_Names "
+                          + "(Table_Names, Dist1, Dist2, Tabl, Tag1, Clock) "
+                          + "VALUES (?,?,?,?,?,?)";             
+                  pstt = con.prepareStatement(sql);
+                  
+                  System.out.println("\tTable: " + table);
+                  System.out.println("\tDist: " + dist);
+                  System.out.println("\tDist2: " + dist2);
+                  System.out.println("\tTabl: " + tabl);
+                  System.out.println("\tTag: " + tag);
+                  System.out.println("\tClock: " + clock);
+                  
+                  pstt.setString(1, table);
+                  pstt.setString(2, dist);
+                  pstt.setString(3, dist2);
+                  pstt.setString(4, tabl);
+                  pstt.setString(5, tag);
+                  pstt.setString(6, clock);
+                  
+                  int i = pstt.executeUpdate();
+                  if (i > 0) {
+                        //DT.getList_id().add();
+                        //DT.getList_T().add(table);
+                        //DT.getList_Dist1().add(dist);
+                        //DT.getList_Dist2().add(dist2);
+                        //DT.getList_Tabl().add(tabl);
+                        //DT.getList_Tag().add(tag);
+                        //DT.getList_Clock().add(clock);
+                        SelectTables();
+                        
+                        VF_R.addItemToMenus(DT.getList_id(), DT.getList_T());
+                        VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
+                        
+                        st.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
+                          "MC-InsertTable Done!", 5000);
+                  }else{
+                        st.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
+                          DT.inter, 7000);
+                  }
+                  
+            }catch(SQLException ex){
+                  ex.printStackTrace();
+                  st.startLBStatus(VC_R.getLB_Status(), Color.RED, ex.toString(), 8000);
+            }
+      }
+      
+      public void InsertTableTEST(String table, String dist, String dist2, String tabl,
+              String tag, String clock){
+            
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -203,6 +279,7 @@ public class MakeCon {
                   DT.getList_Dist2().clear();
                   DT.getList_Tabl().clear();
                   DT.getList_Tag().clear();
+                  DT.getList_Clock().clear();
 
                   while (rs.next()) {
                         DT.getList_id().add(rs.getString(1));
@@ -211,6 +288,7 @@ public class MakeCon {
                         DT.getList_Dist2().add(rs.getString(4));
                         DT.getList_Tabl().add(rs.getString(5));
                         DT.getList_Tag().add(rs.getString(6));
+                        DT.getList_Clock().add(rs.getString(7));
                   }
                   //addItem(DT.getList_id(), dt.getList_T(), dt.getList_Dist1(), dt.getList_Dist2(), dt.getList_Tabl(),
                   //      dt.getList_Tag1(), dt.getList_Tag2());

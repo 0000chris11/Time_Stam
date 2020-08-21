@@ -49,7 +49,9 @@ public class VF_R_DataCom {
       static JScrollPane sc_p1 = new JScrollPane(p1);
 
       static JPanel pt = new JPanel();
+      
       static JTable JT = new JTable();
+      static JLabel lb_JT = new JLabel("NO ROWS INSERTED");
       static JScrollPane sc_JT = new JScrollPane(pt);
 
       static JPanel p3 = new JPanel();
@@ -164,6 +166,10 @@ public class VF_R_DataCom {
 
       public static JTable getJT() {
             return JT;
+      }
+      
+      public static JLabel getLB_JT(){
+            return lb_JT;
       }
 
       public static JToolBar getTB() {

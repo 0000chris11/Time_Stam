@@ -127,7 +127,7 @@ public class VF_R extends VF_R_DataCom {
             }
       }
 
-      private void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
+      public static void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
             MIActionListener MIAL = new MIActionListener();
 
             JM_Select.removeAll();
@@ -386,6 +386,10 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("SC_JT size: " + sc_JT.getSize());
             //System.out.println("JT size: " + JT.getSize());
             //+++++++++++++++++++++++++++++++++++++++++++++
+            pt.add(lb_JT);
+            lb_JT.setSize(200, 70);
+            lb_JT.setForeground(Color.BLACK);
+            MM.setTextToCenter(lb_JT, pt);
       }
 
       private void clockConfig() {
@@ -813,6 +817,11 @@ public class VF_R extends VF_R_DataCom {
             
             System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
             mc.SelectColumns(DT.getTable());
+            //++++++++++++++++++
+            if(JT.getRowCount() == 0){
+                  JT.setVisible(false);
+            }
+            //++++++++++++++++++
             //typeDetection();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET );

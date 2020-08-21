@@ -38,7 +38,7 @@ public class DT {
       private static ArrayList<String> list_Dist2 = new ArrayList<String>();
       private static ArrayList<String> list_Tabl = new ArrayList<String>();
       private static ArrayList<String> list_Tag = new ArrayList<String>();
-      //private static ArrayList<String> list_Tag2 = new ArrayList<String>();
+      private static ArrayList<String> list_Clock = new ArrayList<String>();
 
       private static ArrayList<String> list_C = new ArrayList<String>();//COLUMNS
       private static ArrayList<String> list_R = new ArrayList<String>();//ROWS
@@ -229,6 +229,10 @@ public class DT {
 
       public static ArrayList<String> getList_Tag() {
             return list_Tag;
+      }
+      
+      public static ArrayList<String> getList_Clock(){
+            return list_Clock;
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++

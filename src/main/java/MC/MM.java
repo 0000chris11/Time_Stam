@@ -29,6 +29,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
 import First.VF_R;
 import Others.CC;
+import java.awt.FontMetrics;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,6 +55,15 @@ public class MM extends Status {
             return -1;
       }
 
+      public static void setTextToCenter(JLabel LB, JComponent JC){
+            FontMetrics FM = LB.getFontMetrics(LB.getFont());
+            
+            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
+            int y = (FM.getAscent() + 
+                    (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
+            
+            LB.setLocation(x, y);
+      }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static void printListSelectionListeners(JList lst) {
             System.out.println("\n" + lst.getName() + " ListSelectionListeners count: "
