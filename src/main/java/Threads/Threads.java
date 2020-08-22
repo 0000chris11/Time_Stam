@@ -75,6 +75,7 @@ public class Threads {
 
                                     mc.Insert(DT.getTable(), ++mayor, SS);
                                     mc.SelectData(a + 2, DT.getTable());
+                                    VF_R.noRowsDetection();
                               }
                         }
 

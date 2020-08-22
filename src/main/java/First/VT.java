@@ -1,7 +1,6 @@
 package First;
 
 import static First.VF_R_DataCom.btn_plus;
-import static First.VF_R_DataCom.pt;
 import MC.DT;
 import Others.CC;
 import Second.VC_R;
@@ -21,6 +20,11 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.basic.BasicToolBarUI;
 import smallComponenets.smallTF;
 import javax.swing.plaf.metal.MetalButtonUI;
+import static First.VF_R_DataCom.PT;
+import MC.MM;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -30,6 +34,9 @@ public class VT {
 
       //Data dt = new Data("VT");
       private static JFrame JF = new JFrame();
+      
+      private static JSeparator SP = new JSeparator();
+      final int sp_h = 4;
 
       public static JFrame getJF() {
             return JF;
@@ -39,9 +46,9 @@ public class VT {
             new JButton("UIManager PUT"),
             new JButton("Add to P1"),
             new JButton("Change FG of JTB"),
-            new JButton("get Table Size"),
-            new JButton("BandW elements"),
-            new JButton("Arrays of VC")};
+            new JButton("ADD Test SP"),
+            new JButton("LB_JT to Y=0"),
+            new JButton("NoRowsDetection")};
       int count = 0;
 
       public VT() {
@@ -59,6 +66,12 @@ public class VT {
             //btns[0].setSize(100, 80);
             JF.setSize(sum + 20, 100);
             JF.pack();
+            //++++++++++++++++++++++++++++++
+            SP.setForeground(Color.BLUE);
+            SP.setOrientation(SwingConstants.HORIZONTAL);
+            SP.setSize(60, sp_h);
+            SP.setBorder(new LineBorder(new Color(0,0,255), sp_h));
+            //+++++++++++++++++++++++++++++++
       }
 
       /*
@@ -98,30 +111,40 @@ public class VT {
 
                   } else if (ac.equals(btns[3].getText())) {
                         System.out.println(btns[3].getText());
-                        
+
                         VF_R.getJT().setForeground(Color.RED);
                   } else if (ac.equals(btns[4].getText())) {
                         System.out.println(btns[4].getText());
-                        //System.out.println("\tPT size: " + VF_R.getSize());
-                        //System.out.println("\tSC_JT size: " + VF_R.getSC_JT().getSize());
-                        //System.out.println("\tJT size: " + VF_R.getJT().getSize());
-
+                        VF_R.getJF().add(SP);
+                        SP.setLocation(VF_R.getLB_JT().getX(), VF_R.getLB_JT().getY() - 6);
+                        SP.setSize(VF_R.getLB_JT().getWidth(), sp_h);
+                        
                   } else if (ac.equals(btns[5].getText())) {
                         System.out.println("add Gradient");
-                        for (int a = 0; a < DT.getBandW().size(); a++) {
-                              System.out.println("\t" + a + ": " + DT.getBandW().get(a));
-                        }
+                        VF_R.getLB_JT().setLocation
+                              (VF_R.getLB_JT().getX(), VF_R.getJMB().getHeight());
 
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
 
-                        for (int a = 0; a < VC_R.getRow().length; a++) {
-                              for (int b = 0; b < 9; b++) {
-                                    System.out.println("\t" + a + "-" + b + ": "
-                                            + VC_R.getRow()[a][b].getName() + " ("
-                                            + VC_R.getRow()[a][b].getClass().toString() + ")");
-                              }
+                        VF_R.getSC_JT().setVisible(false);
+                        VF_R.getJT().setVisible(false);
+                        VF_R.getLB_JT().setVisible(true);
+
+                        if (VF_R.getPT().isVisible()) {
+                              System.out.println("\tPT is visible");
+                        } else {
+                              System.out.println("\tPT is NOT visible");
                         }
+
+                        System.out.println("\tPT Background: "
+                                + VF_R.getPT().getBackground());
+
+                        VF_R.getJF().add(VF_R.getLB_JT());
+                        MM.setTextToYCenter(VF_R.getLB_JT(), VF_R.getSC_JT());
+                        System.out.println("\tLB_JT is visible: " + VF_R.getLB_JT().isVisible());
+                        System.out.println("\tLB_JT Location: " + 
+                                VF_R.getLB_JT().getLocation());
                   }
             }
 

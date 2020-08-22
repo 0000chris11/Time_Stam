@@ -64,6 +64,17 @@ public class MM extends Status {
             
             LB.setLocation(x, y);
       }
+      
+      public static void setTextToYCenter(JLabel LB, JComponent JC){
+            FontMetrics FM = LB.getFontMetrics(LB.getFont());
+            
+            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
+            
+            int y = (FM.getAscent() + 
+                    (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
+            
+            LB.setLocation(VF_R.getSC_JT().getX() + x, y - VF_R.getJMB().getHeight());
+      }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static void printListSelectionListeners(JList lst) {
             System.out.println("\n" + lst.getName() + " ListSelectionListeners count: "

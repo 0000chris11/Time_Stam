@@ -365,10 +365,10 @@ public class VF_R extends VF_R_DataCom {
             sc_JT.setSize(766, 522);
             sc_JT.setVerticalScrollBarPolicy(22);
             //sc_JT.setPreferredSize(new Dimension(764, 522));
-            pt.setLayout(null);
-            pt.setBackground(Color.RED);
-            pt.setBounds(2, 2, 769, 518);
-            pt.add(JT);
+            PT.setLayout(null);
+            PT.setBackground(Color.RED);
+            PT.setBounds(2, 2, 769, 518);
+            PT.add(JT);
             JT.setBounds(6, 6, 758, 516);
             //JT.setPreferredSize(new Dimension(758, JT.getHeight()));
             JT.setBackground(Color.BLACK);
@@ -381,15 +381,30 @@ public class VF_R extends VF_R_DataCom {
             JT.setRowSelectionAllowed(true);
             JT.setSelectionBackground(DT.TFColor[2]);
             //JT.setPreferredScrollableViewportSize();
-            JT.setPreferredScrollableViewportSize(pt.getSize());
-            //System.out.println("PT size: " + pt.getSize());
+            JT.setPreferredScrollableViewportSize(PT.getSize());
+            //System.out.println("PT size: " + PT.getSize());
             //System.out.println("SC_JT size: " + sc_JT.getSize());
             //System.out.println("JT size: " + JT.getSize());
             //+++++++++++++++++++++++++++++++++++++++++++++
-            pt.add(lb_JT);
-            lb_JT.setSize(200, 70);
+            PT.add(lb_JT);
+            lb_JT.setVisible(false);
+            lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
-            MM.setTextToCenter(lb_JT, pt);
+            lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
+            MM.setTextToCenter(lb_JT, PT);
+      }
+      
+      public static void noRowsDetection(){
+            System.out.print(CC.CYAN + "MAIN +++++ noRowsDetection: " + CC.RESET);
+            if(JT.getRowCount() == 0){
+                  JT.setVisible(false);
+                  lb_JT.setVisible(true);
+                  System.out.println(CC.CYAN + "NO" + CC.RESET);
+            }else{
+                  JT.setVisible(true);
+                  lb_JT.setVisible(false);
+                  System.out.println(CC.CYAN + "YES" + CC.RESET);
+            }
       }
 
       private void clockConfig() {
@@ -800,7 +815,7 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
             mc.SelectTables();
 
-            //SELECTING DEFAULT TABLE+++++++++++++++++++++++++
+            //SELECTING DEFAULT TABLE++++++++++++++++++++++++
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   mc.SelectDefaultTable();
@@ -817,15 +832,10 @@ public class VF_R extends VF_R_DataCom {
             
             System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
             mc.SelectColumns(DT.getTable());
-            //++++++++++++++++++
-            if(JT.getRowCount() == 0){
-                  JT.setVisible(false);
-            }
-            //++++++++++++++++++
-            //typeDetection();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET );
             cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
+            noRowsDetection();
             System.out.println(CC.CYAN + "MAIN +++++ addKeyListenerToTFS"+ CC.RESET);
 
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);

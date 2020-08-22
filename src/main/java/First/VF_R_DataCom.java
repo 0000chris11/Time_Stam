@@ -48,11 +48,11 @@ public class VF_R_DataCom {
       static JPanel p1 = new PanelGradient();
       static JScrollPane sc_p1 = new JScrollPane(p1);
 
-      static JPanel pt = new JPanel();
+      static JPanel PT = new JPanel();
       
       static JTable JT = new JTable();
       static JLabel lb_JT = new JLabel("NO ROWS INSERTED");
-      static JScrollPane sc_JT = new JScrollPane(pt);
+      static JScrollPane sc_JT = new JScrollPane(PT);
 
       static JPanel p3 = new JPanel();
 
@@ -69,7 +69,7 @@ public class VF_R_DataCom {
             }
       };
       //+++++++++++++++++++++++++++++++++++
-      JMenuBar JMB = new JMenuBar();
+      static JMenuBar JMB = new JMenuBar();
 
       static JMenu JM_Options = new JMenu("Options");
 
@@ -168,12 +168,20 @@ public class VF_R_DataCom {
             return JT;
       }
       
+      public static JPanel getPT(){
+            return PT;
+      }
+      
       public static JLabel getLB_JT(){
             return lb_JT;
       }
 
       public static JToolBar getTB() {
             return TB;
+      }
+      
+      public static JMenuBar getJMB(){
+            return JMB;
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++
