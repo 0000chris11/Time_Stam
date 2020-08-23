@@ -65,15 +65,20 @@ public class MM extends Status {
             LB.setLocation(x, y);
       }
       
-      public static void setTextToYCenter(JLabel LB, JComponent JC){
+      public static void setLB_JTToCenter(JLabel LB, JComponent JC){
+            //System.out.println("##########setLB_JTToCenter");
             FontMetrics FM = LB.getFontMetrics(LB.getFont());
             
-            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
+            int x = (JC.getWidth() - (int) FM.stringWidth(LB.getText())) / 2;
             
             int y = (FM.getAscent() + 
                     (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
             
-            LB.setLocation(VF_R.getSC_JT().getX() + x, y - VF_R.getJMB().getHeight());
+            //System.out.println("\tJC getX: " + JC.getX());
+            //System.out.println("\tX: " + x);
+            //System.out.println("\tY: " + y);
+            //System.out.println("\tP3 getHeight: " + VF_R.getP3().getHeight());
+            LB.setLocation(JC.getX() + x, y - JC.getY());
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static void printListSelectionListeners(JList lst) {

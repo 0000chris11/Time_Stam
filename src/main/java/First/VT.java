@@ -22,6 +22,7 @@ import smallComponenets.smallTF;
 import javax.swing.plaf.metal.MetalButtonUI;
 import static First.VF_R_DataCom.PT;
 import MC.MM;
+import java.awt.FontMetrics;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -115,9 +116,16 @@ public class VT {
                         VF_R.getJT().setForeground(Color.RED);
                   } else if (ac.equals(btns[4].getText())) {
                         System.out.println(btns[4].getText());
+                        JLabel LB = VF_R.getLB_JT();
+                        FontMetrics FM = LB.getFontMetrics(LB.getFont());
+                        
                         VF_R.getJF().add(SP);
-                        SP.setLocation(VF_R.getLB_JT().getX(), VF_R.getLB_JT().getY() - 6);
-                        SP.setSize(VF_R.getLB_JT().getWidth(), sp_h);
+                        SP.setLocation(LB.getX() + LB.getInsets().left
+                                , VF_R.getLB_JT().getY() - 6);
+                        SP.setSize(FM.stringWidth(LB.getText()), sp_h);
+                        
+                        
+                        
                         
                   } else if (ac.equals(btns[5].getText())) {
                         System.out.println("add Gradient");
@@ -127,22 +135,7 @@ public class VT {
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
 
-                        VF_R.getSC_JT().setVisible(false);
-                        VF_R.getJT().setVisible(false);
-                        VF_R.getLB_JT().setVisible(true);
-
-                        if (VF_R.getPT().isVisible()) {
-                              System.out.println("\tPT is visible");
-                        } else {
-                              System.out.println("\tPT is NOT visible");
-                        }
-
-                        System.out.println("\tPT Background: "
-                                + VF_R.getPT().getBackground());
-
-                        VF_R.getJF().add(VF_R.getLB_JT());
-                        MM.setTextToYCenter(VF_R.getLB_JT(), VF_R.getSC_JT());
-                        System.out.println("\tLB_JT is visible: " + VF_R.getLB_JT().isVisible());
+                        MM.setLB_JTToCenter(VF_R.getLB_JT(), VF_R.getSC_JT());
                         System.out.println("\tLB_JT Location: " + 
                                 VF_R.getLB_JT().getLocation());
                   }

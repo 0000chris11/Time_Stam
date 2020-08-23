@@ -105,7 +105,8 @@ public class VF_R_DataCom {
       Separator sep3 = new Separator();
       static JMenuItem mi_CreateTable = new JMenuItem("Create Table");
       static JMenuItem mi_UpdateTable = new JMenuItem("Update Table");
-      static JMenuItem mi_DeleteTable = new JMenuItem("Delete Table");
+      static JMenuItem mi_DeleteTables = new JMenuItem("Delete Tables");
+      static JMenuItem mi_DeleteThisTable = new JMenuItem("Delete this Table");
       //+++++++++++++++++++++++++++++++++++
       static JButton btn_minus = new smallBTN_C("-");
       static JButton btn_plus = new smallBTN_C("+");
@@ -295,7 +296,7 @@ public class VF_R_DataCom {
       }
       
       public static JMenuItem getMI_DeleteTable(){
-            return mi_DeleteTable;
+            return mi_DeleteTables;
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++++
       public static JMenuItem getMI_SEEL() {

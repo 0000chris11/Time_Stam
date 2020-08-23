@@ -298,7 +298,8 @@ public class VF_R extends VF_R_DataCom {
             JM_Table.add(sep3);
             JM_Table.add(mi_CreateTable);
             JM_Table.add(mi_UpdateTable);
-            JM_Table.add(mi_DeleteTable);
+            JM_Table.add(mi_DeleteTables);
+            JM_Table.add(mi_DeleteThisTable);
 
       }
 
@@ -386,22 +387,24 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("SC_JT size: " + sc_JT.getSize());
             //System.out.println("JT size: " + JT.getSize());
             //+++++++++++++++++++++++++++++++++++++++++++++
-            PT.add(lb_JT);
+            JF.add(lb_JT);
             lb_JT.setVisible(false);
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
             lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
-            MM.setTextToCenter(lb_JT, PT);
+            MM.setLB_JTToCenter(lb_JT, sc_JT);
       }
       
       public static void noRowsDetection(){
             System.out.print(CC.CYAN + "MAIN +++++ noRowsDetection: " + CC.RESET);
             if(JT.getRowCount() == 0){
-                  JT.setVisible(false);
+                  sc_JT.setVisible(false);
                   lb_JT.setVisible(true);
                   System.out.println(CC.CYAN + "NO" + CC.RESET);
+                  System.out.println("\tlb_JT visible: " + lb_JT.isVisible());
+                  System.out.println("\tlb_JT Location: " + lb_JT.getLocation());
             }else{
-                  JT.setVisible(true);
+                  sc_JT.setVisible(true);
                   lb_JT.setVisible(false);
                   System.out.println(CC.CYAN + "YES" + CC.RESET);
             }
@@ -746,7 +749,8 @@ public class VF_R extends VF_R_DataCom {
             //++++++++++++++++++++++++++
             mi_CreateTable.setName("mi_CreateTable");
             mi_UpdateTable.setName("mi_UpdateTable");
-            mi_DeleteTable.setName("mi_DeleteTable");
+            mi_DeleteTables.setName("mi_DeleteTables");
+            mi_DeleteThisTable.setName("mi_DeleteThisTable");
             //++++++++++++++++++++++++++
             sep0.setName("sep0");
             sep1.setName("sep1");
