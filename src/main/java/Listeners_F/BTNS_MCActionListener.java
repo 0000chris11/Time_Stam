@@ -113,7 +113,7 @@ public class BTNS_MCActionListener implements ActionListener {
             DT.bool_Del = true;
             //System.out.println("\nDELETING DATA");
 
-            mc.Delete(DT.getTable(), DT.getList_R().get(0));
+            mc.DeleteRow(DT.getTable(), DT.getList_R().get(0));
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VF_R.getJT().getColumnCount() == a + 2) {
                         mc.SelectData(a + 2, DT.getTable());

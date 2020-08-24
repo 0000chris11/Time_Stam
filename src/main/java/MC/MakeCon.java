@@ -150,28 +150,6 @@ public class MakeCon {
             }
       }
 
-      public void CreateTableTEST(String table, String[] cols, int c) {
-            System.out.println(CC.YELLOW + "\nCreateTableTEST" + CC.RESET);
-            String TYPE = "VARCHAR(150)";
-            String TYPE2 = "NOT NULL";
-            //2
-            //++++++++++++++++++++++++++++++++++++++++
-            String sql = "CREATE TABLE " + table + " ("
-                    + "id INT NOT NULL AUTO_INCREMENT, ";
-
-            for (int a = 0; a < c - 1; a++) {
-                  sql += cols[a] + " " + TYPE + " " + TYPE2 + ", ";
-            }
-
-            sql += "PRIMARY KEY(id))ENGINE=INNODB";
-            System.out.println("\tTable: " + table);
-            for (int a = 0; a < cols.length - 1; a++) {
-                  System.out.println("\tCol " + (a + 2) + ": " + cols[a]);
-            }
-            System.out.println("\tC: " + c);
-            System.out.println("\t" + sql);
-      }
-
       public void InsertTable(String table, String dist, String dist2, String tabl,
               String tag, String clock) {
             System.out.println(CC.YELLOW + "MakeCon ++++ InsertTable" + CC.RESET);
@@ -224,9 +202,30 @@ public class MakeCon {
             }
       }
       
-      public void InsertTableTEST(String table, String dist, String dist2, String tabl,
-              String tag, String clock){
-            
+      public void DeleteTable(String table){
+            System.out.println(CC.YELLOW + "MakeCon ++++ DeleteTable" + CC.RESET);
+            try{
+                  con = DriverManager.getConnection(urlConnection, user, passw);
+                  
+                  String sql = "DROP TABLE " + 
+                          table.replaceAll(" ", "_");
+                  pstt = con.prepareStatement(sql);
+                  System.out.println("\t" + sql);
+
+                  int i = pstt.executeUpdate();
+                  if (i == 1) {
+                        st.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
+                                "MC-DeleteTable Done!", 4000);
+                  } else {
+                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                                "DeleteTable: " + DT.inter, 8000);
+                  }
+                  
+            }catch(SQLException ex){
+                  ex.printStackTrace();
+                  st.startLBStatus(VF_R.getLB_Status(), Color.RED, 
+                          ex.toString(), 8000);
+            }
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -618,8 +617,8 @@ public class MakeCon {
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      public void Delete(String table, String id) {
-            System.out.println(CC.YELLOW + "MakeCon ++++ Delete" + CC.RESET);
+      public void DeleteRow(String table, String id) {
+            System.out.println(CC.YELLOW + "MakeCon ++++ DeleteRow" + CC.RESET);
             try {
                   con = DriverManager.getConnection(
                           urlConnection, user, passw);
@@ -630,15 +629,16 @@ public class MakeCon {
                   int ex = pstt.executeUpdate();
 
                   if (ex == 1) {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MCDelete Done!", 4000);
+                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], 
+                                "MCDeleteRow Done!", 4000);
                   } else {
                         st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
-                                "Delete: " + DT.inter, 8000);
+                                "DeleteRow: " + DT.inter, 8000);
                   }
             } catch (SQLException ex) {
                   ex.printStackTrace();
                   st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "Delete: " + ex.toString(), 8000);
+                          "DeleteRow: " + ex.toString(), 8000);
             }
       }
 

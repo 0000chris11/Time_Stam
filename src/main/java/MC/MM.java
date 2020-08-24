@@ -65,6 +65,16 @@ public class MM extends Status {
             LB.setLocation(x, y);
       }
       
+      public static void setTextToXCenter(JLabel LB, int y, JComponent JC){
+            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
+            LB.setLocation(x, LB.getY());
+      }
+      
+      public static void setTextToXCenter(JLabel LB, int y, JFrame JC){
+            int x = (JC.getContentPane().getWidth() - (int) LB.getWidth()) / 2;
+            LB.setLocation(x, y);
+      }
+      
       public static void setLB_JTToCenter(JLabel LB, JComponent JC){
             //System.out.println("##########setLB_JTToCenter");
             FontMetrics FM = LB.getFontMetrics(LB.getFont());
