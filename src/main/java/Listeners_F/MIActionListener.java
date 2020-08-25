@@ -55,6 +55,7 @@ public class MIActionListener implements ActionListener {
 
                   System.out.println("MIActionListener ++++ resetingAfter");
                   resetingAfter();
+                  VF_R.getMI_DeleteThisTable().setEnabled(true);
 
                   System.out.println("MIActionListener ++++ MCSelectATable");
 

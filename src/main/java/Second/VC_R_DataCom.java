@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
-import smallComponenets.PanelGradient;
+import smallComponenets.JPanelGradient;
 import smallComponenets.smallLB;
 
 /**
@@ -25,7 +25,7 @@ public class VC_R_DataCom {
       
       JFrame JF = new JFrame("Create Table");
       
-      JPanel JP = new PanelGradient();
+      JPanel JP = new JPanelGradient();
       JPanel JP2 = new JPanel();
       
       static JLabel lb_Status = new JLabel("Waiting for action...");

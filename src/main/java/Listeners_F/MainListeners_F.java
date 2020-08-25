@@ -283,7 +283,8 @@ public class MainListeners_F {
             MITableActionListener MITAL = new MITableActionListener();
             VF_R.getMI_CreateTable().addActionListener(MITAL);
             VF_R.getMI_UpdateTable().addActionListener(MITAL);
-            VF_R.getMI_DeleteTable().addActionListener(MITAL);
+            VF_R.getMI_DeleteThisTable().addActionListener(MITAL);
+            VF_R.getMI_DeleteTables().addActionListener(MITAL);
       }
       //================================================
       private void addKeyListenerToLSTS() {

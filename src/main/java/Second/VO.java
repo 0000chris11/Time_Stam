@@ -5,9 +5,12 @@
  */
 package Second;
 
+import First.VF_R;
 import MC.MM;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +31,16 @@ public class VO {
       JButton op1 = new JButton("No");
       JButton op2 = new JButton("Yes");
       
-      public VO(String QT){
+      private void windowClosing(){
+            JF.addWindowListener(new WindowAdapter(){
+                  @Override
+                  public void windowClosing(WindowEvent e){
+                        VF_R.getJF().setAlwaysOnTop(true);
+                  }
+            });
+      }
+      
+      public VO(String QT, String table){
             //lbq.setText(QT);
             lbq.setText("Delete this table?");//EX
             //++++++++++++++++++++++++++++
@@ -37,12 +49,18 @@ public class VO {
             JF.getContentPane().setBackground(Color.DARK_GRAY.darker());
             JF.setVisible(true);
             JF.setSize(284, 140);
+            JF.setLocationRelativeTo(null);
+            JF.setAlwaysOnTop(true);
+            //windowClosing();
             
             JF.add(lbq);
             Font f = new Font("Dialog", Font.PLAIN, 20);
             lbq.setForeground(Color.WHITE);
             lbq.setFont(f);
             lbq.setSize(lbq.getFontMetrics(f).stringWidth(lbq.getText()), 27);
+            System.out.println("####lbq bounds: " + lbq.getBounds());
+            System.out.println("####JF width: " + JF.getWidth());
+            System.out.println("####JF-CP witdht: " + JF.getContentPane().getWidth());
             MM.setTextToXCenter(lbq, 18, JF);
             
             JF.add(op1);
@@ -55,12 +73,12 @@ public class VO {
             op1.setBounds(20, by, bw, bh);
             op2.setBounds(op1.getX() + op1.getWidth() + 20, by, bw, bh);
             
-            int w = op1.getX() + op1.getWidth() + op2.getWidth() + 64;
-            System.out.println("JF W: " + w);
+            VO_AL voal = new VO_AL(QT, table);
+            op1.addActionListener(voal);
+            op2.addActionListener(voal);
+            //int w = op1.getX() + op1.getWidth() + op2.getWidth() + 64;
+            //System.out.println("JF W: " + w);
       }
       
-      public static void main(String[] args){
-            new VO("");
-      }
 }
 

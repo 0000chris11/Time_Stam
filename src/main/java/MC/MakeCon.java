@@ -150,7 +150,7 @@ public class MakeCon {
             }
       }
 
-      public void InsertTable(String table, String dist, String dist2, String tabl,
+      public boolean InsertTable(String table, String dist, String dist2, String tabl,
               String tag, String clock) {
             System.out.println(CC.YELLOW + "MakeCon ++++ InsertTable" + CC.RESET);
             try{
@@ -186,23 +186,26 @@ public class MakeCon {
                         //DT.getList_Clock().add(clock);
                         SelectTables();
                         
-                        VF_R.addItemToMenus(DT.getList_id(), DT.getList_T());
-                        VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
+                        
                         
                         st.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
                           "MC-InsertTable Done!", 5000);
+                        
+                        return true;
                   }else{
                         st.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
                           DT.inter, 7000);
+                        return false;
                   }
                   
             }catch(SQLException ex){
                   ex.printStackTrace();
                   st.startLBStatus(VC_R.getLB_Status(), Color.RED, ex.toString(), 8000);
+                  return false;
             }
       }
       
-      public void DeleteTable(String table){
+      public boolean DeleteTable(String table){
             System.out.println(CC.YELLOW + "MakeCon ++++ DeleteTable" + CC.RESET);
             try{
                   con = DriverManager.getConnection(urlConnection, user, passw);
@@ -213,18 +216,48 @@ public class MakeCon {
                   System.out.println("\t" + sql);
 
                   int i = pstt.executeUpdate();
-                  if (i == 1) {
+                  if (i == 0) {
+                        DT.getList_T().remove(table);
                         st.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
                                 "MC-DeleteTable Done!", 4000);
+                        return true;
                   } else {
                         st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "DeleteTable: " + DT.inter, 8000);
+                        return false;
                   }
                   
             }catch(SQLException ex){
                   ex.printStackTrace();
                   st.startLBStatus(VF_R.getLB_Status(), Color.RED, 
-                          ex.toString(), 8000);
+                          "DeleteTable: " + ex.toString(), 8000);
+                  return false;
+            }
+      }
+      
+      public void RemoveTableFromTN(String table){
+            System.out.println(CC.YELLOW + "MakeCon ++++ RemoveTableFromTN" + CC.RESET);
+            try{
+                  con = DriverManager.getConnection(urlConnection, user, passw);
+                  
+                  String sql = "DELETE FROM Table_Names WHERE Table_Names = \""
+                          + table + "\"";
+                  pstt = con.prepareStatement(sql);
+                  System.out.println("\t" + sql);
+
+                  int i = pstt.executeUpdate();
+                  if (i == 1) {
+                        st.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
+                                "MC-RemoveTableFromTN Done!", 4000);
+                  } else {
+                        st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
+                                "RemoveTableFromTN: " + DT.inter, 8000);
+                  }
+                  
+            }catch(SQLException ex){
+                  ex.printStackTrace();
+                  st.startLBStatus(VF_R.getLB_Status(), Color.RED, 
+                          "RemoveTableFromTN: " + ex.toString(), 8000);
             }
       }
 

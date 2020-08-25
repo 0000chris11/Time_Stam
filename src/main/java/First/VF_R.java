@@ -70,7 +70,7 @@ public class VF_R extends VF_R_DataCom {
 
       //Connection con;
       String CName = this.getClass().getName();
-      
+
       //MethodM mm = new MethodM(CName, DT.CCount++);
       Components cp = new Components(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
@@ -89,6 +89,7 @@ public class VF_R extends VF_R_DataCom {
 
       //JScroller scThread = new JScroller();
       Thread addThread;
+
       //++++++++++++++++++++++++++++++++++++++++++++++
       public static void setColorToDItem(String table, String dtable) {
             //System.out.println("MTH - setColorToDItem");
@@ -99,27 +100,29 @@ public class VF_R extends VF_R_DataCom {
                   //System.out.println("###COUNT: " + JMS_ChangeDTable.getItemCount());
                   for (int a = 0; a < JMS_ChangeDTable.getItemCount(); a++) {
                         JM_Select.getItem(a).setBackground(Color.BLACK);
+                        JM_Select.getItem(a).setForeground(Color.WHITE);
                         JMS_ChangeDTable.getItem(a).setBackground(Color.BLACK);
+                        JMS_ChangeDTable.getItem(a).setForeground(Color.WHITE);
                   }
                   for (int a = 0; a < JMS_ChangeDTable.getItemCount(); a++) {
                         String itemText = JM_Select.getItem(a).getText();
                         //System.out.println(CC.PURPLE + "ItemText: " + itemText + CC.RESET);
                         //System.out.println(CC.PURPLE + "\tdt.getTable: " + DT.getTable() + CC.RESET);
                         //System.out.println(CC.PURPLE + "\tdt.getDTable: " + DT.getDTable() + CC.RESET);
-                        if(itemText.contains(" ")){
+                        if (itemText.contains(" ")) {
                               itemText = itemText.replaceAll(" ", "_");
                         }
-                        
-                        if (itemText.equals(table) && 
-                                itemText.equals(dtable)) {
+
+                        if (itemText.equals(table)
+                                && itemText.equals(dtable)) {
                               JM_Select.getItem(a).setBackground(new Color(100, 100, 100));
                               JMS_ChangeDTable.getItem(a).setBackground(new Color(100, 100, 100));
-                        }else if(itemText.equals(table) && 
-                                !itemText.equals(dtable)){
+                        } else if (itemText.equals(table)
+                                && !itemText.equals(dtable)) {
                               JM_Select.getItem(a).setBackground(new Color(50, 50, 50));
                               JMS_ChangeDTable.getItem(a).setBackground(new Color(50, 50, 50));
-                        }else if(!itemText.equals(table) &&
-                                itemText.equals(dtable)){
+                        } else if (!itemText.equals(table)
+                                && itemText.equals(dtable)) {
                               JM_Select.getItem(a).setBackground(new Color(80, 80, 80));
                               JMS_ChangeDTable.getItem(a).setBackground(new Color(80, 80, 80));
                         }
@@ -144,6 +147,29 @@ public class VF_R extends VF_R_DataCom {
             }
 
       }
+
+      public static void tableDeletedState() {
+            boolean b = false;
+            lb_Title.setVisible(b);
+            for (int a = 0; a < btns_MC.length; a++) {
+                  btns_MC[a].setVisible(b);
+            }
+            for(int a = 0; a < lbs.length; a++){
+                  lbs[a].setVisible(b);
+                  tfs[a].setVisible(b);
+                  if(a != lbs.length - 1){
+                        tfs_MD[a].setVisible(b);
+                        tfs_MU[a].setVisible(b);
+                        lb_2ds[a].setVisible(b);
+                        tfs_SD[a].setVisible(b);
+                        tfs_SU[a].setVisible(b);
+                        btns_C[a].setVisible(b);
+                  }
+            }
+            lb_Icon.setVisible(b);
+            JPB.setVisible(b);
+      }
+
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void controlBtnUpdate(ArrayList<String> list, JTextField tf) {
             int z = 0;
@@ -197,7 +223,7 @@ public class VF_R extends VF_R_DataCom {
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
             sc_JT.setViewportView(JT);
-            
+
             JT.setDefaultEditor(String.class, DTCellEditor);
             for (int i = 0; i < JT.getColumnCount(); i++) {
                   JT.getColumnModel().getColumn(i).setCellEditor(DTCellEditor);
@@ -231,7 +257,7 @@ public class VF_R extends VF_R_DataCom {
             sc_p1.setBounds(2, 22, 446, 522);
             sc_p1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             sc_p1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-            
+
             p1.setLayout(null);
             p1.setSize(446, 521);
             //p1.setPreferredSize(new Dimension(446, 521));
@@ -394,16 +420,16 @@ public class VF_R extends VF_R_DataCom {
             lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
             MM.setLB_JTToCenter(lb_JT, sc_JT);
       }
-      
-      public static void noRowsDetection(){
+
+      public static void noRowsDetection() {
             System.out.print(CC.CYAN + "MAIN +++++ noRowsDetection: " + CC.RESET);
-            if(JT.getRowCount() == 0){
+            if (JT.getRowCount() == 0) {
                   sc_JT.setVisible(false);
                   lb_JT.setVisible(true);
                   System.out.println(CC.CYAN + "NO" + CC.RESET);
                   System.out.println("\tlb_JT visible: " + lb_JT.isVisible());
                   System.out.println("\tlb_JT Location: " + lb_JT.getLocation());
-            }else{
+            } else {
                   sc_JT.setVisible(true);
                   lb_JT.setVisible(false);
                   System.out.println(CC.CYAN + "YES" + CC.RESET);
@@ -617,9 +643,9 @@ public class VF_R extends VF_R_DataCom {
             lb_Icon.setHorizontalAlignment(0);
             lb_Icon.setVerticalTextPosition(0);
             lb_Icon.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            
+
             p1.add(JPB);
-            JPB.setBounds(lb_Icon.getX(), lb_Icon.getY() - 8, 
+            JPB.setBounds(lb_Icon.getX(), lb_Icon.getY() - 8,
                     lb_Icon.getWidth(), 18);
             JPB.setBackground(Color.BLACK);
             JPB.setForeground(Color.RED);
@@ -833,14 +859,14 @@ public class VF_R extends VF_R_DataCom {
             //menuFont();
             //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
             DT.setTable(MM.filterTableName(DT.getTable(), "ADD"));
-            
+
             System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
             mc.SelectColumns(DT.getTable());
             //--------------------------------------------------------------------------------------------------------------------
-            System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET );
+            System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET);
             cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
             noRowsDetection();
-            System.out.println(CC.CYAN + "MAIN +++++ addKeyListenerToTFS"+ CC.RESET);
+            System.out.println(CC.CYAN + "MAIN +++++ addKeyListenerToTFS" + CC.RESET);
 
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
             lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(), DT.getTag(),

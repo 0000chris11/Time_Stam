@@ -67,11 +67,11 @@ public class MM extends Status {
       
       public static void setTextToXCenter(JLabel LB, int y, JComponent JC){
             int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
-            LB.setLocation(x, LB.getY());
+            LB.setLocation(x, y);
       }
       
       public static void setTextToXCenter(JLabel LB, int y, JFrame JC){
-            int x = (JC.getContentPane().getWidth() - (int) LB.getWidth()) / 2;
+            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
             LB.setLocation(x, y);
       }
       

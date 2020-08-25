@@ -1,5 +1,6 @@
 package Listeners_C;
 
+import First.VF_R;
 import MC.DT;
 import MC.MakeCon;
 import Others.CC;
@@ -36,7 +37,7 @@ public class BTN_Create_AL implements ActionListener {
             System.out.println("'\tColumns Visible: " + countV);
 
             String[] cols = TFSControl(countV);
-            
+
             System.out.println("'\tColumns OK: " + countO);
             System.out.print("'\tMATCH ");
             //MATCH BETWEEN -VISIBLE COLS- AND -OK COLUMNS-
@@ -62,12 +63,14 @@ public class BTN_Create_AL implements ActionListener {
             if (access == true) {
                   System.out.println(CC.GREEN + "\tAcces TRUE" + CC.RESET);
                   //mc.CreateTable(VC_R.getJTFS()[0].getText(), countV);
-                  mc.CreateTable(VC_R.getJTFS()[0].getText(), 
+                  mc.CreateTable(VC_R.getJTFS()[0].getText(),
                           cols, countV);
-                  
-                  mc.InsertTable(VC_R.getJTFS()[0].getText(), Dist, "NONE", Tabl, Tag, 
+                  mc.InsertTable(VC_R.getJTFS()[0].getText(), Dist, "NONE", Tabl, Tag,
                           Clock);
-            }else{
+
+                  VF_R.addItemToMenus(DT.getList_id(), DT.getList_T());
+                  VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
+            } else {
                   System.out.println(CC.GREEN + "\tAcces FALSE" + CC.RESET);
             }
       }

@@ -5,8 +5,12 @@
  */
 package Second;
 
+import First.VF_R;
+import MC.DT;
+import MC.MakeCon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import smallComponenets.JPanelGradient;
 
 /**
  *
@@ -14,20 +18,43 @@ import java.awt.event.ActionListener;
  */
 public class VO_AL implements ActionListener {
 
+      MakeCon mc = new MakeCon(this.getClass().toString(), DT.CCount++);
       private String QT;
+      private String Table;
 
       @Override
       public void actionPerformed(ActionEvent e) {
             if (QT.equals("Delete this table?")) {
                   if (e.getActionCommand().equals("Yes")) {
-                        
+                        boolean b = mc.DeleteTable(Table);
+                        if (b == true) {
+                              JPanelGradient.setTDeleted(b);//PAINT X STATE
+                              VF_R.tableDeletedState();//HIDE ALL COMPONENTS
+                              VF_R.getSC_JT().setVisible(false);
+                              DT.setTable(null);
+
+                              VF_R.getMI_DeleteThisTable().setEnabled(false);
+                              //DELETE JMI
+                              for (int a = 0; a < VF_R.getJM_Select().getItemCount(); a++) {
+                                    if (VF_R.getJM_Select().getItem(a).toString().
+                                            equals(Table)) {
+                                          VF_R.getJM_Select().remove(a);
+                                    }
+                                    if (VF_R.getJMS_ChangeDTable().getItem(a).toString().
+                                            contains(Table)) {
+                                          VF_R.getJMS_ChangeDTable().remove(a);
+                                    }
+                              }
+                              
+                        }
                   }
                   VO.getJF().dispose();
             }
       }
 
-      public VO_AL(String qt) {
+      public VO_AL(String qt, String table) {
             QT = qt;
+            Table = table;
       }
 
 }

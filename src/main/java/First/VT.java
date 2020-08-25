@@ -43,8 +43,8 @@ public class VT {
             return JF;
       }
       JButton[] btns = new JButton[]{
-            new JButton("Font to PLAIN"),
-            new JButton("UIManager PUT"),
+            new JButton("Font to PLAIN"),//SPECIAL
+            new JButton("VF_R Frame Size"),
             new JButton("Add to P1"),
             new JButton("Change FG of JTB"),
             new JButton("ADD Test SP"),
@@ -102,7 +102,8 @@ public class VT {
                         count++;
 
                   } else if (ac.equals(btns[1].getText())) {
-                        System.out.println("\nSET_BG");
+                        System.out.println(btns[1].getText());
+                        System.out.println("\t" + VF_R.getJF().getSize());
 
                   } else if (ac.equals(btns[2].getText())) {
                         System.out.println("\nAdd to P1");
