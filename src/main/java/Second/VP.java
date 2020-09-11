@@ -6,48 +6,104 @@
 package Second;
 
 import java.awt.Color;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.UIManager;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
  * @author Christopher
  */
 public class VP {
-      
+
       JFrame JF = new JFrame();
       JPanel JP = new JPanel();
-      JTree JTE = new JTree();
-      
-      public VP(){
+      private static JTree JTE;
+      public static JTree getJTE(){
+            return JTE;
+      }
+      JScrollPane SC_JTE;
+
+      private void setComponentFitOnJFrame(JComponent jc, JFrame jf) {
+            jc.setBounds(2, 2,
+                    jf.getWidth() - 21,
+                    jf.getHeight() - 44);
+
+            System.out.println("JP Bounds: " + jc.getBounds());
+      }
+
+      private DefaultMutableTreeNode getDefaultMutableTreeNode() {
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode("Options");
+
+            root.add(new DefaultMutableTreeNode("Look and Feel"));
+            boolean b;
+            for (int a = 0; a < UIManager.getInstalledLookAndFeels().length; a++) {
+                  String name = UIManager.getInstalledLookAndFeels()[a].getName();
+                  b = false;
+                  if (name.equals(UIManager.getLookAndFeel().getName())) {
+                        b = true;
+                  }
+                  ((DefaultMutableTreeNode) root.getChildAt(0)).add(
+                          new DefaultMutableTreeNode(new JCheckBox(name, b)));
+            }
+
+            setItemListener(root);
+            return root;
+      }
+
+      private void setItemListener(DefaultMutableTreeNode root){
+            for(int a = 0; a < root.getChildAt(0).getChildCount(); a++){
+                  Object object = 
+                          ((DefaultMutableTreeNode) root.getChildAt(0).getChildAt(a)).getUserObject();
+                  ((JCheckBox) object).addItemListener(new VP_ItemListener());
+            }
+      }
+      //++++++++++++++++++++++++++++++++++++++++++
+      private void frameConfig() {
             JF.setDefaultCloseOperation(2);
             JF.setLayout(null);
             JF.setSize(1070, 727);
             JF.setLocationRelativeTo(null);
             JF.setAlwaysOnTop(true);
-            
+
             JF.add(JP);
             JP.setBackground(Color.BLACK);
             JP.setLayout(null);
-            setPanelFitOnJFrame(JP, JF);
-            
-            JP.add(JTE);
-            JTE.setBounds(4, 4, 180, JP.getHeight() - 8);
+            setComponentFitOnJFrame(JP, JF);
+      }
+
+      private void JTEConfig() {
+            JTE = new JTree(getDefaultMutableTreeNode());
+            SC_JTE = new JScrollPane(JTE);
+            JP.add(SC_JTE);
+
+            JTE.setRootVisible(false);
+            JTE.setShowsRootHandles(true);
+            JTE.setEditable(true);
+            JTE.putClientProperty("JTree.lineStyle", "Horizontal");
+            JTE.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+            JTE.setCellRenderer(new VP_CellRenderer());
+
+            JTE.setBounds(0, 0, 180, JP.getHeight() + 100);
+            SC_JTE.setBounds(4, 4, 150, JP.getHeight() - 8);
             JTE.setBackground(Color.LIGHT_GRAY.brighter());
+      }
+
+      public VP() {
+            frameConfig();
+            JTEConfig();
+
             //+++++++++++++++++++++++
             JF.setVisible(true);
       }
-      
-      private void setPanelFitOnJFrame(JPanel jp, JFrame jf){
-            jp.setBounds(2, 2, 
-                    jf.getWidth() - 21, 
-                    jf.getHeight() - 44);
-            
-            System.out.println("JP Bounds: " + jp.getBounds());
-      }
-      
-      public static void main(String[] args){
+
+      public static void main(String[] args) {
             new VP();
       }
 }

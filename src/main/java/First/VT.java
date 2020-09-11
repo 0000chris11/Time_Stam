@@ -25,6 +25,7 @@ import MC.MM;
 import java.awt.FontMetrics;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 /**
@@ -45,7 +46,7 @@ public class VT {
       JButton[] btns = new JButton[]{
             new JButton("Font to PLAIN"),//SPECIAL
             new JButton("VF_R Frame Size"),
-            new JButton("Add to P1"),
+            new JButton("getLook and Feel"),
             new JButton("Change FG of JTB"),
             new JButton("ADD Test SP"),
             new JButton("LB_JT to Y=0"),
@@ -106,10 +107,8 @@ public class VT {
                         System.out.println("\t" + VF_R.getJF().getSize());
 
                   } else if (ac.equals(btns[2].getText())) {
-                        System.out.println("\nAdd to P1");
-                        JButton btn = new JButton();
-                        VF_R.getP1().add(btn);
-                        btn.setBounds(30, 400, 40, 40);
+                        System.out.println(btns[2].getText());
+                        System.out.println("\t" + UIManager.getLookAndFeel().getName());
 
                   } else if (ac.equals(btns[3].getText())) {
                         System.out.println(btns[3].getText());
