@@ -1,5 +1,5 @@
 
-package Second;
+package Options;
 
 import java.awt.Color;
 import java.awt.Component;

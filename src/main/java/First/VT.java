@@ -22,7 +22,11 @@ import smallComponenets.smallTF;
 import javax.swing.plaf.metal.MetalButtonUI;
 import static First.VF_R_DataCom.PT;
 import MC.MM;
+import TestWindow.BTNSListeners;
+import TestWindow.NewInterface;
+import TestWindow.VT_E;
 import java.awt.FontMetrics;
+import java.util.ArrayList;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -43,6 +47,7 @@ public class VT {
       public static JFrame getJF() {
             return JF;
       }
+      /*
       JButton[] btns = new JButton[]{
             new JButton("Font to PLAIN"),//SPECIAL
             new JButton("VF_R Frame Size"),
@@ -51,15 +56,22 @@ public class VT {
             new JButton("ADD Test SP"),
             new JButton("LB_JT to Y=0"),
             new JButton("NoRowsDetection")};
+      */
+      JButton[] btns;
       int count = 0;
 
-      public VT() {
+      public VT(ArrayList<String> list) {
+            //+++++++++++++++++++++++++++++++
+            //+++++++++++++++++++++++++++++++
             JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             JF.setTitle("Test Window");
-
             JF.setLayout(new BoxLayout(JF.getContentPane(), BoxLayout.X_AXIS));
+            
             int sum = 0;
-            for (int a = 0; a < btns.length; a++) {
+            btns = new JButton[list.size()];
+            for (int a = 0; a < list.size(); a++) {
+                  //JF.add(btns[a]);
+                  btns[a] = new JButton(list.get(a));
                   JF.add(btns[a]);
                   //btns[a].setSize(100, 80);
                   btns[a].addActionListener(new BTNSActionL());
@@ -86,6 +98,12 @@ public class VT {
             @Override
             public void actionPerformed(ActionEvent evt) {
                   String ac = evt.getActionCommand();
+                  
+                  for(int a = 0; a < btns.length; a++){
+                        if(a)
+                  }
+                  
+                  
                   if (ac.equals(btns[0].getText())) {
                         int fontSize = VF_R.getJM_Select().getMenuComponent(0).getFont().getSize();
                         Font[] F = new Font[]{

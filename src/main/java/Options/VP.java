@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Second;
+package Options;
 
+import TestWindow.VT;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -25,7 +29,8 @@ public class VP {
       JFrame JF = new JFrame();
       JPanel JP = new JPanel();
       private static JTree JTE;
-      public static JTree getJTE(){
+
+      public static JTree getJTE() {
             return JTE;
       }
       JScrollPane SC_JTE;
@@ -57,13 +62,14 @@ public class VP {
             return root;
       }
 
-      private void setItemListener(DefaultMutableTreeNode root){
-            for(int a = 0; a < root.getChildAt(0).getChildCount(); a++){
-                  Object object = 
-                          ((DefaultMutableTreeNode) root.getChildAt(0).getChildAt(a)).getUserObject();
+      private void setItemListener(DefaultMutableTreeNode root) {
+            for (int a = 0; a < root.getChildAt(0).getChildCount(); a++) {
+                  Object object
+                          = ((DefaultMutableTreeNode) root.getChildAt(0).getChildAt(a)).getUserObject();
                   ((JCheckBox) object).addItemListener(new VP_ItemListener());
             }
       }
+
       //++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
             JF.setDefaultCloseOperation(2);
@@ -78,6 +84,24 @@ public class VP {
             setComponentFitOnJFrame(JP, JF);
       }
 
+      private void testConfig() {
+            VT vt = new VT();
+            vt.add(new JButton("repaint JTree"));
+            for (int a = 0; a < vt.getBTNS().size(); a++) {
+                  vt.getBTNS().get(a).addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                              String ac = e.getActionCommand();
+                              if(ac.equals(vt.getBTNS().get(0).getText())){
+                                    System.out.println(vt.getBTNS().get(0).getText());
+                                    JTE.repaint();
+                              }
+                        }
+                  });
+            }
+            vt.setVisible(true);
+      }
+
       private void JTEConfig() {
             JTE = new JTree(getDefaultMutableTreeNode());
             SC_JTE = new JScrollPane(JTE);
@@ -89,6 +113,7 @@ public class VP {
             JTE.putClientProperty("JTree.lineStyle", "Horizontal");
             JTE.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
             JTE.setCellRenderer(new VP_CellRenderer());
+            JTE.setCellEditor(new VP_CellEditor());
 
             JTE.setBounds(0, 0, 180, JP.getHeight() + 100);
             SC_JTE.setBounds(4, 4, 150, JP.getHeight() - 8);
@@ -97,6 +122,7 @@ public class VP {
 
       public VP() {
             frameConfig();
+            testConfig();
             JTEConfig();
 
             //+++++++++++++++++++++++

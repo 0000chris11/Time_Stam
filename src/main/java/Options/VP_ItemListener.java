@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Second;
+package Options;
 
+import Options.VP;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
@@ -38,6 +39,7 @@ public class VP_ItemListener implements ItemListener {
                         }
                   }
             }
+            VP.getJTE().repaint();
       }
 
 }
