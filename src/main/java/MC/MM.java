@@ -30,8 +30,12 @@ import javax.swing.table.DefaultTableModel;
 import First.VF_R;
 import Others.CC;
 import java.awt.FontMetrics;
+import java.awt.Rectangle;
+import java.util.EventObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 
 public class MM extends Status {
 
@@ -778,6 +782,48 @@ public class MM extends Status {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static void setButtonColorWhenPress(MouseEvent evt) {
 
+      }
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      public static boolean isCellEditableForCheckBoxAndDefaults(EventObject anEvent, JTree JTE, 
+              DefaultMutableTreeNode editedNode){
+            boolean returnValue = false;
+
+            if (anEvent instanceof MouseEvent) {
+                  MouseEvent mouseEvent = (MouseEvent) anEvent;
+                  TreePath path = JTE.getPathForLocation(mouseEvent.getX(),
+                          mouseEvent.getY());
+                  if (path != null) {
+                        Object ob = path.getLastPathComponent();
+                        if ((ob != null) && (ob instanceof DefaultMutableTreeNode)) {
+                              editedNode = (DefaultMutableTreeNode) ob;
+                              Object userObject = editedNode.getUserObject();
+                              if (userObject instanceof JCheckBox) {
+                                    //System.out.println("JToggleButton");
+                                    //System.out.println("CheckBox");
+                                    Rectangle r = JTE.getPathBounds(path);
+                                    int x = mouseEvent.getX() - r.x;
+                                    int y = mouseEvent.getY() - r.y;
+
+                                    JCheckBox checkbox = (JCheckBox) userObject;
+                                    
+                                    String text = checkbox.getText();
+                                    checkbox.setText("");
+
+                                    returnValue
+                                            = userObject instanceof JCheckBox
+                                            && x > 0
+                                            && x < checkbox.getPreferredSize().width;
+                                    
+                                    checkbox.setText(text);
+                              } else {
+                                    returnValue = false;
+
+                              }
+                        }
+                  }
+            }
+            System.out.println("isCellEditableForCheckBoxAndDefaults: " + returnValue);
+            return returnValue;
       }
 
       public static void main(String[] args) {

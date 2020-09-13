@@ -45,7 +45,7 @@ public class VP {
 
       private DefaultMutableTreeNode getDefaultMutableTreeNode() {
             DefaultMutableTreeNode root = new DefaultMutableTreeNode("Options");
-
+            //++++++++++++++++++++++++++++++++++++
             root.add(new DefaultMutableTreeNode("Look and Feel"));
             boolean b;
             for (int a = 0; a < UIManager.getInstalledLookAndFeels().length; a++) {
@@ -57,8 +57,15 @@ public class VP {
                   ((DefaultMutableTreeNode) root.getChildAt(0)).add(
                           new DefaultMutableTreeNode(new JCheckBox(name, b)));
             }
-
+            root.add(new DefaultMutableTreeNode("View Options"));
+            ((DefaultMutableTreeNode) root.getChildAt(1)).add(
+                          new DefaultMutableTreeNode("Dist Panel"));
+            ((DefaultMutableTreeNode) root.getChildAt(1)).add(
+                          new DefaultMutableTreeNode("Table"));
+            
             setItemListener(root);
+            //++++++++++++++++++++++++++++++++++++
+            
             return root;
       }
 
@@ -72,7 +79,7 @@ public class VP {
 
       //++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
-            JF.setDefaultCloseOperation(2);
+            JF.setDefaultCloseOperation(3);
             JF.setLayout(null);
             JF.setSize(1070, 727);
             JF.setLocationRelativeTo(null);
@@ -87,6 +94,7 @@ public class VP {
       private void testConfig() {
             VT vt = new VT();
             vt.add(new JButton("repaint JTree"));
+            vt.add(new JButton("is JTree still editing?"));
             for (int a = 0; a < vt.getBTNS().size(); a++) {
                   vt.getBTNS().get(a).addActionListener(new ActionListener() {
                         @Override
@@ -95,6 +103,9 @@ public class VP {
                               if(ac.equals(vt.getBTNS().get(0).getText())){
                                     System.out.println(vt.getBTNS().get(0).getText());
                                     JTE.repaint();
+                              }else if(ac.equals(vt.getBTNS().get(1).getText())){
+                                    System.out.println(vt.getBTNS().get(1).getText());
+                                    System.out.println(JTE.isEditing());
                               }
                         }
                   });

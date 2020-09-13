@@ -6,6 +6,7 @@
 package Options;
 
 import Options.VP;
+import Others.CC;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
@@ -19,6 +20,9 @@ public class VP_ItemListener implements ItemListener {
 
       @Override
       public void itemStateChanged(ItemEvent e) {
+            System.out.println(CC.CYAN + "itemStateChanged" + CC.RESET);
+            
+            
             DefaultMutableTreeNode root
                     = (DefaultMutableTreeNode) VP.getJTE().getModel().getRoot();
             int count = root.getChildAt(0).getChildCount();
@@ -39,6 +43,7 @@ public class VP_ItemListener implements ItemListener {
                         }
                   }
             }
+            VP.getJTE().stopEditing();
             VP.getJTE().repaint();
       }
 

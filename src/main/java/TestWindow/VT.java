@@ -39,7 +39,7 @@ public class VT {
       }
       
       public VT(){
-            JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            JF.setDefaultCloseOperation(2);
             JF.setTitle("Test Window");
             JF.setLayout(new BoxLayout(JF.getContentPane(), BoxLayout.X_AXIS));
       }
