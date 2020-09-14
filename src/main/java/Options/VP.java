@@ -13,9 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
 import javax.swing.JTree;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -27,13 +31,16 @@ import javax.swing.tree.TreeSelectionModel;
 public class VP {
 
       JFrame JF = new JFrame();
+      JSplitPane SPL = new JSplitPane(1);
       JPanel JP = new JPanel();
       private static JTree JTE;
-
       public static JTree getJTE() {
             return JTE;
       }
       JScrollPane SC_JTE;
+      
+      JLabel lb_T = new JLabel();
+      JSeparator sp_T = new JSeparator(SwingConstants.HORIZONTAL);
 
       private void setComponentFitOnJFrame(JComponent jc, JFrame jf) {
             jc.setBounds(2, 2,
@@ -42,11 +49,28 @@ public class VP {
 
             System.out.println("JP Bounds: " + jc.getBounds());
       }
-
+      //++++++++++++++++++++++++++++++++++++++++++++++
       private DefaultMutableTreeNode getDefaultMutableTreeNode() {
             DefaultMutableTreeNode root = new DefaultMutableTreeNode("Options");
             //++++++++++++++++++++++++++++++++++++
-            root.add(new DefaultMutableTreeNode("Look and Feel"));
+            root.add(new DefaultMutableTreeNode("View"));
+            
+            DefaultMutableTreeNode view = (DefaultMutableTreeNode) root.getChildAt(0);
+            addLookAndFeelNode(view);
+
+            view.add(new DefaultMutableTreeNode("Color"));
+            DefaultMutableTreeNode color = (DefaultMutableTreeNode) view.getChildAt(1);
+            color.add(new DefaultMutableTreeNode("Dist Panel"));
+            color.add(new DefaultMutableTreeNode("Table"));
+            
+            setItemListener(view);
+            //++++++++++++++++++++++++++++++++++++
+            
+            return root;
+      }
+      
+      private void addLookAndFeelNode(DefaultMutableTreeNode node){
+            node.add(new DefaultMutableTreeNode("Look and Feel"));
             boolean b;
             for (int a = 0; a < UIManager.getInstalledLookAndFeels().length; a++) {
                   String name = UIManager.getInstalledLookAndFeels()[a].getName();
@@ -54,25 +78,15 @@ public class VP {
                   if (name.equals(UIManager.getLookAndFeel().getName())) {
                         b = true;
                   }
-                  ((DefaultMutableTreeNode) root.getChildAt(0)).add(
+                  ((DefaultMutableTreeNode) node.getChildAt(0)).add(
                           new DefaultMutableTreeNode(new JCheckBox(name, b)));
             }
-            root.add(new DefaultMutableTreeNode("View Options"));
-            ((DefaultMutableTreeNode) root.getChildAt(1)).add(
-                          new DefaultMutableTreeNode("Dist Panel"));
-            ((DefaultMutableTreeNode) root.getChildAt(1)).add(
-                          new DefaultMutableTreeNode("Table"));
-            
-            setItemListener(root);
-            //++++++++++++++++++++++++++++++++++++
-            
-            return root;
       }
-
-      private void setItemListener(DefaultMutableTreeNode root) {
-            for (int a = 0; a < root.getChildAt(0).getChildCount(); a++) {
+      //++++++++++++++++++++++++++++++++++++++++++++++
+      private void setItemListener(DefaultMutableTreeNode node) {
+            for (int a = 0; a < node.getChildAt(0).getChildCount(); a++) {
                   Object object
-                          = ((DefaultMutableTreeNode) root.getChildAt(0).getChildAt(a)).getUserObject();
+                          = ((DefaultMutableTreeNode) node.getChildAt(0).getChildAt(a)).getUserObject();
                   ((JCheckBox) object).addItemListener(new VP_ItemListener());
             }
       }
@@ -81,14 +95,20 @@ public class VP {
       private void frameConfig() {
             JF.setDefaultCloseOperation(3);
             JF.setLayout(null);
-            JF.setSize(1070, 727);
+            JF.setSize(800, 400);
             JF.setLocationRelativeTo(null);
             JF.setAlwaysOnTop(true);
 
-            JF.add(JP);
+            JF.add(SPL);
+            //SPL.setLayout(null);
+            setComponentFitOnJFrame(SPL, JF);
+            SPL.setOneTouchExpandable(true);
+   
+            SPL.setRightComponent(JP);
             JP.setBackground(Color.BLACK);
             JP.setLayout(null);
-            setComponentFitOnJFrame(JP, JF);
+            
+            
       }
 
       private void testConfig() {
@@ -116,7 +136,7 @@ public class VP {
       private void JTEConfig() {
             JTE = new JTree(getDefaultMutableTreeNode());
             SC_JTE = new JScrollPane(JTE);
-            JP.add(SC_JTE);
+            SPL.setLeftComponent(SC_JTE);
 
             JTE.setRootVisible(false);
             JTE.setShowsRootHandles(true);
@@ -137,6 +157,7 @@ public class VP {
             JTEConfig();
 
             //+++++++++++++++++++++++
+            SPL.setDividerLocation(0.3);
             JF.setVisible(true);
       }
 

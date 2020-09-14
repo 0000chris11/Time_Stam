@@ -1,10 +1,14 @@
 package Options;
 
+import Others.CC;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.util.Locale;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JTree;
+import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
@@ -19,8 +23,11 @@ public class VP_CellRenderer implements TreeCellRenderer {
       JCheckBox CB = new JCheckBox();
       
       public VP_CellRenderer(){
-            Font F = defaultRenderer.getFont();
+            
+            Font F = UIManager.getFont("Tree.font");
             CB.setFont(new Font(F.getName(), Font.PLAIN, F.getSize()));
+            
+            defaultRenderer.setOpaque(true);
       }
 
       @Override
@@ -46,23 +53,25 @@ public class VP_CellRenderer implements TreeCellRenderer {
                   returnValue = defaultRenderer.getTreeCellRendererComponent(
                                 tree, value, leaf, expanded, leaf, row, hasFocus);
             }
-
-            normalAndSelected(selected);
+            
+            normalAndSelected(selected, returnValue);
 
             return returnValue;
       }
 
-      private void normalAndSelected(boolean sel) {
+      private void normalAndSelected(boolean sel, Component c) {
+            JComponent jc = (JComponent) c;
+            jc.setOpaque(true);
+            jc.setForeground(Color.BLACK);
             if (sel) {
-                  CB.setBackground(Color.DARK_GRAY);
-                  CB.setForeground(Color.WHITE);
-                  defaultRenderer.setBackground(Color.DARK_GRAY);
-                  defaultRenderer.setForeground(Color.WHITE);
+                  //CB.setBackground(Color.DARK_GRAY);
+                  //CB.setForeground(Color.WHITE);
+                  jc.setBackground(Color.CYAN.darker());
+                  
             } else {
-                  CB.setBackground(new Color(0, 0, 0, 0));
-                  CB.setForeground(Color.BLACK);
-                  defaultRenderer.setBackground(new Color(0, 0, 0, 0));
-                  defaultRenderer.setForeground(Color.BLACK);
+                  //CB.setBackground(new Color(0, 0, 0, 0));
+                  //CB.setForeground(Color.BLACK);
+                  jc.setBackground(Color.WHITE);
             }
       }
 }
