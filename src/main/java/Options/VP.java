@@ -7,6 +7,7 @@ package Options;
 
 import TestWindow.VT;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -40,6 +41,7 @@ public class VP {
       JScrollPane SC_JTE;
       
       JLabel lb_T = new JLabel();
+      JLabel[] lb_Icon = new JLabel[UIManager.getInstalledLookAndFeels().length];
       JSeparator sp_T = new JSeparator(SwingConstants.HORIZONTAL);
 
       private void setComponentFitOnJFrame(JComponent jc, JFrame jf) {
@@ -102,13 +104,7 @@ public class VP {
             JF.add(SPL);
             //SPL.setLayout(null);
             setComponentFitOnJFrame(SPL, JF);
-            SPL.setOneTouchExpandable(true);
-   
-            SPL.setRightComponent(JP);
-            JP.setBackground(Color.BLACK);
-            JP.setLayout(null);
-            
-            
+            SPL.setOneTouchExpandable(true);          
       }
 
       private void testConfig() {
@@ -148,14 +144,32 @@ public class VP {
 
             JTE.setBounds(0, 0, 180, JP.getHeight() + 100);
             SC_JTE.setBounds(4, 4, 150, JP.getHeight() - 8);
+            SC_JTE.setMinimumSize(new Dimension(200, SC_JTE.getHeight()));
             JTE.setBackground(Color.LIGHT_GRAY.brighter());
+      }
+      
+      private void panelConfig(){
+            SPL.setRightComponent(JP);
+            JP.setBackground(Color.BLACK);
+            JP.setLayout(null);
+            
+            
+            JP.add(lb_T);
+            lb_T.setBounds(8, 8, JP.getWidth() - 16, 30);
+            lb_T.setForeground(Color.WHITE);
+            JP.add(sp_T);
+            sp_T.setBounds(4, lb_T.getY() + lb_T.getHeight() + 4, 
+                    100, 2);
+            sp_T.setForeground(Color.WHITE);
+            System.out.println("lb_T bounds: " + lb_T.getBounds());
+            System.out.println("sp_T bounds: " + sp_T.getBounds());
       }
 
       public VP() {
             frameConfig();
             testConfig();
             JTEConfig();
-
+            panelConfig();
             //+++++++++++++++++++++++
             SPL.setDividerLocation(0.3);
             JF.setVisible(true);
