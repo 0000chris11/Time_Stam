@@ -33,9 +33,6 @@ public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
             returnValue = renderer.getTreeCellRendererComponent(tree, value,
                     true, expanded, leaf, row, true);
             
-            //VP.getJTE().repaint(0, 0, 1, 1);
-            //fireEditingStopped();
-            
             return returnValue;
       }
 
@@ -54,7 +51,7 @@ public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
       @Override
       public boolean isCellEditable(EventObject anEvent) {
             return MM.isCellEditableForCheckBoxAndDefaults(
-                    anEvent, VP.getJTE(), defaultNode);
+                    anEvent, VP.JTEN, defaultNode);
       }
       
 }

@@ -24,7 +24,7 @@ public class VP_ItemListener implements ItemListener {
             
             
             DefaultMutableTreeNode root
-                    = (DefaultMutableTreeNode) VP.getJTE().getModel().getRoot();
+                    = (DefaultMutableTreeNode) VP.JTEN.getModel().getRoot();
             int count = root.getChildAt(0).getChildCount();
             for (int a = 0; a < count; a++) {
                   Object object
@@ -43,8 +43,8 @@ public class VP_ItemListener implements ItemListener {
                         }
                   }
             }
-            VP.getJTE().stopEditing();
-            VP.getJTE().repaint();
+            VP.JTEN.stopEditing();
+            VP.JTEN.repaint();
       }
 
 }
