@@ -24,14 +24,14 @@ public class DT {
       
       static JFrame JFN = new JFrame("Options");
       static JSplitPane SPLN = new JSplitPane();
-      static JPanel JP = new JPanel();
+      static JPanel JPN = new JPanel();
       
       static JTree JTEN;
       JScrollPane SC_JTEN;
       
       static JPanel[] jps = new JPanel[5];
       
-      static JLabel lb_Title = new JLabel();
+      static JLabel lb_Title = new JLabel("Select an Option");
       static JSeparator sp_Title = new JSeparator(SwingConstants.HORIZONTAL);
       static JLabel[] lb_Icon = new JLabel[
               UIManager.getInstalledLookAndFeels().length];

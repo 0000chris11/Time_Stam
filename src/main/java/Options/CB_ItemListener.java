@@ -16,7 +16,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  *
  * @author Christopher
  */
-public class VP_ItemListener implements ItemListener {
+public class CB_ItemListener implements ItemListener {
 
       @Override
       public void itemStateChanged(ItemEvent e) {
