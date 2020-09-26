@@ -20,6 +20,7 @@ public class JTE_SelectionListener implements TreeSelectionListener {
       @Override
       public void valueChanged(TreeSelectionEvent e) {
             System.out.println(VP.JTEN.getSelectionPath().toString());
+            /*
             if(VP.JTEN.getSelectionPath().toString().
                     endsWith("Star, Dist Panel]")){
                   ((CardLayout) VP.JPN.getLayout()).show(VP.JPN, "JP Start-Dist Panel");
@@ -27,6 +28,8 @@ public class JTE_SelectionListener implements TreeSelectionListener {
             }else{
                   System.out.println("\tWRONG");
             }
+            */
+            //+++++++++++++++++++++++++++++++++++++++++++++++++
             //VP.JTEN.getNextMatch("", 0, Position.Bias.Forward);
             /*
             for (int a = 0; a < VP.JTEN.getComponentCount(); a++) {

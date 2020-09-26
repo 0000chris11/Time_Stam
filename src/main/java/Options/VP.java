@@ -10,6 +10,9 @@ import TestWindow.VT;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
@@ -164,11 +167,37 @@ public class VP extends DT {
 
       private void panelConfig() {
             SPLN.setRightComponent(JPN);
-            JPN.setBackground(Color.BLACK);
-            JPN.setLayout(new CardLayout(2, 2));
+            JPN.setBackground(Color.WHITE);
+            GridBagLayout gbl = new GridBagLayout();
+            JPN.setLayout(gbl);
             
-            panelSetUp();
+            GridBagConstraints c = new GridBagConstraints();
+
+            for (int a = 0; a < jps.length; a++) {
+                  jps[a] = new JPanel();
+                  if (a == 0) {
+                        jps[a].setBackground(Color.DARK_GRAY);
+                        c.anchor = GridBagConstraints.PAGE_START;
+                        c.fill = GridBagConstraints.HORIZONTAL;
+                        c.ipady = 60;
+                  }else{
+                        jps[a].setBackground(Color.BLACK);
+                        c.fill = GridBagConstraints.BOTH;
+                        c.insets = new Insets(0,0,0,0);
+                  }
+                  
+                  c.weightx = 1;
+                  c.weighty = 1;
+                  c.gridx = 0;
+                  c.gridy = a;
+                  
+                  
+                  JPN.add(jps[a], c);
+            }
+            //panelSetUp();
             //JPN.add(lb_Title);
+            //+++++++++++++++++++++++++++
+            /*
             lb_Title.setBounds(8, 8, JPN.getWidth() - 16, 30);
             lb_Title.setForeground(Color.WHITE);
             //JPN.add(sp_Title);
@@ -177,6 +206,8 @@ public class VP extends DT {
             sp_Title.setForeground(Color.WHITE);
             System.out.println("lb_Title bounds: " + lb_Title.getBounds());
             System.out.println("sp_Title bounds: " + sp_Title.getBounds());
+             */
+            //+++++++++++++++++++++++++++
       }
 
       private void panelSetUp() {
@@ -185,11 +216,11 @@ public class VP extends DT {
                   if (a > 1) {
                         JPN.add("JP" + (a + 2), jps[a]);
                   }
-                        
+
             }
             JPN.add("JP Null", jps[0]);
             JPN.add("JP Start-Dist Panel", jps[1]);
-            
+
             GroupLayout glay = new GroupLayout(jps[0]);
             jps[0].setLayout(glay);
             glay.setAutoCreateContainerGaps(true);
@@ -205,7 +236,7 @@ public class VP extends DT {
             sh.addGroup(ph1);
             ph1.addComponent(lb_Title);
             ph1.addComponent(sp_Title);
-            
+
             sv.addComponent(lb_Title);
             sv.addComponent(sp_Title);
             //ph1.addComponent(SPLN);
