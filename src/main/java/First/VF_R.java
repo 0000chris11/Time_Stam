@@ -154,10 +154,10 @@ public class VF_R extends VF_R_DataCom {
             for (int a = 0; a < btns_MC.length; a++) {
                   btns_MC[a].setVisible(b);
             }
-            for(int a = 0; a < lbs.length; a++){
+            for (int a = 0; a < lbs.length; a++) {
                   lbs[a].setVisible(b);
                   tfs[a].setVisible(b);
-                  if(a != lbs.length - 1){
+                  if (a != lbs.length - 1) {
                         tfs_MD[a].setVisible(b);
                         tfs_MU[a].setVisible(b);
                         lb_2ds[a].setVisible(b);
@@ -258,12 +258,19 @@ public class VF_R extends VF_R_DataCom {
             sc_p1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             sc_p1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-            p1.setLayout(null);
+            if (JPL_layout.equals("null")) {
+                  p1.setLayout(null);
+            }else{
+                  //GroupLayout gl = new GroupLayout();
+                  GroupLayout gl = new GroupLayout(p1);
+                  p1.setLayout(gl);
+            }
+
             p1.setSize(446, 521);
-            //p1.setPreferredSize(new Dimension(446, 521));
             p1.setBackground(Color.BLACK);
-            //System.out.println("P1 Size: " + p1.getSize());
             p1.setFocusable(false);
+            
+            componentsConfig();
             //+++++++++++++++++++++++++++++++++++++++++++++
             tableConfig();
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -276,7 +283,9 @@ public class VF_R extends VF_R_DataCom {
             p3.setLayout(null);
             p3.setBackground(Color.BLACK);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            componentsConfig();
+            //IF - WISH LAYOUT TO USE ON P1
+            
+            //IF - WISH LAYOUT TO USE ON P1
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             toolbarConfig();
             //++++++++++++++++++++++++++++++++++++++
@@ -936,8 +945,6 @@ public class VF_R extends VF_R_DataCom {
                   public void run() {
                         VF_R vf = new VF_R();
                         vf.getJF().setVisible(true);
-                        VT vt = new VT();
-                        vt.getJF().setVisible(true);
                   }
             });
 

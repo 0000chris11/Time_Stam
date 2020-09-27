@@ -5,16 +5,23 @@
  */
 package Options;
 
+import MC.MM;
 import static Options.DT.JTEN;
 import TestWindow.VT;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
@@ -31,6 +38,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -40,22 +48,6 @@ import javax.swing.tree.TreeSelectionModel;
  */
 public class VP extends DT {
 
-      //JFrame JF = new JFrame();
-      //JSplitPane SPL = new JSplitPane(1);
-      //JPanel JP = new JPanel();
-      //private static JTree JTE;
-      //JScrollPane SC_JTE;
-      //JLabel lb_T = new JLabel();
-      //JSeparator sp_T = new JSeparator(SwingConstants.HORIZONTAL);
-      private void setComponentFitOnJFrame(JComponent jc, JFrame jf) {
-            jc.setBounds(2, 2,
-                    jf.getWidth() - 21,
-                    jf.getHeight() - 44);
-
-            System.out.println("JP Bounds: " + jc.getBounds());
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++
       private DefaultMutableTreeNode getDefaultMutableTreeNode() {
             DefaultMutableTreeNode root = new DefaultMutableTreeNode("Options");
             //++++++++++++++++++++++++++++++++++++
@@ -105,14 +97,14 @@ public class VP extends DT {
       //++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
             JFN.setDefaultCloseOperation(3);
-            JFN.setLayout(null);
+            JFN.setLayout(new GridLayout());
             JFN.setSize(800, 400);
             JFN.setLocationRelativeTo(null);
             JFN.setAlwaysOnTop(true);
 
             JFN.add(SPLN);
             //SPLN.setLayout(null);
-            setComponentFitOnJFrame(SPLN, JFN);
+            MM.setComponentFitOnJFrame(SPLN, JFN);
             SPLN.setOneTouchExpandable(true);
       }
 
@@ -120,27 +112,30 @@ public class VP extends DT {
             VT vt = new VT();
             vt.addButton(new JButton("repaint JTree"));
             vt.addButton(new JButton("is JTree still editing?"));
-            vt.addButton(new JButton("get Main Panel panels"));
-            for (int a = 0; a < vt.getBTNS().size(); a++) {
-                  vt.getBTNS().get(a).addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                              String ac = e.getActionCommand();
-                              if (ac.equals(vt.getBTNS().get(0).getText())) {
-                                    System.out.println(vt.getBTNS().get(0).getText());
-                                    JTEN.repaint();
-                              } else if (ac.equals(vt.getBTNS().get(1).getText())) {
-                                    System.out.println(vt.getBTNS().get(1).getText());
-                                    System.out.println(JTEN.isEditing());
-                              } else if (ac.equals(vt.getBTNS().get(2).getText())) {
-                                    System.out.println(vt.getBTNS().get(2).getText());
-                                    for (int a = 0; a < JPN.getComponentCount(); a++) {
-                                          System.out.println("\t" + (a + 1)
-                                                  + JPN.getComponent(a).getClass());
-                                    }
+            vt.addButton(new JButton("get Right Panel Components"));
+
+            ActionListener al = new ActionListener() {
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+                        String ac = e.getActionCommand();
+                        if (ac.equals(vt.getBTNS().get(0).getText())) {
+                              System.out.println(vt.getBTNS().get(0).getText());
+                              JTEN.repaint();
+                        } else if (ac.equals(vt.getBTNS().get(1).getText())) {
+                              System.out.println(vt.getBTNS().get(1).getText());
+                              System.out.println(JTEN.isEditing());
+                        } else if (ac.equals(vt.getBTNS().get(2).getText())) {
+                              System.out.println(vt.getBTNS().get(2).getText());
+                              for (int a = 0; a < JPN.getComponentCount(); a++) {
+                                    System.out.println("\t" + (a + 1)
+                                            + JPN.getComponent(a).getClass());
                               }
                         }
-                  });
+                  }
+
+            };
+            for(int a = 0; a < vt.getBTNS().size(); a++){
+                  vt.getBTNS().get(a).addActionListener(al);
             }
             vt.setVisible(true);
       }
@@ -167,33 +162,29 @@ public class VP extends DT {
 
       private void panelConfig() {
             SPLN.setRightComponent(JPN);
-            JPN.setBackground(Color.WHITE);
-            GridBagLayout gbl = new GridBagLayout();
-            JPN.setLayout(gbl);
+            //JPN.setOpaque(false);
+            JPN.setBackground(Color.BLACK);
             
-            GridBagConstraints c = new GridBagConstraints();
+            JPN.setLayout(new BoxLayout(JPN, BoxLayout.Y_AXIS));
 
-            for (int a = 0; a < jps.length; a++) {
-                  jps[a] = new JPanel();
-                  if (a == 0) {
-                        jps[a].setBackground(Color.DARK_GRAY);
-                        c.anchor = GridBagConstraints.PAGE_START;
-                        c.fill = GridBagConstraints.HORIZONTAL;
-                        c.ipady = 60;
-                  }else{
-                        jps[a].setBackground(Color.BLACK);
-                        c.fill = GridBagConstraints.BOTH;
-                        c.insets = new Insets(0,0,0,0);
-                  }
+            //jps[a].setBackground(Color.DARK_GRAY);
+            //jps[a].setName("Title Panel");
+            //jps[a].setLayout(new BoxLayout(jps[a], BoxLayout.Y_AXIS));
+            JPN.add(lb_Title);
+            lb_Title.setBorder(new EmptyBorder(2, 4, 0, 0));
+            Font F = UIManager.getFont("Label.font");
+            lb_Title.setFont(new Font(F.getName(), F.getStyle(), F.getSize() + 6));
+            lb_Title.setForeground(Color.WHITE);
+            JPN.add(sp_Title);
+            sp_Title.setMaximumSize(new Dimension(sp_Title.getMaximumSize().width,
+            10));
+            //sp_Title.setBorder(new EmptyBorder(10, 2, 0, 4));//DOESN'T WORK
+
                   
-                  c.weightx = 1;
-                  c.weighty = 1;
-                  c.gridx = 0;
-                  c.gridy = a;
-                  
-                  
-                  JPN.add(jps[a], c);
-            }
+            //JPN.add(Box.createVerticalStrut(2));
+
+            //jps[0].add(lb_Title);
+            //jps[0].add(sp_Title);
             //panelSetUp();
             //JPN.add(lb_Title);
             //+++++++++++++++++++++++++++
@@ -242,11 +233,20 @@ public class VP extends DT {
             //ph1.addComponent(SPLN);
       }
 
-      private void radioButtonSetUp() {
-            for (int a = 0; a < rbtns.length; a++) {
-                  rbtns[a] = new JRadioButton("", false);
+      public static void radioButtonSetUp(int count, String[] txs) {
+            rbtns = new JRadioButton[count];
+            ButtonGroup bg = new ButtonGroup();
+            for (int a = 0; a < count; a++) {
+                  rbtns[a] = new JRadioButton(txs[a], false);
+                  rbtns[a].setForeground(Color.WHITE);
+                  rbtns[a].setOpaque(false);
+                  rbtns[a].setBackground(new Color(0,0,0,0));
+                  //rbtns[a].setSize();
+                  bg.add(rbtns[a]);
+                  JPN.add(rbtns[a]);
+                  System.out.println((a + 1) + ": " + rbtns[a].getPreferredSize());
             }
-
+            
       }
 
       public VP() {

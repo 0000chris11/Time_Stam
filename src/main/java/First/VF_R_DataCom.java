@@ -69,6 +69,8 @@ public class VF_R_DataCom {
             }
       };
       //+++++++++++++++++++++++++++++++++++
+      static String JPL_layout = "null";
+      //+++++++++++++++++++++++++++++++++++
       static JMenuBar JMB = new JMenuBar();
 
       static JMenu JM_Options = new JMenu("Options");

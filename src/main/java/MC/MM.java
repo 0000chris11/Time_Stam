@@ -749,6 +749,14 @@ public class MM extends Status {
             return icon2;
             //++++++++++++++++++++++++++++++++++++++++++++++++++
       }
+      
+      public static void setComponentFitOnJFrame(JComponent jc, JFrame jf) {
+            jc.setBounds(2, 2,
+                    jf.getWidth() - 21,
+                    jf.getHeight() - 44);
+
+            System.out.println("JP Bounds: " + jc.getBounds());
+      }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static void printFor(ArrayList<String> list) {

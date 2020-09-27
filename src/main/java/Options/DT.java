@@ -5,6 +5,7 @@
  */
 package Options;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,7 +25,13 @@ public class DT {
       
       static JFrame JFN = new JFrame("Options");
       static JSplitPane SPLN = new JSplitPane();
-      static JPanel JPN = new JPanel();//MAIN PANEL
+      static JPanel JPN = new JPanel(){
+        @Override
+        public void repaint(){
+              super.repaint();
+              System.out.println("REPAINT");
+        }    
+      };
       
       static JTree JTEN;
       JScrollPane SC_JTEN;
@@ -36,5 +43,5 @@ public class DT {
       static JLabel[] lb_Icon = new JLabel[
               UIManager.getInstalledLookAndFeels().length];
       
-      static JRadioButton[] rbtns = new JRadioButton[2];
+      static JRadioButton[] rbtns;
 }
