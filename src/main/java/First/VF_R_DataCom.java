@@ -47,7 +47,9 @@ public class VF_R_DataCom {
 
       static JPanel p1 = new JPanelGradient();
       static JScrollPane sc_p1 = new JScrollPane(p1);
-
+      static JPanel p1_1 = new JPanelGradient();
+      static JPanel p1_2 = new JPanelGradient();
+      
       static JPanel PT = new JPanel();
       
       static JTable JT = new JTable();

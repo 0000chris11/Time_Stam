@@ -2,6 +2,8 @@ package First;
 
 import static First.VF_R_DataCom.JT;
 import static First.VF_R_DataCom.btn_plus;
+import static First.VF_R_DataCom.btns_MC;
+import static First.VF_R_DataCom.lb_Status;
 import static First.VF_R_DataCom.p1;
 import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
@@ -33,6 +35,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 import javax.swing.plaf.basic.BasicToolBarUI;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
@@ -61,6 +64,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalToolBarUI;
 import net.miginfocom.swing.MigLayout;
+import TestWindow.VT;
 
 /**
  *
@@ -247,41 +251,15 @@ public class VF_R extends VF_R_DataCom {
             JF.setSize(Data.defaultFrameSize);
             JF.setLayout(null);
             JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            JF.setResizable(false);
+            JF.setResizable(true);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             menuBarConfig();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            JF.add(sc_p1);
-            sc_p1.setFocusable(false);
-            sc_p1.setEnabled(false);
-            sc_p1.setBounds(2, 22, 446, 522);
-            sc_p1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            sc_p1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-            if (JPL_layout.equals("null")) {
-                  p1.setLayout(null);
-            }else{
-                  //GroupLayout gl = new GroupLayout();
-                  GroupLayout gl = new GroupLayout(p1);
-                  p1.setLayout(gl);
-            }
-
-            p1.setSize(446, 521);
-            p1.setBackground(Color.BLACK);
-            p1.setFocusable(false);
-            
-            componentsConfig();
+            leftPanelConfig();
             //+++++++++++++++++++++++++++++++++++++++++++++
             tableConfig();
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            JF.add(p3);
-            int y3 = sc_p1.getHeight() + 22;
-            int w3 = sc_p1.getWidth() + sc_JT.getWidth() + 40;
-            //F_R.getSC_P1().getWidth() + VF_R.getSC_JT().getWidth() + 40
-            p3.setLocation(sc_p1.getX(), y3 + 1);
-            p3.setSize(w3, 40);
-            p3.setLayout(null);
-            p3.setBackground(Color.BLACK);
+            statusPanelConfig();
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //IF - WISH LAYOUT TO USE ON P1
             
@@ -289,12 +267,85 @@ public class VF_R extends VF_R_DataCom {
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             toolbarConfig();
             //++++++++++++++++++++++++++++++++++++++
-            clockConfig();
+            
             //++++++++++++++++++
             setNameToComponents();
 
       }
 
+      private void leftPanelConfig(){
+            JF.add(sc_p1);
+            sc_p1.setFocusable(false);
+            sc_p1.setEnabled(false);
+            sc_p1.setBounds(2, 22, 446, 522);
+            sc_p1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            sc_p1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+            p1.setSize(446, 521);
+            p1.setBackground(Color.BLACK);
+            p1.setFocusable(false);
+            
+            if (JPL_layout.equals("null")) {
+                  p1.setLayout(null);
+                  componentsConfig();
+            }else{
+                  //GroupLayout gl = new GroupLayout();
+                  p1 = new JPanel();
+                  GroupLayout gl = new GroupLayout(p1);
+                  p1.setLayout(gl);
+                  
+            }
+            
+            clockConfig();
+            
+            
+      }
+      
+      private void statusPanelConfig(){
+            JF.add(p3);
+            int y3 = sc_p1.getHeight() + 22;
+            int w3 = sc_p1.getWidth() + sc_JT.getWidth() + 40;
+            //F_R.getSC_P1().getWidth() + VF_R.getSC_JT().getWidth() + 40
+            p3.setLocation(sc_p1.getX(), y3 + 1);
+            p3.setSize(w3 - 2, 40);
+            p3.setLayout(new BoxLayout(p3, BoxLayout.X_AXIS));
+            p3.setBackground(Color.BLACK);
+            //++++++++++++++++++++++++++++++++++++++
+            p3.add(Box.createHorizontalStrut(6));
+            p3.add(lb_Status);
+            lb_Status.setMaximumSize(new Dimension(902, 28));//1172
+            lb_Status.setForeground(Color.WHITE);
+            lb_Status.setFont(new Font("Dialog", Font.BOLD, 16));
+            Border bb = BorderFactory.createBevelBorder(BevelBorder.RAISED);
+            Border be = BorderFactory.createEmptyBorder(1, 6, 1, 3);
+            lb_Status.setBorder(new CompoundBorder(bb, be));
+            
+            Dimension d = new Dimension(80, 28);
+            Insets in = new Insets(1, 1, 1, 1);
+            p3.add(Box.createHorizontalStrut(6));
+            p3.add(btns_MC[2]);
+            btns_MC[2].setMaximumSize(d);
+            p3.add(Box.createHorizontalStrut(2));
+            p3.add(btns_MC[1]);
+            btns_MC[1].setMaximumSize(d);
+            p3.add(Box.createHorizontalStrut(2));
+            p3.add(btns_MC[3]);
+            btns_MC[3].setMaximumSize(d);
+            p3.add(Box.createHorizontalStrut(2));
+            p3.add(btns_MC[0]);
+            btns_MC[0].setMaximumSize(d);
+            
+            btns_MC[2].setMargin(in);
+            btns_MC[1].setMargin(in);
+            btns_MC[3].setMargin(in);
+            btns_MC[0].setMargin(in);
+            
+            
+            p3.add(Box.createHorizontalStrut(6));
+            //p3.add(btn_Show_All);
+            //btn_Show_All.setPreferredSize(new Dimension(80, 24));
+            //btn_Show_All.setMargin(new Insets(1, 1, 1, 1));
+      }
       //----------------------------------------------------------------------
       private void menuBarConfig() {
             JF.add(JMB);
@@ -461,7 +512,7 @@ public class VF_R extends VF_R_DataCom {
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
-            BasicButtonUI bbui = new BasicButtonUI();
+            
             for (int a = 0; a < tfs_MD.length; a++) {//a: 0 to 4   b: 1 to 5
                   p1.add(tfs_MD[a]);
                   p1.add(tfs_MU[a]);
@@ -627,7 +678,6 @@ public class VF_R extends VF_R_DataCom {
             lb_Title.setForeground(Color.WHITE);
             lb_Title.setBounds(6, 6, 137, 27);
 
-            mcButtonsConfig();
             setComponentsToArray();
             //+++++++++++++++++++++++++
             lb_Title.setVisible(true);
@@ -665,39 +715,25 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++
             btns_MC[1].setEnabled(false);
             btns_MC[2].setEnabled(false);
-            //+++++++++++++++++++++++
-            p3.add(lb_Status);
-            lb_Status.setLocation(6, 6);
-            lb_Status.setSize(p3.getWidth() - 100, 28);
-            lb_Status.setForeground(Color.WHITE);
-            lb_Status.setFont(new Font("Dialog", Font.BOLD, 16));
-
-            Border bb = BorderFactory.createBevelBorder(BevelBorder.RAISED);
-            Border be = BorderFactory.createEmptyBorder(1, 3, 1, 3);
-            lb_Status.setBorder(new CompoundBorder(bb, be));
-            //++++++++++++++++++++++++
-            p3.add(btn_Show_All);
-            btn_Show_All.setLocation(lb_Status.getWidth() + 10, 4);
-            btn_Show_All.setSize(80, 28);
-            btn_Show_All.setMargin(new Insets(1, 1, 1, 1));
       }
 
       private void mcButtonsConfig() {
+            /*
             Insets in = new Insets(1, 1, 1, 1);
 
             p1.add(btns_MC[2]);
             p1.add(btns_MC[1]);
             p1.add(btns_MC[3]);
             p1.add(btns_MC[0]);
-            btns_MC[2].setBounds(231, 9, 80, 23);
-            btns_MC[1].setBounds(317, 9, 80, 23);
-            btns_MC[3].setBounds(231, 40, 80, 23);
-            btns_MC[0].setBounds(317, 40, 80, 23);
+            //btns_MC[2].setBounds(231, 9, 80, 23);
+            //btns_MC[1].setBounds(317, 9, 80, 23);
+            //btns_MC[3].setBounds(231, 40, 80, 23);
+            //btns_MC[0].setBounds(317, 40, 80, 23);
             btns_MC[2].setMargin(in);
             btns_MC[1].setMargin(in);
             btns_MC[3].setMargin(in);
             btns_MC[0].setMargin(in);
-
+            */
       }
 
       private void setComponentsToArray() {
@@ -710,7 +746,30 @@ public class VF_R extends VF_R_DataCom {
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = new smallLB();
                   tfs[a] = new smallTF();
-
+            }
+            //================================
+            scs = new JScrollPane[DT.maxColumns - 1];
+            //+++++++++++++++++++++++++++++
+            lsts = new JList[DT.maxColumns - 1];
+            //+++++++++++++++++++++++++++++
+            btns_C = new JButton[DT.maxColumns - 1];
+            //+++++++++++++++++++++++++++++
+            for (int a = 0; a < DT.maxColumns - 1; a++) {
+                  lsts[a] = new smallLST();
+                  scs[a] = new JScrollPane(lsts[a]);
+                  scs[a].setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+                  scs[a].setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                  
+                  btns_C[a] = new smallBTN_C(null);
+            }
+            //++++++++++++++++++++++++++++++++++++++
+            setComponentsSize();
+      }
+      
+      private void setComponentsSize(){
+            int disLY = 0;
+            int disTY = 0;
+            for (int a = 0; a < DT.maxColumns; a++) {
                   p1.add(lbs[a]);
                   p1.add(tfs[a]);
 
@@ -724,28 +783,14 @@ public class VF_R extends VF_R_DataCom {
                   }
                   disLY += 33;
             }
-            //================================
-            scs = new JScrollPane[DT.maxColumns - 1];
-            //+++++++++++++++++++++++++++++
-            lsts = new JList[DT.maxColumns - 1];
-            //+++++++++++++++++++++++++++++
-            btns_C = new JButton[DT.maxColumns - 1];
-            //+++++++++++++++++++++++++++++
+            
             for (int a = 0; a < DT.maxColumns - 1; a++) {
-                  lsts[a] = new smallLST();
-                  scs[a] = new JScrollPane(lsts[a]);
-
                   scs[a].setSize(290, 170);
-                  scs[a].setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-                  scs[a].setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-                  btns_C[a] = new smallBTN_C(null);
-
+                  
                   p1.add(scs[a]);
                   p1.add(btns_C[a]);
 
                   btns_C[a].setLocation(402, tfs[a + 1].getY());
-
             }
       }
 
@@ -844,7 +889,45 @@ public class VF_R extends VF_R_DataCom {
             JMS_ChangeDTable.setName("mi_OP_Change");
             //mi_SaveOp.setName();
       }
-
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      private void testConfig(){
+            VT vt = new VT();
+            JTextField tf = new JTextField();
+            vt.add(tf);
+            JButton btn = new JButton("SET");
+            vt.add(btn);
+            JButton btn2 = new JButton("GET");
+            vt.add(btn2);
+            
+            btn.addActionListener(new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e) {                        
+                        lb_Status.setMaximumSize(new Dimension(
+                                Integer.parseInt(tf.getText()), 
+                                lb_Status.getPreferredSize().height));
+                        lb_Status.setPreferredSize(new Dimension(
+                                Integer.parseInt(tf.getText()), 
+                                lb_Status.getPreferredSize().height));
+                        
+                        p3.revalidate();
+                        p3.repaint();
+                  }
+                  
+            });
+            btn2.addActionListener(new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+                        System.out.println("PreferredSize: " + 
+                                btns_MC[2].getPreferredSize());
+                        System.out.println("MaxSize: " + 
+                                btns_MC[2].getMaximumSize());
+                  }
+                  
+            });
+            vt.pack();
+            vt.setVisible(true);
+            
+      }
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public VF_R() {
             System.out.println(CC.CYAN + "CLASS ### MAIN" + CC.RESET);
@@ -916,6 +999,7 @@ public class VF_R extends VF_R_DataCom {
             mi_SP1Components.setText(mi_SP1Components.getText() + " ("
                     + p1.getComponentCount() + ")");
             //*++++++++++++++++++++++++++++++++++++++++++++++++++++          
+            testConfig();
             System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
             //System.out.println("Table: " + dt.getTable());
       }
@@ -945,6 +1029,7 @@ public class VF_R extends VF_R_DataCom {
                   public void run() {
                         VF_R vf = new VF_R();
                         vf.getJF().setVisible(true);
+                        
                   }
             });
 

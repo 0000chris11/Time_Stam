@@ -17,14 +17,14 @@ import javax.swing.WindowConstants;
  *
  * @author Christopher
  */
-public class VT {
+public class VT extends JFrame{
       
-      private JFrame JF = new JFrame();
+      //private JFrame JF = new JFrame();
       private ArrayList<JButton> btns = new ArrayList<JButton>();
       private ArrayList<JComboBox> cboxs = new ArrayList<JComboBox>();
       
       public void addButton(JButton btn){
-            JF.add(btn);
+            add(btn);
             btns.add(btn);
             /*
             int sum = 0;
@@ -33,13 +33,13 @@ public class VT {
             }
             JF.setSize(sum + 20, 100);
             */
-            JF.pack();
+            pack();
       }
       public void addComboBox(JComboBox cbox){
-            JF.add(cbox);
+            add(cbox);
             cboxs.add(cbox);
             
-            JF.pack();
+            pack();
       }
       //+++++++++++++++++++++++++++++
       //private void 
@@ -50,14 +50,11 @@ public class VT {
       public ArrayList<JComboBox> getCBOXS(){
             return cboxs;
       }
-      public void setVisible(boolean b){
-            JF.setVisible(b);
-      }
       
       public VT(){
-            JF.setDefaultCloseOperation(2);
-            JF.setTitle("Test Window");
-            JF.setLayout(new BoxLayout(JF.getContentPane(), BoxLayout.X_AXIS));
+            setDefaultCloseOperation(2);
+            setTitle("Test Window");
+            setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
             //++++++++++++++++++++++++++++++++++
       }
 }
