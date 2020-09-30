@@ -3,11 +3,12 @@ package Listeners_F;
 import First.VF_R_DataCom;
 import First.VF_R;
 import MC.DT;
-import MC.MM;
+import mMethods.MM;
 import MC.MakeCon;
 import MC.MethodM;
 import MC.Status;
 import MC.notMyMethods;
+import mMethods.MText;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -80,7 +81,7 @@ public class MIOptions_IL implements ActionListener {
             JFrame JF = VF_R.getJF();
             JPanel p3 = VF_R.getP3();
 
-            if (MM.getMatch(VF_R.getMI_SEEL().getName(), item, Pattern.CASE_INSENSITIVE)) {
+            if (MText.getMatch(VF_R.getMI_SEEL().getName(), item, Pattern.CASE_INSENSITIVE)) {
                   System.out.println("\tMI_SEEL");
                   if (VF_R.getMI_SEEL().isSelected()) {//UNHIDE LEFT PANEL
                         System.out.println("\t\tOPEN");
@@ -123,7 +124,7 @@ public class MIOptions_IL implements ActionListener {
                               VF_R.getMI_SEEL().setSelected(true);
                         }
                   }
-            } else if (MM.getMatch(VF_R.getMI_SEER().getName(), item, Pattern.CASE_INSENSITIVE)) {
+            } else if (MText.getMatch(VF_R.getMI_SEER().getName(), item, Pattern.CASE_INSENSITIVE)) {
                   System.out.println("\tMI_SEER");
                   if (VF_R.getMI_SEER().isSelected()) {//UNHIDE TABLE
                         System.out.println("\t\tOPEN");

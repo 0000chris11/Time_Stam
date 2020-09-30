@@ -9,11 +9,12 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import First.VF_R;
 import MC.DT;
-import MC.MM;
+import mMethods.MM;
 import MC.MakeCon;
 import MC.MethodM;
 import Others.LSTD;
 import MC.notMyMethods;
+import mMethods.MText;
 import Threads.Threads;
 import javax.swing.JTable;
 
@@ -56,7 +57,7 @@ public class JTTableModelListener implements TableModelListener {
                                     //System.out.println("\t+ + + Diferent");
                                     String col = DT.getList_C().get(coln);
 
-                                    DT.setTable(MM.filterTableName(DT.getTable(), "ADD"));
+                                    DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
 
                                     mc.UpdateRow(DT.getTable(), col, data.toString(), DT.getList_R().get(0));
                                     lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),

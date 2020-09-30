@@ -2,10 +2,11 @@ package Listeners_F;
 
 import First.VF_R;
 import MC.DT;
-import MC.MM;
+import mMethods.MM;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import MC.MethodM;
+import mMethods.MList;
 import java.util.EventListener;
 import javax.swing.JMenuItem;
 
@@ -33,10 +34,10 @@ public class MIShow_AL implements ActionListener {
       private void showLists(String ac){
             if (ac.equals("Tables")) {
                   System.out.println();
-                  MM.printFor(DT.getList_T());
+                  MList.printFor(DT.getList_T());
             } else if (ac.equals("Columns")) {
                   System.out.println();
-                  MM.printFor(DT.getList_C());
+                  MList.printFor(DT.getList_C());
             } else if (ac.equals("Dists")) {
                   System.out.println();
                   System.out.println("Dist1: " + DT.getDist1());
@@ -45,11 +46,11 @@ public class MIShow_AL implements ActionListener {
                   System.out.println("Tag1: " + DT.getTag());
                   System.out.println("Clock: " + DT.getClock());
             } else if (ac.equals("ListD")) {
-                  MM.printFor(DT.getListD_2());
-                  MM.printFor(DT.getListD_3());
-                  MM.printFor(DT.getListD_4());
-                  MM.printFor(DT.getListD_5());
-                  MM.printFor(DT.getListD_6());
+                  MList.printFor(DT.getListD_2());
+                  MList.printFor(DT.getListD_3());
+                  MList.printFor(DT.getListD_4());
+                  MList.printFor(DT.getListD_5());
+                  MList.printFor(DT.getListD_6());
             } else if(ac.contains("P1 Components")){
                   for(int a = 0; a < VF_R.getP1().getComponents().length; a++){
                         System.out.println(a + ": " + VF_R.getP1().getComponents()[a].getName()

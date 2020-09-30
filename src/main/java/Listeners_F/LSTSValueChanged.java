@@ -2,7 +2,8 @@ package Listeners_F;
 
 import First.VF_R;
 import MC.DT;
-import MC.MM;
+import mMethods.MKey;
+import mMethods.MM;
 import MC.MethodM;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
@@ -24,7 +25,7 @@ public class LSTSValueChanged implements ListSelectionListener {
             
             if (VF_R.getJLSTS()[0].isVisible() && VF_R.getJLSTS()[0].hasFocus()) {//LST_2
                   System.out.println("\tLST_2");
-                  MM.lst_ConfigDists_L(VF_R.getJLSTS()[0], 
+                  MKey.lst_ConfigDists_L(VF_R.getJLSTS()[0], 
                           null, VF_R.getJTFS()[1], 
                           VF_R.getJLBS()[1], evt);
                   
@@ -32,25 +33,25 @@ public class LSTSValueChanged implements ListSelectionListener {
 
             } else if (VF_R.getJLSTS()[1].isVisible() && VF_R.getJLSTS()[1].hasFocus()) {//LST_3
                   System.out.println("\tLST_3");
-                  MM.lst_ConfigDists_L(VF_R.getJLSTS()[1],
+                  MKey.lst_ConfigDists_L(VF_R.getJLSTS()[1],
                           VF_R.getJTFS()[1], VF_R.getJTFS()[2],
                           VF_R.getJLBS()[2], evt);
 
             } else if (VF_R.getJLSTS()[2].isVisible() && VF_R.getJLSTS()[2].hasFocus()) {//LST_4
                   System.out.println("\tLST_4");
-                  MM.lst_ConfigDists_L(VF_R.getJLSTS()[2],
+                  MKey.lst_ConfigDists_L(VF_R.getJLSTS()[2],
                           VF_R.getJTFS()[2], VF_R.getJTFS()[3],
                           VF_R.getJLBS()[3], evt);
 
             } else if (VF_R.getJLSTS()[3].isVisible() && VF_R.getJLSTS()[3].hasFocus()) {//LST_5
                   System.out.println("\tLST_5");
-                  MM.lst_ConfigDists_L(VF_R.getJLSTS()[3],
+                  MKey.lst_ConfigDists_L(VF_R.getJLSTS()[3],
                           VF_R.getJTFS()[3], VF_R.getJTFS()[4],
                           VF_R.getJLBS()[4], evt);
 
             } else if (VF_R.getJLSTS()[4].isVisible() && VF_R.getJLSTS()[4].hasFocus()) {//LST_6
                   System.out.println("\tLST_6");
-                  MM.lst_ConfigDists_L(VF_R.getJLSTS()[4],
+                  MKey.lst_ConfigDists_L(VF_R.getJLSTS()[4],
                           VF_R.getJTFS()[4], VF_R.getJTFS()[5],
                           VF_R.getJLBS()[5], evt);
             }

@@ -21,10 +21,7 @@ import javax.swing.plaf.basic.BasicToolBarUI;
 import smallComponenets.smallTF;
 import javax.swing.plaf.metal.MetalButtonUI;
 import static First.VF_R_DataCom.PT;
-import MC.MM;
-import TestWindow.BTNSListeners;
-import TestWindow.NewInterface;
-import TestWindow.VT_E;
+import mMethods.MM;
 import java.awt.FontMetrics;
 import java.util.ArrayList;
 import javax.swing.JSeparator;
@@ -100,7 +97,7 @@ public class VT {
                   String ac = evt.getActionCommand();
                   
                   for(int a = 0; a < btns.length; a++){
-                        if(a)
+                        
                   }
                   
                   
@@ -153,7 +150,7 @@ public class VT {
                   } else if (ac.equals(btns[6].getText())) {
                         System.out.println(btns[6].getText());
 
-                        MM.setLB_JTToCenter(VF_R.getLB_JT(), VF_R.getSC_JT());
+                        VF_R.setLB_JTToCenter(VF_R.getLB_JT(), VF_R.getSC_JT());
                         System.out.println("\tLB_JT Location: " + 
                                 VF_R.getLB_JT().getLocation());
                   }

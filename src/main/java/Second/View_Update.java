@@ -8,9 +8,10 @@ package Second;
 import First.VF;
 import MC.DT;
 import MC.Data;
-import MC.MM;
+import mMethods.MM;
 import MC.MethodM;
 import MC.Status;
+import mMethods.MList;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -566,7 +567,7 @@ public class View_Update extends javax.swing.JFrame {
       }
 
       public void setTF_LBValues() {
-            MM.printFor(list_C);
+            MList.printFor(list_C);
             
             if (list_C.size() == 2) {
                   lb_c3.setVisible(false);

@@ -1,166 +1,28 @@
-package MC;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package mMethods;
 
 import static Copy.Lots.searchFilter;
-import First.VF_R;
-import Second.View_Update;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
-import java.awt.image.BufferedImage;
-import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import java.lang.reflect.Method;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.Collections;
-import javax.swing.table.TableModel;
-import javax.swing.table.DefaultTableModel;
-import First.VF_R;
-import Others.CC;
-import java.awt.FontMetrics;
-import java.awt.Rectangle;
-import java.util.EventObject;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 
-public class MM extends Status {
-
-      String CName = this.getClass().getName();
+/**
+ *
+ * @author Christopher
+ */
+public class MKey {
       
-      Connection con;
-      //Data DT = new Data("MethodM");
-
-      public MM(String from, int CC) {
-            DT.getConstructorName(DT.cons, CName, from, CC);
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static int getComponentIndex(Component component) {
-            Container c = component.getParent();
-            for (int a = 0; a < c.getComponentCount(); a++) {
-                  if (c.getComponent(a) == component) {
-                        return a;
-                  }
-            }
-            return -1;
-      }
-
-      public static void setTextToCenter(JLabel LB, JComponent JC){
-            FontMetrics FM = LB.getFontMetrics(LB.getFont());
-            
-            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
-            int y = (FM.getAscent() + 
-                    (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
-            
-            LB.setLocation(x, y);
-      }
-      
-      public static void setTextToXCenter(JLabel LB, int y, JComponent JC){
-            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
-            LB.setLocation(x, y);
-      }
-      
-      public static void setTextToXCenter(JLabel LB, int y, JFrame JC){
-            int x = (JC.getWidth() - (int) LB.getWidth()) / 2;
-            LB.setLocation(x, y);
-      }
-      
-      public static void setLB_JTToCenter(JLabel LB, JComponent JC){
-            //System.out.println("##########setLB_JTToCenter");
-            FontMetrics FM = LB.getFontMetrics(LB.getFont());
-            
-            int x = (JC.getWidth() - (int) FM.stringWidth(LB.getText())) / 2;
-            
-            int y = (FM.getAscent() + 
-                    (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
-            
-            //System.out.println("\tJC getX: " + JC.getX());
-            //System.out.println("\tX: " + x);
-            //System.out.println("\tY: " + y);
-            //System.out.println("\tP3 getHeight: " + VF_R.getP3().getHeight());
-            LB.setLocation(JC.getX() + x, y - JC.getY());
-      }
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void printListSelectionListeners(JList lst) {
-            System.out.println("\n" + lst.getName() + " ListSelectionListeners count: "
-                    + lst.getListSelectionListeners().length);
-            for (int a = 0; a < lst.getListSelectionListeners().length; a++) {
-                  System.out.println("\t" + lst.getName() + " " + a + ": " + lst.getListSelectionListeners()[a].toString());
-            }
-      }
-
-      public static void printListSelectionListeners(JTable jt) {
-            DefaultListSelectionModel dlsm = (DefaultListSelectionModel) jt.getSelectionModel();
-            System.out.println("\n" + jt.getName() + " ListSelectionListeners count: "
-                    + dlsm.getListSelectionListeners().length);
-            for (int a = 0; a < dlsm.getListSelectionListeners().length; a++) {
-                  System.out.println("\t" + jt.getName() + " " + a + ": " + dlsm.getListSelectionListeners()[a].toString());
-            }
-      }
-
-      public static void printKeyListeners(JComponent jc) {
-            System.out.println("\n" + jc.getName() + " KeyListeners count: "
-                    + jc.getKeyListeners().length);
-            for (int a = 0; a < jc.getKeyListeners().length; a++) {
-                  System.out.println("\t" + jc.getName() + " " + a + ": " + jc.getKeyListeners()[a].toString());
-            }
-      }
-
-      public static void printFocusListeners(JComponent jc) {
-            System.out.println("\n" + jc.getName() + " FocusListeners count: "
-                    + jc.getFocusListeners().length);
-            for (int a = 0; a < jc.getFocusListeners().length; a++) {
-                  System.out.println("\t" + jc.getName() + " " + a + ": " + jc.getFocusListeners()[a].toString());
-            }
-      }
-
-      public static void printMouseListeners(JComponent jc) {
-            System.out.println("\n" + jc.getName() + " MouseListeners count: "
-                    + jc.getMouseListeners().length);
-
-            for (int a = 0; a < jc.getMouseListeners().length; a++) {
-                  System.out.println("\t" + jc.getName() + " " + a + ": " + jc.getMouseListeners()[a].toString());
-            }
-      }
-
-      public static void printTableModelListeners(DefaultTableModel dtm) {
-            System.out.println("\nTableModelListeners count: " + dtm.getTableModelListeners().length);
-
-            for (int a = 0; a < dtm.getTableModelListeners().length; a++) {
-                  System.out.println("\t" + a + ": " + dtm.getTableModelListeners()[a].toString());
-            }
-      }
-
-      public static void printActionListeners(JButton jb) {
-            System.out.println("\n" + jb.getName() + " ActionListeners count: " + jb.getActionListeners().length);
-
-            for (int a = 0; a < jb.getActionListeners().length; a++) {
-                  System.out.println("\t" + a + ": " + jb.getActionListeners()[a].toString());
-            }
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static boolean getMatch(String text, String comp, int pattern) {
-            Pattern pat = Pattern.compile(Pattern.quote(text), pattern);
-            Matcher match = pat.matcher(comp);
-            return match.find();
-      }
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void scrollUpDown(JList lst, KeyEvent evt) {
+      private static void scrollUpDown(JList lst, KeyEvent evt) {
             if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
                   lst.ensureIndexIsVisible(lst.getSelectedIndex() + 1);
             } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
@@ -168,7 +30,7 @@ public class MM extends Status {
             }
       }
 
-      public static void searchFilterWhen(JLabel lb, JTextField tf, KeyEvent evt,
+      private static void searchFilterWhen(JLabel lb, JTextField tf, KeyEvent evt,
               ArrayList<String> list, JList lst) {
             if (evt.getKeyCode() == KeyEvent.VK_LEFT
                     || evt.getKeyCode() == KeyEvent.VK_RIGHT
@@ -201,7 +63,7 @@ public class MM extends Status {
             }
       }
 
-      public static void changeIndexTAG(JList jls, JTextField tf, KeyEvent ev) {
+      private static void changeIndexTAG(JList jls, JTextField tf, KeyEvent ev) {
             int ik = ev.getKeyCode();
 
             if (ik == 40) {
@@ -234,7 +96,7 @@ public class MM extends Status {
             }
       }
 
-      public static void changeIndexNoTAG(JList jls, JTextField tf, KeyEvent ev) {
+      private static void changeIndexNoTAG(JList jls, JTextField tf, KeyEvent ev) {
             int ik = ev.getKeyCode();
 
             if (ik == 40) {
@@ -257,7 +119,7 @@ public class MM extends Status {
 
       }
 
-      public static void changeIndexWhen(JLabel lb, JTextField tf, JTextField tf0,
+      private static void changeIndexWhen(JLabel lb, JTextField tf, JTextField tf0,
               KeyEvent evt, JList lst) {
             if (evt.getKeyCode() == KeyEvent.VK_DOWN
                     || evt.getKeyCode() == KeyEvent.VK_UP) {
@@ -278,7 +140,7 @@ public class MM extends Status {
             }
       }
 
-      public static void changeIndexWhen(JLabel lb, JTextField tf,
+      private static void changeIndexWhen(JLabel lb, JTextField tf,
               KeyEvent evt, JList lst) {
             if (evt.getKeyCode() == KeyEvent.VK_DOWN
                     || evt.getKeyCode() == KeyEvent.VK_UP) {
@@ -587,254 +449,4 @@ public class MM extends Status {
             }
       }
 
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void add_Set(JList lst, ArrayList<String> list, DefaultListModel dlm, boolean b) {
-            lst.setModel(dlm);
-            if (b == true) {
-                  for (int a = 0; a < list.size(); a++) {
-                        dlm.addElement(list.get(a));
-                  }
-            }
-      }
-
-      public static void mixList(ArrayList<String> list, ArrayList<String> list2, ArrayList<String> list3) {
-            list3.clear();
-            for (int c = 0; c < list.size(); c++) {
-                  list3.add(list.get(c) + ": " + list2.get(c));
-            }
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void resetTF_LB(JTextField tf, JLabel lb) {
-            if (lb != null) {
-                  tf.setBackground(new Color(51, 51, 51));
-                  tf.setSize(290, tf.getHeight());
-
-                  String l = lb.getText();
-                  if (l.contains("*")) {
-                        lb.setText(l.substring(l.indexOf("*") + 1, l.length()));
-                  }
-            } else {//TF_1 CASE
-                  tf.setSize(70, tf.getHeight());
-            }
-      }
-
-      public static void resetClock(JTextField MD, JTextField MU, JTextField SD, JTextField SU,
-              JLabel D2) {
-            MD.setText("0");
-            MU.setText("0");
-            SD.setText("0");
-            SU.setText("0");
-
-            D2.setVisible(false);
-            MD.setVisible(false);
-            MU.setVisible(false);
-            SD.setVisible(false);
-            SU.setVisible(false);
-
-      }
-
-      public static void shortenLB(JLabel lb) {
-            if (lb.getText().length() >= 10) {
-                  String somet = lb.getText().substring(0, 10);
-                  lb.setText(somet + "...");
-            }
-      }
-
-      public static String filterTableName(String table, String op) {
-            //System.out.println(CC.PURPLE + "FilterTableName" + CC.RESET);
-            System.out.println("\tTable: " + table);
-            if (op.equals("ADD")) {
-                  if (table.contains(" ")) {
-                        //table.replaceAll(" ", "_");
-                        table = table.replaceAll(" ", "_");
-                  }
-            } else if (op.equals("TAKE")) {
-                  if (table.contains("_")) {
-                        //table.replaceAll(" ", "_");
-                        table = table.replaceAll("_", " ");
-                  }
-            }
-            //System.out.println("\tTable: " + table);
-            return table;
-      }
-
-      public static void unTagList(ArrayList<String> list) {
-            String sub1;
-            String sub2;
-            //System.out.println("List Size Before: " + list.size());
-            for (int a = 0; a < list.size(); a++) {
-                  //System.out.println("- - - - - - " + a + " >" + list.get(a));
-                  if (list.get(a).contains(";")) {
-                        sub1 = list.get(a).substring(0, list.get(a).indexOf(";"));
-                        sub2 = list.get(a).substring(list.get(a).indexOf(";") + 2, list.get(a).length());
-
-                        list.add(sub1);
-                        list.add(sub2);
-
-                        list.remove(a);
-
-                        a--;
-                  }
-            }
-            //++++++++++++++++++++++++++++++++++++++++++++++
-            ArrayList<String> copy = new ArrayList<String>();
-            copy.addAll(list);
-
-            Set<String> set = new LinkedHashSet<>(copy);
-
-            copy = new ArrayList<String>(set);
-            Collections.sort(copy);
-
-            list.clear();
-            list.addAll(copy);
-      }
-
-      public static int getMayorId(JTable jt) {
-            Object data;
-            int valor;
-            int mayor = 0;
-            for (int a = 0; a < jt.getRowCount(); a++) {
-                  data = jt.getValueAt(a, 0);
-                  if (data instanceof String) {
-                        //System.out.println("\tID " + a + " is Instanceof of String");
-                  } else if (data instanceof Integer) {
-                        //System.out.println("\tID " + a + " Instanceof Integer");
-                  }
-                  valor = (Integer) data;
-                  if (valor > mayor) {
-                        mayor = valor;
-                  }
-            }
-            return mayor;
-      }
-
-      public static void typeConvert() {
-            int selectedRow = VF_R.getJT().getSelectionModel().getMinSelectionIndex();
-
-            DT.getList_R().clear();
-            Object oo;
-            String aaa;
-            int bbb;
-            for (int a = 0; a < VF_R.getJT().getColumnCount(); a++) {
-                  oo = VF_R.getJT().getValueAt(selectedRow, a);
-                  if (oo instanceof String) {
-                        aaa = (String) oo;
-                        DT.getList_R().add(aaa);
-                  } else if (oo instanceof Integer) {
-                        bbb = (int) oo;
-                        DT.getList_R().add(Integer.toString(bbb));
-                  }
-            }
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void setImageIcon(JButton btn, String url) {
-            ImageIcon ic = new ImageIcon(url);
-            Icon i = (Icon) ic;
-            btn.setIcon(i);
-      }
-
-      public static ImageIcon resizeIcon(ImageIcon ii) {
-            //+++++++++++++++++++++++++++++++++++++++++++++++++
-            BufferedImage bimage = new BufferedImage(225, 225, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2 = bimage.createGraphics();
-
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g2.drawImage(ii.getImage(), 0, 0, 225, 225, null);
-
-            ImageIcon icon2 = new ImageIcon(bimage);
-
-            //System.out.println("------------------------Icon2 Width: " + icon2.getIconWidth() + "\tHeight: " + icon2.getIconHeight());
-            return icon2;
-            //++++++++++++++++++++++++++++++++++++++++++++++++++
-      }
-      
-      public static void setComponentFitOnJFrame(JComponent jc, JFrame jf) {
-            jc.setBounds(2, 2,
-                    jf.getWidth() - 21,
-                    jf.getHeight() - 44);
-
-            System.out.println("JP Bounds: " + jc.getBounds());
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void printFor(ArrayList<String> list) {
-            if (list.isEmpty()) {
-                  System.out.println("the list has no elements");
-            } else {
-                  for (int a = 0; a < list.size(); a++) {
-                        System.out.println("element " + a + ": " + list.get(a));
-                  }
-            }
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void threadHandle(Thread t) {
-            System.out.println("\nState: " + t.getState().toString());
-            if (t.isAlive()) {
-                  System.out.println("\tThread is Alive");
-            } else {
-                  System.out.println("\tThread is Dead");
-            }
-            if (t.isInterrupted()) {
-                  System.out.println("\tThread is Interrupted");
-            } else {
-                  System.out.println("\tThread is NOT Interrupted");
-            }
-      }
-
-      //public void testing() {
-      //     System.out.println("TESTED");
-      //}
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void setButtonColorWhenPress(MouseEvent evt) {
-
-      }
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static boolean isCellEditableForCheckBoxAndDefaults(EventObject anEvent, JTree JTE, 
-              DefaultMutableTreeNode editedNode){
-            boolean returnValue = false;
-
-            if (anEvent instanceof MouseEvent) {
-                  MouseEvent mouseEvent = (MouseEvent) anEvent;
-                  TreePath path = JTE.getPathForLocation(mouseEvent.getX(),
-                          mouseEvent.getY());
-                  if (path != null) {
-                        Object ob = path.getLastPathComponent();
-                        if ((ob != null) && (ob instanceof DefaultMutableTreeNode)) {
-                              editedNode = (DefaultMutableTreeNode) ob;
-                              Object userObject = editedNode.getUserObject();
-                              if (userObject instanceof JCheckBox) {
-                                    //System.out.println("JToggleButton");
-                                    //System.out.println("CheckBox");
-                                    Rectangle r = JTE.getPathBounds(path);
-                                    int x = mouseEvent.getX() - r.x;
-                                    int y = mouseEvent.getY() - r.y;
-
-                                    JCheckBox checkbox = (JCheckBox) userObject;
-                                    
-                                    String text = checkbox.getText();
-                                    checkbox.setText("");
-
-                                    returnValue
-                                            = userObject instanceof JCheckBox
-                                            && x > 0
-                                            && x < checkbox.getPreferredSize().width;
-                                    
-                                    checkbox.setText(text);
-                              } else {
-                                    returnValue = false;
-
-                              }
-                        }
-                  }
-            }
-            System.out.println("isCellEditableForCheckBoxAndDefaults: " + returnValue);
-            return returnValue;
-      }
-
-      public static void main(String[] args) {
-            //System.out.println("MethodM STAR");
-      }
 }

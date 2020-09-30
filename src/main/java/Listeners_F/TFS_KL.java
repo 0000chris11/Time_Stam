@@ -2,7 +2,8 @@ package Listeners_F;
 
 import First.VF_R;
 import MC.DT;
-import MC.MM;
+import mMethods.MKey;
+import mMethods.MM;
 import MC.MethodM;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -138,17 +139,17 @@ public class TFS_KL implements KeyListener {
                   //System.out.println("\tKEY: BUT LEFT & RIGHT");
 
                   if (VF_R.getJTFS()[0].hasFocus()) {
-                        MM.keyReleasedN_T(VF_R.getJTFS()[0], evt);
+                        MKey.keyReleasedN_T(VF_R.getJTFS()[0], evt);
                   }
                   if (VF_R.getJTFS()[1].hasFocus()) {
                         //System.out.println("\t\tTF_2");
                         if (VF_R.getJTFS()[1].getBackground().equals(C[1])
                                 || VF_R.getJTFS()[1].getBackground().equals(C[2])) {
-                              MM.tf_ConfigDists_K(VF_R.getJLBS()[1],
+                              MKey.tf_ConfigDists_K(VF_R.getJLBS()[1],
                                       VF_R.getJTFS()[1], VF_R.getJLSTS()[0],
                                       listsD[0], evt);
                         } else {
-                              MM.keyReleasedN_T(VF_R.getJTFS()[1], evt);
+                              MKey.keyReleasedN_T(VF_R.getJTFS()[1], evt);
                         }
                   } else {
                         //++++++++++++++++++++++++++++++++++++++++++++
@@ -159,19 +160,19 @@ public class TFS_KL implements KeyListener {
                                             || VF_R.getJTFS()[a].getBackground().equals(C[2])) {
                                           if (sizeS[a - 2] > 0) {
                                                 //System.out.println("\t\tTF_" + (a + 1) + " KeyReleased FUSED");
-                                                MM.tf_ConfigDists_K(VF_R.getJLBS()[a],
+                                                MKey.tf_ConfigDists_K(VF_R.getJLBS()[a],
                                                         VF_R.getJTFS()[a - 1], VF_R.getJTFS()[a],
                                                         VF_R.getJLSTS()[a - 1],
                                                         listsS[a - 2], evt);
                                           } else {
                                                 //System.out.println("\t\tTF_" + (a + 1) + " KeyReleased NORMAL");
-                                                MM.tf_ConfigDists_K(VF_R.getJLBS()[a],
+                                                MKey.tf_ConfigDists_K(VF_R.getJLBS()[a],
                                                         VF_R.getJTFS()[a - 1], VF_R.getJTFS()[a],
                                                         VF_R.getJLSTS()[a - 1],
                                                         listsD[a - 1], evt);
                                           }
                                     } else {
-                                          MM.keyReleasedN_T(VF_R.getJTFS()[a], evt);
+                                          MKey.keyReleasedN_T(VF_R.getJTFS()[a], evt);
                                     }
                               }
                         }

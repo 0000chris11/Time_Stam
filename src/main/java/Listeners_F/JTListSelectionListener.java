@@ -9,8 +9,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import First.VF_R;
 import MC.DT;
-import MC.MM;
+import mMethods.MM;
 import MC.MethodM;
+import mMethods.MTable;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -44,7 +45,8 @@ public class JTListSelectionListener implements ListSelectionListener {
                         VF_R.getBTNS_MC()[1].setEnabled(true);
                         VF_R.getBTNS_MC()[2].setEnabled(true);
 
-                        MM.typeConvert();
+                        MTable.typeConvert(VF_R.getJT(), DT.getList_R(), 
+                                VF_R.getJT().getSelectionModel().getMinSelectionIndex());
                         //++++++++++++++++++++++++++++++++++++++++++++
                         for (int a = 0; a < DT.getList_R().size(); a++) {
                               //System.out.println("ListR " + a + ": "+ dt.getList_R().get(a));

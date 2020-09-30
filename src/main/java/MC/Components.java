@@ -5,6 +5,7 @@
  */
 package MC;
 
+import mMethods.MM;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 import First.VF_R;
+import mMethods.MText;
 import Others.CC;
 
 /**
@@ -40,8 +42,8 @@ public class Components {
             }
             //String[] cols = {null, null, col2, col3, col4, col5, col6};
 
-            String ed2 = MM.filterTableName(DT.getTable(), "TAKE");
-            DT.setTable(MM.filterTableName(DT.getTable(), "ADD"));
+            String ed2 = MText.filterTextName(DT.getTable(), "TAKE");
+            DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
             //++++++++++++++++++++++++++++++++++++++++++++++++
             VF_R.getLB_Title().setText(ed2);
 
@@ -61,7 +63,7 @@ public class Components {
                         for (int b = 0; b < a + 1; b++) {
                               //1, 2, 3, 4, 5
                               VF_R.getJLBS()[b + 1].setText((b + 2) + ". " + cols[b + 1]);
-                              MM.shortenLB(VF_R.getJLBS()[b + 1]);
+                              MText.shortenLB(VF_R.getJLBS()[b + 1]);
 
                               VF_R.getJLBS()[b + 1].setVisible(true);
                               VF_R.getJTFS()[b + 1].setVisible(true);

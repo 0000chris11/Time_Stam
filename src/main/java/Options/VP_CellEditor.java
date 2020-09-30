@@ -5,7 +5,7 @@
  */
 package Options;
 
-import MC.MM;
+import mMethods.MM;
 import Others.CC;
 import java.awt.Component;
 import java.awt.event.MouseEvent;

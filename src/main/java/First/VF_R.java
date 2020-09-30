@@ -1,5 +1,6 @@
 package First;
 
+import mMethods.MM;
 import static First.VF_R_DataCom.JT;
 import static First.VF_R_DataCom.btn_plus;
 import static First.VF_R_DataCom.btns_MC;
@@ -14,6 +15,7 @@ import Listeners_F.MIActionListener;
 import Listeners_F.MIShow_AL;
 import Listeners_F.MIV_AL;
 import Listeners_F.CK_FL;
+import mMethods.MText;
 import Others.*;
 import Threads.*;
 import javax.swing.*;
@@ -65,6 +67,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalToolBarUI;
 import net.miginfocom.swing.MigLayout;
 import TestWindow.VT;
+import java.awt.FontMetrics;
 
 /**
  *
@@ -172,6 +175,22 @@ public class VF_R extends VF_R_DataCom {
             }
             lb_Icon.setVisible(b);
             JPB.setVisible(b);
+      }
+      
+      public static void setLB_JTToCenter(JLabel LB, JComponent JC){
+            //System.out.println("##########setLB_JTToCenter");
+            FontMetrics FM = LB.getFontMetrics(LB.getFont());
+            
+            int x = (JC.getWidth() - (int) FM.stringWidth(LB.getText())) / 2;
+            
+            int y = (FM.getAscent() + 
+                    (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
+            
+            //System.out.println("\tJC getX: " + JC.getX());
+            //System.out.println("\tX: " + x);
+            //System.out.println("\tY: " + y);
+            //System.out.println("\tP3 getHeight: " + VF_R.getP3().getHeight());
+            LB.setLocation(JC.getX() + x, y - JC.getY());
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -478,7 +497,7 @@ public class VF_R extends VF_R_DataCom {
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
             lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
-            MM.setLB_JTToCenter(lb_JT, sc_JT);
+            setLB_JTToCenter(lb_JT, sc_JT);
       }
 
       public static void noRowsDetection() {
@@ -950,7 +969,7 @@ public class VF_R extends VF_R_DataCom {
             setColorToDItem(DT.getTable(), DT.getDTable());
             //menuFont();
             //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
-            DT.setTable(MM.filterTableName(DT.getTable(), "ADD"));
+            DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
 
             System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
             mc.SelectColumns(DT.getTable());

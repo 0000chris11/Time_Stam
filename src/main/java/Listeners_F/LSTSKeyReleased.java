@@ -2,7 +2,8 @@ package Listeners_F;
 
 import First.VF;
 import MC.DT;
-import MC.MM;
+import mMethods.MKey;
+import mMethods.MM;
 import MC.MethodM;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -37,7 +38,7 @@ public class LSTSKeyReleased implements KeyListener {
                                 VF.getJLSTS()[a].hasFocus()) {
                               
                               System.out.println("\tLST_" + (a + 2));
-                              MM.lst_ConfigDists_K(VF.getJLSTS()[a].getModel(),
+                              MKey.lst_ConfigDists_K(VF.getJLSTS()[a].getModel(),
                                       VF.getJLSTS()[a],
                                       null, VF.getJTFS()[a + 1],
                                       VF.getJLBS()[a + 1], evt);
@@ -51,7 +52,7 @@ public class LSTSKeyReleased implements KeyListener {
                                 VF.getJLSTS()[a].hasFocus()) {
                                     
                                     System.out.println("\tLST_" + (a + 2));
-                                    MM.lst_ConfigDists_K(VF.getJLSTS()[a].getModel(),
+                                    MKey.lst_ConfigDists_K(VF.getJLSTS()[a].getModel(),
                                             VF.getJLSTS()[a],
                                             VF.getJTFS()[a], VF.getJTFS()[a + 1],
                                             VF.getJLBS()[a + 1], evt);

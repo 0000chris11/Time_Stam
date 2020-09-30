@@ -3,10 +3,12 @@ package Others;
 import First.VF_R;
 import MC.DT;
 import MC.Data;
-import MC.MM;
+import mMethods.MM;
 import MC.MethodM;
 import Threads.Threads;
 import MC.MakeCon;
+import mMethods.MList;
+import mMethods.MText;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -33,7 +35,7 @@ public class LSTD {
 
       public void changeLSTD(String table, String D1, String D2, String TB, String TG1, 
               String CK) {
-            DT.setTable(MM.filterTableName(DT.getTable(), "ADD"));
+            DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
             System.out.println("\tTable: " + table);
             System.out.println("\tD1: " + D1);
             System.out.println("\tD2: " + D2);
@@ -80,8 +82,8 @@ public class LSTD {
                         VF_R.getJTFS()[a + 1].setBackground(DT.TFColor[1]);
 
                         mc.MCInsertSelectD1(table, col, listDs[a + 2]);
-                        MM.unTagList(listDs[a + 2]);
-                        MM.add_Set(VF_R.getJLSTS()[a], listDs[a + 2], dms[a + 2], vis);
+                        MList.unTagList(listDs[a + 2]);
+                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], listDs[a + 2], dms[a + 2], vis);
                   }
             }
       }
@@ -98,9 +100,9 @@ public class LSTD {
 
                         VF_R.getJTFS()[a + 2].setBackground(DT.TFColor[2]);
                         mc.MCInsertSelectD2(table, col1, col2, listDs[a + 2], listDs[a + 3]);
-                        MM.mixList(listDs[a + 2], listDs[a + 3], listSs[a + 2]);
-                        MM.unTagList(listSs[a + 2]);
-                        MM.add_Set(VF_R.getJLSTS()[a + 1], listSs[a + 2], dms[a + 3], vis);
+                        MList.mixRowList(listDs[a + 2], listDs[a + 3], listSs[a + 2], ": ");
+                        MList.unTagList(listSs[a + 2]);
+                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], listSs[a + 2], dms[a + 3], vis);
                   }
             }
       }
@@ -110,7 +112,7 @@ public class LSTD {
                   if (fll == a + 1) {
                         if (!VF_R.getJLBS()[a + 1].getText().contains("*")) {
                               VF_R.getJLBS()[a + 1].setText("*" + VF_R.getJLBS()[a + 1].getText());
-                              MM.shortenLB(VF_R.getJLBS()[a + 1]);
+                              MText.shortenLB(VF_R.getJLBS()[a + 1]);
                         }
                   }
             }

@@ -8,14 +8,16 @@ import java.awt.event.ActionListener;
 import MC.MakeCon;
 import MC.Components;
 import MC.DT;
-import MC.MM;
+import mMethods.MM;
 import MC.Status;
+import mMethods.MText;
 import Others.CC;
 import Others.LSTD;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -29,7 +31,7 @@ public class MIActionListener implements ActionListener {
 
       //Data dt = new Data("MIActionListener");
       String CName = this.getClass().getName();
-      
+
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       Components cp = new Components(CName, DT.CCount++);
@@ -65,10 +67,10 @@ public class MIActionListener implements ActionListener {
                         change = true;
                   }
                   //System.out.println("MIActionListener ++++ Table: " + DT.getTable());
-                  DT.setTable(MM.filterTableName(ac, "ADD"));
+                  DT.setTable(MText.filterTextName(ac, "ADD"));
                   //System.out.println("MIActionListener ++++ Table: " + dt.getTable());
                   mc.SelectATable(DT.getTable());
-                  //dt.setTable(mm.filterTableName(ac, "ADD"));
+                  //dt.setTable(mm.filterTextName(ac, "ADD"));
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
                   System.out.println("MIActionListener ++++ Data");
@@ -90,11 +92,11 @@ public class MIActionListener implements ActionListener {
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ MCSelectColumns");
                   mc.SelectColumns(DT.getTable());
-                  
+
                   System.out.println("MIActionListener ++++ ChangeLB_TF");
                   cp.changeLB_TF(VF_R.getJT().getColumnCount(), DT.getList_C());
                   VF_R.noRowsDetection();
-                  
+
                   System.out.println("MIActionListener ++++ ChangeLSTD");
                   lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
                           DT.getTag(), DT.getClock());
@@ -134,8 +136,8 @@ public class MIActionListener implements ActionListener {
                   }
                   DT.bool_Sel = false;
                   System.out.println(CC.GREEN + "\n MIActionListener ENDS" + CC.RESET);
-            }else{
-                  st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, 
+            } else {
+                  st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                           "This Table is already selected", 3000);
             }
       }
@@ -156,6 +158,35 @@ public class MIActionListener implements ActionListener {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++
+      private static void resetTF_LB(JTextField tf, JLabel lb) {
+            if (lb != null) {
+                  tf.setBackground(new Color(51, 51, 51));
+                  tf.setSize(290, tf.getHeight());
+
+                  String l = lb.getText();
+                  if (l.contains("*")) {
+                        lb.setText(l.substring(l.indexOf("*") + 1, l.length()));
+                  }
+            } else {//TF_1 CASE
+                  tf.setSize(70, tf.getHeight());
+            }
+      }
+
+      private static void resetClock(JTextField MD, JTextField MU, JTextField SD, JTextField SU,
+              JLabel D2) {
+            MD.setText("0");
+            MU.setText("0");
+            SD.setText("0");
+            SU.setText("0");
+
+            D2.setVisible(false);
+            MD.setVisible(false);
+            MU.setVisible(false);
+            SD.setVisible(false);
+            SU.setVisible(false);
+
+      }
+
       private void resetingAfter() {
             VF_R.getJPB().setVisible(false);
             VF_R.getJPB().setForeground(Color.RED);
@@ -163,9 +194,9 @@ public class MIActionListener implements ActionListener {
 
             VF_R.getBTN_Show_All().setSelected(false);
             //System.out.println("1: tf_3 background: " + tfs[2].getBackground());
-            MM.resetTF_LB(VF_R.getJTFS()[0], null);
+            resetTF_LB(VF_R.getJTFS()[0], null);
             for (int a = 1; a < 6; a++) {
-                  MM.resetTF_LB(VF_R.getJTFS()[a], VF_R.getJLBS()[a]);
+                  resetTF_LB(VF_R.getJTFS()[a], VF_R.getJLBS()[a]);
                   //System.out.println("TF_" + (a + 1) + " Width: " + tfs[1].getWidth());
                   VF_R.getJTFS()[a].setText("");
             }
@@ -194,7 +225,7 @@ public class MIActionListener implements ActionListener {
             DT.getList_S56().clear();
             //++++++++++++++++++++++++++++++++++++++
             for (int a = 0; a < VF_R.getTFS_MD().length; a++) {
-                  MM.resetClock(VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a],
+                  resetClock(VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a],
                           VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a], VF_R.getLB_2DS()[a]);
             }
             //+++++++++++++++++++++++++++++++++++++++

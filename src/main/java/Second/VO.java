@@ -6,7 +6,8 @@
 package Second;
 
 import First.VF_R;
-import MC.MM;
+import mMethods.MComp;
+import mMethods.MM;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
@@ -61,7 +62,7 @@ public class VO {
             System.out.println("####lbq bounds: " + lbq.getBounds());
             System.out.println("####JF width: " + JF.getWidth());
             System.out.println("####JF-CP witdht: " + JF.getContentPane().getWidth());
-            MM.setTextToXCenter(lbq, 18, JF);
+            MComp.setLabelToXCenter(lbq, 18, JF);
             
             JF.add(op1);
             JF.add(op2);

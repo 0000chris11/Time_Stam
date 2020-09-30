@@ -8,9 +8,11 @@ import MC.MethodM;
 import java.util.concurrent.BrokenBarrierException;
 import Listeners_F.BTNS_MCActionListener;
 import MC.DT;
-import MC.MM;
+import mMethods.MM;
 import MC.MakeCon;
 import MC.notMyMethods;
+import mMethods.MImage;
+import mMethods.MTable;
 import Others.CC;
 import Others.LSTD;
 import java.awt.Color;
@@ -67,7 +69,7 @@ public class Threads {
                                     //ss[a] = tfs_MD[a].getText() + ":" + tfs_MU[a].getText() + ":" + tfs_SD[a].getText();
                               }
                         }//+++++++++++++++++++++++++++++++++++++++++
-                        int mayor = MM.getMayorId(VF_R.getJT());
+                        int mayor = MTable.getMayorId(VF_R.getJT(), 0);
 
                         for (int a = 0; a < DT.maxColumns - 1; a++) {
                               if (VF_R.getJT().getColumnCount() == a + 2) {
@@ -219,7 +221,7 @@ public class Threads {
                                                 //list_Icon.add(resizeIcon(new ImageIcon(file.getPath())));
                                                 icon = new ImageIcon(file.getPath());
                                                 DT.getList_IconUrl().add(textUrl);
-                                                DT.getList_newIcon().add(MM.resizeIcon(icon));
+                                                DT.getList_newIcon().add(MImage.resizeIcon(icon));
                                           }
                                     } else {
                                           textIcon = DT.IconURL + data.toString() + ".png";
@@ -229,7 +231,7 @@ public class Threads {
                                                 } else {
                                                       icon = new ImageIcon(file.getPath());
                                                       DT.getList_IconUrl().add(textUrl);
-                                                      DT.getList_newIcon().add(MM.resizeIcon(icon));
+                                                      DT.getList_newIcon().add(MImage.resizeIcon(icon));
                                                 }
                                           } else {
                                                 //System.out.println("\t\tFile NOT FOUND");

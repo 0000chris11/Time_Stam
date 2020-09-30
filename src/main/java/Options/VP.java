@@ -5,7 +5,7 @@
  */
 package Options;
 
-import MC.MM;
+import mMethods.MM;
 import static Options.DT.JTEN;
 import TestWindow.VT;
 import java.awt.CardLayout;
@@ -104,7 +104,7 @@ public class VP extends DT {
 
             JFN.add(SPLN);
             //SPLN.setLayout(null);
-            MM.setComponentFitOnJFrame(SPLN, JFN);
+            CP.setComponentFitOnJFrame(SPLN, JFN);
             SPLN.setOneTouchExpandable(true);
       }
 
