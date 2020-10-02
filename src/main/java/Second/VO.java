@@ -6,8 +6,7 @@
 package Second;
 
 import First.VF_R;
-import mMethods.MComp;
-import mMethods.MM;
+import cofii.MComp;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;

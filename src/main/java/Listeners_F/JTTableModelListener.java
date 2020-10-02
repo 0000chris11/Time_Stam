@@ -9,14 +9,12 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import First.VF_R;
 import MC.DT;
-import mMethods.MM;
 import MC.MakeCon;
-import MC.MethodM;
 import Others.LSTD;
 import MC.notMyMethods;
-import mMethods.MText;
+import cofii.MText;
 import Threads.Threads;
-import javax.swing.JTable;
+import cofii.MTable;
 
 /**
  *
@@ -41,7 +39,7 @@ public class JTTableModelListener implements TableModelListener {
                     + " \nbool_Del: " + Data.bool_Del
                     + " \nbool_Sel: " + Data.bool_Sel
                     + " \nbool_Chan: " + Data.bool_Chan);
-            */
+             */
             if (DT.bool_Add == false && DT.bool_Upd == false && DT.bool_Del == false
                     && DT.bool_Sel == false && DT.bool_Chan == false) {
                   if (DT.cellSys == true) {
@@ -66,7 +64,8 @@ public class JTTableModelListener implements TableModelListener {
                                     //++++++++++++++++++++++++++++++
                                     th.setValueToCell(data, coln, rown);
                                     //++++++++++++++++++++++++++++++
-                                    MM.typeConvert();
+                                    MTable.typeConvert(VF_R.getJT(), DT.getList_R(),
+                                            VF_R.getJT().getSelectionModel().getMinSelectionIndex());
                               }
                         }
                   }

@@ -1,69 +1,24 @@
-package mMethods;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cofii;
 
-import static Copy.Lots.searchFilter;
-import First.VF_R;
-import Second.View_Update;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import java.awt.image.BufferedImage;
-import java.awt.RenderingHints;
-import java.awt.event.MouseEvent;
-import java.lang.reflect.Method;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.Collections;
-import javax.swing.table.TableModel;
-import javax.swing.table.DefaultTableModel;
-import First.VF_R;
-import MC.DT;
-import MC.Status;
-import Others.CC;
-import java.awt.FontMetrics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.EventObject;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.swing.JCheckBox;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-public class MM extends Status {
-
-      String CName = this.getClass().getName();
+/**
+ *
+ * @author Christopher
+ */
+public class MTree {
       
-      Connection con;
-      //Data DT = new Data("MethodM");
-
-      public MM(String from, int CC) {
-            DT.getConstructorName(DT.cons, CName, from, CC);
-      }
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void threadHandle(Thread t) {
-            System.out.println("\nState: " + t.getState().toString());
-            if (t.isAlive()) {
-                  System.out.println("\tThread is Alive");
-            } else {
-                  System.out.println("\tThread is Dead");
-            }
-            if (t.isInterrupted()) {
-                  System.out.println("\tThread is Interrupted");
-            } else {
-                  System.out.println("\tThread is NOT Interrupted");
-            }
-      }
-      //JTREE+++++++++++++++++++++++++++++++++++++++++++++++
       public static boolean isCellEditableForCheckBoxAndDefaults(EventObject anEvent, JTree JTE, 
               DefaultMutableTreeNode editedNode){
             boolean returnValue = false;
@@ -104,9 +59,5 @@ public class MM extends Status {
             }
             System.out.println("isCellEditableForCheckBoxAndDefaults: " + returnValue);
             return returnValue;
-      }
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static void main(String[] args) {
-            //System.out.println("MethodM STAR");
       }
 }

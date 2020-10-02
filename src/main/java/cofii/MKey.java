@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mMethods;
+package cofii;
 
-import static Copy.Lots.searchFilter;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -22,12 +21,34 @@ import javax.swing.event.ListSelectionEvent;
  */
 public class MKey {
       
-      private static void scrollUpDown(JList lst, KeyEvent evt) {
+      private static void scrollUpDown(JList<String> lst, KeyEvent evt) {
             if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
                   lst.ensureIndexIsVisible(lst.getSelectedIndex() + 1);
             } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
                   lst.ensureIndexIsVisible(lst.getSelectedIndex() - 1);
             }
+      }
+      
+      public static void searchFilter(String text, ArrayList<String> list, 
+              JList<String> lst) {
+            //System.out.println("\t\tsearchFilter");
+            DefaultListModel<String> filteredItems = new DefaultListModel<String>();
+
+            ArrayList<String> tList = list;
+            if(list.isEmpty()){
+                  System.out.println("\t\t\tList has nothing");
+            }
+            for (int a = 0; a < tList.size(); a++) {
+                  //ADDS ONLY THE ELEMENTS THAT MATCH
+                  if (tList.get(a).toLowerCase().contains(text.toLowerCase())) {
+                        
+                        filteredItems.addElement(list.get(a));
+                  }
+            }
+            
+            //ListModel lm = lst.getModel();
+            DefaultListModel lm2 = filteredItems;
+            lst.setModel(lm2);
       }
 
       private static void searchFilterWhen(JLabel lb, JTextField tf, KeyEvent evt,
@@ -62,7 +83,7 @@ public class MKey {
                   }
             }
       }
-
+      //+++++++++++++++++++++++++++++++++++++++++++
       private static void changeIndexTAG(JList jls, JTextField tf, KeyEvent ev) {
             int ik = ev.getKeyCode();
 
@@ -117,6 +138,62 @@ public class MKey {
                   }
             }
 
+      }
+      
+      public static void changeIndexWithPRNTS(JList lst, JTextField tf, KeyEvent ev) {
+            int ik = ev.getKeyCode();
+
+            if (ik == 40) {
+                  lst.setSelectedIndex(lst.getSelectedIndex() + 1);
+            } else if (ik == 38) {
+                  lst.setSelectedIndex(lst.getSelectedIndex() - 1);
+            }
+
+            if (tf.getText().contains(";")) {
+                  //System.out.println("1st Step");
+                  String text = tf.getText();
+                  tf.setText(text.substring(0, text.lastIndexOf(";") + 2));
+
+                  //System.out.println("2nd Step");
+                  String text0 = lst.getSelectedValue().toString();
+                  tf.setText(tf.getText() + text0.substring(0, text0.lastIndexOf("(") - 1));
+
+            } else {
+                  if (ev.getKeyCode() != KeyEvent.VK_F5) {
+                        String text = lst.getSelectedValue().toString();
+                        tf.setText(text.substring(0, text.indexOf("(") - 1));
+                  }
+            }
+      }
+      
+      public static void changeIndexLST(JTextField tf, JList lst, KeyEvent ev) {
+            if (ev.getKeyCode() == KeyEvent.VK_UP
+                    || ev.getKeyCode() == KeyEvent.VK_DOWN) {
+                  if (tf.getText().contains(";")) {
+                        String t_f = tf.getText();
+
+                        tf.setText(t_f.substring(0, t_f.lastIndexOf(";") + 2));
+
+                        tf.setText(tf.getText() + lst.getSelectedValue().toString());
+                  } else {
+                        tf.setText(lst.getSelectedValue().toString());
+                  }
+            }
+
+      }
+
+      public static void changeIndexLST(JTextField tf, JList lst, ListSelectionEvent ev) {
+            if (ev.getValueIsAdjusting() == true) {
+                  if (tf.getText().contains(";")) {
+
+                        String t_f = tf.getText();
+                        tf.setText(t_f.substring(0, t_f.lastIndexOf(";") + 2));
+
+                        tf.setText(tf.getText() + lst.getSelectedValue().toString());
+                  } else {
+                        tf.setText(lst.getSelectedValue().toString());
+                  }
+            }
       }
 
       private static void changeIndexWhen(JLabel lb, JTextField tf, JTextField tf0,

@@ -7,8 +7,6 @@ package First;
 
 import Second.View_Update;
 import ArrayMethods.ArraysM;
-import Copy.Lots;
-import static Copy.Lots.searchFilter;
 import MC.Data;
 import MC.MethodM;
 import MC.Status;

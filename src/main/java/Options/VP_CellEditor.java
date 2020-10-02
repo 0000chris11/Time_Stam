@@ -5,16 +5,13 @@
  */
 package Options;
 
-import mMethods.MM;
 import Others.CC;
+import cofii.MTree;
 import java.awt.Component;
-import java.awt.event.MouseEvent;
 import java.util.EventObject;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JTree;
-import javax.swing.event.CellEditorListener;
-import javax.swing.text.JTextComponent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellEditor;
 
@@ -50,7 +47,7 @@ public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
 
       @Override
       public boolean isCellEditable(EventObject anEvent) {
-            return MM.isCellEditableForCheckBoxAndDefaults(
+            return MTree.isCellEditableForCheckBoxAndDefaults(
                     anEvent, VP.JTEN, defaultNode);
       }
       

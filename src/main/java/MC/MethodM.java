@@ -1,34 +1,24 @@
 package MC;
 
-import static Copy.Lots.searchFilter;
-import First.VF_R;
-import Second.View_Update;
+
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.image.BufferedImage;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Method;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Collections;
-import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
 import First.VF_R;
-import Others.CC;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -126,6 +116,27 @@ public class MethodM extends Status {
             } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
                   lst.ensureIndexIsVisible(lst.getSelectedIndex() - 1);
             }
+      }
+      
+      public static void searchFilter(String text, ArrayList<String> list, JList lst) {
+            //System.out.println("\t\tsearchFilter");
+            DefaultListModel filteredItems = new DefaultListModel();
+
+            ArrayList<String> tList = list;
+            if(list.isEmpty()){
+                  System.out.println("\t\t\tList has nothing");
+            }
+            for (int a = 0; a < tList.size(); a++) {
+                  //ADDS ONLY THE ELEMENTS THAT MATCH
+                  if (tList.get(a).toLowerCase().contains(text.toLowerCase())) {
+                        
+                        filteredItems.addElement(list.get(a));
+                  }
+            }
+            
+            //ListModel lm = lst.getModel();
+            DefaultListModel lm2 = filteredItems;
+            lst.setModel(lm2);
       }
 
       public void searchFilterWhen(JLabel lb, JTextField tf, KeyEvent evt,

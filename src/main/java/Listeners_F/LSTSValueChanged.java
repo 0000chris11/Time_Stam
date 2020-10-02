@@ -1,11 +1,7 @@
 package Listeners_F;
 
 import First.VF_R;
-import MC.DT;
-import mMethods.MKey;
-import mMethods.MM;
-import MC.MethodM;
-import javax.swing.JList;
+import cofii.MKey;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 

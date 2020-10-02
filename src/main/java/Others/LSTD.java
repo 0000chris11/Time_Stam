@@ -2,13 +2,10 @@ package Others;
 
 import First.VF_R;
 import MC.DT;
-import MC.Data;
-import mMethods.MM;
-import MC.MethodM;
 import Threads.Threads;
 import MC.MakeCon;
-import mMethods.MList;
-import mMethods.MText;
+import cofii.MList;
+import cofii.MText;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;

@@ -1,23 +1,17 @@
 package Listeners_F;
 
-import First.VF_R_DataCom;
 import First.VF_R;
 import MC.DT;
-import mMethods.MM;
 import MC.MakeCon;
-import MC.MethodM;
 import MC.Status;
 import MC.notMyMethods;
-import mMethods.MText;
+import cofii.MText;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.regex.Pattern;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 /**
  *

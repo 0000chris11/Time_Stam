@@ -9,12 +9,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import First.VF_R;
 import MC.DT;
-import mMethods.MM;
-import MC.MethodM;
-import mMethods.MTable;
+import cofii.MTable;
 import java.awt.Color;
-import java.util.ArrayList;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *

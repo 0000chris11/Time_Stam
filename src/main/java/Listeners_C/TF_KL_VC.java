@@ -6,13 +6,10 @@
 package Listeners_C;
 
 import MC.DT;
-import mMethods.MM;
-import Others.CC;
 import Second.VC_R;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.regex.Pattern;
 
 /**
  *

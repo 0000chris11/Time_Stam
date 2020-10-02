@@ -2,9 +2,7 @@ package Listeners_F;
 
 import First.VF_R;
 import MC.DT;
-import mMethods.MKey;
-import mMethods.MM;
-import MC.MethodM;
+import cofii.MKey;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -1,10 +1,7 @@
 package Listeners_F;
 
 import First.VF;
-import MC.DT;
-import mMethods.MKey;
-import mMethods.MM;
-import MC.MethodM;
+import cofii.MKey;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

@@ -1,24 +1,19 @@
 package Listeners_F;
 
 import First.VF_R;
-import MC.MethodM;
 import MC.notMyMethods;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import MC.MakeCon;
 import MC.Components;
 import MC.DT;
-import mMethods.MM;
 import MC.Status;
-import mMethods.MText;
+import cofii.MText;
 import Others.CC;
 import Others.LSTD;
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;

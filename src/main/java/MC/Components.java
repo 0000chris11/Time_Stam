@@ -5,16 +5,9 @@
  */
 package MC;
 
-import mMethods.MM;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonUI;
 import First.VF_R;
-import mMethods.MText;
-import Others.CC;
+import cofii.MText;
 
 /**
  *

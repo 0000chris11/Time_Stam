@@ -1,14 +1,7 @@
 package First;
 
-import static First.VF_R_DataCom.btn_plus;
-import MC.DT;
-import Others.CC;
-import Second.VC_R;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -16,12 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.basic.BasicToolBarUI;
-import smallComponenets.smallTF;
-import javax.swing.plaf.metal.MetalButtonUI;
-import static First.VF_R_DataCom.PT;
-import mMethods.MM;
 import java.awt.FontMetrics;
 import java.util.ArrayList;
 import javax.swing.JSeparator;
