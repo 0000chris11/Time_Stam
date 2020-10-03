@@ -30,6 +30,13 @@
                   <artifactId>poi</artifactId>
                   <version>3.7</version>
             </dependency>
+            
+            <dependency>
+                  <groupId>com.cofii</groupId>
+                  <artifactId>coffiClasses</artifactId>
+                  <version>1.0.1</version>
+            </dependency>
+            
       </dependencies>
       
       <properties>

@@ -8,7 +8,7 @@ import MC.MakeCon;
 import MC.Components;
 import MC.DT;
 import MC.Status;
-import cofii.MText;
+import com.cofii.myMethods.MText;
 import Others.CC;
 import Others.LSTD;
 import java.awt.Color;

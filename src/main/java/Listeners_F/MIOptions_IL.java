@@ -5,7 +5,7 @@ import MC.DT;
 import MC.MakeCon;
 import MC.Status;
 import MC.notMyMethods;
-import cofii.MText;
+import com.cofii.myMethods.MText;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Pattern;

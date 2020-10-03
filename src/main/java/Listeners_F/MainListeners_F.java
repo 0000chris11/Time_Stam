@@ -87,7 +87,7 @@ public class MainListeners_F {
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addKeyListenerToTFS_OLD() {
-            TFS_KL tkt = new TFS_KL(DT.getList_C().size());
+            TFS_KL tkt = new TFS_KL();
             for (int a = 0; a < VF_R.getJTFS().length; a++) {
                   if (VF_R.getJTFS()[a].getKeyListeners().length > 0) {
                         VF_R.getJTFS()[a].removeKeyListener(tkt);

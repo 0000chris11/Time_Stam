@@ -7,6 +7,7 @@ package Options;
 
 import static Options.DT.JTEN;
 import TestWindow.VT;
+import com.cofii.myMethods.MComp;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -91,7 +92,7 @@ public class VP extends DT {
 
             JFN.add(SPLN);
             //SPLN.setLayout(null);
-            CP.setComponentFitOnJFrame(SPLN, JFN);
+            MComp.setComponentFitOnJFrame(SPLN, JFN);
             SPLN.setOneTouchExpandable(true);
       }
 

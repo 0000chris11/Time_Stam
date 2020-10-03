@@ -7,7 +7,7 @@ package MC;
 
 import java.util.ArrayList;
 import First.VF_R;
-import cofii.MText;
+import com.cofii.myMethods.MText;
 
 /**
  *

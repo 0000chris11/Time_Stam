@@ -12,9 +12,9 @@ import MC.DT;
 import MC.MakeCon;
 import Others.LSTD;
 import MC.notMyMethods;
-import cofii.MText;
+import com.cofii.myMethods.MText;
 import Threads.Threads;
-import cofii.MTable;
+import com.cofii.myMethods.MTable;
 
 /**
  *

@@ -1,7 +1,7 @@
 package Listeners_F;
 
 import First.VF;
-import cofii.MKey;
+import com.cofii.myMethods.MKey;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

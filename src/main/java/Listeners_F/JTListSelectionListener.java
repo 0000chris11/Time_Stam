@@ -9,7 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import First.VF_R;
 import MC.DT;
-import cofii.MTable;
+import com.cofii.myMethods.MTable;
 import java.awt.Color;
 
 /**

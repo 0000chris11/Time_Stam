@@ -6,7 +6,7 @@
 package Options;
 
 import Others.CC;
-import cofii.MTree;
+import com.cofii.myMethods.MTree;
 import java.awt.Component;
 import java.util.EventObject;
 import javax.swing.AbstractCellEditor;

@@ -11,7 +11,7 @@ import MC.*;
 import Listeners_F.MainListeners_F;
 import Listeners_F.MIActionListener;
 import Listeners_F.CK_FL;
-import cofii.MText;
+import com.cofii.myMethods.MText;
 import Others.*;
 import Threads.*;
 import javax.swing.*;
