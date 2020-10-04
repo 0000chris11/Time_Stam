@@ -127,7 +127,7 @@ public class Data {
       public static boolean cellSys = true;
 
       public final String inter = "Nothing Changed";
-      public static final Dimension defaultFrameSize = new Dimension(1270, 627);
+      public static final Dimension defaultFrameSize = new Dimension(1280, 627);
       public final int maxColumns = 6;
       public static final int maxColumnss = 6;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++

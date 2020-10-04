@@ -27,8 +27,10 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Component;
 import java.awt.GradientPaint;
+import java.awt.event.KeyEvent;
 import java.util.EventObject;
 import javax.swing.JProgressBar;
+import javax.swing.JSplitPane;
 import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 import smallComponenets.JPanelGradient;
@@ -45,6 +47,7 @@ public class VF_R_DataCom {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
       static JFrame JF = new JFrame("Time Stamp");
 
+      static JSplitPane spl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
       static JPanel p1 = new JPanelGradient();
       static JScrollPane sc_p1 = new JScrollPane(p1);
       static JPanel p1_1 = new JPanelGradient();
@@ -150,7 +153,31 @@ public class VF_R_DataCom {
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static JTextField tf_ce = new JTextField();
-      static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce);
+      static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce){
+            @Override
+            public boolean isCellEditable(EventObject anEvent){
+                  boolean returnValue;
+                  if(anEvent instanceof KeyEvent){
+                        KeyEvent e = (KeyEvent) anEvent;
+                        System.out.println(e.getKeyCode());
+                        if(e.getKeyCode() == KeyEvent.VK_F6 || 
+                                e.getKeyCode() == KeyEvent.VK_F7 ||
+                                e.getKeyCode() == KeyEvent.VK_F8){
+                              
+                              System.out.println("\tF6, F7 or F8");
+                              returnValue = false;
+                              
+                        }else{
+                              System.out.println("\tCorrect");
+                              returnValue = true;
+                        }
+                              
+                  }else{
+                        returnValue = super.isCellEditable(anEvent);
+                  }
+                  return returnValue;
+            }
+      };
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static JFrame getJF() {
