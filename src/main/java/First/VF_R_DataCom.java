@@ -3,6 +3,7 @@ package First;
 import Listeners_F.FocusBorder;
 import Listeners_F.TF_LST_FL;
 import MC.DT;
+import com.cofii.myMethods.MCell;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -47,14 +48,14 @@ public class VF_R_DataCom {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
       static JFrame JF = new JFrame("Time Stamp");
 
-      static JSplitPane spl = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-      static JPanel p1 = new JPanelGradient();
-      static JScrollPane sc_p1 = new JScrollPane(p1);
-      static JPanel p1_1 = new JPanelGradient();
-      static JPanel p1_2 = new JPanelGradient();
-      
+      static JSplitPane SPL = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+      static JPanel PL = new JPanel();
+      static JScrollPane sc_P1 = new JScrollPane();//DELETE
+      static JPanel PL_T = new JPanel();
+      static JPanel PL_C = new JPanelGradient();
+
       static JPanel PT = new JPanel();
-      
+
       static JTable JT = new JTable();
       static JLabel lb_JT = new JLabel("NO ROWS INSERTED");
       static JScrollPane sc_JT = new JScrollPane(PT);
@@ -130,10 +131,10 @@ public class VF_R_DataCom {
       static JButton[] btns_C;
       static JScrollPane[] scs;
       static JList[] lsts;
-      
+
       static JLabel lb_Icon = new JLabel();
       static JProgressBar JPB = new JProgressBar();
-      
+
       static JButton[] btns_TB = new JButton[]{new smallBTN_C(""), new smallBTN_C("")};
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static JTextField[] tfs_MD = new JTextField[]{new JTextField("0"), new JTextField("0"),
@@ -153,29 +154,11 @@ public class VF_R_DataCom {
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static JTextField tf_ce = new JTextField();
-      static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce){
+      static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce) {
             @Override
-            public boolean isCellEditable(EventObject anEvent){
-                  boolean returnValue;
-                  if(anEvent instanceof KeyEvent){
-                        KeyEvent e = (KeyEvent) anEvent;
-                        System.out.println(e.getKeyCode());
-                        if(e.getKeyCode() == KeyEvent.VK_F6 || 
-                                e.getKeyCode() == KeyEvent.VK_F7 ||
-                                e.getKeyCode() == KeyEvent.VK_F8){
-                              
-                              System.out.println("\tF6, F7 or F8");
-                              returnValue = false;
-                              
-                        }else{
-                              System.out.println("\tCorrect");
-                              returnValue = true;
-                        }
-                              
-                  }else{
-                        returnValue = super.isCellEditable(anEvent);
-                  }
-                  return returnValue;
+            public boolean isCellEditable(EventObject anEvent) {                  
+                  return MCell.getCharacterInputandDefault(anEvent, 
+                          super.isCellEditable(anEvent));
             }
       };
 
@@ -185,13 +168,20 @@ public class VF_R_DataCom {
       }
 
       public static JScrollPane getSC_P1() {
-            return sc_p1;
+            return sc_P1;
       }
 
-      public static JPanel getP1() {
-            return p1;
+      public static JPanel getPL() {
+            return PL;
+      }
+      
+      public static JPanel getPL_T(){
+            return PL_T;
       }
 
+      public static JPanel getPL_C(){
+            return PL_C;
+      }
       public static JPanel getP3() {
             return p3;
       }
@@ -199,20 +189,20 @@ public class VF_R_DataCom {
       public static JTable getJT() {
             return JT;
       }
-      
-      public static JPanel getPT(){
+
+      public static JPanel getPT() {
             return PT;
       }
-      
-      public static JLabel getLB_JT(){
+
+      public static JLabel getLB_JT() {
             return lb_JT;
       }
 
       public static JToolBar getTB() {
             return TB;
       }
-      
-      public static JMenuBar getJMB(){
+
+      public static JMenuBar getJMB() {
             return JMB;
       }
 
@@ -228,14 +218,16 @@ public class VF_R_DataCom {
       public static JScrollPane getSC_JT() {
             return sc_JT;
       }
+
       //+++++++++++++++++++++++++++++++++++++++++++
       public static JLabel getLB_Icon() {
             return lb_Icon;
       }
-      
-      public static JProgressBar getJPB(){
+
+      public static JProgressBar getJPB() {
             return JPB;
       }
+
       //+++++++++++++++++++++++++++++++++++++++++++
       public static JLabel getLB_Status() {
             return lb_Status;
@@ -294,7 +286,7 @@ public class VF_R_DataCom {
       }
 
       public static JScrollPane getJSC_P1() {
-            return sc_p1;
+            return sc_P1;
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++
@@ -317,22 +309,23 @@ public class VF_R_DataCom {
       public static JMenu getJMS_ShowListeners() {
             return JMS_ShowListeners;
       }
-      
-      public static JMenuItem getMI_CreateTable(){
+
+      public static JMenuItem getMI_CreateTable() {
             return mi_CreateTable;
       }
 
-      public static JMenuItem getMI_UpdateTable(){
+      public static JMenuItem getMI_UpdateTable() {
             return mi_UpdateTable;
       }
-      
-      public static JMenuItem getMI_DeleteTables(){
+
+      public static JMenuItem getMI_DeleteTables() {
             return mi_DeleteTables;
       }
-      
-      public static JMenuItem getMI_DeleteThisTable(){
+
+      public static JMenuItem getMI_DeleteThisTable() {
             return mi_DeleteThisTable;
       }
+
       //+++++++++++++++++++++++++++++++++++++++++++++++++
       public static JMenuItem getMI_SEEL() {
             return mi_seeL;

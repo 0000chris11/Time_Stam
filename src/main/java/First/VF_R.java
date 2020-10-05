@@ -6,8 +6,6 @@ import static First.VF_R_DataCom.PT;
 import static First.VF_R_DataCom.btn_plus;
 import static First.VF_R_DataCom.btns_MC;
 import static First.VF_R_DataCom.lb_Status;
-import static First.VF_R_DataCom.p1;
-import static First.VF_R_DataCom.spl;
 import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import MC.*;
@@ -40,6 +38,8 @@ import javax.swing.plaf.metal.MetalToolBarUI;
 import TestWindow.VT;
 import java.awt.BorderLayout;
 import java.awt.FontMetrics;
+import static First.VF_R_DataCom.SPL;
+import static First.VF_R_DataCom.PL;
 
 /**
  *
@@ -218,9 +218,9 @@ public class VF_R extends VF_R_DataCom {
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
             sc_JT.setViewportView(JT);
-            
+
             JT.setDefaultEditor(String.class, DTCellEditor);
-            
+
             for (int i = 0; i < JT.getColumnCount(); i++) {
                   JT.getColumnModel().getColumn(i).setCellEditor(DTCellEditor);
             }
@@ -266,32 +266,51 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void leftPanelConfig() {
-            JF.add(spl, BorderLayout.CENTER);
-            spl.setOneTouchExpandable(true);
-            spl.setPreferredSize(new Dimension(500, spl.getPreferredSize().height));
-            spl.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-            spl.setLeftComponent(p1);
-            spl.setRightComponent(sc_JT);
-            
+            JF.add(SPL, BorderLayout.CENTER);
+            SPL.setOneTouchExpandable(true);
+            SPL.setPreferredSize(new Dimension(500, SPL.getPreferredSize().height));
+            SPL.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+            SPL.setLeftComponent(PL);
+            SPL.setRightComponent(sc_JT);
+
             //sc_p1.setFocusable(false);
             //sc_p1.setEnabled(false);
             //sc_p1.setBounds(2, 22, 446, 522);
             //sc_p1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             //sc_p1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
             //p1.setSize(446, 521);
-            p1.setPreferredSize(new Dimension(460, p1.getPreferredSize().height));
-            p1.setBackground(Color.BLACK);
-            p1.setFocusable(false);
+            PL.setPreferredSize(new Dimension(460, PL.getPreferredSize().height));
+            //PL.setBackground(Color.BLACK);
+            PL.setFocusable(false);
 
+            PL.setLayout(new BorderLayout());
+            PL.add(PL_T, BorderLayout.NORTH);
+            PL_T.setLayout(new BoxLayout(PL_T, BoxLayout.X_AXIS));
+            PL_T.setBackground(Color.BLACK);
+            PL_T.setBorder(new LineBorder(Color.WHITE, 1));
+            PL_T.setPreferredSize(new Dimension(PL_T.getPreferredSize().width, 40));
+
+            PL_T.add(Box.createHorizontalStrut(10));
+            PL_T.add(lb_Title);
+            lb_Title.setFont(new Font("Dialog", Font.BOLD, 18));
+            lb_Title.setForeground(Color.WHITE);
+            lb_Title.setPreferredSize(new Dimension(
+                    lb_Title.getPreferredSize().width, 27));
+            
+            PL.add(PL_C, BorderLayout.CENTER);
+            PL_C.setBackground(Color.BLACK);
+            PL_C.setBorder(new LineBorder(Color.WHITE, 1));
+
+            setComponentsToArray();
+            
             if (JPL_layout.equals("null")) {
-                  p1.setLayout(null);
+                  PL_C.setLayout(null);
+
+                  setComponentsSize();
                   componentsConfig();
             } else {
-                  //GroupLayout gl = new GroupLayout();
-                  p1 = new JPanel();
-                  GroupLayout gl = new GroupLayout(p1);
-                  p1.setLayout(gl);
+                  GroupLayout gl = new GroupLayout(PL_C);
+                  PL.setLayout(gl);
 
             }
             clockConfig();
@@ -299,10 +318,10 @@ public class VF_R extends VF_R_DataCom {
 
       private void statusPanelConfig() {
             JF.add(p3, BorderLayout.SOUTH);
-            //int y3 = sc_p1.getHeight() + 22;
-            //int w3 = sc_p1.getWidth() + sc_JT.getWidth() + 40;
+            //int y3 = sc_P1.getHeight() + 22;
+            //int w3 = sc_P1.getWidth() + sc_JT.getWidth() + 40;
             //F_R.getSC_P1().getWidth() + VF_R.getSC_JT().getWidth() + 40
-            //p3.setLocation(sc_p1.getX(), y3 + 1);
+            //p3.setLocation(sc_P1.getX(), y3 + 1);
             //p3.setSize(w3 - 2, 40)
             p3.setPreferredSize(new Dimension(p3.getPreferredSize().width, 40));
             p3.setSize(p3.getPreferredSize());
@@ -451,7 +470,7 @@ public class VF_R extends VF_R_DataCom {
       private void tableConfig() {
             //JF.getContentPane().add(sc_JT);
             JT.setUI(new BasicTableUI());
-            int x = sc_p1.getX() + sc_p1.getWidth();
+            //int x = sc_P1.getX() + sc_P1.getWidth();
             //sc_JT.setLayout(null);
             //sc_JT.setLocation(x - 2, 22);
             sc_JT.setPreferredSize(new Dimension(300, sc_JT.getPreferredSize().height));
@@ -521,10 +540,10 @@ public class VF_R extends VF_R_DataCom {
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
 
             for (int a = 0; a < tfs_MD.length; a++) {//a: 0 to 4   b: 1 to 5
-                  p1.add(tfs_MD[a]);
-                  p1.add(tfs_MU[a]);
-                  p1.add(tfs_SD[a]);
-                  p1.add(tfs_SU[a]);
+                  PL_C.add(tfs_MD[a]);
+                  PL_C.add(tfs_MU[a]);
+                  PL_C.add(tfs_SD[a]);
+                  PL_C.add(tfs_SU[a]);
                   //+++++++++++++++++++++++++++++++++++++++++
                   tfs_MD[a].setBackground(c[0]);
                   tfs_MU[a].setBackground(c[0]);
@@ -592,7 +611,7 @@ public class VF_R extends VF_R_DataCom {
                   tfs_SD[a].addFocusListener(CF);
                   tfs_SU[a].addFocusListener(CF);
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  p1.add(lb_2ds[a]);
+                  PL_C.add(lb_2ds[a]);
                   lb_2ds[a].setBounds((tfs_MU[0].getX() + tfs_MU[0].getWidth() + 2),
                           tfs_MU[a].getY() - 3,
                           20, tfs_MU[0].getHeight());
@@ -645,7 +664,7 @@ public class VF_R extends VF_R_DataCom {
             TB.setSize(d);
             TB.setUI(mtbUI);
             //TB.setUI(new BasicToolBarUI());
-            //int x_tb = sc_p1.getWidth() + sc_JT.getWidth() - 2;
+            //int x_tb = sc_P1.getWidth() + sc_JT.getWidth() - 2;
             TB.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
             TB.setLayout(null);
             //TB.setBounds(x_tb, 22, 42, sc_JT.getHeight());
@@ -686,12 +705,8 @@ public class VF_R extends VF_R_DataCom {
             lbs[1].setBounds(6, 72, 120, 27);
             tfs[1].setBounds(107, 72, 290, 27);
              */
-            p1.add(lb_Title);
-            lb_Title.setFont(new Font("Dialog", Font.BOLD, 18));
-            lb_Title.setForeground(Color.WHITE);
-            lb_Title.setBounds(6, 6, 137, 27);
 
-            setComponentsToArray();
+            
             //+++++++++++++++++++++++++
             lb_Title.setVisible(true);
             lbs[0].setVisible(true);
@@ -706,17 +721,17 @@ public class VF_R extends VF_R_DataCom {
             scs[3].setVisible(false);
             scs[4].setVisible(false);
             //+++++++++++++++++++++++++++++++++++++++++
-            p1.add(lb_Icon);
+            PL_C.add(lb_Icon);
             lb_Icon.setFont(new Font("Dialog", Font.PLAIN, 24));
             lb_Icon.setSize(225, 225);
-            float f = (sc_p1.getWidth() / 2) - (lb_Icon.getWidth() / 2);
+            float f = (sc_P1.getWidth() / 2) - (lb_Icon.getWidth() / 2);
             lb_Icon.setBounds((int) f, 500, 225, 225);
             lb_Icon.setForeground(Color.WHITE);
             lb_Icon.setHorizontalAlignment(0);
             lb_Icon.setVerticalTextPosition(0);
             lb_Icon.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 
-            p1.add(JPB);
+            PL_C.add(JPB);
             JPB.setBounds(lb_Icon.getX(), lb_Icon.getY() - 8,
                     lb_Icon.getWidth(), 18);
             JPB.setBackground(Color.BLACK);
@@ -734,10 +749,10 @@ public class VF_R extends VF_R_DataCom {
             /*
             Insets in = new Insets(1, 1, 1, 1);
 
-            p1.add(btns_MC[2]);
-            p1.add(btns_MC[1]);
-            p1.add(btns_MC[3]);
-            p1.add(btns_MC[0]);
+            PL.add(btns_MC[2]);
+            PL.add(btns_MC[1]);
+            PL.add(btns_MC[3]);
+            PL.add(btns_MC[0]);
             //btns_MC[2].setBounds(231, 9, 80, 23);
             //btns_MC[1].setBounds(317, 9, 80, 23);
             //btns_MC[3].setBounds(231, 40, 80, 23);
@@ -776,15 +791,15 @@ public class VF_R extends VF_R_DataCom {
                   btns_C[a] = new smallBTN_C(null);
             }
             //++++++++++++++++++++++++++++++++++++++
-            setComponentsSize();
+            
       }
 
       private void setComponentsSize() {
             int disLY = 0;
             int disTY = 0;
             for (int a = 0; a < DT.maxColumns; a++) {
-                  p1.add(lbs[a]);
-                  p1.add(tfs[a]);
+                  PL_C.add(lbs[a]);
+                  PL_C.add(tfs[a]);
 
                   lbs[a].setBounds(6, 38 + disLY, 100, 27);
                   if (a == 0) {
@@ -800,8 +815,8 @@ public class VF_R extends VF_R_DataCom {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   scs[a].setSize(290, 170);
 
-                  p1.add(scs[a]);
-                  p1.add(btns_C[a]);
+                  PL_C.add(scs[a]);
+                  PL_C.add(btns_C[a]);
 
                   btns_C[a].setLocation(402, tfs[a + 1].getY());
             }
@@ -852,9 +867,11 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void setNameToComponents() {
-            sc_p1.setName("SC_P1");
-            spl.setName("SPL");
-            p1.setName("P1");
+            sc_P1.setName("SC_P1");
+            SPL.setName("SPL");
+            PL.setName("PL");
+            PL_T.setName("PL_T");
+            PL_C.setName("PL_C");
             p3.setName("P3");
             sc_JT.setName("SC_JT");
             JT.setName("JT");
@@ -921,7 +938,7 @@ public class VF_R extends VF_R_DataCom {
             btn.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        spl.setDividerLocation(0.4);
+                        SPL.setDividerLocation(0.4);
                         JF.revalidate();
                         JF.repaint();
                   }
@@ -940,12 +957,12 @@ public class VF_R extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        
-                        System.out.println("SPL pref W: " + spl.getPreferredSize().width);
+
+                        System.out.println("SPL pref W: " + SPL.getPreferredSize().width);
                         System.out.println("TB pref W: " + TB.getPreferredSize().width);
                         System.out.println("JF W: " + JF.getWidth());
-                        
-                        spl.setPreferredSize(new Dimension(400, spl.getPreferredSize().height));
+
+                        SPL.setPreferredSize(new Dimension(400, SPL.getPreferredSize().height));
                   }
 
             });
@@ -957,7 +974,7 @@ public class VF_R extends VF_R_DataCom {
                                     System.out.println(JF.getContentPane().getComponent(a).getName() + ": "
                                             + ((BorderLayout) JF.getContentPane().getLayout()).getConstraints(
                                                     JF.getContentPane().getComponent(a)));
-                              }else{
+                              } else {
                                     System.out.println(JF.getClass().toString() + " "
                                             + "is not instanceof BorderLayout");
                               }
@@ -1039,12 +1056,12 @@ public class VF_R extends VF_R_DataCom {
             mi_SJFComponents.setText(mi_SJFComponents.getText() + " ("
                     + JF.getContentPane().getComponentCount() + ")");
             mi_SP1Components.setText(mi_SP1Components.getText() + " ("
-                    + p1.getComponentCount() + ")");
+                    + PL_C.getComponentCount() + ")");
             //*++++++++++++++++++++++++++++++++++++++++++++++++++++          
             testConfig();
-            spl.setDividerLocation(0.4);
-            spl.revalidate();
-            spl.repaint();
+            SPL.setDividerLocation(0.4);
+            SPL.revalidate();
+            SPL.repaint();
             System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
             //System.out.println("Table: " + dt.getTable());
       }

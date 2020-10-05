@@ -6,7 +6,7 @@
 package Options;
 
 import Others.CC;
-import com.cofii.myMethods.MTree;
+import com.cofii.myMethods.MCell;
 import java.awt.Component;
 import java.util.EventObject;
 import javax.swing.AbstractCellEditor;
@@ -47,7 +47,7 @@ public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
 
       @Override
       public boolean isCellEditable(EventObject anEvent) {
-            return MTree.isCellEditableForCheckBoxAndDefaults(
+            return MCell.isCellEditableForCheckBoxAndDefaults(
                     anEvent, VP.JTEN, defaultNode);
       }
       

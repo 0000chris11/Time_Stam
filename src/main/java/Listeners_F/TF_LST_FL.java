@@ -260,7 +260,7 @@ public class TF_LST_FL implements FocusListener {
       /*
       private void setGraphics(JComponent jc) {
             //System.out.println("setgraphics");
-            //g2 = (Graphics2D) VF_R.getP1().getGraphics();
+            //g2 = (Graphics2D) VF_R.getPL().getGraphics();
 
             //g2.setColor(Color.RED);
             //g2.drawRect(jc.getX(), jc.getY(), jc.getWidth() + 2, jc.getHeight() + 2);
@@ -274,7 +274,7 @@ public class TF_LST_FL implements FocusListener {
                         }
                         //cS = jc;
                         System.out.println("\npaintComponent");
-                        VF_R.getP1().paintComponents(VF_R.getP1().getGraphics());
+                        VF_R.getPL().paintComponents(VF_R.getPL().getGraphics());
                   }
             }.start();
 

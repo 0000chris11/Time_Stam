@@ -28,7 +28,7 @@ public class Components {
       public void changeLB_TF(int cc, ArrayList<String> listC) {
             System.out.println("\tColumnCount: " + cc);
            
-            String[] cols = new String[listC.size()];
+            String[] cols = new String[listC.size()];//TEXT FOR LABELS
             for (int a = 0; a < cols.length; a++) {
                   System.out.println("\tlistC " + a + ": "+ listC.get(a));
                   cols[a] = listC.get(a);
@@ -45,14 +45,15 @@ public class Components {
                         //System.out.println("\nCOLUMN NUMBER: " + (a + 2));
                         for (int b = 0; b < a; b++) {
                               //0, 1, 2, 3, 4
-                              VF_R.getJLBS()[b + 2].setLocation(6, VF_R.getJLBS()[b + 1].getY() + 33);
-                              VF_R.getJTFS()[b + 2].setLocation(107, VF_R.getJTFS()[b + 1].getY() + 33);
+                              //VF_R.getJLBS()[b + 2].setLocation(6, VF_R.getJLBS()[b + 1].getY() + 33);
+                              //VF_R.getJTFS()[b + 2].setLocation(107, VF_R.getJTFS()[b + 1].getY() + 33);
                               //VF_R.getBTNS_C()[b + 1].setLocation(402, VF_R.getBTNS_C()[b].getY() + 33);
                         }
-
+                        
                         VF_R.getLB_Icon().setLocation(VF_R.getLB_Icon().getX(), 
                                 VF_R.getJTFS()[a + 1].getY() + 66);
-
+                        
+                        //MAKE COMPONENTS UNDER LIMIT VISIBLE
                         for (int b = 0; b < a + 1; b++) {
                               //1, 2, 3, 4, 5
                               VF_R.getJLBS()[b + 1].setText((b + 2) + ". " + cols[b + 1]);
@@ -62,6 +63,7 @@ public class Components {
                               VF_R.getJTFS()[b + 1].setVisible(true);
                               VF_R.getBTNS_C()[b].setVisible(true);
                         }
+                        //HIDES OUT LENGTH COMPONENTS
                         for (int b = 0; b < VF_R.getJLBS().length - (a + 2); b++) {//4
                               VF_R.getJLBS()[b + (2 + a)].setVisible(false);
                               VF_R.getJTFS()[b + (2 + a)].setVisible(false);

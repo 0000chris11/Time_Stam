@@ -48,9 +48,9 @@ public class MIShow_AL implements ActionListener {
                   MList.printFor(DT.getListD_5());
                   MList.printFor(DT.getListD_6());
             } else if(ac.contains("P1 Components")){
-                  for(int a = 0; a < VF_R.getP1().getComponents().length; a++){
-                        System.out.println(a + ": " + VF_R.getP1().getComponents()[a].getName()
-                        + " == " + VF_R.getP1().getComponent(a).toString());
+                  for(int a = 0; a < VF_R.getPL_C().getComponents().length; a++){
+                        System.out.println(a + ": " + VF_R.getPL_C().getComponents()[a].getName()
+                        + " == " + VF_R.getPL_C().getComponent(a).toString());
                   }
             }else if(ac.contains("JF Components")){
                   for(int a = 0; a < VF_R.getJF().getContentPane().getComponents().length; a++){
