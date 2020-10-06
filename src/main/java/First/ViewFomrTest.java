@@ -19,13 +19,13 @@ public class ViewFomrTest extends javax.swing.JFrame {
       public ViewFomrTest() {
             initComponents();
             System.out.println(getContentPane().getLayout().getClass());
-            if(getContentPane().getLayout() instanceof GroupLayout){
+            if (getContentPane().getLayout() instanceof GroupLayout) {
                   GroupLayout gl = (GroupLayout) getContentPane().getLayout();
                   //gl.setHonorsVisibility(false);
-                  System.out.println("\tHonorsVisibility: "+ gl.getHonorsVisibility());
-                  
+                  System.out.println("\tHonorsVisibility: " + gl.getHonorsVisibility());
+
             }
-                  
+
       }
 
       /**
@@ -130,7 +130,7 @@ public class ViewFomrTest extends javax.swing.JFrame {
       }// </editor-fold>//GEN-END:initComponents
 
       private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           jScrollPane1.setVisible(false);
+            jScrollPane1.setVisible(false);
       }//GEN-LAST:event_jButton1ActionPerformed
 
       /**
