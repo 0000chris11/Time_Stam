@@ -6,7 +6,7 @@
 package Options;
 
 import static Options.DT.JTEN;
-import TestWindow.VT;
+import com.cofii.myClasses.VT;
 import com.cofii.myMethods.MComp;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -98,22 +98,26 @@ public class VP extends DT {
 
       private void testConfig() {
             VT vt = new VT();
-            vt.addButton(new JButton("repaint JTree"));
-            vt.addButton(new JButton("is JTree still editing?"));
-            vt.addButton(new JButton("get Right Panel Components"));
+            JButton btn1 = new JButton("repaint JTree");
+            JButton btn2 = new JButton("is JTree still editing?");
+            JButton btn3 = new JButton("get Right Panel Components");
+
+            vt.add(btn1);
+            vt.add(btn2);
+            vt.add(btn3);
 
             ActionListener al = new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
                         String ac = e.getActionCommand();
-                        if (ac.equals(vt.getBTNS().get(0).getText())) {
-                              System.out.println(vt.getBTNS().get(0).getText());
+                        if (ac.equals(btn1.getText())) {
+                              System.out.println(btn1.getText());
                               JTEN.repaint();
-                        } else if (ac.equals(vt.getBTNS().get(1).getText())) {
-                              System.out.println(vt.getBTNS().get(1).getText());
+                        } else if (ac.equals(btn2.getText())) {
+                              System.out.println(btn2.getText());
                               System.out.println(JTEN.isEditing());
-                        } else if (ac.equals(vt.getBTNS().get(2).getText())) {
-                              System.out.println(vt.getBTNS().get(2).getText());
+                        } else if (ac.equals(btn3.getText())) {
+                              System.out.println(btn3.getText());
                               for (int a = 0; a < JPN.getComponentCount(); a++) {
                                     System.out.println("\t" + (a + 1)
                                             + JPN.getComponent(a).getClass());
@@ -122,9 +126,11 @@ public class VP extends DT {
                   }
 
             };
-            for(int a = 0; a < vt.getBTNS().size(); a++){
-                  vt.getBTNS().get(a).addActionListener(al);
-            }
+
+            btn1.addActionListener(al);
+            btn2.addActionListener(al);
+            btn3.addActionListener(al);
+
             vt.setVisible(true);
       }
 
@@ -152,7 +158,7 @@ public class VP extends DT {
             SPLN.setRightComponent(JPN);
             //JPN.setOpaque(false);
             JPN.setBackground(Color.BLACK);
-            
+
             JPN.setLayout(new BoxLayout(JPN, BoxLayout.Y_AXIS));
 
             //jps[a].setBackground(Color.DARK_GRAY);
@@ -165,12 +171,10 @@ public class VP extends DT {
             lb_Title.setForeground(Color.WHITE);
             JPN.add(sp_Title);
             sp_Title.setMaximumSize(new Dimension(sp_Title.getMaximumSize().width,
-            10));
+                    10));
             //sp_Title.setBorder(new EmptyBorder(10, 2, 0, 4));//DOESN'T WORK
 
-                  
             //JPN.add(Box.createVerticalStrut(2));
-
             //jps[0].add(lb_Title);
             //jps[0].add(sp_Title);
             //panelSetUp();
@@ -228,13 +232,13 @@ public class VP extends DT {
                   rbtns[a] = new JRadioButton(txs[a], false);
                   rbtns[a].setForeground(Color.WHITE);
                   rbtns[a].setOpaque(false);
-                  rbtns[a].setBackground(new Color(0,0,0,0));
+                  rbtns[a].setBackground(new Color(0, 0, 0, 0));
                   //rbtns[a].setSize();
                   bg.add(rbtns[a]);
                   JPN.add(rbtns[a]);
                   System.out.println((a + 1) + ": " + rbtns[a].getPreferredSize());
             }
-            
+
       }
 
       public VP() {

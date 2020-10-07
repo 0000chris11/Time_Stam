@@ -35,7 +35,7 @@ import smallComponenets.smallLST;
 import smallComponenets.smallTF;
 import javax.swing.JSeparator;
 import javax.swing.plaf.metal.MetalToolBarUI;
-import TestWindow.VT;
+import com.cofii.myClasses.VT;
 import java.awt.BorderLayout;
 import java.awt.FontMetrics;
 import static First.VF_R_DataCom.SPL;
