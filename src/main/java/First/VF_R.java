@@ -302,16 +302,16 @@ public class VF_R extends VF_R_DataCom {
             PL_C.setBorder(new LineBorder(Color.WHITE, 1));
 
             setComponentsToArray();
-            
+            componentsConfig();
+            //++++++++++++++++++++++++++
             if (JPL_layout.equals("null")) {
                   PL_C.setLayout(null);
-
-                  setComponentsSize();
-                  componentsConfig();
+                  setNullLayoutComponentsSize();
             } else {
                   GroupLayout gl = new GroupLayout(PL_C);
                   PL.setLayout(gl);
-
+                  setGroupLayoutComponents(gl, DT.maxColumns);
+                  testing t = new testing(lbs, tfs, ??, scs, btns_C);
             }
             clockConfig();
       }
@@ -721,7 +721,7 @@ public class VF_R extends VF_R_DataCom {
             scs[3].setVisible(false);
             scs[4].setVisible(false);
             //+++++++++++++++++++++++++++++++++++++++++
-            PL_C.add(lb_Icon);
+            //PL_C.add(lb_Icon);
             lb_Icon.setFont(new Font("Dialog", Font.PLAIN, 24));
             lb_Icon.setSize(225, 225);
             float f = (sc_P1.getWidth() / 2) - (lb_Icon.getWidth() / 2);
@@ -731,7 +731,7 @@ public class VF_R extends VF_R_DataCom {
             lb_Icon.setVerticalTextPosition(0);
             lb_Icon.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 
-            PL_C.add(JPB);
+            //PL_C.add(JPB);
             JPB.setBounds(lb_Icon.getX(), lb_Icon.getY() - 8,
                     lb_Icon.getWidth(), 18);
             JPB.setBackground(Color.BLACK);
@@ -776,13 +776,13 @@ public class VF_R extends VF_R_DataCom {
                   tfs[a] = new smallTF();
             }
             //================================
-            scs = new JScrollPane[DT.maxColumns - 1];
+            scs = new JScrollPane[DT.maxColumns];
             //+++++++++++++++++++++++++++++
-            lsts = new JList[DT.maxColumns - 1];
+            lsts = new JList[DT.maxColumns];
             //+++++++++++++++++++++++++++++
-            btns_C = new JButton[DT.maxColumns - 1];
+            btns_C = new JButton[DT.maxColumns];
             //+++++++++++++++++++++++++++++
-            for (int a = 0; a < DT.maxColumns - 1; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   lsts[a] = new smallLST();
                   scs[a] = new JScrollPane(lsts[a]);
                   scs[a].setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -794,7 +794,7 @@ public class VF_R extends VF_R_DataCom {
             
       }
 
-      private void setComponentsSize() {
+      private void setNullLayoutComponentsSize() {
             int disLY = 0;
             int disTY = 0;
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -822,6 +822,10 @@ public class VF_R extends VF_R_DataCom {
             }
       }
 
+      private void setGroupLayoutComponents(GroupLayout gl, int limit){
+      
+      }
+      
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void setNameToMenus() {
             JMB.setName("JMB");
