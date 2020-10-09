@@ -154,7 +154,6 @@ public class MIActionListener implements ActionListener {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++
       private static void resetTF_LB(JTextField tf, JLabel lb) {
-            if (lb != null) {
                   tf.setBackground(new Color(51, 51, 51));
                   tf.setSize(290, tf.getHeight());
 
@@ -162,12 +161,11 @@ public class MIActionListener implements ActionListener {
                   if (l.contains("*")) {
                         lb.setText(l.substring(l.indexOf("*") + 1, l.length()));
                   }
-            } else {//TF_1 CASE
-                  tf.setSize(70, tf.getHeight());
-            }
+            
       }
 
-      private static void resetClock(JTextField MD, JTextField MU, JTextField SD, JTextField SU,
+      private static void resetClock(JTextField MD, JTextField MU, 
+              JTextField SD, JTextField SU,
               JLabel D2) {
             MD.setText("0");
             MU.setText("0");
@@ -188,15 +186,14 @@ public class MIActionListener implements ActionListener {
             VF_R.getJPB().setValue(0);
 
             VF_R.getBTN_Show_All().setSelected(false);
-            //System.out.println("1: tf_3 background: " + tfs[2].getBackground());
-            resetTF_LB(VF_R.getJTFS()[0], null);
-            for (int a = 1; a < 6; a++) {
+            //CHANGE LB & TFS TO ITS ORIGINAL LOOK
+            for (int a = 0; a < DT.maxColumns; a++) {
                   resetTF_LB(VF_R.getJTFS()[a], VF_R.getJLBS()[a]);
                   //System.out.println("TF_" + (a + 1) + " Width: " + tfs[1].getWidth());
                   VF_R.getJTFS()[a].setText("");
             }
-            //System.out.println("2: tf_3 background: " + tfs[2].getBackground());
-            for (int a = 2; a < 6; a++) {
+            //HIDING LBS AND TFS FOR NEXT TABLE-SELECTION
+            for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJLBS()[a].setVisible(false);
                   VF_R.getJTFS()[a].setVisible(false);
             }
@@ -219,7 +216,7 @@ public class MIActionListener implements ActionListener {
             DT.getList_S45().clear();
             DT.getList_S56().clear();
             //++++++++++++++++++++++++++++++++++++++
-            for (int a = 0; a < VF_R.getTFS_MD().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   resetClock(VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a],
                           VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a], VF_R.getLB_2DS()[a]);
             }

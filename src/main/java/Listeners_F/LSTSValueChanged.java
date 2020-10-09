@@ -26,12 +26,16 @@ public class LSTSValueChanged implements ListSelectionListener {
                         if (a == 0) {
                               MKey.lst_ConfigDists_L(VF_R.getJLSTS()[a],
                                       null, VF_R.getJTFS()[a],
-                                      VF_R.getJLBS()[a], evt);
-                              MKey.
+                                      VF_R.getJLBS()[a]);
+                              
+                        }else{
+                              MKey.lst_ConfigDists_L(VF_R.getJLSTS()[a], 
+                                      VF_R.getJTFS()[a - 1], VF_R.getJTFS()[a], 
+                                      VF_R.getJLBS()[a]);
                         }
                   }
             }
-
+            /*
             if (VF_R.getJLSTS()[0].isVisible() && VF_R.getJLSTS()[0].hasFocus()) {//LST_1
                   System.out.println("\tLST_1");
                   MKey.lst_ConfigDists_L(VF_R.getJLSTS()[0],
@@ -63,5 +67,6 @@ public class LSTSValueChanged implements ListSelectionListener {
                           VF_R.getJTFS()[3], VF_R.getJTFS()[4],
                           VF_R.getJLBS()[4], evt);
             }
+            */
       }
 }

@@ -126,32 +126,25 @@ public class VF_R_DataCom {
       static JToggleButton btn_Show_All = new JToggleButton("Show All");
 
       static JLabel lb_Title = new JLabel();
-      static JLabel[] lbs;
-      static JTextField[] tfs;
-      static JButton[] btns_C;
-      static JScrollPane[] scs;
-      static JList[] lsts;
+      static JLabel[] lbs = new JLabel[DT.maxColumns];
+      static JTextField[] tfs = new JTextField[DT.maxColumns];
+      static JButton[] btns_C = new JButton[DT.maxColumns];
+      static JScrollPane[] scs = new JScrollPane[DT.maxColumns];
+      static JList[] lsts = new JList[DT.maxColumns];
 
       static JLabel lb_Icon = new JLabel();
       static JProgressBar JPB = new JProgressBar();
 
       static JButton[] btns_TB = new JButton[]{new smallBTN_C(""), new smallBTN_C("")};
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      static JTextField[] tfs_MD = new JTextField[]{new JTextField("0"), new JTextField("0"),
-            new JTextField("0"), new JTextField("0"), new JTextField("0")};
-      static JTextField[] tfs_MU = new JTextField[]{new JTextField("0"), new JTextField("0"),
-            new JTextField("0"), new JTextField("0"), new JTextField("0")};
-      static JTextField[] tfs_SD = new JTextField[]{new JTextField("0"), new JTextField("0"),
-            new JTextField("0"), new JTextField("0"), new JTextField("0")};
-      static JTextField[] tfs_SU = new JTextField[]{new JTextField("0"), new JTextField("0"),
-            new JTextField("0"), new JTextField("0"), new JTextField("0")};
-
-      static JLabel[] lb_2ds = new JLabel[]{new JLabel(":"), new JLabel(":"), new JLabel(":"),
-            new JLabel(":"), new JLabel(":")};
+      static JPanel[] clocks = new JPanel[DT.maxColumns];
+      static JTextField[] tfs_MD = new JTextField[DT.maxColumns];
+      static JTextField[] tfs_MU = new JTextField[DT.maxColumns];      
+      static JTextField[] tfs_SD = new JTextField[DT.maxColumns];
+      static JTextField[] tfs_SU = new JTextField[DT.maxColumns];
+      static JLabel[] lb_2ds = new JLabel[DT.maxColumns];
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
       static boolean getDefault = true;
-
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static JTextField tf_ce = new JTextField();
       static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce) {

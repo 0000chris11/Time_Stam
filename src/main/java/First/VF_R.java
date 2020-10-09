@@ -133,17 +133,13 @@ public class VF_R extends VF_R_DataCom {
             for (int a = 0; a < btns_MC.length; a++) {
                   btns_MC[a].setVisible(b);
             }
-            for (int a = 0; a < lbs.length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setVisible(b);
                   tfs[a].setVisible(b);
-                  if (a != lbs.length - 1) {
-                        tfs_MD[a].setVisible(b);
-                        tfs_MU[a].setVisible(b);
-                        lb_2ds[a].setVisible(b);
-                        tfs_SD[a].setVisible(b);
-                        tfs_SU[a].setVisible(b);
-                        btns_C[a].setVisible(b);
-                  }
+                  
+                  clocks[a].setVisible(b);
+                  btns_C[a].setVisible(b);
+
             }
             lb_Icon.setVisible(b);
             JPB.setVisible(b);
@@ -296,7 +292,7 @@ public class VF_R extends VF_R_DataCom {
             lb_Title.setForeground(Color.WHITE);
             lb_Title.setPreferredSize(new Dimension(
                     lb_Title.getPreferredSize().width, 27));
-            
+
             PL.add(PL_C, BorderLayout.CENTER);
             PL_C.setBackground(Color.BLACK);
             PL_C.setBorder(new LineBorder(Color.WHITE, 1));
@@ -310,8 +306,8 @@ public class VF_R extends VF_R_DataCom {
             } else {
                   GroupLayout gl = new GroupLayout(PL_C);
                   PL.setLayout(gl);
-                  setGroupLayoutComponents(gl, DT.maxColumns);
-                  testing t = new testing(lbs, tfs, ??, scs, btns_C);
+                  testing t = new testing(gl, DT.maxColumns);
+                  t.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
             }
             clockConfig();
       }
@@ -523,27 +519,34 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void clockConfig() {
-            int x_tm = 6;
-            int x_bm = x_tm + 6;
-            int x_ts = x_bm + 26;
-            int x_bs = x_ts + 6;
-            int b = 1;
-            int py = 2;
-            int t2 = 15;
-            int tf_y = tfs[1].getY() - 4;
-            int tf_h = tfs[b].getHeight() + 4;
+            int tf_h = tfs[0].getHeight() - 4;
 
-            CK_FL CF = new CK_FL();
             //System.out.println("tfs Heights: " + tf_h);
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
+            Dimension cks = new Dimension(30, tf_h);
+            Dimension cks2 = new Dimension(10, tf_h);
 
-            for (int a = 0; a < tfs_MD.length; a++) {//a: 0 to 4   b: 1 to 5
-                  PL_C.add(tfs_MD[a]);
-                  PL_C.add(tfs_MU[a]);
-                  PL_C.add(tfs_SD[a]);
-                  PL_C.add(tfs_SU[a]);
+            for (int a = 0; a < DT.maxColumns; a++) {//a: 0 to 4   b: 1 to 5
+                  clocks[a] = new JPanel();
+                  PL_C.add(clocks[a]);
+                  clocks[a].setLayout(new BoxLayout(clocks[a], BoxLayout.X_AXIS));
+                  clocks[a].setBackground(Color.DARK_GRAY);
+                  clocks[a].setSize(200, tf_h);
+                  //++++++++++++++++++++++++++++++
+                  tfs_MD[a] = new JTextField("0");
+                  tfs_MU[a] = new JTextField("0");
+                  lb_2ds[a] = new JLabel(":");
+                  tfs_SD[a] = new JTextField("0");
+                  tfs_SU[a] = new JTextField("0");
+                  for (int b = 0; b < DT.maxColumns; b++) {
+                        clocks[a].add(tfs_MD[b]);
+                        clocks[a].add(tfs_MU[b]);
+                        clocks[a].add(lb_2ds[b]);
+                        clocks[a].add(tfs_SD[b]);
+                        clocks[a].add(tfs_SU[b]);
+                  }
                   //+++++++++++++++++++++++++++++++++++++++++
                   tfs_MD[a].setBackground(c[0]);
                   tfs_MU[a].setBackground(c[0]);
@@ -562,40 +565,19 @@ public class VF_R extends VF_R_DataCom {
                   tfs_SD[a].setHorizontalAlignment(0);
                   tfs_SU[a].setHorizontalAlignment(0);
                   //++++++++++++++++++++++++++++++++++++++++++
-                  //tfs_h[a].setLocation(tfs[1].getX(), tfs[1].getY() + t1);
-                  tfs_MD[a].setBounds(tfs[1].getX() + 163, tf_y + py,
-                          30, tf_h);
-                  //btns_hp[a].setBounds(tfs_MD[0].getX() + 32, tfs_MD[0].getY() + t1, 10, 10);
-                  //btns_hm[a].setBounds(tfs_MD[0].getX() + 32, tfs_MD[0].getY() + t2, 10, 10);
-
-                  tfs_MU[a].setBounds(tfs_MD[0].getX() + 26, tf_y + py,
-                          30, tf_h);
-                  //btns_mp[a].setBounds(tfs_MU[0].getX() + 32, tfs_MD[0].getY() + t1, 10, 10);
-                  //btns_mm[a].setBounds(tfs_MU[0].getX() + 32, tfs_MD[0].getY() + t2, 10, 10);
-
-                  tfs_SD[a].setBounds(tfs_MU[0].getX() + 44, tf_y + py,
-                          30, tf_h);
-                  //btns_sp[a].setBounds(tfs_SD[0].getX() + 32, tfs_MD[0].getY() + t1, 10, 10);
-                  //btns_sm[a].setBounds(tfs_SD[0].getX() + 32, tfs_MD[0].getY() + t2, 10, 10);
-
-                  tfs_SU[a].setBounds(tfs_SD[0].getX() + 26, tf_y + py,
-                          30, tf_h);
-                  //System.out.println("btns_hp[" + a + "] location" + btns_hp[a].getLocation());
-                  //System.out.println("btns_mp[" + a + "] location" + btns_hm[a].getLocation());
-                  py += 33;
-                  //t2 += 33;
-                  b++;
+                  tfs_MD[a].setPreferredSize(cks);
+                  tfs_MD[a].setMaximumSize(cks);
+                  tfs_MU[a].setPreferredSize(cks);
+                  tfs_MU[a].setMaximumSize(cks);
+                  tfs_SD[a].setPreferredSize(cks);
+                  tfs_SD[a].setMaximumSize(cks);
+                  tfs_SU[a].setPreferredSize(cks);
+                  tfs_SU[a].setMaximumSize(cks);
                   //+++++++++++++++++++++++++++++++++++++
                   tfs_MD[a].setVisible(false);
                   tfs_MU[a].setVisible(false);
                   tfs_SD[a].setVisible(false);
                   tfs_SU[a].setVisible(false);
-                  //btns_hp[a].setVisible(false);
-                  //btns_hm[a].setVisible(false);
-                  //btns_mp[a].setVisible(false);
-                  //btns_mm[a].setVisible(false);
-                  //btns_sp[a].setVisible(false);
-                  //btns_sm[a].setVisible(false);
                   //+++++++++++++++++++++++++++++++
                   ((AbstractDocument) tfs_MD[a].getDocument()).setDocumentFilter(
                           new LimitTextD("D"));
@@ -606,26 +588,19 @@ public class VF_R extends VF_R_DataCom {
                   ((AbstractDocument) tfs_SU[a].getDocument()).setDocumentFilter(
                           new LimitTextD("U"));
 
+                  CK_FL CF = new CK_FL();
                   tfs_MD[a].addFocusListener(CF);
                   tfs_MU[a].addFocusListener(CF);
                   tfs_SD[a].addFocusListener(CF);
                   tfs_SU[a].addFocusListener(CF);
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  PL_C.add(lb_2ds[a]);
-                  lb_2ds[a].setBounds((tfs_MU[0].getX() + tfs_MU[0].getWidth() + 2),
-                          tfs_MU[a].getY() - 3,
-                          20, tfs_MU[0].getHeight());
+                  lb_2ds[a].setPreferredSize(cks2);
+                  lb_2ds[a].setMaximumSize(cks2);
                   lb_2ds[a].setFont(FL);
                   lb_2ds[a].setForeground(Color.WHITE);
                   lb_2ds[a].setHorizontalTextPosition(0);
                   lb_2ds[a].setVisible(false);
             }
-            //System.out.println("\ntfs 2: "+ tfs[1].getY());
-            //System.out.println("tfs 3: "+ tfs[2].getY());
-            //System.out.println("tfs 4: "+ tfs[3].getY());
-            //System.out.println("tfs 5: "+ tfs[4].getY());
-            //System.out.println("tfs 6: "+ tfs[5].getY());
-            lb_2ds[4].setForeground(Color.RED);
       }
 
       private void actionTBComponents() {
@@ -633,19 +608,6 @@ public class VF_R extends VF_R_DataCom {
                   public void actionPerformed(ActionEvent evt) {
                         //JT.getColumn(0);
                         System.out.println("\nPRESS");
-
-                        //++++++++++++++++++++++++++++++++++++++++++++
-                        if (tfs[1].isShowing()) {
-                              System.out.println("\tShowing...");
-                        }
-                        /*
-                        Border bor = tfs[1].getBorder();
-                        Graphics g = tfs[1].getGraphics();
-                        System.out.println(g.toString());
-
-                        bor.paintBorder(tfs[1], g, 0, 0, tfs[1].getWidth() + 2, tfs[1].getHeight() + 2);
-                        g.setColor(Color.RED);
-                         */
                   }
             });
       }
@@ -706,20 +668,14 @@ public class VF_R extends VF_R_DataCom {
             tfs[1].setBounds(107, 72, 290, 27);
              */
 
-            
             //+++++++++++++++++++++++++
             lb_Title.setVisible(true);
             lbs[0].setVisible(true);
-            lbs[1].setVisible(true);
             tfs[0].setVisible(true);
-            tfs[0].setBackground(new Color(51, 0, 0));
-            tfs[1].setVisible(true);
 
-            scs[0].setVisible(false);
-            scs[1].setVisible(false);
-            scs[2].setVisible(false);
-            scs[3].setVisible(false);
-            scs[4].setVisible(false);
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  scs[a].setVisible(false);
+            }
             //+++++++++++++++++++++++++++++++++++++++++
             //PL_C.add(lb_Icon);
             lb_Icon.setFont(new Font("Dialog", Font.PLAIN, 24));
@@ -765,23 +721,12 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void setComponentsToArray() {
-            lbs = new JLabel[DT.maxColumns];
             //=================================
-            tfs = new JTextField[DT.maxColumns];
-            //+++++++++++++++++++++
-            int disLY = 0;
-            int disTY = 0;
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = new smallLB();
                   tfs[a] = new smallTF();
             }
             //================================
-            scs = new JScrollPane[DT.maxColumns];
-            //+++++++++++++++++++++++++++++
-            lsts = new JList[DT.maxColumns];
-            //+++++++++++++++++++++++++++++
-            btns_C = new JButton[DT.maxColumns];
-            //+++++++++++++++++++++++++++++
             for (int a = 0; a < DT.maxColumns; a++) {
                   lsts[a] = new smallLST();
                   scs[a] = new JScrollPane(lsts[a]);
@@ -791,7 +736,7 @@ public class VF_R extends VF_R_DataCom {
                   btns_C[a] = new smallBTN_C(null);
             }
             //++++++++++++++++++++++++++++++++++++++
-            
+
       }
 
       private void setNullLayoutComponentsSize() {
@@ -822,10 +767,6 @@ public class VF_R extends VF_R_DataCom {
             }
       }
 
-      private void setGroupLayoutComponents(GroupLayout gl, int limit){
-      
-      }
-      
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void setNameToMenus() {
             JMB.setName("JMB");
@@ -897,27 +838,19 @@ public class VF_R extends VF_R_DataCom {
             btns_MC[3].setName("BTN_FIND");
             //+++++++++++++++++++++++++++++++++++++++
             //System.out.println("lbs Length: " + lbs.length);
-            for (int a = 0; a < lbs.length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setName("LB_" + (a + 1));
-            }
-            for (int a = 0; a < tfs.length; a++) {
                   tfs[a].setName("TF_" + (a + 1));
-            }
-            for (int a = 0; a < scs.length; a++) {
-                  scs[a].setName("SC_" + (a + 2));
-            }
-            for (int a = 0; a < lsts.length; a++) {
-                  lsts[a].setName("LST_" + (a + 2));
-            }
-            for (int a = 0; a < btns_C.length; a++) {
-                  btns_C[a].setName("BTNC_" + (a + 2));
-            }
-            for (int a = 0; a < tfs_MD.length; a++) {
-                  tfs_MD[a].setName("TF_MD_" + (a + 2));
-                  tfs_MU[a].setName("TF_MU_" + (a + 2));
-                  tfs_SD[a].setName("TF_SD_" + (a + 2));
-                  tfs_SU[a].setName("TF_SU_" + (a + 2));
-                  lb_2ds[a].setName("LB_2D_" + (a + 2));
+                  scs[a].setName("SC_" + (a + 1));
+                  lsts[a].setName("LST_" + (a + 1));
+                  btns_C[a].setName("BTNC_" + (a + 1));
+
+                  clocks[a].setName("Clock_" + (a + 1));
+                  tfs_MD[a].setName("TF_MD_" + (a + 1));
+                  tfs_MU[a].setName("TF_MU_" + (a + 1));
+                  tfs_SD[a].setName("TF_SD_" + (a + 1));
+                  tfs_SU[a].setName("TF_SU_" + (a + 1));
+                  lb_2ds[a].setName("LB_2D_" + (a + 1));
             }
             //++++++++++++++++++++++++++++++++
             JM_Select.setName("JM_Select");
