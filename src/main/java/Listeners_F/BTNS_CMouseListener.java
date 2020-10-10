@@ -6,6 +6,7 @@
 package Listeners_F;
 
 import First.VF_R;
+import MC.DT;
 import MC.notMyMethods;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -18,10 +19,10 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 /**
- *
+ *MouseListener for BTNS_C
  * @author Christopher
  */
-public class CCD implements MouseListener {
+public class BTNS_CMouseListener implements MouseListener {
 
       notMyMethods n_mm = new notMyMethods();
 
@@ -37,19 +38,19 @@ public class CCD implements MouseListener {
             Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
 
             if (evt.getButton() == 1) {
-                  for (int a = 0; a < 5; a++) {
-                        if (jcC.getName().equals("BTNC_" + (a + 2))) {
-                              StringSelection ss = new StringSelection(VF_R.getJTFS()[a + 1].getText());
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        if (jcC.getName().equals("BTNC_" + (a + 1))) {
+                              StringSelection ss = new StringSelection(VF_R.getJTFS()[a].getText());
                               cb.setContents(ss, ss);
                         }
                   }
             } else if (evt.getButton() == 3) {
-                  for (int a = 0; a < VF_R.getBTNS_C().length; a++) {
-                        if (jcC.getName().equals("BTNC_" + (a + 2))) {
-                              VF_R.getJTFS()[a + 1].setText("");
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        if (jcC.getName().equals("BTNC_" + (a + 1))) {
+                              VF_R.getJTFS()[a].setText("");
                         }
-                        if (jcC.getName().equals("TF_" + (a + 2))) {
-                              n_mm.onPaste(VF_R.getJTFS()[a + 1]);
+                        if (jcC.getName().equals("TF_" + (a + 1))) {
+                              n_mm.onPaste(VF_R.getJTFS()[a]);
                               //mm.tf_ConfigDists_M(lb_2, tf_2, lst_2, dt.getDm_2(), dt.getListD_2());
                         }
                   }

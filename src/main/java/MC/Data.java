@@ -1,6 +1,6 @@
 package MC;
 
-import ArrayMethods.EXam;
+import ArrayMethods.CustomTableModel;
 import Others.CC;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -72,10 +72,10 @@ public class Data {
       private static ArrayList<String> list_cutUrl = new ArrayList<String>();
 
       private static DefaultTableModel[] dtms = new DefaultTableModel[]{
-            null, null, new EXam(2), new EXam(3), new EXam(4), new EXam(5), new EXam(6)};
+            null, null, new CustomTableModel(2), new CustomTableModel(3), new CustomTableModel(4), new CustomTableModel(5), new CustomTableModel(6)};
 
       private static TableModel[] dtms2 = new TableModel[]{
-            null, null, new EXam(2), new EXam(3), new EXam(4), new EXam(5), new EXam(6)};
+            null, null, new CustomTableModel(2), new CustomTableModel(3), new CustomTableModel(4), new CustomTableModel(5), new CustomTableModel(6)};
 
       private static DefaultListModel dm_2 = new DefaultListModel();
       private static DefaultListModel dm_3 = new DefaultListModel();

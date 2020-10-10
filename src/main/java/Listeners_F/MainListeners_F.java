@@ -15,7 +15,6 @@ import javax.swing.ListSelectionModel;
 public class MainListeners_F {
 
       //Data dt = new Data("MainListeners_F");
-
       public void addAllListenerLoop() {
             addTableModelListenerToJT();
             addListSelectionListenerToJT();
@@ -45,6 +44,7 @@ public class MainListeners_F {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
+      //CHANGE NEEDED
       private void addTableModelListenerToJT() {
             JTTableModelListener JTML = new JTTableModelListener();
             for (int a = 2; a < DT.getDTMS().length; a++) {
@@ -100,18 +100,18 @@ public class MainListeners_F {
       }
 
       private void addMouseListenerToTFS() {
-            CCD BTNCML = new CCD();
-            for (int a = 0; a < VF_R.getJTFS().length - 1; a++) {
-                  if (VF_R.getJTFS()[a + 1].getMouseListeners().length > 0) {
-                        for (int b = 0; b < VF_R.getJTFS()[a + 1].getMouseListeners().length; b++) {
-                              if (VF_R.getJTFS()[a + 1].getMouseListeners()[b].toString().contains("MouseListener")) {
-                                    VF_R.getJTFS()[a + 1].removeMouseListener(BTNCML);
+            BTNS_CMouseListener BTNCML = new BTNS_CMouseListener();
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (VF_R.getJTFS()[a].getMouseListeners().length > 0) {
+                        for (int b = 0; b < VF_R.getJTFS()[a].getMouseListeners().length; b++) {
+                              if (VF_R.getJTFS()[a].getMouseListeners()[b].toString().contains("MouseListener")) {
+                                    VF_R.getJTFS()[a].removeMouseListener(BTNCML);
                               }
                         }
                   }
-                  if (VF_R.getJTFS()[a + 1].getMouseListeners().length == 3) {
+                  if (VF_R.getJTFS()[a].getMouseListeners().length == 3) {
                         //System.out.println(tfs[a + 1].getName() + " adds: " + BTNCML.toString());
-                        VF_R.getJTFS()[a + 1].addMouseListener(BTNCML);
+                        VF_R.getJTFS()[a].addMouseListener(BTNCML);
                   }
             }
       }
@@ -159,7 +159,7 @@ public class MainListeners_F {
 
       private void addValueChangedListenerToLSTS() {
             LSTSValueChanged lstsVC = new LSTSValueChanged();
-            for (int a = 0; a < VF_R.getJLSTS().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getJLSTS()[a].getListSelectionListeners().length > 0) {
                         VF_R.getJLSTS()[a].removeListSelectionListener(lstsVC);
                   }
@@ -171,8 +171,8 @@ public class MainListeners_F {
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addMouseListenerToBTN_C() {
-            CCD BTNCML = new CCD();
-            for (int a = 0; a < VF_R.getBTNS_C().length; a++) {
+            BTNS_CMouseListener BTNCML = new BTNS_CMouseListener();
+            for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getBTNS_C()[a].getMouseListeners().length > 0) {
                         for (int b = 0; b < VF_R.getBTNS_C()[a].getMouseListeners().length; b++) {
                               if (VF_R.getBTNS_C()[a].getMouseListeners()[b].toString().contains("MouseListener")) {
@@ -197,8 +197,8 @@ public class MainListeners_F {
             }
             //System.out.println("\tEND OF addActionListenerToBTNS_MC");
       }
-      
-      private void addActionListenerToBTNS_P_M(){
+
+      private void addActionListenerToBTNS_P_M() {
             BTNS_TBActionListener BTNS_TB = new BTNS_TBActionListener();
             VF_R.getBTN_PLUS().addActionListener(BTNS_TB);
             VF_R.getBTN_MINUS().addActionListener(BTNS_TB);
@@ -207,47 +207,37 @@ public class MainListeners_F {
       ///================================================
       private void addFocusListenersToJC_PC() {
             FocusBorder jcfl = new FocusBorder();
-            for (int a = 0; a < VF_R.getJTFS().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFS()[a].addFocusListener(jcfl);
-                  if (a != 0) {
-                        VF_R.getJLSTS()[a - 1].addFocusListener(jcfl);
-                        VF_R.getTFS_MD()[a - 1].addFocusListener(jcfl);
-                        VF_R.getTFS_MU()[a - 1].addFocusListener(jcfl);
-                        VF_R.getTFS_SD()[a - 1].addFocusListener(jcfl);
-                        VF_R.getTFS_SU()[a - 1].addFocusListener(jcfl);
-                  }
+                  VF_R.getJLSTS()[a].addFocusListener(jcfl);
+                  VF_R.getTFS_MD()[a].addFocusListener(jcfl);
+                  VF_R.getTFS_MU()[a].addFocusListener(jcfl);
+                  VF_R.getTFS_SD()[a].addFocusListener(jcfl);
+                  VF_R.getTFS_SU()[a].addFocusListener(jcfl);
+
             }
       }
 
       private void addFocusListenersToJC() {
             TF_LST_FL TFSFL = new TF_LST_FL();
-            for (int a = 0; a < VF_R.getJTFS().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFS()[a].addFocusListener(TFSFL);
-                  if (a != 0) {
-                        VF_R.getJLSTS()[a - 1].addFocusListener(TFSFL);
-                  }
+                  VF_R.getJLSTS()[a].addFocusListener(TFSFL);
+
             }
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addKeyListenersToTFS() {
             TFS_KL tkt = new TFS_KL();
-            for (int a = 0; a < VF_R.getJTFS().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFS()[a].addKeyListener(tkt);
-                  /*
-                  if(a != 0){
-                        VF_R.getTFS_MD()[a - 1].addKeyListener(tkt);
-                        VF_R.getTFS_MU()[a - 1].addKeyListener(tkt);
-                        VF_R.getTFS_SD()[a - 1].addKeyListener(tkt);
-                        VF_R.getTFS_SU()[a - 1].addKeyListener(tkt);
-                  }
-                   */
             }
       }
 
       private void addKeyListenersToCKS() {
             CK_KL ckkl = new CK_KL();
-            for (int a = 0; a < VF_R.getTFS_MD().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getTFS_MD()[a].addKeyListener(ckkl);
                   VF_R.getTFS_MU()[a].addKeyListener(ckkl);
                   VF_R.getTFS_SD()[a].addKeyListener(ckkl);
@@ -279,13 +269,14 @@ public class MainListeners_F {
             VF_R.getSaveOp().addActionListener(mio);
       }
 
-      private void addActionListenerToMITable(){
+      private void addActionListenerToMITable() {
             MITableActionListener MITAL = new MITableActionListener();
             VF_R.getMI_CreateTable().addActionListener(MITAL);
             VF_R.getMI_UpdateTable().addActionListener(MITAL);
             VF_R.getMI_DeleteThisTable().addActionListener(MITAL);
             VF_R.getMI_DeleteTables().addActionListener(MITAL);
       }
+
       //================================================
       private void addKeyListenerToLSTS() {
 

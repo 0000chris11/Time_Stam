@@ -10,7 +10,7 @@ import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import MC.*;
 import Listeners_F.MainListeners_F;
-import Listeners_F.MIActionListener;
+import Listeners_F.TableChangedActionListener;
 import Listeners_F.CK_FL;
 import com.cofii.myMethods.MText;
 import Others.*;
@@ -110,7 +110,7 @@ public class VF_R extends VF_R_DataCom {
       }
 
       public static void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
-            MIActionListener MIAL = new MIActionListener();
+            TableChangedActionListener MIAL = new TableChangedActionListener();
 
             JM_Select.removeAll();
             JMS_ChangeDTable.removeAll();
@@ -136,7 +136,7 @@ public class VF_R extends VF_R_DataCom {
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setVisible(b);
                   tfs[a].setVisible(b);
-                  
+
                   clocks[a].setVisible(b);
                   btns_C[a].setVisible(b);
 
@@ -301,9 +301,11 @@ public class VF_R extends VF_R_DataCom {
             componentsConfig();
             //++++++++++++++++++++++++++
             if (JPL_layout.equals("null")) {
+                  System.out.println("\tNull Layout for LeftPanel");
                   PL_C.setLayout(null);
                   setNullLayoutComponentsSize();
             } else {
+                  System.out.println("\tGroup Layout for LeftPanel");
                   GroupLayout gl = new GroupLayout(PL_C);
                   PL.setLayout(gl);
                   testing t = new testing(gl, DT.maxColumns);
@@ -527,6 +529,7 @@ public class VF_R extends VF_R_DataCom {
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
             Dimension cks = new Dimension(30, tf_h);
             Dimension cks2 = new Dimension(10, tf_h);
+            int tfCW = 160;
 
             for (int a = 0; a < DT.maxColumns; a++) {//a: 0 to 4   b: 1 to 5
                   clocks[a] = new JPanel();
@@ -534,19 +537,13 @@ public class VF_R extends VF_R_DataCom {
                   clocks[a].setLayout(new BoxLayout(clocks[a], BoxLayout.X_AXIS));
                   clocks[a].setBackground(Color.DARK_GRAY);
                   clocks[a].setSize(200, tf_h);
+                  clocks[a].setLocation(tfs[a].getX() + tfCW + 4, tfs[a].getY());
                   //++++++++++++++++++++++++++++++
                   tfs_MD[a] = new JTextField("0");
                   tfs_MU[a] = new JTextField("0");
                   lb_2ds[a] = new JLabel(":");
                   tfs_SD[a] = new JTextField("0");
                   tfs_SU[a] = new JTextField("0");
-                  for (int b = 0; b < DT.maxColumns; b++) {
-                        clocks[a].add(tfs_MD[b]);
-                        clocks[a].add(tfs_MU[b]);
-                        clocks[a].add(lb_2ds[b]);
-                        clocks[a].add(tfs_SD[b]);
-                        clocks[a].add(tfs_SU[b]);
-                  }
                   //+++++++++++++++++++++++++++++++++++++++++
                   tfs_MD[a].setBackground(c[0]);
                   tfs_MU[a].setBackground(c[0]);
@@ -574,10 +571,7 @@ public class VF_R extends VF_R_DataCom {
                   tfs_SU[a].setPreferredSize(cks);
                   tfs_SU[a].setMaximumSize(cks);
                   //+++++++++++++++++++++++++++++++++++++
-                  tfs_MD[a].setVisible(false);
-                  tfs_MU[a].setVisible(false);
-                  tfs_SD[a].setVisible(false);
-                  tfs_SU[a].setVisible(false);
+                  clocks[a].setVisible(false);
                   //+++++++++++++++++++++++++++++++
                   ((AbstractDocument) tfs_MD[a].getDocument()).setDocumentFilter(
                           new LimitTextD("D"));
@@ -600,6 +594,16 @@ public class VF_R extends VF_R_DataCom {
                   lb_2ds[a].setForeground(Color.WHITE);
                   lb_2ds[a].setHorizontalTextPosition(0);
                   lb_2ds[a].setVisible(false);
+            }
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  for (int b = 0; b < DT.maxColumns; b++) {
+                        clocks[a].add(tfs_MD[b]);
+                        clocks[a].add(tfs_MU[b]);
+                        clocks[a].add(lb_2ds[b]);
+                        clocks[a].add(tfs_SD[b]);
+                        clocks[a].add(tfs_SU[b]);
+                  }
+                  clocks[a].setSize(130, tf_h);
             }
       }
 

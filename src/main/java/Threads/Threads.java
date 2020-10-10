@@ -68,7 +68,8 @@ public class Threads {
 
                         for (int a = 0; a < DT.maxColumns - 1; a++) {
                               if (VF_R.getJT().getColumnCount() == a + 2) {
-                                    System.out.println("\t\tADD ++++ INSERTING " + (a + 2) + " COLUMNS");
+                                    System.out.println("\t\tADD ++++ INSERTING " + (a + 2) + 
+                                            " COLUMNS");
 
                                     mc.Insert(DT.getTable(), ++mayor, SS);
                                     mc.SelectData(a + 2, DT.getTable());

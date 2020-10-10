@@ -6,12 +6,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Christopher
  */
-public class EXam extends DefaultTableModel {
+public class CustomTableModel extends DefaultTableModel {
 
       Class[] types;
       int Index;
 
-      public EXam(int index) {
+      public CustomTableModel(int index) {
             //System.out.println("----------index size: " + index);
             Index = index;
             types = new Class[Index];
@@ -22,6 +22,7 @@ public class EXam extends DefaultTableModel {
             }
       }
 
+      @Override
       public Class getColumnClass(int columnIndex) {
             //System.out.println("+-+-+-+-+-+-columnIndex: " + columnIndex);
             /*if (Index == 6) {

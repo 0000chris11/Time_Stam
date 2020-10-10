@@ -245,6 +245,10 @@ public class VF_R_DataCom {
       public static JLabel[] getLB_2DS() {
             return lb_2ds;
       }
+      
+      public static JPanel[] getClocks(){
+            return clocks;
+      }
 
       public static JButton[] getBTNS_C() {
             return btns_C;

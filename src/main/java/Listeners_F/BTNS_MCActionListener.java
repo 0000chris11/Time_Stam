@@ -70,6 +70,7 @@ public class BTNS_MCActionListener implements ActionListener {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VF_R.getJT().getColumnCount() == a + 2) {
                         for (int b = 0; b < a + 2; b++) {
+                              //COMPARING EACH TFS WITH THE SELECTED ROW
                               if (!DT.getList_R().get(b).equals(VF_R.getJTFS()[b].getText()) 
                                       && !VF_R.getJTFS()[b].getText().equals("")
                                       && VF_R.getJTFS()[b].isVisible()) {
@@ -89,15 +90,14 @@ public class BTNS_MCActionListener implements ActionListener {
             System.out.println("\tcolIndexs Size: " + colIndexs.size());
             System.out.println("\tnewData Size: " + newData.toArray().length);
             
+            //PASSING THE INDEX IN ORDER TO FIND THE COLUMN NAME
             String[] cols = new String[colIndexs.size()];
             for(int a = 0; a < colIndexs.size(); a++){
                   //System.out.println("\tcolIndexs[" + a + "] = " + colIndexs.get(a));
                   cols[a] = DT.getList_C().get(colIndexs.get(a));
                   //System.out.println("\tcols[" + a + "] = " + cols[a]);
-            }
-            
+            }            
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            //UpdateRow(String table, Object[] cols, Object[] newvs, String id) {
             mc.UpdateRow(DT.getTable(), cols, newData.toArray(), DT.getList_R().get(0));
             mc.SelectData(colN, DT.getTable());
 
@@ -106,7 +106,7 @@ public class BTNS_MCActionListener implements ActionListener {
                     DT.getTabl(), DT.getTag(), DT.getClock());
 
             DT.bool_Upd = false;
-            System.out.println(CC.GREEN + "\n\tUPDATE DATA" + CC.RESET);
+            System.out.println(CC.GREEN + "\n\tUPDATED DATA" + CC.RESET);
       }
 
       private void delOp() {

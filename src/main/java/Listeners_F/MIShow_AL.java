@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import com.cofii.myMethods.MList;
 
 /**
- *
+ *Show Listeners and List
  * @author Christopher
  */
 public class MIShow_AL implements ActionListener {
@@ -63,7 +63,7 @@ public class MIShow_AL implements ActionListener {
       private void showListeners(String ac){
             if(ac.equals("JTextFields FL")){
                   System.out.println("\nJTextFields Focus Listeners");
-                  for(int a = 0; a < VF_R.getJTFS().length; a++){
+                  for(int a = 0; a < DT.maxColumns; a++){
                         for(int b = 0; b < VF_R.getJTFS()[a].getFocusListeners().length; b++){
                               System.out.println(VF_R.getJTFS()[a].getName()
                               + " " + (b + 1) + ": " + VF_R.getJTFS()[a].getFocusListeners()[b].toString());
@@ -71,7 +71,7 @@ public class MIShow_AL implements ActionListener {
                   }
             }else if(ac.equals("JTextFields KL")){
                   System.out.println("\nJTextFields Key Listeners");
-                  for(int a = 0; a < VF_R.getJTFS().length; a++){
+                  for(int a = 0; a < DT.maxColumns; a++){
                         for(int b = 0; b < VF_R.getJTFS()[a].getKeyListeners().length; b++){
                               System.out.println(VF_R.getJTFS()[a].getName()
                               + " " + (b + 1) + ": " + VF_R.getJTFS()[a].getKeyListeners()[b].toString());
@@ -79,7 +79,7 @@ public class MIShow_AL implements ActionListener {
                   }
             }else if(ac.equals("JTextFields ML")){
                   System.out.println("\nJTextFields Mouse Listeners");
-                  for(int a = 0; a < VF_R.getJTFS().length; a++){
+                  for(int a = 0; a < DT.maxColumns; a++){
                         for(int b = 0; b < VF_R.getJTFS()[a].getMouseListeners().length; b++){
                               System.out.println(VF_R.getJTFS()[a].getName()
                               + " " + (b + 1) + ": " + VF_R.getJTFS()[a].getMouseListeners()[b].toString());
@@ -87,7 +87,7 @@ public class MIShow_AL implements ActionListener {
                   }
             }else if(ac.equals("JLists LSL")){
                   System.out.println("\nJLists ListSelection Listeners");
-                  for(int a = 0; a < VF_R.getJLSTS().length; a++){
+                  for(int a = 0; a < DT.maxColumns; a++){
                         for(int b = 0; b < VF_R.getJLSTS()[a].getListSelectionListeners().length; b++){
                               System.out.println(VF_R.getJLSTS()[a].getName()
                               + " " + (b + 1) + ": " + VF_R.getJLSTS()[a].getListSelectionListeners()[b].toString());
@@ -95,7 +95,7 @@ public class MIShow_AL implements ActionListener {
                   }
             }else if(ac.equals("JLists FL")){
                   System.out.println("\nJLists Focus Listeners");
-                  for(int a = 0; a < VF_R.getJLSTS().length; a++){
+                  for(int a = 0; a < DT.maxColumns; a++){
                         for(int b = 0; b < VF_R.getJLSTS()[a].getFocusListeners().length; b++){
                               System.out.println(VF_R.getJLSTS()[a].getName()
                               + " " + (b + 1) + ": " + VF_R.getJLSTS()[a].getFocusListeners()[b].toString());

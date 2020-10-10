@@ -14,7 +14,7 @@ import MC.notMyMethods;
 import MC.Components;
 import Listeners_F.CK_FL;
 import Listeners_F.CK_KL;
-import Listeners_F.CCD;
+import Listeners_F.BTNS_CMouseListener;
 import Listeners_F.LSTSKeyReleased;
 import Listeners_F.LSTSValueChanged;
 import Listeners_F.TF_LST_FL;
@@ -105,8 +105,8 @@ import javax.swing.plaf.basic.BasicTableUI;
 import javax.swing.plaf.basic.BasicToolBarUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.text.AbstractDocument;
-import Listeners_F.CCD;
-import Listeners_F.MIActionListener;
+import Listeners_F.BTNS_CMouseListener;
+import Listeners_F.TableChangedActionListener;
 import Listeners_F.MIShow_AL;
 import Listeners_F.MIV_AL;
 import MC.MakeCon;
@@ -378,7 +378,7 @@ public class VF extends JFrame{
       }
 
       private void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
-            MIActionListener MIAL = new MIActionListener();
+            TableChangedActionListener MIAL = new TableChangedActionListener();
 
             JM2.removeAll();
             mi_OP_Change.removeAll();

@@ -8,18 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
+ * KeyListener for the Clock
  *
  * @author Christopher
  */
 public class CK_KL implements KeyListener {
 
-      //private String Op = "E";
-
-      /*public CK_KL(String op) {
-            if (op.equals("U") || op.equals("D")) {
-                  Op = op;
-            }
-      }*/
       @Override
       public void keyTyped(KeyEvent arg0) {
       }
@@ -50,42 +44,40 @@ public class CK_KL implements KeyListener {
             if (!evt.isControlDown()) {
                   if (KeyEvent.VK_DOWN == evt.getKeyCode()
                           || KeyEvent.VK_UP == evt.getKeyCode()) {
+                        //CHANGE INDEX (UP or DOWN)
                         JTextField jtfC = (JTextField) evt.getSource();
-                        int V = Integer.parseInt(jtfC.getText());
-                        //System.out.println("\tJTFC Location: " + jtfC.getLocation());
-                        for (int a = 0; a < 5; a++) {
-                              //System.out.println("\tMD Location: " + VF_R.getTFS_MD()[a].getLocation());
+                        int value = Integer.parseInt(jtfC.getText());
+                        for (int a = 0; a < DT.maxColumns; a++) {
+                              //MATCH BASED ON LOCATION
                               if (jtfC.getLocation().equals(VF_R.getTFS_MD()[a].getLocation())) {
-                                    setIndexMD(evt, a, V);
+                                    setIndexMD(evt, a, value);
                               } else if (jtfC.getLocation().equals(VF_R.getTFS_MU()[a].getLocation())) {
-                                    setIndexMU(evt, a, V);
+                                    setIndexMU(evt, a, value);
                               } else if (jtfC.getLocation().equals(VF_R.getTFS_SD()[a].getLocation())) {
-                                    setIndexSD(evt, a, V);
+                                    setIndexSD(evt, a, value);
                               } else if (jtfC.getLocation().equals(VF_R.getTFS_SU()[a].getLocation())) {
-                                    setIndexSU(evt, a, V);
+                                    setIndexSU(evt, a, value);
                               }
                         }
                   }
             } else if (KeyEvent.VK_ENTER == evt.getKeyCode()) {
-                  //System.out.println("\nENTER");
-                  for (int a = 0; a < 5; a++) {
-                        String time = "E";
+                  //SET CLOCK TEXT TO TF
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        String timeValue = "E";//ERROR (DOESN'T CHANGE)
                         if (VF_R.getTFS_MD()[a].isVisible()) {
-                              time = VF_R.getTFS_MD()[a].getText()
+                              timeValue = VF_R.getTFS_MD()[a].getText()
                                       + VF_R.getTFS_MU()[a].getText() + ":"
                                       + VF_R.getTFS_SD()[a].getText()
                                       + VF_R.getTFS_SU()[a].getText();
                               //+++++++++++++++++++++++++++++++++++++++++
-                              //System.out.println("\tText: " + VF_R.getJTFS()[a + 1].getText());
-                              if (VF_R.getJTFS()[a + 1].getText().contains("; ")) {
-                                    //System.out.println("\tcontains > ; <");
-                                    time = VF_R.getJTFS()[a + 1].getText().substring(0,
-                                            VF_R.getJTFS()[a + 1].getText().lastIndexOf("; ") + 2)
-                                            + time;
-                              } else {
-                                    //System.out.println("\tnormal");
+                              //IF TF ALLOWES TAGS
+                              if (VF_R.getJTFS()[a].getText().contains("; ")) {
+                                    timeValue = VF_R.getJTFS()[a].getText().substring(0,
+                                            VF_R.getJTFS()[a].getText().lastIndexOf("; ") + 2)
+                                            + timeValue;
                               }
-                              VF_R.getJTFS()[a + 1].setText(time);
+
+                              VF_R.getJTFS()[a].setText(timeValue);
                         }
                   }
             }
@@ -93,8 +85,9 @@ public class CK_KL implements KeyListener {
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void setIndexMD(KeyEvent evt, int a, int V) {
+            //RESET LOOP NOT IMPLEMENTED
             if (KeyEvent.VK_DOWN == evt.getKeyCode()) {
-                  if (V < 5) {
+                  if (V < 5) {//ONLY IT'LL COUNT UP IF IS 4 MAX
                         VF_R.getTFS_MD()[a].setText(Integer.toString(++V));
                   }
             } else if (KeyEvent.VK_UP == evt.getKeyCode()) {
@@ -143,7 +136,7 @@ public class CK_KL implements KeyListener {
       //+++++++++++++++++++++++++++++++++++++++++++++
       private void changeFocusRight() {
             //System.out.println("\tChange Focus Right");
-            for (int a = 0; a < 5; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getTFS_MD()[a].hasFocus()) {
                         VF_R.getTFS_MU()[a].requestFocus();
 
@@ -154,16 +147,16 @@ public class CK_KL implements KeyListener {
                         VF_R.getTFS_SU()[a].requestFocus();
 
                   } else if (VF_R.getTFS_SU()[a].hasFocus()) {
-                        VF_R.getJTFS()[a + 1].requestFocus();
+                        VF_R.getJTFS()[a].requestFocus();
                   }
             }
       }
 
       private void changeFocusLeft() {
             //System.out.println("\nChange Focus Right");
-            for (int a = 0; a < 5; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getTFS_MD()[a].hasFocus()) {
-                        VF_R.getJTFS()[a + 1].requestFocus();
+                        VF_R.getJTFS()[a].requestFocus();
 
                   } else if (VF_R.getTFS_MU()[a].hasFocus()) {
                         VF_R.getTFS_MD()[a].requestFocus();
@@ -178,20 +171,26 @@ public class CK_KL implements KeyListener {
       }
 
       private void changeFocusUp() {
-            for (int a = 0; a < VF_R.getTFS_MD().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getTFS_MD()[a].hasFocus() || VF_R.getTFS_MU()[a].hasFocus()
                           || VF_R.getTFS_SD()[a].hasFocus() || VF_R.getTFS_SU()[a].hasFocus()) {
-                        VF_R.getJTFS()[a].requestFocus();
+                        if (a == 0) {
+                              VF_R.getJTFS()[DT.maxColumns - 1].requestFocus();
+                        } else {
+                              VF_R.getJTFS()[a - 1].requestFocus();
+                        }
                   }
             }
       }
 
       private void changeFocusDown() {
-            for (int a = 0; a < VF_R.getTFS_MD().length; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getTFS_MD()[a].hasFocus() || VF_R.getTFS_MU()[a].hasFocus()
                           || VF_R.getTFS_SD()[a].hasFocus() || VF_R.getTFS_SU()[a].hasFocus()) {
-                        if (DT.maxColumns != (a + 2)) {
-                              VF_R.getJTFS()[a + 2].requestFocus();
+                        if (a == DT.maxColumns - 1) {
+                              VF_R.getJTFS()[0].requestFocus();
+                        } else {
+                              VF_R.getJTFS()[a + 1].requestFocus();
                         }
                   }
             }
