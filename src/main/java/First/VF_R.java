@@ -1003,6 +1003,7 @@ public class VF_R extends VF_R_DataCom {
             SPL.setDividerLocation(0.4);
             SPL.revalidate();
             SPL.repaint();
+            
             System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
             //System.out.println("Table: " + dt.getTable());
       }
