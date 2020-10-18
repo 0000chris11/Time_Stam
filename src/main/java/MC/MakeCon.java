@@ -8,11 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import ArrayMethods.Instance;
 import Others.CC;
-import Second.VC_R;
+import Create.VC_R;
 import java.awt.Color;
 
 /**

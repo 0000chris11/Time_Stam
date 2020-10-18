@@ -14,12 +14,12 @@ import javax.swing.LayoutStyle;
  *
  * @author Christopher
  */
-public class testing {
+public class toCofii {
 
       private LayoutManager LY;
       private int Limit;
 
-      public testing(LayoutManager ly, int limit) {
+      public toCofii(LayoutManager ly, int limit) {
             LY = ly;
             Limit = limit;
       }

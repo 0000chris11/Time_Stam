@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Second;
+package Create;
 
 import MC.DT;
 import javax.swing.JButton;

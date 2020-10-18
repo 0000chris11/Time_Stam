@@ -1,6 +1,6 @@
 package MC;
 
-import ArrayMethods.CustomTableModel;
+import Table.CustomTableModel;
 import Others.CC;
 import java.awt.Color;
 import java.awt.Dimension;

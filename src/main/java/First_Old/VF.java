@@ -3,26 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package First;
+package First_Old;
 
-import Second.View_Update;
-import ArrayMethods.ArraysM;
 import MC.Data;
 import MC.MethodM;
 import MC.Status;
 import MC.notMyMethods;
 import MC.Components;
-import Listeners_F.CK_FL;
 import Listeners_F.CK_KL;
-import Listeners_F.BTNS_CMouseListener;
-import Listeners_F.LSTSKeyReleased;
-import Listeners_F.LSTSValueChanged;
-import Listeners_F.TF_LST_FL;
-import Listeners_F.JTTableModelListener;
 import Others.LimitTextD;
-import Listeners_F.TFS_KL;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -108,7 +98,6 @@ import javax.swing.text.AbstractDocument;
 import Listeners_F.BTNS_CMouseListener;
 import Listeners_F.TableChangedActionListener;
 import Listeners_F.MIShow_AL;
-import Listeners_F.MIV_AL;
 import MC.MakeCon;
 import Threads.Threads;
 import Others.LSTD;
@@ -122,12 +111,12 @@ import javax.swing.SwingUtilities;
  *
  * @author Christopher
  */
-public class VF extends JFrame{
+public class VF extends JFrame {
 
       Connection con;
 
       String CName = this.getClass().getName();
-      
+
       MethodM mm = new MethodM(CName, DT.CCount++);
       Components cp = new Components(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
@@ -139,9 +128,9 @@ public class VF extends JFrame{
       //ArraysM am = new ArraysM();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
       //+++++++++++++++++++++++++++++++++++++++++++++
-      
+
       private static JFrame JF = new JFrame();
-      
+
       Color[] cl = {Color.RED, Color.GREEN, Color.YELLOW};
       final String inter = "Nothing Changed";
 
@@ -260,20 +249,20 @@ public class VF extends JFrame{
       public static JButton[] getBTNS_MC() {
             return btns_MC;
       }
-      
-      public static JScrollPane getJSC_P1(){
+
+      public static JScrollPane getJSC_P1() {
             return sc_p1;
       }
-      
-      public static JMenuItem getMI_SEEL(){
+
+      public static JMenuItem getMI_SEEL() {
             return mi_seeL;
       }
-      
-      public static JMenuItem getMI_SEER(){
+
+      public static JMenuItem getMI_SEER() {
             return mi_seeR;
       }
-      
-      public static JFrame getJF(){
+
+      public static JFrame getJF() {
             return JF;
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -302,7 +291,6 @@ public class VF extends JFrame{
       public static DefaultCellEditor getCustomCellEditor() {
             return customCellEditor;
       }
-      
 
       int state = 1;
 
@@ -311,6 +299,7 @@ public class VF extends JFrame{
 
       //JScroller scThread = new JScroller();
       Thread addThread;
+
       //++++++++++++++++++++++++++++++++++++++++++++++
       /*
       private void V_sbThread() {
@@ -362,7 +351,7 @@ public class VF extends JFrame{
                   }
             }.start();
       }
-      */
+       */
       private void setColorToDItem(ArrayList<String> listTables, JMenu jm) {
             if (listTables.isEmpty()) {
             } else {
@@ -394,6 +383,7 @@ public class VF extends JFrame{
             }
             setColorToDItem(L_Table, mi_OP_Change);
       }
+
       //+++++++++++++++++++++++++++++++++++++++++++++++++
       private void fillTableSize(JScrollPane sc, JTable table, int columns) {
 
@@ -537,19 +527,19 @@ public class VF extends JFrame{
             }
       }
 
-      private void otherListeners(){
+      private void otherListeners() {
             MIShow_AL misal = new MIShow_AL();
             MIV_AL mival = new MIV_AL();
-            
+
             mi_STables.addActionListener(misal);
             mi_SColumns.addActionListener(misal);
             mi_SDists.addActionListener(misal);
             mi_SListD.addActionListener(misal);
-            
+
             mi_seeL.addActionListener(mival);
             mi_seeR.addActionListener(mival);
       }
-      
+
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void clockConfig() {
             int x_tm = 6;
@@ -861,7 +851,7 @@ public class VF extends JFrame{
             System.out.println("------ChangeLSTD");
             lstd.changeLSTD(dt.getTable(), dt.getDist1(), dt.getDist2(), dt.getTabl(), dt.getTag(),
                     dt.getClock());
-            
+
             //addKeyListenerToLSTS();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("SELECT CONFIG");
@@ -1798,7 +1788,7 @@ public class VF extends JFrame{
                         mi_seeL.setSelected(true);
                   }
             }
-            */
+             */
       }//GEN-LAST:event_mi_seeLActionPerformed
 
       private void mi_seeRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_seeRActionPerformed
@@ -1814,7 +1804,7 @@ public class VF extends JFrame{
                         mi_seeR.setSelected(true);
                   }
             }
-            */
+             */
       }//GEN-LAST:event_mi_seeRActionPerformed
 
       public static void main(String args[]) {
@@ -1831,18 +1821,11 @@ public class VF extends JFrame{
 
                         }
                   }
-            } catch (ClassNotFoundException ex) {
-                  java.util.logging.Logger.getLogger(VF.class
-                          .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                  java.util.logging.Logger.getLogger(VF.class
-                          .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                  java.util.logging.Logger.getLogger(VF.class
-                          .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException | InstantiationException
+                    | IllegalAccessException ex) {
+                  ex.printStackTrace();
             } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-                  java.util.logging.Logger.getLogger(VF.class
-                          .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                  ex.printStackTrace();
             }
             //</editor-fold>
             //</editor-fold>

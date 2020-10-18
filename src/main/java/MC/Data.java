@@ -1,6 +1,6 @@
 package MC;
 
-import ArrayMethods.CustomTableModel;
+import Table.CustomTableModel;
 import Others.CC;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -70,18 +70,6 @@ public class Data {
       private static ArrayList<String> list_IconUrl = new ArrayList<String>();
       private static ArrayList<ImageIcon> list_newIcon = new ArrayList<ImageIcon>();
       private static ArrayList<String> list_cutUrl = new ArrayList<String>();
-
-      private static DefaultTableModel[] dtms = new DefaultTableModel[]{
-            null, null, new CustomTableModel(2), new CustomTableModel(3), new CustomTableModel(4), new CustomTableModel(5), new CustomTableModel(6)};
-
-      private static TableModel[] dtms2 = new TableModel[]{
-            null, null, new CustomTableModel(2), new CustomTableModel(3), new CustomTableModel(4), new CustomTableModel(5), new CustomTableModel(6)};
-
-      private static DefaultListModel dm_2 = new DefaultListModel();
-      private static DefaultListModel dm_3 = new DefaultListModel();
-      private static DefaultListModel dm_4 = new DefaultListModel();
-      private static DefaultListModel dm_5 = new DefaultListModel();
-      private static DefaultListModel dm_6 = new DefaultListModel();
 
       private String[] bw = {" FROM", " WHERE", " SHOW", " WITH", "-"};
       private ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
@@ -395,32 +383,6 @@ public class Data {
       }
       public static ArrayList<String> getList_cutUrls(){
             return list_cutUrl;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++
-      public DefaultTableModel[] getDTMS() {
-            return dtms;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++
-      public DefaultListModel getDm_2() {
-            return dm_2;
-      }
-
-      public DefaultListModel getDm_3() {
-            return dm_3;
-      }
-
-      public DefaultListModel getDm_4() {
-            return dm_4;
-      }
-
-      public DefaultListModel getDm_5() {
-            return dm_5;
-      }
-
-      public DefaultListModel getDm_6() {
-            return dm_6;
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++

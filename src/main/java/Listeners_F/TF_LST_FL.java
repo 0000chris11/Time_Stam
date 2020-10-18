@@ -1,32 +1,17 @@
 package Listeners_F;
 
-import First.VF;
-import java.awt.Color;
+
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import First.VF_R;
 import MC.DT;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.BorderUIResource;
 
 /**
  *
  * @author Christopher
  */
 public class TF_LST_FL implements FocusListener {
-
-      //Data dt = new Data("TF_LST_FL");
-      //Border[] brs = new LineBorder[]{new LineBorder(Color.WHITE)};
-
-      //Graphics g2;
-      //private static JComponent cS = null;
 
       @Override
       public void focusGained(FocusEvent evt) {

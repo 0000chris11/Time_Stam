@@ -11,7 +11,7 @@ import smallComponenets.smallLB;
 import MC.*;
 import Listeners_F.MainListeners_F;
 import Listeners_F.TableChangedActionListener;
-import Listeners_F.CK_FL;
+import First_Old.CK_FL;
 import com.cofii.myMethods.MText;
 import Others.*;
 import Threads.*;
@@ -308,7 +308,7 @@ public class VF_R extends VF_R_DataCom {
                   System.out.println("\tGroup Layout for LeftPanel");
                   GroupLayout gl = new GroupLayout(PL_C);
                   PL.setLayout(gl);
-                  testing t = new testing(gl, DT.maxColumns);
+                  toCofii t = new toCofii(gl, DT.maxColumns);
                   t.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
             }
             clockConfig();

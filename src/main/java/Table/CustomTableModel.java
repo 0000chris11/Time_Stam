@@ -1,4 +1,4 @@
-package ArrayMethods;
+package Table;
 
 import javax.swing.table.DefaultTableModel;
 
