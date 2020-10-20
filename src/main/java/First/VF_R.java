@@ -9,8 +9,8 @@ import static First.VF_R_DataCom.lb_Status;
 import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import MC.*;
-import Listeners_F.MainListeners_F;
-import Listeners_F.TableChangedActionListener;
+import First.Listeners.MainListeners_F;
+import First.Listeners.JTChanged_AL;
 import First_Old.CK_FL;
 import com.cofii.myMethods.MText;
 import Others.*;
@@ -51,7 +51,7 @@ public class VF_R extends VF_R_DataCom {
       String CName = this.getClass().getName();
 
       //MethodM mm = new MethodM(CName, DT.CCount++);
-      Components cp = new Components(CName, DT.CCount++);
+      CompReset cp = new CompReset();
       notMyMethods n_mm = new notMyMethods();
       //Data dt = new Data("VF_R");
       Status st = new Status();
@@ -110,7 +110,7 @@ public class VF_R extends VF_R_DataCom {
       }
 
       public static void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
-            TableChangedActionListener MIAL = new TableChangedActionListener();
+            JTChanged_AL MIAL = new JTChanged_AL();
 
             JM_Select.removeAll();
             JMS_ChangeDTable.removeAll();

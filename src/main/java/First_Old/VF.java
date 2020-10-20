@@ -9,8 +9,8 @@ import MC.Data;
 import MC.MethodM;
 import MC.Status;
 import MC.notMyMethods;
-import MC.Components;
-import Listeners_F.CK_KL;
+import MC.CompReset;
+import First.Listeners.CK_KL;
 import Others.LimitTextD;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -95,15 +95,15 @@ import javax.swing.plaf.basic.BasicTableUI;
 import javax.swing.plaf.basic.BasicToolBarUI;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.text.AbstractDocument;
-import Listeners_F.BTNS_CMouseListener;
-import Listeners_F.TableChangedActionListener;
-import Listeners_F.MIShow_AL;
+import First.Listeners.BTNS_CMouseListener;
+import First.Listeners.JTChanged_AL;
+import First.Listeners.MIShow_AL;
 import MC.MakeCon;
 import Threads.Threads;
 import Others.LSTD;
 import java.lang.reflect.Method;
 import javax.swing.JToggleButton;
-import Listeners_F.MainListeners_F;
+import First.Listeners.MainListeners_F;
 import MC.DT;
 import javax.swing.SwingUtilities;
 
@@ -116,11 +116,9 @@ public class VF extends JFrame {
       Connection con;
 
       String CName = this.getClass().getName();
-
+      CompReset cp = new CompReset();
       MethodM mm = new MethodM(CName, DT.CCount++);
-      Components cp = new Components(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
-      Data dt = new Data();
       Status st = new Status();
       MainListeners_F ml = new MainListeners_F();
       LSTD lstd = new LSTD();
@@ -172,7 +170,7 @@ public class VF extends JFrame {
       //JButton hide_id = new JButton();
       JButton[] btns_T = new JButton[]{new JButton(), new JButton()};
 
-      //Components tb_cp = new Components(tb);
+      //Components tb_cp = new CompReset(tb);
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private static JTextField[] tfs_MD = new JTextField[]{new JTextField("0"), new JTextField("0"),
             new JTextField("0"), new JTextField("0"), new JTextField("0")};
@@ -356,7 +354,7 @@ public class VF extends JFrame {
             if (listTables.isEmpty()) {
             } else {
                   for (int a = 0; a < listTables.size(); a++) {
-                        if (listTables.get(a).contains(dt.getDTable())) {
+                        if (listTables.get(a).contains(DT.getDTable())) {
                               jm.getItem(a).setFont(new Font(
                                       jm.getItem(a).getFont().getName(),
                                       Font.BOLD,
@@ -367,7 +365,7 @@ public class VF extends JFrame {
       }
 
       private void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
-            TableChangedActionListener MIAL = new TableChangedActionListener();
+            JTChanged_AL MIAL = new JTChanged_AL();
 
             JM2.removeAll();
             mi_OP_Change.removeAll();
@@ -833,38 +831,38 @@ public class VF extends JFrame {
 
             }
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++
-            addItemToMenus(dt.getList_id(), dt.getList_T());
+            addItemToMenus(DT.getList_id(), DT.getList_T());
             setNameToComponents();
 
             mm.printListSelectionListeners(JT);
 
             //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
-            dt.setTable(mm.filterTableName(dt.getTable(), "ADD"));
+            DT.setTable(mm.filterTableName(DT.getTable(), "ADD"));
             System.out.println("SELECT COLUMNS AND ROWS");
-            mc.SelectColumns(dt.getTable());
+            mc.SelectColumns(DT.getTable());
             //typeDetection();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("------ChangeLB_TF");
-            cp.changeLB_TF(JT.getColumnCount(), dt.getList_C());
+            cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
             System.out.println("------addKeyListenerToTFS");
 
             System.out.println("------ChangeLSTD");
-            lstd.changeLSTD(dt.getTable(), dt.getDist1(), dt.getDist2(), dt.getTabl(), dt.getTag(),
-                    dt.getClock());
+            lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(), DT.getTag(),
+                    DT.getClock());
 
             //addKeyListenerToLSTS();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("SELECT CONFIG");
             mc.SelectConfig();
-            mi_AOT.setSelected(dt.getList_BL().get(0));
-            JF.setAlwaysOnTop(dt.getList_BL().get(0));
+            mi_AOT.setSelected(DT.getList_BL().get(0));
+            JF.setAlwaysOnTop(DT.getList_BL().get(0));
 
-            mi_AutoR.setSelected(dt.getList_BL().get(1));
-            n_mm.rez(JT, dt.getList_BL().get(1));
-            dt.autoState = dt.getList_BL().get(1);
+            mi_AutoR.setSelected(DT.getList_BL().get(1));
+            n_mm.rez(JT, DT.getList_BL().get(1));
+            DT.autoState = DT.getList_BL().get(1);
 
-            mi_Grid.setSelected(dt.getList_BL().get(2));
-            JT.setShowGrid(dt.getList_BL().get(2));
+            mi_Grid.setSelected(DT.getList_BL().get(2));
+            JT.setShowGrid(DT.getList_BL().get(2));
             //----------------------------------------------------------------------------------------------------------------------
             System.out.println("------addAllListenerToCJS");
             ml.addAllListenerLoop();
@@ -903,18 +901,18 @@ public class VF extends JFrame {
             frameConfig();
 
             mc.SelectTables();
-            addItemToMenus(dt.getList_id(), dt.getList_T());
+            addItemToMenus(DT.getList_id(), DT.getList_T());
 
             mc.SelectConfig();
-            mi_AOT.setSelected(dt.getList_BL().get(0));
-            JF.setAlwaysOnTop(dt.getList_BL().get(0));
+            mi_AOT.setSelected(DT.getList_BL().get(0));
+            JF.setAlwaysOnTop(DT.getList_BL().get(0));
 
-            mi_AutoR.setSelected(dt.getList_BL().get(1));
-            n_mm.rez(JT, dt.getList_BL().get(1));
-            dt.autoState = dt.getList_BL().get(1);
+            mi_AutoR.setSelected(DT.getList_BL().get(1));
+            n_mm.rez(JT, DT.getList_BL().get(1));
+            DT.autoState = DT.getList_BL().get(1);
 
-            mi_Grid.setSelected(dt.getList_BL().get(2));
-            JT.setShowGrid(dt.getList_BL().get(2));
+            mi_Grid.setSelected(DT.getList_BL().get(2));
+            JT.setShowGrid(DT.getList_BL().get(2));
 
       }
 
@@ -1400,10 +1398,10 @@ public class VF extends JFrame {
 
       private void mi_AutoRStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mi_AutoRStateChanged
             if (mi_AutoR.isSelected()) {
-                  dt.autoState = true;
-                  n_mm.rez(JT, dt.autoState);
+                  DT.autoState = true;
+                  n_mm.rez(JT, DT.autoState);
             } else {
-                  dt.autoState = false;
+                  DT.autoState = false;
             }
       }//GEN-LAST:event_mi_AutoRStateChanged
 
@@ -1699,7 +1697,7 @@ public class VF extends JFrame {
             JT.setFont(new Font(f.getName(), f.getSize(), ++fsize));
             JT.setRowHeight(++rheight);
             tf_ce.setFont(new Font(f.getName(), f.getSize(), ++fsize));
-            n_mm.rez(JT, dt.autoState);
+            n_mm.rez(JT, DT.autoState);
       }//GEN-LAST:event_btn_plusActionPerformed
 
       private void btn_minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minusActionPerformed
@@ -1709,7 +1707,7 @@ public class VF extends JFrame {
             JT.setFont(new Font(f.getName(), f.getSize(), --fsize));
             JT.setRowHeight(--rheight);
             tf_ce.setFont(new Font(f.getName(), f.getSize(), --fsize));
-            n_mm.rez(JT, dt.autoState);
+            n_mm.rez(JT, DT.autoState);
       }//GEN-LAST:event_btn_minusActionPerformed
 
       private void mi_GridStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mi_GridStateChanged
@@ -1730,32 +1728,32 @@ public class VF extends JFrame {
 
       private void mi_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_UpdateActionPerformed
             ArrayList<String> list_LST = new ArrayList<String>();
-            list_LST.add(dt.getTable());
-            list_LST.add(dt.getDist1());
-            list_LST.add(dt.getDist2());
-            list_LST.add(dt.getTabl());
-            list_LST.add(dt.getTag());
-            list_LST.add(dt.getClock());
+            list_LST.add(DT.getTable());
+            list_LST.add(DT.getDist1());
+            list_LST.add(DT.getDist2());
+            list_LST.add(DT.getTabl());
+            list_LST.add(DT.getTag());
+            list_LST.add(DT.getClock());
 
-            View_Update vu = new View_Update(list_LST, dt.getList_T(), dt.getList_C(),
-                    dt.getList_TP(), dt.getList_NL());
+            View_Update vu = new View_Update(list_LST, DT.getList_T(), DT.getList_C(),
+                    DT.getList_TP(), DT.getList_NL());
             vu.setVisible(true);
             //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             dispose();
       }//GEN-LAST:event_mi_UpdateActionPerformed
 
       private void mi_saveOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_saveOpActionPerformed
-            if (mi_AOT.getState() != dt.getList_BL().get(0)) {
+            if (mi_AOT.getState() != DT.getList_BL().get(0)) {
                   mc.UpdateConfig(mi_AOT.getState(), 1);
             } else {
                   //System.out.println("mi_AOT hasn't changed");
             }
-            if (mi_AutoR.getState() != dt.getList_BL().get(1)) {
+            if (mi_AutoR.getState() != DT.getList_BL().get(1)) {
                   mc.UpdateConfig(mi_AutoR.getState(), 2);
             } else {
                   //System.out.println("mi_AutoR hasn't changed");
             }
-            if (mi_Grid.getState() != dt.getList_BL().get(2)) {
+            if (mi_Grid.getState() != DT.getList_BL().get(2)) {
                   mc.UpdateConfig(mi_Grid.getState(), 3);
             } else {
                   //System.out.println("mi_Grid hasn't changed");

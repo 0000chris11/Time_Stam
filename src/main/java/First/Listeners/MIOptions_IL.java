@@ -1,4 +1,4 @@
-package Listeners_F;
+package First.Listeners;
 
 import First.VF_R;
 import MC.DT;
@@ -19,12 +19,13 @@ import javax.swing.JPanel;
  */
 public class MIOptions_IL implements ActionListener {
 
+      
       @Override
       public void actionPerformed(ActionEvent e) {
             String item = ((JComponent) e.getSource()).getName();
 
             setFOptions(e, item);
-            setPanelsOptions(e, item);
+            //setPanelsOptions(e, item);
             //+++++++++++++++++++++++++
             if (e.getActionCommand().contains("Save")) {
                   //Data dt = new Data("MIOptions_IL");

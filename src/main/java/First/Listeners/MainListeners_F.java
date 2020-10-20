@@ -1,5 +1,16 @@
-package Listeners_F;
+package First.Listeners;
 
+import First.Listeners.MITableOptions_AL;
+import First.Listeners.MIShow_AL;
+import First.Listeners.MIOptions_IL;
+import First.Listeners.LSTS_VC;
+import First.Listeners.JT_ML;
+import First.Listeners.JT_LSL;
+import First.Listeners.FocusBorder;
+import First.Listeners.CK_KL;
+import First.Listeners.BTNS_TBActionListener;
+import First.Listeners.BTNS_MCActionListener;
+import First.Listeners.BTNS_CMouseListener;
 import First.VF_R;
 import MC.DT;
 import Create.VC_R;
@@ -46,7 +57,7 @@ public class MainListeners_F {
       //++++++++++++++++++++++++++++++++++++++++++++
       //CHANGE NEEDED
       private void addTableModelListenerToJT() {
-            JTTableModelListener JTML = new JTTableModelListener();
+            JT_ML JTML = new JT_ML();
             for (int a = 2; a < DT.getDTMS().length; a++) {
                   if (DT.getList_C().size() == a) {
                         if (DT.getDTMS()[a].getTableModelListeners().length > 0) {
@@ -67,7 +78,7 @@ public class MainListeners_F {
       }
 
       private void addListSelectionListenerToJT() {
-            JTListSelectionListener JTL = new JTListSelectionListener();
+            JT_LSL JTL = new JT_LSL();
             DefaultListSelectionModel dlsm = (DefaultListSelectionModel) VF_R.getJT().getSelectionModel();
 
             if (dlsm.getListSelectionListeners().length > 0) {
@@ -158,7 +169,7 @@ public class MainListeners_F {
       }
 
       private void addValueChangedListenerToLSTS() {
-            LSTSValueChanged lstsVC = new LSTSValueChanged();
+            LSTS_VC lstsVC = new LSTS_VC();
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getJLSTS()[a].getListSelectionListeners().length > 0) {
                         VF_R.getJLSTS()[a].removeListSelectionListener(lstsVC);
@@ -270,7 +281,7 @@ public class MainListeners_F {
       }
 
       private void addActionListenerToMITable() {
-            MITableActionListener MITAL = new MITableActionListener();
+            MITableOptions_AL MITAL = new MITableOptions_AL();
             VF_R.getMI_CreateTable().addActionListener(MITAL);
             VF_R.getMI_UpdateTable().addActionListener(MITAL);
             VF_R.getMI_DeleteThisTable().addActionListener(MITAL);

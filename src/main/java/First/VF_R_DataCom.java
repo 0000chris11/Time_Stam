@@ -1,7 +1,7 @@
 package First;
 
-import Listeners_F.FocusBorder;
-import Listeners_F.TF_LST_FL;
+import First.Listeners.FocusBorder;
+import First.Listeners.TF_LST_FL;
 import MC.DT;
 import com.cofii.myMethods.MCell;
 import java.awt.BasicStroke;
@@ -75,7 +75,7 @@ public class VF_R_DataCom {
             }
       };
       //+++++++++++++++++++++++++++++++++++
-      static String JPL_layout = "null";
+      public static String JPL_layout = "null";
       //+++++++++++++++++++++++++++++++++++
       static JMenuBar JMB = new JMenuBar();
 

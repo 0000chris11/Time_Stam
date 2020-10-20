@@ -1,11 +1,12 @@
-package Listeners_F;
+package First.Listeners;
 
+import First.Listeners.MainListeners_F;
 import First.VF_R;
 import MC.notMyMethods;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import MC.MakeCon;
-import MC.Components;
+import MC.CompReset;
 import MC.DT;
 import MC.Status;
 import com.cofii.myMethods.MText;
@@ -22,14 +23,14 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Christopher
  */
-public class TableChangedActionListener implements ActionListener {
+public class JTChanged_AL implements ActionListener {
 
-      //Data dt = new Data("TableChangedActionListener");
+      //Data dt = new Data("JTChanged_AL");
       String CName = this.getClass().getName();
 
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
-      Components cp = new Components(CName, DT.CCount++);
+      CompReset cp = new CompReset();
       LSTD lstd = new LSTD();
       MainListeners_F ml = new MainListeners_F();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
@@ -57,9 +58,9 @@ public class TableChangedActionListener implements ActionListener {
                         System.out.println("\tcut: " + ac);
                         change = true;
                   }
-                  //System.out.println("TableChangedActionListener ++++ Table: " + DT.getTable());
+                  //System.out.println("JTChanged_AL ++++ Table: " + DT.getTable());
                   DT.setTable(MText.filterTextName(ac, "ADD"));
-                  //System.out.println("TableChangedActionListener ++++ Table: " + dt.getTable());
+                  //System.out.println("JTChanged_AL ++++ Table: " + dt.getTable());
                   mc.SelectATable(DT.getTable());
                   //dt.setTable(mm.filterTextName(ac, "ADD"));
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++

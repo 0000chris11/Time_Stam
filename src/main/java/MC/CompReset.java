@@ -13,24 +13,17 @@ import com.cofii.myMethods.MText;
  *
  * @author Christopher
  */
-public class Components {
+public class CompReset {
 
-      //Data dt = new Data("Components");
       String CName = this.getClass().getName();
-      
-      //MethodM mm =  new MethodM(CName, DT.CCount++);
       MakeCon mc = new MakeCon(CName, DT.CCount++);
 
-      public Components(String from, int CC){
-            DT.getConstructorName(DT.cons, CName, from, CC);
-      }
-      
       public void changeLB_TF(int cc, ArrayList<String> listC) {
             System.out.println("\tColumnCount: " + cc);
-           
+
             String[] cols = new String[listC.size()];//TEXT FOR LABELS
             for (int a = 0; a < cols.length; a++) {
-                  System.out.println("\tlistC " + a + ": "+ listC.get(a));
+                  System.out.println("\tlistC " + a + ": " + listC.get(a));
                   cols[a] = listC.get(a);
             }
             //String[] cols = {null, null, col2, col3, col4, col5, col6};
@@ -49,10 +42,11 @@ public class Components {
                               //VF_R.getJTFS()[b + 2].setLocation(107, VF_R.getJTFS()[b + 1].getY() + 33);
                               //VF_R.getBTNS_C()[b + 1].setLocation(402, VF_R.getBTNS_C()[b].getY() + 33);
                         }
-                        
-                        VF_R.getLB_Icon().setLocation(VF_R.getLB_Icon().getX(), 
-                                VF_R.getJTFS()[a + 1].getY() + 66);
-                        
+                        if (VF_R.JPL_layout.equals("null")) {
+                              VF_R.getLB_Icon().setLocation(VF_R.getLB_Icon().getX(),
+                                      VF_R.getJTFS()[a + 1].getY() + 66);
+                        }
+
                         //MAKE COMPONENTS UNDER LIMIT VISIBLE
                         for (int b = 0; b < a + 1; b++) {
                               //1, 2, 3, 4, 5
@@ -69,7 +63,7 @@ public class Components {
                               VF_R.getJTFS()[b + (2 + a)].setVisible(false);
                               VF_R.getBTNS_C()[b + (1 + a)].setVisible(false);
                         }
-                        
+
                         mc.SelectData(a + 2, DT.getTable());
                   }
             }

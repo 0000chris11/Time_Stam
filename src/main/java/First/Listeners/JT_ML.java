@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Listeners_F;
+package First.Listeners;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -20,9 +20,9 @@ import com.cofii.myMethods.MTable;
  *
  * @author Christopher
  */
-public class JTTableModelListener implements TableModelListener {
+public class JT_ML implements TableModelListener {
 
-      //Data dt = new Data("JTTableModelListener");
+      //Data dt = new Data("JT_ML");
       String CName = this.getClass().getName();
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();

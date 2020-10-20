@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Listeners_F;
+package First.Listeners;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,9 +16,9 @@ import java.awt.Color;
  *
  * @author Christopher
  */
-public class JTListSelectionListener implements ListSelectionListener {
+public class JT_LSL implements ListSelectionListener {
 
-      //Data dt = new Data("JTListSelectionListener");
+      //Data dt = new Data("JT_LSL");
       String CName = this.getClass().getName();
       //MethodM mm = new MethodM(CName, DT.CCount++);
 

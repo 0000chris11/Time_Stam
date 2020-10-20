@@ -1,48 +1,18 @@
 package MC;
 
-import Table.CustomTableModel;
 import Others.CC;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GradientPaint;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.CyclicBarrier;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableModel;
 
 public class Data {
 
-      private static String Id;
-      private static String Old_id;
-      private static String Table;
-      private static String DTable;
-      private static String Dist1;
-      private static String Dist2;
-      private static String Tabl;
-      private static String Tag;
-      private static String Clock;
-
-      
-
-      private static ArrayList<String> list_TC = new ArrayList<String>();
-      private static ArrayList<Boolean> list_BL = new ArrayList<Boolean>();
-
-      private static ArrayList<String> list_id = new ArrayList<String>();
-      private static ArrayList<String> list_T = new ArrayList<String>();//TABLES
-      private static ArrayList<String> list_Dist1 = new ArrayList<String>();
-      private static ArrayList<String> list_Dist2 = new ArrayList<String>();
-      private static ArrayList<String> list_Tabl = new ArrayList<String>();
-      private static ArrayList<String> list_Tag = new ArrayList<String>();
-      //private static ArrayList<String> list_Tag2 = new ArrayList<String>();
-
-      private static ArrayList<String> list_C = new ArrayList<String>();//COLUMNS
       private static ArrayList<String> list_R = new ArrayList<String>();//ROWS
       private static ArrayList<String> list_TP = new ArrayList<String>();//COL TYPE
       private static ArrayList<String> list_NL = new ArrayList<String>();//COL NULL
@@ -123,134 +93,8 @@ public class Data {
             System.out.println(CC.CYAN + "CLASS ### Data ---------- FROM: " 
                     + from + CC.RESET);
       }
-      public Data(){
-            System.out.println(CC.CYAN + "CLASS ### Data" + CC.RESET);
-      }
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      public String getId() {
-            return Id;
-      }
 
-      public void setId(String id) {
-            Id = id;
-      }
-
-      public String getOld_id() {
-            return Old_id;
-      }
-
-      public void setOld_id(String old_id) {
-            Old_id = old_id;
-      }
-
-      public String getTable() {
-            return Table;
-      }
-      public static String getTables(){
-            return Table;
-      }
-
-      public void setTable(String table) {
-            Table = table;
-      }
-
-      public String getDist1() {
-            return Dist1;
-      }
-      public static String getDist1s(){
-            return Dist1;
-      }
-
-      public void setDist1(String dist1) {
-            Dist1 = dist1;
-      }
-
-      public String getDist2() {
-            return Dist2;
-      }
-      public static String getDist2s(){
-            return Dist2;
-      }
-
-      public void setDist2(String dist2) {
-            Dist2 = dist2;
-      }
-
-      public String getTabl() {
-            return Tabl;
-      }
-      public static String getTabls(){
-            return Tabl;
-      }
-
-      public void setTabl(String tabl) {
-            Tabl = tabl;
-      }
-
-      public String getTag() {
-            return Tag;
-      }
-      public static String getTags(){
-            return Tag;
-      }
-
-      public void setTag(String tag) {
-            Tag = tag;
-      }
-
-      public String getClock() {
-            return Clock;
-      }
-      public static String getClocks(){
-            return Clock;
-      }
-
-      public void setClock(String clock) {
-            Clock = clock;
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public ArrayList<String> getList_TC() {
-            return list_TC;
-      }
-
-      public ArrayList<Boolean> getList_BL() {
-            return list_BL;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public ArrayList<String> getList_id() {
-            return list_id;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public ArrayList<String> getList_T() {
-            return list_T;
-      }
-
-      public ArrayList<String> getList_Dist1() {
-            return list_Dist1;
-      }
-
-      public ArrayList<String> getList_Dist2() {
-            return list_Dist2;
-      }
-
-      public ArrayList<String> getList_Tabl() {
-            return list_Tabl;
-      }
-
-      public ArrayList<String> getList_Tag() {
-            return list_Tag;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public ArrayList<String> getList_C() {
-            return list_C;
-      }
-      public static ArrayList<String> getList_Cs() {
-            return list_C;
-      }
+      //++++++++++++++++++++++++++++++++++++++++++++++++
 
       public ArrayList<String> getList_R() {
             return list_R;
@@ -390,14 +234,6 @@ public class Data {
             return bandW;
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++
-      //+++++++++++++++++++++++++++++++++++++++++++++++
-      public String getDTable() {
-            return DTable;
-      }
-
-      public void setDTable(String dtable) {
-            DTable = dtable;
-      }
       /*
       public Data(){
             rowData = new ArrayList<Object>[]{list_1};

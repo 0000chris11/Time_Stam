@@ -1,4 +1,4 @@
-package Listeners_F;
+package First.Listeners;
 
 import First.VF_R;
 import MC.DT;
@@ -10,7 +10,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author Christopher
  */
-public class LSTSValueChanged implements ListSelectionListener {
+public class LSTS_VC implements ListSelectionListener {
 
       String CName = this.getClass().getName();
       //MethodM mm = new MethodM(CName, DT.CCount++);
