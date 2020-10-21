@@ -209,7 +209,7 @@ public class VF_R extends VF_R_DataCom {
             Font f = JT.getFont();
 
             tf_ce.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
-            tf_ce.setBorder(Data.compoundBorder_N);
+            tf_ce.setBorder(DT.compoundBorder_N);
             tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
@@ -236,7 +236,7 @@ public class VF_R extends VF_R_DataCom {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
-            JF.setSize(Data.defaultFrameSize);
+            JF.setSize(DT.defaultFrameSize);
             JF.setLayout(new BorderLayout());
             JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             JF.setResizable(true);
@@ -865,13 +865,14 @@ public class VF_R extends VF_R_DataCom {
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void testConfig() {
             VT vt = new VT();
+            
             JTextField tf = new JTextField();
             vt.add(tf);
             JButton btn = new JButton("SET");
             vt.add(btn);
             JButton btn2 = new JButton("GET");
             vt.add(btn2);
-            JButton btn3 = new JButton("PREF SIZE");
+            JButton btn3 = new JButton("GET TABLE MODEL");
             vt.add(btn3);
             JButton btn4 = new JButton("JF COMPONENTS");
             vt.add(btn4);
@@ -898,12 +899,7 @@ public class VF_R extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-
-                        System.out.println("SPL pref W: " + SPL.getPreferredSize().width);
-                        System.out.println("TB pref W: " + TB.getPreferredSize().width);
-                        System.out.println("JF W: " + JF.getWidth());
-
-                        SPL.setPreferredSize(new Dimension(400, SPL.getPreferredSize().height));
+                        System.out.println(JT.getModel().)
                   }
 
             });
@@ -923,6 +919,7 @@ public class VF_R extends VF_R_DataCom {
                   }
 
             });
+            
             vt.pack();
             vt.setVisible(true);
 

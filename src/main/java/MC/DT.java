@@ -77,10 +77,14 @@ public class DT {
       private static ArrayList<String> list_cutUrl = new ArrayList<String>();
 
       private static DefaultTableModel[] dtms = new DefaultTableModel[]{
-            null, null, new CustomTableModel(2), new CustomTableModel(3), new CustomTableModel(4), new CustomTableModel(5), new CustomTableModel(6)};
+            null, null, 
+            new CustomTableModel(2), new CustomTableModel(3), 
+            new CustomTableModel(4), new CustomTableModel(5), 
+            new CustomTableModel(6)};
 
       private static TableModel[] dtms2 = new TableModel[]{
-            null, null, new CustomTableModel(2), new CustomTableModel(3), 
+            null, null, 
+            new CustomTableModel(2), new CustomTableModel(3), 
             new CustomTableModel(4), new CustomTableModel(5), 
             new CustomTableModel(6)};
 
@@ -133,12 +137,8 @@ public class DT {
       public static final Dimension defaultFrameSize = new Dimension(1270, 627);
       public static final int maxColumns = 6;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      public DT(String from){
-            System.out.println(CC.CYAN + "CLASS ### Data ---------- FROM: " 
-                    + from + CC.RESET);
-      }
-      public DT(){
-            System.out.println(CC.CYAN + "CLASS ### Data" + CC.RESET);
+      private DT(){
+            throw new IllegalStateException("Private Constructor");
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
       public static String getId() {

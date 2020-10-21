@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Table;
+package MC;
 
 import MC.DT;
 import javax.swing.table.DefaultTableModel;
@@ -19,9 +19,7 @@ public class TData {
             throw new IllegalStateException("PRIVATE CONSTRUCTOR");
       }
       
-      private static DefaultTableModel[] dtms = 
+      public static DefaultTableModel[] dtms = 
               new DefaultTableModel[DT.maxColumns];
-      public static DefaultTableModel[] getDTMS(){
-            return dtms;
-      }
+      
 }

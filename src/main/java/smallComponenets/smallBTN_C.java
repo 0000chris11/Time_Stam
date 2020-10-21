@@ -1,24 +1,19 @@
 package smallComponenets;
 
-import MC.Data;
+import MC.DT;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
+
 
 /**
  *
@@ -140,16 +135,16 @@ public class smallBTN_C extends JButton {
                                     H = getHeight();
 
                                     GPS[0]
-                                            = new GradientPaint(0, 0, Data.GP_brightCeleste[0],
-                                                    W, H, Data.GP_brightCeleste[1]);
+                                            = new GradientPaint(0, 0, DT.GP_brightCeleste[0],
+                                                    W, H, DT.GP_brightCeleste[1]);
 
                                     GPS[1]
-                                            = new GradientPaint(0, 0, Data.GP_brightCeleste[0],
-                                                    W, H, Data.GP_brightCeleste[1].darker());
+                                            = new GradientPaint(0, 0, DT.GP_brightCeleste[0],
+                                                    W, H, DT.GP_brightCeleste[1].darker());
 
                                     GPS[2]
-                                            = new GradientPaint(0, 0, Data.GP_brightCeleste[0].darker(),
-                                                    W, H, Data.GP_brightCeleste[1].darker());
+                                            = new GradientPaint(0, 0, DT.GP_brightCeleste[0].darker(),
+                                                    W, H, DT.GP_brightCeleste[1].darker());
 
                                     //System.out.println("\t" + smallBTN_C.this.getName());
                                     //System.out.println("Dimensions: " + W + ", " + H);

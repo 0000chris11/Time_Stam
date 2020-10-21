@@ -76,6 +76,10 @@ public class MainListeners_F {
                   }
             }
       }
+      
+      private void addTableModelListenerToJTNew(){
+            
+      }
 
       private void addListSelectionListenerToJT() {
             JT_LSL JTL = new JT_LSL();

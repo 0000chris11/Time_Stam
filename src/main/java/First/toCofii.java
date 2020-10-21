@@ -9,6 +9,7 @@ import java.awt.LayoutManager;
 import javax.swing.GroupLayout;
 import javax.swing.JComponent;
 import javax.swing.LayoutStyle;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -75,6 +76,14 @@ public class toCofii {
                   gl.setVerticalGroup(
                           gl.createParallelGroup(GroupLayout.Alignment.LEADING)
                                   .addGroup(sgv1));
+            }
+      }
+
+      public static void printTableModelInfo(TableModel tm) {
+            System.out.println("Class: " + tm.getClass().toString());
+            System.out.println("Column Count: " + tm.getColumnCount());
+            for (int a = 0; a < tm.getColumnCount(); a++) {
+                  System.out.println("Class Column " + a + ": " + tm.getColumnClass(a).toString());
             }
       }
 }
