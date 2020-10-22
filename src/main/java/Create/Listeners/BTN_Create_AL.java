@@ -3,7 +3,7 @@ package Create.Listeners;
 import First.VF_R;
 import MC.DT;
 import MC.MakeCon;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import Create.VC_R;
 import java.awt.Color;
 import java.awt.event.ActionEvent;

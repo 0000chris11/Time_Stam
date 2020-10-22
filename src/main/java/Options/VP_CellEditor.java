@@ -5,7 +5,7 @@
  */
 package Options;
 
-import Others.CC;
+import com.cofii.myClasses.CC;
 import com.cofii.myMethods.MCell;
 import java.awt.Component;
 import java.util.EventObject;

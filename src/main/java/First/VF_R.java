@@ -8,12 +8,16 @@ import static First.VF_R_DataCom.btns_MC;
 import static First.VF_R_DataCom.lb_Status;
 import static First.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
-import MC.*;
+import MC.DT;
+import MC.CompReset;
+import MC.notMyMethods;
+import MC.MakeCon;
+import MC.Status;
 import First.Listeners.MainListeners_F;
 import First.Listeners.JTChanged_AL;
 import First_Old.CK_FL;
 import com.cofii.myMethods.MText;
-import Others.*;
+import com.cofii.myClasses.CC;
 import Threads.*;
 import javax.swing.*;
 import java.awt.Color;
@@ -40,12 +44,18 @@ import java.awt.BorderLayout;
 import java.awt.FontMetrics;
 import static First.VF_R_DataCom.SPL;
 import static First.VF_R_DataCom.PL;
+import SQLActions.SelectColumns;
 import com.cofii.myClasses.MLayout;
 import com.cofii.myMethods.MTable;
+import Others.LimitTextD;
+import Others.JTCellRenderer;
+import Others.LSTD;
+import SQLActions.SelectTables;
+import com.cofii.myClasses.MSQL;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class VF_R extends VF_R_DataCom {
 
@@ -62,6 +72,7 @@ public class VF_R extends VF_R_DataCom {
       Threads th = new Threads(CName, DT.CCount++);
       //ArraysM am = new ArraysM();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       //++++++++-+++++++++++++++++++++++++++++++++++++
       int state = 1;
 
@@ -936,8 +947,8 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
             System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
-            mc.SelectTables();
-
+            //mc.SelectTables();
+            ms.selectTables(DT.mainTable, new SelectTables());
             //SELECTING DEFAULT TABLE++++++++++++++++++++++++
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
@@ -954,7 +965,7 @@ public class VF_R extends VF_R_DataCom {
             DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
 
             System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
-            mc.SelectColumns(DT.getTable());
+            ms.SelectColumns(DT.getTable(), new SelectColumns());
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET);
             cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
@@ -1013,7 +1024,7 @@ public class VF_R extends VF_R_DataCom {
             System.out.println("S: " + table);
             frameConfig();
 
-            mc.SelectTables();
+            ms.selectTables(DT.mainTable, new SelectTables());
             addItemToMenus(DT.getList_id(), DT.getList_T());
 
             mc.SelectConfig();

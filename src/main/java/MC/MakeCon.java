@@ -8,8 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import Create.VC_R;
+import SQLActions.SelectTables;
+import com.cofii.myClasses.MSQL;
 import java.awt.Color;
 
 /**
@@ -18,6 +20,7 @@ import java.awt.Color;
  */
 public class MakeCon {
 
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       String CName = this.getClass().getName();
       //Data dt = new Data("MakeCon");
       Status st = new Status();
@@ -181,7 +184,7 @@ public class MakeCon {
                         //DT.getList_Tabl().add(tabl);
                         //DT.getList_Tag().add(tag);
                         //DT.getList_Clock().add(clock);
-                        SelectTables();
+                        ms.selectTables(DT.mainTable, new SelectTables());
                         
                         
                         
@@ -358,57 +361,6 @@ public class MakeCon {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
-      //REPLACE FOR COFII
-      public void SelectColumns(String table) {
-            System.out.println(CC.YELLOW + "MakeCon ++++ SelectColumns" + CC.RESET);
-            System.out.println("\tTable: " + table);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-
-                  String query = "SHOW COLUMNS FROM " + table;
-                  //System.out.println("SHOW COLUMNS FROM " + table);
-                  stt = con.createStatement();
-                  rs = stt.executeQuery(query);
-
-                  DT.getList_C().clear();
-                  DT.getList_TP().clear();
-                  DT.getList_NL().clear();
-
-                  while (rs.next()) {
-                        //jm.addColumn(rs.getString(1));
-                        DT.getList_C().add(rs.getString(1));
-                        DT.getList_TP().add(rs.getString(2));
-                        DT.getList_NL().add(rs.getString(3));
-                  }
-
-                  //NEED METHOD
-                  //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-                  for (int a = 0; a < DT.maxColumns - 1; a++) {
-                        if (DT.getList_C().size() == a + 2) {
-                              VF_R.getJT().setModel(DT.getDTMS()[a + 2]);
-                        }
-
-                        DT.getDTMS()[a + 2].setColumnCount(0);
-                        DT.getDTMS()[a + 2].setRowCount((0));
-                  }
-
-                  for (int a = 0; a < DT.getList_C().size(); a++) {
-                        for (int b = 0; b < DT.maxColumns - 1; b++) {
-                              if (DT.getList_C().size() == b + 2) {
-                                    DT.getDTMS()[b + 2].addColumn(DT.getList_C().get(a));
-                              }
-                        }
-                  }
-
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectColumns: " + ex.toString(), 8000);
-            }
-
-      }
-
       public void SelectData(int cols, String table) {
             System.out.println(CC.YELLOW + "MakeCon ++++ SelectData" + CC.RESET);
             System.out.println("\tTable: " + table);

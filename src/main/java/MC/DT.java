@@ -1,7 +1,7 @@
 package MC;
 
 import Table.CustomTableModel;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -122,7 +122,20 @@ public class DT {
       public static String[] cols = new String[8];
 
       public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";
-
+      //++++++++++++++++++++++++++++++++++++++++++++
+      public static final String dataBase = "TIME_STAM";
+      public static final String mainTable = "Table_Names";
+      public static final String urlConnection
+              = "jdbc:mysql://localhost:3306/"
+              + dataBase + "?allowPublicKeyRetrieval=true&"
+              + "useSSL=false&"
+              + "useJDBCCompliantTimezoneShift=true&"
+              + "useLegacyDatetimeCode=false&"
+              + "serverTimezone=UTC";
+      
+      public static final String user = "root";
+      final public static String passw = "ccfmps00112";
+      //++++++++++++++++++++++++++++++++++++++++++++
       public static boolean autoState;
 
       public static boolean bool_Add;

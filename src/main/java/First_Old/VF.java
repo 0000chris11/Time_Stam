@@ -52,6 +52,9 @@ import Others.LSTD;
 import javax.swing.JToggleButton;
 import First.Listeners.MainListeners_F;
 import MC.DT;
+import com.cofii.myClasses.MSQL;
+import SQLActions.SelectColumns;
+import SQLActions.SelectTables;
 
 /**
  *
@@ -71,6 +74,7 @@ public class VF extends JFrame {
       Threads th = new Threads(CName, DT.CCount++);
       //ArraysM am = new ArraysM();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       //+++++++++++++++++++++++++++++++++++++++++++++
 
       private static JFrame JF = new JFrame();
@@ -767,7 +771,7 @@ public class VF extends JFrame {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
             System.out.println("\nSELECT TABLES");
-            mc.SelectTables();
+            ms.selectTables(DT.mainTable, new SelectTables());
 
             //SELECTING DEFAULT TABLE+++++++++++++++++++++++++
             if (getDefault == true) {
@@ -785,7 +789,7 @@ public class VF extends JFrame {
             //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
             DT.setTable(mm.filterTableName(DT.getTable(), "ADD"));
             System.out.println("SELECT COLUMNS AND ROWS");
-            mc.SelectColumns(DT.getTable());
+            ms.SelectColumns(DT.getTable(), new SelectColumns());
             //typeDetection();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("------ChangeLB_TF");
@@ -846,7 +850,7 @@ public class VF extends JFrame {
             System.out.println("S: " + table);
             frameConfig();
 
-            mc.SelectTables();
+            ms.selectTables(DT.mainTable, new SelectTables());
             addItemToMenus(DT.getList_id(), DT.getList_T());
 
             mc.SelectConfig();

@@ -9,7 +9,7 @@ import MC.MakeCon;
 import MC.notMyMethods;
 import com.cofii.myMethods.MImage;
 import com.cofii.myMethods.MTable;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import Others.LSTD;
 import java.awt.Color;
 import java.util.ArrayList;

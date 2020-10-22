@@ -8,12 +8,17 @@ import java.awt.event.ActionListener;
 import MC.MakeCon;
 import MC.CompReset;
 import MC.DT;
+import SQLActions.SelectColumns;
 import MC.Status;
 import com.cofii.myMethods.MText;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import Others.LSTD;
+import com.cofii.myClasses.MSQL;
+import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,7 +38,10 @@ public class JTChanged_AL implements ActionListener {
       CompReset cp = new CompReset();
       LSTD lstd = new LSTD();
       MainListeners_F ml = new MainListeners_F();
+
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
+
       Status st = new Status();
 
       @Override
@@ -83,7 +91,8 @@ public class JTChanged_AL implements ActionListener {
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ MCSelectColumns");
-                  mc.SelectColumns(DT.getTable());
+                  //ms.SelectColumns(DT.getTable());
+                  ms.SelectColumns(DT.getTable(), new SelectColumns());
 
                   System.out.println("MIActionListener ++++ ChangeLB_TF");
                   cp.changeLB_TF(VF_R.getJT().getColumnCount(), DT.getList_C());
@@ -128,7 +137,7 @@ public class JTChanged_AL implements ActionListener {
                   }
                   DT.bool_Sel = false;
                   System.out.println(CC.GREEN + "\n MIActionListener ENDS" + CC.RESET);
-                  
+
             } else {
                   st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                           "This Table is already selected", 3000);
@@ -152,17 +161,17 @@ public class JTChanged_AL implements ActionListener {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++
       private static void resetTF_LB(JTextField tf, JLabel lb) {
-                  tf.setBackground(new Color(51, 51, 51));
-                  tf.setSize(290, tf.getHeight());
+            tf.setBackground(new Color(51, 51, 51));
+            tf.setSize(290, tf.getHeight());
 
-                  String l = lb.getText();
-                  if (l.contains("*")) {//?????????
-                        lb.setText(l.substring(l.indexOf("*") + 1, l.length()));
-                  }
-            
+            String l = lb.getText();
+            if (l.contains("*")) {//?????????
+                  lb.setText(l.substring(l.indexOf("*") + 1, l.length()));
+            }
+
       }
 
-      private static void resetClock(JTextField MD, JTextField MU, 
+      private static void resetClock(JTextField MD, JTextField MU,
               JTextField SD, JTextField SU) {
             MD.setText("0");
             MU.setText("0");
@@ -208,7 +217,7 @@ public class JTChanged_AL implements ActionListener {
             //++++++++++++++++++++++++++++++++++++++
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getClocks()[a].setVisible(false);
-                  
+
                   resetClock(VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a],
                           VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a]);
             }

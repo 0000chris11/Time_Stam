@@ -1,10 +1,8 @@
 package Options;
 
-import Others.CC;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.util.Locale;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JTree;

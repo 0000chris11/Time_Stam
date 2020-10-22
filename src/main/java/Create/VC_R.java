@@ -4,7 +4,7 @@ import Create.VC_R_DataCom;
 import First.VF_R;
 import Create.Listeners.MainListeners_C;
 import MC.DT;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.BorderFactory;

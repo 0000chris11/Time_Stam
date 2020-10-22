@@ -6,7 +6,7 @@
 package Options;
 
 import Options.VP;
-import Others.CC;
+import com.cofii.myClasses.CC;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JCheckBox;
