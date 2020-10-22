@@ -358,6 +358,7 @@ public class MakeCon {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
+      //REPLACE FOR COFII
       public void SelectColumns(String table) {
             System.out.println(CC.YELLOW + "MakeCon ++++ SelectColumns" + CC.RESET);
             System.out.println("\tTable: " + table);

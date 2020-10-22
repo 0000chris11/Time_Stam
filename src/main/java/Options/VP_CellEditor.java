@@ -47,8 +47,7 @@ public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
 
       @Override
       public boolean isCellEditable(EventObject anEvent) {
-            return MCell.isCellEditableForCheckBoxAndDefaults(
-                    anEvent, VP.JTEN, defaultNode);
+            return MCell.isCellEditableForCheckBoxAndDefaults(anEvent, VP.JTEN);
       }
       
 }

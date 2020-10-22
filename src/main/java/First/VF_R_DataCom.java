@@ -1,10 +1,7 @@
 package First;
 
-import First.Listeners.FocusBorder;
-import First.Listeners.TF_LST_FL;
 import MC.DT;
 import com.cofii.myMethods.MCell;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,28 +21,20 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Component;
 import java.awt.GradientPaint;
-import java.awt.event.KeyEvent;
 import java.util.EventObject;
 import javax.swing.JProgressBar;
 import javax.swing.JSplitPane;
-import javax.swing.event.CellEditorListener;
-import javax.swing.table.TableCellEditor;
 import smallComponenets.JPanelGradient;
 import smallComponenets.smallBTN_C;
-import smallComponenets.smallMenu;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class VF_R_DataCom {
 
-      //Data dt = new Data();
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++
+      //+++++++++++++++++++++++++++++++++++++++++++
       static JFrame JF = new JFrame("Time Stamp");
 
       static JSplitPane SPL = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);

@@ -40,6 +40,8 @@ import java.awt.BorderLayout;
 import java.awt.FontMetrics;
 import static First.VF_R_DataCom.SPL;
 import static First.VF_R_DataCom.PL;
+import com.cofii.myClasses.MLayout;
+import com.cofii.myMethods.MTable;
 
 /**
  *
@@ -308,8 +310,9 @@ public class VF_R extends VF_R_DataCom {
                   System.out.println("\tGroup Layout for LeftPanel");
                   GroupLayout gl = new GroupLayout(PL_C);
                   PL.setLayout(gl);
-                  toCofii t = new toCofii(gl, DT.maxColumns);
-                  t.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
+                  
+                  MLayout ml = new MLayout(gl, DT.maxColumns);
+                  ml.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
             }
             clockConfig();
       }
@@ -478,6 +481,7 @@ public class VF_R extends VF_R_DataCom {
             PT.setLayout(null);
             PT.setPreferredSize(new Dimension(300, PT.getPreferredSize().height));
             PT.setBackground(Color.RED);
+            
             //PT.setBounds(2, 2, 769, 518);
             PT.add(JT);
             JT.setBounds(6, 6, 758, 516);
@@ -899,7 +903,7 @@ public class VF_R extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println(JT.getModel().)
+                        MTable.printTableModelInfo(JT.getModel());
                   }
 
             });

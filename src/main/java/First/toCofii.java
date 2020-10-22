@@ -5,85 +5,88 @@
  */
 package First;
 
-import java.awt.LayoutManager;
-import javax.swing.GroupLayout;
-import javax.swing.JComponent;
-import javax.swing.LayoutStyle;
-import javax.swing.table.TableModel;
+import MC.DT;
+import Others.CC;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class toCofii {
 
-      private LayoutManager LY;
-      private int Limit;
+      Actions ac;
 
-      public toCofii(LayoutManager ly, int limit) {
-            LY = ly;
-            Limit = limit;
+      private Connection con;
+      private String query;
+      private Statement stt;
+      private PreparedStatement pstt;
+      private ResultSet rs;
+
+      private String urlConnection;
+      private String user;
+      private String passw;
+
+      public toCofii(String urlConnection, String user, String passw) {
+            this.urlConnection = urlConnection;
+            this.user = user;
+            this.passw = passw;
       }
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      public void SelectColumns(String table, Actions ac) {
+            System.out.println(CC.YELLOW + "MakeCon ++++ SelectColumns" + CC.RESET);
+            System.out.println(CC.YELLOW + "\tTable: " + table + CC.RESET);
 
-      //TO COFII
-      public void useFiveAndOneSequence(JComponent[] C1, JComponent[] C2,
-              JComponent[] C3, JComponent[] C4, JComponent[] C5) {
-            if (LY instanceof GroupLayout) {
-                  GroupLayout gl = (GroupLayout) LY;
+            try {
+                  con = DriverManager.getConnection(
+                          urlConnection, user, passw);
 
-                  gl.setAutoCreateGaps(true);
-                  gl.setAutoCreateContainerGaps(true);
+                  String query = "SHOW COLUMNS FROM " + table;
+                  //System.out.println("SHOW COLUMNS FROM " + table);
+                  stt = con.createStatement();
+                  rs = stt.executeQuery(query);
 
-                  GroupLayout.ParallelGroup pgh1 = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-                  GroupLayout.ParallelGroup pgh2 = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-                  GroupLayout.ParallelGroup pgh3 = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-
-                  GroupLayout.SequentialGroup sgv1 = gl.createSequentialGroup();
-                  //SequentialGroup sgh1 = layout.createSequentialGroup();
-                  int LST_PREF = 200;
-                  int TF_PREF = 150;
-                  int CON_PREF = 50;
-
-                  for (int a = 0; a < Limit; a++) {
-                        pgh1.addComponent(C1[a]);
-                        pgh1.addGap(0);
-                        //++++++++++++++++++++++++++
-                        pgh2.addGroup(gl.createSequentialGroup()
-                                .addComponent(C2[a], TF_PREF, TF_PREF, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(C3[a], CON_PREF, CON_PREF, CON_PREF));
-                        pgh2.addComponent(C4[a], LST_PREF, LST_PREF, Short.MAX_VALUE);
-                        //++++++++++++++++++++++++++
-                        pgh3.addComponent(C5[a]);
-                        pgh3.addGap(0);
-                        //=========================================
-                        sgv1.addGroup(gl.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(C1[a])
-                                .addComponent(C2[a])
-                                .addComponent(C3[a])
-                                .addComponent(C5[a]));
-                        sgv1.addComponent(C4[a]);
+                  ac.beforeQuery();
+                  
+                  while (rs.next()) {
+                        ac.setData(rs);
                   }
-                  //++++++++++++++++++++++++++++++++
-                  //++++++++++++++++++++++++++++++++
-                  gl.setHorizontalGroup(
-                          gl.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                  .addGroup(gl.createSequentialGroup()
-                                          .addGroup(pgh1)
-                                          .addGroup(pgh2)
-                                          .addGroup(pgh3)));
 
-                  gl.setVerticalGroup(
-                          gl.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                  .addGroup(sgv1));
+                  ac.afterQuery();
+
+            } catch (SQLException ex) {
+                  ac.exception(ex);
+
             }
       }
 
-      public static void printTableModelInfo(TableModel tm) {
-            System.out.println("Class: " + tm.getClass().toString());
-            System.out.println("Column Count: " + tm.getColumnCount());
-            for (int a = 0; a < tm.getColumnCount(); a++) {
-                  System.out.println("Class Column " + a + ": " + tm.getColumnClass(a).toString());
+      public int getColumnCount(String table) {
+            System.out.println(CC.YELLOW + "MakeCon ++++ getColumnCount" + CC.RESET);
+            System.out.println("\tTable: " + table);
+
+            int returnValue = -1;
+
+            try {
+                  con = DriverManager.getConnection(
+                          urlConnection, user, passw);
+
+                  String query = "SELECT COUNT(*) FROM " + table;
+                  stt = con.createStatement();
+                  rs = stt.executeQuery(query);
+
+                  while (rs.next()) {
+                        returnValue = rs.getInt(1);
+                  }
+            } catch (SQLException ex) {
+                  ex.printStackTrace();
+                  returnValue = -1;
             }
+            return returnValue;
       }
+
 }
