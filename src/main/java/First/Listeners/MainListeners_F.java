@@ -274,9 +274,6 @@ public class MainListeners_F {
             VF_R.getMI_AutoR().addActionListener(mio);
             VF_R.getMI_Grid().addActionListener(mio);
 
-            VF_R.getMI_SEEL().addActionListener(mio);
-            VF_R.getMI_SEER().addActionListener(mio);
-
             VF_R.getSaveOp().addActionListener(mio);
       }
 

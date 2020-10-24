@@ -97,7 +97,7 @@ public class VP extends DT {
       }
 
       private void testConfig() {
-            VT vt = new VT();
+            VT vt = new VT(BoxLayout.Y_AXIS);
             JButton btn1 = new JButton("repaint JTree");
             JButton btn2 = new JButton("is JTree still editing?");
             JButton btn3 = new JButton("get Right Panel Components");

@@ -789,7 +789,7 @@ public class VF extends JFrame {
             //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
             DT.setTable(mm.filterTableName(DT.getTable(), "ADD"));
             System.out.println("SELECT COLUMNS AND ROWS");
-            ms.SelectColumns(DT.getTable(), new SelectColumns());
+            ms.selectColumns(DT.getTable(), new SelectColumns());
             //typeDetection();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("------ChangeLB_TF");

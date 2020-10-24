@@ -92,7 +92,7 @@ public class JTChanged_AL implements ActionListener {
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ MCSelectColumns");
                   //ms.SelectColumns(DT.getTable());
-                  ms.SelectColumns(DT.getTable(), new SelectColumns());
+                  ms.selectColumns(DT.getTable(), new SelectColumns());
 
                   System.out.println("MIActionListener ++++ ChangeLB_TF");
                   cp.changeLB_TF(VF_R.getJT().getColumnCount(), DT.getList_C());

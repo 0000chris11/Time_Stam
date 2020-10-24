@@ -36,12 +36,21 @@ public class VF_R_DataCom {
 
       //+++++++++++++++++++++++++++++++++++++++++++
       static JFrame JF = new JFrame("Time Stamp");
-
+      //============================================================
       static JSplitPane SPL = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-      static JPanel PL = new JPanel();
-      static JScrollPane sc_P1 = new JScrollPane();//DELETE
-      static JPanel PL_T = new JPanel();
-      static JPanel PL_C = new JPanelGradient();
+      
+      static JSplitPane SPL_SUB = new JSplitPane(JSplitPane.VERTICAL_SPLIT);    
+      static JPanel PL_U = new JPanel();      
+      static JPanel PL_UT = new JPanel();
+      static JPanel PL_UC = new JPanelGradient();
+      static JScrollPane sc_PL_UC = new JScrollPane(PL_UC);
+      
+      static JPanel PL_B = new JPanel();
+      static JScrollPane sc_PL_B = new JScrollPane(PL_B);
+      static JLabel lb_Icon = new JLabel("NO ICON SELECTED");
+      static JProgressBar JPB = new JProgressBar();
+      //============================================================
+      
 
       static JPanel PT = new JPanel();
 
@@ -90,9 +99,6 @@ public class VF_R_DataCom {
       static JCheckBoxMenuItem mi_AutoR = new JCheckBoxMenuItem("Auto-Resize");
       static JCheckBoxMenuItem mi_Grid = new JCheckBoxMenuItem("Show Grid");
       Separator sep1 = new Separator();
-      static JCheckBoxMenuItem mi_seeL = new JCheckBoxMenuItem("Show Left Panel");
-      static JCheckBoxMenuItem mi_seeR = new JCheckBoxMenuItem("Show Rigth Panel");
-      Separator sep2 = new Separator();
       static JMenuItem mi_SaveOp = new JMenuItem("Save Options");
 
       static JMenu JM_Select = new JMenu("Select");
@@ -114,15 +120,12 @@ public class VF_R_DataCom {
       static JLabel lb_Status = new JLabel("Waiting for Action...");
       static JToggleButton btn_Show_All = new JToggleButton("Show All");
 
-      static JLabel lb_Title = new JLabel();
+      static JLabel lb_Title = new JLabel("No Table Selected");
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       static JButton[] btns_C = new JButton[DT.maxColumns];
       static JScrollPane[] scs = new JScrollPane[DT.maxColumns];
       static JList[] lsts = new JList[DT.maxColumns];
-
-      static JLabel lb_Icon = new JLabel();
-      static JProgressBar JPB = new JProgressBar();
 
       static JButton[] btns_TB = new JButton[]{new smallBTN_C(""), new smallBTN_C("")};
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -149,20 +152,18 @@ public class VF_R_DataCom {
             return JF;
       }
 
-      public static JScrollPane getSC_P1() {
-            return sc_P1;
-      }
+
 
       public static JPanel getPL() {
-            return PL;
+            return PL_U;
       }
       
       public static JPanel getPL_T(){
-            return PL_T;
+            return PL_UT;
       }
 
       public static JPanel getPL_C(){
-            return PL_C;
+            return PL_UC;
       }
       public static JPanel getP3() {
             return p3;
@@ -271,10 +272,6 @@ public class VF_R_DataCom {
             return btns_MC;
       }
 
-      public static JScrollPane getJSC_P1() {
-            return sc_P1;
-      }
-
       //+++++++++++++++++++++++++++++++++++++++++++++++++
       public static JMenu getJM_Options() {
             return JM_Options;
@@ -311,16 +308,6 @@ public class VF_R_DataCom {
       public static JMenuItem getMI_DeleteThisTable() {
             return mi_DeleteThisTable;
       }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public static JMenuItem getMI_SEEL() {
-            return mi_seeL;
-      }
-
-      public static JMenuItem getMI_SEER() {
-            return mi_seeR;
-      }
-
       //+++++++++++++++++++++++++++++++++++++++++++++++++
       public static JCheckBoxMenuItem getMI_AOT() {
             return mi_AOT;
