@@ -49,14 +49,13 @@ public class VF_R_DataCom {
       static JScrollPane sc_PL_B = new JScrollPane(PL_B);
       static JLabel lb_Icon = new JLabel("NO ICON SELECTED");
       static JProgressBar JPB = new JProgressBar();
-      //============================================================
       
-
-      static JPanel PT = new JPanel();
-
       static JTable JT = new JTable();
       static JLabel lb_JT = new JLabel("NO ROWS INSERTED");
-      static JScrollPane sc_JT = new JScrollPane(PT);
+      static JScrollPane sc_JT = new JScrollPane(JT);
+      //============================================================    
+
+      
 
       static JPanel p3 = new JPanel();
 
@@ -171,10 +170,6 @@ public class VF_R_DataCom {
 
       public static JTable getJT() {
             return JT;
-      }
-
-      public static JPanel getPT() {
-            return PT;
       }
 
       public static JLabel getLB_JT() {

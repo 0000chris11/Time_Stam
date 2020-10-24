@@ -38,11 +38,15 @@ public class VT_T extends VF_R_DataCom{
             btn.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        Class ss = lb_Icon.getClass();
-                        System.out.println("Fields" + ss.getDeclaredFields());
+                        Class ss = JT.getModel().getClass();
+                        System.out.println("DeclaredFields: " + ss.getDeclaredFields());
                         printArray(ss.getDeclaredFields());
-                        System.out.println("TypeParameters" + ss.getTypeParameters());
+                        System.out.println("TypeParameters: " + ss.getTypeParameters());
                         printArray(ss.getTypeParameters());
+                        System.out.println("Fields: " + ss.getFields());
+                        printArray(ss.getFields());
+                        System.out.println("Methods: " + ss.getMethods());
+                        printArray(ss.getMethods());
                         
                   }
 

@@ -2,7 +2,6 @@ package First;
 
 import static First.VF_R_DataCom.JF;
 import static First.VF_R_DataCom.JT;
-import static First.VF_R_DataCom.PT;
 import static First.VF_R_DataCom.btn_plus;
 import static First.VF_R_DataCom.btns_MC;
 import static First.VF_R_DataCom.lb_Status;
@@ -262,14 +261,8 @@ public class VF_R extends VF_R_DataCom {
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             statusPanelConfig();
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            //IF - WISH LAYOUT TO USE ON P1
-
-            //IF - WISH LAYOUT TO USE ON P1
-            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             toolbarConfig();
             //++++++++++++++++++++++++++++++++++++++
-
-            //++++++++++++++++++
             setNameToComponents();
 
       }
@@ -288,10 +281,10 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++
             subSplitUpConfig();
             subSplitDownConfig();
-            SPL_SUB.setDividerLocation(0.6);
+            SPL_SUB.setDividerLocation(0.6);//NOT LISTENING
             //*++++++++++++++++++++++++++++++++++++++++++++
             setComponentsToArray();
-            componentsConfig();
+            componentsVisibility();
             //++++++++++++++++++++++++++
             if (JPL_layout.equals("null")) {
                   System.out.println("\tNull Layout for LeftPanel");
@@ -340,8 +333,9 @@ public class VF_R extends VF_R_DataCom {
 
       private void subSplitDownConfig() {
             sc_PL_B.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            //sc_PL_B.setPreferredSize(new );
+            sc_PL_B.setPreferredSize(new Dimension(sc_PL_B.getPreferredSize().width, 250));
             PL_B.setLayout(new BorderLayout());
+            //PL_B.setPreferredSize(new Dimension(sc_PL_B.getPreferredSize().width));
             PL_B.setBackground(Color.BLACK);
             PL_B.add(lb_Icon, BorderLayout.CENTER);
             PL_B.add(JPB, BorderLayout.SOUTH);
@@ -511,23 +505,13 @@ public class VF_R extends VF_R_DataCom {
 
       //----------------------------------------------------------------------
       private void tableConfig() {
-            //JF.getContentPane().add(sc_JT);
             JT.setUI(new BasicTableUI());
-            //int x = sc_P1.getX() + sc_P1.getWidth();
-            //sc_JT.setLayout(null);
-            //sc_JT.setLocation(x - 2, 22);
-            sc_JT.setPreferredSize(new Dimension(300, sc_JT.getPreferredSize().height));
-            sc_JT.setSize(766, 522);
+            sc_JT.setPreferredSize(new Dimension(400, sc_JT.getPreferredSize().height));
+            //sc_JT.setSize(766, 522);
             sc_JT.setVerticalScrollBarPolicy(22);
-            //sc_JT.setPreferredSize(new Dimension(764, 522));
-            PT.setLayout(null);
-            PT.setPreferredSize(new Dimension(300, PT.getPreferredSize().height));
-            PT.setBackground(Color.RED);
-
-            //PT.setBounds(2, 2, 769, 518);
-            PT.add(JT);
-            JT.setBounds(6, 6, 758, 516);
-            //JT.setPreferredSize(new Dimension(758, JT.getHeight()));
+            
+            //JT.setBounds(6, 6, 758, 516);
+            JT.setPreferredSize(new Dimension(758, JT.getHeight()));
             JT.setBackground(Color.BLACK);
             JT.setFont(new Font("Dialog", Font.PLAIN, 20));
             JT.setRowHeight(23);
@@ -538,7 +522,7 @@ public class VF_R extends VF_R_DataCom {
             JT.setRowSelectionAllowed(true);
             JT.setSelectionBackground(DT.TFColor[2]);
             //JT.setPreferredScrollableViewportSize();
-            JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
+            //JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
             //System.out.println("PT size: " + PT.getSize());
             //System.out.println("SC_JT size: " + sc_JT.getSize());
             //System.out.println("JT size: " + JT.getSize());
@@ -568,8 +552,6 @@ public class VF_R extends VF_R_DataCom {
 
       private void clockConfig() {
             int tf_h = tfs[0].getHeight() - 4;
-
-            //System.out.println("tfs Heights: " + tf_h);
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
@@ -709,7 +691,7 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("btn hide_id Bounds: " + hide_id.getBounds());
       }
 
-      private void componentsConfig() {
+      private void componentsVisibility() {
             /*
             lbs[0].setBounds(6, 38, 100, 27);
             tfs[0].setBounds(107, 38, 70, 27);
@@ -726,25 +708,6 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++
             btns_MC[1].setEnabled(false);
             btns_MC[2].setEnabled(false);
-      }
-
-      private void mcButtonsConfig() {
-            /*
-            Insets in = new Insets(1, 1, 1, 1);
-
-            PL_U.add(btns_MC[2]);
-            PL_U.add(btns_MC[1]);
-            PL_U.add(btns_MC[3]);
-            PL_U.add(btns_MC[0]);
-            //btns_MC[2].setBounds(231, 9, 80, 23);
-            //btns_MC[1].setBounds(317, 9, 80, 23);
-            //btns_MC[3].setBounds(231, 40, 80, 23);
-            //btns_MC[0].setBounds(317, 40, 80, 23);
-            btns_MC[2].setMargin(in);
-            btns_MC[1].setMargin(in);
-            btns_MC[3].setMargin(in);
-            btns_MC[0].setMargin(in);
-             */
       }
 
       private void setComponentsToArray() {
