@@ -13,6 +13,7 @@ import Create.VC_R;
 import SQLActions.SelectTables;
 import com.cofii.myClasses.MSQL;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,8 +26,8 @@ public class MakeCon {
       //Data dt = new Data("MakeCon");
       Status st = new Status();
 
-      ArrayList<Object>[] listsN = new ArrayList[]{DT.getList_1(), DT.getList_2(),
-            DT.getList_3(), DT.getList_4(), DT.getList_5(), DT.getList_6()};
+      //ArrayList<Object>[] listsN = new ArrayList[]{DT.getList_1(), DT.getList_2(),
+        //    DT.getList_3(), DT.getList_4(), DT.getList_5(), DT.getList_6()};
 
       Connection con;
       final String urlConnection
@@ -331,35 +332,6 @@ public class MakeCon {
             }
       }
 
-      public void SelectATable(String table) {
-            System.out.println(CC.YELLOW + "MakeCon ++++ SelectATable" + CC.RESET);
-            System.out.println("\tTable: " + table);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-
-                  String query = "SELECT * FROM Table_Names WHERE Table_Names = \""
-                          + table.replaceAll("_", " ") + "\"";
-                  System.out.println("\t" + query);
-                  stt = con.createStatement();
-                  rs = stt.executeQuery(query);
-
-                  while (rs.next()) {
-                        DT.setId(rs.getString(1));
-                        //D.setTable(rs.getString(2));//SET FROM Action MI
-                        DT.setDist1(rs.getString(3));
-                        DT.setDist2(rs.getString(4));
-                        DT.setTabl(rs.getString(5));
-                        DT.setTag(rs.getString(6));
-                        DT.setClock(rs.getString(7));
-                  }
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectATable: " + ex.toString(), 8000);
-            }
-      }
-
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       public void SelectData(int cols, String table) {
             System.out.println(CC.YELLOW + "MakeCon ++++ SelectData" + CC.RESET);
@@ -373,24 +345,27 @@ public class MakeCon {
                   stt = con.createStatement();
                   rs = stt.executeQuery(query);
 
-                  SelectDataForListN(cols, "clear", null);
-                  for (int a = 0; a < DT.maxColumns - 1; a++) {
-                        DT.getDTMS()[a + 2].setRowCount(0);
-                  }
-
+                  //SelectDataForListN(cols, "clear", null);
+                  DefaultTableModel tm = (DefaultTableModel) VF_R.getJT().getModel();
+                  tm.setRowCount(0);
+                  //for (int a = 0; a < D.maxColumns - 1; a++) {
+                    //    DT.getDTMS()[a + 2].setRowCount(0);
+                        
+                  //}
                   Object[] rss = new Object[cols];
                   //int a = 0;
                   while (rs.next()) {
-                        rss[0] = rs.getInt(1);
-                        for (int a = 1; a < cols; a++) {
+                        //rss[0] = rs.getObject(1);
+                        for (int a = 0; a < cols; a++) {
                               //if((a + 1) == cols){
                               rss[a] = rs.getString(a + 1);
                               //System.out.println("rs.getString(" + (a + 1) + "): " + rs.getString(a + 1));
                               //}
                         }
 
-                        SelectDataForListN(cols, "add", rss);
-                        DT.getDTMS()[cols].addRow(rss);
+                        //SelectDataForListN(cols, "add", rss);
+                        //DT.getDTMS()[cols].addRow(rss);
+                        tm.addRow(rss);
                   }
             } catch (SQLException ex) {
                   ex.printStackTrace();
@@ -404,14 +379,14 @@ public class MakeCon {
             int b = 0;
             for (int a = 0; a < cols; a++) {
                   if (op.equals("clear")) {
-                        listsN[a].clear();
+                        //listsN[a].clear();
                         //System.out.println("\tlist_" + (a + 1) + " size: " + listsN[a].size());
                   } else if (op.equals("add")) {
                         //System.out.println();
                         if (toAdd[b] instanceof Integer) {
-                              listsN[a].add((Integer) toAdd[b]);
+                              //listsN[a].add((Integer) toAdd[b]);
                         } else if (toAdd[b] instanceof String) {
-                              listsN[a].add(toAdd[b].toString());
+                              //listsN[a].add(toAdd[b].toString());
                         }
                         //System.out.println("\tlist_" + (a + 1) + " adds: " + toAdd[b]);
                         b++;
@@ -501,9 +476,9 @@ public class MakeCon {
 
                   int i = pstt.executeUpdate();
                   if (i > 0) {
-                        listsN[0].add(n);
+                        //listsN[0].add(n);
                         for (int a = 0; a < nvs.size(); a++) {
-                              listsN[a + 1].add(nvs.get(a));
+                              //listsN[a + 1].add(nvs.get(a));
                         }
 
                         st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MC-Insert 2 Done!", 4000);

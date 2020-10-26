@@ -45,13 +45,6 @@ public class DT {
 
       private static ArrayList<Object>[] list_Cols = 
               (ArrayList<Object>[]) new ArrayList[DT.maxColumns];
-      
-      private static ArrayList<Integer> list_1 = new ArrayList<Integer>();//id
-      private static ArrayList<String> list_2 = new ArrayList<String>();
-      private static ArrayList<String> list_3 = new ArrayList<String>();
-      private static ArrayList<String> list_4 = new ArrayList<String>();
-      private static ArrayList<String> list_5 = new ArrayList<String>();
-      private static ArrayList<String> list_6 = new ArrayList<String>();
 
       ArrayList<Object>[] rowData;
 
@@ -125,6 +118,7 @@ public class DT {
       //++++++++++++++++++++++++++++++++++++++++++++
       public static final String dataBase = "TIME_STAM";
       public static final String mainTable = "Table_Names";
+      public static final String mainColumn = "Table_Names";
       public static final String urlConnection
               = "jdbc:mysql://localhost:3306/"
               + dataBase + "?allowPublicKeyRetrieval=true&"
@@ -272,31 +266,6 @@ public class DT {
 
       public static ArrayList<String> getList_NL() {
             return list_NL;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public static ArrayList<Integer> getList_1() {
-            return list_1;
-      }
-
-      public static ArrayList<String> getList_2() {
-            return list_2;
-      }
-
-      public static ArrayList<String> getList_3() {
-            return list_3;
-      }
-
-      public static ArrayList<String> getList_4() {
-            return list_4;
-      }
-
-      public static ArrayList<String> getList_5() {
-            return list_5;
-      }
-
-      public static ArrayList<String> getList_6() {
-            return list_6;
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++

@@ -5,16 +5,16 @@
  */
 package First;
 
-import static First.VF_R_DataCom.SPL;
+import static First.VF_R_DataCom.JT;
+import static First.VF_R_DataCom.PL_B;
 import com.cofii.myMethods.MTable;
 import com.cofii.myClasses.VT;
+import com.cofii.myMethods.MComp;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Array;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 /**
  *
@@ -28,7 +28,7 @@ public class VT_T extends VF_R_DataCom{
             //vt.add(tf);
             JButton btn = new JButton("GET INFO");
             vt.add(btn);
-            JButton btn2 = new JButton("GET");
+            JButton btn2 = new JButton("COMPARING");
             vt.add(btn2);
             JButton btn3 = new JButton("GET TABLE MODEL");
             vt.add(btn3);
@@ -54,17 +54,17 @@ public class VT_T extends VF_R_DataCom{
             btn2.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println("PreferredSize: "
-                                + btns_MC[2].getPreferredSize());
-                        System.out.println("MaxSize: "
-                                + btns_MC[2].getMaximumSize());
+                        MTable.printTableModelInfo(JT.getModel());
+                        MComp.printComponentSizeInfo(PL_B);
+                        MComp.printComponentSizeInfo(JT);
+                        
                   }
 
             });
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        MTable.printTableModelInfo(JT.getModel());
+                        
                   }
 
             });

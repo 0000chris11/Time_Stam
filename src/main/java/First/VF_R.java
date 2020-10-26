@@ -225,7 +225,7 @@ public class VF_R extends VF_R_DataCom {
             tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
-            sc_JT.setViewportView(JT);
+            //sc_JT.setViewportView(JT);
 
             JT.setDefaultEditor(String.class, DTCellEditor);
 
@@ -236,12 +236,13 @@ public class VF_R extends VF_R_DataCom {
 
       public static void setTableRenderer() {
             //System.out.println("#######setTableRenderer (column count: " + JT.getColumnCount());
+            
             JTCellRenderer jtcr = new JTCellRenderer();
 
             for (int a = 0; a < JT.getColumnCount(); a++) {
                   JT.getColumnModel().getColumn(a).setCellRenderer(jtcr);
             }
-
+            
             //System.out.println("+++++++++++GETFONT: " + JT.getFont());
             //System.out.println("Selection Model: " + JT.getSelectionModel().toString());
       }
@@ -342,14 +343,15 @@ public class VF_R extends VF_R_DataCom {
 
             //PL_B+++++++++++++++++++++++++++++++++++++++++
             PL_B.add(lb_Icon);
+            lb_Icon.setPreferredSize(new Dimension(225, 255));
             lb_Icon.setFont(new Font("Dialog", Font.PLAIN, 24));
             lb_Icon.setForeground(Color.WHITE);
             lb_Icon.setHorizontalAlignment(0);
             lb_Icon.setVerticalTextPosition(0);
             lb_Icon.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-            
 
             PL_B.add(JPB);
+            JPB.setMaximumSize(new Dimension(Short.MAX_VALUE, 26));
             JPB.setBackground(Color.BLACK);
             JPB.setForeground(Color.RED);
             JPB.setMinimum(0);
@@ -511,7 +513,7 @@ public class VF_R extends VF_R_DataCom {
             sc_JT.setVerticalScrollBarPolicy(22);
             
             //JT.setBounds(6, 6, 758, 516);
-            JT.setPreferredSize(new Dimension(758, JT.getHeight()));
+            //JT.setPreferredSize(new Dimension(758, JT.getHeight()));
             JT.setBackground(Color.BLACK);
             JT.setFont(new Font("Dialog", Font.PLAIN, 20));
             JT.setRowHeight(23);
@@ -858,14 +860,11 @@ public class VF_R extends VF_R_DataCom {
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   mc.SelectDefaultTable();
-            } else {
-
             }
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++
             addItemToMenus(DT.getList_id(), DT.getList_T());
             menuBarLook();
             setColorToDItem(DT.getTable(), DT.getDTable());
-            //menuFont();
             //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
             DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
 
@@ -875,8 +874,7 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET);
             cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
             noRowsDetection();
-            System.out.println(CC.CYAN + "MAIN +++++ addKeyListenerToTFS" + CC.RESET);
-
+            
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
             lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(), DT.getTag(),
                     DT.getClock());
@@ -916,7 +914,10 @@ public class VF_R extends VF_R_DataCom {
             SPL.setDividerLocation(0.4);
             SPL.revalidate();
             SPL.repaint();
-
+            SPL_SUB.setDividerLocation(0.5);
+            SPL_SUB.revalidate();
+            SPL_SUB.repaint();
+            
             System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
             //System.out.println("Table: " + dt.getTable());
       }

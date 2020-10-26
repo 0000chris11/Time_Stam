@@ -39,10 +39,8 @@ public class LSTD {
             System.out.println("\tTB: " + TB);
             System.out.println("\tTG1: " + TG1);
             System.out.println("\tCK: " + CK);
-            //System.out.println("D1 = " + D1);
-            //System.out.println("-----filterEquals(\"Dist1\", D1) == " + D1);
+            
             filterEquals("Dist1", D1);
-            //System.out.println("D2 = " + D2);
             filterEquals("Dist2", D2);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("Tabl = " + TB);

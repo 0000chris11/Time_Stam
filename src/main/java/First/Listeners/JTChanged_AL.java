@@ -13,6 +13,7 @@ import MC.Status;
 import com.cofii.myMethods.MText;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
+import SQLActions.SelectATable;
 import com.cofii.myClasses.MSQL;
 import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
@@ -69,7 +70,9 @@ public class JTChanged_AL implements ActionListener {
                   //System.out.println("JTChanged_AL ++++ Table: " + DT.getTable());
                   DT.setTable(MText.filterTextName(ac, "ADD"));
                   //System.out.println("JTChanged_AL ++++ Table: " + dt.getTable());
-                  mc.SelectATable(DT.getTable());
+                  //mc.SelectATable(DT.getTable());
+                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, DT.getTable(), 
+                          new SelectATable());
                   //dt.setTable(mm.filterTextName(ac, "ADD"));
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
