@@ -859,7 +859,7 @@ public class VF_R extends VF_R_DataCom {
             //SELECTING DEFAULT TABLE++++++++++++++++++++++++
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
-                  DT.setTable(ms.selectValueFromTable(DT.defautlTable, DT.mainColumnDefault, 1).toString());
+                  DT.setTable(ms.selectValueFromTable(DT.defautlTable, DT.defaultColumn, 1).toString());
                   //mc.SelectDefaultTable();
                   ms.selectRowFromTable(DT.mainTable, DT.mainColumn, 
                           DT.getTable().replaceAll("_", " "), new SelectDefaultTable());

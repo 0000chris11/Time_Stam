@@ -39,7 +39,7 @@ public class DT {
       private static ArrayList<String> list_Clock = new ArrayList<String>();
 
       private static ArrayList<String> list_C = new ArrayList<String>();//COLUMNS
-      private static ArrayList<String> list_R = new ArrayList<String>();//ROWS
+      private static ArrayList<Object> list_R = new ArrayList<Object>();//ROWS
       private static ArrayList<String> list_TP = new ArrayList<String>();//COL TYPE
       private static ArrayList<String> list_NL = new ArrayList<String>();//COL NULL
 
@@ -117,11 +117,16 @@ public class DT {
       public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";
       //++++++++++++++++++++++++++++++++++++++++++++
       public static final String dataBase = "TIME_STAM";
+      
       public static final String mainTable = "Table_Names";
       public static final String mainColumn = "Table_Names";
+      
       public static final String defautlTable = "Default_Table";
+      public static final String defaultColumn = "Name";
+      
       public static final String configTable = "Table_Config";
-      public static final String mainColumnDefault = "Name";
+      public static final String configColumn = "Value";
+      
       public static final String urlConnection
               = "jdbc:mysql://localhost:3306/"
               + dataBase + "?allowPublicKeyRetrieval=true&"
@@ -259,7 +264,7 @@ public class DT {
             return list_C;
       }
 
-      public static ArrayList<String> getList_R() {
+      public static ArrayList<Object> getList_R() {
             return list_R;
       }
 

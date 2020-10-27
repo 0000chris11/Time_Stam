@@ -6,6 +6,7 @@ import MC.MakeCon;
 import MC.Status;
 import MC.notMyMethods;
 import SQLActions.SelectConfig;
+import SQLActions.UpdateTable;
 import com.cofii.myClasses.MSQL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +18,9 @@ import javax.swing.JComponent;
  */
 public class MIOptions_IL implements ActionListener {
 
+      MakeCon mc = new MakeCon(this.getClass().getName(), DT.CCount++);
       MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
-      
+
       @Override
       public void actionPerformed(ActionEvent e) {
             String item = ((JComponent) e.getSource()).getName();
@@ -28,22 +30,32 @@ public class MIOptions_IL implements ActionListener {
             //+++++++++++++++++++++++++
             if (e.getActionCommand().contains("Save")) {
                   //Data dt = new Data("MIOptions_IL");
-                  MakeCon mc = new MakeCon(this.getClass().getName(), 
-                          DT.CCount++);
 
                   if (VF_R.getMI_AOT().getState() != DT.getList_BL().get(0)) {
-                        mc.UpdateConfig(VF_R.getMI_AOT().getState(), 1);
-                  }else if (VF_R.getMI_AutoR().getState() != DT.getList_BL().get(1)) {
-                        mc.UpdateConfig(VF_R.getMI_AutoR().getState(), 2);
-                  }else if (VF_R.getMI_Grid().getState() != DT.getList_BL().get(2)) {
-                        mc.UpdateConfig(VF_R.getMI_Grid().getState(), 3);
-                  }else{
+                        //mc.UpdateConfig(VF_R.getMI_AOT().getState(), 1);
+                        ms.updateRow(DT.configTable,
+                                DT.configColumn, VF_R.getMI_AOT().getState(),
+                                "id", 1, new UpdateTable("UpdateConfig: "));
+
+                  } else if (VF_R.getMI_AutoR().getState() != DT.getList_BL().get(1)) {
+                        //mc.UpdateConfig(VF_R.getMI_AutoR().getState(), 2);
+                        ms.updateRow(DT.configTable,
+                                DT.configColumn, VF_R.getMI_AutoR().getState(),
+                                "id", 2, new UpdateTable("UpdateConfig: "));
+                        
+                  } else if (VF_R.getMI_Grid().getState() != DT.getList_BL().get(2)) {
+                        //mc.UpdateConfig(VF_R.getMI_Grid().getState(), 3);
+                        ms.updateRow(DT.configTable,
+                                DT.configColumn, VF_R.getMI_Grid().getState(),
+                                "id", 3, new UpdateTable("UpdateConfig: "));
+                        
+                  } else {
                         Status.startLBStatus(
                                 VF_R.getLB_Status(), DT.RGY[2], "Nothing has changed.", 6000);
                   }
-                        //mc.SelectConfig();
-                        ms.selectTables(DT.configTable, new SelectConfig());
-                        
+                  //mc.SelectConfig();
+                  ms.selectTables(DT.configTable, new SelectConfig());
+
             }
       }
 

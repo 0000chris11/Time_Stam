@@ -141,8 +141,8 @@ public class LSTD {
                         }
                   }
             } else {
-                  for (int a = 0; a < VF_R.getTFS_MD().length; a++) {//FIXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                        VF_R.getJTFS()[a + 1].setSize(290, VF_R.getJTFS()[1].getHeight());
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[1].getHeight());
                         VF_R.getTFS_MD()[a].setVisible(false);
                         VF_R.getTFS_MU()[a].setVisible(false);
                         VF_R.getTFS_SD()[a].setVisible(false);

@@ -12,8 +12,10 @@ import MC.DT;
 import MC.MakeCon;
 import Others.LSTD;
 import MC.notMyMethods;
+import SQLActions.UpdateTable;
 import com.cofii.myMethods.MText;
 import Threads.Threads;
+import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MTable;
 
 /**
@@ -27,11 +29,13 @@ public class JT_ML implements TableModelListener {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);
 
       @Override
       public void tableChanged(TableModelEvent evt) {
+            System.out.println("tableChanged");
             /*
             System.out.println("+++TableChanged: "
                     + " \nbool_Add: " + Data.bool_Add
@@ -52,20 +56,26 @@ public class JT_ML implements TableModelListener {
                               //System.out.println("\tselectedColn(list_R): " + dt.getList_R().get(coln));
                               //System.out.println("\tdata: " + data);
                               if (!DT.getList_R().get(coln).equals(data)) {//ONLY UPDATES WHEN THE NEW VALUE IS DIFERENT FROM THE ORIGINAL
-                                    //System.out.println("\t+ + + Diferent");
+                                    System.out.println("\t+ + + Diferent");
                                     String col = DT.getList_C().get(coln);
 
                                     DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
 
-                                    mc.UpdateRow(DT.getTable(), col, data.toString(), DT.getList_R().get(0));
+                                    //mc.UpdateRow(DT.getTable(), col, data.toString(), DT.getList_R().get(0));
+                                    ms.updateRow(DT.getTable(), col, data, 
+                                            DT.getList_C().get(0), DT.getList_R().get(0),
+                                            new UpdateTable("UpdateRow: "));
+                                    
                                     lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
                                             DT.getTag(), DT.getClock());
                                     n_mm.rez(VF_R.getJT(), DT.autoState);
                                     //++++++++++++++++++++++++++++++
                                     th.setValueToCell(data, coln, rown);
-                                    //++++++++++++++++++++++++++++++
+                                    //+MAYBE+UNNECESARY++++++++++++++++++++++++++++
                                     MTable.typeConvert(VF_R.getJT(), DT.getList_R(),
                                             VF_R.getJT().getSelectionModel().getMinSelectionIndex());
+                              }else{
+                                    System.out.println("\t- - - Same");
                               }
                         }
                   }

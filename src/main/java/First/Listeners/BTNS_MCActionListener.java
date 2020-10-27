@@ -11,6 +11,7 @@ import MC.notMyMethods;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
 import SQLActions.SelectData;
+import SQLActions.UpdateTable;
 import Threads.Threads;
 import com.cofii.myClasses.MSQL;
 import java.awt.Color;
@@ -53,7 +54,7 @@ public class BTNS_MCActionListener implements ActionListener {
             DT.bool_Upd = true;
 
             ArrayList<Integer> colIndexs = new ArrayList<Integer>();
-            ArrayList<String> newData = new ArrayList<String>();
+            ArrayList<Object> newData = new ArrayList<Object>();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             int colN = -1;
             //int hc = 0;
@@ -65,12 +66,12 @@ public class BTNS_MCActionListener implements ActionListener {
             }
             //+++++++++++++++++++++++++++++++++++++++++
             System.out.println("\tUPD ++++ starts");
-            for (int a = 0; a < DT.maxColumns - 1; a++) {
-                  if (VF_R.getJT().getColumnCount() == a + 2) {
-                        for (int b = 0; b < a + 2; b++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (VF_R.getJT().getColumnCount() == a + 1) {
+                        for (int b = 0; b < a + 1; b++) {
                               //COMPARING EACH TFS WITH THE SELECTED ROW
                               if (!DT.getList_R().get(b).equals(VF_R.getJTFS()[b].getText()) 
-                                      && !VF_R.getJTFS()[b].getText().equals("")
+                                      && !VF_R.getJTFS()[b].getText().equals("")//CHANGE WHEN U ALLOWED NULL FIELDS
                                       && VF_R.getJTFS()[b].isVisible()) {
                                     
                                     newData.add(VF_R.getJTFS()[b].getText());
@@ -81,7 +82,7 @@ public class BTNS_MCActionListener implements ActionListener {
                                             "??????", 10000);
                               }
                         }
-                        colN = a + 2;
+                        colN = a + 1;
                   }
             }
             
@@ -96,7 +97,9 @@ public class BTNS_MCActionListener implements ActionListener {
                   //System.out.println("\tcols[" + a + "] = " + cols[a]);
             }            
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            mc.UpdateRow(DT.getTable(), cols, newData.toArray(), DT.getList_R().get(0));
+            //mc.UpdateRow(DT.getTable(), cols, newData.toArray(), DT.getList_R().get(0));
+            ms.updateRow(DT.getTable(), cols, newData.toArray(), "id", DT.getList_R().get(0), 
+                    new UpdateTable("UpdateRow: "));
             //mc.SelectData(colN, DT.getTable());
             ms.selectData(DT.getTable(), new SelectData(colN));
 

@@ -54,6 +54,8 @@ public class MainListeners_F {
       //CHANGE NEEDED
       private void addTableModelListenerToJT() {
             JT_ML JTML = new JT_ML();
+            VF_R.getJT().getModel().addTableModelListener(JTML);
+            /*
             for (int a = 2; a < DT.getDTMS().length; a++) {
                   if (DT.getList_C().size() == a) {
                         if (DT.getDTMS()[a].getTableModelListeners().length > 0) {
@@ -70,7 +72,7 @@ public class MainListeners_F {
                               DT.getDTMS()[a].addTableModelListener(JTML);
                         }
                   }
-            }
+            }*/
       }
       
       private void addTableModelListenerToJTNew(){

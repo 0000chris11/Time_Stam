@@ -27,31 +27,30 @@ public class Threads {
 
       //Data dt = new Data();
       String CName = this.getClass().getName();
-      
+
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
 
       //BTNS_MCActionListener BMA = new BTNS_MCActionListener();
-
       private static CyclicBarrier cyb = new CyclicBarrier(2);
-      
+
       private static Thread addThread;
       private static Thread iconThread;
       private static Thread scrollThread;
       private static Thread fireDataThread;
-      
+
       private static Thread cellUpdate;
-      
+
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      public Threads(String from, int CC){
+      public Threads(String from, int CC) {
             DT.getConstructorName(DT.cons, CName, from, CC);
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      
+
       public void addOp() {
-            addThread = new Thread(new Runnable(){
+            addThread = new Thread(new Runnable() {
                   @Override
                   public void run() {
                         DT.bool_Add = true;
@@ -67,23 +66,24 @@ public class Threads {
                                     //ss[a] = tfs_MD[a].getText() + ":" + tfs_MU[a].getText() + ":" + tfs_SD[a].getText();
                               }
                         }//+++++++++++++++++++++++++++++++++++++++++
-                        int mayor = MTable.getMayorId(VF_R.getJT(), 0);
-
+                        //CHANGE WHEN THERE IS NO >ID< FIELD
+                              int mayor = MTable.getMayorId(VF_R.getJT(), 0);
+                        
                         for (int a = 0; a < DT.maxColumns - 1; a++) {
                               if (VF_R.getJT().getColumnCount() == a + 2) {
-                                    System.out.println("\t\tADD ++++ INSERTING " + (a + 2) + 
-                                            " COLUMNS");
+                                    System.out.println("\t\tADD ++++ INSERTING " + (a + 2)
+                                            + " COLUMNS");
 
                                     mc.Insert(DT.getTable(), ++mayor, SS);
                                     //mc.SelectData(a + 2, DT.getTable());
                                     ms.selectData(DT.getTable(), new SelectData(a + 2));
-                                    
+
                                     VF_R.noRowsDetection();
                               }
                         }
 
-                        new LSTD().changeLSTD(DT.getTable(), DT.getDist1(), 
-                                DT.getDist2(), DT.getTabl(), DT.getTag(), 
+                        new LSTD().changeLSTD(DT.getTable(), DT.getDist1(),
+                                DT.getDist2(), DT.getTabl(), DT.getTag(),
                                 DT.getClock());
 
                         VF_R.getJT().clearSelection();
@@ -91,10 +91,10 @@ public class Threads {
 
                         System.out.println("\tADD ++++ addStar Finished");
                   }
-                  
+
             });
             addThread.start();
-            scrollThread = new Thread(new Runnable(){
+            scrollThread = new Thread(new Runnable() {
                   @Override
                   public void run() {
                         try {
@@ -119,10 +119,10 @@ public class Threads {
                         }
                         System.out.println("\tV_sb finished");
                   }
-                  
+
             });
             scrollThread.start();
-            fireDataThread = new Thread(new Runnable(){
+            fireDataThread = new Thread(new Runnable() {
                   @Override
                   public void run() {
                         try {
@@ -142,13 +142,13 @@ public class Threads {
                         }
                         DT.bool_Add = false;
                         System.out.println(CC.GREEN + "\tfireData finished (ADD FINISH)"
-                        + CC.RESET);
+                                + CC.RESET);
                   }
-                  
+
             });
             fireDataThread.start();
       }
-      
+
       public void addLBIconThread(String TB) {
             System.out.println(CC.RED + "addLBIconThread" + CC.RESET);
             iconThread = new Thread() {
@@ -256,14 +256,14 @@ public class Threads {
                               VF_R.getJPB().setForeground(Color.GREEN);
                         }
                         VF_R.getLB_Icon().setText("Ready!");
-                        
+
                         JTCellRenderer.setForegroundCell(Color.WHITE);
                         VF_R.getJT().setEnabled(true);
                   }
             };
             iconThread.start();
       }
-      
+
       public void setValueToCell(Object data, int coln, int rown) {
             cellUpdate = new Thread(new Runnable() {
                   public void run() {
@@ -290,7 +290,7 @@ public class Threads {
             });
             cellUpdate.start();
       }
-      
+
       /*
       
       
@@ -320,5 +320,5 @@ public class Threads {
                   }
             };
       }
-      */ 
+       */
 }

@@ -1694,17 +1694,17 @@ public class VF extends JFrame {
 
       private void mi_saveOpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_saveOpActionPerformed
             if (mi_AOT.getState() != DT.getList_BL().get(0)) {
-                  mc.UpdateConfig(mi_AOT.getState(), 1);
+                  //mc.UpdateConfig(mi_AOT.getState(), 1);
             } else {
                   //System.out.println("mi_AOT hasn't changed");
             }
             if (mi_AutoR.getState() != DT.getList_BL().get(1)) {
-                  mc.UpdateConfig(mi_AutoR.getState(), 2);
+                  //mc.UpdateConfig(mi_AutoR.getState(), 2);
             } else {
                   //System.out.println("mi_AutoR hasn't changed");
             }
             if (mi_Grid.getState() != DT.getList_BL().get(2)) {
-                  mc.UpdateConfig(mi_Grid.getState(), 3);
+                  //mc.UpdateConfig(mi_Grid.getState(), 3);
             } else {
                   //System.out.println("mi_Grid hasn't changed");
             }
