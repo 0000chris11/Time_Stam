@@ -20,8 +20,6 @@ import javax.swing.table.TableModel;
  */
 public class SelectColumns implements IActions {
 
-      Status st = new Status();
-      
       @Override
       public void beforeQuery() {
             DT.getList_C().clear();
@@ -66,7 +64,7 @@ public class SelectColumns implements IActions {
       @Override
       public void exception(SQLException ex) {
             ex.printStackTrace();
-            st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectColumns: " + ex.toString(), 8000);
       }
 

@@ -5,9 +5,7 @@
  */
 package SQLActions;
 
-import First.VF_R;
 import MC.DT;
-import MC.Status;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author C0FII
  */
-public class SelectATable implements IActions {
+public class SelectDefaultTable implements IActions {
 
       @Override
       public void beforeQuery() {
@@ -27,6 +25,7 @@ public class SelectATable implements IActions {
       public void setData(ResultSet rs) throws SQLException {
             DT.setId(rs.getString(1));
             DT.setTable(rs.getString(2));
+            DT.setDTable(rs.getString(2));
             DT.setDist1(rs.getString(3));
             DT.setDist2(rs.getString(4));
             DT.setTabl(rs.getString(5));
@@ -36,14 +35,12 @@ public class SelectATable implements IActions {
 
       @Override
       public void afterQuery() {
-
+            
       }
 
       @Override
-      public void exception(SQLException ex) {
-            ex.printStackTrace();
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectATable: " + ex.toString(), 8000);
+      public void exception(SQLException sqle) {
+            sqle.printStackTrace();
       }
 
 }

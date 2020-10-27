@@ -43,8 +43,6 @@ public class JTChanged_AL implements ActionListener {
       MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
 
-      Status st = new Status();
-
       @Override
       public void actionPerformed(ActionEvent evt) {
             String ac = evt.getActionCommand();
@@ -142,7 +140,7 @@ public class JTChanged_AL implements ActionListener {
                   System.out.println(CC.GREEN + "\n MIActionListener ENDS" + CC.RESET);
 
             } else {
-                  st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
+                  Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                           "This Table is already selected", 3000);
             }
       }

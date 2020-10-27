@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 import javax.swing.table.AbstractTableModel;
 import Others.JTCellRenderer;
+import SQLActions.SelectData;
+import com.cofii.myClasses.MSQL;
 
 /**
  *
@@ -29,6 +31,7 @@ public class Threads {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
 
       //BTNS_MCActionListener BMA = new BTNS_MCActionListener();
 
@@ -72,7 +75,9 @@ public class Threads {
                                             " COLUMNS");
 
                                     mc.Insert(DT.getTable(), ++mayor, SS);
-                                    mc.SelectData(a + 2, DT.getTable());
+                                    //mc.SelectData(a + 2, DT.getTable());
+                                    ms.selectData(DT.getTable(), new SelectData(a + 2));
+                                    
                                     VF_R.noRowsDetection();
                               }
                         }

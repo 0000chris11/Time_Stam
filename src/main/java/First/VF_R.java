@@ -51,6 +51,8 @@ import Others.LSTD;
 import SQLActions.SelectTables;
 import com.cofii.myClasses.MSQL;
 import static First.VF_R_DataCom.PL_U;
+import SQLActions.SelectConfig;
+import SQLActions.SelectDefaultTable;
 
 /**
  *
@@ -64,8 +66,6 @@ public class VF_R extends VF_R_DataCom {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       CompReset cp = new CompReset();
       notMyMethods n_mm = new notMyMethods();
-      //Data dt = new Data("VF_R");
-      Status st = new Status();
       MainListeners_F ml = new MainListeners_F();
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);
@@ -859,7 +859,10 @@ public class VF_R extends VF_R_DataCom {
             //SELECTING DEFAULT TABLE++++++++++++++++++++++++
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
-                  mc.SelectDefaultTable();
+                  DT.setTable(ms.selectValueFromTable(DT.defautlTable, DT.mainColumnDefault, 1).toString());
+                  //mc.SelectDefaultTable();
+                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, 
+                          DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
             }
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++
             addItemToMenus(DT.getList_id(), DT.getList_T());
@@ -871,7 +874,7 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
             ms.selectColumns(DT.getTable(), new SelectColumns());
             //--------------------------------------------------------------------------------------------------------------------
-            System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF" + CC.RESET);
+            System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
             cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
             noRowsDetection();
             
@@ -880,7 +883,8 @@ public class VF_R extends VF_R_DataCom {
                     DT.getClock());
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ SELECT CONFIG" + CC.RESET);
-            mc.SelectConfig();
+            //mc.SelectConfig();
+            ms.selectTables(DT.configTable, new SelectConfig());
             //System.out.println("\tAOT BL: " + dt.getList_BL().get(0));
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
@@ -929,7 +933,7 @@ public class VF_R extends VF_R_DataCom {
             ms.selectTables(DT.mainTable, new SelectTables());
             addItemToMenus(DT.getList_id(), DT.getList_T());
 
-            mc.SelectConfig();
+            ms.selectTables(DT.configTable, new SelectConfig());
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
 

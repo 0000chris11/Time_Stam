@@ -23,11 +23,6 @@ public class MakeCon {
 
       MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       String CName = this.getClass().getName();
-      //Data dt = new Data("MakeCon");
-      Status st = new Status();
-
-      //ArrayList<Object>[] listsN = new ArrayList[]{DT.getList_1(), DT.getList_2(),
-        //    DT.getList_3(), DT.getList_4(), DT.getList_5(), DT.getList_6()};
 
       Connection con;
       final String urlConnection
@@ -49,35 +44,7 @@ public class MakeCon {
       public MakeCon(String from, int CC) {
             DT.getConstructorName(DT.cons, CName, from, CC);
       }
-
-      //++++++++++++++++++++++++++++++++++
-      public void SelectConfig() {
-            System.out.println(CC.YELLOW + "MakeCon ++++ SelectConfig" + CC.RESET);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-
-                  String query = "SELECT * FROM Table_Config";
-                  stt = con.createStatement();
-                  rs = stt.executeQuery(query);
-
-                  DT.getList_TC().clear();
-                  DT.getList_BL().clear();
-                  while (rs.next()) {
-                        DT.getList_TC().add(rs.getString(2));
-                        DT.getList_BL().add(rs.getBoolean(3));
-                  }
-                  //System.out.println("0 AOT: " + DT.getList_BL().get(0));
-                  //System.out.println("1: AutoR" + dt.getList_BL().get(1));
-                  //System.out.println("2: Grid" + dt.getList_BL().get(2));
-
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectConfig: " + ex.toString(), 8000);
-            }
-      }
-
+      //++++++++++++++++++++++++++++++++++++++++++++
       public void UpdateConfig(boolean newnv, int id) {
             System.out.println(CC.YELLOW + "MakeCon ++++ UpdateConfig" + CC.RESET);
             try {
@@ -91,16 +58,16 @@ public class MakeCon {
 
                   int ex = pstt.executeUpdate();
                   if (ex == 1) {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MC-UpdateConfig Done!", 4000);
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MC-UpdateConfig Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "UpdateConfig: " + DT.inter, 8000);
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "UpdateConfig: " + ex.toString(), 8000);
             }
       }
@@ -136,17 +103,17 @@ public class MakeCon {
                   int i = stt.executeUpdate(sql);
                   
                   if (i > 0) {
-                        st.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
+                        Status.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
                           "MC-CreateTable Done!", 5000);
                   }else{
-                        st.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
+                        Status.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
                           DT.inter, 7000);
                   }
                   //++++++++++++++++++++++++++++++++++++++++
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VC_R.getLB_Status(), Color.RED,
+                  Status.startLBStatus(VC_R.getLB_Status(), Color.RED,
                           "CreateTable - " + ex.toString(), 7000);
             }
       }
@@ -189,19 +156,19 @@ public class MakeCon {
                         
                         
                         
-                        st.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
+                        Status.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
                           "MC-InsertTable Done!", 5000);
                         
                         return true;
                   }else{
-                        st.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
+                        Status.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
                           DT.inter, 7000);
                         return false;
                   }
                   
             }catch(SQLException ex){
                   ex.printStackTrace();
-                  st.startLBStatus(VC_R.getLB_Status(), Color.RED, ex.toString(), 8000);
+                  Status.startLBStatus(VC_R.getLB_Status(), Color.RED, ex.toString(), 8000);
                   return false;
             }
       }
@@ -219,18 +186,18 @@ public class MakeCon {
                   int i = pstt.executeUpdate();
                   if (i == 0) {
                         DT.getList_T().remove(table);
-                        st.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
+                        Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
                                 "MC-DeleteTable Done!", 4000);
                         return true;
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "DeleteTable: " + DT.inter, 8000);
                         return false;
                   }
                   
             }catch(SQLException ex){
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), Color.RED, 
+                  Status.startLBStatus(VF_R.getLB_Status(), Color.RED, 
                           "DeleteTable: " + ex.toString(), 8000);
                   return false;
             }
@@ -248,16 +215,16 @@ public class MakeCon {
 
                   int i = pstt.executeUpdate();
                   if (i == 1) {
-                        st.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
+                        Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
                                 "MC-RemoveTableFromTN Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
+                        Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                                 "RemoveTableFromTN: " + DT.inter, 8000);
                   }
                   
             }catch(SQLException ex){
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), Color.RED, 
+                  Status.startLBStatus(VF_R.getLB_Status(), Color.RED, 
                           "RemoveTableFromTN: " + ex.toString(), 8000);
             }
       }
@@ -273,6 +240,9 @@ public class MakeCon {
                   //Table_Names ON Default_Table.id = Table_Names.id;
                   String query = "SELECT Default_Table.id, Name, Dist1, Dist2, Tabl, Tag1, Clock FROM Default_Table "
                           + "LEFT JOIN Table_Names ON Default_Table.id = Table_Names.id";
+                  
+                  //SELECT Default_Table.id, Name, Dist1, Dist2, Tabl, Tag1, Clock FROM Default_Table LEFT JOIN Table_Names ON Default_Table.id = Table_Names.id
+                  
                   stt = con.createStatement();
                   rs = stt.executeQuery(query);
 
@@ -290,7 +260,7 @@ public class MakeCon {
                   //System.out.println("\t0 Table: " + DT.getTable());
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectDefaultTable: " + ex.toString(), 8000);
             }
 
@@ -327,70 +297,8 @@ public class MakeCon {
                   //      dt.getList_Tag1(), dt.getList_Tag2());
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectTables: " + ex.toString(), 8000);
-            }
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++
-      public void SelectData(int cols, String table) {
-            System.out.println(CC.YELLOW + "MakeCon ++++ SelectData" + CC.RESET);
-            System.out.println("\tTable: " + table);
-            System.out.println("\tCols: " + cols);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-
-                  query = "SELECT * FROM " + table + " ORDER BY id";
-                  stt = con.createStatement();
-                  rs = stt.executeQuery(query);
-
-                  //SelectDataForListN(cols, "clear", null);
-                  DefaultTableModel tm = (DefaultTableModel) VF_R.getJT().getModel();
-                  tm.setRowCount(0);
-                  //for (int a = 0; a < D.maxColumns - 1; a++) {
-                    //    DT.getDTMS()[a + 2].setRowCount(0);
-                        
-                  //}
-                  Object[] rss = new Object[cols];
-                  //int a = 0;
-                  while (rs.next()) {
-                        //rss[0] = rs.getObject(1);
-                        for (int a = 0; a < cols; a++) {
-                              //if((a + 1) == cols){
-                              rss[a] = rs.getString(a + 1);
-                              //System.out.println("rs.getString(" + (a + 1) + "): " + rs.getString(a + 1));
-                              //}
-                        }
-
-                        //SelectDataForListN(cols, "add", rss);
-                        //DT.getDTMS()[cols].addRow(rss);
-                        tm.addRow(rss);
-                  }
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectData: " + ex.toString(), 8000);
-
-            }
-      }
-
-      private void SelectDataForListN(int cols, String op, Object[] toAdd) {
-            int b = 0;
-            for (int a = 0; a < cols; a++) {
-                  if (op.equals("clear")) {
-                        //listsN[a].clear();
-                        //System.out.println("\tlist_" + (a + 1) + " size: " + listsN[a].size());
-                  } else if (op.equals("add")) {
-                        //System.out.println();
-                        if (toAdd[b] instanceof Integer) {
-                              //listsN[a].add((Integer) toAdd[b]);
-                        } else if (toAdd[b] instanceof String) {
-                              //listsN[a].add(toAdd[b].toString());
-                        }
-                        //System.out.println("\tlist_" + (a + 1) + " adds: " + toAdd[b]);
-                        b++;
-                  }
             }
       }
 
@@ -419,15 +327,15 @@ public class MakeCon {
                         DT.setTag(tg1);
                         DT.setClock(ck);
 
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MCChangeDefault Done!", 4000);
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MCChangeDefault Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "ChangeDefault: " + DT.inter, 8000);
                   }
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "ChangeDefault: " + ex.toString(), 8000);
             }
       }
@@ -481,14 +389,14 @@ public class MakeCon {
                               //listsN[a + 1].add(nvs.get(a));
                         }
 
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MC-Insert 2 Done!", 4000);
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MC-Insert 2 Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "Insert: " + DT.inter, 8000);
                   }
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "Insert: " + ex.toString(), 8000);
             }
       }
@@ -528,16 +436,16 @@ public class MakeCon {
                   int ex = pstt.executeUpdate();
                   if (ex == 1) {
                         //System.out.println("\tDONE");
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1],
                                 "MC-Update 1 Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "UpdateRow[]: " + DT.inter, 8000);
                   }
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(),
+                  Status.startLBStatus(VF_R.getLB_Status(),
                           DT.RGY[0], "UpdateRow[]: " + ex.toString(), 8000);
             }
       }
@@ -561,15 +469,15 @@ public class MakeCon {
                   int ex = pstt.executeUpdate();
                   if (ex == 1) {
                         //System.out.println("\tDONE");
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1],
                                 "MC-Update 1 Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(),
+                        Status.startLBStatus(VF_R.getLB_Status(),
                                 DT.RGY[2], "UpdateRow: " + DT.inter, 8000);
                   }
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(),
+                  Status.startLBStatus(VF_R.getLB_Status(),
                           DT.RGY[0], "UpdateRow: " + ex.toString(), 8000);
             }
       }
@@ -587,15 +495,15 @@ public class MakeCon {
                   int ex = pstt.executeUpdate();
 
                   if (ex == 1) {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], 
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], 
                                 "MCDeleteRow Done!", 4000);
                   } else {
-                        st.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
+                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
                                 "DeleteRow: " + DT.inter, 8000);
                   }
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "DeleteRow: " + ex.toString(), 8000);
             }
       }
@@ -671,7 +579,7 @@ public class MakeCon {
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "MCInsertSelectD1: " + ex.toString(), 8000);
             }
       }
@@ -697,7 +605,7 @@ public class MakeCon {
                   }
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "MCInsertSelectD2: " + ex.toString(), 8000);
             }
       }

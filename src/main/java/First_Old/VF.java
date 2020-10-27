@@ -54,6 +54,7 @@ import First.Listeners.MainListeners_F;
 import MC.DT;
 import com.cofii.myClasses.MSQL;
 import SQLActions.SelectColumns;
+import SQLActions.SelectConfig;
 import SQLActions.SelectTables;
 
 /**
@@ -68,7 +69,6 @@ public class VF extends JFrame {
       CompReset cp = new CompReset();
       MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
-      Status st = new Status();
       MainListeners_F ml = new MainListeners_F();
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);
@@ -803,7 +803,7 @@ public class VF extends JFrame {
             //addKeyListenerToLSTS();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("SELECT CONFIG");
-            mc.SelectConfig();
+            ms.selectTables(DT.configTable, new SelectConfig());
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
 
@@ -853,7 +853,7 @@ public class VF extends JFrame {
             ms.selectTables(DT.mainTable, new SelectTables());
             addItemToMenus(DT.getList_id(), DT.getList_T());
 
-            mc.SelectConfig();
+            ms.selectTables(DT.configTable, new SelectConfig());
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
 
@@ -1636,7 +1636,7 @@ public class VF extends JFrame {
                   }
             }
             if (z == -1) {
-                  st.startLBStatus(lb_Status, cl[0], "Nothing Found", 5000);
+                  Status.startLBStatus(lb_Status, cl[0], "Nothing Found", 5000);
             }
       }//GEN-LAST:event_btn_FindActionPerformed
 

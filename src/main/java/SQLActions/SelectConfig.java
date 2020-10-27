@@ -16,34 +16,30 @@ import java.sql.SQLException;
  *
  * @author C0FII
  */
-public class SelectATable implements IActions {
+public class SelectConfig implements IActions {
 
       @Override
       public void beforeQuery() {
-
+            DT.getList_TC().clear();
+            DT.getList_BL().clear();
       }
 
       @Override
       public void setData(ResultSet rs) throws SQLException {
-            DT.setId(rs.getString(1));
-            DT.setTable(rs.getString(2));
-            DT.setDist1(rs.getString(3));
-            DT.setDist2(rs.getString(4));
-            DT.setTabl(rs.getString(5));
-            DT.setTag(rs.getString(6));
-            DT.setClock(rs.getString(7));
+            DT.getList_TC().add(rs.getString(2));
+            DT.getList_BL().add(rs.getBoolean(3));
       }
 
       @Override
       public void afterQuery() {
-
+            
       }
 
       @Override
       public void exception(SQLException ex) {
             ex.printStackTrace();
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectATable: " + ex.toString(), 8000);
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                          "SelectConfig: " + ex.toString(), 8000);
       }
 
 }

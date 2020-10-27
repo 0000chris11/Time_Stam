@@ -8,7 +8,11 @@ import javax.swing.JLabel;
 
 public class Status {
 
-      public void startLBStatus(JLabel status, Color c, String ex, int time) {
+      private Status(){
+            throw new IllegalStateException("Private Constructor");
+      }
+      
+      public static void startLBStatus(JLabel status, Color c, String ex, int time) {
             Thread t1 = new Thread(new Runnable() {
                   public void run() {
                         status.setForeground(c);

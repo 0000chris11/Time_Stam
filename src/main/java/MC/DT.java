@@ -119,6 +119,9 @@ public class DT {
       public static final String dataBase = "TIME_STAM";
       public static final String mainTable = "Table_Names";
       public static final String mainColumn = "Table_Names";
+      public static final String defautlTable = "Default_Table";
+      public static final String configTable = "Table_Config";
+      public static final String mainColumnDefault = "Name";
       public static final String urlConnection
               = "jdbc:mysql://localhost:3306/"
               + dataBase + "?allowPublicKeyRetrieval=true&"

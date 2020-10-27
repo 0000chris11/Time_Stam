@@ -11,27 +11,36 @@ import MC.Status;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author C0FII
  */
-public class SelectATable implements IActions {
+public class SelectData implements IActions {
+      
+      private int Cols;
+      private DefaultTableModel tm;
+      Object[] row;
+
+      public SelectData(int cols) {
+            Cols = cols;
+      }
 
       @Override
       public void beforeQuery() {
+            tm = (DefaultTableModel) VF_R.getJT().getModel();
+            tm.setRowCount(0);
 
+            row = new Object[Cols];
       }
 
       @Override
       public void setData(ResultSet rs) throws SQLException {
-            DT.setId(rs.getString(1));
-            DT.setTable(rs.getString(2));
-            DT.setDist1(rs.getString(3));
-            DT.setDist2(rs.getString(4));
-            DT.setTabl(rs.getString(5));
-            DT.setTag(rs.getString(6));
-            DT.setClock(rs.getString(7));
+            for (int a = 0; a < Cols; a++) {
+                  row[a] = rs.getString(a + 1);
+            }
+            tm.addRow(row);
       }
 
       @Override
@@ -43,7 +52,7 @@ public class SelectATable implements IActions {
       public void exception(SQLException ex) {
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectATable: " + ex.toString(), 8000);
+                          "SelectData: " + ex.toString(), 8000);
       }
 
 }

@@ -115,9 +115,9 @@ public class LSTD {
 
       private void changeCK(String CK) {
             if (!CK.equals("NONE")) {
-                  DT.chars[0] = CK.charAt(1);
+                  DT.chars[0] = CK.charAt(1);// COL NUM
                   DT.strings[0] = Character.toString(DT.chars[0]);
-                  DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 6 TO 5
+                  DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 6 IS 5
 
                   for (int a = 1; a < VF_R.getJTFS().length; a++) {
                         if (a == DT.ints[0]) {

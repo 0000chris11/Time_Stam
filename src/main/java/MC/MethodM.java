@@ -1,7 +1,5 @@
 package MC;
 
-
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -22,7 +20,7 @@ import First.VF_R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MethodM extends Status {
+public class MethodM {
 
       String CName = this.getClass().getName();
       

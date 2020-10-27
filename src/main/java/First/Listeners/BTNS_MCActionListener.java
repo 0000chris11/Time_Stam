@@ -10,13 +10,14 @@ import MC.Status;
 import MC.notMyMethods;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
+import SQLActions.SelectData;
 import Threads.Threads;
+import com.cofii.myClasses.MSQL;
 import java.awt.Color;
-import java.util.concurrent.BrokenBarrierException;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class BTNS_MCActionListener implements ActionListener {
 
@@ -26,10 +27,9 @@ public class BTNS_MCActionListener implements ActionListener {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       Threads th = new Threads(CName, DT.CCount++);
-      Status st = new Status();
 
-      
       //public static Thread scrollThread;
 
       @Override
@@ -77,7 +77,7 @@ public class BTNS_MCActionListener implements ActionListener {
                                     colIndexs.add(b);
                                     //hc++;
                               }else{
-                                    st.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, 
+                                    Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, 
                                             "??????", 10000);
                               }
                         }
@@ -97,7 +97,8 @@ public class BTNS_MCActionListener implements ActionListener {
             }            
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             mc.UpdateRow(DT.getTable(), cols, newData.toArray(), DT.getList_R().get(0));
-            mc.SelectData(colN, DT.getTable());
+            //mc.SelectData(colN, DT.getTable());
+            ms.selectData(DT.getTable(), new SelectData(colN));
 
             colIndexs.clear();
             new LSTD().changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), 
@@ -114,7 +115,8 @@ public class BTNS_MCActionListener implements ActionListener {
             mc.DeleteRow(DT.getTable(), DT.getList_R().get(0));
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VF_R.getJT().getColumnCount() == a + 2) {
-                        mc.SelectData(a + 2, DT.getTable());
+                        //mc.SelectData(a + 2, DT.getTable());
+                        ms.selectData(DT.getTable(), new SelectData(a + 2));
                   }
             }
 

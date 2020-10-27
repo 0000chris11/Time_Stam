@@ -18,8 +18,6 @@ import java.sql.SQLException;
  */
 public class SelectTables implements IActions {
       
-      Status st = new Status();
-
       @Override
       public void beforeQuery() {
             DT.getList_id().clear();
@@ -50,7 +48,7 @@ public class SelectTables implements IActions {
       @Override
       public void exception(SQLException ex) {
             ex.printStackTrace();
-                  st.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectTables: " + ex.toString(), 8000);
       }
 

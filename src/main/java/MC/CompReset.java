@@ -7,6 +7,8 @@ package MC;
 
 import java.util.ArrayList;
 import First.VF_R;
+import SQLActions.SelectData;
+import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MText;
 
 /**
@@ -17,6 +19,7 @@ public class CompReset {
 
       String CName = this.getClass().getName();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
 
       public void changeLB_TF(int cc, ArrayList<String> listC) {
             System.out.println("\tColumnCount: " + cc);
@@ -57,7 +60,8 @@ public class CompReset {
                               VF_R.getBTNS_C()[b + (0 + a)].setVisible(false);
                         }
 
-                        mc.SelectData(a + 1, DT.getTable());
+                        //mc.SelectData(a + 1, DT.getTable());
+                        ms.selectData(DT.getTable(), new SelectData(a + 1));
                   }
             }
       }

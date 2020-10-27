@@ -5,20 +5,19 @@ import MC.DT;
 import MC.MakeCon;
 import MC.Status;
 import MC.notMyMethods;
-import com.cofii.myMethods.MText;
+import SQLActions.SelectConfig;
+import com.cofii.myClasses.MSQL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class MIOptions_IL implements ActionListener {
 
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
       
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -39,10 +38,12 @@ public class MIOptions_IL implements ActionListener {
                   }else if (VF_R.getMI_Grid().getState() != DT.getList_BL().get(2)) {
                         mc.UpdateConfig(VF_R.getMI_Grid().getState(), 3);
                   }else{
-                        new Status().startLBStatus(
+                        Status.startLBStatus(
                                 VF_R.getLB_Status(), DT.RGY[2], "Nothing has changed.", 6000);
                   }
-                        mc.SelectConfig();
+                        //mc.SelectConfig();
+                        ms.selectTables(DT.configTable, new SelectConfig());
+                        
             }
       }
 
