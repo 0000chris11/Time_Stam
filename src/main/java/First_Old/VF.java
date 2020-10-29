@@ -771,12 +771,12 @@ public class VF extends JFrame {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
             System.out.println("\nSELECT TABLES");
-            ms.selectTables(DT.mainTable, new SelectTables());
+            //ms.selectTables(DT.mainTable, new SelectTables());
 
             //SELECTING DEFAULT TABLE+++++++++++++++++++++++++
             if (getDefault == true) {
                   System.out.println("SELECT DEFAULT TABLE");
-                  mc.SelectDefaultTable();
+                  //mc.SelectDefaultTable();
             } else {
 
             }
@@ -803,7 +803,7 @@ public class VF extends JFrame {
             //addKeyListenerToLSTS();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("SELECT CONFIG");
-            ms.selectTables(DT.configTable, new SelectConfig());
+            //ms.selectTables(DT.configTable, new SelectConfig());
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
 
@@ -850,10 +850,10 @@ public class VF extends JFrame {
             System.out.println("S: " + table);
             frameConfig();
 
-            ms.selectTables(DT.mainTable, new SelectTables());
+            //ms.selectTables(DT.mainTable, new SelectTables());
             addItemToMenus(DT.getList_id(), DT.getList_T());
 
-            ms.selectTables(DT.configTable, new SelectConfig());
+            //ms.selectTables(DT.configTable, new SelectConfig());
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
 

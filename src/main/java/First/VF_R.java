@@ -854,13 +854,11 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
             System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
-            //mc.SelectTables();
-            ms.selectTables(DT.mainTable, new SelectTables());
+            ms.selectData(DT.mainTable, new SelectTables());
             //SELECTING DEFAULT TABLE++++++++++++++++++++++++
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   DT.setTable(ms.selectValueFromTable(DT.defautlTable, DT.defaultColumn, 1).toString());
-                  //mc.SelectDefaultTable();
                   ms.selectRowFromTable(DT.mainTable, DT.mainColumn, 
                           DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
             }
@@ -884,7 +882,8 @@ public class VF_R extends VF_R_DataCom {
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ SELECT CONFIG" + CC.RESET);
             //mc.SelectConfig();
-            ms.selectTables(DT.configTable, new SelectConfig());
+            //ms.selectTables(DT.configTable, new SelectConfig());
+            ms.selectData(DT.configTable, new SelectConfig());
             //System.out.println("\tAOT BL: " + dt.getList_BL().get(0));
             mi_AOT.setSelected(DT.getList_BL().get(0));
             JF.setAlwaysOnTop(DT.getList_BL().get(0));
@@ -924,26 +923,6 @@ public class VF_R extends VF_R_DataCom {
             
             System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
             //System.out.println("Table: " + dt.getTable());
-      }
-
-      public VF_R(String table) {
-            System.out.println("S: " + table);
-            frameConfig();
-
-            ms.selectTables(DT.mainTable, new SelectTables());
-            addItemToMenus(DT.getList_id(), DT.getList_T());
-
-            ms.selectTables(DT.configTable, new SelectConfig());
-            mi_AOT.setSelected(DT.getList_BL().get(0));
-            JF.setAlwaysOnTop(DT.getList_BL().get(0));
-
-            mi_AutoR.setSelected(DT.getList_BL().get(1));
-            n_mm.rez(JT, DT.getList_BL().get(1));
-            DT.autoState = DT.getList_BL().get(1);
-
-            mi_Grid.setSelected(DT.getList_BL().get(2));
-            JT.setShowGrid(DT.getList_BL().get(2));
-
       }
 
       public static void main(String[] args) {

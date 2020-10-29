@@ -7,6 +7,7 @@ package First;
 
 import static First.VF_R_DataCom.JT;
 import static First.VF_R_DataCom.PL_B;
+import MC.DT;
 import com.cofii.myMethods.MTable;
 import com.cofii.myClasses.VT;
 import com.cofii.myMethods.MComp;
@@ -30,7 +31,7 @@ public class VT_T extends VF_R_DataCom{
             vt.add(btn);
             JButton btn2 = new JButton("COMPARING");
             vt.add(btn2);
-            JButton btn3 = new JButton("GET TABLE MODEL");
+            JButton btn3 = new JButton("GET BOOLEANS");
             vt.add(btn3);
             JButton btn4 = new JButton("JF COMPONENTS");
             vt.add(btn4);
@@ -64,7 +65,9 @@ public class VT_T extends VF_R_DataCom{
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        
+                        System.out.println("\t" + DT.getList_BL().get(0));
+                        System.out.println("\t" + DT.getList_BL().get(1));
+                        System.out.println("\t" + DT.getList_BL().get(2));
                   }
 
             });

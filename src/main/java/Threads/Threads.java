@@ -58,25 +58,25 @@ public class Threads {
 
                         ArrayList<String> SS = new ArrayList<String>();
                         //int b = 1;
-                        for (int a = 0; a < DT.maxColumns - 1; a++) {
-                              if (VF_R.getJTFS()[a + 1].isVisible()) {
+                        for (int a = 0; a < DT.maxColumns; a++) {
+                              if (VF_R.getJTFS()[a].isVisible()) {
                                     //ss[a] = VF_R.getJTFS()[a + 1].getText();
-                                    SS.add(VF_R.getJTFS()[a + 1].getText());
+                                    SS.add(VF_R.getJTFS()[a].getText());
                               } else {
                                     //ss[a] = tfs_MD[a].getText() + ":" + tfs_MU[a].getText() + ":" + tfs_SD[a].getText();
                               }
                         }//+++++++++++++++++++++++++++++++++++++++++
                         //CHANGE WHEN THERE IS NO >ID< FIELD
-                              int mayor = MTable.getMayorId(VF_R.getJT(), 0);
-                        
-                        for (int a = 0; a < DT.maxColumns - 1; a++) {
-                              if (VF_R.getJT().getColumnCount() == a + 2) {
-                                    System.out.println("\t\tADD ++++ INSERTING " + (a + 2)
+                        int mayor = MTable.getMayorId(VF_R.getJT(), 0);
+
+                        for (int a = 0; a < DT.maxColumns; a++) {
+                              if (VF_R.getJT().getColumnCount() == a + 1) {
+                                    System.out.println("\t\tADD ++++ INSERTING " + (a + 1)
                                             + " COLUMNS");
 
                                     mc.Insert(DT.getTable(), ++mayor, SS);
                                     //mc.SelectData(a + 2, DT.getTable());
-                                    ms.selectData(DT.getTable(), new SelectData(a + 2));
+                                    ms.selectData(DT.getTable(), new SelectData(a + 1));
 
                                     VF_R.noRowsDetection();
                               }

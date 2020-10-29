@@ -8,6 +8,7 @@ package SQLActions;
 import First.VF_R;
 import MC.DT;
 import MC.Status;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IUpdates;
 import java.sql.SQLException;
 
@@ -18,19 +19,19 @@ import java.sql.SQLException;
 public class UpdateTable implements IUpdates {
 
       private String Msg;
-      
-      public UpdateTable(String msg){
+
+      public UpdateTable(String msg) {
             Msg = msg;
       }
-      
+
       @Override
       public void succeed() {
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], Msg, 4000);
+            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], Msg + "Done", 4000);
       }
 
       @Override
       public void fail() {
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2], Msg + DT.inter, 8000);
+            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2], Msg + "Fail" + DT.inter, 8000);
       }
 
       @Override

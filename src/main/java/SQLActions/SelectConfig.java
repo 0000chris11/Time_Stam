@@ -8,6 +8,7 @@ package SQLActions;
 import First.VF_R;
 import MC.DT;
 import MC.Status;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,10 +23,13 @@ public class SelectConfig implements IActions {
       public void beforeQuery() {
             DT.getList_TC().clear();
             DT.getList_BL().clear();
+            System.out.println(CC.CYAN + "SELECT" + CC.RESET);
       }
 
       @Override
       public void setData(ResultSet rs) throws SQLException {
+            System.out.println("\t" + rs.getBoolean(3));
+            
             DT.getList_TC().add(rs.getString(2));
             DT.getList_BL().add(rs.getBoolean(3));
       }

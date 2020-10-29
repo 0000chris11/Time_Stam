@@ -44,33 +44,6 @@ public class MakeCon {
       public MakeCon(String from, int CC) {
             DT.getConstructorName(DT.cons, CName, from, CC);
       }
-      //UPDATE+A+CELL+++++++++++++++++++++++++++++++++++++
-      public void UpdateConfig(boolean newnv, int id) {
-            System.out.println(CC.YELLOW + "MakeCon ++++ UpdateConfig" + CC.RESET);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-
-                  pstt = con.prepareStatement(
-                          "UPDATE Table_Config SET Value = " + newnv + " WHERE id = " + id);
-                  //Update Table_Config SET 
-                  //System.out.println("UPDATE Table_Config SET Value = " + newnv + " WHERE id = " + id);
-
-                  int ex = pstt.executeUpdate();
-                  if (ex == 1) {
-                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MC-UpdateConfig Done!", 4000);
-                  } else {
-                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
-                                "UpdateConfig: " + DT.inter, 8000);
-                  }
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "UpdateConfig: " + ex.toString(), 8000);
-            }
-      }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       public void CreateTable(String table, String[] cols, int c) {
@@ -152,8 +125,8 @@ public class MakeCon {
                         //DT.getList_Tabl().add(tabl);
                         //DT.getList_Tag().add(tag);
                         //DT.getList_Clock().add(clock);
-                        ms.selectTables(DT.mainTable, new SelectTables());
-                        
+                        //ms.selectTables(DT.mainTable, new SelectTables());
+                        ms.selectData(DT.mainTable, new SelectTables());
                         
                         
                         Status.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
@@ -227,43 +200,6 @@ public class MakeCon {
                   Status.startLBStatus(VF_R.getLB_Status(), Color.RED, 
                           "RemoveTableFromTN: " + ex.toString(), 8000);
             }
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++
-      public void SelectDefaultTable() {
-            System.out.println(CC.YELLOW + "MakeCon ++++ SelectDefaultTable" + CC.RESET);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-                  //jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-
-                  //Table_Names ON Default_Table.id = Table_Names.id;
-                  String query = "SELECT Default_Table.id, Name, Dist1, Dist2, Tabl, Tag1, Clock FROM Default_Table "
-                          + "LEFT JOIN Table_Names ON Default_Table.id = Table_Names.id";
-                  
-                  //SELECT Default_Table.id, Name, Dist1, Dist2, Tabl, Tag1, Clock FROM Default_Table LEFT JOIN Table_Names ON Default_Table.id = Table_Names.id
-                  
-                  stt = con.createStatement();
-                  rs = stt.executeQuery(query);
-
-                  while (rs.next()) {
-                        DT.setId(rs.getString(1));
-                        DT.setTable(rs.getString(2));
-                        DT.setDTable(rs.getString(2));
-                        DT.setDist1(rs.getString(3));
-                        DT.setDist2(rs.getString(4));
-                        DT.setTabl(rs.getString(5));
-                        DT.setTag(rs.getString(6));
-                        DT.setClock(rs.getString(7));
-                  }
-
-                  //System.out.println("\t0 Table: " + DT.getTable());
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectDefaultTable: " + ex.toString(), 8000);
-            }
-
       }
 
       public void SelectTables() {
