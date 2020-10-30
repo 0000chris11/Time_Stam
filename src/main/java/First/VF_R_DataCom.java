@@ -54,9 +54,6 @@ public class VF_R_DataCom {
       static JLabel lb_JT = new JLabel("NO ROWS INSERTED");
       static JScrollPane sc_JT = new JScrollPane(JT);
       //============================================================    
-
-      
-
       static JPanel p3 = new JPanel();
 
       static JToolBar TB = new JToolBar() {
@@ -150,9 +147,15 @@ public class VF_R_DataCom {
       public static JFrame getJF() {
             return JF;
       }
+      
+      public static JSplitPane getSPL(){
+            return SPL;
+      }
 
-
-
+      public static JSplitPane getSPL_SUB(){
+            return SPL_SUB;
+      }
+      
       public static JPanel getPL() {
             return PL_U;
       }

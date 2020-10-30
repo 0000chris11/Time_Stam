@@ -51,6 +51,7 @@ import Others.LSTD;
 import SQLActions.SelectTables;
 import com.cofii.myClasses.MSQL;
 import static First.VF_R_DataCom.PL_U;
+import static First.VF_R_DataCom.SPL_SUB;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
 
@@ -226,7 +227,6 @@ public class VF_R extends VF_R_DataCom {
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
             //sc_JT.setViewportView(JT);
-
             JT.setDefaultEditor(String.class, DTCellEditor);
 
             for (int i = 0; i < JT.getColumnCount(); i++) {
@@ -236,13 +236,13 @@ public class VF_R extends VF_R_DataCom {
 
       public static void setTableRenderer() {
             //System.out.println("#######setTableRenderer (column count: " + JT.getColumnCount());
-            
+
             JTCellRenderer jtcr = new JTCellRenderer();
 
             for (int a = 0; a < JT.getColumnCount(); a++) {
                   JT.getColumnModel().getColumn(a).setCellRenderer(jtcr);
             }
-            
+
             //System.out.println("+++++++++++GETFONT: " + JT.getFont());
             //System.out.println("Selection Model: " + JT.getSelectionModel().toString());
       }
@@ -271,18 +271,16 @@ public class VF_R extends VF_R_DataCom {
       private void splitConfig() {
             JF.add(SPL, BorderLayout.CENTER);
             SPL.setOneTouchExpandable(true);
-            SPL.setPreferredSize(new Dimension(500, SPL.getPreferredSize().height));
             SPL.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
             SPL.setLeftComponent(SPL_SUB);
             SPL.setRightComponent(sc_JT);
 
-            SPL_SUB.setPreferredSize(new Dimension(460, SPL_SUB.getPreferredSize().height));
+            SPL_SUB.setOneTouchExpandable(true);
             SPL_SUB.setTopComponent(PL_U);
             SPL_SUB.setBottomComponent(sc_PL_B);
             //+++++++++++++++++++++++++++++++++++++++++++++
             subSplitUpConfig();
             subSplitDownConfig();
-            SPL_SUB.setDividerLocation(0.6);//NOT LISTENING
             //*++++++++++++++++++++++++++++++++++++++++++++
             setComponentsToArray();
             componentsVisibility();
@@ -300,11 +298,27 @@ public class VF_R extends VF_R_DataCom {
                   ml.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
             }
             clockConfig();
+            splitSizeConfig();
+      }
+
+      private void splitSizeConfig() {
+            //SPL.setPreferredSize(new Dimension(500, SPL.getPreferredSize().height));
+
+            //SPL_SUB.setPreferredSize(new Dimension(460, 700));
+            //PL_U.setPreferredSize(new Dimension(PL_U.getPreferredSize().width, 450));
+            //sc_PL_B.setPreferredSize(new Dimension(sc_PL_B.getPreferredSize().width, 250));
+            //sc_JT.setPreferredSize(new Dimension(400, sc_JT.getPreferredSize().height));
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //SPL.setDividerLocation(0.4);
+            //SPL.revalidate();
+            //SPL.repaint();
+            SPL_SUB.setDividerLocation(0.6);
+            SPL_SUB.revalidate();
+            SPL_SUB.repaint();
       }
 
       private void subSplitUpConfig() {
             PL_U.setLayout(new BorderLayout());
-            PL_U.setPreferredSize(new Dimension(PL_U.getPreferredSize().width, 500));
             PL_U.add(PL_UT, BorderLayout.NORTH);
             PL_U.add(sc_PL_UC, BorderLayout.CENTER);
 
@@ -312,7 +326,7 @@ public class VF_R extends VF_R_DataCom {
             PL_UT.setLayout(new BoxLayout(PL_UT, BoxLayout.X_AXIS));
             PL_UT.setBackground(Color.BLACK);
             PL_UT.setBorder(new LineBorder(Color.WHITE, 1));
-            PL_UT.setPreferredSize(new Dimension(PL_UT.getPreferredSize().width, 40));
+            PL_UT.setMaximumSize(new Dimension(PL_UT.getPreferredSize().width, 40));
 
             PL_UT.add(Box.createHorizontalStrut(10));
             PL_UT.add(lb_Title);
@@ -322,6 +336,7 @@ public class VF_R extends VF_R_DataCom {
                     lb_Title.getPreferredSize().width, 27));
 
             //PL_U+++++++++++++++++++++++++++++++++++++++++
+            sc_PL_UC.setPreferredSize(new Dimension(sc_PL_UC.getPreferredSize().width, 450));
             sc_PL_UC.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             Dimension d = new Dimension(PL_UC.getPreferredSize().width, 1000);
             PL_UC.setMinimumSize(d);
@@ -355,7 +370,7 @@ public class VF_R extends VF_R_DataCom {
             JPB.setBackground(Color.BLACK);
             JPB.setForeground(Color.RED);
             JPB.setMinimum(0);
-            
+
             lb_Icon.setVisible(true);
             JPB.setVisible(true);
       }
@@ -508,10 +523,10 @@ public class VF_R extends VF_R_DataCom {
       //----------------------------------------------------------------------
       private void tableConfig() {
             JT.setUI(new BasicTableUI());
-            sc_JT.setPreferredSize(new Dimension(400, sc_JT.getPreferredSize().height));
+
             //sc_JT.setSize(766, 522);
             sc_JT.setVerticalScrollBarPolicy(22);
-            
+
             //JT.setBounds(6, 6, 758, 516);
             //JT.setPreferredSize(new Dimension(758, JT.getHeight()));
             JT.setBackground(Color.BLACK);
@@ -847,6 +862,7 @@ public class VF_R extends VF_R_DataCom {
             JMS_ChangeDTable.setName("mi_OP_Change");
             //mi_SaveOp.setName();
       }
+
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public VF_R() {
             System.out.println(CC.CYAN + "CLASS ### MAIN" + CC.RESET);
@@ -859,7 +875,7 @@ public class VF_R extends VF_R_DataCom {
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   DT.setTable(ms.selectValueFromTable(DT.defautlTable, DT.defaultColumn, 1).toString());
-                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, 
+                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn,
                           DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
             }
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -875,7 +891,7 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
             cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
             noRowsDetection();
-            
+
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
             lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(), DT.getTag(),
                     DT.getClock());
@@ -914,25 +930,27 @@ public class VF_R extends VF_R_DataCom {
             mi_SP1Components.setText(mi_SP1Components.getText() + " ("
                     + PL_UC.getComponentCount() + ")");
             //*++++++++++++++++++++++++++++++++++++++++++++++++++++          
-            SPL.setDividerLocation(0.4);
-            SPL.revalidate();
-            SPL.repaint();
-            SPL_SUB.setDividerLocation(0.5);
-            SPL_SUB.revalidate();
-            SPL_SUB.repaint();
-            
             System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
             //System.out.println("Table: " + dt.getTable());
       }
 
       public static void main(String[] args) {
+            Swing
             SwingUtilities.invokeLater(new Runnable() {
                   public void run() {
                         VF_R vf = new VF_R();
                         vf.getJF().setVisible(true);
+                        
+                        SPL.setDividerLocation(0.4);
+                        //SPL.revalidate();
+                        //SPL.repaint();
+                        SPL_SUB.setDividerLocation(0.6);
+                        //SPL_SUB.revalidate();
+                        //SPL_SUB.repaint();
+
                         new VT_T();
                   }
             });
-
+            SwingUtilities.in
       }
 }
