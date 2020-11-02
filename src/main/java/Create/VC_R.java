@@ -10,6 +10,7 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -34,14 +35,14 @@ public class VC_R extends VC_R_DataCom {
             JF.setLayout(null);
             JF.setLocation(VF_R.getJF().getX() + 100, VF_R.getJF().getY() + 60);
 
-            JF.add(JP);
-            JP.setLayout(null);
-            JP.setBounds(2, 2, 800, 500 - VF_R.getP3().getHeight() - 2);
+            JF.add(JP1);
+            JP1.setLayout(null);
+            JP1.setBounds(2, 2, 800, 500 - VF_R.getP3().getHeight() - 2);
 
             JF.add(JP2);
             JP2.setLayout(null);
             JP2.setBackground(Color.BLACK);
-            JP2.setBounds(2, JP.getHeight() + 6, JP.getWidth(), VF_R.getP3().getHeight());
+            JP2.setBounds(2, JP1.getHeight() + 6, JP1.getWidth(), VF_R.getP3().getHeight());
 
             JP2.add(lb_Status);
             Border bb = BorderFactory.createBevelBorder(BevelBorder.RAISED);
@@ -58,7 +59,7 @@ public class VC_R extends VC_R_DataCom {
             btn_Create.setBounds(JP2.getWidth() - 90, lb_Status.getY(),
                     84, lb_Status.getHeight());
 
-            JF.setSize(JP.getWidth() + 20, JP.getHeight() + JP2.getHeight() + 48);
+            JF.setSize(JP1.getWidth() + 20, JP1.getHeight() + JP2.getHeight() + 48);
             JF.setVisible(true);
       }
 
@@ -67,7 +68,7 @@ public class VC_R extends VC_R_DataCom {
             int lby = 24;
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = new smallLB();
-                  JP.add(lbs[a]);
+                  JP1.add(lbs[a]);
 
                   if (a == 0) {
                         lbs[a].setText("Table");
@@ -77,7 +78,7 @@ public class VC_R extends VC_R_DataCom {
                         lbs[a].setText("Column " + (a + 1));
                   }
                   tfs[a] = new smallTF();
-                  JP.add(tfs[a]);
+                  JP1.add(tfs[a]);
 
                   if (a >= 1) {
                         //BUT TITLE / MAIN
@@ -97,11 +98,11 @@ public class VC_R extends VC_R_DataCom {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   //System.out.println(CC.PURPLE + "A: " + a + CC.RESET);
                   btns_m[a] = new smallBTN_C("-");
-                  JP.add(btns_m[a]);
+                  JP1.add(btns_m[a]);
                   btns_m[a].setBounds(314, lby, 22, 27);
 
                   btns_p[a] = new smallBTN_C("+");
-                  JP.add(btns_p[a]);
+                  JP1.add(btns_p[a]);
                   btns_p[a].setBounds(336, lby, 22, 27);
 
                   lby += 33;
@@ -126,41 +127,41 @@ public class VC_R extends VC_R_DataCom {
       }
 
       private void LBDist_SPConfig() {
-            JP.add(SP_H1);
-            SP_H1.setBounds(4, tfs[1].getY() - 10, JP.getWidth() - 10, 1);
+            JP1.add(SP_H1);
+            SP_H1.setBounds(4, tfs[1].getY() - 10, JP1.getWidth() - 10, 1);
             SP_H1.setForeground(Color.LIGHT_GRAY);
 
-            JP.add(SP_V1);
+            JP1.add(SP_V1);
             SP_V1.setOrientation(SwingConstants.VERTICAL);
             SP_V1.setBounds(btns_p[0].getX() + btns_p[0].getWidth() + 6,
-                    4, 1, JP.getHeight() - 10);
+                    4, 1, JP1.getHeight() - 10);
             SP_V1.setForeground(Color.LIGHT_GRAY);
 
             int y = 10;
             int w = 80;
             int h = 27;
-            JP.add(lb_Dist);
+            JP1.add(lb_Dist);
             lb_Dist.setBounds(SP_V1.getX() + 12, y, w, h);
 
-            JP.add(lb_Dist2);
+            JP1.add(lb_Dist2);
             lb_Dist2.setBounds(lb_Dist.getX() + 80, y, w, h);
 
-            JP.add(lb_Tabl);
+            JP1.add(lb_Tabl);
             lb_Tabl.setBounds(lb_Dist2.getX() + 80, y, w, h);
 
-            JP.add(lb_Tag);
+            JP1.add(lb_Tag);
             lb_Tag.setBounds(lb_Tabl.getX() + 80, y, w, h);
 
-            JP.add(lb_Clock);
+            JP1.add(lb_Clock);
             lb_Clock.setBounds(lb_Tag.getX() + 80, y, w, h);
 
             int xs = SP_V1.getX() + 80;
             for (int a = 0; a < SP_VS.length; a++) {
                   SP_VS[a] = new JSeparator();
 
-                  JP.add(SP_VS[a]);
+                  JP1.add(SP_VS[a]);
                   SP_VS[a].setOrientation(SwingConstants.VERTICAL);
-                  SP_VS[a].setBounds(xs, y, 1, JP.getHeight() - 10);
+                  SP_VS[a].setBounds(xs, y, 1, JP1.getHeight() - 10);
                   SP_VS[a].setForeground(Color.LIGHT_GRAY);
                   xs += 80;
             }
@@ -182,20 +183,20 @@ public class VC_R extends VC_R_DataCom {
                   btns_Tag[a] = new smallBTN_TG(w, h, gG);
                   btns_Clock[a] = new smallBTN_TG(w, h, gY);
 
-                  JP.add(btns_Dist[a]);
+                  JP1.add(btns_Dist[a]);
                   btns_Dist[a].setBounds(lb_Dist.getX(), lbs[a + 1].getY(), w, h);
 
-                  JP.add(btns_Dist2[a]);
+                  JP1.add(btns_Dist2[a]);
                   btns_Dist2[a].setBounds(lb_Dist2.getX(), lbs[a + 1].getY(), w, h);
                   btns_Dist2[a].setEnabled(false);
 
-                  JP.add(btns_Tabl[a]);
+                  JP1.add(btns_Tabl[a]);
                   btns_Tabl[a].setBounds(lb_Tabl.getX(), lbs[a + 1].getY(), w, h);
 
-                  JP.add(btns_Tag[a]);
+                  JP1.add(btns_Tag[a]);
                   btns_Tag[a].setBounds(lb_Tag.getX(), lbs[a + 1].getY(), w, h);
 
-                  JP.add(btns_Clock[a]);
+                  JP1.add(btns_Clock[a]);
                   btns_Clock[a].setBounds(lb_Clock.getX(), lbs[a + 1].getY(), w, h);
             }
             BTNS_DistsSTARS();
@@ -290,5 +291,15 @@ public class VC_R extends VC_R_DataCom {
             ml.addAllListeners();
 
             System.out.println(CC.CYAN + "VC ### ENDS" + CC.RESET);
+            
+      }
+      
+      public static void main(String[] args){
+            SwingUtilities.invokeLater(new Runnable(){
+                  @Override
+                  public void run() {
+                        new VC_R();
+                  }
+            });
       }
 }

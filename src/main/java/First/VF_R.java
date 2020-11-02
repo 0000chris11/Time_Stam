@@ -935,7 +935,6 @@ public class VF_R extends VF_R_DataCom {
       }
 
       public static void main(String[] args) {
-            Swing
             SwingUtilities.invokeLater(new Runnable() {
                   public void run() {
                         VF_R vf = new VF_R();
@@ -951,6 +950,5 @@ public class VF_R extends VF_R_DataCom {
                         new VT_T();
                   }
             });
-            SwingUtilities.in
       }
 }
