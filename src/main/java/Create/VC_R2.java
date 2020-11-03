@@ -119,16 +119,23 @@ public class VC_R2 extends VC_R_DataCom {
             JPB.setLayout(new GridLayout(1, 3, 0, 0));
             componentsConfig();
             //+++++++++++++++++++++++++++++++++++++
+            
+            //+++++++++++++++++++++++++++++++++++++++
             JPB.add(JP1);
             jp1(JP1, DT.maxColumns);
             
             JPB.add(JP2);
             GroupLayout gl = new GroupLayout(JP2);
+            MLayout ml = new MLayout(gl, DT.maxColumns);
             JP2.setLayout(gl);
-            MLayout ml = new MLayout(gl, 2);
+            
+            comb.setBackground(DT.TFColor[0]);
+            comb.setForeground(Color.WHITE);
+            comb.setFont(tfs[0].getFont());
+            checkb.setToolTipText("Allow null");
             
             JComponent[] comps = new JComponent[]{comb, checkb};
-            ml.lineSequence(comps);
+            JComponent[][] compsP2 = ml.lineSequence(comps, 27);
             
             JPB.add(JP3);
             
