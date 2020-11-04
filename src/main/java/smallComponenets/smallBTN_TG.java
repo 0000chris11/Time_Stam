@@ -9,8 +9,10 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
+import org.apache.commons.lang3.SerializationUtils;
 
 /**
  *
@@ -20,6 +22,7 @@ public class smallBTN_TG extends JToggleButton {
 
       int W;
       int H;
+      
       GradientPaint GP;
       GradientPaint GP_D;
 
@@ -73,6 +76,9 @@ public class smallBTN_TG extends JToggleButton {
             GP_O = new GradientPaint(0, 0, Color.CYAN, w, h, Color.WHITE);
             GP_OD = new GradientPaint(0, 0, Color.BLUE.darker(), w, h, Color.WHITE.darker());
             GP_EF = new GradientPaint(0, 0, Color.GRAY.darker(), w, h, Color.WHITE.darker());
+            
+            SerializationUtils.serialize((Serializable) GP_O);
+            
             /*
             for (int a = 0; a < 5; a++) {
                   if (colorGradient == a) {

@@ -17,6 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import smallComponenets.JPanelGradient;
+import smallComponenets.smallBTN_TG;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
 
@@ -37,6 +38,9 @@ public class VC_R_DataCom {
       static JLabel lb_Status = new JLabel("Waiting for action...");
       static JButton btn_Create = new JButton("CREATE");
       //++++++++++++++++++++++++++++++++++++++++++++++
+      JLabel[] headers2 = new JLabel[2];
+      JLabel[] headers3 = new JLabel[5];
+      //++++++++++++++++++++++++++++++++++++++++++++++
       static JLabel lb_Title = new JLabel("INSERT TITLE");
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField tf_Title = new smallTF();
@@ -48,7 +52,15 @@ public class VC_R_DataCom {
             "INT", "FLOAT", "DOUBLE", "VARCHAR", "BOOLEAN/TINYINT(1)", "DATE"};
       static JComboBox comb = new JComboBox(cb_options);
       static JCheckBox checkb = new JCheckBox();
-
+      //++++++++++++++++++++++++++++++++++++++++++++++
+      private static int w = 54;
+      private static int h = 27;
+      static JToggleButton btn_Dist = new JToggleButton();
+      static JToggleButton btn_Dist2 = new JToggleButton();
+      static JToggleButton btn_Tabl = new JToggleButton();
+      static JToggleButton btn_Tag = new JToggleButton();
+      static JToggleButton btn_Clock = new JToggleButton();
+      //++++++++++++++++++++++++++++++++++++++++++++++
       JSeparator SP_H1 = new JSeparator();
       JSeparator SP_V1 = new JSeparator();
       JSeparator[] SP_VS = new JSeparator[4];
