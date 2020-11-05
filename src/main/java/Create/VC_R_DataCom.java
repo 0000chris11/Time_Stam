@@ -17,6 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import smallComponenets.JPanelGradient;
+import smallComponenets.smallBTN_C;
 import smallComponenets.smallBTN_TG;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
@@ -30,7 +31,7 @@ public class VC_R_DataCom {
       JFrame JF = new JFrame("Create Table");
 
       JPanel JPU = new JPanel();
-      JPanel JPB = new JPanel();
+      JPanel JPB = new JPanelGradient();
       JPanel JP1 = new JPanelGradient();
       JPanel JP2 = new JPanelGradient();
       JPanel JP3 = new JPanelGradient();
@@ -38,12 +39,26 @@ public class VC_R_DataCom {
       static JLabel lb_Status = new JLabel("Waiting for action...");
       static JButton btn_Create = new JButton("CREATE");
       //++++++++++++++++++++++++++++++++++++++++++++++
+      String[] headers_t = new String[]{
+            "Columns", "Name", "Sub", "Add", "Type", "Null", 
+            "Dist1", "Dist2", "Tabl", "Tag", "Clock"};
+      JLabel[] headers = new JLabel[11];
       JLabel[] headers2 = new JLabel[2];
       JLabel[] headers3 = new JLabel[5];
+      
+      static JComponent[][] compsD;
       //++++++++++++++++++++++++++++++++++++++++++++++
       static JLabel lb_Title = new JLabel("INSERT TITLE");
-      static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField tf_Title = new smallTF();
+      
+      static JLabel lb = new smallLB("Column 1");
+      static JTextField tf = new smallTF();
+      static JButton btn_p = new JButton("+");
+      static JButton btn_m = new JButton("-");
+      static JButton[] btns_po;
+      static JButton[] btns_mo;
+      
+      static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       static JButton[] btns_p = new JButton[DT.maxColumns];
       static JButton[] btns_m = new JButton[DT.maxColumns];
@@ -80,6 +95,10 @@ public class VC_R_DataCom {
       static JComponent[][] row = new JComponent[DT.maxColumns - 1][9];
       //++++++++++++++++++++++++++++++++++++++++++
 
+      public static JComponent[][] getCompsD(){
+            return compsD;
+      }
+      
       public static JLabel[] getJLBS() {
             return lbs;
       }
@@ -94,6 +113,14 @@ public class VC_R_DataCom {
 
       public static JButton[] getJBTNS_M() {
             return btns_m;
+      }
+      
+      public static JButton[] getJBTNS_PO(){
+            return btns_po;
+      }
+      
+      public static JButton[] getJBTNS_MO(){
+            return btns_mo;
       }
 
       public static JToggleButton[] getBTNS_Dist() {

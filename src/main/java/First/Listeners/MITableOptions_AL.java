@@ -9,6 +9,7 @@ import First.VF_R;
 import MC.DT;
 import First_Old.VC;
 import Create.VC_R;
+import Create.VC_R2;
 import Second.VO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +27,10 @@ public class MITableOptions_AL implements ActionListener{
             
             if(ac.equals(VF_R.getMI_CreateTable().getText())){
                   System.out.println(VF_R.getMI_CreateTable().getText());
-                  new VC_R();
+                  new VC_R2("CREATE");
             }else if(ac.equals(VF_R.getMI_UpdateTable().getText())){
                   System.out.println(VF_R.getMI_UpdateTable().getText());
-                  //NOT YET+++++++++++++++++++++++++
+                  new VC_R2("UPDATE");
             }else if(ac.equals(VF_R.getMI_DeleteTables().getText())){
                   System.out.println(VF_R.getMI_DeleteTables().getText());
                   //NOT YET+++++++++++++++++++++++++
