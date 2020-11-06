@@ -52,11 +52,11 @@ public class VC_R extends VC_R_DataCom {
             lb_Status.setForeground(Color.WHITE);
             lb_Status.setFont(VF_R.getLB_Status().getFont());
             lb_Status.setBounds(VF_R.getLB_Status().getX(), VF_R.getLB_Status().getY(),
-                    JP2.getWidth() - 100, VF_R.getLB_Status().getHeight());
+                    JP2.getWidth() - 100, 28);
             
-            JP2.add(btn_Create);
-            btn_Create.setMargin(new Insets(3, 1, 3, 1));
-            btn_Create.setBounds(JP2.getWidth() - 90, lb_Status.getY(),
+            JP2.add(btn_CU);
+            btn_CU.setMargin(new Insets(3, 1, 3, 1));
+            btn_CU.setBounds(JP2.getWidth() - 90, lb_Status.getY(),
                     84, lb_Status.getHeight());
 
             JF.setSize(JP1.getWidth() + 20, JP1.getHeight() + JP2.getHeight() + 48);

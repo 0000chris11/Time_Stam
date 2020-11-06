@@ -18,13 +18,23 @@ public class BTN_MP_AL implements ActionListener{
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            for(int a = 0; a < DT.maxColumns - 1; a++){
-                  if(e.getSource() == VC_R2.getJBTNS_MO()[a + 1]){//FIRST ONE ALLWAYS DISABLED
-                        for(int b = 0; b < VC_R2.getCompsD()[a].length; b++){
-                              VC_R2.getCompsD()[a + 2][b].setVisible(false);
+            for(int row = 0; row < DT.maxColumns - 1; row++){
+                  //SUB
+                  if(e.getSource() == VC_R2.getJBTNS_MO()[row + 1]){//FIRST ONE ALLWAYS DISABLED
+                        for(int col = 0; col < VC_R2.getCompsD()[row].length; col++){
+                              VC_R2.getCompsD()[row + 2][col].setVisible(false);
                         }
-                        VC_R2.getJBTNS_MO()[a].setVisible(true);
-                        VC_R2.getJBTNS_PO()[a].setVisible(true);
+                        VC_R2.getJBTNS_MO()[row].setVisible(true);
+                        VC_R2.getJBTNS_PO()[row].setVisible(true);
+                  }
+                  //ADD
+                  if(e.getSource() == VC_R2.getJBTNS_PO()[row]){//LAST ONE ALLWAYS DISABLED
+                        for(int col = 0; col < VC_R2.getCompsD()[row].length; col++){
+                              VC_R2.getCompsD()[row + 2][col].setVisible(true);
+                        }
+                        VC_R2.getJBTNS_MO()[row].setVisible(false);
+                        VC_R2.getJBTNS_PO()[row].setVisible(false);
+                        
                   }
             }
       }
