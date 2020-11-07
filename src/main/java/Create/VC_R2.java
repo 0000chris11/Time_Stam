@@ -6,7 +6,6 @@
 package Create;
 
 import Create.Listeners.BTN_MP_AL;
-import Create.Listeners.BTN_PM_VC;
 import Create.Listeners.TF_KL_Control;
 import static Create.VC_R_DataCom.lb_Status;
 import First.VF_R;
@@ -31,6 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
@@ -54,91 +54,71 @@ public class VC_R2 extends VC_R_DataCom {
                   headers[a] = new smallLB(headers_t[a]);
             }
 
+            //btn_m.setMaximumSize(new Dimension(20, 27));
+            //btn_p.setMaximumSize(new Dimension(20, 27));
             comb.setBackground(DT.TFColor[0]);
             comb.setForeground(Color.WHITE);
             comb.setFont(tf.getFont());
             checkb.setToolTipText("Allow null");
-            
+
             //btn_Dist.setBackground(Color.WHITE);
       }
-      
-      private Object[] getColumn(Object[][] object, int col){
+
+      private Object[] getColumn(Object[][] object, int col) {
             Object[] returnObject = new Object[object.length];
-            for(int a = 0; a < object.length; a++){
+            for (int a = 0; a < object.length; a++) {
                   returnObject[a] = object[a][col];
             }
             return returnObject;
       }
 
       private void startCreate() {
-            ArrayList<JButton> btns = new ArrayList<JButton>();
             for (int a = 0; a < compsD.length; a++) {
                   for (int b = 0; b < compsD[a].length; b++) {
                         if (a > 1) {
                               compsD[a][b].setVisible(false);
                         }
-
-                        if (compsD[a][b] instanceof JButton) {
-                              btns.add((JButton) compsD[a][b]);
-                        }
                   }
             }
 
-            ArrayList<JButton> btns_m = new ArrayList<JButton>();
-            ArrayList<JButton> btns_p = new ArrayList<JButton>();
-            for (int a = 0; a < btns.size(); a++) {
-                  if (btns.get(a).getText().equals("-")) {
-                        btns_m.add(btns.get(a));
-                  } else if (btns.get(a).getText().equals("+")) {
-                        btns_p.add(btns.get(a));
-                  }
-            }
-
-            /*
-            Integer[] arr = new Integer[al.size()]; 
-            arr = al.toArray(arr); 
-             */
-            BTN_MP_AL btnAC = new BTN_MP_AL();
-            btns_mo = new JButton[btns_m.size()];
-            btns_mo = btns_m.toArray(btns_mo);
-            btns_mo[0].setEnabled(false);
-
-            btns_po = new JButton[btns_p.size()];
-            btns_po = btns_p.toArray(btns_po);
-            btns_po[DT.maxColumns - 1].setEnabled(false);
-
-            for (JButton btn : btns_mo) {
-                  btn.addActionListener(btnAC);
-            }
-            for (JButton btn : btns_po) {
-                  btn.addActionListener(btnAC);
-            }
-            
+            Object[] ob_lbs = getColumn(compsD, 0);
             Object[] ob_tfs = getColumn(compsD, 1);
+            Object[] ob_btnm = getColumn(compsD, 2);
+            Object[] ob_btnp = getColumn(compsD, 3);
             Object[] ob_dis = getColumn(compsD, 6);
             Object[] ob_dis2 = getColumn(compsD, 7);
             Object[] ob_tab = getColumn(compsD, 8);
             Object[] ob_tag = getColumn(compsD, 9);
             Object[] ob_ck = getColumn(compsD, 10);
-            
+
             TF_KL_Control tfkl = new TF_KL_Control();
-            
+            BTN_MP_AL btnAC = new BTN_MP_AL();
+
             ButtonGroup bg = new ButtonGroup();
             ButtonGroup bg2 = new ButtonGroup();
-            for(int a = 0; a < DT.maxColumns; a++){
-                  tfsn[a] = (JTextField) ob_tfs[a + 1];
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  lbs[a] = (JLabel) ob_lbs[a + 1];
+                  lbOrigText[a] = "Column " + (a + 1);
+                  tfs[a] = (JTextField) ob_tfs[a + 1];
+                  btns_m[a] = (JButton) ob_btnm[a + 1];
+                  btns_p[a] = (JButton) ob_btnp[a + 1];
                   btns_Disto[a] = (JToggleButton) ob_dis[a + 1];
                   btns_Disto2[a] = (JToggleButton) ob_dis2[a + 1];
                   btns_Tablo[a] = (JToggleButton) ob_tab[a + 1];
                   btns_Tago[a] = (JToggleButton) ob_tag[a + 1];
                   btns_Clocko[a] = (JToggleButton) ob_ck[a + 1];
-                  
-                  tfsn[a].addKeyListener(tfkl);
-                  
+
+                  btns_m[a].addActionListener(btnAC);
+                  btns_p[a].addActionListener(btnAC);
+                  tfs[a].addKeyListener(tfkl);
+
                   bg.add(btns_Tablo[a]);
                   bg2.add(btns_Clocko[a]);
-                  
+
             }
+
+            btns_m[0].setEnabled(false);
+            btns_p[DT.maxColumns - 1].setEnabled(false);
       }
 
       private void startUpdate() {
@@ -146,7 +126,7 @@ public class VC_R2 extends VC_R_DataCom {
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++
-      public void JPUConfig() {
+      private void JPUConfig() {
             JF.add(JPU, BorderLayout.NORTH);
             JPU.setLayout(new BoxLayout(JPU, BoxLayout.X_AXIS));
             JPU.setBorder(new LineBorder(Color.WHITE, 2));
@@ -168,8 +148,10 @@ public class VC_R2 extends VC_R_DataCom {
       }
 
       private void JPCConfig() {
-            JF.add(JPC, BorderLayout.CENTER);
-            JPC.setBorder(new LineBorder(Color.WHITE, 2));
+            JF.add(sc_JPC, BorderLayout.CENTER);
+            sc_JPC.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            sc_JPC.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+            sc_JPC.setBorder(new LineBorder(Color.WHITE, 2));
 
             componentsConfig();
             //+++++++++++++++++++++++++++++++++++++
@@ -181,7 +163,7 @@ public class VC_R2 extends VC_R_DataCom {
             compsD = MLayout.lineSequence(gl, headers, comps, DT.maxColumns, 27);
       }
 
-      public void JPBConfig(String text) {
+      private void JPBConfig(String text) {
             JF.add(JPB, BorderLayout.SOUTH);
             JPB.setBackground(Color.BLACK);
             JPB.setPreferredSize(new Dimension(500, 40));
@@ -203,6 +185,29 @@ public class VC_R2 extends VC_R_DataCom {
             JPB.add(Box.createHorizontalStrut(10));
       }
 
+      private void JPRConfig(String choice) {
+            JF.add(JPR, BorderLayout.EAST);
+            JPR.setBackground(Color.BLACK);
+            JPR.setMinimumSize(new Dimension(200, 40));
+            JPR.setPreferredSize(new Dimension(200, 500));
+            JPR.setMaximumSize(new Dimension(200, Short.MAX_VALUE));
+            JPR.setLayout(new BoxLayout(JPR, BoxLayout.Y_AXIS));
+
+            //System.out.println("lb_Disp length: " + lb_Disp.length);
+            //System.out.println("lb_Disp_textC length: " + lb_Disp_textC.length);
+            for (int a = 0; a < lb_Disp.length; a++) {
+                  if (choice.equals("CREATE")) {
+                        lb_Disp[a] = new smallLB(lb_Disp_textC[a]);
+                  }
+                  
+                  lb_Disp[a].setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
+                  if(a % 2 == 0){
+                        lb_Disp[a].setFont(new Font("Dialog", Font.BOLD, 22));
+                  }
+                  JPR.add(lb_Disp[a]);
+            }
+      }
+
       public VC_R2(String choice) {
             JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             JF.setLayout(new BorderLayout());
@@ -219,6 +224,7 @@ public class VC_R2 extends VC_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++
 
             JPBConfig(choice);
+            JPRConfig(choice);
 
             JF.setVisible(true);
       }

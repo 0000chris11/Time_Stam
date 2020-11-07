@@ -1,5 +1,6 @@
 package MC;
 
+import Create.VC_R2;
 import First.VF_R;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,11 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import com.cofii.myClasses.CC;
-import Create.VC_R;
 import SQLActions.SelectTables;
 import com.cofii.myClasses.MSQL;
 import java.awt.Color;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -76,17 +75,17 @@ public class MakeCon {
                   int i = stt.executeUpdate(sql);
                   
                   if (i > 0) {
-                        Status.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
+                        Status.startLBStatus(VC_R2.getLB_Status(), Color.GREEN,
                           "MC-CreateTable Done!", 5000);
                   }else{
-                        Status.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
+                        Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
                           DT.inter, 7000);
                   }
                   //++++++++++++++++++++++++++++++++++++++++
 
             } catch (SQLException ex) {
                   ex.printStackTrace();
-                  Status.startLBStatus(VC_R.getLB_Status(), Color.RED,
+                  Status.startLBStatus(VC_R2.getLB_Status(), Color.RED,
                           "CreateTable - " + ex.toString(), 7000);
             }
       }
@@ -129,19 +128,19 @@ public class MakeCon {
                         ms.selectData(DT.mainTable, new SelectTables());
                         
                         
-                        Status.startLBStatus(VC_R.getLB_Status(), Color.GREEN,
+                        Status.startLBStatus(VC_R2.getLB_Status(), Color.GREEN,
                           "MC-InsertTable Done!", 5000);
                         
                         return true;
                   }else{
-                        Status.startLBStatus(VC_R.getLB_Status(), Color.YELLOW,
+                        Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
                           DT.inter, 7000);
                         return false;
                   }
                   
             }catch(SQLException ex){
                   ex.printStackTrace();
-                  Status.startLBStatus(VC_R.getLB_Status(), Color.RED, ex.toString(), 8000);
+                  Status.startLBStatus(VC_R2.getLB_Status(), Color.RED, ex.toString(), 8000);
                   return false;
             }
       }

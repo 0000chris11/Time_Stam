@@ -4,7 +4,6 @@ import First.VF_R;
 import MC.DT;
 import MC.MakeCon;
 import com.cofii.myClasses.CC;
-import Create.VC_R;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,11 +28,13 @@ public class BTN_Create_AL implements ActionListener {
             int countV = 1;
 
             //HOW MANY COLS ARE VISIBLE
+            /*
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VC_R.getJTFS()[a + 1].isVisible()) {
                         countV++;
                   }
             }
+            */
             System.out.println("'\tColumns Visible: " + countV);
 
             String[] cols = TFSControl(countV);
@@ -63,11 +64,12 @@ public class BTN_Create_AL implements ActionListener {
             if (access == true) {
                   System.out.println(CC.GREEN + "\tAcces TRUE" + CC.RESET);
                   //mc.CreateTable(VC_R.getJTFS()[0].getText(), countV);
+                  /*
                   mc.CreateTable(VC_R.getJTFS()[0].getText(),
                           cols, countV);
                   mc.InsertTable(VC_R.getJTFS()[0].getText(), Dist, "NONE", Tabl, Tag,
                           Clock);
-
+                  */
                   VF_R.addItemToMenus(DT.getList_id(), DT.getList_T());
                   VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
             } else {
@@ -80,6 +82,7 @@ public class BTN_Create_AL implements ActionListener {
             int countC = 0;
             String[] cols = new String[cv];
             //IF EACH JTF HAS TEXT AND THE RIGHT CHARS
+            /*
             for (int a = 0; a < cv; a++) {
                   if (!VC_R.getJTFS()[a].getText().isEmpty()) {
                         if (!VC_R.getJTFS()[a].getForeground().equals(Color.RED)) {
@@ -98,11 +101,13 @@ public class BTN_Create_AL implements ActionListener {
                         }
                   }
             }
+            */
             return cols;
       }
 
       private void tableControl() {
             boolean match = false;
+            /*
             for (int b = 0; b < DT.getList_T().size(); b++) {
                   if (VC_R.getJTFS()[0].getText().equalsIgnoreCase(
                           DT.getList_T().get(b))) {
@@ -113,6 +118,7 @@ public class BTN_Create_AL implements ActionListener {
                         }
                   }
             }
+            */
             System.out.print("\t\tTable ");
             if (match == false) {
                   System.out.println(CC.GREEN + "OK" + CC.RESET);
@@ -130,6 +136,7 @@ public class BTN_Create_AL implements ActionListener {
             ArrayList<Integer> dstCol = new ArrayList<Integer>();
             ArrayList<Integer> tgCol = new ArrayList<Integer>();
             //++++++++++++++++++++++++++++++++++++++++++++++++
+            /*
             for (int a = 0; a < cv - 1; a++) {
                   if (VC_R.getBTNS_Dist()[a].isSelected()) {
                         dstCount++;
@@ -140,6 +147,7 @@ public class BTN_Create_AL implements ActionListener {
                         tgCol.add(a + 2);
                   }
             }
+            */
             //CREATING STRING DIST
             String Dist = "X" + Integer.toString(dstCount) + ": ";
             if (dstCount != 0) {
@@ -172,6 +180,7 @@ public class BTN_Create_AL implements ActionListener {
 
             String Tabl = "C";
             String Clock = "C";
+            /*
             for (int a = 0; a < cv - 1; a++) {
                   if (VC_R.getBTNS_Tabl()[a].isSelected()) {
                         Tabl += (a + 2);
@@ -182,7 +191,7 @@ public class BTN_Create_AL implements ActionListener {
                         ckCount++;
                   }
             }
-
+            */
             return new Object[][]{{Tabl, tbCount}, {Clock, ckCount}};
       }
 
