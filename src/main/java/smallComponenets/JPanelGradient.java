@@ -14,18 +14,23 @@ import javax.swing.JPanel;
  */
 public class JPanelGradient extends JPanel {
 
+      private Color[] Colors;
       private static boolean tdeleted = false;
       public static void setTDeleted(boolean b){
             tdeleted = b;
+      }
+      
+      public JPanelGradient(Color[] colors){
+            Colors = colors;
       }
 
       @Override
       public void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setPaint(new GradientPaint(
-                    0, 0, DT.GP_darkRed[0],
+                    0, 0, Colors[0],
                     getWidth(), getHeight(),
-                    DT.GP_darkRed[1]));
+                    Colors[1]));
             g2.fillRect(0, 0, getWidth(), getHeight());
             
             //TABLE DELETED STATE

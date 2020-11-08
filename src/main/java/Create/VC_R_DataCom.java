@@ -8,6 +8,7 @@ package Create;
 import MC.DT;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -35,14 +36,15 @@ public class VC_R_DataCom {
       JFrame JF = new JFrame("Create Table");
 
       JPanel JPU = new JPanel();
-      JPanel JPC = new JPanelGradient();
+      JPanel JPC = new JPanelGradient(DT.GP_blackRed);
       JScrollPane sc_JPC = new JScrollPane(JPC);
       JPanel JPB = new JPanel();
       //++++++++++++++++++++++++++++++++++++++
-      JPanel JPR = new JPanel();
-      String[] lb_Disp_textC = new String[]{
-            "Dist:", "NONE", "Dist2:" ,"NONE", "Tabl:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
-      JLabel[] lb_Disp = new JLabel[10];
+      JPanel JPR = new JPanelGradient(DT.GP_celesteWhite);
+      static String[] lb_Disp_textC = new String[]{
+            "Dist:", "NONE", "Dist2:", "NONE", "Tabl:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
+      static JLabel[] lb_TDisp = new JLabel[10];
+      static JLabel[] lb_ADisp = new JLabel[5];
       //++++++++++++++++++++++++++++++++++++++
 
       static JLabel lb_Status = new JLabel("Waiting for action...");
@@ -51,7 +53,7 @@ public class VC_R_DataCom {
       String[] headers_t = new String[]{
             "Columns", "Name", "Sub", "Add", "Type", "Null",
             "Dist1", "Dist2", "Tabl", "Tag", "Clock"};
-      JLabel[]  headers = new JLabel[headers_t.length];
+      JLabel[] headers = new JLabel[headers_t.length];
 
       static JComponent[][] compsD;
       //++++++++++++++++++++++++++++++++++++++++++++++
@@ -68,26 +70,29 @@ public class VC_R_DataCom {
             "INT", "FLOAT", "DOUBLE", "VARCHAR", "BOOLEAN/TINYINT(1)", "DATE"};
       static JComboBox comb = new JComboBox(cb_options);
       static JCheckBox checkb = new JCheckBox();
+
       //++++++++++++++++++++++++++++++++++++++++++++++
       private static class ColorB extends JToggleButton {
 
             Color C;
-            
-            public ColorB(Color c){
+
+            public ColorB(Color c) {
                   C = c;
             }
-            
+
             @Override
             public void paintComponent(Graphics g) {
-                  System.out.println("paintComponent");
-                  if(isSelected()){
-                        System.out.println("\tSELECTED");
-                        setBackground(C);
-                  }else{
-                        System.out.println("\tUNSELECTED");
-                        setBackground(Color.DARK_GRAY);
-                  }
                   super.paintComponent(g);
+                  if (isEnabled()) {
+                        if (isSelected()) {
+                              setBackground(C);
+                        } else {
+                              setBackground(Color.DARK_GRAY);
+                        }
+                  }else{
+                        setBackground(Color.BLACK);
+                  }
+                  
             }
       }
       static JToggleButton btn_Dist = new ColorB(Color.WHITE);
@@ -100,41 +105,76 @@ public class VC_R_DataCom {
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       static JButton[] btns_p = new JButton[DT.maxColumns];
       static JButton[] btns_m = new JButton[DT.maxColumns];
-      static JToggleButton[] btns_Disto = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Disto2 = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Tablo = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Tago = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Clocko = new JToggleButton[DT.maxColumns];
+      static JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns];
+      static JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns];
+      static JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns];
+      static ButtonGroup tablGroup;
+      static ButtonGroup clockGroup;
+      static JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns];
+      static JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns];
       //++++++++++++++++++++++++++++++++++++++++++
 
       public static JComponent[][] getCompsD() {
             return compsD;
       }
-      
-      public static JTextField getTable_Name(){
+
+      public static JTextField getTable_Name() {
             return tf_Title;
       }
-      
-      public static String[] getJLBOrigTexts(){
+
+      public static String[] getLBOrigTexts() {
             return lbOrigText;
       }
-      
-      public static JLabel[] getJLBS(){
+
+      public static JLabel[] getLBS() {
             return lbs;
       }
-      
-      public static JTextField[] getJTFS(){
+
+      public static JTextField[] getTFS() {
             return tfs;
       }
 
-      public static JButton[] getJBTNS_P() {
+      public static JButton[] getBTNS_P() {
             return btns_p;
       }
 
-      public static JButton[] getJBTNS_M() {
+      public static JButton[] getBTNS_M() {
             return btns_m;
       }
+
+      public static JToggleButton[] getBTNS_Dist() {
+            return btns_Dist;
+      }
+
+      public static JToggleButton[] getBTNS_Dist2() {
+            return btns_Dist2;
+      }
+
+      public static JToggleButton[] getBTNS_Tabl() {
+            return btns_Tabl;
+      }
       
+      public static ButtonGroup getTablGroup(){
+            return tablGroup;
+      }
+
+      public static JToggleButton[] getBTNS_Tag() {
+            return btns_Tag;
+      }
+
+      public static JToggleButton[] getBTNS_Clock() {
+            return btns_Clock;
+      }
+      
+      public static ButtonGroup getClockGroup(){
+            return clockGroup;
+      }
+
+      //++++++++++++++++++++++++++++++++++++++++++
+      public static JLabel[] getLB_ADisp() {
+            return lb_ADisp;
+      }
+
       //++++++++++++++++++++++++++++++++++++++++++
       public static JLabel getLB_Status() {
             return lb_Status;

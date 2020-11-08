@@ -32,7 +32,7 @@ public class BTN_CU_AL implements ActionListener {
 
                   //HOW MANY COLS ARE VISIBLE
                   for (int a = 0; a < DT.maxColumns; a++) {
-                        if (VC_R2.getJTFS()[a].isVisible()) {
+                        if (VC_R2.getTFS()[a].isVisible()) {
                               countV++;
                         }
                   }
@@ -56,11 +56,11 @@ public class BTN_CU_AL implements ActionListener {
             //IF EACH JTF HAS TEXT AND NO SQL ERRORS
             for (int a = 0; a < cv; a++) {
                   //IF THE COLUMNS ARE OK
-                  if (!VC_R2.getJTFS()[a].getText().isEmpty()) {
-                        if (!VC_R2.getJTFS()[a].getForeground().equals(Color.RED)
-                                && !VC_R2.getJLBS()[a].getForeground().equals(Color.RED)) {
+                  if (!VC_R2.getTFS()[a].getText().isEmpty()) {
+                        if (!VC_R2.getTFS()[a].getForeground().equals(Color.RED)
+                                && !VC_R2.getLBS()[a].getForeground().equals(Color.RED)) {
                               System.out.println("\t\tCNEEDED " + (cv) + " = " + countC);
-                              cols[countC] = VC_R2.getJTFS()[a].getText();
+                              cols[countC] = VC_R2.getTFS()[a].getText();
                               countC++;//count up only if it meats the conditions
                               countO++;
                               

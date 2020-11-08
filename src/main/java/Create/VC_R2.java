@@ -5,9 +5,12 @@
  */
 package Create;
 
+import Create.Listeners.BTN_Dists;
 import Create.Listeners.BTN_MP_AL;
+import Create.Listeners.MButtonGroup;
 import Create.Listeners.TF_KL_Control;
 import static Create.VC_R_DataCom.lb_Status;
+import static Create.VC_R_DataCom.tablGroup;
 import First.VF_R;
 import MC.DT;
 import com.cofii.myClasses.MLayout;
@@ -16,6 +19,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.BorderFactory;
@@ -64,6 +69,7 @@ public class VC_R2 extends VC_R_DataCom {
             //btn_Dist.setBackground(Color.WHITE);
       }
 
+      //++++++++++++++++++++++++++++++++++++++++++++++++
       private Object[] getColumn(Object[][] object, int col) {
             Object[] returnObject = new Object[object.length];
             for (int a = 0; a < object.length; a++) {
@@ -71,7 +77,13 @@ public class VC_R2 extends VC_R_DataCom {
             }
             return returnObject;
       }
-
+      
+      private <T> void listToArray(ArrayList<T> list, T[] array){
+            for (int a = 0; a < list.size(); a++) {
+                  array[a] = list.get(a);
+            }
+      }
+      //++++++++++++++++++++++++++++++++++++++++++++++++
       private void startCreate() {
             for (int a = 0; a < compsD.length; a++) {
                   for (int b = 0; b < compsD[a].length; b++) {
@@ -93,32 +105,39 @@ public class VC_R2 extends VC_R_DataCom {
 
             TF_KL_Control tfkl = new TF_KL_Control();
             BTN_MP_AL btnAC = new BTN_MP_AL();
-
-            ButtonGroup bg = new ButtonGroup();
-            ButtonGroup bg2 = new ButtonGroup();
+            BTN_Dists btnDis = new BTN_Dists();
+            
+            
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = (JLabel) ob_lbs[a + 1];
                   lbOrigText[a] = "Column " + (a + 1);
                   tfs[a] = (JTextField) ob_tfs[a + 1];
                   btns_m[a] = (JButton) ob_btnm[a + 1];
                   btns_p[a] = (JButton) ob_btnp[a + 1];
-                  btns_Disto[a] = (JToggleButton) ob_dis[a + 1];
-                  btns_Disto2[a] = (JToggleButton) ob_dis2[a + 1];
-                  btns_Tablo[a] = (JToggleButton) ob_tab[a + 1];
-                  btns_Tago[a] = (JToggleButton) ob_tag[a + 1];
-                  btns_Clocko[a] = (JToggleButton) ob_ck[a + 1];
+                  btns_Dist[a] = (JToggleButton) ob_dis[a + 1];
+                  btns_Dist2[a] = (JToggleButton) ob_dis2[a + 1];
+                  btns_Tabl[a] = (JToggleButton) ob_tab[a + 1];
+                  btns_Tag[a] = (JToggleButton) ob_tag[a + 1];
+                  btns_Clock[a] = (JToggleButton) ob_ck[a + 1];
 
+                  tfs[a].addKeyListener(tfkl);
                   btns_m[a].addActionListener(btnAC);
                   btns_p[a].addActionListener(btnAC);
-                  tfs[a].addKeyListener(tfkl);
+                  btns_Dist[a].addActionListener(btnDis);
+                  btns_Dist2[a].setEnabled(false);
+                  btns_Tag[a].addActionListener(btnDis);
 
-                  bg.add(btns_Tablo[a]);
-                  bg2.add(btns_Clocko[a]);
-
+                  btns_Tabl[a].addActionListener(new MButtonGroup(btns_Tabl));
+                  btns_Tabl[a].addActionListener(btnDis);
+                  btns_Clock[a].addActionListener(new MButtonGroup(btns_Clock));
+                  btns_Clock[a].addActionListener(btnDis);
             }
 
+            
             btns_m[0].setEnabled(false);
             btns_p[DT.maxColumns - 1].setEnabled(false);
+            headers[7].setForeground(Color.GRAY);
+            
       }
 
       private void startUpdate() {
@@ -129,7 +148,7 @@ public class VC_R2 extends VC_R_DataCom {
       private void JPUConfig() {
             JF.add(JPU, BorderLayout.NORTH);
             JPU.setLayout(new BoxLayout(JPU, BoxLayout.X_AXIS));
-            JPU.setBorder(new LineBorder(Color.WHITE, 2));
+            JPU.setBorder(new LineBorder(Color.WHITE, 1));
             JPU.setBackground(Color.BLACK);
             JPU.setPreferredSize(new Dimension(500, 46));
             JPU.setMaximumSize(new Dimension(Short.MAX_VALUE, 46));
@@ -151,7 +170,7 @@ public class VC_R2 extends VC_R_DataCom {
             JF.add(sc_JPC, BorderLayout.CENTER);
             sc_JPC.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             sc_JPC.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-            sc_JPC.setBorder(new LineBorder(Color.WHITE, 2));
+            sc_JPC.setBorder(new LineBorder(Color.WHITE, 1));
 
             componentsConfig();
             //+++++++++++++++++++++++++++++++++++++
@@ -188,24 +207,33 @@ public class VC_R2 extends VC_R_DataCom {
       private void JPRConfig(String choice) {
             JF.add(JPR, BorderLayout.EAST);
             JPR.setBackground(Color.BLACK);
+            JPR.setBorder(new LineBorder(Color.WHITE, 1));
             JPR.setMinimumSize(new Dimension(200, 40));
             JPR.setPreferredSize(new Dimension(200, 500));
             JPR.setMaximumSize(new Dimension(200, Short.MAX_VALUE));
             JPR.setLayout(new BoxLayout(JPR, BoxLayout.Y_AXIS));
 
-            //System.out.println("lb_Disp length: " + lb_Disp.length);
+            //System.out.println("lb_TDisp length: " + lb_TDisp.length);
             //System.out.println("lb_Disp_textC length: " + lb_Disp_textC.length);
-            for (int a = 0; a < lb_Disp.length; a++) {
+            for (int a = 0; a < lb_TDisp.length; a++) {
                   if (choice.equals("CREATE")) {
-                        lb_Disp[a] = new smallLB(lb_Disp_textC[a]);
+                        lb_TDisp[a] = new smallLB(lb_Disp_textC[a]);
                   }
-                  
-                  lb_Disp[a].setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
-                  if(a % 2 == 0){
-                        lb_Disp[a].setFont(new Font("Dialog", Font.BOLD, 22));
+
+                  lb_TDisp[a].setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
+                  if (a % 2 == 0) {
+                        lb_TDisp[a].setFont(new Font("Dialog", Font.BOLD, 22));
                   }
-                  JPR.add(lb_Disp[a]);
+                  JPR.add(lb_TDisp[a]);
             }
+            ArrayList<JLabel> listLabels = new ArrayList<JLabel>();
+            for (int a = 0; a < lb_TDisp.length; a++) {
+                  if (a % 2 == 1) {
+                        listLabels.add(lb_TDisp[a]);
+                  }
+            }
+
+            listToArray(listLabels, lb_ADisp);
       }
 
       public VC_R2(String choice) {

@@ -42,7 +42,7 @@ public class VF_R_DataCom {
       static JSplitPane SPL_SUB = new JSplitPane(JSplitPane.VERTICAL_SPLIT);    
       static JPanel PL_U = new JPanel();      
       static JPanel PL_UT = new JPanel();
-      static JPanel PL_UC = new JPanelGradient();
+      static JPanel PL_UC = new JPanelGradient(DT.GP_blackRed);
       static JScrollPane sc_PL_UC = new JScrollPane(PL_UC);
       
       static JPanel PL_B = new JPanel();

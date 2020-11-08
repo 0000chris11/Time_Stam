@@ -102,10 +102,13 @@ public class DT {
       public static final Color[] RGY = new Color[]{Color.RED, Color.GREEN, Color.YELLOW};
       public static final Color[] TFColor = new Color[]{new Color(51, 51, 51), new Color(0, 0, 51),
             new Color(0, 0, 81)};
-      public static final Color[] GP_darkRed = new Color[]{
+      
+      public static final Color[] GP_blackRed = new Color[]{
             Color.BLACK, new Color(102,0,0)};
-      public static final Color[] GP_brightCeleste = new Color[]{
+      public static final Color[] GP_whiteCeleste = new Color[]{
             Color.WHITE, new Color(37,161,231)};
+      public static final Color[] GP_celesteWhite = new Color[]{
+            new Color(37,161,231), Color.WHITE};
 
       public static final Color[] cl = {Color.RED, Color.GREEN, Color.YELLOW};
       //++++++++++++++++++++++++++++
