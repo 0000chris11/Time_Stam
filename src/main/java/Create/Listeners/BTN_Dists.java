@@ -7,10 +7,12 @@ package Create.Listeners;
 
 import Create.VC_R2;
 import MC.DT;
+import com.cofii.myMethods.MComp;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 /**
@@ -21,12 +23,14 @@ public class BTN_Dists implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            System.out.println("actionPerformed");
+            System.out.println("BTN_Dists actionPerformed");
+            tablClockAction(e);
+
             ArrayList<Integer> colsDist = new ArrayList<Integer>();
             ArrayList<Integer> colsTag = new ArrayList<Integer>();
-            int colTabl = -1;
-            int colClock = -1;
-            
+            //int colTabl = -1;
+            //int colClock = -1;
+
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (VC_R2.getBTNS_Dist()[a].isSelected()) {
                         colsDist.add(a);
@@ -34,31 +38,23 @@ public class BTN_Dists implements ActionListener {
                   if (VC_R2.getBTNS_Tag()[a].isSelected()) {
                         colsTag.add(a);
                   }
-                  if(VC_R2.getBTNS_Tabl()[a].isSelected()/* && 
-                          e.getSource() == VC_R2.getBTNS_Tabl()[a]*/){
-                        colTabl = a;
-                  }
-                  if(VC_R2.getBTNS_Clock()[a].isSelected() /*&& 
-                          e.getSource() == VC_R2.getBTNS_Clock()[a]*/){
-                        colClock = a;
-                  }
             }
-
+            //++++++++++++++++++++++++++++++++++++++++++
             String dist = getOutput(colsDist);
             String tag = getOutput(colsTag);
-            String tabl = getOutput(colTabl);
-            String clock = getOutput(colClock);
-            
+            String tabl = getOutput(VC_R2.getBTN_TablSelected());
+            String clock = getOutput(VC_R2.getBTN_ClockSelected());
+
             setLB(VC_R2.getLB_ADisp()[0], dist);
             setLB(VC_R2.getLB_ADisp()[3], tag);
             setLB(VC_R2.getLB_ADisp()[2], tabl);
             setLB(VC_R2.getLB_ADisp()[4], clock);
       }
-      
-      private void setLB(JLabel lb, String var){
+
+      private void setLB(JLabel lb, String var) {
             if (!var.equals("NONE")) {
                   lb.setForeground(Color.CYAN);
-            }else{
+            } else {
                   lb.setForeground(Color.WHITE);
             }
             lb.setText(var);
@@ -79,12 +75,29 @@ public class BTN_Dists implements ActionListener {
 
             return var;
       }
-      private String getOutput(int val){
+
+      private String getOutput(int val) {
             String var = "NONE";
-            if(val != -1){
-                  var = "C" + (Integer.toString(val + 1));
+            if (val != -1) {
+                  var = "C" + (Integer.toString(val));
             }
             return var;
+      }
+
+      //+++++++++++++++++++++++++++++++++++++++++++++
+      private void tablClockAction(ActionEvent e) {
+            System.out.println("MButtonGroup actionPerformed");
+            String name = ((JComponent) e.getSource()).getName();
+            try {
+                  if (name.contains("btns_Tabl")) {
+                        VC_R2.setBTN_TablSelected(MComp.setButtonGroup(e,
+                                VC_R2.getBTNS_Tabl()));
+                  } else if (name.contains("btns_Clock")) {
+                        VC_R2.setBTN_ClockSelected(MComp.setButtonGroup(e,
+                                VC_R2.getBTNS_Clock()));
+                  }
+            } catch (NullPointerException ex) {
+            }
       }
 
 }

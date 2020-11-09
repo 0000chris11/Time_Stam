@@ -7,29 +7,21 @@ package Create;
 
 import Create.Listeners.BTN_Dists;
 import Create.Listeners.BTN_MP_AL;
-import Create.Listeners.MButtonGroup;
 import Create.Listeners.TF_KL_Control;
 import static Create.VC_R_DataCom.lb_Status;
-import static Create.VC_R_DataCom.tablGroup;
-import First.VF_R;
 import MC.DT;
 import com.cofii.myClasses.MLayout;
+import com.cofii.myInterfaces.SerializationExceptionAction;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.ParallelGroup;
-import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -42,11 +34,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.plaf.metal.MetalToggleButtonUI;
-import org.apache.commons.lang3.SerializationUtils;
-import smallComponenets.smallBTN_C;
+import org.apache.commons.lang3.SerializationException;
+import smallComponenets.smallBTN_TG;
 import smallComponenets.smallLB;
-import smallComponenets.smallTF;
 
 /**
  *
@@ -70,19 +60,20 @@ public class VC_R2 extends VC_R_DataCom {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++
-      private Object[] getColumn(Object[][] object, int col) {
-            Object[] returnObject = new Object[object.length];
-            for (int a = 0; a < object.length; a++) {
-                  returnObject[a] = object[a][col];
+      private <T> T[] getColumn(Class<T> clas, T[][] doubleArray, int col) {
+            T[] returnObject = (T[]) Array.newInstance(clas, doubleArray.length);
+            for (int a = 0; a < doubleArray.length; a++) {
+                  returnObject[a] = (T) doubleArray[a][col];
             }
             return returnObject;
       }
-      
-      private <T> void listToArray(ArrayList<T> list, T[] array){
+
+      private <T> void listToArray(ArrayList<T> list, T[] array) {
             for (int a = 0; a < list.size(); a++) {
                   array[a] = list.get(a);
             }
       }
+
       //++++++++++++++++++++++++++++++++++++++++++++++++
       private void startCreate() {
             for (int a = 0; a < compsD.length; a++) {
@@ -93,6 +84,7 @@ public class VC_R2 extends VC_R_DataCom {
                   }
             }
 
+            /*
             Object[] ob_lbs = getColumn(compsD, 0);
             Object[] ob_tfs = getColumn(compsD, 1);
             Object[] ob_btnm = getColumn(compsD, 2);
@@ -102,23 +94,43 @@ public class VC_R2 extends VC_R_DataCom {
             Object[] ob_tab = getColumn(compsD, 8);
             Object[] ob_tag = getColumn(compsD, 9);
             Object[] ob_ck = getColumn(compsD, 10);
-
+            */
             TF_KL_Control tfkl = new TF_KL_Control();
             BTN_MP_AL btnAC = new BTN_MP_AL();
             BTN_Dists btnDis = new BTN_Dists();
-            
-            
+            /*
+            tfs = (JTextField[]) getColumn(JComponent.class, compsD, 1);
+            btns_m = (JButton[]) getColumn(JComponent.class, compsD, 2);
+            btns_p = (JButton[]) getColumn(JComponent.class, compsD, 3);
+            btns_Dist = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 6);
+            btns_Dist2 = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 7);
+            btns_Tabl = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 8);
+            btns_Tag = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 9);
+            btns_Clock = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 10);
+            */
             for (int a = 0; a < DT.maxColumns; a++) {
-                  lbs[a] = (JLabel) ob_lbs[a + 1];
+                  lbs[a] = (JLabel) getColumn(JComponent.class, compsD, 0)[a + 1];
+                  tfs[a] = (JTextField) getColumn(JComponent.class, compsD, 1)[a + 1];
+                  btns_m[a] = (JButton) getColumn(JComponent.class, compsD, 2)[a + 1];
+                  btns_p[a] = (JButton) getColumn(JComponent.class, compsD, 3)[a + 1];
+                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 6)[a + 1];
+                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
+                  btns_Tabl[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
+                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
+                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
+                  
                   lbOrigText[a] = "Column " + (a + 1);
-                  tfs[a] = (JTextField) ob_tfs[a + 1];
-                  btns_m[a] = (JButton) ob_btnm[a + 1];
-                  btns_p[a] = (JButton) ob_btnp[a + 1];
-                  btns_Dist[a] = (JToggleButton) ob_dis[a + 1];
-                  btns_Dist2[a] = (JToggleButton) ob_dis2[a + 1];
-                  btns_Tabl[a] = (JToggleButton) ob_tab[a + 1];
-                  btns_Tag[a] = (JToggleButton) ob_tag[a + 1];
-                  btns_Clock[a] = (JToggleButton) ob_ck[a + 1];
+                  //tfs[a] = (JTextField) ob_tfs[a + 1];
+                  //btns_m[a] = (JButton) ob_btnm[a + 1];
+                  //btns_p[a] = (JButton) ob_btnp[a + 1];
+                  //btns_Dist[a] = (smallBTN_TG) ob_dis[a + 1];
+                  //btns_Dist2[a] = (smallBTN_TG) ob_dis2[a + 1];
+                  //btns_Tabl[a] = (smallBTN_TG) ob_tab[a + 1];
+                  //btns_Tag[a] = (smallBTN_TG) ob_tag[a + 1];
+                  //btns_Clock[a] = (smallBTN_TG) ob_ck[a + 1];
+
+                  btns_Tabl[a].setName("btns_Tabl " + (a + 1));
+                  btns_Clock[a].setName("btns_Clock " + (a + 1));
 
                   tfs[a].addKeyListener(tfkl);
                   btns_m[a].addActionListener(btnAC);
@@ -127,17 +139,14 @@ public class VC_R2 extends VC_R_DataCom {
                   btns_Dist2[a].setEnabled(false);
                   btns_Tag[a].addActionListener(btnDis);
 
-                  btns_Tabl[a].addActionListener(new MButtonGroup(btns_Tabl));
                   btns_Tabl[a].addActionListener(btnDis);
-                  btns_Clock[a].addActionListener(new MButtonGroup(btns_Clock));
                   btns_Clock[a].addActionListener(btnDis);
             }
 
-            
             btns_m[0].setEnabled(false);
             btns_p[DT.maxColumns - 1].setEnabled(false);
             headers[7].setForeground(Color.GRAY);
-            
+
       }
 
       private void startUpdate() {
@@ -179,6 +188,17 @@ public class VC_R2 extends VC_R_DataCom {
             JComponent[] comps = new JComponent[]{
                   lb, tf, btn_m, btn_p, comb, checkb,
                   btn_Dist, btn_Dist2, btn_Tabl, btn_Tag, btn_Clock};
+            MLayout.setSerializationExceptionAction(new SerializationExceptionAction() {
+                  @Override
+                  public JComponent getComponent(SerializationException se, JComponent jc) {
+                        JComponent returnValue = null;
+                        if (jc instanceof smallBTN_TG) {
+                              returnValue = new smallBTN_TG();
+                        }
+                        return returnValue;
+                  }
+
+            });
             compsD = MLayout.lineSequence(gl, headers, comps, DT.maxColumns, 27);
       }
 

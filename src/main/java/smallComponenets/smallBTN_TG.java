@@ -19,9 +19,6 @@ import org.apache.commons.lang3.SerializationUtils;
  * @author Christopher
  */
 public class smallBTN_TG extends JToggleButton {
-
-      int W;
-      int H;
       
       GradientPaint GP;
       GradientPaint GP_D;
@@ -53,40 +50,24 @@ public class smallBTN_TG extends JToggleButton {
       public void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g;
             //System.out.println("paintComponent");
+            int w = getWidth();
+            int h = getHeight();
             if (isEnabled()) {
                   if (isSelected()) {
                         //System.out.println("\tis Selcted");
-                        g2.setPaint(GP_O);
+                        g2.setPaint(new GradientPaint(0, 0, 
+                                Color.CYAN, w, h, Color.WHITE));
                   } else {
                         //System.out.println("\tNOT");
-                        g2.setPaint(GP_OD);
+                        g2.setPaint(new GradientPaint(0, 0, 
+                                Color.BLUE.darker(), w, h, Color.WHITE.darker()));
                   }
             }else{
-                  g2.setPaint(GP_EF);
+                  g2.setPaint(new GradientPaint(0, 0, 
+                          Color.GRAY.darker(), w, h, Color.WHITE.darker()));
             }
-            g2.fillRect(0, 0, getWidth(), getHeight());
+            g2.fillRect(0, 0, w, h);
 
             super.paintComponents(g);
-      }
-
-      public smallBTN_TG(int w, int h, int colorGradient) {
-            W = w;
-            H = h;
-            
-            GP_O = new GradientPaint(0, 0, Color.CYAN, w, h, Color.WHITE);
-            GP_OD = new GradientPaint(0, 0, Color.BLUE.darker(), w, h, Color.WHITE.darker());
-            GP_EF = new GradientPaint(0, 0, Color.GRAY.darker(), w, h, Color.WHITE.darker());
-            
-            SerializationUtils.serialize((Serializable) GP_O);
-            
-            /*
-            for (int a = 0; a < 5; a++) {
-                  if (colorGradient == a) {
-                        //System.out.println("smallBTN_TG: " + colors[a]);
-                        GP = new GradientPaint(0, 0, colors[a], w, h, Color.WHITE);
-                        GP_D = new GradientPaint(0, 0, colors[a + 1], w, h, Color.WHITE);
-                  }
-            }
-             */
       }
 }

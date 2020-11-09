@@ -40,7 +40,7 @@ public class VC_R_DataCom {
       JScrollPane sc_JPC = new JScrollPane(JPC);
       JPanel JPB = new JPanel();
       //++++++++++++++++++++++++++++++++++++++
-      JPanel JPR = new JPanelGradient(DT.GP_celesteWhite);
+      JPanel JPR = new JPanelGradient(new Color[]{Color.BLACK, Color.BLUE});
       static String[] lb_Disp_textC = new String[]{
             "Dist:", "NONE", "Dist2:", "NONE", "Tabl:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
       static JLabel[] lb_TDisp = new JLabel[10];
@@ -72,7 +72,7 @@ public class VC_R_DataCom {
       static JCheckBox checkb = new JCheckBox();
 
       //++++++++++++++++++++++++++++++++++++++++++++++
-      private static class ColorB extends JToggleButton {
+      public static class ColorB extends JToggleButton {
 
             Color C;
 
@@ -108,6 +108,8 @@ public class VC_R_DataCom {
       static JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns];
       static JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns];
       static JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns];
+      static int btn_TablSelected = -1;
+      static int btn_ClockSelected = -1;
       static ButtonGroup tablGroup;
       static ButtonGroup clockGroup;
       static JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns];
@@ -157,6 +159,14 @@ public class VC_R_DataCom {
       public static ButtonGroup getTablGroup(){
             return tablGroup;
       }
+      
+      public static int getBTN_TablSelected(){
+            return btn_TablSelected;
+      }
+      
+      public static void setBTN_TablSelected(int v){
+            btn_TablSelected = v;
+      }
 
       public static JToggleButton[] getBTNS_Tag() {
             return btns_Tag;
@@ -168,6 +178,14 @@ public class VC_R_DataCom {
       
       public static ButtonGroup getClockGroup(){
             return clockGroup;
+      }
+      
+      public static int getBTN_ClockSelected(){
+            return btn_ClockSelected;
+      }
+      
+      public static void setBTN_ClockSelected(int v){
+            btn_ClockSelected = v;
       }
 
       //++++++++++++++++++++++++++++++++++++++++++

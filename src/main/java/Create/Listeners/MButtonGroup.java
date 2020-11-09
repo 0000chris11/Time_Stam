@@ -7,35 +7,29 @@ package Create.Listeners;
 
 import Create.VC_R2;
 import MC.DT;
+import com.cofii.myMethods.MComp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
+import javax.swing.JComponent;
 
 /**
  *
  * @author C0FII
  */
-public class MButtonGroup<T extends AbstractButton> implements ActionListener {
+public class MButtonGroup/*<T extends AbstractButton>*/ implements ActionListener {
 
-      private T[] Array;
+      //private T[] Array;
+      //MButtonGAction mca;
 
-      public MButtonGroup(T[] array) {
-            Array = array;
+      public MButtonGroup(/*T[] array, MButtonGAction mca*/) {
+            //Array = array;
+            //this.mca = mca;
       }
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            for (int a = 0; a < Array.length; a++) {
-                  if (e.getSource() == Array[a]) {
-                        //IF A BTN IS SELECTED SET THE REST TO DESELECTED
-                        if (Array[a].isSelected()) {
-                              for (int b = 0; b < Array.length; b++) {
-                                    if (b != a) {//MINUS ITSELF
-                                          Array[b].setSelected(false);
-                                    }
-                              }
-                        }
-                  }
-            }
+            
+            //mca.action(e);
       }
 }
