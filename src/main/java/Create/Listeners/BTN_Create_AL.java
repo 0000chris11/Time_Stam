@@ -207,7 +207,4 @@ public class BTN_Create_AL implements ActionListener {
             }
       }
 
-      private void printAllValues() {
-
-      }
 }

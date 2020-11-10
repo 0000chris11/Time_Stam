@@ -40,10 +40,22 @@ public class BTN_Dists implements ActionListener {
                   }
             }
             //++++++++++++++++++++++++++++++++++++++++++
+            int clockN = VC_R2.getBTN_ClockSelected();
+            int tablN = VC_R2.getBTN_TablSelected();
+            
             String dist = getOutput(colsDist);
             String tag = getOutput(colsTag);
-            String tabl = getOutput(VC_R2.getBTN_TablSelected());
-            String clock = getOutput(VC_R2.getBTN_ClockSelected());
+            String tabl = getOutput(tablN);
+            String clock = getOutput(clockN);
+            
+            //INPUT FOR FOLDER LOCATION (CLOCK)
+            if (clockN > 0) {
+                  VC_R2.getBoxClock().setVisible(true);
+                  VC_R2.getLB_ClockLocation().setVisible(true);
+            }else{
+                  VC_R2.getBoxClock().setVisible(false);
+                  VC_R2.getLB_ClockLocation().setVisible(false);
+            }
 
             setLB(VC_R2.getLB_ADisp()[0], dist);
             setLB(VC_R2.getLB_ADisp()[3], tag);
@@ -80,6 +92,7 @@ public class BTN_Dists implements ActionListener {
             String var = "NONE";
             if (val != -1) {
                   var = "C" + (Integer.toString(val));
+
             }
             return var;
       }

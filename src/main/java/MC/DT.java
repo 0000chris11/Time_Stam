@@ -109,6 +109,10 @@ public class DT {
             Color.WHITE, new Color(37,161,231)};
       public static final Color[] GP_celesteWhite = new Color[]{
             new Color(37,161,231), Color.WHITE};
+      public static final Color[] GP_greenWhite = new Color[]{
+            Color.GREEN, Color.WHITE};
+      public static final Color[] GP_yellowWhite = new Color[]{
+            Color.YELLOW, Color.WHITE};
 
       public static final Color[] cl = {Color.RED, Color.GREEN, Color.YELLOW};
       //++++++++++++++++++++++++++++

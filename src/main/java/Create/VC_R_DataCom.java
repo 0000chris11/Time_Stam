@@ -8,6 +8,8 @@ package Create;
 import MC.DT;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -24,8 +26,11 @@ import javax.swing.UIManager;
 import smallComponenets.JPanelGradient;
 import smallComponenets.smallBTN_C;
 import smallComponenets.smallBTN_TG;
+import smallComponenets.smallCHBX;
+import smallComponenets.smallCOMBX;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
+import smallComponenets.smallTR_TF;
 
 /**
  *
@@ -45,6 +50,11 @@ public class VC_R_DataCom {
             "Dist:", "NONE", "Dist2:", "NONE", "Tabl:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
       static JLabel[] lb_TDisp = new JLabel[10];
       static JLabel[] lb_ADisp = new JLabel[5];
+      
+      static JLabel lb_ClockLocation = new smallLB("Folder Location:");
+      static Box bxClock = new Box(BoxLayout.LINE_AXIS);
+      JTextField tfClock = new smallTR_TF();
+      JButton btn_ClockLocation = new JButton();
       //++++++++++++++++++++++++++++++++++++++
 
       static JLabel lb_Status = new JLabel("Waiting for action...");
@@ -61,59 +71,38 @@ public class VC_R_DataCom {
       static JTextField tf_Title = new smallTF();
 
       static String[] lbOrigText = new String[DT.maxColumns];
+      //TO+COPY++++++++++++++++++++++++++++++++++++++
       static JLabel lb = new smallLB("Column 1");
       static JTextField tf = new smallTF();
-      static JButton btn_p = new JButton("+");
-      static JButton btn_m = new JButton("-");
-      //++++++++++++++++++++++++++++++++++++++++++++++
+      static JButton btn_p = new smallBTN_C("+");
+      static JButton btn_m = new smallBTN_C("-");
+
       static String[] cb_options = new String[]{
             "INT", "FLOAT", "DOUBLE", "VARCHAR", "BOOLEAN/TINYINT(1)", "DATE"};
-      static JComboBox comb = new JComboBox(cb_options);
-      static JCheckBox checkb = new JCheckBox();
-
-      //++++++++++++++++++++++++++++++++++++++++++++++
-      public static class ColorB extends JToggleButton {
-
-            Color C;
-
-            public ColorB(Color c) {
-                  C = c;
-            }
-
-            @Override
-            public void paintComponent(Graphics g) {
-                  super.paintComponent(g);
-                  if (isEnabled()) {
-                        if (isSelected()) {
-                              setBackground(C);
-                        } else {
-                              setBackground(Color.DARK_GRAY);
-                        }
-                  }else{
-                        setBackground(Color.BLACK);
-                  }
-                  
-            }
-      }
-      static JToggleButton btn_Dist = new ColorB(Color.WHITE);
-      static JToggleButton btn_Dist2 = new ColorB(Color.WHITE);
-      static JToggleButton btn_Tabl = new ColorB(Color.CYAN);
-      static JToggleButton btn_Tag = new ColorB(Color.WHITE);
-      static JToggleButton btn_Clock = new ColorB(Color.GREEN);
+      static JComboBox comb = new smallCOMBX(cb_options);
+      static JCheckBox checkb = new smallCHBX();
+      
+      static JToggleButton btn_Dist = new smallBTN_TG(DT.GP_celesteWhite);
+      static JToggleButton btn_Dist2 = new smallBTN_TG(null);
+      static JToggleButton btn_Tabl = new smallBTN_TG(DT.GP_greenWhite);
+      static JToggleButton btn_Tag = new smallBTN_TG(DT.GP_celesteWhite);
+      static JToggleButton btn_Clock = new smallBTN_TG(DT.GP_yellowWhite);
       //++++++++++++++++++++++++++++++++++++++++++++++
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
-      static JButton[] btns_p = new JButton[DT.maxColumns];
-      static JButton[] btns_m = new JButton[DT.maxColumns];
-      static JToggleButton[] btns_Dist = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Dist2 = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Tabl = new JToggleButton[DT.maxColumns];
+      static JButton[] btns_p = new smallBTN_C[DT.maxColumns];
+      static JButton[] btns_m = new smallBTN_C[DT.maxColumns];
+      static JComboBox[] combs = new smallCOMBX[DT.maxColumns];
+      static JCheckBox[] checkbs = new smallCHBX[DT.maxColumns];
+      static JToggleButton[] btns_Dist = new smallBTN_TG[DT.maxColumns];
+      static JToggleButton[] btns_Dist2 = new smallBTN_TG[DT.maxColumns];
+      static JToggleButton[] btns_Tabl = new smallBTN_TG[DT.maxColumns];
       static int btn_TablSelected = -1;
       static int btn_ClockSelected = -1;
       static ButtonGroup tablGroup;
       static ButtonGroup clockGroup;
-      static JToggleButton[] btns_Tag = new JToggleButton[DT.maxColumns];
-      static JToggleButton[] btns_Clock = new JToggleButton[DT.maxColumns];
+      static JToggleButton[] btns_Tag = new smallBTN_TG[DT.maxColumns];
+      static JToggleButton[] btns_Clock = new smallBTN_TG[DT.maxColumns];
       //++++++++++++++++++++++++++++++++++++++++++
 
       public static JComponent[][] getCompsD() {
@@ -122,6 +111,14 @@ public class VC_R_DataCom {
 
       public static JTextField getTable_Name() {
             return tf_Title;
+      }
+      
+      public static JLabel getLB_ClockLocation(){
+            return lb_ClockLocation;
+      }
+      
+      public static Box getBoxClock(){
+            return bxClock;
       }
 
       public static String[] getLBOrigTexts() {
@@ -143,6 +140,8 @@ public class VC_R_DataCom {
       public static JButton[] getBTNS_M() {
             return btns_m;
       }
+      
+      
 
       public static JToggleButton[] getBTNS_Dist() {
             return btns_Dist;

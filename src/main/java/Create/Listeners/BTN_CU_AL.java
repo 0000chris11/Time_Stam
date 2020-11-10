@@ -8,23 +8,27 @@ package Create.Listeners;
 import Create.VC_R2;
 import MC.DT;
 import com.cofii.myClasses.CC;
+import com.cofii.myClasses.MSQL;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  *
  * @author C0FII
  */
 public class BTN_CU_AL implements ActionListener {
-      
+
       private String Choice;
       private int countO = -1;
-      
+
+      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
+
       public BTN_CU_AL(String choice) {
             Choice = choice;
       }
-      
+
       @Override
       public void actionPerformed(ActionEvent e) {
             if (Choice.equals("CREATE")) {
@@ -37,18 +41,25 @@ public class BTN_CU_AL implements ActionListener {
                         }
                   }
                   System.out.println("'\tColumns Visible: " + countV);
-                  
+
                   String[] cols = TFSControl(countV);
                   boolean tableMatch = tableControl();
                   if (countV == countO && tableMatch == false) {
+                        String table = VC_R2.getTable_Name().getText();
                         
+                        String[] colNames = new String[countV];
+                        String[] types = new String[countV];
+                        for (int a = 0; a < countV; a++) {
+                              colNames[a] = VC_R2.getTFS()[a].getText();
+                              types[a] = 
+                        }
                   }
-                  
+
             } else if (Choice.equals("UPDATE")) {
-                  
+
             }
       }
-      
+
       private String[] TFSControl(int cv) {
             countO = 0;
             int countC = 0;
@@ -63,13 +74,13 @@ public class BTN_CU_AL implements ActionListener {
                               cols[countC] = VC_R2.getTFS()[a].getText();
                               countC++;//count up only if it meats the conditions
                               countO++;
-                              
+
                         }
                   }
             }
             return cols;
       }
-      
+
       private boolean tableControl() {
             boolean match = false;
             for (int b = 0; b < DT.getList_T().size(); b++) {
@@ -90,5 +101,5 @@ public class BTN_CU_AL implements ActionListener {
             }
             return match;
       }
-      
+
 }

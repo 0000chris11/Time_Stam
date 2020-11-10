@@ -20,31 +20,7 @@ import org.apache.commons.lang3.SerializationUtils;
  */
 public class smallBTN_TG extends JToggleButton {
       
-      GradientPaint GP;
-      GradientPaint GP_D;
-
-      GradientPaint GP_O;
-      GradientPaint GP_OD;
-      
-      GradientPaint GP_EF; 
-
-      Color[] colors = new Color[]{
-            Color.BLUE, Color.BLUE.darker(),
-            Color.RED, Color.BLUE.darker(),
-            Color.GREEN, Color.GREEN.darker(),
-            Color.YELLOW, Color.YELLOW.darker(),
-            Color.CYAN, Color.CYAN.darker()};
-
-      public static final int blueWhite = 0;
-      public static final int blueWhite_D = 5;
-      public static final int redWhite = 1;
-      public static final int redWhite_D = 6;
-      public static final int greenWhite = 2;
-      public static final int greenWhite_D = 7;
-      public static final int yellowWhite = 3;
-      public static final int yellowWhite_D = 8;
-      public static final int cyanWhite = 4;
-      public static final int cyanWhite_D = 9;
+      public Color[] C;
 
       @Override
       public void paintComponent(Graphics g) {
@@ -56,11 +32,11 @@ public class smallBTN_TG extends JToggleButton {
                   if (isSelected()) {
                         //System.out.println("\tis Selcted");
                         g2.setPaint(new GradientPaint(0, 0, 
-                                Color.CYAN, w, h, Color.WHITE));
+                                C[0], w, h, C[1]));
                   } else {
                         //System.out.println("\tNOT");
                         g2.setPaint(new GradientPaint(0, 0, 
-                                Color.BLUE.darker(), w, h, Color.WHITE.darker()));
+                                C[0].darker(), w, h, Color.GRAY));
                   }
             }else{
                   g2.setPaint(new GradientPaint(0, 0, 
@@ -69,5 +45,9 @@ public class smallBTN_TG extends JToggleButton {
             g2.fillRect(0, 0, w, h);
 
             super.paintComponents(g);
+      }
+      
+      public smallBTN_TG(Color[] c){
+            C = c;
       }
 }

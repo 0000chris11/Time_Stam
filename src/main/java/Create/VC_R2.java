@@ -17,7 +17,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -34,7 +38,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationException;
+import smallComponenets.smallBTN_C;
 import smallComponenets.smallBTN_TG;
 import smallComponenets.smallLB;
 
@@ -48,15 +54,6 @@ public class VC_R2 extends VC_R_DataCom {
             for (int a = 0; a < headers.length; a++) {
                   headers[a] = new smallLB(headers_t[a]);
             }
-
-            //btn_m.setMaximumSize(new Dimension(20, 27));
-            //btn_p.setMaximumSize(new Dimension(20, 27));
-            comb.setBackground(DT.TFColor[0]);
-            comb.setForeground(Color.WHITE);
-            comb.setFont(tf.getFont());
-            checkb.setToolTipText("Allow null");
-
-            //btn_Dist.setBackground(Color.WHITE);
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -84,41 +81,22 @@ public class VC_R2 extends VC_R_DataCom {
                   }
             }
 
-            /*
-            Object[] ob_lbs = getColumn(compsD, 0);
-            Object[] ob_tfs = getColumn(compsD, 1);
-            Object[] ob_btnm = getColumn(compsD, 2);
-            Object[] ob_btnp = getColumn(compsD, 3);
-            Object[] ob_dis = getColumn(compsD, 6);
-            Object[] ob_dis2 = getColumn(compsD, 7);
-            Object[] ob_tab = getColumn(compsD, 8);
-            Object[] ob_tag = getColumn(compsD, 9);
-            Object[] ob_ck = getColumn(compsD, 10);
-            */
             TF_KL_Control tfkl = new TF_KL_Control();
             BTN_MP_AL btnAC = new BTN_MP_AL();
             BTN_Dists btnDis = new BTN_Dists();
-            /*
-            tfs = (JTextField[]) getColumn(JComponent.class, compsD, 1);
-            btns_m = (JButton[]) getColumn(JComponent.class, compsD, 2);
-            btns_p = (JButton[]) getColumn(JComponent.class, compsD, 3);
-            btns_Dist = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 6);
-            btns_Dist2 = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 7);
-            btns_Tabl = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 8);
-            btns_Tag = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 9);
-            btns_Clock = (smallBTN_TG[]) getColumn(JComponent.class, compsD, 10);
-            */
+
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = (JLabel) getColumn(JComponent.class, compsD, 0)[a + 1];
                   tfs[a] = (JTextField) getColumn(JComponent.class, compsD, 1)[a + 1];
-                  btns_m[a] = (JButton) getColumn(JComponent.class, compsD, 2)[a + 1];
-                  btns_p[a] = (JButton) getColumn(JComponent.class, compsD, 3)[a + 1];
+                  btns_m[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 2)[a + 1];
+                  btns_p[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 3)[a + 1];
+
                   btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 6)[a + 1];
                   btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
                   btns_Tabl[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
                   btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
                   btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
-                  
+
                   lbOrigText[a] = "Column " + (a + 1);
                   //tfs[a] = (JTextField) ob_tfs[a + 1];
                   //btns_m[a] = (JButton) ob_btnm[a + 1];
@@ -193,7 +171,12 @@ public class VC_R2 extends VC_R_DataCom {
                   public JComponent getComponent(SerializationException se, JComponent jc) {
                         JComponent returnValue = null;
                         if (jc instanceof smallBTN_TG) {
-                              returnValue = new smallBTN_TG();
+                              Color[] c = ((smallBTN_TG) jc).C;
+                              returnValue = new smallBTN_TG(c);
+                              
+                        } else if (jc instanceof smallBTN_C) {
+                              String text = ((smallBTN_C) jc).Title;
+                              returnValue = new smallBTN_C(text);
                         }
                         return returnValue;
                   }
@@ -233,8 +216,7 @@ public class VC_R2 extends VC_R_DataCom {
             JPR.setMaximumSize(new Dimension(200, Short.MAX_VALUE));
             JPR.setLayout(new BoxLayout(JPR, BoxLayout.Y_AXIS));
 
-            //System.out.println("lb_TDisp length: " + lb_TDisp.length);
-            //System.out.println("lb_Disp_textC length: " + lb_Disp_textC.length);
+            //ADDING LB TO JPR AND TO TDISP+++++++++++++++++++++
             for (int a = 0; a < lb_TDisp.length; a++) {
                   if (choice.equals("CREATE")) {
                         lb_TDisp[a] = new smallLB(lb_Disp_textC[a]);
@@ -244,16 +226,35 @@ public class VC_R2 extends VC_R_DataCom {
                   if (a % 2 == 0) {
                         lb_TDisp[a].setFont(new Font("Dialog", Font.BOLD, 22));
                   }
-                  JPR.add(lb_TDisp[a]);
+                  JPR.add(lb_TDisp[a]);//HOLD ALL LBS AT THIS TIME
             }
-            ArrayList<JLabel> listLabels = new ArrayList<JLabel>();
+            JPR.add(lb_ClockLocation);
+            lb_ClockLocation.setForeground(Color.YELLOW.darker());
+            //lb_ClockLocation.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
+            
+            JPR.add(bxClock);
+            bxClock.add(tfClock);
+            tfClock.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
+            bxClock.add(btn_ClockLocation);
+            btn_ClockLocation.setMinimumSize(new Dimension(20, 27));
+            lb_ClockLocation.setVisible(false);
+            bxClock.setVisible(false);
+            
+            //ADDING LB TO ADISP
+            ArrayList<JLabel> listLabelsA = new ArrayList<JLabel>();
+            ArrayList<JLabel> listLabelsT = new ArrayList<JLabel>();
             for (int a = 0; a < lb_TDisp.length; a++) {
                   if (a % 2 == 1) {
-                        listLabels.add(lb_TDisp[a]);
+                        listLabelsA.add(lb_TDisp[a]);
+                  } else {
+                        listLabelsT.add(lb_TDisp[a]);
                   }
             }
-
-            listToArray(listLabels, lb_ADisp);
+            listToArray(listLabelsT, lb_TDisp);
+            listToArray(listLabelsA, lb_ADisp);
+            //DIST2 OFF
+            lb_TDisp[1].setForeground(Color.GRAY);
+            lb_ADisp[1].setForeground(Color.GRAY);
       }
 
       public VC_R2(String choice) {

@@ -14,14 +14,13 @@ import java.awt.font.TextLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-
 /**
  *
  * @author Christopher
  */
 public class smallBTN_C extends JButton {
 
-      String Title;
+      public String Title = "E";
       Font F = new Font("Dialog", Font.BOLD, 15);
       //ArrayList<Shape> listS = new ArrayList<Shape>();
       int W;
@@ -33,24 +32,30 @@ public class smallBTN_C extends JButton {
 
       @Override
       public void paintComponent(Graphics g) {
+            int w = getWidth();
+            int h = getHeight();
+
             Graphics2D g2 = (Graphics2D) g;
             //System.out.println("pC - " + getName());
             if (getModel().isEnabled()) {
                   if (getModel().isPressed()) {
                         //System.out.println("\tPRESSED");
-                        g2.setPaint(GPS[1]);
+                        g2.setPaint(new GradientPaint(0, 0, DT.GP_whiteCeleste[0],
+                                w, h, DT.GP_whiteCeleste[1].darker()));
                   } else {
                         //System.out.println("\tNORMAL");
-                        g2.setPaint(GPS[0]);
+                        g2.setPaint(new GradientPaint(0, 0, DT.GP_whiteCeleste[0],
+                                w, h, DT.GP_whiteCeleste[1]));
                   }
             } else {
-                  g2.setPaint(GPS[2]);
+                  g2.setPaint(new GradientPaint(0, 0, DT.GP_whiteCeleste[0].darker(),
+                          w, h, DT.GP_whiteCeleste[1].darker()));
             }
-            g2.fillRect(0, 0, getWidth(), getHeight());
+            g2.fillRect(0, 0, w, h);
             if (Title != null && Outline != null) {
                   //System.out.println("\tShape: " + Outline);
                   //System.out.println("\tG2: " + g2);
-                  setCenter(g2, Outline, getWidth(), getHeight());
+                  setCenter(g2, Outline, w, h);
             } else {
                   if (getName() != null) {
                         if (getName().equals("BTN_H")) {
@@ -106,8 +111,6 @@ public class smallBTN_C extends JButton {
             g2.setFont(F);
             g2.drawString(Title, x, y);
       }
-      
-      
 
       public smallBTN_C(String title) {
             //System.out.println("\nConstructor Title: " + title);
@@ -130,24 +133,6 @@ public class smallBTN_C extends JButton {
                                     System.err.println("ERROR");
                               }
                               if (smallBTN_C.this.getGraphics() != null) {
-                                    //System.out.println("\nSmallBTN_C -> Creating");
-                                    W = getWidth();
-                                    H = getHeight();
-
-                                    GPS[0]
-                                            = new GradientPaint(0, 0, DT.GP_whiteCeleste[0],
-                                                    W, H, DT.GP_whiteCeleste[1]);
-
-                                    GPS[1]
-                                            = new GradientPaint(0, 0, DT.GP_whiteCeleste[0],
-                                                    W, H, DT.GP_whiteCeleste[1].darker());
-
-                                    GPS[2]
-                                            = new GradientPaint(0, 0, DT.GP_whiteCeleste[0].darker(),
-                                                    W, H, DT.GP_whiteCeleste[1].darker());
-
-                                    //System.out.println("\t" + smallBTN_C.this.getName());
-                                    //System.out.println("Dimensions: " + W + ", " + H);
                                     if (Title != null) {
                                           creatingOutline();
                                     }
@@ -158,6 +143,5 @@ public class smallBTN_C extends JButton {
             }.start();
             //++++++++++++++++++++++++
       }
-      
-      
+
 }
