@@ -44,14 +44,16 @@ public class BTN_CU_AL implements ActionListener {
                   }
                   System.out.println("'\tColumns Visible: " + countV);
 
-                  String[] cols = TFSControl(countV);
+                  TFSControl(countV);
                   boolean tableMatch = tableControl(VC_R2.getTF_Title().getText());
+                  
                   if (countV == countO && tableMatch == false) {
 
                         String table = VC_R2.getTF_Title().getText();
                         String[] colNames = new String[countV];
                         String[] types = new String[countV];
                         boolean[] nulls = new boolean[countV];
+                        
                         for (int a = 0; a < countV; a++) {
                               colNames[a] = VC_R2.getTFS()[a].getText();
                               types[a] = VC_R2.getCombs()[a].getSelectedItem().toString();
@@ -60,9 +62,13 @@ public class BTN_CU_AL implements ActionListener {
 
                         ms.createTable(table, colNames, types, nulls,
                                 new Update("CreateTable", VC_R2.getLB_Status()));
+                        //+++++++++++++++++++++++++++++++++++++++++++++++++
+                        
+                        //VC_R2.getLB_ADisp()
+                        
                   } else {
                         Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
-                                "Unable to Create Table ->Check Errors<-", 5000);
+                                "Unable to Create Table ->Check For Errors<-", 5000);
                   }
 
             } else if (Choice.equals("UPDATE")) {
@@ -70,25 +76,22 @@ public class BTN_CU_AL implements ActionListener {
             }
       }
 
-      private String[] TFSControl(int cv) {
+      private void TFSControl(int cv) {
             countO = 0;
-            int countC = 0;
-            String[] cols = new String[cv];
+            //int countC = 0;
             //IF EACH JTF HAS TEXT AND NO SQL ERRORS
             for (int a = 0; a < cv; a++) {
-                  //IF THE COLUMNS ARE OK
+                  //IF THE COLUMNS ARE CORRECT
                   if (!VC_R2.getTFS()[a].getText().isEmpty()) {
                         if (!VC_R2.getTFS()[a].getForeground().equals(Color.RED)
                                 && !VC_R2.getLBS()[a].getForeground().equals(Color.RED)) {
-                              System.out.println("\t\tCNEEDED " + (cv) + " = " + countC);
-                              cols[countC] = VC_R2.getTFS()[a].getText();
-                              countC++;//count up only if it meats the conditions
-                              countO++;
+                              System.out.println("\t\tCNEEDED " + (cv) + " = " + countO);
+                              //countC++;
+                              countO++;//count up only if it meats these conditions
 
                         }
                   }
             }
-            return cols;
       }
 
       private boolean tableControl(String table) {

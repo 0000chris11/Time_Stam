@@ -104,7 +104,8 @@ public class VC_R2 extends VC_R_DataCom {
                   lbOrigText[a] = "Column " + (a + 1);
                   btns_Tabl[a].setName("btns_Tabl " + (a + 1));
                   btns_Clock[a].setName("btns_Clock " + (a + 1));
-
+                  //+++++++++++++++++++++++++++++++++++++++++++++++
+                  tfs[a].setMinimumSize(new Dimension(200, 27));
                   tfs[a].addKeyListener(tfkl);
                   btns_m[a].addActionListener(btnAC);
                   btns_p[a].addActionListener(btnAC);
@@ -258,7 +259,7 @@ public class VC_R2 extends VC_R_DataCom {
             JF.setLayout(new BorderLayout());
 
             JPUConfig();
-            JPCConfig();
+            JPCConfig();//GroupLayout setUp
 
             //+++++++++++++++++++++++++++++++++++++
             if (choice.equals("CREATE")) {
@@ -280,6 +281,7 @@ public class VC_R2 extends VC_R_DataCom {
                   public void run() {
                         VC_R2 vc = new VC_R2("CREATE");
                         vc.JF.setSize(800, 500);
+                        vc.JF.setAlwaysOnTop(true);
                   }
 
             });
