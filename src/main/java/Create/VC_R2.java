@@ -7,6 +7,7 @@ package Create;
 
 import Create.Listeners.BTN_Dists;
 import Create.Listeners.BTN_MP_AL;
+import Create.Listeners.TFTable_KL_Control;
 import Create.Listeners.TF_KL_Control;
 import static Create.VC_R_DataCom.lb_Status;
 import MC.DT;
@@ -42,6 +43,8 @@ import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationException;
 import smallComponenets.smallBTN_C;
 import smallComponenets.smallBTN_TG;
+import smallComponenets.smallCHBX;
+import smallComponenets.smallCOMBX;
 import smallComponenets.smallLB;
 
 /**
@@ -90,23 +93,15 @@ public class VC_R2 extends VC_R_DataCom {
                   tfs[a] = (JTextField) getColumn(JComponent.class, compsD, 1)[a + 1];
                   btns_m[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 2)[a + 1];
                   btns_p[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 3)[a + 1];
-
+                  combs[a] = (smallCOMBX)getColumn(JComponent.class, compsD, 4)[a + 1];
+                  checkbs[a] = (smallCHBX) getColumn(JComponent.class, compsD, 5)[a + 1];
                   btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 6)[a + 1];
                   btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
                   btns_Tabl[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
                   btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
                   btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
-
+                  //+++++++++++++++++++++++++++++++++++++++++++++++
                   lbOrigText[a] = "Column " + (a + 1);
-                  //tfs[a] = (JTextField) ob_tfs[a + 1];
-                  //btns_m[a] = (JButton) ob_btnm[a + 1];
-                  //btns_p[a] = (JButton) ob_btnp[a + 1];
-                  //btns_Dist[a] = (smallBTN_TG) ob_dis[a + 1];
-                  //btns_Dist2[a] = (smallBTN_TG) ob_dis2[a + 1];
-                  //btns_Tabl[a] = (smallBTN_TG) ob_tab[a + 1];
-                  //btns_Tag[a] = (smallBTN_TG) ob_tag[a + 1];
-                  //btns_Clock[a] = (smallBTN_TG) ob_ck[a + 1];
-
                   btns_Tabl[a].setName("btns_Tabl " + (a + 1));
                   btns_Clock[a].setName("btns_Clock " + (a + 1));
 
@@ -150,6 +145,7 @@ public class VC_R2 extends VC_R_DataCom {
             JPU.add(tf_Title);
             tf_Title.setPreferredSize(new Dimension(tf_Title.getPreferredSize().width, 27));
             tf_Title.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
+            tf_Title.addKeyListener(new TFTable_KL_Control());
             JPU.add(Box.createHorizontalStrut(10));
       }
 

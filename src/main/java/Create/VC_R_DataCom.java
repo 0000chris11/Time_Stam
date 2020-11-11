@@ -70,7 +70,8 @@ public class VC_R_DataCom {
       static JLabel lb_Title = new JLabel("Table Name");
       static JTextField tf_Title = new smallTF();
 
-      static String[] lbOrigText = new String[DT.maxColumns];
+      static String lb_TitleOrigText = "Table Name";//MAY GETTER FROM CONSTRUCTOR
+      static String[] lbOrigText = new String[DT.maxColumns];//MAY GETTER FROM CONSTRUCTOR
       //TO+COPY++++++++++++++++++++++++++++++++++++++
       static JLabel lb = new smallLB("Column 1");
       static JTextField tf = new smallTF();
@@ -108,8 +109,12 @@ public class VC_R_DataCom {
       public static JComponent[][] getCompsD() {
             return compsD;
       }
+      
+      public static JLabel getLB_Title(){
+            return lb_Title;
+      }
 
-      public static JTextField getTable_Name() {
+      public static JTextField getTF_Title() {
             return tf_Title;
       }
       
@@ -120,11 +125,15 @@ public class VC_R_DataCom {
       public static Box getBoxClock(){
             return bxClock;
       }
+      //++++++++++++++++++++++++++++++++++++++++++++
+      public static String getLB_TitleOrigText(){
+            return lb_TitleOrigText;
+      }
 
       public static String[] getLBOrigTexts() {
             return lbOrigText;
       }
-
+      //++++++++++++++++++++++++++++++++++++++++++++
       public static JLabel[] getLBS() {
             return lbs;
       }
@@ -141,7 +150,13 @@ public class VC_R_DataCom {
             return btns_m;
       }
       
+      public static JComboBox[] getCombs(){
+            return combs;
+      }
       
+      public static JCheckBox[] getCheckbs(){
+            return checkbs;
+      }
 
       public static JToggleButton[] getBTNS_Dist() {
             return btns_Dist;

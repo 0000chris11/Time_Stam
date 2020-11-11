@@ -7,9 +7,11 @@ package Create.Listeners;
 
 import Create.VC_R2;
 import MC.DT;
+import com.cofii.myMethods.MOthers;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -32,22 +34,32 @@ public class TF_KL_Control implements KeyListener {
       @Override
       public void keyReleased(KeyEvent e) {
             System.out.println("keyReleased");
-            boolean bool_BW = false;
-            boolean bool_SC = false;
-            for (int a = 0; a < DT.maxColumns; a++) {
+            boolean bool_BW = false;//BANDWORDS MATCH
+            boolean bool_SC = false;//SAME COLUMN
 
-                  String text = VC_R2.getTFS()[a].getText().toUpperCase();
-                  //BAND WORDS CONTROL
-                  for (int b = 0; b < DT.getBandW().size(); b++) {
-                        if (text.contains(DT.getBandW().get(b))) {
-                              VC_R2.getTFS()[a].setForeground(Color.RED);
-                              bool_BW = true;
-                        } else {
-                              if (bool_BW != true) {
-                                    VC_R2.getTFS()[a].setForeground(Color.WHITE);
-                              }
-                        }
+            //BAND WORDS CONTROL
+            bool_BW = MOthers.getContainMatchFromArrayToList(VC_R2.getTFS(), DT.getBandW());
+            if(bool_BW = true){
+                  
+            }
+
+            Object[] resSC = MOthers.getEqualsMatchAndPositionFromArray(VC_R2.getTFS(), true);
+            ArrayList<Integer> A = (ArrayList<Integer>) resSC[1];
+            ArrayList<Integer> B = (ArrayList<Integer>) resSC[2];
+            bool_SC = (boolean) resSC[0];
+            
+            if (bool_SC == true) {
+                  for (Integer x : A) {
+                        VC_R2.getLBS()[x].setForeground(Color.RED);
+                        VC_R2.getLBS()[x].setText("Same Name");
                   }
+                  for (Integer x : B) {
+                        VC_R2.getLBS()[x].setForeground(Color.RED);
+                        VC_R2.getLBS()[x].setText("Same Name");
+                  }
+            }
+            /*
+            for (int a = 0; a < DT.maxColumns; a++) {
                   //COLUMN WITH THE SAME NAME CONTROL
                   JTextField tf = VC_R2.getTFS()[a];
                   JLabel lb = VC_R2.getLBS()[a];
@@ -74,8 +86,9 @@ public class TF_KL_Control implements KeyListener {
                         }
                         //}
                   }
-
+                  
             }
+            */
       }
 
 }

@@ -11,7 +11,7 @@ import MC.notMyMethods;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
 import SQLActions.SelectData;
-import SQLActions.UpdateTable;
+import SQLActions.Update;
 import Threads.Threads;
 import com.cofii.myClasses.MSQL;
 import java.awt.Color;
@@ -99,7 +99,7 @@ public class BTNS_MCActionListener implements ActionListener {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //mc.UpdateRow(DT.getTable(), cols, newData.toArray(), DT.getList_R().get(0));
             ms.updateRow(DT.getTable(), cols, newData.toArray(), "id", DT.getList_R().get(0), 
-                    new UpdateTable("UpdateRow: "));
+                    new Update("UpdateRow", VF_R.getLB_Status()));
             //mc.SelectData(colN, DT.getTable());
             ms.selectData(DT.getTable(), new SelectData(colN));
 

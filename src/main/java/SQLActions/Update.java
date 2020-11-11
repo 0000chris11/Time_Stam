@@ -11,33 +11,36 @@ import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IUpdates;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 
 /**
  *
  * @author C0FII
  */
-public class UpdateTable implements IUpdates {
+public class Update implements IUpdates {
 
       private String Msg;
-
-      public UpdateTable(String msg) {
+      private JLabel LB;
+      
+      public Update(String msg, JLabel lb) {
             Msg = msg;
+            LB = lb;
       }
 
       @Override
       public void succeed() {
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], Msg + "Done", 4000);
+            Status.startLBStatus(LB, DT.RGY[1], Msg + ": Done", 4000);
       }
 
       @Override
       public void fail() {
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2], Msg + "Fail" + DT.inter, 8000);
+            Status.startLBStatus(LB, DT.RGY[2], Msg + ": Fail" + DT.inter, 8000);
       }
 
       @Override
       public void exception(SQLException ex) {
             ex.printStackTrace();
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0], Msg + ex.toString(), 8000);
+            Status.startLBStatus(LB, DT.RGY[0], Msg + ": " + ex.toString(), 8000);
       }
 
 }

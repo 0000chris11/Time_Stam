@@ -7,7 +7,7 @@ import MC.Status;
 import MC.notMyMethods;
 import SQLActions.SelectConfig;
 import SQLActions.SelectTables;
-import SQLActions.UpdateTable;
+import SQLActions.Update;
 import com.cofii.myClasses.MSQL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,21 +36,21 @@ public class MIOptions_IL implements ActionListener {
                         //mc.UpdateConfig(VF_R.getMI_AOT().getState(), 1);
                         ms.updateRow(DT.configTable,
                                 DT.configColumn, VF_R.getMI_AOT().getState(),
-                                "id", 1, new UpdateTable("UpdateConfig: "));
+                                "id", 1, new Update("UpdateConfig", VF_R.getLB_Status()));
                         c++;
                   }
                   if (VF_R.getMI_AutoR().getState() != DT.getList_BL().get(1)) {
                         //mc.UpdateConfig(VF_R.getMI_AutoR().getState(), 2);
                         ms.updateRow(DT.configTable,
                                 DT.configColumn, VF_R.getMI_AutoR().getState(),
-                                "id", 2, new UpdateTable("UpdateConfig: "));
+                                "id", 2, new Update("UpdateConfig", VF_R.getLB_Status()));
                         c++;
                   }
                   if (VF_R.getMI_Grid().getState() != DT.getList_BL().get(2)) {
                         //mc.UpdateConfig(VF_R.getMI_Grid().getState(), 3);
                         ms.updateRow(DT.configTable,
                                 DT.configColumn, VF_R.getMI_Grid().getState(),
-                                "id", 3, new UpdateTable("UpdateConfig: "));
+                                "id", 3, new Update("UpdateConfig", VF_R.getLB_Status()));
                         c++;
                   }
                   if (c == 0) {

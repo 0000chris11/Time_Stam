@@ -7,6 +7,8 @@ package Create.Listeners;
 
 import Create.VC_R2;
 import MC.DT;
+import MC.Status;
+import SQLActions.Update;
 import com.cofii.myClasses.CC;
 import com.cofii.myClasses.MSQL;
 import java.awt.Color;
@@ -43,16 +45,24 @@ public class BTN_CU_AL implements ActionListener {
                   System.out.println("'\tColumns Visible: " + countV);
 
                   String[] cols = TFSControl(countV);
-                  boolean tableMatch = tableControl();
+                  boolean tableMatch = tableControl(VC_R2.getTF_Title().getText());
                   if (countV == countO && tableMatch == false) {
-                        String table = VC_R2.getTable_Name().getText();
-                        
+
+                        String table = VC_R2.getTF_Title().getText();
                         String[] colNames = new String[countV];
                         String[] types = new String[countV];
+                        boolean[] nulls = new boolean[countV];
                         for (int a = 0; a < countV; a++) {
                               colNames[a] = VC_R2.getTFS()[a].getText();
-                              types[a] = 
+                              types[a] = VC_R2.getCombs()[a].getSelectedItem().toString();
+                              nulls[a] = VC_R2.getCheckbs()[a].isSelected();
                         }
+
+                        ms.createTable(table, colNames, types, nulls,
+                                new Update("CreateTable", VC_R2.getLB_Status()));
+                  } else {
+                        Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
+                                "Unable to Create Table ->Check Errors<-", 5000);
                   }
 
             } else if (Choice.equals("UPDATE")) {
@@ -81,23 +91,26 @@ public class BTN_CU_AL implements ActionListener {
             return cols;
       }
 
-      private boolean tableControl() {
+      private boolean tableControl(String table) {
             boolean match = false;
-            for (int b = 0; b < DT.getList_T().size(); b++) {
-                  if (VC_R2.getTable_Name().getText().equalsIgnoreCase(
-                          DT.getList_T().get(b))) {
-                        match = true;
-                  } else {
-                        if (match != true) {
-                              match = false;
+            if (!table.isEmpty()) {
+                  for (int b = 0; b < DT.getList_T().size(); b++) {
+                        if (table.equalsIgnoreCase(
+                                DT.getList_T().get(b))) {
+                              match = true;
+                        } else {
+                              if (match != true) {
+                                    match = false;
+                              }
                         }
                   }
+            }else{
+                  match = true;
             }
-            System.out.print("\t\tTable ");
             if (match == false) {
-                  System.out.println(CC.GREEN + "OK" + CC.RESET);
+                  
             } else {
-                  System.out.println(CC.RED + "ALREADY EXIST" + CC.RESET);
+                  
             }
             return match;
       }

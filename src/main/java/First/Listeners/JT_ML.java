@@ -12,7 +12,7 @@ import MC.DT;
 import MC.MakeCon;
 import Others.LSTD;
 import MC.notMyMethods;
-import SQLActions.UpdateTable;
+import SQLActions.Update;
 import com.cofii.myMethods.MText;
 import Threads.Threads;
 import com.cofii.myClasses.MSQL;
@@ -64,7 +64,7 @@ public class JT_ML implements TableModelListener {
                                     //mc.UpdateRow(DT.getTable(), col, data.toString(), DT.getList_R().get(0));
                                     ms.updateRow(DT.getTable(), col, data, 
                                             DT.getList_C().get(0), DT.getList_R().get(0),
-                                            new UpdateTable("UpdateRow: "));
+                                            new Update("UpdateRow", VF_R.getLB_Status()));
                                     
                                     lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
                                             DT.getTag(), DT.getClock());
