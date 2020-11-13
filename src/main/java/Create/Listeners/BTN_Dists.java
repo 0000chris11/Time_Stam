@@ -61,6 +61,8 @@ public class BTN_Dists implements ActionListener {
             setLB(VC_R2.getLB_ADisp()[3], tag);
             setLB(VC_R2.getLB_ADisp()[2], tabl);
             setLB(VC_R2.getLB_ADisp()[4], clock);
+            
+            
       }
 
       private void setLB(JLabel lb, String var) {

@@ -24,12 +24,14 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 import smallComponenets.JPanelGradient;
+import smallComponenets.NumberOTF;
 import smallComponenets.smallBTN_C;
 import smallComponenets.smallBTN_TG;
 import smallComponenets.smallCHBX;
 import smallComponenets.smallCOMBX;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
+import smallComponenets.smallTR_JP;
 import smallComponenets.smallTR_TF;
 
 /**
@@ -41,7 +43,7 @@ public class VC_R_DataCom {
       JFrame JF = new JFrame("Create Table");
 
       JPanel JPU = new JPanel();
-      JPanel JPC = new JPanelGradient(DT.GP_blackRed);
+      static JPanel JPC = new JPanelGradient(DT.GP_blackRed);
       JScrollPane sc_JPC = new JScrollPane(JPC);
       JPanel JPB = new JPanel();
       //++++++++++++++++++++++++++++++++++++++
@@ -61,7 +63,7 @@ public class VC_R_DataCom {
       static JButton btn_CU = new JButton();
       //++++++++++++++++++++++++++++++++++++++++++++++
       String[] headers_t = new String[]{
-            "Columns", "Name", "Sub", "Add", "Type", "Null",
+            "Columns", "Name", "Sub", "Add", "Type", "Null", "Type 2",
             "Dist1", "Dist2", "Tabl", "Tag", "Clock"};
       JLabel[] headers = new JLabel[headers_t.length];
 
@@ -83,6 +85,12 @@ public class VC_R_DataCom {
       static JComboBox comb = new smallCOMBX(cb_options);
       static JCheckBox checkb = new smallCHBX();
       
+      static JPanel panelType = new smallTR_JP();
+      static String[] cbType_options = new String[]{"AUTO INCREMENT", "IDENTITY"};
+      static JComboBox combType = new smallCOMBX(cbType_options);
+      static JTextField tfType1 = new NumberOTF();
+      static JTextField tfType2 = new NumberOTF();
+      
       static JToggleButton btn_Dist = new smallBTN_TG(DT.GP_celesteWhite);
       static JToggleButton btn_Dist2 = new smallBTN_TG(null);
       static JToggleButton btn_Tabl = new smallBTN_TG(DT.GP_greenWhite);
@@ -95,6 +103,10 @@ public class VC_R_DataCom {
       static JButton[] btns_m = new smallBTN_C[DT.maxColumns];
       static JComboBox[] combs = new smallCOMBX[DT.maxColumns];
       static JCheckBox[] checkbs = new smallCHBX[DT.maxColumns];
+      static JPanel[] panelTypes = new JPanel[DT.maxColumns];
+      static JComboBox[] combTypes = new JComboBox[DT.maxColumns];
+      static JTextField[] tfsTypes1 = new JTextField[DT.maxColumns];
+      static JTextField[] tfsTypes2 = new JTextField[DT.maxColumns];
       static JToggleButton[] btns_Dist = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Dist2 = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Tabl = new smallBTN_TG[DT.maxColumns];
@@ -106,6 +118,10 @@ public class VC_R_DataCom {
       static JToggleButton[] btns_Clock = new smallBTN_TG[DT.maxColumns];
       //++++++++++++++++++++++++++++++++++++++++++
 
+      public static JPanel getPC(){
+            return JPC;
+      }
+      
       public static JComponent[][] getCompsD() {
             return compsD;
       }

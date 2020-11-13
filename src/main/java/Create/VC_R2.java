@@ -11,6 +11,7 @@ import Create.Listeners.TFTable_KL_Control;
 import Create.Listeners.TF_KL_Control;
 import static Create.VC_R_DataCom.lb_Status;
 import MC.DT;
+import Others.LimitN;
 import com.cofii.myClasses.MLayout;
 import com.cofii.myInterfaces.SerializationExceptionAction;
 import java.awt.BorderLayout;
@@ -39,13 +40,17 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
 import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationException;
+import smallComponenets.NumberOTF;
 import smallComponenets.smallBTN_C;
 import smallComponenets.smallBTN_TG;
 import smallComponenets.smallCHBX;
 import smallComponenets.smallCOMBX;
 import smallComponenets.smallLB;
+import smallComponenets.smallTF;
+import smallComponenets.smallTR_JP;
 
 /**
  *
@@ -57,6 +62,13 @@ public class VC_R2 extends VC_R_DataCom {
             for (int a = 0; a < headers.length; a++) {
                   headers[a] = new smallLB(headers_t[a]);
             }
+            
+            panelType.setLayout(new BoxLayout(panelType, BoxLayout.X_AXIS));
+            panelType.add(combType);
+            panelType.add(tfType1);
+            //((AbstractDocument) tfType1.getDocument()).setDocumentFilter(new LimitN());
+            panelType.add(tfType2);
+            //((AbstractDocument) tfType2.getDocument()).setDocumentFilter(new LimitN());
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -89,17 +101,20 @@ public class VC_R2 extends VC_R_DataCom {
             BTN_Dists btnDis = new BTN_Dists();
 
             for (int a = 0; a < DT.maxColumns; a++) {
-                  lbs[a] = (JLabel) getColumn(JComponent.class, compsD, 0)[a + 1];
-                  tfs[a] = (JTextField) getColumn(JComponent.class, compsD, 1)[a + 1];
+                  lbs[a] = (smallLB) getColumn(JComponent.class, compsD, 0)[a + 1];
+                  tfs[a] = (smallTF) getColumn(JComponent.class, compsD, 1)[a + 1];
                   btns_m[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 2)[a + 1];
                   btns_p[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 3)[a + 1];
-                  combs[a] = (smallCOMBX)getColumn(JComponent.class, compsD, 4)[a + 1];
+                  combs[a] = (smallCOMBX) getColumn(JComponent.class, compsD, 4)[a + 1];
                   checkbs[a] = (smallCHBX) getColumn(JComponent.class, compsD, 5)[a + 1];
-                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 6)[a + 1];
-                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
-                  btns_Tabl[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
-                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
-                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
+                  
+                  panelTypes[a] = (smallTR_JP) getColumn(JComponent.class, compsD, 6)[a + 1];
+                  
+                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
+                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
+                  btns_Tabl[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
+                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
+                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   lbOrigText[a] = "Column " + (a + 1);
                   btns_Tabl[a].setName("btns_Tabl " + (a + 1));
@@ -109,12 +124,29 @@ public class VC_R2 extends VC_R_DataCom {
                   tfs[a].addKeyListener(tfkl);
                   btns_m[a].addActionListener(btnAC);
                   btns_p[a].addActionListener(btnAC);
+                  
+                  panelTypes[a].setMinimumSize(new Dimension(240, 27));
+                  
                   btns_Dist[a].addActionListener(btnDis);
                   btns_Dist2[a].setEnabled(false);
                   btns_Tag[a].addActionListener(btnDis);
 
                   btns_Tabl[a].addActionListener(btnDis);
                   btns_Clock[a].addActionListener(btnDis);
+            }
+            
+            for(int a = 0; a < panelTypes.length; a++){
+                  combTypes[a] = (smallCOMBX) panelTypes[a].getComponent(0);
+                  //combTypes[a]
+                  tfsTypes1[a] = (NumberOTF) panelTypes[a].getComponent(1);
+                  tfsTypes2[a] = (NumberOTF) panelTypes[a].getComponent(2);
+                  
+                  ((AbstractDocument) tfsTypes1[a].getDocument()).setDocumentFilter(new LimitN());
+                  ((AbstractDocument) tfsTypes2[a].getDocument()).setDocumentFilter(new LimitN());
+                  
+                  combTypes[a].setMinimumSize(new Dimension(100, 27));
+                  tfsTypes1[a].setMinimumSize(new Dimension(40, 27));
+                  tfsTypes2[a].setMinimumSize(new Dimension(40, 27));
             }
 
             btns_m[0].setEnabled(false);
@@ -161,7 +193,7 @@ public class VC_R2 extends VC_R_DataCom {
             GroupLayout gl = new GroupLayout(JPC);
             JPC.setLayout(gl);
             JComponent[] comps = new JComponent[]{
-                  lb, tf, btn_m, btn_p, comb, checkb,
+                  lb, tf, btn_m, btn_p, comb, checkb, panelType,
                   btn_Dist, btn_Dist2, btn_Tabl, btn_Tag, btn_Clock};
             MLayout.setSerializationExceptionAction(new SerializationExceptionAction() {
                   @Override
@@ -280,7 +312,7 @@ public class VC_R2 extends VC_R_DataCom {
                   @Override
                   public void run() {
                         VC_R2 vc = new VC_R2("CREATE");
-                        vc.JF.setSize(800, 500);
+                        vc.JF.setSize(1100, 500);
                         vc.JF.setAlwaysOnTop(true);
                   }
 
