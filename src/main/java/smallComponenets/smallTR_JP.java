@@ -15,16 +15,17 @@ import javax.swing.JPanel;
  * @author C0FII
  */
 public class smallTR_JP extends JPanel{
-      
+      /*
       @Override
       public void paintComponent(Graphics g){
             g.setColor(getBackground());
             g.fillRect(0, 0, getWidth(), getHeight());
             super.paintComponent(g);
       }
+      */
       
       public smallTR_JP(){
-            setOpaque(false);
-            setBackground(new Color(255, 0, 0, 20));
+            //setOpaque(false);
+            setBackground(Color.BLACK);
       }
 }

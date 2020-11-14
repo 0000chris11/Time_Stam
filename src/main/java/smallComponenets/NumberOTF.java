@@ -8,6 +8,7 @@ package smallComponenets;
 import MC.DT;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
@@ -17,8 +18,18 @@ import javax.swing.JTextField;
  */
 public class NumberOTF extends JFormattedTextField {
 
+      /*
+      @Override
+      public void paintComponent(Graphics g){
+            g.setColor(getBackground());
+            g.fillRect(0, 0, getWidth(), getHeight());
+            super.paintComponent(g);
+      }
+      */
+      
       public NumberOTF() {
             Font f = new Font("Dialog", Font.BOLD, 16);
+            //setOpaque(false);
             setBackground(DT.TFColor[0]);
             setForeground(Color.WHITE);
             

@@ -38,9 +38,9 @@ public class BTN_MP_AL implements ActionListener{
                   }
             }
             
-            System.out.println("REVALIDATE");
-            VC_R2.getPC().revalidate();
-            VC_R2.getPC().repaint();
+            //System.out.println("REVALIDATE");
+            //VC_R2.getPC().revalidate();
+            
       }
       
 }

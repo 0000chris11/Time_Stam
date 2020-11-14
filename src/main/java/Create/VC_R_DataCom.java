@@ -23,6 +23,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
+import javax.swing.JRadioButton;
 import smallComponenets.JPanelGradient;
 import smallComponenets.NumberOTF;
 import smallComponenets.smallBTN_C;
@@ -43,7 +44,8 @@ public class VC_R_DataCom {
       JFrame JF = new JFrame("Create Table");
 
       JPanel JPU = new JPanel();
-      static JPanel JPC = new JPanelGradient(DT.GP_blackRed);
+      //static JPanel JPC = new JPanelGradient(DT.GP_blackRed);
+      static JPanel JPC = new JPanel();
       JScrollPane sc_JPC = new JScrollPane(JPC);
       JPanel JPB = new JPanel();
       //++++++++++++++++++++++++++++++++++++++
@@ -85,9 +87,10 @@ public class VC_R_DataCom {
       static JComboBox comb = new smallCOMBX(cb_options);
       static JCheckBox checkb = new smallCHBX();
       
-      static JPanel panelType = new smallTR_JP();
+      static JPanel panelType2 = new JPanel();
+      static JRadioButton rbType2 = new JRadioButton();
       static String[] cbType_options = new String[]{"AUTO INCREMENT", "IDENTITY"};
-      static JComboBox combType = new smallCOMBX(cbType_options);
+      static JComboBox combType2 = new smallCOMBX(cbType_options);
       static JTextField tfType1 = new NumberOTF();
       static JTextField tfType2 = new NumberOTF();
       
@@ -101,10 +104,11 @@ public class VC_R_DataCom {
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       static JButton[] btns_p = new smallBTN_C[DT.maxColumns];
       static JButton[] btns_m = new smallBTN_C[DT.maxColumns];
-      static JComboBox[] combs = new smallCOMBX[DT.maxColumns];
+      static JComboBox[] combTypes1 = new smallCOMBX[DT.maxColumns];
       static JCheckBox[] checkbs = new smallCHBX[DT.maxColumns];
-      static JPanel[] panelTypes = new JPanel[DT.maxColumns];
-      static JComboBox[] combTypes = new JComboBox[DT.maxColumns];
+      static JPanel[] panelTypes2 = new JPanel[DT.maxColumns];
+      static JRadioButton[] rbTypes2 = new JRadioButton[DT.maxColumns];
+      static JComboBox[] combTypes2 = new JComboBox[DT.maxColumns];
       static JTextField[] tfsTypes1 = new JTextField[DT.maxColumns];
       static JTextField[] tfsTypes2 = new JTextField[DT.maxColumns];
       static JToggleButton[] btns_Dist = new smallBTN_TG[DT.maxColumns];
@@ -166,12 +170,28 @@ public class VC_R_DataCom {
             return btns_m;
       }
       
-      public static JComboBox[] getCombs(){
-            return combs;
+      public static JComboBox[] getCombTypes1(){
+            return combTypes1;
       }
       
       public static JCheckBox[] getCheckbs(){
             return checkbs;
+      }
+      
+      public static JRadioButton[] getRBTypes2(){
+            return rbTypes2;
+      }
+      
+      public static JComboBox[] getCombTypes2(){
+            return combTypes2;
+      }
+      
+      public static JTextField[] getTFSTypes1(){
+            return tfsTypes1;
+      }
+      
+      public static JTextField[] getTFSTypes2(){
+            return tfsTypes2;
       }
 
       public static JToggleButton[] getBTNS_Dist() {

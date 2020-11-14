@@ -5,6 +5,8 @@
  */
 package Others;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
@@ -15,6 +17,17 @@ import javax.swing.text.DocumentFilter;
  */
 public class LimitN extends DocumentFilter {
 
+      @Override
+      public void insertString​(DocumentFilter.FilterBypass fb, int offset, String text, AttributeSet attr) {
+            if (test(text)) {
+                  try {
+                        fb.insertString(offset, text, attr);
+                  } catch (BadLocationException ex) {
+                        ex.printStackTrace();
+                  }
+            }
+      }
+      /*
       @Override
       public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) {
             if (test(text)) {
@@ -27,7 +40,7 @@ public class LimitN extends DocumentFilter {
                   }
             }
       }
-
+      */
       public boolean test(String text) {
             try {
                   Integer.parseInt(text);

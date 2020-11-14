@@ -56,7 +56,7 @@ public class BTN_CU_AL implements ActionListener {
                         
                         for (int a = 0; a < countV; a++) {
                               colNames[a] = VC_R2.getTFS()[a].getText();
-                              types[a] = VC_R2.getCombs()[a].getSelectedItem().toString();
+                              types[a] = VC_R2.getCombTypes1()[a].getSelectedItem().toString();
                               nulls[a] = VC_R2.getCheckbs()[a].isSelected();
                         }
 
