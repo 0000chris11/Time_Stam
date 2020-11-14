@@ -134,6 +134,9 @@ public class DT {
       public static final String configTable = "Table_Config";
       public static final String configColumn = "Value";
       
+      public static final String[] mainTableColumns = new String[]{
+      "id", "Table_Names", "Dist1", "Dist2", "Tabl", "Tag1", "Clock"};
+      
       public static final String urlConnection
               = "jdbc:mysql://localhost:3306/"
               + dataBase + "?allowPublicKeyRetrieval=true&"

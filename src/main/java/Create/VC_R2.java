@@ -81,6 +81,7 @@ public class VC_R2 extends VC_R_DataCom {
             panelType2.add(tfType1);
             //((AbstractDocument) tfType1.getDocument()).setDocumentFilter(new LimitN());
             panelType2.add(tfType2);
+            panelType2.add(Box.createGlue());
             //((AbstractDocument) tfType2.getDocument()).setDocumentFilter(new LimitN());
       }
 
@@ -135,8 +136,9 @@ public class VC_R2 extends VC_R_DataCom {
                   panelTypes2[a].setBackground(Color.BLACK);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   tfs[a].setMinimumSize(new Dimension(200, 27));
-                  panelTypes2[a].setMinimumSize(new Dimension(280, 27));
-                  panelTypes2[a].setMaximumSize(new Dimension(280, 27));
+                  panelTypes2[a].setMinimumSize(new Dimension(40, 27));
+                  //panelTypes2[a].setPreferredSize(new Dimension(40, 27));
+                  panelTypes2[a].setMaximumSize(new Dimension(320, 27));
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   tfs[a].addKeyListener(tfkl);
                   btns_m[a].addActionListener(btnAC);
@@ -172,9 +174,11 @@ public class VC_R2 extends VC_R_DataCom {
                   //++++++++++++++++++++++++++++++++++++++++++++++++
                   combTypes2[a].setMinimumSize(new Dimension(100, 27));
                   combTypes2[a].setMaximumSize(new Dimension(210, 27));
-                  tfsTypes1[a].setMinimumSize(new Dimension(50, 27));
-                  tfsTypes1[a].setMaximumSize(new Dimension(50, 27));
+                  tfsTypes1[a].setMinimumSize(new Dimension(40, 27));
+                  tfsTypes1[a].setPreferredSize(new Dimension(40, 27));
+                  tfsTypes1[a].setMaximumSize(new Dimension(40, 27));
                   tfsTypes2[a].setMinimumSize(new Dimension(50, 27));
+                  tfsTypes2[a].setPreferredSize(new Dimension(40, 27));
                   tfsTypes2[a].setMaximumSize(new Dimension(50, 27));
                   //++++++++++++++++++++++++++++++++++++++++++++++++
                   rbTypes2[a].setOpaque(true);
@@ -311,10 +315,17 @@ public class VC_R2 extends VC_R_DataCom {
             //lb_ClockLocation.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
 
             JPR.add(bxClock);
+            bxClock.setMinimumSize(new Dimension(100, 27));
             bxClock.add(tfClock);
+            tfClock.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+            tfClock.setMinimumSize(new Dimension(80, 27));
             tfClock.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
             bxClock.add(btn_ClockLocation);
+            btn_ClockLocation.setBorder(BorderFactory.createEmptyBorder());
             btn_ClockLocation.setMinimumSize(new Dimension(20, 27));
+            btn_ClockLocation.setPreferredSize(new Dimension(20, 27));
+            btn_ClockLocation.setMaximumSize(new Dimension(20, 27));
+            
             lb_ClockLocation.setVisible(false);
             bxClock.setVisible(false);
 
@@ -354,8 +365,21 @@ public class VC_R2 extends VC_R_DataCom {
             JPRConfig(choice);
 
             JF.setVisible(true);
+            updateSwing();
       }
 
+      private void updateSwing(){
+            SwingUtilities.invokeLater(new Runnable() {
+                  @Override
+                  public void run() {
+                        VC_R2 vc = new VC_R2("CREATE");
+                        vc.JF.setSize(1100, 500);
+                        vc.JF.setAlwaysOnTop(true);
+                  }
+
+            });
+      }
+      
       public static void main(String[] args) {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override

@@ -54,7 +54,7 @@ public class VC_R_DataCom {
             "Dist:", "NONE", "Dist2:", "NONE", "Tabl:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
       static JLabel[] lb_TDisp = new JLabel[10];
       static JLabel[] lb_ADisp = new JLabel[5];
-      
+
       static JLabel lb_ClockLocation = new smallLB("Folder Location:");
       static Box bxClock = new Box(BoxLayout.LINE_AXIS);
       JTextField tfClock = new smallTR_TF();
@@ -86,14 +86,14 @@ public class VC_R_DataCom {
             "INT", "FLOAT", "DOUBLE", "VARCHAR", "BOOLEAN/TINYINT(1)", "DATE"};
       static JComboBox comb = new smallCOMBX(cb_options);
       static JCheckBox checkb = new smallCHBX();
-      
+
       static JPanel panelType2 = new JPanel();
       static JRadioButton rbType2 = new JRadioButton();
       static String[] cbType_options = new String[]{"AUTO INCREMENT", "IDENTITY"};
       static JComboBox combType2 = new smallCOMBX(cbType_options);
       static JTextField tfType1 = new NumberOTF();
       static JTextField tfType2 = new NumberOTF();
-      
+
       static JToggleButton btn_Dist = new smallBTN_TG(DT.GP_celesteWhite);
       static JToggleButton btn_Dist2 = new smallBTN_TG(null);
       static JToggleButton btn_Tabl = new smallBTN_TG(DT.GP_greenWhite);
@@ -108,6 +108,7 @@ public class VC_R_DataCom {
       static JCheckBox[] checkbs = new smallCHBX[DT.maxColumns];
       static JPanel[] panelTypes2 = new JPanel[DT.maxColumns];
       static JRadioButton[] rbTypes2 = new JRadioButton[DT.maxColumns];
+      static int rb_Types2Selected = -1;
       static JComboBox[] combTypes2 = new JComboBox[DT.maxColumns];
       static JTextField[] tfsTypes1 = new JTextField[DT.maxColumns];
       static JTextField[] tfsTypes2 = new JTextField[DT.maxColumns];
@@ -122,37 +123,39 @@ public class VC_R_DataCom {
       static JToggleButton[] btns_Clock = new smallBTN_TG[DT.maxColumns];
       //++++++++++++++++++++++++++++++++++++++++++
 
-      public static JPanel getPC(){
+      public static JPanel getPC() {
             return JPC;
       }
-      
+
       public static JComponent[][] getCompsD() {
             return compsD;
       }
-      
-      public static JLabel getLB_Title(){
+
+      public static JLabel getLB_Title() {
             return lb_Title;
       }
 
       public static JTextField getTF_Title() {
             return tf_Title;
       }
-      
-      public static JLabel getLB_ClockLocation(){
+
+      public static JLabel getLB_ClockLocation() {
             return lb_ClockLocation;
       }
-      
-      public static Box getBoxClock(){
+
+      public static Box getBoxClock() {
             return bxClock;
       }
+
       //++++++++++++++++++++++++++++++++++++++++++++
-      public static String getLB_TitleOrigText(){
+      public static String getLB_TitleOrigText() {
             return lb_TitleOrigText;
       }
 
       public static String[] getLBOrigTexts() {
             return lbOrigText;
       }
+
       //++++++++++++++++++++++++++++++++++++++++++++
       public static JLabel[] getLBS() {
             return lbs;
@@ -169,28 +172,32 @@ public class VC_R_DataCom {
       public static JButton[] getBTNS_M() {
             return btns_m;
       }
-      
-      public static JComboBox[] getCombTypes1(){
+
+      public static JComboBox[] getCombTypes1() {
             return combTypes1;
       }
-      
-      public static JCheckBox[] getCheckbs(){
+
+      public static JCheckBox[] getCheckbs() {
             return checkbs;
       }
-      
-      public static JRadioButton[] getRBTypes2(){
+
+      public static JPanel[] getPanelTypes2() {
+            return panelTypes2;
+      }
+
+      public static JRadioButton[] getRBTypes2() {
             return rbTypes2;
       }
-      
-      public static JComboBox[] getCombTypes2(){
+
+      public static JComboBox[] getCombTypes2() {
             return combTypes2;
       }
-      
-      public static JTextField[] getTFSTypes1(){
+
+      public static JTextField[] getTFSTypes1() {
             return tfsTypes1;
       }
-      
-      public static JTextField[] getTFSTypes2(){
+
+      public static JTextField[] getTFSTypes2() {
             return tfsTypes2;
       }
 
@@ -205,17 +212,25 @@ public class VC_R_DataCom {
       public static JToggleButton[] getBTNS_Tabl() {
             return btns_Tabl;
       }
-      
-      public static ButtonGroup getTablGroup(){
+
+      public static ButtonGroup getTablGroup() {
             return tablGroup;
       }
-      
-      public static int getBTN_TablSelected(){
+
+      public static int getBTN_TablSelected() {
             return btn_TablSelected;
       }
-      
-      public static void setBTN_TablSelected(int v){
+
+      public static void setBTN_TablSelected(int v) {
             btn_TablSelected = v;
+      }
+      
+      public static int getRB_Types2Selected(){
+            return rb_Types2Selected;
+      }
+      
+      public static void setRB_Types2Selected(int v){
+            rb_Types2Selected = v;
       }
 
       public static JToggleButton[] getBTNS_Tag() {
@@ -225,16 +240,16 @@ public class VC_R_DataCom {
       public static JToggleButton[] getBTNS_Clock() {
             return btns_Clock;
       }
-      
-      public static ButtonGroup getClockGroup(){
+
+      public static ButtonGroup getClockGroup() {
             return clockGroup;
       }
-      
-      public static int getBTN_ClockSelected(){
+
+      public static int getBTN_ClockSelected() {
             return btn_ClockSelected;
       }
-      
-      public static void setBTN_ClockSelected(int v){
+
+      public static void setBTN_ClockSelected(int v) {
             btn_ClockSelected = v;
       }
 

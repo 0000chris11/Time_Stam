@@ -34,8 +34,14 @@ public class BTN_CU_AL implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
             if (Choice.equals("CREATE")) {
-                  int countV = 0;
+                  create();
+            } else if (Choice.equals("UPDATE")) {
 
+            }
+      }
+      
+      private void create(){
+            int countV = 0;
                   //HOW MANY COLS ARE VISIBLE
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (VC_R2.getTFS()[a].isVisible()) {
@@ -46,34 +52,49 @@ public class BTN_CU_AL implements ActionListener {
 
                   TFSControl(countV);
                   boolean tableMatch = tableControl(VC_R2.getTF_Title().getText());
-                  
-                  if (countV == countO && tableMatch == false) {
 
+                  if (countV == countO && tableMatch == false) {
+                        //GETTING VALUES TO CREATE THE TABLE++++++++++++++++++++++
                         String table = VC_R2.getTF_Title().getText();
                         String[] colNames = new String[countV];
                         String[] types = new String[countV];
                         boolean[] nulls = new boolean[countV];
-                        
+
                         for (int a = 0; a < countV; a++) {
                               colNames[a] = VC_R2.getTFS()[a].getText();
                               types[a] = VC_R2.getCombTypes1()[a].getSelectedItem().toString();
                               nulls[a] = VC_R2.getCheckbs()[a].isSelected();
                         }
-
-                        ms.createTable(table, colNames, types, nulls,
-                                new Update("CreateTable", VC_R2.getLB_Status()));
-                        //+++++++++++++++++++++++++++++++++++++++++++++++++
                         
-                        //VC_R2.getLB_ADisp()
+                        int colType2 = VC_R2.getRB_Types2Selected();
+                        String type2 = null;
+                        if (colType2 > 0) {
+                              type2 = VC_R2.getCombTypes2()[colType2 - 1].getSelectedItem().toString();
+                              if(VC_R2.getCombTypes2()[colType2 - 1].getSelectedIndex() == 1){
+                                    type2 += "(" + VC_R2.getTFSTypes1()[colType2 - 1].getText()
+                                            + ", " + VC_R2.getTFSTypes2()[colType2 - 1].getText() + ")";
+                              }
+                        }
+                        
+                        ms.createTable(table, 
+                                colNames, types, nulls, colType2, type2,
+                                new Update("CreateTable", VC_R2.getLB_Status()));
+                                
+                        //INSERT TABLE ON MAINTTABLES++++++++++++++++++++++++++
+                        Object[] newValues = new Object[]{null, table, 
+                              VC_R2.getLB_ADisp()[0],//DIST1
+                              VC_R2.getLB_ADisp()[1],//DIST2
+                              VC_R2.getLB_ADisp()[2],//TABL
+                              VC_R2.getLB_ADisp()[3],//TAG
+                              VC_R2.getLB_ADisp()[4]};//CLOCK
+                        
+                        ms.insert(DT.mainTable, DT.mainTableColumns, newValues, colType2, 
+                                new Update("INSERT", VC_R2.getLB_Status()));
                         
                   } else {
                         Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
                                 "Unable to Create Table ->Check For Errors<-", 5000);
                   }
-
-            } else if (Choice.equals("UPDATE")) {
-
-            }
       }
 
       private void TFSControl(int cv) {
@@ -107,13 +128,13 @@ public class BTN_CU_AL implements ActionListener {
                               }
                         }
                   }
-            }else{
+            } else {
                   match = true;
             }
             if (match == false) {
-                  
+
             } else {
-                  
+
             }
             return match;
       }

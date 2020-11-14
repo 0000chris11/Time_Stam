@@ -23,7 +23,6 @@ public class BTN_Dists implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            System.out.println("BTN_Dists actionPerformed");
             tablClockAction(e);
 
             ArrayList<Integer> colsDist = new ArrayList<Integer>();
@@ -101,7 +100,6 @@ public class BTN_Dists implements ActionListener {
 
       //+++++++++++++++++++++++++++++++++++++++++++++
       private void tablClockAction(ActionEvent e) {
-            System.out.println("MButtonGroup actionPerformed");
             String name = ((JComponent) e.getSource()).getName();
             try {
                   if (name.contains("btns_Tabl")) {
