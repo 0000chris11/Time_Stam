@@ -154,7 +154,8 @@ public class LSTD {
 
       private void filterEquals(String filter, String FL) {
             //System.out.println("\nfilterEquals (max Column - 1 = " + (dt.maxColumns - 1));
-            
+            System.out.println("Filter: "+ filter);
+            System.out.println("FL: "+ FL);
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   //System.out.println("\ta = " + a);
                   if (FL.equals("NONE")) {

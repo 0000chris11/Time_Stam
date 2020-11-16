@@ -1,6 +1,5 @@
 package First.Listeners;
 
-
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import First.VF_R;
@@ -15,71 +14,54 @@ public class TF_LST_FL implements FocusListener {
 
       @Override
       public void focusGained(FocusEvent evt) {
-            //System.out.println("\nFocusGained");
-            int b = 4;
-            for (int a = 0; a < 5; a++) {
-                  if (VF_R.getJTFS()[a + 1].hasFocus()) {
-                        if (VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[1])
-                                || VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[2])) {
-                              focusGainedFor(b);
+            int forSize = DT.maxColumns - 1;//DEPENDING ON WICH TF HAD THE FOCUS THE REMAINIG (COUNTING UP) WILL BE MOVE
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (VF_R.getJTFS()[a].hasFocus()) {
+                        if (VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[1])
+                                || VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[2])) {
+                              focusGainedFor(forSize, a + 1);
                         }
                   }
-                  b--;
-                  //0 = 4
-                  //1 = 3
-                  //2 = 2
-                  //4 = 1
-                  //5 = 0
+                  forSize--;
             }
       }
 
       @Override
       public void focusLost(FocusEvent evt) {
-            //System.out.println("\nFocusLost");
             String JC = ((JComponent) evt.getSource()).getName();
-            int b = 4;
-            for (int a = 0; a < 5; a++) {
-                  if (JC.equals("TF_" + (a + 2))) {
-                        //VF_R.getJTFS()[a + 1].setBorder(brs[0]);
-                        //SwingUtilities.updateComponentTreeUI(VF_R.getJTFS()[a + 1]);
-                  }
-                  //System.out.println("\tSource name" + JC);
-                  if ((JC.equals("TF_" + (a + 2))
-                          && (VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[1])
-                          || VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[2])))
-                          || JC.equals("LST_" + (a + 2))) {
+            int forSize = DT.maxColumns - 1;
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if ((JC.equals("TF_" + (a + 1))
+                          && (VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[1])
+                          || VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[2])))
+                          || JC.equals("LST_" + (a + 1))) {
 
-                        //System.out.println("\tTF_" + (a + 2) + " or LST_" + (a + 2));
-                        focusLostFor(a, b);
+                        focusLostFor(a, forSize);
                   }
-                  b--;
+                  forSize--;
             }
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
-      private void focusGainedFor(int forSize) {
+      private void focusGainedFor(int forSize, int res) {
             VF_R.getLB_Icon().setVisible(false);
 
-            int r = getNumToSum(forSize);
-            if (forSize != 0) {
-                  int b = 209;
-                  //System.out.println("r value: " + r);
-                  for (int a = 0; a < forSize; a++) {// 3 or 4
-                        // +2 or +3
-                        VF_R.getJLBS()[a + r].setLocation(6, VF_R.getJLBS()[r - 1].getY() + b);
-                        //1,1,0 or 2,2,1
-                        VF_R.getJTFS()[a + r].setLocation(107, VF_R.getJTFS()[r - 1].getY() + b);
-
-                        VF_R.getBTNS_C()[a + (r - 1)].setLocation(402, VF_R.getBTNS_C()[r - 2].getY() + b);
+            //int r = getNumToSum(forSize);
+            if (forSize != 0) {//IF THE LAST TF HAD THE FOCUS THEN YOU CAN'T MOVE OTHERS
+                  int b = 209;//SPACE NEEDED TO FIT LST IN BETWEEN COMPONENTS
+                  for (int a = 0; a < forSize; a++) {
+                        VF_R.getJLBS()[a + res].setLocation(6, VF_R.getJLBS()[res - 1].getY() + b);
+                        VF_R.getJTFS()[a + res].setLocation(107, VF_R.getJTFS()[res - 1].getY() + b);
+                        VF_R.getBTNS_C()[a + res].setLocation(402, VF_R.getBTNS_C()[res - 1].getY() + b);
 
                         b += 33;
                   }
                   //+++++++++++++++++++++++++++++++
-                  ClockFocusGained(forSize, r);
+                  ClockFocusGained(forSize, res);
             }
             //00 or 11
-            VF_R.getJSCS()[r - 2].setLocation(107, VF_R.getJTFS()[r - 1].getY() + 33);
-            VF_R.getJSCS()[r - 2].setVisible(true);
+            VF_R.getJSCS()[res - 1].setLocation(107, VF_R.getJTFS()[res - 1].getY() + 33);
+            VF_R.getJSCS()[res - 1].setVisible(true);
       }
 
       private void focusLostFor(int lst_sc, int forSize) {
@@ -108,41 +90,42 @@ public class TF_LST_FL implements FocusListener {
             }
       }
 
-      private void ClockFocusGained(int forSize, int res) {
+      private void ClockFocusGained(int forSize, int index) {
             String CK = DT.getClock();
             if (!CK.equals("NONE")) {
-                  DT.chars[0] = CK.charAt(1);
-                  DT.strings[0] = Character.toString(DT.chars[0]);
-                  DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 4 TO 3
+                  //DT.chars[0] = CK.charAt(1);
+                  //DT.strings[0] = Character.toString(DT.chars[0]);
+                  //DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 4 TO 3
 
-                  //System.out.println("\tClockFocusGained");
-                  for (int a = 0; a < 4; a++) {
-                        if (forSize == (a + 1)) {//Focus on TF_5
-                              //System.out.println("\t\tFocus on TF_" + (6 - (a + 1)));
-                              int PA = 6 - (a + 1);
-                              int c = 308;
-                              int d = 5;
-                              for (int b = 0; b < (a + 1); b++) {
-                                    if (DT.ints[0] == d) {//IF CK = 6
-                                          int dis = getDistanceGained(PA, DT.ints[0] + 1);
-                                          //System.out.println("\t\tCK is on: C" + (1 + d));
-                                          //System.out.println("\t\tTEST " + VF_R.getTFS_MD()[res - 2].getName() + " is referenced");
-                                          //ints = 5(6) // 5 - 1 = 4(CK6) // ref: 
-                                          VF_R.getTFS_MD()[DT.ints[0] - 1].setLocation(270, VF_R.getTFS_MD()[res - 2].getY() + dis);//res - 2
+                  int col = Character.getNumericValue(CK.charAt(1)) - 1;
+                  System.out.println("\t####COL VALUE: " + col + " (CK: " + CK + ")");
+                  //FOCUS TF_5
+                  //forSize = 1
+                  //index = 5
 
-                                          VF_R.getTFS_MU()[DT.ints[0] - 1].setLocation(296, VF_R.getTFS_MU()[res - 2].getY() + dis);
+                  int d = 5;
+                  for (int b = 0; b < forSize; b++) {
+                        if (col == d) {//FINDING THE CLOCK
+                              int dis = getDistanceGained(index, col + 1);
 
-                                          VF_R.getLB_2DS()[DT.ints[0] - 1].setLocation(328, VF_R.getLB_2DS()[res - 2].getY() + dis);
+                              VF_R.getTFS_MD()[col].setLocation(
+                                      270, VF_R.getTFS_MD()[index - 1].getY() + dis);//res - 2
 
-                                          VF_R.getTFS_SD()[DT.ints[0] - 1].setLocation(340, VF_R.getTFS_SD()[res - 2].getY() + dis);
+                              VF_R.getTFS_MU()[col].setLocation(
+                                      296, VF_R.getTFS_MU()[index - 1].getY() + dis);
 
-                                          VF_R.getTFS_SU()[DT.ints[0] - 1].setLocation(366, VF_R.getTFS_SU()[res - 2].getY() + dis);
-                                    }
-                                    c -= 33;
-                                    d--;
-                              }
+                              VF_R.getLB_2DS()[col].setLocation(
+                                      328, VF_R.getLB_2DS()[index - 1].getY() + dis);
+
+                              VF_R.getTFS_SD()[col].setLocation(
+                                      340, VF_R.getTFS_SD()[index - 1].getY() + dis);
+
+                              VF_R.getTFS_SU()[col].setLocation(
+                                      366, VF_R.getTFS_SU()[index - 1].getY() + dis);
                         }
+                        d--;
                   }
+
             }
       }
 
@@ -198,25 +181,14 @@ public class TF_LST_FL implements FocusListener {
       }
 
       public int getDistanceGained(int pointA, int pointB) {
-            int dis = pointB - pointA;
-            if (dis == 4) {
-                  dis = 308;
-            } else if (dis == 3) {
-                  dis = 275;
-            } else if (dis == 2) {
-                  dis = 242;
-            } else if (dis == 1) {
-                  dis = 209;
+            int disP = pointB - pointA;
+            int dis = 209;
+            for (int a = 0; a < DT.maxColumns - 1; a++) {
+                  if (disP == a + 1) {
+                        dis = dis + (33 * a);
+                  }
             }
-            //C2
-            //209 C3
-            //242 C4
-            //275 C5
-            //308 C6
-            //System.out.println("--------------PointA: " + pointA);
-            //System.out.println("--------------PointB: " + pointB);
-            //System.out.println("--------------Distance: " + dis);
-            return dis;
+            return disP;
       }
 
       public int getDistanceLost(int pointA, int pointB) {
@@ -230,73 +202,7 @@ public class TF_LST_FL implements FocusListener {
             } else if (dis == 1) {
                   dis = 33;
             }
-            //C2
-            //33 C3
-            //66 C4
-            //99 C5
-            //132 C6
-            //System.out.println("--------------PointA: " + pointA);
-            //System.out.println("--------------PointB: " + pointB);
-            //System.out.println("--------------Distance: " + dis);
+
             return dis;
       }
-
-      //+++++++++++++++++++++++++++++++++++++
-      /*
-      private void setGraphics(JComponent jc) {
-            //System.out.println("setgraphics");
-            //g2 = (Graphics2D) VF_R.getPL().getGraphics();
-
-            //g2.setColor(Color.RED);
-            //g2.drawRect(jc.getX(), jc.getY(), jc.getWidth() + 2, jc.getHeight() + 2);
-            new Thread() {
-                  @Override
-                  public void run() {
-                        try{
-                              Thread.sleep(70);
-                        }catch(InterruptedException ex){
-                              ex.printStackTrace();
-                        }
-                        //cS = jc;
-                        System.out.println("\npaintComponent");
-                        VF_R.getPL().paintComponents(VF_R.getPL().getGraphics());
-                  }
-            }.start();
-
-      }
-      */
-      //+++++++++++++++++++++++++++++++++++++
-      private void oldState() {
-            /*
-if (tf_6.getBackground().equals(new Color(0, 0, 51))
-                    || tf_6.getBackground().equals(new Color(0, 0, 81))) {
-                  //jPanel1.setPreferredSize(new Dimension(430, 520));
-                  //sc_p1.getVerticalScrollBar().set
-                  if (btn_Show_All.isSelected()) {
-                  } else {
-                        lb_Icon.setVisible(false);
-
-                        sc_6.setLocation(107, tf_6.getY() + 33);
-                        sc_6.setVisible(true);
-                  }
-            }
-             *//*
-            if (tf_6.getBackground().equals(new Color(0, 0, 51))
-                    || tf_6.getBackground().equals(new Color(0, 0, 81))) {
-                  //jPanel1.setPreferredSize(new Dimension(430, 310));
-                  if (btn_Show_All.isSelected()) {
-                  } else {
-                        if (lst_6.getValueIsAdjusting() == true) {
-                        } else {
-                              if (dt.getTabl().equals("NONE")) {
-                              } else {
-                                    lb_Icon.setVisible(true);
-                              }
-                              sc_6.setVisible(false);
-                        }
-                  }
-            }
-             */
-      }
-
 }

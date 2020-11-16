@@ -766,13 +766,13 @@ public class VF_R extends VF_R_DataCom {
                   disLY += 33;
             }
 
-            for (int a = 0; a < DT.maxColumns - 1; a++) {
+            for (int a = 0; a < DT.maxColumns; a++) {
                   scs[a].setSize(290, 170);
 
                   PL_UC.add(scs[a]);
                   PL_UC.add(btns_C[a]);
 
-                  btns_C[a].setLocation(402, tfs[a + 1].getY());
+                  btns_C[a].setLocation(402, tfs[a].getY());
             }
       }
 
