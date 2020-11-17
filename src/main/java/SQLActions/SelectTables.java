@@ -8,6 +8,7 @@ package SQLActions;
 import First.VF_R;
 import MC.DT;
 import MC.Status;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 public class SelectTables implements IActions {
       
       @Override
-      public void beforeQuery() {
+      public void beforeQuery(boolean result) {
             DT.getList_id().clear();
             DT.getList_T().clear();
             DT.getList_Dist1().clear();
@@ -38,15 +39,18 @@ public class SelectTables implements IActions {
             DT.getList_Tabl().add(rs.getString(5));
             DT.getList_Tag().add(rs.getString(6));
             DT.getList_Clock().add(rs.getString(7));
-      }
-
-      @Override
-      public void afterQuery() {
+            
             
       }
 
       @Override
-      public void exception(SQLException ex) {
+      public void afterQuery(String query) {
+            
+      }
+
+      @Override
+      public void exception(SQLException ex, String query) {
+            System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
                   Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectTables: " + ex.toString(), 8000);

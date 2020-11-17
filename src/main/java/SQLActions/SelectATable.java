@@ -8,6 +8,7 @@ package SQLActions;
 import First.VF_R;
 import MC.DT;
 import MC.Status;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 public class SelectATable implements IActions {
 
       @Override
-      public void beforeQuery() {
+      public void beforeQuery(boolean result) {
 
       }
 
@@ -35,12 +36,19 @@ public class SelectATable implements IActions {
       }
 
       @Override
-      public void afterQuery() {
-
+      public void afterQuery(String query) {
+            System.out.println("###AfterQuery: " + query);
+            System.out.println("Table: " + DT.getTable());
+            System.out.println("Dist1: " + DT.getDist1());
+            System.out.println("Dist2: " + DT.getDist2());
+            System.out.println("Tabl: " + DT.getTabl());
+            System.out.println("Tag: " + DT.getTag());
+            System.out.println("Clock: " + DT.getClock());
       }
 
       @Override
-      public void exception(SQLException ex) {
+      public void exception(SQLException ex, String query) {
+            System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectATable: " + ex.toString(), 8000);

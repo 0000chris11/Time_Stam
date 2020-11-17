@@ -47,33 +47,27 @@ public class JTChanged_AL implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
             String ac = evt.getActionCommand();
             if (!ac.equals(DT.getTable().replaceAll("_", " "))) {
-
                   System.out.println(CC.GREEN + "\n MIActionListener STARS" + CC.RESET);
                   boolean change = false;
                   //SAVING PREVIOUS ID
                   DT.setOld_id(DT.getId());
                   DT.bool_Sel = true;
-
+                  //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ resetingAfter");
                   resetingAfter();
                   VF_R.getMI_DeleteThisTable().setEnabled(true);
 
                   System.out.println("MIActionListener ++++ MCSelectATable");
-
                   if (ac.contains(":")) {
                         ac = ac.substring(ac.indexOf(":") + 2, ac.length());
                         System.out.println("\tcut: " + ac);
                         change = true;
                   }
-                  //System.out.println("JTChanged_AL ++++ Table: " + DT.getTable());
-                  DT.setTable(MText.filterTextName(ac, "ADD"));
-                  //System.out.println("JTChanged_AL ++++ Table: " + dt.getTable());
-                  //mc.SelectATable(DT.getTable());
-                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, DT.getTable(), 
+                  
+                  DT.setTable(MText.filterTextName(ac, "ADD"));//DELETE
+                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, DT.getTable().replaceAll("_", " "), 
                           new SelectATable());
-                  //dt.setTable(mm.filterTextName(ac, "ADD"));
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
                   System.out.println("MIActionListener ++++ Data");
                   System.out.println("\told id = " + DT.getOld_id());
                   System.out.println("\tcurrent id = " + DT.getId());
@@ -86,7 +80,6 @@ public class JTChanged_AL implements ActionListener {
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   if (change == true) {
                         System.out.println("MIActionListener ++++ ChangeDefault");
-
                         mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
                                 DT.getDist2(), DT.getTabl(), DT.getTag(), DT.getClock());
                   }
@@ -96,7 +89,7 @@ public class JTChanged_AL implements ActionListener {
                   ms.selectColumns(DT.getTable(), new SelectColumns());
 
                   System.out.println("MIActionListener ++++ ChangeLB_TF");
-                  cp.changeLB_TF(VF_R.getJT().getColumnCount(), DT.getList_C());
+                  cp.changeLB_TFandSelectData(VF_R.getJT().getColumnCount(), DT.getList_C());
                   VF_R.noRowsDetection();
 
                   System.out.println("MIActionListener ++++ ChangeLSTD");

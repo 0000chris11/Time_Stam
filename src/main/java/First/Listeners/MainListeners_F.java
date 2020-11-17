@@ -132,7 +132,7 @@ public class MainListeners_F {
       private void addFocusListenerToTFS_OLD() {
             //System.out.println("-----On Mehod = tf2 FocusListener count: " + tfs[1].getFocusListeners().length);
             TF_LST_FL TFSFL = new TF_LST_FL();
-            for (int a = 1; a < VF_R.getJTFS().length; a++) {
+            for (int a = 0; a < VF_R.getJTFS().length; a++) {
                   if (VF_R.getJTFS()[a].getFocusListeners().length > 0) {
                         for (int b = 0; b < VF_R.getJTFS()[a].getFocusListeners().length; b++) {
                               if (VF_R.getJTFS()[a].getFocusListeners()[b].toString().contains("TF_LST_FL")) {

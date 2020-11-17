@@ -793,7 +793,7 @@ public class VF extends JFrame {
             //typeDetection();
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println("------ChangeLB_TF");
-            cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
+            cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
             System.out.println("------addKeyListenerToTFS");
 
             System.out.println("------ChangeLSTD");

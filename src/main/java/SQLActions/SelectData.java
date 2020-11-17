@@ -8,7 +8,9 @@ package SQLActions;
 import First.VF_R;
 import MC.DT;
 import MC.Status;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +20,9 @@ import javax.swing.table.DefaultTableModel;
  * @author C0FII
  */
 public class SelectData implements IActions {
-      
+
       private int Cols;
+      private boolean Result;
       private DefaultTableModel tm;
       Object[] row;
 
@@ -28,31 +31,44 @@ public class SelectData implements IActions {
       }
 
       @Override
-      public void beforeQuery() {
+      public void beforeQuery(boolean result) {
+            Result = result;
+            
             tm = (DefaultTableModel) VF_R.getJT().getModel();
             tm.setRowCount(0);
-
+            
             row = new Object[Cols];
       }
 
       @Override
       public void setData(ResultSet rs) throws SQLException {
-            for (int a = 0; a < Cols; a++) {
-                  row[a] = rs.getString(a + 1);
+            if (Result) {
+                  System.out.println("###Rows: YES");
+                  VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
+                  for (int a = 0; a < Cols; a++) {
+                        row[a] = rs.getString(a + 1);
+                  }
+                  tm.addRow(row);
+            }else{
+                  System.out.println("###Rows: NO");
+                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
+                  VF_R.getLB_JT().setText("NO ROWS DETECTED");
+                  VF_R.getLB_JT().setForeground(Color.RED);
+                  
             }
-            tm.addRow(row);
       }
 
       @Override
-      public void afterQuery() {
-
-      }
-
-      @Override
-      public void exception(SQLException ex) {
+      public void exception(SQLException ex, String query) {
+            System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectData: " + ex.toString(), 8000);
+                    "SelectData: " + ex.toString(), 8000);
+      }
+
+      @Override
+      public void afterQuery(String string) {
+
       }
 
 }

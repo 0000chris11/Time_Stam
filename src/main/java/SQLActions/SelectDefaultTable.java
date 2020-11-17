@@ -6,6 +6,7 @@
 package SQLActions;
 
 import MC.DT;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import java.sql.SQLException;
 public class SelectDefaultTable implements IActions {
 
       @Override
-      public void beforeQuery() {
+      public void beforeQuery(boolean result) {
 
       }
 
@@ -31,16 +32,21 @@ public class SelectDefaultTable implements IActions {
             DT.setTabl(rs.getString(5));
             DT.setTag(rs.getString(6));
             DT.setClock(rs.getString(7));
+            //GETTING NULLS FROM RESULTSET
       }
 
       @Override
-      public void afterQuery() {
-            
-      }
-
-      @Override
-      public void exception(SQLException sqle) {
+      public void exception(SQLException sqle, String query) {
+            System.out.println(CC.RED + query + CC.RESET);
             sqle.printStackTrace();
+      }
+
+      @Override
+      public void afterQuery(String string) {
+            System.out.println("###AfterQuery");
+            System.out.println("Dist1: " + DT.getDist1());
+            System.out.println("Dist2: " + DT.getDist2());
+            System.out.println("Clock: " + DT.getClock());
       }
 
 }

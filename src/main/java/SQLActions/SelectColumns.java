@@ -8,6 +8,7 @@ package SQLActions;
 import First.VF_R;
 import MC.DT;
 import MC.Status;
+import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ import javax.swing.table.TableModel;
 public class SelectColumns implements IActions {
 
       @Override
-      public void beforeQuery() {
+      public void beforeQuery(boolean result) {
             DT.getList_C().clear();
             DT.getList_TP().clear();
             DT.getList_NL().clear();
@@ -35,7 +36,7 @@ public class SelectColumns implements IActions {
       }
 
       @Override
-      public void afterQuery() {
+      public void afterQuery(String query) {
             DefaultTableModel tm = new DefaultTableModel();
             VF_R.getJT().setModel(tm);
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -49,7 +50,7 @@ public class SelectColumns implements IActions {
                   //DT.getDTMS()[a + 2].setRowCount((0));
                   
             }
-
+            
             for (int a = 0; a < DT.getList_C().size(); a++) {
                   for (int b = 0; b < DT.maxColumns; b++) {
                         if (DT.getList_C().size() == b + 1) {
@@ -62,7 +63,8 @@ public class SelectColumns implements IActions {
       }
 
       @Override
-      public void exception(SQLException ex) {
+      public void exception(SQLException ex, String query) {
+            System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectColumns: " + ex.toString(), 8000);

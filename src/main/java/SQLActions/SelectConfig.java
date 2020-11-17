@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class SelectConfig implements IActions {
 
       @Override
-      public void beforeQuery() {
+      public void beforeQuery(boolean result) {
             DT.getList_TC().clear();
             DT.getList_BL().clear();
             System.out.println(CC.CYAN + "SELECT" + CC.RESET);
@@ -34,16 +34,18 @@ public class SelectConfig implements IActions {
             DT.getList_BL().add(rs.getBoolean(3));
       }
 
-      @Override
-      public void afterQuery() {
-            
-      }
 
       @Override
-      public void exception(SQLException ex) {
+      public void exception(SQLException ex, String query) {
+            System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
                   Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectConfig: " + ex.toString(), 8000);
+      }
+
+      @Override
+      public void afterQuery(String string) {
+            
       }
 
 }

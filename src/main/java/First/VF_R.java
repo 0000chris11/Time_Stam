@@ -54,6 +54,7 @@ import static First.VF_R_DataCom.PL_U;
 import static First.VF_R_DataCom.SPL_SUB;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
+import org.apache.commons.lang3.SerializationUtils;
 
 /**
  *
@@ -641,14 +642,15 @@ public class VF_R extends VF_R_DataCom {
                   lb_2ds[a].setVisible(false);
             }
             for (int a = 0; a < DT.maxColumns; a++) {
-                  for (int b = 0; b < DT.maxColumns; b++) {
-                        clocks[a].add(tfs_MD[b]);
-                        clocks[a].add(tfs_MU[b]);
-                        clocks[a].add(lb_2ds[b]);
-                        clocks[a].add(tfs_SD[b]);
-                        clocks[a].add(tfs_SU[b]);
-                  }
-                  clocks[a].setSize(130, tf_h);
+
+                  clocks[a].add(SerializationUtils.clone(tfs_MD[a]));
+                  clocks[a].add(SerializationUtils.clone(tfs_MU[a]));
+                  clocks[a].add(SerializationUtils.clone(lb_2ds[a]));
+                  clocks[a].add(SerializationUtils.clone(tfs_SD[a]));
+                  clocks[a].add(SerializationUtils.clone(tfs_SU[a]));
+
+                  clocks[a].setSize(130, tf_h + 6);
+                  clocks[a].getComponent(2).setMinimumSize(new Dimension(10, tf_h + 6));
             }
       }
 
@@ -875,6 +877,10 @@ public class VF_R extends VF_R_DataCom {
             if (getDefault == true) {
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   DT.setTable(ms.selectValueFromTable(DT.defautlTable, DT.defaultColumn, 1).toString());
+                  /*
+                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, DT.getTable(), 
+                          new SelectATable());
+                   */
                   ms.selectRowFromTable(DT.mainTable, DT.mainColumn,
                           DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
             }
@@ -889,7 +895,7 @@ public class VF_R extends VF_R_DataCom {
             ms.selectColumns(DT.getTable(), new SelectColumns());
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
-            cp.changeLB_TF(JT.getColumnCount(), DT.getList_C());
+            cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
             noRowsDetection();
 
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
@@ -939,7 +945,7 @@ public class VF_R extends VF_R_DataCom {
                   public void run() {
                         VF_R vf = new VF_R();
                         vf.getJF().setVisible(true);
-                        
+
                         SPL.setDividerLocation(0.4);
                         //SPL.revalidate();
                         //SPL.repaint();

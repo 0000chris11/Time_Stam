@@ -6,6 +6,7 @@
 package Others;
 
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
@@ -14,7 +15,7 @@ import javax.swing.text.DocumentFilter;
  *
  * @author Christopher
  */
-public class LimitTextD extends DocumentFilter {
+public class LimitTextD extends DocumentFilter implements Serializable{
 
       private int Limit = 0;
       private String Op = "E";

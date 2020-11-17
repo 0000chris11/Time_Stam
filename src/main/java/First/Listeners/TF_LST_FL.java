@@ -64,24 +64,22 @@ public class TF_LST_FL implements FocusListener {
             VF_R.getJSCS()[res - 1].setVisible(true);
       }
 
-      private void focusLostFor(int lst_sc, int forSize) {
-            if (VF_R.getJLSTS()[lst_sc].getValueIsAdjusting() == true) {// = 0
+      private void focusLostFor(int index, int forSize) {
+            if (VF_R.getJLSTS()[index].getValueIsAdjusting() == true) {// = 0
             } else {
                   if (!DT.getTabl().equals("NONE")) {
                         VF_R.getLB_Icon().setVisible(true);
                   }
 
-                  VF_R.getJSCS()[lst_sc].setVisible(false);
+                  VF_R.getJSCS()[index].setVisible(false);
                   if (forSize != 0) {
                         int b = 33;
                         int r = getNumToSum(forSize);
                         for (int a = 0; a < forSize; a++) {// 4 to 3
 
                               VF_R.getJLBS()[a + r].setLocation(6, VF_R.getJLBS()[r - 1].getY() + b);
-                              // 4 - 3 = 1
                               VF_R.getJTFS()[a + r].setLocation(107, VF_R.getJTFS()[r - 1].getY() + b);
-
-                              VF_R.getBTNS_C()[a + (r - 1)].setLocation(402, VF_R.getBTNS_C()[r - 2].getY() + b);
+                              VF_R.getBTNS_C()[a + r].setLocation(402, VF_R.getBTNS_C()[r - 1].getY() + b);
 
                               b += 33;
                         }
@@ -106,8 +104,10 @@ public class TF_LST_FL implements FocusListener {
                   int d = 5;
                   for (int b = 0; b < forSize; b++) {
                         if (col == d) {//FINDING THE CLOCK
-                              int dis = getDistanceGained(index, col + 1);
+                              int dis = getDistance(index, col + 1, 209);
 
+                              VF_R.getClocks()[col].setLocation(270, VF_R.getTFS_MD()[index - 1].getY() + dis);
+                              /*
                               VF_R.getTFS_MD()[col].setLocation(
                                       270, VF_R.getTFS_MD()[index - 1].getY() + dis);//res - 2
 
@@ -122,6 +122,7 @@ public class TF_LST_FL implements FocusListener {
 
                               VF_R.getTFS_SU()[col].setLocation(
                                       366, VF_R.getTFS_SU()[index - 1].getY() + dis);
+                              */
                         }
                         d--;
                   }
@@ -129,80 +130,68 @@ public class TF_LST_FL implements FocusListener {
             }
       }
 
-      private void ClockFocusLost(int forSize, int res) {
+      private void ClockFocusLost(int forSize, int index) {
             String CK = DT.getClock();
             if (!CK.equals("NONE")) {
-                  DT.chars[0] = CK.charAt(1);
-                  DT.strings[0] = Character.toString(DT.chars[0]);
-                  DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 4 TO 3
+                  //DT.chars[0] = CK.charAt(1);
+                  //DT.strings[0] = Character.toString(DT.chars[0]);
+                  //DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 4 TO 3
+
+                  int col = Character.getNumericValue(CK.charAt(1)) - 1;
+                  System.out.println("\t####COL VALUE: " + col + " (CK: " + CK + ")");
 
                   //System.out.println("\tClockFocusLost");
-                  for (int a = 0; a < 4; a++) {
-                        if (forSize == (a + 1)) {
-                              //System.out.println("\t\tFocus on TF_" + (6 - (a + 1)));
-                              int PA = 6 - (a + 1);
-                              int d = 5;
-                              for (int b = 0; b < (a + 1); b++) {
-                                    if (DT.ints[0] == d) {
-                                          int dis = getDistanceLost(PA, 1 + d);
-                                          //System.out.println("\t\tCK is on: C" + (1 + d));
-                                          VF_R.getTFS_MD()[DT.ints[0] - 1].setLocation(270, VF_R.getTFS_MD()[res - 2].getY() + dis);//5
+                  int d = 5;
+                  for (int b = 0; b < forSize; b++) {
+                        if (col == d) {
+                              int dis = getDistance(index, col + 1, 33);
+                              //System.out.println("\t\tCK is on: C" + (1 + d));
+                              VF_R.getClocks()[col].setLocation(
+                                      270, VF_R.getTFS_MD()[index - 1].getY() + dis);
+                              /*
+                              VF_R.getTFS_MD()[col].setLocation(
+                                      270, VF_R.getTFS_MD()[index - 1].getY() + dis);//5
 
-                                          VF_R.getTFS_MU()[DT.ints[0] - 1].setLocation(296, VF_R.getTFS_MU()[res - 2].getY() + dis);
+                              VF_R.getTFS_MU()[col].setLocation(
+                                      296, VF_R.getTFS_MU()[index - 1].getY() + dis);
 
-                                          VF_R.getLB_2DS()[DT.ints[0] - 1].setLocation(328, VF_R.getLB_2DS()[res - 2].getY() + dis);
+                              VF_R.getLB_2DS()[col].setLocation(
+                                      328, VF_R.getLB_2DS()[index - 1].getY() + dis);
 
-                                          VF_R.getTFS_SD()[DT.ints[0] - 1].setLocation(340, VF_R.getTFS_SD()[res - 2].getY() + dis);
+                              VF_R.getTFS_SD()[col].setLocation(
+                                      340, VF_R.getTFS_SD()[index - 1].getY() + dis);
 
-                                          VF_R.getTFS_SU()[DT.ints[0] - 1].setLocation(366, VF_R.getTFS_SU()[res - 2].getY() + dis);
-                                    }
-                                    d--;
-                              }
+                              VF_R.getTFS_SU()[col].setLocation(
+                                      366, VF_R.getTFS_SU()[index - 1].getY() + dis);
+                              */
                         }
+                        d--;
                   }
 
             }
       }
-
+      //*++++++++++++++++++++++++++++++++++++++++++++++++++
       private int getNumToSum(int num) {
-            int res = -1;
-            if (num == 4) {//TF_2
-                  res = 2;
-            } else if (num == 3) {//TF_3
-                  res = 3;
-            } else if (num == 2) {//TF_4
-                  res = 4;
-            } else if (num == 1) {//TF_5
-                  res = 5;
-            } else if (num == 0) {
-                  res = 6;
+            int returnValue = -1;
+            int res = DT.maxColumns - 1;
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (num == a) {
+                        returnValue = res;
+                  }
+                  res--;
             }
-            return res;
+
+            return returnValue;
       }
 
-      public int getDistanceGained(int pointA, int pointB) {
+      public int getDistance(int pointA, int pointB, int initValue) {
             int disP = pointB - pointA;
-            int dis = 209;
+            int dis = initValue;
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (disP == a + 1) {
                         dis = dis + (33 * a);
                   }
             }
             return disP;
-      }
-
-      public int getDistanceLost(int pointA, int pointB) {
-            int dis = pointB - pointA;
-            if (dis == 4) {
-                  dis = 132;
-            } else if (dis == 3) {
-                  dis = 99;
-            } else if (dis == 2) {
-                  dis = 66;
-            } else if (dis == 1) {
-                  dis = 33;
-            }
-
-            return dis;
       }
 }

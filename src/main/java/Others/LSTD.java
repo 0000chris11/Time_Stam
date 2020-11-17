@@ -4,6 +4,7 @@ import First.VF_R;
 import MC.DT;
 import Threads.Threads;
 import MC.MakeCon;
+import com.cofii.myInterfaces.IActions;
 import com.cofii.myMethods.MList;
 import com.cofii.myMethods.MText;
 import java.awt.Color;
@@ -32,6 +33,7 @@ public class LSTD {
 
       public void changeLSTD(String table, String D1, String D2, String TB, String TG1, 
               String CK) {
+            
             DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
             System.out.println("\tTable: " + table);
             System.out.println("\tD1: " + D1);
@@ -115,34 +117,44 @@ public class LSTD {
 
       private void changeCK(String CK) {
             if (!CK.equals("NONE")) {
-                  DT.chars[0] = CK.charAt(1);// COL NUM
-                  DT.strings[0] = Character.toString(DT.chars[0]);
-                  DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 6 IS 5
+                  //DT.chars[0] = CK.charAt(1);// COL NUM
+                  //DT.strings[0] = Character.toString(DT.chars[0]);
+                  //DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 6 IS 5
+                  int col = Character.getNumericValue(CK.charAt(1)) - 1;
+                  System.out.println("\t####COL VALUE: " + col + " (CK: " + CK + ")");
 
-                  for (int a = 1; a < VF_R.getJTFS().length; a++) {
-                        if (a == DT.ints[0]) {
-                              if (VF_R.getJTFS()[DT.ints[0]].getWidth() == 290) {
-                                    VF_R.getJTFS()[DT.ints[0]].setSize(VF_R.getJTFS()[DT.ints[0]].getWidth() - 130,
-                                            VF_R.getJTFS()[DT.ints[0]].getHeight());
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        if (a == col) {
+                              System.out.println("\t\t###a: " + col);
+                              if (VF_R.getJTFS()[a].getWidth() == 290) {
+                                    VF_R.getJTFS()[a].setSize(VF_R.getJTFS()[a].getWidth() - 130,
+                                            VF_R.getJTFS()[a].getHeight());
                               }
-                              VF_R.getTFS_MD()[DT.ints[0] - 1].setVisible(true);
-                              VF_R.getTFS_MU()[DT.ints[0] - 1].setVisible(true);
-                              VF_R.getTFS_SD()[DT.ints[0] - 1].setVisible(true);
-                              VF_R.getTFS_SU()[DT.ints[0] - 1].setVisible(true);
-                              VF_R.getLB_2DS()[DT.ints[0] - 1].setVisible(true);
+                              
+                              VF_R.getClocks()[a].setVisible(true);
+                              /*
+                              VF_R.getTFS_MD()[a].setVisible(true);
+                              VF_R.getTFS_MU()[a].setVisible(true);
+                              VF_R.getTFS_SD()[a].setVisible(true);
+                              VF_R.getTFS_SU()[a].setVisible(true);
+                              VF_R.getLB_2DS()[a].setVisible(true);
+                              */
                         } else {
                               VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[a].getHeight());
 
-                              VF_R.getTFS_MD()[a - 1].setVisible(false);
-                              VF_R.getTFS_MU()[a - 1].setVisible(false);
-                              VF_R.getTFS_SD()[a - 1].setVisible(false);
-                              VF_R.getTFS_SU()[a - 1].setVisible(false);
-                              VF_R.getLB_2DS()[a - 1].setVisible(false);
+                              VF_R.getClocks()[a].setVisible(false);
+                              /*
+                              VF_R.getTFS_MD()[a].setVisible(false);
+                              VF_R.getTFS_MU()[a].setVisible(false);
+                              VF_R.getTFS_SD()[a].setVisible(false);
+                              VF_R.getTFS_SU()[a].setVisible(false);
+                              VF_R.getLB_2DS()[a].setVisible(false);
+                              */
                         }
                   }
             } else {
                   for (int a = 0; a < DT.maxColumns; a++) {
-                        VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[1].getHeight());
+                        VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[a].getHeight());
                         VF_R.getTFS_MD()[a].setVisible(false);
                         VF_R.getTFS_MU()[a].setVisible(false);
                         VF_R.getTFS_SD()[a].setVisible(false);

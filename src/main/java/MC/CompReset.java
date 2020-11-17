@@ -21,7 +21,7 @@ public class CompReset {
       MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
 
-      public void changeLB_TF(int cc, ArrayList<String> listC) {
+      public void changeLB_TFandSelectData(int cc, ArrayList<String> listC) {
             System.out.println("\tColumnCount: " + cc);
 
             String[] cols = new String[listC.size()];//TEXT FOR LABELS
@@ -57,7 +57,7 @@ public class CompReset {
                         for (int b = 0; b < DT.maxColumns - (a + 1); b++) {//4
                               VF_R.getJLBS()[b + (1 + a)].setVisible(false);
                               VF_R.getJTFS()[b + (1 + a)].setVisible(false);
-                              VF_R.getBTNS_C()[b + (0 + a)].setVisible(false);
+                              VF_R.getBTNS_C()[b + (1 + a)].setVisible(false);
                         }
 
                         //mc.SelectData(a + 1, DT.getTable());
