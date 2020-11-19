@@ -12,6 +12,7 @@ import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,12 +21,12 @@ import java.sql.SQLException;
 public class SelectATable implements IActions {
 
       @Override
-      public void beforeQuery(boolean result) {
+      public void beforeQuery() {
 
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs) throws SQLException{
             DT.setId(rs.getString(1));
             DT.setTable(rs.getString(2));
             DT.setDist1(rs.getString(3));
@@ -36,7 +37,7 @@ public class SelectATable implements IActions {
       }
 
       @Override
-      public void afterQuery(String query) {
+      public void afterQuery(String query, boolean rsValue) {
             System.out.println("###AfterQuery: " + query);
             System.out.println("Table: " + DT.getTable());
             System.out.println("Dist1: " + DT.getDist1());

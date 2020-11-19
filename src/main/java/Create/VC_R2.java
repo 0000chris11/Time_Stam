@@ -158,6 +158,9 @@ public class VC_R2 extends VC_R_DataCom {
             CBType2_IL cbListener2 = new CBType2_IL();
             //ButtonGroup bgRB = new ButtonGroup();
             for (int a = 0; a < panelTypes2.length; a++) {
+                  System.out.println("panelTypes2-0 component " + (a + 1) + ": " + 
+                          panelTypes2[0].getComponent(a).getClass());
+                  /*
                   rbTypes2[a] = (JRadioButton) panelTypes2[a].getComponent(0);
                   combTypes2[a] = (smallCOMBX) panelTypes2[a].getComponent(1);
                   tfsTypes1[a] = (NumberOTF) panelTypes2[a].getComponent(2);
@@ -189,6 +192,7 @@ public class VC_R2 extends VC_R_DataCom {
                   combTypes2[a].setVisible(false);
                   tfsTypes1[a].setVisible(false);
                   tfsTypes2[a].setVisible(false);
+                  */
             }
             //========================================
             for (int a = 0; a < combTypes1.length; a++) {

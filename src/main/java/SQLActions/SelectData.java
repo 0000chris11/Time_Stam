@@ -13,6 +13,7 @@ import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +23,6 @@ import javax.swing.table.DefaultTableModel;
 public class SelectData implements IActions {
 
       private int Cols;
-      private boolean Result;
       private DefaultTableModel tm;
       Object[] row;
 
@@ -31,31 +31,21 @@ public class SelectData implements IActions {
       }
 
       @Override
-      public void beforeQuery(boolean result) {
-            Result = result;
-            
+      public void beforeQuery() {
             tm = (DefaultTableModel) VF_R.getJT().getModel();
             tm.setRowCount(0);
-            
+
             row = new Object[Cols];
       }
 
       @Override
       public void setData(ResultSet rs) throws SQLException {
-            if (Result) {
-                  System.out.println("###Rows: YES");
-                  VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
-                  for (int a = 0; a < Cols; a++) {
-                        row[a] = rs.getString(a + 1);
-                  }
-                  tm.addRow(row);
-            }else{
-                  System.out.println("###Rows: NO");
-                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
-                  VF_R.getLB_JT().setText("NO ROWS DETECTED");
-                  VF_R.getLB_JT().setForeground(Color.RED);
-                  
+            for (int a = 0; a < Cols; a++) {
+                  row[a] = rs.getString(a + 1);
             }
+
+            tm.addRow(row);
+
       }
 
       @Override
@@ -67,8 +57,17 @@ public class SelectData implements IActions {
       }
 
       @Override
-      public void afterQuery(String string) {
+      public void afterQuery(String string, boolean rsValue) {
+            if (rsValue) {
+                  System.out.println("###Rows: YES");
 
+                  VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
+            } else {
+                  System.out.println("###Rows: NO");
+                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
+                  VF_R.getLB_JT().setText("NO ROWS DETECTED");
+                  VF_R.getLB_JT().setForeground(Color.RED);
+            }
       }
 
 }

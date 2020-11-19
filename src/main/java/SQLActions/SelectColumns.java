@@ -12,6 +12,7 @@ import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -22,7 +23,7 @@ import javax.swing.table.TableModel;
 public class SelectColumns implements IActions {
 
       @Override
-      public void beforeQuery(boolean result) {
+      public void beforeQuery() {
             DT.getList_C().clear();
             DT.getList_TP().clear();
             DT.getList_NL().clear();
@@ -36,7 +37,7 @@ public class SelectColumns implements IActions {
       }
 
       @Override
-      public void afterQuery(String query) {
+      public void afterQuery(String query, boolean rsValue) {
             DefaultTableModel tm = new DefaultTableModel();
             VF_R.getJT().setModel(tm);
             for (int a = 0; a < DT.maxColumns; a++) {

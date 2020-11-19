@@ -164,11 +164,9 @@ public class Threads {
                         DT.getList_newIcon().clear();
                         DT.getList_cutUrl().clear();
                         //-------------------------------------------------------------------------------
-                        DT.chars[0] = TB.charAt(1);
-                        DT.strings[0] = Character.toString(DT.chars[0]);
-                        DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;
-
-                        DT.cols[0] = DT.getList_C().get(DT.ints[0]);
+                        int col = Character.getNumericValue(TB.charAt(1)) - 1;
+                        
+                        DT.cols[0] = DT.getList_C().get(col);//UNUSED?
                         //++++++++++++++++++++++++++++++++++++++++++++++++++++++
                         Object data;
                         String textIcon = "ERROR";
@@ -178,11 +176,12 @@ public class Threads {
                         for (int a = 0; a < VF_R.getJT().getRowCount(); a++) {
                               VF_R.getJPB().setValue((a + 1));
 
-                              data = VF_R.getJT().getValueAt(a, DT.ints[0]);
+                              data = VF_R.getJT().getValueAt(a, col);
                               if (data.toString().contains("; ")) {
 
                                     textIcon = data.toString();
-                                    textIcon = DT.IconURL + textIcon.substring(textIcon.indexOf(";") + 2, textIcon.length()) + ".jpg";
+                                    textIcon = DT.IconURL + textIcon.substring(
+                                            textIcon.indexOf(";") + 2, textIcon.length()) + ".jpg";
                                     textUrl = textIcon;
 
                               } else {

@@ -12,6 +12,7 @@ import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,7 +21,7 @@ import java.sql.SQLException;
 public class SelectConfig implements IActions {
 
       @Override
-      public void beforeQuery(boolean result) {
+      public void beforeQuery() {
             DT.getList_TC().clear();
             DT.getList_BL().clear();
             System.out.println(CC.CYAN + "SELECT" + CC.RESET);
@@ -28,8 +29,6 @@ public class SelectConfig implements IActions {
 
       @Override
       public void setData(ResultSet rs) throws SQLException {
-            System.out.println("\t" + rs.getBoolean(3));
-            
             DT.getList_TC().add(rs.getString(2));
             DT.getList_BL().add(rs.getBoolean(3));
       }
@@ -44,7 +43,7 @@ public class SelectConfig implements IActions {
       }
 
       @Override
-      public void afterQuery(String string) {
+      public void afterQuery(String string, boolean rsValue) {
             
       }
 

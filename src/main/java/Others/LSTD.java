@@ -51,7 +51,7 @@ public class LSTD {
                   VF_R.getLB_Icon().setIcon(null);
                   VF_R.getLB_Icon().setText(null);
                   VF_R.getLB_Icon().setVisible(false);
-            } else if (TB.contains("C")) {
+            } else if (TB.contains("C")) {//IMAGE
                   //System.out.println(CC.RED + "TEST: "+ TB + CC.RESET);
                   VF_R.getLB_Icon().setText("Loading");
                   VF_R.getJT().setEnabled(false);
@@ -177,10 +177,7 @@ public class LSTD {
                         //System.out.println("\t\t" + filter + " at X" + (a + 1) + " (" + FL + ")");
                         int d = 2;
                         for (int b = 0; b < a + 1; b++) {
-                              DT.chars[b] = FL.charAt(FL.indexOf(":") + d);
-                              //System.out.println("\t\t\tdt.chars[b]: " + DT.chars[b]);
-                              DT.strings[b] = Character.toString(DT.chars[b]);
-                              DT.ints[b] = Integer.parseInt(DT.strings[b]) - 1;
+                              DT.ints[b] = Character.getNumericValue(FL.charAt(FL.indexOf(":") + d)) - 1;
                               DT.cols[b] = DT.getList_C().get(DT.ints[b]);
                               d += 2;
                         }
@@ -193,9 +190,8 @@ public class LSTD {
                               int c = 4;
                               int e = 0;
                               for (int b = a + 1; b < (a + 1) * 2; b++) {
-                                    DT.chars[b] = FL.charAt(FL.indexOf(":") + c);//4-6-8-12 -- 4-8-12-16                                   
-                                    DT.strings[b] = Character.toString(DT.chars[b]);
-                                    DT.ints[b] = Integer.parseInt(DT.strings[b]) - 1;
+                                    //4-6-8-12 -- 4-8-12-16        
+                                    DT.ints[b] = Character.getNumericValue(FL.charAt(FL.indexOf(":") + c)) - 1;
                                     DT.cols[b] = DT.getList_C().get(DT.ints[b]);
                                     c += 4;
 

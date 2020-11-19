@@ -356,9 +356,7 @@ public class VF_R extends VF_R_DataCom {
             PL_B.setBackground(Color.BLACK);
             PL_B.add(lb_Icon, BorderLayout.CENTER);
             PL_B.add(JPB, BorderLayout.SOUTH);
-
-            //PL_B+++++++++++++++++++++++++++++++++++++++++
-            PL_B.add(lb_Icon);
+            //+++++++++++++++++++++++++++++++++++++++++
             lb_Icon.setPreferredSize(new Dimension(225, 255));
             lb_Icon.setFont(new Font("Dialog", Font.PLAIN, 24));
             lb_Icon.setForeground(Color.WHITE);
@@ -366,7 +364,6 @@ public class VF_R extends VF_R_DataCom {
             lb_Icon.setVerticalTextPosition(0);
             lb_Icon.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 
-            PL_B.add(JPB);
             JPB.setMaximumSize(new Dimension(Short.MAX_VALUE, 26));
             JPB.setBackground(Color.BLACK);
             JPB.setForeground(Color.RED);
@@ -550,7 +547,8 @@ public class VF_R extends VF_R_DataCom {
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
             lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
-            setLB_JTToCenter(lb_JT, sc_JT);
+            
+            //setLB_JTToCenter(lb_JT, sc_JT);
       }
 
       public static void noRowsDetection() {
@@ -940,6 +938,17 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("Table: " + dt.getTable());
       }
 
+      public static void updateSplits(){
+            SwingUtilities.invokeLater(new Runnable() {
+                  @Override
+                  public void run() {
+                        SPL.setDividerLocation(0.4);
+                        SPL_SUB.setDividerLocation(0.6);
+                  }
+                  
+            });
+      }
+      
       public static void main(String[] args) {
             SwingUtilities.invokeLater(new Runnable() {
                   public void run() {

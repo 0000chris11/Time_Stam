@@ -25,6 +25,7 @@ import java.awt.GradientPaint;
 import java.util.EventObject;
 import javax.swing.JProgressBar;
 import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
 import smallComponenets.JPanelGradient;
 import smallComponenets.smallBTN_C;
 
@@ -51,7 +52,7 @@ public class VF_R_DataCom {
       static JProgressBar JPB = new JProgressBar();
       
       static JTable JT = new JTable();
-      static JLabel lb_JT = new JLabel("NO ROWS INSERTED");
+      static JLabel lb_JT = new JLabel("NO ROWS INSERTED", SwingConstants.CENTER);
       static JScrollPane sc_JT = new JScrollPane(JT);
       //============================================================    
       static JPanel p3 = new JPanel();

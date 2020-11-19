@@ -11,6 +11,7 @@ import First.VF_R;
 import MC.DT;
 import com.cofii.myMethods.MTable;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -63,12 +64,8 @@ public class JT_LSL implements ListSelectionListener {
       private void lb_IconChange() {
             if (VF_R.getLB_Icon().isVisible()) {
                   //GET INDEX OF COLUMN FOR ICON RECOG
-                  DT.chars[0] = DT.getTabl().charAt(1);
-                  DT.strings[0] = Character.toString(DT.chars[0]);
-                  DT.ints[0] = Integer.parseInt(DT.strings[0]);
-
                   int row = VF_R.getJT().getSelectedRow();
-                  int col = DT.ints[0] - 1;
+                  int col = Character.getNumericValue(DT.getTabl().charAt(1)) - 1;
 
                   //MATCH CELL VALUE TO ICON URL NAME
                   int z = 0;
@@ -82,7 +79,8 @@ public class JT_LSL implements ListSelectionListener {
                         if (value.equals(DT.getList_cutUrl().get(a))) {
                               z = 1;
                               VF_R.getLB_Icon().setText(null);
-                              VF_R.getLB_Icon().setIcon(DT.getList_newIcon().get(a));
+                              ImageIcon ii = DT.getList_newIcon().get(a);
+                              VF_R.getLB_Icon().setIcon(ii);
                         } else {
                               if (z == 1) {
                               } else {

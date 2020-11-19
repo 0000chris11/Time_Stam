@@ -63,9 +63,9 @@ public class JTChanged_AL implements ActionListener {
                         System.out.println("\tcut: " + ac);
                         change = true;
                   }
-                  
+
                   DT.setTable(MText.filterTextName(ac, "ADD"));//DELETE
-                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, DT.getTable().replaceAll("_", " "), 
+                  ms.selectRowFromTable(DT.mainTable, DT.mainColumn, DT.getTable().replaceAll("_", " "),
                           new SelectATable());
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ Data");
@@ -91,6 +91,8 @@ public class JTChanged_AL implements ActionListener {
                   System.out.println("MIActionListener ++++ ChangeLB_TF");
                   cp.changeLB_TFandSelectData(VF_R.getJT().getColumnCount(), DT.getList_C());
                   VF_R.noRowsDetection();
+                  VF_R.getSPL().setDividerLocation(0.4);
+                  VF_R.getSPL_SUB().setDividerLocation(0.6);
 
                   System.out.println("MIActionListener ++++ ChangeLSTD");
                   lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
@@ -136,6 +138,7 @@ public class JTChanged_AL implements ActionListener {
                   Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                           "This Table is already selected", 3000);
             }
+
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++

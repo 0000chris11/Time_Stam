@@ -10,20 +10,23 @@ import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author C0FII
  */
 public class SelectDefaultTable implements IActions {
-
+      
       @Override
-      public void beforeQuery(boolean result) {
+      public void beforeQuery() {
+
 
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs) throws SQLException{
+            
             DT.setId(rs.getString(1));
             DT.setTable(rs.getString(2));
             DT.setDTable(rs.getString(2));
@@ -42,8 +45,8 @@ public class SelectDefaultTable implements IActions {
       }
 
       @Override
-      public void afterQuery(String string) {
-            System.out.println("###AfterQuery");
+      public void afterQuery(String query, boolean rsValue) {
+            System.out.println("###AfterQuery: " + query);
             System.out.println("Dist1: " + DT.getDist1());
             System.out.println("Dist2: " + DT.getDist2());
             System.out.println("Clock: " + DT.getClock());
