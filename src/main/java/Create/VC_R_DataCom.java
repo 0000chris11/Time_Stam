@@ -57,6 +57,7 @@ public class VC_R_DataCom {
 
       static JLabel lb_ClockLocation = new smallLB("Folder Location:");
       static Box bxClock = new Box(BoxLayout.LINE_AXIS);
+      static JPanel bxClock2 = new JPanel();
       JTextField tfClock = new smallTR_TF();
       JButton btn_ClockLocation = new JButton();
       //++++++++++++++++++++++++++++++++++++++
@@ -109,9 +110,9 @@ public class VC_R_DataCom {
       static JPanel[] panelTypes2 = new JPanel[DT.maxColumns];
       static JRadioButton[] rbTypes2 = new JRadioButton[DT.maxColumns];
       static int rb_Types2Selected = -1;
-      static JComboBox[] combTypes2 = new JComboBox[DT.maxColumns];
-      static JTextField[] tfsTypes1 = new JTextField[DT.maxColumns];
-      static JTextField[] tfsTypes2 = new JTextField[DT.maxColumns];
+      static JComboBox[] combTypes2 = new smallCOMBX[DT.maxColumns];
+      static JTextField[] tfsTypes1 = new NumberOTF[DT.maxColumns];
+      static JTextField[] tfsTypes2 = new NumberOTF[DT.maxColumns];
       static JToggleButton[] btns_Dist = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Dist2 = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Tabl = new smallBTN_TG[DT.maxColumns];

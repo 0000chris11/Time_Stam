@@ -20,7 +20,7 @@ public class CBType1_IL implements ItemListener {
 
       @Override
       public void itemStateChanged(ItemEvent e) {
-            System.out.println("itemStateChanged");
+            //System.out.println("itemStateChanged");
             boolean enabled = false;
             Color foreg = Color.WHITE;
             Color selec = Color.BLUE;

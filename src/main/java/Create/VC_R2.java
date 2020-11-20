@@ -76,13 +76,12 @@ public class VC_R2 extends VC_R_DataCom {
             }
 
             panelType2.setLayout(new BoxLayout(panelType2, BoxLayout.X_AXIS));
+
             panelType2.add(rbType2);
             panelType2.add(combType2);
             panelType2.add(tfType1);
-            //((AbstractDocument) tfType1.getDocument()).setDocumentFilter(new LimitN());
             panelType2.add(tfType2);
             panelType2.add(Box.createGlue());
-            //((AbstractDocument) tfType2.getDocument()).setDocumentFilter(new LimitN());
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -157,14 +156,30 @@ public class VC_R2 extends VC_R_DataCom {
             RBType2_AL rbListener = new RBType2_AL();
             CBType2_IL cbListener2 = new CBType2_IL();
             //ButtonGroup bgRB = new ButtonGroup();
-            for (int a = 0; a < panelTypes2.length; a++) {
-                  System.out.println("panelTypes2-0 component " + (a + 1) + ": " + 
-                          panelTypes2[0].getComponent(a).getClass());
-                  /*
-                  rbTypes2[a] = (JRadioButton) panelTypes2[a].getComponent(0);
-                  combTypes2[a] = (smallCOMBX) panelTypes2[a].getComponent(1);
-                  tfsTypes1[a] = (NumberOTF) panelTypes2[a].getComponent(2);
-                  tfsTypes2[a] = (NumberOTF) panelTypes2[a].getComponent(3);
+            
+            JComponent[] pt2 = new JComponent[4];
+
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  System.out.println("################## " + (a + 1));
+                  int count = 0;
+                  int countR = 0;
+                  for (int b = 0; b < pt2.length + 1; b++) {
+                        System.out.println("\t" + panelTypes2[a].getComponent(b).getClass().toString());
+                        if (!panelTypes2[a].getComponent(b).getClass().toString().contains("Filler")) {
+                              if (panelTypes2[a].getComponent(b).getClass().toString().contains("Radio")) {
+                                    countR++;
+                              }
+                              if (countR <= 1) {
+                                    pt2[count] = (JComponent) panelTypes2[a].getComponent(b);
+                                    System.out.println("\t\tC" + count + ": " + pt2[count++].getClass());
+                              }
+                        }
+                  }
+
+                  rbTypes2[a] = (JRadioButton) pt2[0];
+                  combTypes2[a] = (smallCOMBX) pt2[1];
+                  tfsTypes1[a] = (NumberOTF) pt2[2];
+                  tfsTypes2[a] = (NumberOTF) pt2[3];
                   //++++++++++++++++++++++++++++++++++++++++++++++++
                   ((AbstractDocument) tfsTypes1[a].getDocument()).setDocumentFilter(new LimitN());
                   ((AbstractDocument) tfsTypes2[a].getDocument()).setDocumentFilter(new LimitN());
@@ -192,7 +207,7 @@ public class VC_R2 extends VC_R_DataCom {
                   combTypes2[a].setVisible(false);
                   tfsTypes1[a].setVisible(false);
                   tfsTypes2[a].setVisible(false);
-                  */
+
             }
             //========================================
             for (int a = 0; a < combTypes1.length; a++) {
@@ -318,20 +333,20 @@ public class VC_R2 extends VC_R_DataCom {
             lb_ClockLocation.setForeground(Color.YELLOW.darker());
             //lb_ClockLocation.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
 
-            JPR.add(bxClock);
-            bxClock.setMinimumSize(new Dimension(100, 27));
-            bxClock.add(tfClock);
+            JPR.add(bxClock2);
+            bxClock2.setMinimumSize(new Dimension(100, 27));
+            bxClock2.add(tfClock);
             tfClock.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
             tfClock.setMinimumSize(new Dimension(80, 27));
             tfClock.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
-            bxClock.add(btn_ClockLocation);
+            bxClock2.add(btn_ClockLocation);
             btn_ClockLocation.setBorder(BorderFactory.createEmptyBorder());
             btn_ClockLocation.setMinimumSize(new Dimension(20, 27));
             btn_ClockLocation.setPreferredSize(new Dimension(20, 27));
             btn_ClockLocation.setMaximumSize(new Dimension(20, 27));
-            
+
             lb_ClockLocation.setVisible(false);
-            bxClock.setVisible(false);
+            bxClock2.setVisible(false);
 
             //ADDING LB TO ADISP
             ArrayList<JLabel> listLabelsA = new ArrayList<JLabel>();
@@ -368,22 +383,21 @@ public class VC_R2 extends VC_R_DataCom {
             JPBConfig(choice);
             JPRConfig(choice);
 
-            JF.setVisible(true);
             updateSwing();
       }
 
-      private void updateSwing(){
+      private void updateSwing() {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override
                   public void run() {
-                        VC_R2 vc = new VC_R2("CREATE");
-                        vc.JF.setSize(1100, 500);
-                        vc.JF.setAlwaysOnTop(true);
+                        JF.setSize(1100, 500);
+                        JF.setAlwaysOnTop(true);
+                        JF.setVisible(true);
                   }
 
             });
       }
-      
+      /*
       public static void main(String[] args) {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override
@@ -395,4 +409,5 @@ public class VC_R2 extends VC_R_DataCom {
 
             });
       }
+      */
 }

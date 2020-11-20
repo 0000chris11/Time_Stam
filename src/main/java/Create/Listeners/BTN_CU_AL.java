@@ -70,16 +70,17 @@ public class BTN_CU_AL implements ActionListener {
                         String type2 = null;
                         if (colType2 > 0) {
                               type2 = VC_R2.getCombTypes2()[colType2 - 1].getSelectedItem().toString();
+                              //IF IS IDENTITY
                               if(VC_R2.getCombTypes2()[colType2 - 1].getSelectedIndex() == 1){
                                     type2 += "(" + VC_R2.getTFSTypes1()[colType2 - 1].getText()
                                             + ", " + VC_R2.getTFSTypes2()[colType2 - 1].getText() + ")";
                               }
                         }
-                        
+                        //==============================================
                         ms.createTable(table, 
                                 colNames, types, nulls, colType2, type2,
                                 new Update("CreateTable", VC_R2.getLB_Status()));
-                                
+                        //==============================================        
                         //INSERT TABLE ON MAINTTABLES++++++++++++++++++++++++++
                         Object[] newValues = new Object[]{null, table, 
                               VC_R2.getLB_ADisp()[0],//DIST1
@@ -87,10 +88,10 @@ public class BTN_CU_AL implements ActionListener {
                               VC_R2.getLB_ADisp()[2],//TABL
                               VC_R2.getLB_ADisp()[3],//TAG
                               VC_R2.getLB_ADisp()[4]};//CLOCK
-                        
+                        //==============================================
                         ms.insert(DT.mainTable, DT.mainTableColumns, newValues, colType2, 
                                 new Update("INSERT", VC_R2.getLB_Status()));
-                        
+                        //==============================================
                   } else {
                         Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
                                 "Unable to Create Table ->Check For Errors<-", 5000);

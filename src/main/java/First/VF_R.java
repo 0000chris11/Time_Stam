@@ -14,7 +14,6 @@ import MC.MakeCon;
 import MC.Status;
 import First.Listeners.MainListeners_F;
 import First.Listeners.JTChanged_AL;
-import First_Old.CK_FL;
 import com.cofii.myMethods.MText;
 import com.cofii.myClasses.CC;
 import Threads.*;
@@ -54,6 +53,7 @@ import static First.VF_R_DataCom.PL_U;
 import static First.VF_R_DataCom.SPL_SUB;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
+import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationUtils;
 
 /**
@@ -547,7 +547,7 @@ public class VF_R extends VF_R_DataCom {
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
             lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
-            
+
             //setLB_JTToCenter(lb_JT, sc_JT);
       }
 
@@ -567,77 +567,27 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void clockConfig() {
-            int tf_h = tfs[0].getHeight() - 4;
+            int tf_h = tfs[0].getHeight();
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
             Dimension cks = new Dimension(30, tf_h);
             Dimension cks2 = new Dimension(10, tf_h);
-            int tfCW = 160;
 
             for (int a = 0; a < DT.maxColumns; a++) {//a: 0 to 4   b: 1 to 5
                   clocks[a] = new JPanel();
                   PL_UC.add(clocks[a]);
                   clocks[a].setLayout(new BoxLayout(clocks[a], BoxLayout.X_AXIS));
                   clocks[a].setBackground(Color.DARK_GRAY);
-                  clocks[a].setSize(200, tf_h);
-                  clocks[a].setLocation(tfs[a].getX() + tfCW + 4, tfs[a].getY());
+                  clocks[a].setSize(196, tf_h);
+                  clocks[a].setLocation(tfs[a].getX() + 160, tfs[a].getY());
                   //++++++++++++++++++++++++++++++
                   tfs_MD[a] = new JTextField("0");
                   tfs_MU[a] = new JTextField("0");
-                  lb_2ds[a] = new JLabel(":");
+                  lb_2ds[a] = new JLabel(":", SwingConstants.CENTER);
                   tfs_SD[a] = new JTextField("0");
                   tfs_SU[a] = new JTextField("0");
-                  //+++++++++++++++++++++++++++++++++++++++++
-                  tfs_MD[a].setBackground(c[0]);
-                  tfs_MU[a].setBackground(c[0]);
-                  tfs_SD[a].setBackground(c[0]);
-                  tfs_SU[a].setBackground(c[0]);
-                  tfs_MD[a].setFont(FT);
-                  tfs_MU[a].setFont(FT);
-                  tfs_SD[a].setFont(FT);
-                  tfs_SU[a].setFont(FT);
-                  tfs_MD[a].setForeground(c[1]);
-                  tfs_MU[a].setForeground(c[1]);
-                  tfs_SD[a].setForeground(c[1]);
-                  tfs_SU[a].setForeground(c[1]);
-                  tfs_MD[a].setHorizontalAlignment(0);
-                  tfs_MU[a].setHorizontalAlignment(0);
-                  tfs_SD[a].setHorizontalAlignment(0);
-                  tfs_SU[a].setHorizontalAlignment(0);
-                  //++++++++++++++++++++++++++++++++++++++++++
-                  tfs_MD[a].setPreferredSize(cks);
-                  tfs_MD[a].setMaximumSize(cks);
-                  tfs_MU[a].setPreferredSize(cks);
-                  tfs_MU[a].setMaximumSize(cks);
-                  tfs_SD[a].setPreferredSize(cks);
-                  tfs_SD[a].setMaximumSize(cks);
-                  tfs_SU[a].setPreferredSize(cks);
-                  tfs_SU[a].setMaximumSize(cks);
-                  //+++++++++++++++++++++++++++++++++++++
-                  clocks[a].setVisible(false);
-                  //+++++++++++++++++++++++++++++++
-                  ((AbstractDocument) tfs_MD[a].getDocument()).setDocumentFilter(
-                          new LimitTextD("D"));
-                  ((AbstractDocument) tfs_MU[a].getDocument()).setDocumentFilter(
-                          new LimitTextD("U"));
-                  ((AbstractDocument) tfs_SD[a].getDocument()).setDocumentFilter(
-                          new LimitTextD("D"));
-                  ((AbstractDocument) tfs_SU[a].getDocument()).setDocumentFilter(
-                          new LimitTextD("U"));
 
-                  CK_FL CF = new CK_FL();
-                  tfs_MD[a].addFocusListener(CF);
-                  tfs_MU[a].addFocusListener(CF);
-                  tfs_SD[a].addFocusListener(CF);
-                  tfs_SU[a].addFocusListener(CF);
-                  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  lb_2ds[a].setPreferredSize(cks2);
-                  lb_2ds[a].setMaximumSize(cks2);
-                  lb_2ds[a].setFont(FL);
-                  lb_2ds[a].setForeground(Color.WHITE);
-                  lb_2ds[a].setHorizontalTextPosition(0);
-                  lb_2ds[a].setVisible(false);
             }
             for (int a = 0; a < DT.maxColumns; a++) {
 
@@ -647,9 +597,69 @@ public class VF_R extends VF_R_DataCom {
                   clocks[a].add(SerializationUtils.clone(tfs_SD[a]));
                   clocks[a].add(SerializationUtils.clone(tfs_SU[a]));
 
-                  clocks[a].setSize(130, tf_h + 6);
-                  clocks[a].getComponent(2).setMinimumSize(new Dimension(10, tf_h + 6));
+                  clocks[a].setSize(130, tf_h);
+                  clocks[a].setVisible(false);
+                  //++++++++++++++++++++++++++++++++++++++++++++
+                  JTextField MD = (JTextField) clocks[a].getComponent(0);
+                  JTextField MU = (JTextField) clocks[a].getComponent(1);
+                  JLabel LB2D = (JLabel) clocks[a].getComponent(2);
+                  JTextField SD = (JTextField) clocks[a].getComponent(3);
+                  JTextField SU = (JTextField) clocks[a].getComponent(4);
+                  //++++++++++++++++++++++++++++++++++++++++++++
+                  MD.setBackground(new Color(51, 51, 51));
+                  MU.setBackground(new Color(51, 51, 51));
+                  SD.setBackground(new Color(51, 51, 51));
+                  SU.setBackground(new Color(51, 51, 51));
+                  MD.setFont(FT);
+                  MU.setFont(FT);
+                  LB2D.setFont(FT);
+                  SD.setFont(FT);
+                  SU.setFont(FT);
+                  MD.setForeground(Color.WHITE);
+                  MU.setForeground(Color.WHITE);
+                  LB2D.setForeground(Color.WHITE);
+                  SD.setForeground(Color.WHITE);
+                  SU.setForeground(Color.WHITE);
+                  MD.setHorizontalAlignment(0);
+                  MU.setHorizontalAlignment(0);
+                  SD.setHorizontalAlignment(0);
+                  SU.setHorizontalAlignment(0);
+                  //++++++++++++++++++++++++++++++++++++++++++
+                  MD.setPreferredSize(cks);
+                  MD.setMaximumSize(cks);
+                  MU.setPreferredSize(cks);
+                  MU.setMaximumSize(cks);
+                  LB2D.setMinimumSize(new Dimension(16, tf_h));
+                  LB2D.setPreferredSize(new Dimension(16, tf_h));
+                  LB2D.setMaximumSize(new Dimension(16, tf_h));
+                  SD.setPreferredSize(cks);
+                  SD.setMaximumSize(cks);
+                  SU.setPreferredSize(cks);
+                  SU.setMaximumSize(cks);
+                  //+++++++++++++++++++++++++++++++++++++
+                  ((AbstractDocument) MD.getDocument()).setDocumentFilter(
+                          new LimitTextD("D"));
+                  ((AbstractDocument) MU.getDocument()).setDocumentFilter(
+                          new LimitTextD("U"));
+                  ((AbstractDocument) SD.getDocument()).setDocumentFilter(
+                          new LimitTextD("D"));
+                  ((AbstractDocument) SU.getDocument()).setDocumentFilter(
+                          new LimitTextD("U"));
+
+                  //CK_FL CF = new CK_FL();
+                  //MD.addFocusListener(CF);
+                  //MU.addFocusListener(CF);
+                  //SD.addFocusListener(CF);
+                  //SU.addFocusListener(CF);
+                  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                  lb_2ds[a].setPreferredSize(cks2);
+                  lb_2ds[a].setMaximumSize(cks2);
+                  lb_2ds[a].setFont(FL);
+                  lb_2ds[a].setForeground(Color.WHITE);
+                  lb_2ds[a].setHorizontalTextPosition(0);
+                  lb_2ds[a].setVisible(false);
             }
+
       }
 
       private void actionTBComponents() {
@@ -938,17 +948,17 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("Table: " + dt.getTable());
       }
 
-      public static void updateSplits(){
+      public static void updateSplits() {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override
                   public void run() {
                         SPL.setDividerLocation(0.4);
                         SPL_SUB.setDividerLocation(0.6);
                   }
-                  
+
             });
       }
-      
+
       public static void main(String[] args) {
             SwingUtilities.invokeLater(new Runnable() {
                   public void run() {
@@ -958,7 +968,11 @@ public class VF_R extends VF_R_DataCom {
                         SPL.setDividerLocation(0.4);
                         //SPL.revalidate();
                         //SPL.repaint();
-                        SPL_SUB.setDividerLocation(0.6);
+                        if (DT.getTabl().equals("NONE")) {
+                              SPL_SUB.setDividerLocation(1.0);
+                        } else {
+                              SPL_SUB.setDividerLocation(0.6);
+                        }
                         //SPL_SUB.revalidate();
                         //SPL_SUB.repaint();
 

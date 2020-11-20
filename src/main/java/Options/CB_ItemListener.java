@@ -20,7 +20,7 @@ public class CB_ItemListener implements ItemListener {
 
       @Override
       public void itemStateChanged(ItemEvent e) {
-            System.out.println(CC.CYAN + "itemStateChanged" + CC.RESET);
+            //System.out.println(CC.CYAN + "itemStateChanged" + CC.RESET);
             
             
             DefaultMutableTreeNode root

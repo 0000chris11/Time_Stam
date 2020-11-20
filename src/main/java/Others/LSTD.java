@@ -49,10 +49,12 @@ public class LSTD {
             if (TB.equals("NONE")) {
                   //System.out.println("'\nTB = NOTHING");
                   VF_R.getLB_Icon().setIcon(null);
-                  VF_R.getLB_Icon().setText(null);
-                  VF_R.getLB_Icon().setVisible(false);
+                  VF_R.getLB_Icon().setText("No image for col");
+                  VF_R.getLB_Icon().setVisible(true);
+                  VF_R.getSPL_SUB().setDividerLocation(1.0);
             } else if (TB.contains("C")) {//IMAGE
                   //System.out.println(CC.RED + "TEST: "+ TB + CC.RESET);
+                  VF_R.getSPL_SUB().setDividerLocation(0.5);
                   VF_R.getLB_Icon().setText("Loading");
                   VF_R.getJT().setEnabled(false);
                   JTCellRenderer.setForegroundCell(Color.GRAY);
@@ -127,7 +129,7 @@ public class LSTD {
                         if (a == col) {
                               System.out.println("\t\t###a: " + col);
                               if (VF_R.getJTFS()[a].getWidth() == 290) {
-                                    VF_R.getJTFS()[a].setSize(VF_R.getJTFS()[a].getWidth() - 130,
+                                    VF_R.getJTFS()[a].setSize(160,
                                             VF_R.getJTFS()[a].getHeight());
                               }
                               

@@ -37,7 +37,7 @@ public class TFTable_KL_Control implements KeyListener{
             String table = VC_R2.getTF_Title().getText();
             matchBW = MOthers.getContainMatchFromStringToList(table, DT.getBandW());
             //TEST WHEN YOU ACCESS FROM VF_R
-            matchST = MOthers.getContainMatchFromStringToList(table, DT.getList_T());
+            matchST = MOthers.getEqualMatchFromStringToList(table, DT.getList_T());
             
             if(matchBW == true){
                   VC_R2.getTF_Title().setForeground(Color.RED);

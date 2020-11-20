@@ -92,7 +92,6 @@ public class JTChanged_AL implements ActionListener {
                   cp.changeLB_TFandSelectData(VF_R.getJT().getColumnCount(), DT.getList_C());
                   VF_R.noRowsDetection();
                   VF_R.getSPL().setDividerLocation(0.4);
-                  VF_R.getSPL_SUB().setDividerLocation(0.6);
 
                   System.out.println("MIActionListener ++++ ChangeLSTD");
                   lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
