@@ -47,17 +47,19 @@ public class VC_R_DataCom {
       //static JPanel JPC = new JPanelGradient(DT.GP_blackRed);
       static JPanel JPC = new JPanel();
       JScrollPane sc_JPC = new JScrollPane(JPC);
-      JPanel JPB = new JPanel();
+      static JPanel JPB = new JPanel();
       //++++++++++++++++++++++++++++++++++++++
-      JPanel JPR = new JPanelGradient(new Color[]{Color.BLACK, Color.BLUE});
+      static JPanel JPR = new JPanel();
+      static JPanel JPR_U = new JPanelGradient(new Color[]{Color.BLACK, Color.BLUE});
+      static JPanel JPR_B = new JPanel();
       static String[] lb_Disp_textC = new String[]{
-            "Dist:", "NONE", "Dist2:", "NONE", "Tabl:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
+            "Dist:", "NONE", "Dist2:", "NONE", "ImageC:", "NONE", "Tag:", "NONE", "Clock:", "NONE"};
       static JLabel[] lb_TDisp = new JLabel[10];
       static JLabel[] lb_ADisp = new JLabel[5];
 
       static JLabel lb_ClockLocation = new smallLB("Folder Location:");
       static Box bxClock = new Box(BoxLayout.LINE_AXIS);
-      static JPanel bxClock2 = new JPanel();
+      static JPanel boxImageC = new JPanel();
       JTextField tfClock = new smallTR_TF();
       JButton btn_ClockLocation = new JButton();
       //++++++++++++++++++++++++++++++++++++++
@@ -67,7 +69,7 @@ public class VC_R_DataCom {
       //++++++++++++++++++++++++++++++++++++++++++++++
       String[] headers_t = new String[]{
             "Columns", "Name", "Sub", "Add", "Type", "Null", "Type 2",
-            "Dist1", "Dist2", "Tabl", "Tag", "Clock"};
+            "Dist1", "Dist2", "ImageC", "Tag", "Clock"};
       JLabel[] headers = new JLabel[headers_t.length];
 
       static JComponent[][] compsD;
@@ -97,7 +99,7 @@ public class VC_R_DataCom {
 
       static JToggleButton btn_Dist = new smallBTN_TG(DT.GP_celesteWhite);
       static JToggleButton btn_Dist2 = new smallBTN_TG(null);
-      static JToggleButton btn_Tabl = new smallBTN_TG(DT.GP_greenWhite);
+      static JToggleButton btn_ImageC = new smallBTN_TG(DT.GP_greenWhite);
       static JToggleButton btn_Tag = new smallBTN_TG(DT.GP_celesteWhite);
       static JToggleButton btn_Clock = new smallBTN_TG(DT.GP_yellowWhite);
       //++++++++++++++++++++++++++++++++++++++++++++++
@@ -115,10 +117,10 @@ public class VC_R_DataCom {
       static JTextField[] tfsTypes2 = new NumberOTF[DT.maxColumns];
       static JToggleButton[] btns_Dist = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Dist2 = new smallBTN_TG[DT.maxColumns];
-      static JToggleButton[] btns_Tabl = new smallBTN_TG[DT.maxColumns];
-      static int btn_TablSelected = -1;
+      static JToggleButton[] btns_ImageC = new smallBTN_TG[DT.maxColumns];
+      static int btn_ImageCSelected = -1;
       static int btn_ClockSelected = -1;
-      static ButtonGroup tablGroup;
+      static ButtonGroup imageCGroup;
       static ButtonGroup clockGroup;
       static JToggleButton[] btns_Tag = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Clock = new smallBTN_TG[DT.maxColumns];
@@ -126,6 +128,10 @@ public class VC_R_DataCom {
 
       public static JPanel getPC() {
             return JPC;
+      }
+      
+      public static JPanel getPR(){
+            return JPR_U;
       }
 
       public static JComponent[][] getCompsD() {
@@ -146,6 +152,10 @@ public class VC_R_DataCom {
 
       public static Box getBoxClock() {
             return bxClock;
+      }
+      
+      public static JPanel getBoxImageC(){
+            return boxImageC;
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
@@ -210,20 +220,20 @@ public class VC_R_DataCom {
             return btns_Dist2;
       }
 
-      public static JToggleButton[] getBTNS_Tabl() {
-            return btns_Tabl;
+      public static JToggleButton[] getBTNS_ImageC() {
+            return btns_ImageC;
       }
 
-      public static ButtonGroup getTablGroup() {
-            return tablGroup;
+      public static ButtonGroup getImageCGroup() {
+            return imageCGroup;
       }
 
-      public static int getBTN_TablSelected() {
-            return btn_TablSelected;
+      public static int getBTN_ImageCSelected() {
+            return btn_ImageCSelected;
       }
 
-      public static void setBTN_TablSelected(int v) {
-            btn_TablSelected = v;
+      public static void setBTN_ImageCSelected(int v) {
+            btn_ImageCSelected = v;
       }
       
       public static int getRB_Types2Selected(){

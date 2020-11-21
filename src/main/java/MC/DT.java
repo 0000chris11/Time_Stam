@@ -23,7 +23,7 @@ public class DT {
       private static String DTable;
       private static String Dist1;
       private static String Dist2;
-      private static String Tabl;
+      private static String ImageC;
       private static String Tag;
       private static String Clock;
 
@@ -34,7 +34,7 @@ public class DT {
       private static ArrayList<String> list_T = new ArrayList<String>();//TABLES
       private static ArrayList<String> list_Dist1 = new ArrayList<String>();
       private static ArrayList<String> list_Dist2 = new ArrayList<String>();
-      private static ArrayList<String> list_Tabl = new ArrayList<String>();
+      private static ArrayList<String> list_ImageC = new ArrayList<String>();
       private static ArrayList<String> list_Tag = new ArrayList<String>();
       private static ArrayList<String> list_Clock = new ArrayList<String>();
 
@@ -87,7 +87,7 @@ public class DT {
       private static DefaultListModel dm_5 = new DefaultListModel();
       private static DefaultListModel dm_6 = new DefaultListModel();
 
-      private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-","_",  
+      private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-",  
             " TABLE "};
       private static ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
       //++++++++++++++++++++
@@ -135,7 +135,7 @@ public class DT {
       public static final String configColumn = "Value";
       
       public static final String[] mainTableColumns = new String[]{
-      "id", "Table_Names", "Dist1", "Dist2", "Tabl", "Tag1", "Clock"};
+      "id", "Table_Names", "Dist1", "Dist2", "ImageC", "Tag1", "Clock"};
       
       public static final String urlConnection
               = "jdbc:mysql://localhost:3306/"
@@ -206,12 +206,12 @@ public class DT {
             Dist2 = dist2;
       }
 
-      public static String getTabl(){
-            return Tabl;
+      public static String getImageC(){
+            return ImageC;
       }
 
-      public static void setTabl(String tabl) {
-            Tabl = tabl;
+      public static void setImageC(String imagec) {
+            ImageC = imagec;
       }
 
       public static String getTag(){
@@ -257,8 +257,8 @@ public class DT {
             return list_Dist2;
       }
 
-      public static ArrayList<String> getList_Tabl() {
-            return list_Tabl;
+      public static ArrayList<String> getList_ImageC() {
+            return list_ImageC;
       }
 
       public static ArrayList<String> getList_Tag() {

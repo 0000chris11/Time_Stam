@@ -83,7 +83,7 @@ public class Threads {
                         }
 
                         new LSTD().changeLSTD(DT.getTable(), DT.getDist1(),
-                                DT.getDist2(), DT.getTabl(), DT.getTag(),
+                                DT.getDist2(), DT.getImageC(), DT.getTag(),
                                 DT.getClock());
 
                         VF_R.getJT().clearSelection();
@@ -103,7 +103,7 @@ public class Threads {
                               System.out.println("\tV_sb is waiting for \"addThread\" to finish");
                               Thread.sleep(500);
                               addThread.join();
-                              if (!DT.getTabl().contains("NONE")) {
+                              if (!DT.getImageC().contains("NONE")) {
                                     System.out.println("\tV_sb is waiting for \"iconThread\" to finish");
                                     iconThread.join();
                               }
@@ -303,7 +303,7 @@ public class Threads {
                               System.out.println("\tV_sb is waiting");
                               Thread.sleep(500);
                               BMA.getAddThread().join();
-                              if (!dt.getTabl().contains("NONE")) {
+                              if (!dt.getImageC().contains("NONE")) {
                                     iconThread.join();
                               }
                               Thread.sleep(200);

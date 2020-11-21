@@ -13,6 +13,8 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -44,7 +46,7 @@ public class TF_KL_Control implements KeyListener {
 
             }
 
-            ArrayList<Result> resSC = MOthers.getEqualsMatchAndPositionFromArray(
+            ArrayList<Result> resSC = getEqualsMatchAndPositionFromArray(
                     VC_R2.getTFS(), true);
 
             //ArrayList<Integer> A = (ArrayList<Integer>) resSC[1];
@@ -114,4 +116,75 @@ public class TF_KL_Control implements KeyListener {
              */
       }
 
+      //++++++++++++++++++++++++++++++++++++
+      public static ArrayList<Result> getEqualsMatchAndPositionFromArray(
+              JTextField[] array, boolean trim) {
+            boolean match = false;
+
+            ArrayList<Result> res = new ArrayList<Result>();
+            //####################
+            List<JTextField> lis = Arrays.asList(array);
+            ArrayList<JTextField> list = new ArrayList<JTextField>(lis);
+            System.out.println("array length: " + array.length);
+            System.out.println("list size: " + list.size());
+
+            for (int a = 0; a < array.length; a++) {
+                  System.out.println("Element " + (a + 1) + ": " + array[a].getText());
+                  if (!array[a].isVisible()) {
+                        list.remove(a);
+
+                  }
+            }
+            //####################
+
+            for (int a = 0; a < list.size(); a++) {
+                  String text = getStringAdjust(list.get(a).getText());
+                  if (trim == true) {
+                        text = text.trim();
+                  }
+                  for (int b = 0; b < list.size(); b++) {
+                        if (a != b) {
+                              String cont = getStringAdjust(list.get(b).getText()).trim();
+                              if (trim == true) {
+                                    cont = cont.trim();
+                              }
+
+                              System.out.println("####Comparing " + (a + 1) + " & " + (b + 1));
+                              System.out.println("\t####text " + (a + 1) + ": " + text);
+                              System.out.println("\t####cont " + (b + 1) + ": " + cont);
+
+                              if (!text.isEmpty()) {
+                                    if (text.equalsIgnoreCase(cont)) {
+                                          System.out.println("\t\tMATCH");
+                                          match = true;
+                                          res.add(new Result(true, a, b));
+                                    } else {
+                                          if (match != true);
+                                          System.out.println("\t\tUNMATCH");
+                                          res.add(new Result(false, a, b));
+                                    }
+                              } else {
+                                    System.out.println("\t\tUNMATCH");
+                                    match = false;
+                                    res.add(new Result(false, a, b));
+                              }
+                        }
+                  }
+            }
+
+            return res;
+      }
+      
+      private static String getStringAdjust(String text) {
+            text = text.toUpperCase().trim();
+            if (text.contains("_")) {
+                  text = text.replaceAll("_", " ");
+            }
+            /*
+            if(text.contains(" ")){
+                  text = text.replaceAll(" ", "");
+            }
+            */
+            return text;
+      }
 }

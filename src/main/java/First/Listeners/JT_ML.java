@@ -66,7 +66,7 @@ public class JT_ML implements TableModelListener {
                                             DT.getList_C().get(0), DT.getList_R().get(0),
                                             new Update("UpdateRow", VF_R.getLB_Status()));
                                     
-                                    lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
+                                    lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(),
                                             DT.getTag(), DT.getClock());
                                     n_mm.rez(VF_R.getJT(), DT.autoState);
                                     //++++++++++++++++++++++++++++++

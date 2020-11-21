@@ -67,7 +67,7 @@ public class TF_LST_FL implements FocusListener {
       private void focusLostFor(int index, int forSize) {
             if (VF_R.getJLSTS()[index].getValueIsAdjusting() == true) {// = 0
             } else {
-                  if (!DT.getTabl().equals("NONE")) {
+                  if (!DT.getImageC().equals("NONE")) {
                         VF_R.getLB_Icon().setVisible(true);
                   }
 

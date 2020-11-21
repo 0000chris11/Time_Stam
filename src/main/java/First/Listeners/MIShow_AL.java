@@ -38,7 +38,7 @@ public class MIShow_AL implements ActionListener {
                   System.out.println();
                   System.out.println("Dist1: " + DT.getDist1());
                   System.out.println("Dist2: " + DT.getDist2());
-                  System.out.println("Tabl: " + DT.getTabl());
+                  System.out.println("ImageC: " + DT.getImageC());
                   System.out.println("Tag1: " + DT.getTag());
                   System.out.println("Clock: " + DT.getClock());
             } else if (ac.equals("ListD")) {

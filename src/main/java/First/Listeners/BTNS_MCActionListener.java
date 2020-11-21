@@ -105,7 +105,7 @@ public class BTNS_MCActionListener implements ActionListener {
 
             colIndexs.clear();
             new LSTD().changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), 
-                    DT.getTabl(), DT.getTag(), DT.getClock());
+                    DT.getImageC(), DT.getTag(), DT.getClock());
 
             DT.bool_Upd = false;
             System.out.println(CC.GREEN + "\n\tUPDATED DATA" + CC.RESET);
@@ -125,7 +125,7 @@ public class BTNS_MCActionListener implements ActionListener {
 
             VF_R.getJT().clearSelection();
             new LSTD().changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), 
-                    DT.getTabl(), DT.getTag(), DT.getClock());
+                    DT.getImageC(), DT.getTag(), DT.getClock());
 
             //sc_JT.getVerticalScrollBar().setValue(sc_JT.getVerticalScrollBar().getMaximum());
             DT.bool_Del = false;

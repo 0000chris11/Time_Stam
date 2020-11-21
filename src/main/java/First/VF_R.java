@@ -907,7 +907,7 @@ public class VF_R extends VF_R_DataCom {
             noRowsDetection();
 
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
-            lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(), DT.getTag(),
+            lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
                     DT.getClock());
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ SELECT CONFIG" + CC.RESET);
@@ -968,7 +968,7 @@ public class VF_R extends VF_R_DataCom {
                         SPL.setDividerLocation(0.4);
                         //SPL.revalidate();
                         //SPL.repaint();
-                        if (DT.getTabl().equals("NONE")) {
+                        if (DT.getImageC().equals("NONE")) {
                               SPL_SUB.setDividerLocation(1.0);
                         } else {
                               SPL_SUB.setDividerLocation(0.6);

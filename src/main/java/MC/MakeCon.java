@@ -90,28 +90,28 @@ public class MakeCon {
             }
       }
 
-      public boolean InsertTable(String table, String dist, String dist2, String tabl,
+      public boolean InsertTable(String table, String dist, String dist2, String imageC,
               String tag, String clock) {
             System.out.println(CC.YELLOW + "MakeCon ++++ InsertTable" + CC.RESET);
             try{
                   con = DriverManager.getConnection(urlConnection, user, passw);
                   
                   String sql = "INSERT INTO Table_Names "
-                          + "(Table_Names, Dist1, Dist2, Tabl, Tag1, Clock) "
+                          + "(Table_Names, Dist1, Dist2, ImageC, Tag1, Clock) "
                           + "VALUES (?,?,?,?,?,?)";             
                   pstt = con.prepareStatement(sql);
                   
                   System.out.println("\tTable: " + table);
                   System.out.println("\tDist: " + dist);
                   System.out.println("\tDist2: " + dist2);
-                  System.out.println("\tTabl: " + tabl);
+                  System.out.println("\tImageC: " + imageC);
                   System.out.println("\tTag: " + tag);
                   System.out.println("\tClock: " + clock);
                   
                   pstt.setString(1, table);
                   pstt.setString(2, dist);
                   pstt.setString(3, dist2);
-                  pstt.setString(4, tabl);
+                  pstt.setString(4, imageC);
                   pstt.setString(5, tag);
                   pstt.setString(6, clock);
                   
@@ -121,7 +121,7 @@ public class MakeCon {
                         //DT.getList_T().add(table);
                         //DT.getList_Dist1().add(dist);
                         //DT.getList_Dist2().add(dist2);
-                        //DT.getList_Tabl().add(tabl);
+                        //DT.getList_ImageC().add(imageC);
                         //DT.getList_Tag().add(tag);
                         //DT.getList_Clock().add(clock);
                         //ms.selectTables(DT.mainTable, new SelectTables());
@@ -215,7 +215,7 @@ public class MakeCon {
                   DT.getList_T().clear();
                   DT.getList_Dist1().clear();
                   DT.getList_Dist2().clear();
-                  DT.getList_Tabl().clear();
+                  DT.getList_ImageC().clear();
                   DT.getList_Tag().clear();
                   DT.getList_Clock().clear();
 
@@ -224,11 +224,11 @@ public class MakeCon {
                         DT.getList_T().add(rs.getString(2));
                         DT.getList_Dist1().add(rs.getString(3));
                         DT.getList_Dist2().add(rs.getString(4));
-                        DT.getList_Tabl().add(rs.getString(5));
+                        DT.getList_ImageC().add(rs.getString(5));
                         DT.getList_Tag().add(rs.getString(6));
                         DT.getList_Clock().add(rs.getString(7));
                   }
-                  //addItem(DT.getList_id(), dt.getList_T(), dt.getList_Dist1(), dt.getList_Dist2(), dt.getList_Tabl(),
+                  //addItem(DT.getList_id(), dt.getList_T(), dt.getList_Dist1(), dt.getList_Dist2(), dt.getList_ImageC(),
                   //      dt.getList_Tag1(), dt.getList_Tag2());
             } catch (SQLException ex) {
                   ex.printStackTrace();
@@ -258,7 +258,7 @@ public class MakeCon {
                         DT.setDTable(title);
                         DT.setDist1(d1);
                         DT.setDist2(d2);
-                        DT.setTabl(tab);
+                        DT.setImageC(tab);
                         DT.setTag(tg1);
                         DT.setClock(ck);
 

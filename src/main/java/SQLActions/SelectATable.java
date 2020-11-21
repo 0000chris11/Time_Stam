@@ -31,7 +31,7 @@ public class SelectATable implements IActions {
             DT.setTable(rs.getString(2));
             DT.setDist1(rs.getString(3));
             DT.setDist2(rs.getString(4));
-            DT.setTabl(rs.getString(5));
+            DT.setImageC(rs.getString(5));
             DT.setTag(rs.getString(6));
             DT.setClock(rs.getString(7));
       }
@@ -42,7 +42,7 @@ public class SelectATable implements IActions {
             System.out.println("Table: " + DT.getTable());
             System.out.println("Dist1: " + DT.getDist1());
             System.out.println("Dist2: " + DT.getDist2());
-            System.out.println("Tabl: " + DT.getTabl());
+            System.out.println("ImageC: " + DT.getImageC());
             System.out.println("Tag: " + DT.getTag());
             System.out.println("Clock: " + DT.getClock());
       }

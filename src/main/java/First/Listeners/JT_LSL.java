@@ -62,10 +62,10 @@ public class JT_LSL implements ListSelectionListener {
       }
 
       private void lb_IconChange() {
-            if (VF_R.getLB_Icon().isVisible()) {
+            if (!DT.getImageC().equals("NONE")) {
                   //GET INDEX OF COLUMN FOR ICON RECOG
                   int row = VF_R.getJT().getSelectedRow();
-                  int col = Character.getNumericValue(DT.getTabl().charAt(1)) - 1;
+                  int col = Character.getNumericValue(DT.getImageC().charAt(1)) - 1;
 
                   //MATCH CELL VALUE TO ICON URL NAME
                   int z = 0;

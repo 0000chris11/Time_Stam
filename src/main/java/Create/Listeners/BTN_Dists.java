@@ -23,11 +23,11 @@ public class BTN_Dists implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            tablClockAction(e);
+            imageCClockAction(e);
 
             ArrayList<Integer> colsDist = new ArrayList<Integer>();
             ArrayList<Integer> colsTag = new ArrayList<Integer>();
-            //int colTabl = -1;
+            //int colImageC = -1;
             //int colClock = -1;
 
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -40,25 +40,26 @@ public class BTN_Dists implements ActionListener {
             }
             //++++++++++++++++++++++++++++++++++++++++++
             int clockN = VC_R2.getBTN_ClockSelected();
-            int tablN = VC_R2.getBTN_TablSelected();
+            int imageCN = VC_R2.getBTN_ImageCSelected();
             
             String dist = getOutput(colsDist);
             String tag = getOutput(colsTag);
-            String tabl = getOutput(tablN);
+            String imageC = getOutput(imageCN);
             String clock = getOutput(clockN);
             
-            //INPUT FOR FOLDER LOCATION (CLOCK)
-            if (clockN > 0) {
-                  VC_R2.getBoxClock().setVisible(true);
+            //INPUT FOR FOLDER LOCATION (IMAGEC)
+            if (imageCN > 0) {
+                  VC_R2.getBoxImageC().setVisible(true);
                   VC_R2.getLB_ClockLocation().setVisible(true);
+                  //VC_R2.getPR().paintComponents(VC_R2.getPR().getGraphics());
             }else{
-                  VC_R2.getBoxClock().setVisible(false);
+                  VC_R2.getBoxImageC().setVisible(false);
                   VC_R2.getLB_ClockLocation().setVisible(false);
             }
 
             setLB(VC_R2.getLB_ADisp()[0], dist);
             setLB(VC_R2.getLB_ADisp()[3], tag);
-            setLB(VC_R2.getLB_ADisp()[2], tabl);
+            setLB(VC_R2.getLB_ADisp()[2], imageC);
             setLB(VC_R2.getLB_ADisp()[4], clock);
             
             
@@ -99,12 +100,12 @@ public class BTN_Dists implements ActionListener {
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++
-      private void tablClockAction(ActionEvent e) {
+      private void imageCClockAction(ActionEvent e) {
             String name = ((JComponent) e.getSource()).getName();
             try {
-                  if (name.contains("btns_Tabl")) {
-                        VC_R2.setBTN_TablSelected(MComp.setButtonGroup(e,
-                                VC_R2.getBTNS_Tabl()));
+                  if (name.contains("btns_ImageC")) {
+                        VC_R2.setBTN_ImageCSelected(MComp.setButtonGroup(e,
+                                VC_R2.getBTNS_ImageC()));
                   } else if (name.contains("btns_Clock")) {
                         VC_R2.setBTN_ClockSelected(MComp.setButtonGroup(e,
                                 VC_R2.getBTNS_Clock()));

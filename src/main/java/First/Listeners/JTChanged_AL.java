@@ -74,14 +74,14 @@ public class JTChanged_AL implements ActionListener {
                   System.out.println("\tTable = " + DT.getTable());
                   System.out.println("\tDist1 = " + DT.getDist1());
                   System.out.println("\tDist2 = " + DT.getDist2());
-                  System.out.println("\tTabl = " + DT.getTabl());
+                  System.out.println("\tImageC = " + DT.getImageC());
                   System.out.println("\tTag1 = " + DT.getTag());
                   System.out.println("\tClock = " + DT.getClock());
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   if (change == true) {
                         System.out.println("MIActionListener ++++ ChangeDefault");
                         mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
-                                DT.getDist2(), DT.getTabl(), DT.getTag(), DT.getClock());
+                                DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock());
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ MCSelectColumns");
@@ -94,7 +94,7 @@ public class JTChanged_AL implements ActionListener {
                   VF_R.getSPL().setDividerLocation(0.4);
 
                   System.out.println("MIActionListener ++++ ChangeLSTD");
-                  lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getTabl(),
+                  lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(),
                           DT.getTag(), DT.getClock());
 
                   VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
@@ -122,7 +122,7 @@ public class JTChanged_AL implements ActionListener {
                   }.start();
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.print("MIActionListener ++++ LOAD Icon");
-                  if (!DT.getTabl().equals("NONE")) {
+                  if (!DT.getImageC().equals("NONE")) {
                         System.out.println(CC.GREEN + "\tYES" + CC.RESET);
                         VF_R.getLB_Icon().setVisible(true);
                         VF_R.getLB_Icon().setText("Loading");

@@ -26,7 +26,7 @@ public class SelectTables implements IActions {
             DT.getList_T().clear();
             DT.getList_Dist1().clear();
             DT.getList_Dist2().clear();
-            DT.getList_Tabl().clear();
+            DT.getList_ImageC().clear();
             DT.getList_Tag().clear();
             DT.getList_Clock().clear();
       }
@@ -37,7 +37,7 @@ public class SelectTables implements IActions {
             DT.getList_T().add(rs.getString(2));
             DT.getList_Dist1().add(rs.getString(3));
             DT.getList_Dist2().add(rs.getString(4));
-            DT.getList_Tabl().add(rs.getString(5));
+            DT.getList_ImageC().add(rs.getString(5));
             DT.getList_Tag().add(rs.getString(6));
             DT.getList_Clock().add(rs.getString(7));
             

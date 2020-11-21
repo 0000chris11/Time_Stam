@@ -124,12 +124,12 @@ public class VC_R2 extends VC_R_DataCom {
                   panelTypes2[a] = (JPanel) getColumn(JComponent.class, compsD, 6)[a + 1];
                   btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
                   btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
-                  btns_Tabl[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
+                  btns_ImageC[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
                   btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
                   btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   lbOrigText[a] = "Column " + (a + 1);
-                  btns_Tabl[a].setName("btns_Tabl " + (a + 1));
+                  btns_ImageC[a].setName("btns_ImageC " + (a + 1));
                   btns_Clock[a].setName("btns_Clock " + (a + 1));
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   panelTypes2[a].setBackground(Color.BLACK);
@@ -145,7 +145,7 @@ public class VC_R2 extends VC_R_DataCom {
                   combTypes1[a].addItemListener(cbListener1);
                   btns_Dist[a].addActionListener(btnDis);
                   btns_Tag[a].addActionListener(btnDis);
-                  btns_Tabl[a].addActionListener(btnDis);
+                  btns_ImageC[a].addActionListener(btnDis);
                   btns_Clock[a].addActionListener(btnDis);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   panelTypes2[a].setOpaque(true);
@@ -266,7 +266,7 @@ public class VC_R2 extends VC_R_DataCom {
             JPC.setLayout(gl);
             JComponent[] comps = new JComponent[]{
                   lb, tf, btn_m, btn_p, comb, checkb, panelType2,
-                  btn_Dist, btn_Dist2, btn_Tabl, btn_Tag, btn_Clock};
+                  btn_Dist, btn_Dist2, btn_ImageC, btn_Tag, btn_Clock};
             MLayout.setSerializationExceptionAction(new SerializationExceptionAction() {
                   @Override
                   public JComponent getComponent(SerializationException se, JComponent jc) {
@@ -310,14 +310,16 @@ public class VC_R2 extends VC_R_DataCom {
 
       private void JPRConfig(String choice) {
             JF.add(JPR, BorderLayout.EAST);
-            JPR.setBackground(Color.BLACK);
-            JPR.setBorder(new LineBorder(Color.WHITE, 1));
-            JPR.setMinimumSize(new Dimension(200, 40));
-            JPR.setPreferredSize(new Dimension(200, 500));
-            JPR.setMaximumSize(new Dimension(200, Short.MAX_VALUE));
-            JPR.setLayout(new BoxLayout(JPR, BoxLayout.Y_AXIS));
+            JPR.setLayout(new BorderLayout());
+            JPR.add(JPR_U, BorderLayout.CENTER);
+            JPR_U.setBackground(Color.BLACK);
+            JPR_U.setBorder(new LineBorder(Color.WHITE, 1));
+            JPR_U.setMinimumSize(new Dimension(200, 40));
+            JPR_U.setPreferredSize(new Dimension(200, 500));
+            JPR_U.setMaximumSize(new Dimension(200, Short.MAX_VALUE));
+            JPR_U.setLayout(new BoxLayout(JPR_U, BoxLayout.Y_AXIS));
 
-            //ADDING LB TO JPR AND TO TDISP+++++++++++++++++++++
+            //ADDING LB TO JPR_U AND TO TDISP+++++++++++++++++++++
             for (int a = 0; a < lb_TDisp.length; a++) {
                   if (choice.equals("CREATE")) {
                         lb_TDisp[a] = new smallLB(lb_Disp_textC[a]);
@@ -327,26 +329,29 @@ public class VC_R2 extends VC_R_DataCom {
                   if (a % 2 == 0) {
                         lb_TDisp[a].setFont(new Font("Dialog", Font.BOLD, 22));
                   }
-                  JPR.add(lb_TDisp[a]);//HOLD ALL LBS AT THIS TIME
+                  JPR_U.add(lb_TDisp[a]);//HOLD ALL LBS AT THIS TIME
             }
-            JPR.add(lb_ClockLocation);
+            JPR_U.add(lb_ClockLocation);
             lb_ClockLocation.setForeground(Color.YELLOW.darker());
             //lb_ClockLocation.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
 
-            JPR.add(bxClock2);
-            bxClock2.setMinimumSize(new Dimension(100, 27));
-            bxClock2.add(tfClock);
+            JPR.add(boxImageC, BorderLayout.SOUTH);
+            boxImageC.setMinimumSize(new Dimension(100, 27));
+            boxImageC.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
+            boxImageC.setBackground(Color.BLACK);
+            boxImageC.setLayout(new BoxLayout(boxImageC, BoxLayout.X_AXIS));
+            boxImageC.add(tfClock);
             tfClock.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
             tfClock.setMinimumSize(new Dimension(80, 27));
             tfClock.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
-            bxClock2.add(btn_ClockLocation);
+            boxImageC.add(btn_ClockLocation);
             btn_ClockLocation.setBorder(BorderFactory.createEmptyBorder());
             btn_ClockLocation.setMinimumSize(new Dimension(20, 27));
             btn_ClockLocation.setPreferredSize(new Dimension(20, 27));
             btn_ClockLocation.setMaximumSize(new Dimension(20, 27));
 
             lb_ClockLocation.setVisible(false);
-            bxClock2.setVisible(false);
+            boxImageC.setVisible(false);
 
             //ADDING LB TO ADISP
             ArrayList<JLabel> listLabelsA = new ArrayList<JLabel>();
@@ -366,7 +371,7 @@ public class VC_R2 extends VC_R_DataCom {
       }
 
       public VC_R2(String choice) {
-            JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            JF.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             JF.setLayout(new BorderLayout());
 
             JPUConfig();

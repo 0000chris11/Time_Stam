@@ -85,7 +85,7 @@ public class BTN_CU_AL implements ActionListener {
                         Object[] newValues = new Object[]{null, table, 
                               VC_R2.getLB_ADisp()[0],//DIST1
                               VC_R2.getLB_ADisp()[1],//DIST2
-                              VC_R2.getLB_ADisp()[2],//TABL
+                              VC_R2.getLB_ADisp()[2],//IMAGEC
                               VC_R2.getLB_ADisp()[3],//TAG
                               VC_R2.getLB_ADisp()[4]};//CLOCK
                         //==============================================
