@@ -42,15 +42,13 @@ public class MIShow_AL implements ActionListener {
                   System.out.println("Tag1: " + DT.getTag());
                   System.out.println("Clock: " + DT.getClock());
             } else if (ac.equals("ListD")) {
-                  MList.printFor(DT.getListD_2());
-                  MList.printFor(DT.getListD_3());
-                  MList.printFor(DT.getListD_4());
-                  MList.printFor(DT.getListD_5());
-                  MList.printFor(DT.getListD_6());
+                  for(int a = 0; a < DT.maxColumns; a++){
+                        MList.printFor(DT.getList_DS()[a]);
+                  }
             } else if(ac.contains("P1 Components")){
-                  for(int a = 0; a < VF_R.getPL_C().getComponents().length; a++){
-                        System.out.println(a + ": " + VF_R.getPL_C().getComponents()[a].getName()
-                        + " == " + VF_R.getPL_C().getComponent(a).toString());
+                  for(int a = 0; a < VF_R.getPL_UC().getComponents().length; a++){
+                        System.out.println(a + ": " + VF_R.getPL_UC().getComponents()[a].getName()
+                        + " == " + VF_R.getPL_UC().getComponent(a).toString());
                   }
             }else if(ac.contains("JF Components")){
                   for(int a = 0; a < VF_R.getJF().getContentPane().getComponents().length; a++){

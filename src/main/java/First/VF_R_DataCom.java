@@ -70,7 +70,7 @@ public class VF_R_DataCom {
             }
       };
       //+++++++++++++++++++++++++++++++++++
-      public static String JPL_layout = "null";
+      public static final String JPL_layout = "Group Layout";
       //+++++++++++++++++++++++++++++++++++
       static JMenuBar JMB = new JMenuBar();
 
@@ -165,7 +165,7 @@ public class VF_R_DataCom {
             return PL_UT;
       }
 
-      public static JPanel getPL_C(){
+      public static JPanel getPL_UC(){
             return PL_UC;
       }
       public static JPanel getP3() {

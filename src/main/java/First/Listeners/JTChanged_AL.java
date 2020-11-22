@@ -88,10 +88,13 @@ public class JTChanged_AL implements ActionListener {
                   //ms.SelectColumns(DT.getTable());
                   ms.selectColumns(DT.getTable(), new SelectColumns());
 
+                  //+++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ ChangeLB_TF");
                   cp.changeLB_TFandSelectData(VF_R.getJT().getColumnCount(), DT.getList_C());
-                  VF_R.noRowsDetection();
+                  //VF_R.noRowsDetection();
                   VF_R.getSPL().setDividerLocation(0.4);
+                  VF_R.getPL_UC().revalidate();
+                  //+++++++++++++++++++++++++++++++++++++++++
 
                   System.out.println("MIActionListener ++++ ChangeLSTD");
                   lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(),
@@ -201,15 +204,12 @@ public class JTChanged_AL implements ActionListener {
             DT.getDm_5().clear();
             DT.getDm_6().clear();
 
-            DT.getListD_2().clear();
-            DT.getListD_3().clear();
-            DT.getListD_4().clear();
-            DT.getListD_5().clear();
-            DT.getListD_6().clear();
-            DT.getList_S23().clear();
-            DT.getList_S34().clear();
-            DT.getList_S45().clear();
-            DT.getList_S56().clear();
+            for(int a = 0; a < DT.maxColumns; a++){
+                  DT.getList_DS()[a].clear();
+                  if (a != DT.maxColumns - 1) {
+                        DT.getList_MXS()[a].clear();
+                  }
+            }
             //++++++++++++++++++++++++++++++++++++++
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getClocks()[a].setVisible(false);

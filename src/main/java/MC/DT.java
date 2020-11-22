@@ -42,28 +42,18 @@ public class DT {
       private static ArrayList<Object> list_R = new ArrayList<Object>();//ROWS
       private static ArrayList<String> list_TP = new ArrayList<String>();//COL TYPE
       private static ArrayList<String> list_NL = new ArrayList<String>();//COL NULL
-
+      /*
+      //ArrayList<Integer>[] al = new ArrayList[n];
       private static ArrayList<Object>[] list_Cols = 
               (ArrayList<Object>[]) new ArrayList[DT.maxColumns];
 
       ArrayList<Object>[] rowData;
 
-      private static ArrayList<String>[] list_Mixs = 
-              (ArrayList<String>[]) new ArrayList[DT.maxColumns - 1];
-      
-      private static ArrayList<String> list_S23 = new ArrayList<String>();
-      private static ArrayList<String> list_S34 = new ArrayList<String>();
-      private static ArrayList<String> list_S45 = new ArrayList<String>();
-      private static ArrayList<String> list_S56 = new ArrayList<String>();
-
-      private static ArrayList<String>[] list_DS = 
-              (ArrayList<String>[]) new ArrayList[DT.maxColumns];
-      
-      private static ArrayList<String> listD_2 = new ArrayList<String>();
-      private static ArrayList<String> listD_3 = new ArrayList<String>();
-      private static ArrayList<String> listD_4 = new ArrayList<String>();
-      private static ArrayList<String> listD_5 = new ArrayList<String>();
-      private static ArrayList<String> listD_6 = new ArrayList<String>();
+      //private static ArrayList<String>[] list_DS = 
+        //      (ArrayList<String>[]) new ArrayList[DT.maxColumns];
+      */
+      private static ArrayList<String>[] list_DS = new ArrayList[DT.maxColumns];//DISTINC LISTS
+      private static ArrayList<String>[] list_MXS = new ArrayList[DT.maxColumns - 1];//MIXED LISTS
 
       private static ArrayList<String> list_IconUrl = new ArrayList<String>();
       private static ArrayList<ImageIcon> list_newIcon = new ArrayList<ImageIcon>();
@@ -286,80 +276,16 @@ public class DT {
             return list_NL;
       }
 
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public static ArrayList<String> getList_S23() {
-            return list_S23;
+      //=======================================
+      public static ArrayList<String>[] getList_DS(){
+            return list_DS;
       }
-
-      public static ArrayList<String> getList_S34() {
-            return list_S34;
+      
+      public static ArrayList<String>[] getList_MXS(){
+            return list_MXS;
       }
-
-      public static ArrayList<String> getList_S45() {
-            return list_S45;
-      }
-
-      public static ArrayList<String> getList_S56() {
-            return list_S56;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++
-      public static ArrayList<String> getListD_2() {
-            return listD_2;
-      }
-
-      public static ArrayList<String> getListD_3() {
-            return listD_3;
-      }
-
-      public static ArrayList<String> getListD_4() {
-            return listD_4;
-      }
-
-      public static ArrayList<String> getListD_5() {
-            return listD_5;
-      }
-
-      public static ArrayList<String> getListD_6() {
-            return listD_6;
-      }
-
-      public static void setListD_2(ArrayList<String> list) {
-            listD_2.clear();
-            for (int a = 0; a < list.size(); a++) {
-                  listD_2.add(list.get(a));
-            }
-      }
-
-      public static void setListD_3(ArrayList<String> list) {
-            listD_3.clear();
-            for (int a = 0; a < list.size(); a++) {
-                  listD_3.add(list.get(a));
-            }
-      }
-
-      public static void setListD_4(ArrayList<String> list) {
-            listD_4.clear();
-            for (int a = 0; a < list.size(); a++) {
-                  listD_4.add(list.get(a));
-            }
-      }
-
-      public static void setListD_5(ArrayList<String> list) {
-            listD_5.clear();
-            for (int a = 0; a < list.size(); a++) {
-                  listD_5.add(list.get(a));
-            }
-      }
-
-      public static void setListD_6(ArrayList<String> list) {
-            listD_6.clear();
-            for (int a = 0; a < list.size(); a++) {
-                  listD_6.add(list.get(a));
-            }
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++
+      //=======================================
+      
       public static ArrayList<String> getList_IconUrl(){
             return list_IconUrl;
       }

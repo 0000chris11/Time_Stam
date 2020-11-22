@@ -38,7 +38,7 @@ public class BTNS_CMouseListener implements MouseListener {
             Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
 
             if (evt.getButton() == 1) {
-                  System.out.println(jcC.getName());
+                  //System.out.println(jcC.getName());
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (jcC.getName().equals("BTNC_" + (a + 1))) {
                               StringSelection ss = new StringSelection(VF_R.getJTFS()[a].getText());

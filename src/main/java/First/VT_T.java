@@ -32,7 +32,7 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn2);
             JButton btn3 = new JButton("Get Booleans");
             vt.add(btn3);
-            JButton btn4 = new JButton("is Clock Visible");
+            JButton btn4 = new JButton("LST_ALL VISIBLE");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -84,25 +84,13 @@ public class VT_T extends VF_R_DataCom {
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        int length1 = VF_R.getClocks()[0].getComponentCount();
-                        int length2 = VF_R.getClocks()[1].getComponentCount();
-                        int length3 = VF_R.getClocks()[2].getComponentCount();
-                        int length4 = VF_R.getClocks()[3].getComponentCount();
-                        int length5 = VF_R.getClocks()[4].getComponentCount();
-                        int length6 = VF_R.getClocks()[5].getComponentCount();
-                        System.out.println("Clock 1: " + length1);
-                        System.out.println("Clock 2: " + length2);
-                        System.out.println("Clock 3: " + length3);
-                        System.out.println("Clock 4: " + length4);
-                        System.out.println("Clock 5: " + length5);
-                        System.out.println("Clock 6: " + length6);
-                        if (length4 != 0) {
-                              for (int a = 0; a < length4; a++) {
-                                    System.out.println(VF_R.getClocks()[3].getComponent(a).isVisible());
-                              }
-                        } else {
-                              System.out.println("NO COMPONENTS");
-                        }
+                        VF_R.getJSCS()[0].setVisible(true);
+                        VF_R.getJSCS()[1].setVisible(true);
+                        VF_R.getJSCS()[2].setVisible(true);
+                        VF_R.getJSCS()[3].setVisible(true);
+                        VF_R.getJSCS()[4].setVisible(true);
+                        VF_R.getJSCS()[5].setVisible(true);
+                        VF_R.getPL_UC().revalidate();
                   }
 
             });

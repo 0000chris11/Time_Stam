@@ -83,7 +83,7 @@ public class VF_R extends VF_R_DataCom {
       //JScroller scThread = new JScroller();
       Thread addThread;
 
-      //++++++++++++++++++++++++++++++++++++++++++++++
+      //MENU+BAR+++++++++++++++++++++++++++++++++++
       public static void setColorToDItem(String table, String dtable) {
             //System.out.println("MTH - setColorToDItem");
             Font F = new Font("Dialog", Font.BOLD, 12);
@@ -141,6 +141,7 @@ public class VF_R extends VF_R_DataCom {
 
       }
 
+      //+++++++++++++++++++++++++++++++++++++++++++++
       public static void tableDeletedState() {
             boolean b = false;
             lb_Title.setVisible(b);
@@ -159,66 +160,7 @@ public class VF_R extends VF_R_DataCom {
             JPB.setVisible(b);
       }
 
-      public static void setLB_JTToCenter(JLabel LB, JComponent JC) {
-            //System.out.println("##########setLB_JTToCenter");
-            FontMetrics FM = LB.getFontMetrics(LB.getFont());
-
-            int x = (JC.getWidth() - (int) FM.stringWidth(LB.getText())) / 2;
-
-            int y = (FM.getAscent()
-                    + (JC.getHeight() - (FM.getAscent() + FM.getDescent())) / 2);
-
-            //System.out.println("\tJC getX: " + JC.getX());
-            //System.out.println("\tX: " + x);
-            //System.out.println("\tY: " + y);
-            //System.out.println("\tP3 getHeight: " + VF_R.getP3().getHeight());
-            LB.setLocation(JC.getX() + x, y - JC.getY());
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      private void controlBtnUpdate(ArrayList<String> list, JTextField tf) {
-            int z = 0;
-            if (tf.getText().equals("")) {
-                  z = 1;
-            } else {
-                  for (int a = 0; a < list.size(); a++) {
-                        if (list.get(a).equals(tf.getText())) {
-                              z = 1;
-                              //a = list.size();
-                        } else {
-                              if (z == 1) {
-                              } else {
-                                    z = 0;
-                              }
-                        }
-                  }
-            }
-            if (z >= 1) {
-                  //System.out.println("UPDATE TO FALSE");
-                  btns_MC[1].setEnabled(false);
-            } else if (z == 0) {
-                  //System.out.println("UPDATE TO TRUE");
-                  btns_MC[1].setEnabled(true);
-            }
-      }
-
-      //SEND TO MAINLISTENERS
-      private void otherListeners() {
-            /*
-            MIShow_AL misal = new MIShow_AL();
-            MIV_AL mival = new MIV_AL();
-            for (int a = 0; a < JMS_ShowList.getItemCount(); a++) {
-                  JMS_ShowList.getItem(a).addActionListener(misal);
-            }
-            for (int a = 0; a < JMS_ShowListeners.getItemCount(); a++) {
-                  JMS_ShowListeners.getItem(a).addActionListener(misal);
-            }
-            mi_seeL.addActionListener(mival);
-            mi_seeR.addActionListener(mival);
-             */
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++
       private void setTableCellEditor() {
             Font f = JT.getFont();
 
@@ -248,7 +190,7 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("Selection Model: " + JT.getSelectionModel().toString());
       }
 
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //CONFIG++++++++++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
             JF.setSize(DT.defaultFrameSize);
             JF.setLayout(new BorderLayout());
@@ -264,6 +206,8 @@ public class VF_R extends VF_R_DataCom {
             statusPanelConfig();
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             toolbarConfig();
+            //++++++++++++++++++++++++++++++++++++++
+            setArrayListToArray();
             //++++++++++++++++++++++++++++++++++++++
             setNameToComponents();
 
@@ -286,10 +230,12 @@ public class VF_R extends VF_R_DataCom {
             setComponentsToArray();
             componentsVisibility();
             //++++++++++++++++++++++++++
+            clockConfig();
             if (JPL_layout.equals("null")) {
                   System.out.println("\tNull Layout for LeftPanel");
                   PL_UC.setLayout(null);
                   setNullLayoutComponentsSize();
+                  clockNullLayout();
             } else {
                   System.out.println("\tGroup Layout for LeftPanel");
                   GroupLayout gl = new GroupLayout(PL_UC);
@@ -297,25 +243,9 @@ public class VF_R extends VF_R_DataCom {
 
                   MLayout ml = new MLayout(gl, DT.maxColumns);
                   ml.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
+                  componentsGroupLayout();
             }
-            clockConfig();
-            splitSizeConfig();
-      }
 
-      private void splitSizeConfig() {
-            //SPL.setPreferredSize(new Dimension(500, SPL.getPreferredSize().height));
-
-            //SPL_SUB.setPreferredSize(new Dimension(460, 700));
-            //PL_U.setPreferredSize(new Dimension(PL_U.getPreferredSize().width, 450));
-            //sc_PL_B.setPreferredSize(new Dimension(sc_PL_B.getPreferredSize().width, 250));
-            //sc_JT.setPreferredSize(new Dimension(400, sc_JT.getPreferredSize().height));
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            //SPL.setDividerLocation(0.4);
-            //SPL.revalidate();
-            //SPL.repaint();
-            SPL_SUB.setDividerLocation(0.6);
-            SPL_SUB.revalidate();
-            SPL_SUB.repaint();
       }
 
       private void subSplitUpConfig() {
@@ -551,36 +481,19 @@ public class VF_R extends VF_R_DataCom {
             //setLB_JTToCenter(lb_JT, sc_JT);
       }
 
-      public static void noRowsDetection() {
-            System.out.print(CC.CYAN + "MAIN +++++ noRowsDetection: " + CC.RESET);
-            if (JT.getRowCount() == 0) {
-                  sc_JT.setVisible(false);
-                  lb_JT.setVisible(true);
-                  System.out.println(CC.CYAN + "NO" + CC.RESET);
-                  System.out.println("\tlb_JT visible: " + lb_JT.isVisible());
-                  System.out.println("\tlb_JT Location: " + lb_JT.getLocation());
-            } else {
-                  sc_JT.setVisible(true);
-                  lb_JT.setVisible(false);
-                  System.out.println(CC.CYAN + "YES" + CC.RESET);
-            }
-      }
-
       private void clockConfig() {
-            int tf_h = tfs[0].getHeight();
+            int h = tfs[0].getHeight();
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
-            Dimension cks = new Dimension(30, tf_h);
-            Dimension cks2 = new Dimension(10, tf_h);
+            Dimension cks = new Dimension(30, h);
+            Dimension cks2 = new Dimension(10, h);
 
             for (int a = 0; a < DT.maxColumns; a++) {//a: 0 to 4   b: 1 to 5
                   clocks[a] = new JPanel();
                   PL_UC.add(clocks[a]);
                   clocks[a].setLayout(new BoxLayout(clocks[a], BoxLayout.X_AXIS));
                   clocks[a].setBackground(Color.DARK_GRAY);
-                  clocks[a].setSize(196, tf_h);
-                  clocks[a].setLocation(tfs[a].getX() + 160, tfs[a].getY());
                   //++++++++++++++++++++++++++++++
                   tfs_MD[a] = new JTextField("0");
                   tfs_MU[a] = new JTextField("0");
@@ -597,7 +510,6 @@ public class VF_R extends VF_R_DataCom {
                   clocks[a].add(SerializationUtils.clone(tfs_SD[a]));
                   clocks[a].add(SerializationUtils.clone(tfs_SU[a]));
 
-                  clocks[a].setSize(130, tf_h);
                   clocks[a].setVisible(false);
                   //++++++++++++++++++++++++++++++++++++++++++++
                   JTextField MD = (JTextField) clocks[a].getComponent(0);
@@ -629,9 +541,9 @@ public class VF_R extends VF_R_DataCom {
                   MD.setMaximumSize(cks);
                   MU.setPreferredSize(cks);
                   MU.setMaximumSize(cks);
-                  LB2D.setMinimumSize(new Dimension(16, tf_h));
-                  LB2D.setPreferredSize(new Dimension(16, tf_h));
-                  LB2D.setMaximumSize(new Dimension(16, tf_h));
+                  LB2D.setMinimumSize(new Dimension(16, h));
+                  LB2D.setPreferredSize(new Dimension(16, h));
+                  LB2D.setMaximumSize(new Dimension(16, h));
                   SD.setPreferredSize(cks);
                   SD.setMaximumSize(cks);
                   SU.setPreferredSize(cks);
@@ -660,6 +572,26 @@ public class VF_R extends VF_R_DataCom {
                   lb_2ds[a].setVisible(false);
             }
 
+      }
+
+      private void clockNullLayout() {
+            int h = tfs[0].getHeight();
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  clocks[a].setLocation(tfs[a].getX() + 160, tfs[a].getY());
+                  clocks[a].setSize(196, h);
+                  //clocks[a].setSize(130, h);
+            }
+      }
+
+      private void componentsGroupLayout() {
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  clocks[a].setMinimumSize(new Dimension(196, 27));
+                  clocks[a].setMaximumSize(new Dimension(196, 27));
+                  scs[a].setMinimumSize(new Dimension(100, 200));
+                  scs[a].setMaximumSize(new Dimension(Short.MAX_VALUE, 200));
+                  btns_C[a].setMinimumSize(new Dimension(20, 27));
+                  btns_C[a].setMaximumSize(new Dimension(20, 27));
+            }
       }
 
       private void actionTBComponents() {
@@ -735,6 +667,15 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++
             btns_MC[1].setEnabled(false);
             btns_MC[2].setEnabled(false);
+      }
+
+      private void setArrayListToArray() {
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  DT.getList_DS()[a] = new ArrayList<String>();
+                  if (a != DT.maxColumns - 1) {
+                        DT.getList_MXS()[a] = new ArrayList<String>();
+                  }
+            }
       }
 
       private void setComponentsToArray() {
@@ -904,7 +845,7 @@ public class VF_R extends VF_R_DataCom {
             //--------------------------------------------------------------------------------------------------------------------
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
             cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
-            noRowsDetection();
+            //noRowsDetection();
 
             System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
             lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
@@ -930,7 +871,6 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(CC.CYAN + "MAIN +++++ addAllListenerToCJS" + CC.RESET);
             ml.addAllListenerLoop();
             ml.addAllListener();
-            otherListeners();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             setTableCellEditor();
             setTableRenderer();
@@ -980,4 +920,22 @@ public class VF_R extends VF_R_DataCom {
                   }
             });
       }
+      //++++++++++++++++++++++++++++++++++++++++++++++
+      /*
+      public static void noRowsDetection() {
+            System.out.print(CC.CYAN + "MAIN +++++ noRowsDetection: " + CC.RESET);
+            if (JT.getRowCount() == 0) {
+                  sc_JT.setVisible(false);
+                  lb_JT.setVisible(true);
+                  System.out.println(CC.CYAN + "NO" + CC.RESET);
+                  System.out.println("\tlb_JT visible: " + lb_JT.isVisible());
+                  System.out.println("\tlb_JT Location: " + lb_JT.getLocation());
+            } else {
+                  sc_JT.setVisible(true);
+                  lb_JT.setVisible(false);
+                  System.out.println(CC.CYAN + "YES" + CC.RESET);
+            }
+      }
+       */
+
 }

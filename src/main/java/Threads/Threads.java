@@ -78,7 +78,7 @@ public class Threads {
                                     //mc.SelectData(a + 2, DT.getTable());
                                     ms.selectData(DT.getTable(), new SelectData(a + 1));
 
-                                    VF_R.noRowsDetection();
+                                    //VF_R.noRowsDetection();
                               }
                         }
 

@@ -13,52 +13,52 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class LSTD {
 
       //Data dt = new Data("LSTD");
       String CName = this.getClass().getName();
-      
+
       //MethodM mm = new MethodM(CName, DT.CCount++);
       Threads th = new Threads(CName, DT.CCount++);
       MakeCon mc = new MakeCon(CName, DT.CCount++);
 
-      ArrayList<String>[] listDs = new ArrayList[]{null, null, DT.getListD_2(), DT.getListD_3(),
-            DT.getListD_4(), DT.getListD_5(), DT.getListD_6()};
-      ArrayList<String>[] listSs = new ArrayList[]{null, null, DT.getList_S23(), DT.getList_S34(),
-            DT.getList_S45(), DT.getList_S56()};
+      //ArrayList<String>[] listDs = new ArrayList[]{null, null, DT.getListD_2(), DT.getListD_3(),
+        //    DT.getListD_4(), DT.getListD_5(), DT.getListD_6()};
+      //ArrayList<String>[] listSs = new ArrayList[]{null, null, DT.getList_S23(), DT.getList_S34(),
+        //    DT.getList_S45(), DT.getList_S56()};
       DefaultListModel[] dms = new DefaultListModel[]{null, null, DT.getDm_2(),
             DT.getDm_3(), DT.getDm_4(), DT.getDm_5(), DT.getDm_6()};
 
-      public void changeLSTD(String table, String D1, String D2, String TB, String TG1, 
+      public void changeLSTD(String table, String D1, String D2, String IC, String TG1,
               String CK) {
-            
+
             DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
             System.out.println("\tTable: " + table);
             System.out.println("\tD1: " + D1);
             System.out.println("\tD2: " + D2);
-            System.out.println("\tTB: " + TB);
+            System.out.println("\tTB: " + IC);
             System.out.println("\tTG1: " + TG1);
             System.out.println("\tCK: " + CK);
-            
+
             filterEquals("Dist1", D1);
             filterEquals("Dist2", D2);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("Tabl = " + TB);
-            if (TB.equals("NONE")) {
+            if (IC.equals("NONE")) {
                   //System.out.println("'\nTB = NOTHING");
                   VF_R.getLB_Icon().setIcon(null);
                   VF_R.getLB_Icon().setText("No image for col");
                   VF_R.getLB_Icon().setVisible(true);
                   VF_R.getSPL_SUB().setDividerLocation(1.0);
-            } else if (TB.contains("C")) {//IMAGE
+            } else if (IC.contains("C")) {//IMAGE
                   //System.out.println(CC.RED + "TEST: "+ TB + CC.RESET);
                   VF_R.getSPL_SUB().setDividerLocation(0.5);
                   VF_R.getLB_Icon().setText("Loading");
                   VF_R.getJT().setEnabled(false);
                   JTCellRenderer.setForegroundCell(Color.GRAY);
-                  th.addLBIconThread(TB);
+                  th.addLBIconThread(IC);
             }
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("TG1 = " + TG1);
@@ -70,19 +70,24 @@ public class LSTD {
       }
 
       private void changeLSTDist1(int index, String table, String col) {
-            boolean vis;
+            boolean vis;//NO ADDING THE ELEMENTS AGAIN
 
-            for (int a = 0; a < DT.maxColumns - 1; a++) {
-                  if (index + 1 == a + 2) {
+            System.out.println("changeLSTDist1");
+            System.out.println("\tindex: " + index);
+            System.out.println("\ttable: " + table);
+            System.out.println("\tcol: " + col);
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (index + 1 == a + 1) {
                         vis = true;
-                        if (VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[1])) {
+                        if (VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[1])) {
                               vis = false;
                         }
-                        VF_R.getJTFS()[a + 1].setBackground(DT.TFColor[1]);
 
-                        mc.MCInsertSelectD1(table, col, listDs[a + 2]);
-                        MList.unTagList(listDs[a + 2]);
-                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], listDs[a + 2], dms[a + 2], vis);
+                        VF_R.getJTFS()[a].setBackground(DT.TFColor[1]);
+                        //+++++++++++++++++++++++++++++++++++++++++++++++
+                        mc.MCInsertSelectD1(table, col, DT.getList_DS()[a]);//listDs[a + 2]
+                        MList.unTagList(DT.getList_DS()[a]);
+                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
                   }
             }
       }
@@ -90,28 +95,29 @@ public class LSTD {
       private void changeLSTDist2(int fll1, int fll2, String table, String col1, String col2) {
             boolean vis = true;
             //System.out.println("\nchangeLSTDist2");
-            for (int a = 0; a < DT.maxColumns - 2; a++) {
-                  if (fll1 + 1 == a + 2 && fll2 + 1 == a + 3) {
+            for (int a = 0; a < DT.maxColumns - 1; a++) {
+                  if (fll1 + 1 == a + 1 && fll2 + 1 == a + 2) {
                         //System.out.println("\ta: " + a);
-                        if (VF_R.getJTFS()[a + 2].getBackground().equals(DT.TFColor[2])) {
+                        if (VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[2])) {
                               vis = false;
                         }
 
-                        VF_R.getJTFS()[a + 2].setBackground(DT.TFColor[2]);
-                        mc.MCInsertSelectD2(table, col1, col2, listDs[a + 2], listDs[a + 3]);
-                        MList.mixRowList(listDs[a + 2], listDs[a + 3], listSs[a + 2], ": ");
-                        MList.unTagList(listSs[a + 2]);
-                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], listSs[a + 2], dms[a + 3], vis);
+                        VF_R.getJTFS()[a + 1].setBackground(DT.TFColor[2]);
+
+                        mc.MCInsertSelectD2(table, col1, col2, DT.getList_DS()[a], DT.getList_DS()[a + 1]);//listDs[a + 2] & listDs[a + 3]
+                        DT.getList_MXS()[a] = MList.mixRowList(DT.getList_DS()[a], DT.getList_DS()[a + 1], ": ");//listSs[a + 2]
+                        MList.unTagList(DT.getList_MXS()[a]);//listSs[a + 2]
+                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
                   }
             }
       }
 
       private void changeLSTDTag(int fll) {
-            for (int a = 0; a < DT.maxColumns - 1; a++) {
-                  if (fll == a + 1) {
-                        if (!VF_R.getJLBS()[a + 1].getText().contains("*")) {
-                              VF_R.getJLBS()[a + 1].setText("*" + VF_R.getJLBS()[a + 1].getText());
-                              MText.shortenLB(VF_R.getJLBS()[a + 1]);
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (fll == a) {
+                        if (!VF_R.getJLBS()[a].getText().contains("*")) {
+                              VF_R.getJLBS()[a].setText("*" + VF_R.getJLBS()[a].getText());
+                              MText.shortenLB(VF_R.getJLBS()[a]);
                         }
                   }
             }
@@ -132,7 +138,7 @@ public class LSTD {
                                     VF_R.getJTFS()[a].setSize(160,
                                             VF_R.getJTFS()[a].getHeight());
                               }
-                              
+
                               VF_R.getClocks()[a].setVisible(true);
                               /*
                               VF_R.getTFS_MD()[a].setVisible(true);
@@ -140,7 +146,7 @@ public class LSTD {
                               VF_R.getTFS_SD()[a].setVisible(true);
                               VF_R.getTFS_SU()[a].setVisible(true);
                               VF_R.getLB_2DS()[a].setVisible(true);
-                              */
+                               */
                         } else {
                               VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[a].getHeight());
 
@@ -151,7 +157,7 @@ public class LSTD {
                               VF_R.getTFS_SD()[a].setVisible(false);
                               VF_R.getTFS_SU()[a].setVisible(false);
                               VF_R.getLB_2DS()[a].setVisible(false);
-                              */
+                               */
                         }
                   }
             } else {
@@ -168,8 +174,8 @@ public class LSTD {
 
       private void filterEquals(String filter, String FL) {
             //System.out.println("\nfilterEquals (max Column - 1 = " + (dt.maxColumns - 1));
-            System.out.println("Filter: "+ filter);
-            System.out.println("FL: "+ FL);
+            System.out.println("Filter: " + filter);
+            System.out.println("FL: " + FL);
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   //System.out.println("\ta = " + a);
                   if (FL.equals("NONE")) {
@@ -207,142 +213,5 @@ public class LSTD {
                         }
                   }
             }
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++
-            /*
-            if (FL.equals("NONE")) {
-            } else if (FL.contains("X1")) {
-                  dt.chars[0] = FL.charAt(FL.indexOf(":") + 2);
-                  dt.strings[0] = Character.toString(dt.chars[0]);
-                  dt.ints[0] = Integer.parseInt(dt.strings[0]) - 1;
-                  dt.cols[0] = dt.getList_C().get(dt.ints[0]);
-
-                  if (filter.equals("Dist1")) {
-                        changeLSTDist1(dt.ints[0], dt.getTable(), dt.cols[0]);
-
-                  } else if (filter.equals("Dist2")) {
-                        dt.chars[1] = FL.charAt(FL.indexOf(":") + 4);
-                        dt.strings[1] = Character.toString(dt.chars[1]);
-                        dt.ints[1] = Integer.parseInt(dt.strings[1]) - 1;
-                        dt.cols[1] = dt.getList_C().get(dt.ints[1]);
-
-                        changeLSTDist2(dt.ints[0], dt.ints[1], dt.getTable(), dt.cols[0], dt.cols[1]);
-                  } else if (filter.equals("Tag1")) {
-                        //System.out.println("-X1- Changing LST Tag1");
-                        changeLSTDTag(dt.ints[0]);
-                  }
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            } else if (FL.contains("X2")) {
-                  d = 2;
-                  for (int a = 0; a < 2; a++) {
-                        dt.chars[a] = FL.charAt(FL.indexOf(":") + d);
-                        dt.strings[a] = Character.toString(dt.chars[a]);
-                        dt.ints[a] = Integer.parseInt(dt.strings[a]) - 1;
-                        dt.cols[a] = dt.getList_C().get(dt.ints[a]);
-                        d += 2;
-                  }
-
-                  if (filter.equals("Dist1")) {
-                        for (int a = 0; a < 2; a++) {
-                              changeLSTDist1(dt.ints[a], dt.getTable(), dt.cols[a]);
-                        }
-
-                  } else if (filter.equals("Dist2")) {
-                        int b = 0;
-                        int e = 6;
-                        for (int a = 2; a < 4; a++) {
-                              dt.chars[a] = FL.charAt(FL.indexOf(":") + e);
-                              dt.strings[a] = Character.toString(dt.chars[a]);
-                              dt.ints[a] = Integer.parseInt(dt.strings[a]) - 1;
-                              dt.cols[a] = dt.getList_C().get(dt.ints[a]);
-                              e += 2;
-
-                              changeLSTDist2(dt.ints[b++], dt.ints[b--], dt.getTable(),
-                                      dt.cols[b++], dt.cols[b++]);
-                        }
-                  } else if (filter.equals("Tag1")) {
-                        for (int a = 0; a < 2; a++) {
-                              changeLSTDTag(dt.ints[a]);
-                        }
-                  }
-                  //++++++++++++++++++++++++++++++++++++++++++++++++
-            } else if (FL.contains("X3")) {
-                  d = 2;
-                  for (int c = 0; c < 3; c++) {
-                        dt.chars[c] = FL.charAt(FL.indexOf(":") + c + d);
-                        dt.strings[c] = Character.toString(dt.chars[c]);
-                        dt.ints[c] = Integer.parseInt(dt.strings[c]) - 1;
-                        dt.cols[c] = dt.getList_C().get(dt.ints[c]);
-                        d++;
-                  }
-                  //t1 = FL.charAt(FL.indexOf(":") + 2);
-                  //t2 = FL.charAt(FL.indexOf(":") + 4);
-                  //t3 = FL.charAt(FL.indexOf(":") + 6);
-                  //tt1 = Character.toString(t1);
-                  //tt2 = Character.toString(t2);
-                  //tt3 = Character.toString(t3);
-                  //iFill1 = Integer.parseInt(tt1) - 1;
-                  //iFill2 = Integer.parseInt(tt2) - 1;
-                  //iFill3 = Integer.parseInt(tt3) - 1;
-                  //col1 = dt.getList_C().get(iFill1);
-                  //col2 = dt.getList_C().get(iFill2);
-                  //col3 = dt.getList_C().get(iFill3);
-
-                  if (filter.equals("Dist1")) {
-                        for (int a = 0; a < 3; a++) {
-                              changeLSTDist1(dt.ints[a], dt.getTable(), dt.cols[a]);
-                        }
-                  } else if (filter.equals("Dist2")) {
-                        int b = 0;
-                        int a = 8;
-                        for (int c = 3; c < 6; c++) {
-                              dt.chars[c] = FL.charAt(FL.indexOf(":") + a);
-                              dt.strings[c] = Character.toString(dt.chars[c]);
-                              dt.ints[c] = Integer.parseInt(dt.strings[c]) - 1;
-                              dt.cols[c] = dt.getList_C().get(dt.ints[c]);
-                              a += 2;
-
-                              changeLSTDist2(dt.ints[b++], dt.ints[b--], dt.getTable(),
-                                      dt.cols[b++], dt.cols[b++]);
-                        }
-
-                  } else if (filter.equals("Tag1")) {
-                        for (int a = 0; a < 3; a++) {
-                              changeLSTDTag(dt.ints[a]);
-                        }
-                  }
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            } else if (FL.contains("X4")) {
-                  d = 2;
-                  for (int c = 0; c < 4; c++) {
-                        dt.chars[c] = FL.charAt(FL.indexOf(":") + c + d);
-                        dt.strings[c] = Character.toString(dt.chars[c]);
-                        dt.ints[c] = Integer.parseInt(dt.strings[c]) - 1;
-                        dt.cols[c] = dt.getList_C().get(dt.ints[c]);
-                        d++;
-                  }
-
-                  if (filter.equals("Dist1")) {
-                        for (int a = 0; a < 4; a++) {
-                              changeLSTDist1(dt.ints[a], dt.getTable(), dt.cols[a]);
-                        }
-
-                  } else if (filter.equals("Dist2")) {
-                        int b = 0;
-                        for (int c = 4; c < 8; c++) {
-                              dt.chars[c] = FL.charAt(FL.indexOf(":") + c + c);
-                              dt.strings[c] = Character.toString(dt.chars[c]);
-                              dt.ints[c] = Integer.parseInt(dt.strings[c]) - 1;
-                              dt.cols[c] = dt.getList_C().get(dt.ints[c]);
-
-                              changeLSTDist2(dt.ints[b++], dt.ints[b--], dt.getTable(),
-                                      dt.cols[b++], dt.cols[b++]);
-                        }
-                  } else if (filter.equals("Tag1")) {
-                        for (int a = 0; a < 4; a++) {
-                              changeLSTDTag(dt.ints[a]);
-                        }
-                  }
-            }
-            */
       }
 }

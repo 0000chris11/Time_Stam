@@ -30,14 +30,20 @@ public class MainListeners_F {
             addValueChangedListenerToLSTS();
             //addActionLIstenerToBTN_C();
             addMouseListenerToBTN_C();
-            addMouseListenerToTFS();
+            
             //addFocusListenerToLSTS_OLD();
             //addActionListenerToBTNS_MC();
       }
 
       public void addAllListener() {
-            addFocusListenersToJC();
-            addFocusListenersToJC_PC();
+            if (VF_R.JPL_layout.equals("null")) {
+                  addFocusListenersToJC();
+            }else{
+                  addFocusListenersToJC_GL();
+            }
+            
+            addFocusBorderToJC_PC();
+            addMouseListenerToTFS();
 
             addKeyListenersToTFS();
             addKeyListenersToCKS();
@@ -74,9 +80,9 @@ public class MainListeners_F {
                   }
             }*/
       }
-      
-      private void addTableModelListenerToJTNew(){
-            
+
+      private void addTableModelListenerToJTNew() {
+
       }
 
       private void addListSelectionListenerToJT() {
@@ -113,19 +119,9 @@ public class MainListeners_F {
       }
 
       private void addMouseListenerToTFS() {
-            BTNS_CMouseListener BTNCML = new BTNS_CMouseListener();
+            BTNS_CMouseListener ML = new BTNS_CMouseListener();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VF_R.getJTFS()[a].getMouseListeners().length > 0) {
-                        for (int b = 0; b < VF_R.getJTFS()[a].getMouseListeners().length; b++) {
-                              if (VF_R.getJTFS()[a].getMouseListeners()[b].toString().contains("MouseListener")) {
-                                    VF_R.getJTFS()[a].removeMouseListener(BTNCML);
-                              }
-                        }
-                  }
-                  if (VF_R.getJTFS()[a].getMouseListeners().length == 3) {
-                        //System.out.println(tfs[a + 1].getName() + " adds: " + BTNCML.toString());
-                        VF_R.getJTFS()[a].addMouseListener(BTNCML);
-                  }
+                  VF_R.getJTFS()[a].addMouseListener(ML);
             }
       }
 
@@ -218,7 +214,7 @@ public class MainListeners_F {
       }
 
       ///================================================
-      private void addFocusListenersToJC_PC() {
+      private void addFocusBorderToJC_PC() {
             FocusBorder jcfl = new FocusBorder();
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFS()[a].addFocusListener(jcfl);
@@ -237,6 +233,14 @@ public class MainListeners_F {
                   VF_R.getJTFS()[a].addFocusListener(TFSFL);
                   VF_R.getJLSTS()[a].addFocusListener(TFSFL);
 
+            }
+      }
+      
+      private void addFocusListenersToJC_GL(){
+            TF_LST_FL_GL FL = new TF_LST_FL_GL();
+            for(int a = 0; a < DT.maxColumns; a++){
+                  VF_R.getJTFS()[a].addFocusListener(FL);
+                  VF_R.getJLSTS()[a].addFocusListener(FL);
             }
       }
 
