@@ -6,7 +6,7 @@
 package MC;
 
 import java.util.ArrayList;
-import First.VF_R;
+import views.first.VF_R;
 import SQLActions.SelectData;
 import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MText;
@@ -19,7 +19,7 @@ public class CompReset {
 
       String CName = this.getClass().getName();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
+      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
 
       public void changeLB_TFandSelectData(int cc, ArrayList<String> listC) {
             System.out.println("\tColumnCount: " + cc);

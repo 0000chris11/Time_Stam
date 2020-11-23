@@ -16,7 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.Collections;
 import javax.swing.table.DefaultTableModel;
-import First.VF_R;
+import views.first.VF_R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

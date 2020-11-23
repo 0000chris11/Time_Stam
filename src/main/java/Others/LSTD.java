@@ -1,6 +1,6 @@
 package Others;
 
-import First.VF_R;
+import views.first.VF_R;
 import MC.DT;
 import Threads.Threads;
 import MC.MakeCon;
@@ -23,13 +23,6 @@ public class LSTD {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       Threads th = new Threads(CName, DT.CCount++);
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-
-      //ArrayList<String>[] listDs = new ArrayList[]{null, null, DT.getListD_2(), DT.getListD_3(),
-        //    DT.getListD_4(), DT.getListD_5(), DT.getListD_6()};
-      //ArrayList<String>[] listSs = new ArrayList[]{null, null, DT.getList_S23(), DT.getList_S34(),
-        //    DT.getList_S45(), DT.getList_S56()};
-      DefaultListModel[] dms = new DefaultListModel[]{null, null, DT.getDm_2(),
-            DT.getDm_3(), DT.getDm_4(), DT.getDm_5(), DT.getDm_6()};
 
       public void changeLSTD(String table, String D1, String D2, String IC, String TG1,
               String CK) {

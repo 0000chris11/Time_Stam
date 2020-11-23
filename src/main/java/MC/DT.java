@@ -42,44 +42,16 @@ public class DT {
       private static ArrayList<Object> list_R = new ArrayList<Object>();//ROWS
       private static ArrayList<String> list_TP = new ArrayList<String>();//COL TYPE
       private static ArrayList<String> list_NL = new ArrayList<String>();//COL NULL
-      /*
-      //ArrayList<Integer>[] al = new ArrayList[n];
-      private static ArrayList<Object>[] list_Cols = 
-              (ArrayList<Object>[]) new ArrayList[DT.maxColumns];
 
-      ArrayList<Object>[] rowData;
-
-      //private static ArrayList<String>[] list_DS = 
-        //      (ArrayList<String>[]) new ArrayList[DT.maxColumns];
-      */
       private static ArrayList<String>[] list_DS = new ArrayList[DT.maxColumns];//DISTINC LISTS
       private static ArrayList<String>[] list_MXS = new ArrayList[DT.maxColumns - 1];//MIXED LISTS
+      private static DefaultListModel[] dlms = new DefaultListModel[DT.maxColumns];
 
       private static ArrayList<String> list_IconUrl = new ArrayList<String>();
       private static ArrayList<ImageIcon> list_newIcon = new ArrayList<ImageIcon>();
       private static ArrayList<String> list_cutUrl = new ArrayList<String>();
 
-      private static DefaultTableModel[] dtms = new DefaultTableModel[]{
-            null, null, 
-            new CustomTableModel(2), new CustomTableModel(3), 
-            new CustomTableModel(4), new CustomTableModel(5), 
-            new CustomTableModel(6)};
-
-      private static TableModel[] dtms2 = new TableModel[]{
-            null, null, 
-            new CustomTableModel(2), new CustomTableModel(3), 
-            new CustomTableModel(4), new CustomTableModel(5), 
-            new CustomTableModel(6)};
-
-      private static DefaultListModel dm_2 = new DefaultListModel();
-      private static DefaultListModel dm_3 = new DefaultListModel();
-      private static DefaultListModel dm_4 = new DefaultListModel();
-      private static DefaultListModel dm_5 = new DefaultListModel();
-      private static DefaultListModel dm_6 = new DefaultListModel();
-
-      private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-",  
-            " TABLE "};
-      private static ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
+      
       //++++++++++++++++++++
       private final static Border line1 = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
       private final static Border line2 = BorderFactory.createLineBorder(Color.WHITE, 2);
@@ -110,36 +82,10 @@ public class DT {
       public static String[] strings = new String[8];
       public static int[] ints = new int[8];
       public static String[] cols = new String[8];
-
-      public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";
       //++++++++++++++++++++++++++++++++++++++++++++
-      public static final String dataBase = "TIME_STAM";
-      
-      public static final String mainTable = "Table_Names";
-      public static final String mainColumn = "Table_Names";
-      
-      public static final String defautlTable = "Default_Table";
-      public static final String defaultColumn = "Name";
-      
-      public static final String configTable = "Table_Config";
-      public static final String configColumn = "Value";
-      
-      public static final String[] mainTableColumns = new String[]{
-      "id", "Table_Names", "Dist1", "Dist2", "ImageC", "Tag1", "Clock"};
-      
-      public static final String urlConnection
-              = "jdbc:mysql://localhost:3306/"
-              + dataBase + "?allowPublicKeyRetrieval=true&"
-              + "useSSL=false&"
-              + "useJDBCCompliantTimezoneShift=true&"
-              + "useLegacyDatetimeCode=false&"
-              + "serverTimezone=UTC";
-      
-      public static final String user = "root";
-      final public static String passw = "ccfmps00112";
+      private static boolean RTable;//Are There Tables on MainTable
       //++++++++++++++++++++++++++++++++++++++++++++
       public static boolean autoState;
-
       public static boolean bool_Add;
       public static boolean bool_Upd;
       public static boolean bool_Del;
@@ -298,37 +244,13 @@ public class DT {
             return list_cutUrl;
       }
 
-      //+++++++++++++++++++++++++++++++++++++++++++++++
-      public static DefaultTableModel[] getDTMS() {
-            return dtms;
-      }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++
-      public static DefaultListModel getDm_2() {
-            return dm_2;
+      
+      public static DefaultListModel[] getDLMS(){
+            return dlms;
       }
 
-      public static DefaultListModel getDm_3() {
-            return dm_3;
-      }
-
-      public static DefaultListModel getDm_4() {
-            return dm_4;
-      }
-
-      public static DefaultListModel getDm_5() {
-            return dm_5;
-      }
-
-      public static DefaultListModel getDm_6() {
-            return dm_6;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++
-      public static ArrayList<String> getBandW() {
-            return bandW;
-      }
-      //+++++++++++++++++++++++++++++++++++++++++++++++
       //+++++++++++++++++++++++++++++++++++++++++++++++
       public static String getDTable() {
             return DTable;
@@ -336,6 +258,14 @@ public class DT {
 
       public static void setDTable(String dtable) {
             DTable = dtable;
+      }
+      //+++++++++++++++++++++++++++++++++++++++++++++++
+      public static boolean getRTable(){
+            return RTable;
+      }
+      
+      public static void setRTable(boolean v){
+            RTable = v;
       }
       //===================================================
       public static int CCount = 1;

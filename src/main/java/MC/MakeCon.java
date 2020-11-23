@@ -1,7 +1,7 @@
 package MC;
 
-import Create.VC_R2;
-import First.VF_R;
+import views.create.VC_R2;
+import views.first.VF_R;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,7 +20,7 @@ import java.awt.Color;
  */
 public class MakeCon {
 
-      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
+      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
       String CName = this.getClass().getName();
 
       Connection con;
@@ -125,7 +125,7 @@ public class MakeCon {
                         //DT.getList_Tag().add(tag);
                         //DT.getList_Clock().add(clock);
                         //ms.selectTables(DT.mainTable, new SelectTables());
-                        ms.selectData(DT.mainTable, new SelectTables());
+                        ms.selectData(DTSQL.mainTable, new SelectTables());
                         
                         
                         Status.startLBStatus(VC_R2.getLB_Status(), Color.GREEN,

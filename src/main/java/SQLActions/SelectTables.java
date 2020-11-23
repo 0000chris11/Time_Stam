@@ -5,7 +5,7 @@
  */
 package SQLActions;
 
-import First.VF_R;
+import views.first.VF_R;
 import MC.DT;
 import MC.Status;
 import com.cofii.myClasses.CC;
@@ -46,7 +46,7 @@ public class SelectTables implements IActions {
 
       @Override
       public void afterQuery(String query, boolean rsValue) {
-            
+            DT.setRTable(rsValue);
       }
 
       @Override

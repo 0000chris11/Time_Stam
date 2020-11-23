@@ -1,10 +1,11 @@
 package Threads;
 
-import First.VF_R;
+import views.first.VF_R;
 import java.io.File;
 import javax.swing.ImageIcon;
 import java.util.concurrent.BrokenBarrierException;
 import MC.DT;
+import MC.DTSQL;
 import MC.MakeCon;
 import MC.notMyMethods;
 import com.cofii.myMethods.MImage;
@@ -31,7 +32,7 @@ public class Threads {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DT.urlConnection, DT.user, DT.passw);
+      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
 
       //BTNS_MCActionListener BMA = new BTNS_MCActionListener();
       private static CyclicBarrier cyb = new CyclicBarrier(2);
@@ -180,13 +181,13 @@ public class Threads {
                               if (data.toString().contains("; ")) {
 
                                     textIcon = data.toString();
-                                    textIcon = DT.IconURL + textIcon.substring(
+                                    textIcon = DTSQL.IconURL + textIcon.substring(
                                             textIcon.indexOf(";") + 2, textIcon.length()) + ".jpg";
                                     textUrl = textIcon;
 
                               } else {
-                                    textUrl = DT.IconURL + data.toString() + ".jpg";
-                                    textIcon = DT.IconURL + data.toString() + ".jpg";
+                                    textUrl = DTSQL.IconURL + data.toString() + ".jpg";
+                                    textIcon = DTSQL.IconURL + data.toString() + ".jpg";
                               }
                               //++++++++++++++++++++++++++++++++++++++++++++
                               if (textIcon.contains("/")) {
@@ -224,7 +225,7 @@ public class Threads {
                                                 DT.getList_newIcon().add(MImage.resizeIcon(icon));
                                           }
                                     } else {
-                                          textIcon = DT.IconURL + data.toString() + ".png";
+                                          textIcon = DTSQL.IconURL + data.toString() + ".png";
                                           file = new File(textIcon);
                                           if (file.exists()) {
                                                 if (DT.getList_IconUrl().contains(textUrl)) {

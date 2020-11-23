@@ -1,6 +1,6 @@
 package smallComponenets;
 
-import First.VF_R;
+import views.first.VF_R;
 import MC.DT;
 import java.awt.Color;
 import java.awt.Cursor;
