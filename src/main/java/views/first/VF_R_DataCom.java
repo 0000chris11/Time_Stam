@@ -77,6 +77,8 @@ public class VF_R_DataCom {
 
       static JMenu JM_Options = new JMenu("Options");
 
+      static JMenuItem mi_changeLogin = new JMenuItem("Change Login or DB");
+      
       static JMenu JMS_ShowList = new JMenu("Show List");
       JMenuItem mi_STables = new JMenuItem("Tables");
       JMenuItem mi_SColumns = new JMenuItem("Columns");
@@ -291,6 +293,10 @@ public class VF_R_DataCom {
 
       public static JMenu getJMS_ShowListeners() {
             return JMS_ShowListeners;
+      }
+      
+      public static JMenuItem getMI_ChangeLogin(){
+            return mi_changeLogin;
       }
 
       public static JMenuItem getMI_CreateTable() {

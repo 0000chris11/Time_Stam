@@ -55,6 +55,7 @@ import MC.DTSQL;
 import MC.DTT;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
+import javax.swing.JPopupMenu.Separator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationUtils;
@@ -76,7 +77,7 @@ public class VF_R extends VF_R_DataCom {
       Threads th = new Threads(CName, DT.CCount++);
       //ArraysM am = new ArraysM();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
       //++++++++-+++++++++++++++++++++++++++++++++++++
       int state = 1;
 
@@ -365,6 +366,8 @@ public class VF_R extends VF_R_DataCom {
             JMB.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
             //++++++++++++++++++++++++++++++++++++++++
             JMB.add(JM_Options);
+            JM_Options.add(mi_changeLogin);
+            JM_Options.add(new Separator());
             JM_Options.add(JMS_ShowList);
             JMS_ShowList.add(mi_STables);
             JMS_ShowList.add(mi_SColumns);

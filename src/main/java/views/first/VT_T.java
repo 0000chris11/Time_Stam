@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JTextField;
+import views.Login.VL;
 
 /**
  *
@@ -33,7 +35,7 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn2);
             JButton btn3 = new JButton("Get Booleans");
             vt.add(btn3);
-            JButton btn4 = new JButton("LST_ALL VISIBLE");
+            JButton btn4 = new JButton("GET FONT");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -85,13 +87,8 @@ public class VT_T extends VF_R_DataCom {
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        VF_R.getJSCS()[0].setVisible(true);
-                        VF_R.getJSCS()[1].setVisible(true);
-                        VF_R.getJSCS()[2].setVisible(true);
-                        VF_R.getJSCS()[3].setVisible(true);
-                        VF_R.getJSCS()[4].setVisible(true);
-                        VF_R.getJSCS()[5].setVisible(true);
-                        VF_R.getPL_UC().revalidate();
+                        System.out.println(VF_R.getJTFS()[0].getFont());
+                        
                   }
 
             });

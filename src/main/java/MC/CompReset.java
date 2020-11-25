@@ -19,7 +19,7 @@ public class CompReset {
 
       String CName = this.getClass().getName();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
 
       public void changeLB_TFandSelectData(int cc, ArrayList<String> listC) {
             System.out.println("\tColumnCount: " + cc);

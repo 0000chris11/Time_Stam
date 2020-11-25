@@ -29,7 +29,7 @@ public class BTNS_MCActionListener implements ActionListener {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
       Threads th = new Threads(CName, DT.CCount++);
 
       //public static Thread scrollThread;

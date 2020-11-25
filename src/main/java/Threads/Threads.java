@@ -32,7 +32,7 @@ public class Threads {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
 
       //BTNS_MCActionListener BMA = new BTNS_MCActionListener();
       private static CyclicBarrier cyb = new CyclicBarrier(2);

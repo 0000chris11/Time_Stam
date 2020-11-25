@@ -17,7 +17,18 @@ public class DTSQL {
       private DTSQL(){
             throw new IllegalStateException("Private Constructor");
       }
-      
+    
+      public static final String[] bandUsers = new String[]{
+            "mysql.infoschema",
+            "mysql.session",
+            "mysql.sys"};
+      public static final String[] bandDB = new String[]{
+            "INFORMATION_SCHEMA", 
+            "MYSQL",
+            "PERFORMANCE_SCHEMA",
+            "SYS",
+            "WORLD"};
+            
       private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-",  
             " TABLE "};
       private static ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
@@ -34,16 +45,33 @@ public class DTSQL {
       
       public static final String[] mainTableColumns = new String[]{
       "id", "Table_Names", "Dist1", "Dist2", "ImageC", "Tag1", "Clock"};
-      
-      public static final String urlConnection
-              = "jdbc:mysql://localhost:3306/"
-              +  dataBase + "?allowPublicKeyRetrieval=true&"
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      private static final String dbms = "mysql";
+      private static final String server = "localhost";
+      private static final String portNumber = "3306";
+      private static final String defaultConnectionProps 
+              = "?allowPublicKeyRetrieval=true&"
               + "useSSL=false&"
               + "useJDBCCompliantTimezoneShift=true&"
               + "useLegacyDatetimeCode=false&"
               + "serverTimezone=UTC";
       
-      public static final String user = "root";
+      public static final String defaultURLConnection
+              = "jdbc:" + dbms + "://" + server + ":" + portNumber + "/" + dataBase 
+              + defaultConnectionProps;
+      
+      public static final String initURLConnection
+              = "jdbc:" + dbms + "://" + server + ":" + portNumber + "/" + defaultConnectionProps;
+      
+      /*
+      conn = DriverManager.getConnection(
+                   "jdbc:" + this.dbms + "://" +
+                   this.serverName +
+                   ":" + this.portNumber + "/",
+                   connectionProps);
+      */
+      
+      public static final String rootUser = "root";
       final public static String passw = "ccfmps00112";
       //++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getBandW() {

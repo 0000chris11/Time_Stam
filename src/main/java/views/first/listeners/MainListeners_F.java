@@ -271,6 +271,8 @@ public class MainListeners_F {
             for (int a = 0; a < VF_R.getJMS_ShowListeners().getItemCount(); a++) {
                   VF_R.getJMS_ShowListeners().getItem(a).addActionListener(mial);
             }
+            MIOptions_AL AL =  new MIOptions_AL();
+            VF_R.getMI_ChangeLogin().addActionListener(AL);
       }
 
       private void addItemListenersToMIS() {

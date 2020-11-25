@@ -20,7 +20,7 @@ import java.awt.Color;
  */
 public class MakeCon {
 
-      MSQL ms = new MSQL(DTSQL.urlConnection, DTSQL.user, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
       String CName = this.getClass().getName();
 
       Connection con;

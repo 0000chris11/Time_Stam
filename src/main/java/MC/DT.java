@@ -4,6 +4,7 @@ import Table.CustomTableModel;
 import com.cofii.myClasses.CC;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.BorderFactory;
@@ -53,6 +54,8 @@ public class DT {
 
       
       //++++++++++++++++++++
+      public static final Font TFDefaultFont = new Font("Dialog", Font.BOLD, 16);
+      
       private final static Border line1 = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
       private final static Border line2 = BorderFactory.createLineBorder(Color.WHITE, 2);
       public final static Border emptyBorder = new EmptyBorder(1, 3, 1, 3);
