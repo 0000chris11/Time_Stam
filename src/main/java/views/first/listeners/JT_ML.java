@@ -30,7 +30,7 @@ public class JT_ML implements TableModelListener {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);
 

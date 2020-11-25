@@ -43,7 +43,7 @@ public class JTChanged_AL implements ActionListener {
       MainListeners_F ml = new MainListeners_F();
 
       MakeCon mc = new MakeCon(CName, DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       @Override
       public void actionPerformed(ActionEvent evt) {

@@ -86,6 +86,7 @@ public class DT {
       public static int[] ints = new int[8];
       public static String[] cols = new String[8];
       //++++++++++++++++++++++++++++++++++++++++++++
+      private static boolean wrongPassword;
       private static boolean RTable;//Are There Tables on MainTable
       //++++++++++++++++++++++++++++++++++++++++++++
       public static boolean autoState;
@@ -263,6 +264,14 @@ public class DT {
             DTable = dtable;
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++
+      public static boolean getWrongPassword(){
+            return wrongPassword;
+      }
+      
+      public static void setWrongPassword(boolean value){
+            wrongPassword = value;
+      }
+      
       public static boolean getRTable(){
             return RTable;
       }

@@ -10,16 +10,18 @@ import MC.DT;
 import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import views.Login.VL;
 
 /**
  *
  * @author C0FII
  */
 public class SelectTables implements IActions {
-      
+
       @Override
       public void beforeQuery() {
             DT.getList_id().clear();
@@ -32,7 +34,7 @@ public class SelectTables implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException{
+      public void setData(ResultSet rs) throws SQLException {
             DT.getList_id().add(rs.getString(1));
             DT.getList_T().add(rs.getString(2));
             DT.getList_Dist1().add(rs.getString(3));
@@ -40,8 +42,7 @@ public class SelectTables implements IActions {
             DT.getList_ImageC().add(rs.getString(5));
             DT.getList_Tag().add(rs.getString(6));
             DT.getList_Clock().add(rs.getString(7));
-            
-            
+
       }
 
       @Override
@@ -51,10 +52,19 @@ public class SelectTables implements IActions {
 
       @Override
       public void exception(SQLException ex, String query) {
-            System.out.println(CC.RED + query + CC.RESET);
-            ex.printStackTrace();
+            System.out.println("MESSAGE: " + ex.getMessage());
+            if (ex.getMessage().contains("Access denied for user")) {
+                  System.out.println("\tWRONG PASSWORD");
+                  DT.setWrongPassword(true);
+                  VL.getLBPass().setForeground(Color.RED);
+                  VL.getLBPass().setText("Incorrect Password");
+            }else{
+                  System.out.println("\tOTHER ERROR");
+                  DT.setWrongPassword(false);
+                  ex.printStackTrace();
                   Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                           "SelectTables: " + ex.toString(), 8000);
+            }
       }
 
 }

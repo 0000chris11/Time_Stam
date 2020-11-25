@@ -21,7 +21,7 @@ import javax.swing.JComponent;
 public class MIOptions_IL implements ActionListener {
 
       MakeCon mc = new MakeCon(this.getClass().getName(), DT.CCount++);
-      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       @Override
       public void actionPerformed(ActionEvent e) {

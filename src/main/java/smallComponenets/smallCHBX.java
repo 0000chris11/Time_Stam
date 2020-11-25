@@ -27,4 +27,9 @@ public class smallCHBX extends JCheckBox {
             setOpaque(false);
             setBackground(new Color(255, 0, 0, 20));
       }
+      public smallCHBX(String text){
+            setText(text);
+            setOpaque(false);
+            setBackground(new Color(255, 0, 0, 20));
+      }
 }

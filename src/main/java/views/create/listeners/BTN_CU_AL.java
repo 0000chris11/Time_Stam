@@ -26,7 +26,7 @@ public class BTN_CU_AL implements ActionListener {
       private String Choice;
       private int countO = -1;
 
-      MSQL ms = new MSQL(DTSQL.defaultURLConnection, DTSQL.rootUser, DTSQL.passw);
+      MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       public BTN_CU_AL(String choice) {
             Choice = choice;
