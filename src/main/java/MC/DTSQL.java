@@ -27,7 +27,8 @@ public class DTSQL {
             "MYSQL",
             "PERFORMANCE_SCHEMA",
             "SYS",
-            "WORLD"};
+            "WORLD",
+            "ROOTCONFIG"};
 
       private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-",
             " TABLE "};
@@ -39,16 +40,23 @@ public class DTSQL {
       private static String dataBase;
 
       public static final String defaultUserTable = "DefaultUser";
-
+      //MAIN TABLE VARIABLES ++++++++++++++++++++++++++++++++
       public static final String mainTable = "Table_Names";
       public static final String mainColumn = "Table_Names";
+      public static final String[] mainTableColumns = new String[]{
+            "id", "Table_Names", "Dist1", "Dist2", "ImageC", "Tag1", "Clock"};
+      public static final String[] mainTableTypes = new String[]{
+            "INT(11)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(200)", 
+            "VARCHAR(100)","VARCHAR(50)"};
+      public static final boolean[] mainTableNulls = new boolean[]{
+            false, false, false, false, false, false, false};
+      
       public static final String defautlTable = "Default_Table";
       public static final String defaultColumn = "Name";
       public static final String configTable = "Table_Config";
       public static final String configColumn = "Value";
 
-      public static final String[] mainTableColumns = new String[]{
-            "id", "Table_Names", "Dist1", "Dist2", "ImageC", "Tag1", "Clock"};
+      
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private static final String dbms = "mysql";
       private static final String server = "localhost";
@@ -72,6 +80,8 @@ public class DTSQL {
       public static final String rootUser = "root";
       private static String Passw;
       public static final String rootPassw = "ccfmps00112";
+      //++++++++++++++++++++++++++++++++++++++
+      private static boolean mainTableExist;
 
       //++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getBandW() {
@@ -107,5 +117,12 @@ public class DTSQL {
       //+++++++++++++++++++++++++++++++++++++++
       public static String getURLConnection(){
             return URLConnection;
+      }
+      //+++++++++++++++++++++++++++++++++++++++
+      public static boolean getMainTableExist(){
+            return mainTableExist;
+      }
+      public static void setMainTableExist(boolean v){
+            mainTableExist = v;
       }
 }

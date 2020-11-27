@@ -53,6 +53,9 @@ import static views.first.VF_R_DataCom.PL_U;
 import static views.first.VF_R_DataCom.SPL_SUB;
 import MC.DTSQL;
 import MC.DTT;
+import SQLActions.ConfigTableExist;
+import SQLActions.CreateMainTable;
+import SQLActions.MainTableExistFQ;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
 import com.cofii.myMethods.MComp;
@@ -804,84 +807,98 @@ public class VF_R extends VF_R_DataCom {
             //mi_SaveOp.setName();
       }
 
-      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      private void afterFirstQuerySuccess() {
+            if (!DTSQL.getMainTableExist()) {//CREATING MAIN TABLE IF DOESN'T EXIST
+                  ms.createTable(DTSQL.mainTable, DTSQL.mainTableColumns,
+                          DTSQL.mainTableTypes, DTSQL.mainTableNulls, 1, "AUTO_INCREMENT", "id",
+                          new CreateMainTable());
+            }
+
+            System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
+            ms.selectData(DTSQL.mainTable, new SelectTables());
+
+            if (DT.getRTable()) {
+                  //SELECTING DEFAULT TABLE++++++++++++++++++++++++
+                  if (getDefault == true) {
+                        System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
+
+                        DT.setTable(ms.selectValueFromTable(DTSQL.defautlTable, DTSQL.defaultColumn).toString());
+                        ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainColumn,
+                                DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
+                  }
+                  //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
+                  addItemToMenus(DT.getList_id(), DT.getList_T());
+                  setColorToDItem(DT.getTable(), DT.getDTable());
+
+                  //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
+                  DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
+
+                  System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
+                  ms.selectColumns(DT.getTable(), new SelectColumns());
+
+                  //--------------------------------------------------------------------------------------------------------------------
+                  System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
+                  cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
+                  //noRowsDetection();
+
+                  System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
+                  lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
+                          DT.getClock());
+                  //--------------------------------------------------------------------------------------------------------------------
+            } else {//IF THERE IS NO TABLE ADDED TO MAINTABLES
+                  lb_PL.setForeground(Color.RED);
+                  SPL_SUB.setTopComponent(lb_PL);
+            }
+            menuBarLook();
+            //+++++++++++++++++++++++++++++++++++++++++++++++++
+            System.out.println(CC.CYAN + "MAIN +++++ SELECT CONFIG" + CC.RESET);
+            //mc.SelectConfig();
+            //ms.selectTables(DT.configTable, new SelectConfig());
+            ms.selectData(DTSQL.configTable, new SelectConfig());
+            //System.out.println("\tAOT BL: " + dt.getList_BL().get(0));
+            mi_AOT.setSelected(DT.getList_BL().get(0));
+            JF.setAlwaysOnTop(DT.getList_BL().get(0));
+
+            //System.out.println("\tAutoR BL: " + dt.getList_BL().get(1));
+            mi_AutoR.setSelected(DT.getList_BL().get(1));
+            n_mm.rez(JT, DT.getList_BL().get(1));
+            DT.autoState = DT.getList_BL().get(1);
+
+            //System.out.println("\tGrid BL: " + dt.getList_BL().get(2));
+            mi_Grid.setSelected(DT.getList_BL().get(2));
+            JT.setShowGrid(DT.getList_BL().get(2));
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
+            System.out.println(CC.CYAN + "MAIN +++++ addAllListenerToCJS" + CC.RESET);
+            ml.addAllListenerLoop();
+            ml.addAllListener();
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
+            setTableCellEditor();
+            setTableRenderer();
+            //*++++++++++++++++++++++++++++++++++++++++++++++++++++
+            //System.out.println("\nHeap Size: \t" + Runtime.getRuntime().totalMemory());
+            //System.out.println("Heap Max Size: \t" + Runtime.getRuntime().maxMemory());
+            //System.out.println("Heap Free Size: \t" + Runtime.getRuntime().freeMemory());
+            //*++++++++++++++++++++++++++++++++++++++++++++++++++++
+            mi_SJFComponents.setText(mi_SJFComponents.getText() + " ("
+                    + JF.getContentPane().getComponentCount() + ")");
+            mi_SP1Components.setText(mi_SP1Components.getText() + " ("
+                    + PL_UC.getComponentCount() + ")");
+            //*++++++++++++++++++++++++++++++++++++++++++++++++++++          
+            star();
+            System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
+            //System.out.println("Table: " + dt.getTable());
+      }
+
       public VF_R() {
             System.out.println(CC.CYAN + "CLASS ### MAIN" + CC.RESET);
             frameConfig();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
-            System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
-            ms.selectData(DTSQL.mainTable, new SelectTables());
+            System.out.println(CC.CYAN + "CHECKING IF MAIN TABLE EXIST (FIRST QUERY) ++++++++++++++++" + CC.RESET);
+            ms.doesThisTableExist(DTSQL.mainTable, new MainTableExistFQ());
+            ms.doesThisTableExist(DTSQL.configTable, new ConfigTableExist());
             if (!DT.getWrongPassword()) {//IF FIRST QUERY FAILS BC WRONG PASSWORD
-                  if (DT.getRTable()) {
-                        //SELECTING DEFAULT TABLE++++++++++++++++++++++++
-                        if (getDefault == true) {
-                              System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
-
-                              DT.setTable(ms.selectValueFromTable(DTSQL.defautlTable, DTSQL.defaultColumn).toString());
-                              ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainColumn,
-                                      DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
-                        }
-                        addItemToMenus(DT.getList_id(), DT.getList_T());
-                        setColorToDItem(DT.getTable(), DT.getDTable());
-
-                        //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
-                        DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
-
-                        System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
-                        ms.selectColumns(DT.getTable(), new SelectColumns());
-
-                        //--------------------------------------------------------------------------------------------------------------------
-                        System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
-                        cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
-                        //noRowsDetection();
-
-                        System.out.println(CC.CYAN + "MAIN +++++ ChangeLSTD" + CC.RESET);
-                        lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
-                                DT.getClock());
-                        //--------------------------------------------------------------------------------------------------------------------
-                  } else {
-                        lb_PL.setForeground(Color.RED);
-                        SPL_SUB.setTopComponent(lb_PL);
-                  }
-                  menuBarLook();
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.println(CC.CYAN + "MAIN +++++ SELECT CONFIG" + CC.RESET);
-                  //mc.SelectConfig();
-                  //ms.selectTables(DT.configTable, new SelectConfig());
-                  ms.selectData(DTSQL.configTable, new SelectConfig());
-                  //System.out.println("\tAOT BL: " + dt.getList_BL().get(0));
-                  mi_AOT.setSelected(DT.getList_BL().get(0));
-                  JF.setAlwaysOnTop(DT.getList_BL().get(0));
-
-                  //System.out.println("\tAutoR BL: " + dt.getList_BL().get(1));
-                  mi_AutoR.setSelected(DT.getList_BL().get(1));
-                  n_mm.rez(JT, DT.getList_BL().get(1));
-                  DT.autoState = DT.getList_BL().get(1);
-
-                  //System.out.println("\tGrid BL: " + dt.getList_BL().get(2));
-                  mi_Grid.setSelected(DT.getList_BL().get(2));
-                  JT.setShowGrid(DT.getList_BL().get(2));
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
-                  System.out.println(CC.CYAN + "MAIN +++++ addAllListenerToCJS" + CC.RESET);
-                  ml.addAllListenerLoop();
-                  ml.addAllListener();
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
-                  setTableCellEditor();
-                  setTableRenderer();
-                  //*++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  //System.out.println("\nHeap Size: \t" + Runtime.getRuntime().totalMemory());
-                  //System.out.println("Heap Max Size: \t" + Runtime.getRuntime().maxMemory());
-                  //System.out.println("Heap Free Size: \t" + Runtime.getRuntime().freeMemory());
-                  //*++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  mi_SJFComponents.setText(mi_SJFComponents.getText() + " ("
-                          + JF.getContentPane().getComponentCount() + ")");
-                  mi_SP1Components.setText(mi_SP1Components.getText() + " ("
-                          + PL_UC.getComponentCount() + ")");
-                  //*++++++++++++++++++++++++++++++++++++++++++++++++++++          
-                  star();
-                  System.out.println(CC.CYAN + "MAIN +++++ END\n" + CC.RESET);
-                  //System.out.println("Table: " + dt.getTable());
+                  afterFirstQuerySuccess();
             }
       }
 
@@ -897,6 +914,10 @@ public class VF_R extends VF_R_DataCom {
                         } else {
                               SPL_SUB.setDividerLocation(0.6);
                         }
+                        System.out.println("REVALIDATE!!!!!!!!!!!!!!!!!!");
+                        SPL.revalidate();
+                        SPL_SUB.revalidate();
+                        
                         VL.getJF().dispose();
                         JF.setVisible(true);
                   }

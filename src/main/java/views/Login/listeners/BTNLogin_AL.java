@@ -61,9 +61,11 @@ public class BTNLogin_AL implements ActionListener {
                   } catch (InterruptedException ex) {
                         Logger.getLogger(BTNLogin_AL.class.getName()).log(Level.SEVERE, null, ex);
                   }
+                  
                   DTSQL.setUser(selectedUser);
                   DTSQL.setPassw(selectedPass);
                   DTSQL.setDatabase(selectedDB);
+                  
                   new VF_R();
             }
       }

@@ -28,12 +28,14 @@ public class Update implements IUpdates {
       }
 
       @Override
-      public void succeed() {
+      public void executeResultRowN() {
+            //FIXXXXXXXXXXXXXXXXX
             Status.startLBStatus(LB, DT.RGY[1], Msg + ": Done", 4000);
       }
 
       @Override
-      public void fail() {
+      public void executeResult0() {
+            //FIXXXXXXXXXXXXXXXXX
             Status.startLBStatus(LB, DT.RGY[2], Msg + ": Fail" + DT.inter, 8000);
       }
 

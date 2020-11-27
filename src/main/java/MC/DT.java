@@ -87,6 +87,7 @@ public class DT {
       public static String[] cols = new String[8];
       //++++++++++++++++++++++++++++++++++++++++++++
       private static boolean wrongPassword;
+      private static boolean lockCaps;
       private static boolean RTable;//Are There Tables on MainTable
       //++++++++++++++++++++++++++++++++++++++++++++
       public static boolean autoState;
@@ -278,6 +279,14 @@ public class DT {
       
       public static void setRTable(boolean v){
             RTable = v;
+      }
+      
+      public static boolean getLockCaps(){
+            return lockCaps;
+      }
+      
+      public static void setLockCaps(boolean v){
+            lockCaps = v;
       }
       //===================================================
       public static int CCount = 1;

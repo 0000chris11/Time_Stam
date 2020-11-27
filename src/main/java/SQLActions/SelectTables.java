@@ -52,19 +52,10 @@ public class SelectTables implements IActions {
 
       @Override
       public void exception(SQLException ex, String query) {
-            System.out.println("MESSAGE: " + ex.getMessage());
-            if (ex.getMessage().contains("Access denied for user")) {
-                  System.out.println("\tWRONG PASSWORD");
-                  DT.setWrongPassword(true);
-                  VL.getLBPass().setForeground(Color.RED);
-                  VL.getLBPass().setText("Incorrect Password");
-            }else{
-                  System.out.println("\tOTHER ERROR");
-                  DT.setWrongPassword(false);
-                  ex.printStackTrace();
-                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectTables: " + ex.toString(), 8000);
-            }
+            ex.printStackTrace();
+            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                    "SelectTables: " + ex.toString(), 8000);
+
       }
 
 }

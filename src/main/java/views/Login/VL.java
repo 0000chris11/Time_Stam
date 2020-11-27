@@ -18,7 +18,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
+import java.awt.KeyboardFocusManager;
 import java.awt.Shape;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -38,6 +41,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import views.Login.listeners.BTNLogin_AL;
 import views.first.VF_R;
+import views.first.listeners.KEDispatcher;
 
 /**
  *
@@ -121,6 +125,12 @@ public class VL extends VL_DataCom {
 
             });
       }
+      
+      private void keyDispatch(){
+            boolean check = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(
+            new KEDispatcher(check));
+      }
 
       private void setNames() {
             cbUser.setName("tfUser");
@@ -186,6 +196,7 @@ public class VL extends VL_DataCom {
 
                   //+++++++++++++++++++++++++++++++++++++++++
                   querys();
+                  keyDispatch();
                   //+++++++++++++++++++++++++++++++++++++++++
                   setNames();
                   star();
