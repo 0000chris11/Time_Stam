@@ -78,9 +78,11 @@ public class BTN_CU_AL implements ActionListener {
                               }
                         }
                         //==============================================
+                        /*
                         ms.createTable(table, 
                                 colNames, types, nulls, colType2, type2,
                                 new Update("CreateTable", VC_R2.getLB_Status()));
+                        */
                         //==============================================        
                         //INSERT TABLE ON MAINTTABLES++++++++++++++++++++++++++
                         Object[] newValues = new Object[]{null, table, 

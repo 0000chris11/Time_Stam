@@ -5,6 +5,7 @@
  */
 package SQLActions;
 
+import MC.DTSQL;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,12 +30,19 @@ public class ConfigTableExist implements IActions{
 
       @Override
       public void afterQuery(String sql, boolean rsValue) {
-            
+            if (rsValue && configTable.equals(DTSQL.configTable)) {
+                  System.out.println("\tConfig Table Exist Already");
+                  DTSQL.setConfigTableExist(true);
+            } else {
+                  System.out.println("\tConfig Table doesn't exist");
+                  DTSQL.setConfigTableExist(false);
+            }
       }
 
       @Override
       public void exception(SQLException ex, String mess) {
-            
+            System.out.println(mess);
+            ex.printStackTrace();
       }
       
 }

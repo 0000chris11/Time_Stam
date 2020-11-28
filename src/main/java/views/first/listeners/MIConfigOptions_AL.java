@@ -18,7 +18,7 @@ import javax.swing.JComponent;
  *
  * @author C0FII
  */
-public class MIOptions_IL implements ActionListener {
+public class MIConfigOptions_AL implements ActionListener {
 
       MakeCon mc = new MakeCon(this.getClass().getName(), DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
@@ -31,26 +31,26 @@ public class MIOptions_IL implements ActionListener {
             //setPanelsOptions(e, item);
             //+++++++++++++++++++++++++
             if (e.getActionCommand().contains("Save")) {
-                  //Data dt = new Data("MIOptions_IL");
+                  //Data dt = new Data("MIConfigOptions_AL");
                   int c = 0;
                   if (VF_R.getMI_AOT().getState() != DT.getList_BL().get(0)) {
                         //mc.UpdateConfig(VF_R.getMI_AOT().getState(), 1);
                         ms.updateRow(DTSQL.configTable,
-                                DTSQL.configColumn, VF_R.getMI_AOT().getState(),
+                                DTSQL.configTableColumns[2], VF_R.getMI_AOT().getState(),
                                 "id", 1, new Update("UpdateConfig", VF_R.getLB_Status()));
                         c++;
                   }
                   if (VF_R.getMI_AutoR().getState() != DT.getList_BL().get(1)) {
                         //mc.UpdateConfig(VF_R.getMI_AutoR().getState(), 2);
                         ms.updateRow(DTSQL.configTable,
-                                DTSQL.configColumn, VF_R.getMI_AutoR().getState(),
+                                DTSQL.configTableColumns[2], VF_R.getMI_AutoR().getState(),
                                 "id", 2, new Update("UpdateConfig", VF_R.getLB_Status()));
                         c++;
                   }
                   if (VF_R.getMI_Grid().getState() != DT.getList_BL().get(2)) {
                         //mc.UpdateConfig(VF_R.getMI_Grid().getState(), 3);
                         ms.updateRow(DTSQL.configTable,
-                                DTSQL.configColumn, VF_R.getMI_Grid().getState(),
+                                DTSQL.configTableColumns[2], VF_R.getMI_Grid().getState(),
                                 "id", 3, new Update("UpdateConfig", VF_R.getLB_Status()));
                         c++;
                   }

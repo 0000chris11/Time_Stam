@@ -27,6 +27,8 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,6 +41,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+import static views.Login.VL_DataCom.setDefaultUser;
 import views.Login.listeners.BTNLogin_AL;
 import views.first.VF_R;
 import views.first.listeners.KEDispatcher;
@@ -50,15 +53,37 @@ import views.first.listeners.KEDispatcher;
 public class VL extends VL_DataCom {
 
       MSQL ms = new MSQL(DTSQL.initURLConnection, DTSQL.rootUser, DTSQL.rootPassw);
+      private boolean defaultUser = false;
 
-      private boolean isThereDefaultUser() {
-            Object ob = ms.selectValueFromTable(DTSQL.defaultUserTable, "Name");
-            System.out.println(">>>>>>>>>>>>DefaultUser: " + ob);
-            if (!ob.toString().equals("NONE")) {
-                  return false;
-            } else {
-                  return true;
-            }
+      private void defaultUser() {
+            ms.selectRowFromTable(DTSQL.defaultUserTable, 1, new IActions() {
+                  @Override
+                  public void beforeQuery() {
+
+                  }
+
+                  @Override
+                  public void setData(ResultSet rs) throws SQLException {
+                        DTSQL.setUser(rs.getString(1));
+                        DTSQL.setPassw(rs.getString(2));
+                        DTSQL.setDatabase(rs.getString(3));
+                  }
+
+                  @Override
+                  public void afterQuery(String string, boolean bln) {
+                        if (bln) {
+                              setDefaultUser(true);
+                        } else {
+                              setDefaultUser(false);
+                        }
+                  }
+
+                  @Override
+                  public void exception(SQLException sqle, String string) {
+                        sqle.printStackTrace();
+                  }
+
+            });
       }
 
       private void querys() {
@@ -124,12 +149,18 @@ public class VL extends VL_DataCom {
                   }
 
             });
+
+            try {
+                  ms.getConnection().close();
+            } catch (SQLException ex) {
+                  Logger.getLogger(VL.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
-      
-      private void keyDispatch(){
+
+      private void keyDispatch() {
             boolean check = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(
-            new KEDispatcher(check));
+                    new KEDispatcher(check));
       }
 
       private void setNames() {
@@ -138,8 +169,11 @@ public class VL extends VL_DataCom {
             cbDB.setName("tfDB");
       }
 
-      public VL(String option) {
-            if (isThereDefaultUser()) {
+      public VL(String option) {//OPTION MANAGE NEEDED
+            if (option.equals("Login")) {
+                  defaultUser();
+            }
+            if (!getDefaultUser() || option.equals("Change")) {
                   System.out.println("LOGIN +++++ STARS");
                   //++++++++++++++++++++++++++++++++++++++++
                   JF.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -150,10 +184,10 @@ public class VL extends VL_DataCom {
                         public void windowClosing(WindowEvent e) {
                               if (VF_R.getJF() == null) {
                                     System.out.println("X DISPOSE X");
-                                    JF.dispose();
-                              }else{
-                                    System.out.println("XXXX TERMINTATE XXXX");
                                     System.exit(0);
+                              } else {
+                                    System.out.println("XXXX TERMINTATE XXXX");
+                                    JF.dispose();
                               }
                         }
                   });

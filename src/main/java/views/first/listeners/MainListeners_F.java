@@ -2,7 +2,7 @@ package views.first.listeners;
 
 import views.first.listeners.MITableOptions_AL;
 import views.first.listeners.MIShow_AL;
-import views.first.listeners.MIOptions_IL;
+import views.first.listeners.MIConfigOptions_AL;
 import views.first.listeners.LSTS_VC;
 import views.first.listeners.JT_ML;
 import views.first.listeners.JT_LSL;
@@ -13,7 +13,11 @@ import views.first.listeners.BTNS_MCActionListener;
 import views.first.listeners.BTNS_CMouseListener;
 import views.first.VF_R;
 import MC.DT;
+import com.cofii.myClasses.CC;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultListSelectionModel;
+import views.Login.VL;
 
 /**
  *
@@ -30,7 +34,7 @@ public class MainListeners_F {
             addValueChangedListenerToLSTS();
             //addActionLIstenerToBTN_C();
             addMouseListenerToBTN_C();
-            
+
             //addFocusListenerToLSTS_OLD();
             //addActionListenerToBTNS_MC();
       }
@@ -38,10 +42,10 @@ public class MainListeners_F {
       public void addAllListener() {
             if (VF_R.JPL_layout.equals("null")) {
                   addFocusListenersToJC();
-            }else{
+            } else {
                   addFocusListenersToJC_GL();
             }
-            
+
             addFocusBorderToJC_PC();
             addMouseListenerToTFS();
 
@@ -49,11 +53,9 @@ public class MainListeners_F {
             addKeyListenersToCKS();
 
             addActionListenersToMIS();
-            addItemListenersToMIS();
 
             addActionListenerToBTNS_MC();
             addActionListenerToBTNS_P_M();
-            addActionListenerToMITable();
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
@@ -61,29 +63,8 @@ public class MainListeners_F {
       private void addTableModelListenerToJT() {
             JT_ML JTML = new JT_ML();
             VF_R.getJT().getModel().addTableModelListener(JTML);
-            /*
-            for (int a = 2; a < DT.getDTMS().length; a++) {
-                  if (DT.getList_C().size() == a) {
-                        if (DT.getDTMS()[a].getTableModelListeners().length > 0) {
-                              for (int b = 0; b < DT.getDTMS()[a].getTableModelListeners().length; b++) {
-
-                                    if (DT.getDTMS()[a].getTableModelListeners()[b].equals("TableModelListener")) {
-
-                                          DT.getDTMS()[a].removeTableModelListener(
-                                                  DT.getDTMS()[a].getTableModelListeners()[b]);
-                                    }
-                              }
-                        }
-                        if (DT.getDTMS()[a].getTableModelListeners().length == 1) {
-                              DT.getDTMS()[a].addTableModelListener(JTML);
-                        }
-                  }
-            }*/
       }
 
-      private void addTableModelListenerToJTNew() {
-
-      }
 
       private void addListSelectionListenerToJT() {
             JT_LSL JTL = new JT_LSL();
@@ -235,10 +216,10 @@ public class MainListeners_F {
 
             }
       }
-      
-      private void addFocusListenersToJC_GL(){
+
+      private void addFocusListenersToJC_GL() {
             TF_LST_FL_GL FL = new TF_LST_FL_GL();
-            for(int a = 0; a < DT.maxColumns; a++){
+            for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFS()[a].addFocusListener(FL);
                   VF_R.getJLSTS()[a].addFocusListener(FL);
             }
@@ -264,6 +245,7 @@ public class MainListeners_F {
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addActionListenersToMIS() {
+            //PRINT LISTENER AND OUTDATED LISTS +++++++++++++++
             MIShow_AL mial = new MIShow_AL();
             for (int a = 0; a < VF_R.getJMS_ShowList().getItemCount(); a++) {
                   VF_R.getJMS_ShowList().getItem(a).addActionListener(mial);
@@ -271,37 +253,30 @@ public class MainListeners_F {
             for (int a = 0; a < VF_R.getJMS_ShowListeners().getItemCount(); a++) {
                   VF_R.getJMS_ShowListeners().getItem(a).addActionListener(mial);
             }
-            MIOptions_AL AL =  new MIOptions_AL();
-            VF_R.getMI_ChangeLogin().addActionListener(AL);
-      }
-
-      private void addItemListenersToMIS() {
-            MIOptions_IL mio = new MIOptions_IL();
+            //ConfigOptions +++++++++++++++++++++++++++++++++++++
+            MIConfigOptions_AL mio = new MIConfigOptions_AL();
 
             VF_R.getMI_AOT().addActionListener(mio);
             VF_R.getMI_AutoR().addActionListener(mio);
             VF_R.getMI_Grid().addActionListener(mio);
-
             VF_R.getSaveOp().addActionListener(mio);
-      }
-
-      private void addActionListenerToMITable() {
+            
+            //MAIN QUERYS +++++++++++++++++++++++++++++++++++++
             MITableOptions_AL MITAL = new MITableOptions_AL();
             VF_R.getMI_CreateTable().addActionListener(MITAL);
             VF_R.getMI_UpdateTable().addActionListener(MITAL);
             VF_R.getMI_DeleteThisTable().addActionListener(MITAL);
             VF_R.getMI_DeleteTables().addActionListener(MITAL);
-      }
+            
+            //LOGIN +++++++++++++++++++++++++++++++++++++++++++
+            VF_R.getMI_ChangeLogin().addActionListener(new ActionListener() {
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+                        System.out.println(CC.CYAN + "#### VL STARS ####" + CC.RESET);
+                        new VL("Change");
+                  }
 
-      //================================================
-      private void addKeyListenerToLSTS() {
-
-            /*LSTSKeyReleased LSTSKR = new LSTSKeyReleased();
-            for (int a = 0; a < lsts.length; a++) {
-                  lsts[a].removeKeyListener(LSTSKR);
-                  lsts[a].addKeyListener(LSTSKR);
-            }
-             */
+            });
       }
 
 }

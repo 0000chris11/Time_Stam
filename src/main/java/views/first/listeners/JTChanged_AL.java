@@ -82,6 +82,7 @@ public class JTChanged_AL implements ActionListener {
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   if (change == true) {
                         System.out.println("MIActionListener ++++ ChangeDefault");
+                        //PREPLACE WITH MS.UPDATE
                         mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
                                 DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock());
                   }

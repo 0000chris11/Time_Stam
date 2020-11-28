@@ -6,6 +6,7 @@
 package views.Login.listeners;
 
 import MC.DTSQL;
+import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MOthers;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,8 @@ import views.first.VF_R;
  * @author C0FII
  */
 public class BTNLogin_AL implements ActionListener {
+
+      MSQL ms = new MSQL(DTSQL.initURLConnection, DTSQL.rootUser, DTSQL.rootPassw);
 
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -43,13 +46,13 @@ public class BTNLogin_AL implements ActionListener {
                   VL.getLBUser().setForeground(Color.RED);
                   VL.getLBUser().setText("Not Found User");
             }
-            
-            if(!selectedDB.isEmpty() 
-                    && MOthers.getContainMatchFromStringToList(selectedDB, VL.getDBData())){
+
+            if (!selectedDB.isEmpty()
+                    && MOthers.getContainMatchFromStringToList(selectedDB, VL.getDBData())) {
                   VL.getLBDB().setForeground(Color.WHITE);
                   VL.getLBDB().setText("Database");
                   countB++;
-            }else{
+            } else {
                   VL.getLBUser().setForeground(Color.RED);
                   VL.getLBUser().setText("Not Found Database");
             }
@@ -61,16 +64,32 @@ public class BTNLogin_AL implements ActionListener {
                   } catch (InterruptedException ex) {
                         Logger.getLogger(BTNLogin_AL.class.getName()).log(Level.SEVERE, null, ex);
                   }
-                  
+
                   DTSQL.setUser(selectedUser);
                   DTSQL.setPassw(selectedPass);
                   DTSQL.setDatabase(selectedDB);
-                  
-                  new VF_R();
+                  //++++++++++++++++++++++++++++++++
+                  if (VL.getCKB_Default().isSelected()) {
+                        Object[] newValues = new Object[]{selectedUser, selectedPass, selectedDB};
+                        /*
+                        ms.insert(DTSQL.defaultUserTable,
+                                DTSQL.defaultUserTableColumns, newValues, 0,
+                                null);
+                        */
+                        ms.updateRow(DTSQL.defaultUserTable, 
+                                DTSQL.defaultUserTableColumns, newValues, 1, null);
+                  } else {
+                        if (VL.getDefaultUser()) {
+                              ms.deleteRow(DTSQL.defaultUserTable, 1, null);
+                              VL.setDefaultUser(false);
+                        }
+                  }
             }
+            //++++++++++++++++++++++++++++++++
+            new VF_R();
       }
 
-      private void resetLBS(){
+      private void resetLBS() {
             VL.getLBUser().setForeground(Color.WHITE);
             VL.getLBUser().setText("User");
             VL.getLBPass().setForeground(Color.WHITE);
@@ -78,5 +97,5 @@ public class BTNLogin_AL implements ActionListener {
             VL.getLBDB().setForeground(Color.WHITE);
             VL.getLBDB().setText("Database");
       }
-      
+
 }

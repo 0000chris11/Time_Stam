@@ -40,6 +40,8 @@ public class DTSQL {
       private static String dataBase;
 
       public static final String defaultUserTable = "DefaultUser";
+      public static final String[] defaultUserTableColumns = new String[]{
+            "Name", "Passw", "DATAB"};
       //MAIN TABLE VARIABLES ++++++++++++++++++++++++++++++++
       public static final String mainTable = "Table_Names";
       public static final String mainColumn = "Table_Names";
@@ -53,9 +55,16 @@ public class DTSQL {
       
       public static final String defautlTable = "Default_Table";
       public static final String defaultColumn = "Name";
+      
       public static final String configTable = "Table_Config";
-      public static final String configColumn = "Value";
-
+      public static final String[] configTableColumns = new String[]{
+            "id", "Name", "Value"};
+      public static final String[] configTableTypes = new String[]{
+            "INT(11)", "VARCHAR(50)", "TINYINT(1)"};
+      public static final boolean[] configTableNulls = new boolean[]{
+            false, false, false};
+      public static final Object[][] configTableValues = new Object[][]{
+            {1, "AlwaysOnTop", false}, {2, "AutoReziseTable", false}, {3, "ShowGrid", false}};
       
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private static final String dbms = "mysql";
@@ -82,7 +91,7 @@ public class DTSQL {
       public static final String rootPassw = "ccfmps00112";
       //++++++++++++++++++++++++++++++++++++++
       private static boolean mainTableExist;
-
+      private static boolean configTableExist;
       //++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getBandW() {
             return bandW;
@@ -122,7 +131,16 @@ public class DTSQL {
       public static boolean getMainTableExist(){
             return mainTableExist;
       }
+      
       public static void setMainTableExist(boolean v){
             mainTableExist = v;
+      }
+      
+      public static boolean getConfigTableExist(){
+            return configTableExist;
+      }
+      
+      public static void setConfigTableExist(boolean v){
+            configTableExist = v;
       }
 }

@@ -59,7 +59,16 @@ public class VL_DataCom {
 
       static JButton btn_login = new JButton("Login");
       static JCheckBox ckb_Default = new smallCHBX("Set Default Login");
-
+      //+++++++++++++++++++++++++++++++++++++++++++++
+      private static boolean defaultUser;
+      
+      public static boolean getDefaultUser(){
+            return defaultUser;
+      }
+      
+      public static void setDefaultUser(boolean v){
+            defaultUser = v;
+      }
       //+++++++++++++++++++++++++++++++++++++++++++++
       public static JFrame getJF(){
             return JF;
@@ -115,5 +124,9 @@ public class VL_DataCom {
 
       public static JList getLSTDB() {
             return lstDB;
+      }
+      
+      public static JCheckBox getCKB_Default(){
+            return ckb_Default;
       }
 }

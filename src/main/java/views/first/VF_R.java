@@ -54,11 +54,16 @@ import static views.first.VF_R_DataCom.SPL_SUB;
 import MC.DTSQL;
 import MC.DTT;
 import SQLActions.ConfigTableExist;
+import SQLActions.CreateConfigTable;
 import SQLActions.CreateMainTable;
+import SQLActions.InsertConfigTable;
 import SQLActions.MainTableExistFQ;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
 import com.cofii.myMethods.MComp;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPopupMenu.Separator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
@@ -810,9 +815,21 @@ public class VF_R extends VF_R_DataCom {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void afterFirstQuerySuccess() {
             if (!DTSQL.getMainTableExist()) {//CREATING MAIN TABLE IF DOESN'T EXIST
-                  ms.createTable(DTSQL.mainTable, DTSQL.mainTableColumns,
-                          DTSQL.mainTableTypes, DTSQL.mainTableNulls, 1, "AUTO_INCREMENT", "id",
+                  ms.createTable(DTSQL.mainTable,
+                          DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
+                          1, "AUTO_INCREMENT", "id",
                           new CreateMainTable());
+            }
+            if (!DTSQL.getConfigTableExist()) {
+                  ms.createTable(DTSQL.configTable,
+                          DTSQL.configTableColumns, DTSQL.configTableTypes, DTSQL.configTableNulls,
+                          0, null, null, new CreateConfigTable());
+                  //INSERTING DEFAULT VALUES
+                  for (int a = 0; a < DTSQL.configTableValues[0].length; a++) {
+                        ms.insert(DTSQL.configTable,
+                                DTSQL.configTableColumns, DTSQL.configTableValues[a], 0,
+                                new InsertConfigTable());
+                  }
             }
 
             System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
@@ -847,8 +864,15 @@ public class VF_R extends VF_R_DataCom {
                           DT.getClock());
                   //--------------------------------------------------------------------------------------------------------------------
             } else {//IF THERE IS NO TABLE ADDED TO MAINTABLES
-                  lb_PL.setForeground(Color.RED);
                   SPL_SUB.setTopComponent(lb_PL);
+                  lb_PL.setForeground(Color.RED);
+                  lb_PL.setFont(new Font("Dialog", Font.BOLD, 40));
+                  
+                  JMenuItem mi = new JMenuItem("No tables created yet");
+                  mi.setBackground(Color.BLACK);
+                  mi.setForeground(Color.WHITE);
+                  mi.setEnabled(false);
+                  JM_Select.add(mi);
             }
             menuBarLook();
             //+++++++++++++++++++++++++++++++++++++++++++++++++
@@ -902,22 +926,35 @@ public class VF_R extends VF_R_DataCom {
             }
       }
 
-      private static void star() {
+      private void star() {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override
                   public void run() {
+                        try {
+                              ms.getConnection().close();
+                        } catch (SQLException ex) {
+                              Logger.getLogger(VF_R.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        
                         JF.setSize(DT.defaultFrameSize);
                         MComp.setFrameToCenterOfScreen(JF);
+                        SPL.setSize(DT.defaultFrameSize);//TAKING THE PORCENTAGE OF THE SPLITS
+                        SPL_SUB.setSize(DT.defaultFrameSize);
+                        
                         SPL.setDividerLocation(0.4);
-                        if (DT.getImageC().equals("NONE")) {
-                              SPL_SUB.setDividerLocation(1.0);
+                        if (DT.getImageC() != null) {
+                              if (DT.getImageC().equals("NONE")) {
+                                    SPL_SUB.setDividerLocation(1.0);
+                              } else {
+                                    SPL_SUB.setDividerLocation(0.6);
+                              }
                         } else {
-                              SPL_SUB.setDividerLocation(0.6);
+                              SPL_SUB.setDividerLocation(1.0);
                         }
                         System.out.println("REVALIDATE!!!!!!!!!!!!!!!!!!");
                         SPL.revalidate();
                         SPL_SUB.revalidate();
-                        
+
                         VL.getJF().dispose();
                         JF.setVisible(true);
                   }

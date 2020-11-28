@@ -12,21 +12,21 @@ import java.sql.SQLException;
  *
  * @author C0FII
  */
-public class CreateMainTable implements IUpdates{
+public class CreateConfigTable implements IUpdates {
 
       @Override
       public void executeResultRowN() {
-            System.out.println("\tMain Table creation FAIL");
+            System.out.println("\tConfig Table creation FAIL");
       }
 
       @Override
       public void executeResult0() {
-            System.out.println("\tMain Table has been created");
+            System.out.println("\tConfig Table has been created");
       }
 
       @Override
-      public void exception(SQLException sqle) {
-            sqle.printStackTrace();
+      public void exception(SQLException ex) {
+            ex.printStackTrace();
       }
-      
+
 }
