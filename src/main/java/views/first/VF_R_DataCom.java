@@ -42,18 +42,16 @@ public class VF_R_DataCom {
       
       static JSplitPane SPL_SUB = new JSplitPane(JSplitPane.VERTICAL_SPLIT);    
       static JPanel PL_U = new JPanel();
-      static JLabel lb_PL = new JLabel("No Table Selected", SwingConstants.CENTER);
       static JPanel PL_UT = new JPanel();
       static JPanel PL_UC = new JPanelGradient(DT.GP_blackRed);
       static JScrollPane sc_PL_UC = new JScrollPane(PL_UC);
       
       static JPanel PL_B = new JPanel();
       static JScrollPane sc_PL_B = new JScrollPane(PL_B);
-      static JLabel lb_Icon = new JLabel("NO ICON SELECTED");
       static JProgressBar JPB = new JProgressBar();
       
       static JTable JT = new JTable();
-      static JLabel lb_JT = new JLabel("NO ROWS INSERTED", SwingConstants.CENTER);
+      
       static JScrollPane sc_JT = new JScrollPane(JT);
       //============================================================    
       static JPanel p3 = new JPanel();
@@ -117,7 +115,6 @@ public class VF_R_DataCom {
             new smallBTN_C("ADD"), new smallBTN_C("UPDATE"),
             new smallBTN_C("DELETE"), new smallBTN_C("FIND")};
       //+++++++++++++++++++++++++++++++++++
-      static JLabel lb_Status = new JLabel("Waiting for Action...");
       static JToggleButton btn_Show_All = new JToggleButton("Show All");
 
       static JLabel lb_Title = new JLabel("No Table Selected");
@@ -135,6 +132,11 @@ public class VF_R_DataCom {
       static JTextField[] tfs_SD = new JTextField[DT.maxColumns];
       static JTextField[] tfs_SU = new JTextField[DT.maxColumns];
       static JLabel[] lb_2ds = new JLabel[DT.maxColumns];
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      static JLabel lb_Status = new JLabel("Waiting for Action...");
+      static JLabel lb_Icon = new JLabel("NO ICON SELECTED");
+      static JLabel lb_PL = new JLabel("No Table Selected", SwingConstants.CENTER);
+      static JLabel lb_JT = new JLabel("NO ROWS INSERTED", SwingConstants.CENTER);
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static boolean getDefault = true;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++

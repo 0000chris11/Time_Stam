@@ -44,9 +44,8 @@ public class DTSQL {
             "Name", "Passw", "DATAB"};
       //MAIN TABLE VARIABLES ++++++++++++++++++++++++++++++++
       public static final String mainTable = "Table_Names";
-      public static final String mainColumn = "Table_Names";
       public static final String[] mainTableColumns = new String[]{
-            "id", "Table_Names", "Dist1", "Dist2", "ImageC", "Tag1", "Clock"};
+            "id", "Name", "Dist1", "Dist2", "ImageC", "Tag", "Clock"};
       public static final String[] mainTableTypes = new String[]{
             "INT(11)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(200)", 
             "VARCHAR(100)","VARCHAR(50)"};
@@ -54,7 +53,10 @@ public class DTSQL {
             false, false, false, false, false, false, false};
       
       public static final String defautlTable = "Default_Table";
-      public static final String defaultColumn = "Name";
+      private static String defaultTableValue;
+      //SAME COLUMNS AS mainTableColumns
+      //SAME TYPES AS mainTableTypes
+      //SAME NULLS AS mainTableNulls
       
       public static final String configTable = "Table_Config";
       public static final String[] configTableColumns = new String[]{
@@ -92,6 +94,7 @@ public class DTSQL {
       //++++++++++++++++++++++++++++++++++++++
       private static boolean mainTableExist;
       private static boolean configTableExist;
+      private static boolean defaultTableExist;
       //++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getBandW() {
             return bandW;
@@ -128,6 +131,14 @@ public class DTSQL {
             return URLConnection;
       }
       //+++++++++++++++++++++++++++++++++++++++
+      public static String getDefaultTableValue(){
+            return defaultTableValue;
+      }
+      
+      public static void setDefaultTableValue(String v){
+            defaultTableValue = v;
+      }
+      //+++++++++++++++++++++++++++++++++++++++
       public static boolean getMainTableExist(){
             return mainTableExist;
       }
@@ -142,5 +153,13 @@ public class DTSQL {
       
       public static void setConfigTableExist(boolean v){
             configTableExist = v;
+      }
+      
+      public static boolean getDefaultTableExist(){
+            return defaultTableExist;
+      }
+      
+      public static void setDefaultTableExist(boolean v){
+            defaultTableExist = v;
       }
 }

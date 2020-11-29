@@ -19,6 +19,7 @@ import javax.swing.table.AbstractTableModel;
 import Others.JTCellRenderer;
 import SQLActions.SelectData;
 import com.cofii.myClasses.MSQL;
+import com.cofii.myMethods.MList;
 
 /**
  *
@@ -57,16 +58,18 @@ public class Threads {
                         DT.bool_Add = true;
                         System.out.println("\tADD ++++ addThread starts");
 
-                        ArrayList<String> SS = new ArrayList<String>();
+                        ArrayList<String> listNewValues = new ArrayList<String>();
                         //int b = 1;
                         for (int a = 0; a < DT.maxColumns; a++) {
                               if (VF_R.getJTFS()[a].isVisible()) {
-                                    //ss[a] = VF_R.getJTFS()[a + 1].getText();
-                                    SS.add(VF_R.getJTFS()[a].getText());
+                                    listNewValues.add(VF_R.getJTFS()[a].getText());
                               } else {
                                     //ss[a] = tfs_MD[a].getText() + ":" + tfs_MU[a].getText() + ":" + tfs_SD[a].getText();
                               }
-                        }//+++++++++++++++++++++++++++++++++++++++++
+                        }
+                        String[] columns = MList.getListToArray(String.class, DT.getList_C());
+                        String[] newValues = MList.getListToArray(String.class, listNewValues);
+                        //+++++++++++++++++++++++++++++++++++++++++
                         //CHANGE WHEN THERE IS NO >ID< FIELD
                         int mayor = MTable.getMayorId(VF_R.getJT(), 0);
 
@@ -75,11 +78,9 @@ public class Threads {
                                     System.out.println("\t\tADD ++++ INSERTING " + (a + 1)
                                             + " COLUMNS");
 
-                                    mc.Insert(DT.getTable(), ++mayor, SS);
-                                    //mc.SelectData(a + 2, DT.getTable());
+                                    //ms.insert(DT.getTable(), columns, newValues, a, iu);
+                                    mc.Insert(DT.getTable(), ++mayor, listNewValues);
                                     ms.selectData(DT.getTable(), new SelectData(a + 1));
-
-                                    //VF_R.noRowsDetection();
                               }
                         }
 

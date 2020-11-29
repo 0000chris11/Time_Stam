@@ -36,17 +36,6 @@ public class MainTableExistFQ implements IActions {
 
       @Override
       public void afterQuery(String string, boolean value) {
-            /*
-            CREATE TABLE IF NOT EXISTS Table_Names (
-                  id [Ljava.lang.String;@1dda4a50 NOT NULL AUTO_INCREMENT, 
-                  Table_Names [Ljava.lang.String;@1dda4a50 NOT NULL, 
-                  Dist1 [Ljava.lang.String;@1dda4a50 NOT NULL, 
-                  Dist2 [Ljava.lang.String;@1dda4a50 NOT NULL, 
-                  ImageC [Ljava.lang.String;@1dda4a50 NOT NULL, 
-                  Tag1 [Ljava.lang.String;@1dda4a50 NOT NULL, 
-                  Clock [Ljava.lang.String;@1dda4a50 NOT NULL,  
-                  PRIMARY KEY(id)) ENGINE=INNODB
-            */
             if (value && MainTableName.equals(DTSQL.mainTable)) {
                   System.out.println("\tMain Table Exist Already");
                   DTSQL.setMainTableExist(true);

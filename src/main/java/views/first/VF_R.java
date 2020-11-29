@@ -55,7 +55,9 @@ import MC.DTSQL;
 import MC.DTT;
 import SQLActions.ConfigTableExist;
 import SQLActions.CreateConfigTable;
+import SQLActions.CreateDefaultTable;
 import SQLActions.CreateMainTable;
+import SQLActions.DefaultTableExist;
 import SQLActions.InsertConfigTable;
 import SQLActions.MainTableExistFQ;
 import SQLActions.SelectConfig;
@@ -119,7 +121,7 @@ public class VF_R extends VF_R_DataCom {
                         if (itemText.contains(" ")) {
                               itemText = itemText.replaceAll(" ", "_");
                         }
-
+                        
                         if (itemText.equals(table)
                                 && itemText.equals(dtable)) {
                               JM_Select.getItem(a).setBackground(new Color(100, 100, 100));
@@ -814,36 +816,16 @@ public class VF_R extends VF_R_DataCom {
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void afterFirstQuerySuccess() {
-            if (!DTSQL.getMainTableExist()) {//CREATING MAIN TABLE IF DOESN'T EXIST
-                  ms.createTable(DTSQL.mainTable,
-                          DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
-                          1, "AUTO_INCREMENT", "id",
-                          new CreateMainTable());
-            }
-            if (!DTSQL.getConfigTableExist()) {
-                  ms.createTable(DTSQL.configTable,
-                          DTSQL.configTableColumns, DTSQL.configTableTypes, DTSQL.configTableNulls,
-                          0, null, null, new CreateConfigTable());
-                  //INSERTING DEFAULT VALUES
-                  for (int a = 0; a < DTSQL.configTableValues[0].length; a++) {
-                        ms.insert(DTSQL.configTable,
-                                DTSQL.configTableColumns, DTSQL.configTableValues[a], 0,
-                                new InsertConfigTable());
-                  }
-            }
-
+            creatingNeededTables();
+            //++++++++++++++++++++++++++++++++++
             System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
             ms.selectData(DTSQL.mainTable, new SelectTables());
 
             if (DT.getRTable()) {
                   //SELECTING DEFAULT TABLE++++++++++++++++++++++++
-                  if (getDefault == true) {
-                        System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
-
-                        DT.setTable(ms.selectValueFromTable(DTSQL.defautlTable, DTSQL.defaultColumn).toString());
-                        ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainColumn,
-                                DT.getTable().replaceAll("_", " "), new SelectDefaultTable());
-                  }
+                  System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
+                  ms.selectRowFromTable(DTSQL.defautlTable, 1, new SelectDefaultTable());
+                  
                   //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
                   addItemToMenus(DT.getList_id(), DT.getList_T());
                   setColorToDItem(DT.getTable(), DT.getDTable());
@@ -867,7 +849,7 @@ public class VF_R extends VF_R_DataCom {
                   SPL_SUB.setTopComponent(lb_PL);
                   lb_PL.setForeground(Color.RED);
                   lb_PL.setFont(new Font("Dialog", Font.BOLD, 40));
-                  
+
                   JMenuItem mi = new JMenuItem("No tables created yet");
                   mi.setBackground(Color.BLACK);
                   mi.setForeground(Color.WHITE);
@@ -914,6 +896,33 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("Table: " + dt.getTable());
       }
 
+      private void creatingNeededTables() {
+            if (!DTSQL.getMainTableExist()) {//CREATING MAIN TABLE IF DOESN'T EXIST
+                  ms.createTable(DTSQL.mainTable,
+                          DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
+                          1, "AUTO_INCREMENT", "id",
+                          new CreateMainTable());
+            }
+            if (!DTSQL.getConfigTableExist()) {
+                  ms.createTable(DTSQL.configTable,
+                          DTSQL.configTableColumns, DTSQL.configTableTypes, DTSQL.configTableNulls,
+                          0, null, null,
+                          new CreateConfigTable());
+                  //INSERTING DEFAULT VALUES
+                  for (int a = 0; a < DTSQL.configTableValues[0].length; a++) {
+                        ms.insert(DTSQL.configTable,
+                                DTSQL.configTableColumns, DTSQL.configTableValues[a], 0,
+                                new InsertConfigTable());
+                  }
+            }
+            if (!DTSQL.getDefaultTableExist()) {
+                  ms.createTable(DTSQL.defautlTable,
+                          DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
+                          1, "AUTO_INCREMENT", "id",
+                          new CreateDefaultTable());
+            }
+      }
+
       public VF_R() {
             System.out.println(CC.CYAN + "CLASS ### MAIN" + CC.RESET);
             frameConfig();
@@ -921,6 +930,7 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(CC.CYAN + "CHECKING IF MAIN TABLE EXIST (FIRST QUERY) ++++++++++++++++" + CC.RESET);
             ms.doesThisTableExist(DTSQL.mainTable, new MainTableExistFQ());
             ms.doesThisTableExist(DTSQL.configTable, new ConfigTableExist());
+            ms.doesThisTableExist(DTSQL.defautlTable, new DefaultTableExist());
             if (!DT.getWrongPassword()) {//IF FIRST QUERY FAILS BC WRONG PASSWORD
                   afterFirstQuerySuccess();
             }
@@ -935,12 +945,12 @@ public class VF_R extends VF_R_DataCom {
                         } catch (SQLException ex) {
                               Logger.getLogger(VF_R.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
+
                         JF.setSize(DT.defaultFrameSize);
                         MComp.setFrameToCenterOfScreen(JF);
                         SPL.setSize(DT.defaultFrameSize);//TAKING THE PORCENTAGE OF THE SPLITS
                         SPL_SUB.setSize(DT.defaultFrameSize);
-                        
+
                         SPL.setDividerLocation(0.4);
                         if (DT.getImageC() != null) {
                               if (DT.getImageC().equals("NONE")) {
@@ -957,6 +967,8 @@ public class VF_R extends VF_R_DataCom {
 
                         VL.getJF().dispose();
                         JF.setVisible(true);
+                        
+                        new VT_T();
                   }
 
             });

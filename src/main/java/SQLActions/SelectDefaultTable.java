@@ -6,6 +6,7 @@
 package SQLActions;
 
 import MC.DT;
+import MC.DTSQL;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
  */
 public class SelectDefaultTable implements IActions {
       
+      private String Table;
+      
       @Override
       public void beforeQuery() {
 
@@ -25,11 +28,12 @@ public class SelectDefaultTable implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException{
-            
+      public void setData(ResultSet rs) throws SQLException{            
             DT.setId(rs.getString(1));
-            DT.setTable(rs.getString(2));
-            DT.setDTable(rs.getString(2));
+            String table = rs.getString(2);
+            DT.setTable(table);
+            DT.setDTable(table);
+            Table = table;
             DT.setDist1(rs.getString(3));
             DT.setDist2(rs.getString(4));
             DT.setImageC(rs.getString(5));
@@ -39,17 +43,20 @@ public class SelectDefaultTable implements IActions {
       }
 
       @Override
+      public void afterQuery(String query, boolean value) {
+            if(value){
+               DTSQL.setDefaultTableValue(Table);
+            }else{
+                  DTSQL.setDefaultTableValue(null);
+            }
+      }
+      
+      @Override
       public void exception(SQLException sqle, String query) {
             System.out.println(CC.RED + query + CC.RESET);
             sqle.printStackTrace();
       }
 
-      @Override
-      public void afterQuery(String query, boolean rsValue) {
-            System.out.println("###AfterQuery: " + query);
-            System.out.println("Dist1: " + DT.getDist1());
-            System.out.println("Dist2: " + DT.getDist2());
-            System.out.println("Clock: " + DT.getClock());
-      }
+      
 
 }

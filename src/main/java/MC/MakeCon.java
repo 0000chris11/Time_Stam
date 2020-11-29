@@ -44,77 +44,11 @@ public class MakeCon {
             DT.getConstructorName(DT.cons, CName, from, CC);
       }
 
-      public boolean DeleteTable(String table){
-            System.out.println(CC.YELLOW + "MakeCon ++++ DeleteTable" + CC.RESET);
-            try{
-                  con = DriverManager.getConnection(urlConnection, user, passw);
-                  
-                  String sql = "DROP TABLE " + 
-                          table.replaceAll(" ", "_");
-                  pstt = con.prepareStatement(sql);
-                  System.out.println("\t" + sql);
-
-                  int i = pstt.executeUpdate();
-                  if (i == 0) {
-                        DT.getList_T().remove(table);
-                        Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
-                                "MC-DeleteTable Done!", 4000);
-                        return true;
-                  } else {
-                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
-                                "DeleteTable: " + DT.inter, 8000);
-                        return false;
-                  }
-                  
-            }catch(SQLException ex){
-                  ex.printStackTrace();
-                  Status.startLBStatus(VF_R.getLB_Status(), Color.RED, 
-                          "DeleteTable: " + ex.toString(), 8000);
-                  return false;
-            }
-      }
-      //REPLACE++++++++++++++++++++++
-      public void ChangeDefault(String idd, String old_idd, String title, String d1, String d2, String tab, String tg1,
-              String ck) {
-            System.out.println(CC.YELLOW + "MakeCon ++++ ChangeDefault" + CC.RESET);
-            try {
-                  con = DriverManager.getConnection(
-                          urlConnection, user, passw);
-
-                  String sql = "UPDATE Default_Table SET id = "
-                          + idd + ", Name = '" + title + "' WHERE id = " + old_idd;
-
-                  System.out.println(sql);
-
-                  PreparedStatement stmt = con.prepareStatement(sql);
-                  int i = stmt.executeUpdate();
-                  if (i > 0) {
-                        DT.setId(idd);
-                        DT.setTable(title);
-                        DT.setDTable(title);
-                        DT.setDist1(d1);
-                        DT.setDist2(d2);
-                        DT.setImageC(tab);
-                        DT.setTag(tg1);
-                        DT.setClock(ck);
-
-                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[1], "MCChangeDefault Done!", 4000);
-                  } else {
-                        Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[2],
-                                "ChangeDefault: " + DT.inter, 8000);
-                  }
-
-            } catch (SQLException ex) {
-                  ex.printStackTrace();
-                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "ChangeDefault: " + ex.toString(), 8000);
-            }
-      }
-
       //REPLACE++++++++++++++++++++++
       public void Insert(String table, int n, ArrayList<String> nvs) {
             System.out.println(CC.YELLOW + "MakeCon ++++ Insert" + CC.RESET);
             System.out.println("\tTable: " + table);
+            
             for (int a = 0; a < nvs.size(); a++) {
                   System.out.println("\tnv " + (a + 1) + ": " + nvs.get(a));
             }

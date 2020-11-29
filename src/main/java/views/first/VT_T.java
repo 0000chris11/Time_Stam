@@ -33,9 +33,9 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn);
             JButton btn2 = new JButton("Comparing");
             vt.add(btn2);
-            JButton btn3 = new JButton("Get Booleans");
+            JButton btn3 = new JButton("Get SPL Components");
             vt.add(btn3);
-            JButton btn4 = new JButton("GET FONT");
+            JButton btn4 = new JButton("GET Default Table");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -78,16 +78,17 @@ public class VT_T extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println("\t" + DT.getList_BL().get(0));
-                        System.out.println("\t" + DT.getList_BL().get(1));
-                        System.out.println("\t" + DT.getList_BL().get(2));
+                        System.out.println("SPL LeftComponent: " + 
+                                VF_R.getSPL().getLeftComponent().getClass());
+                        System.out.println("SPL RightComponent: " + 
+                                VF_R.getSPL().getRightComponent().getClass());
                   }
 
             });
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println(VF_R.getJTFS()[0].getFont());
+                        System.out.println("DefaultTable: " + DT.getDTable());
                         
                   }
 

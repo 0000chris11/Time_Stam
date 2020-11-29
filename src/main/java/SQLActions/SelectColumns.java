@@ -11,7 +11,9 @@ import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -34,33 +36,23 @@ public class SelectColumns implements IActions {
             DT.getList_C().add(rs.getString(1));
             DT.getList_TP().add(rs.getString(2));
             DT.getList_NL().add(rs.getString(3));
+            //CREATE KEY, DEFAULT AND EXTRA LISTS
       }
 
       @Override
-      public void afterQuery(String query, boolean rsValue) {
-            DefaultTableModel tm = new DefaultTableModel();
-            VF_R.getJT().setModel(tm);
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  if (DT.getList_C().size() == a + 1) {
-                        //VF_R.getJT().setModel(DT.getDTMS()[a + 1]);
-                        
-                  }
-                  //tm.setColumnCount(0);
-                  //tm.setRowCount(0);
-                  //DT.getDTMS()[a + 2].setColumnCount(0);
-                  //DT.getDTMS()[a + 2].setRowCount((0));
-                  
-            }
-            
-            for (int a = 0; a < DT.getList_C().size(); a++) {
-                  for (int b = 0; b < DT.maxColumns; b++) {
-                        if (DT.getList_C().size() == b + 1) {
-                              //DT.getDTMS()[b + 2].addColumn(DT.getList_C().get(a));
-                              tm.addColumn(DT.getList_C().get(a));
+      public void afterQuery(String query, boolean value) {
+            if (value) {
+                  DefaultTableModel tm = new DefaultTableModel();
+                  VF_R.getJT().setModel(tm);
+
+                  for (int a = 0; a < DT.getList_C().size(); a++) {
+                        for (int b = 0; b < DT.maxColumns; b++) {
+                              if (DT.getList_C().size() == b + 1) {
+                                    tm.addColumn(DT.getList_C().get(a));
+                              }
                         }
                   }
             }
-            
       }
 
       @Override
@@ -68,7 +60,7 @@ public class SelectColumns implements IActions {
             System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
-                          "SelectColumns: " + ex.toString(), 8000);
+                    "SelectColumns: " + ex.toString(), 8000);
       }
 
 }

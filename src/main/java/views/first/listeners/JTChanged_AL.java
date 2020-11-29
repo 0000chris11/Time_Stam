@@ -16,6 +16,7 @@ import com.cofii.myMethods.MText;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
 import SQLActions.SelectATable;
+import SQLActions.UpdateDefaultTable;
 import com.cofii.myClasses.MSQL;
 import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
@@ -67,7 +68,7 @@ public class JTChanged_AL implements ActionListener {
                   }
 
                   DT.setTable(MText.filterTextName(ac, "ADD"));//DELETE
-                  ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainColumn, DT.getTable().replaceAll("_", " "),
+                  ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainTableColumns[1], DT.getTable().replaceAll("_", " "),
                           new SelectATable());
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ Data");
@@ -83,8 +84,14 @@ public class JTChanged_AL implements ActionListener {
                   if (change == true) {
                         System.out.println("MIActionListener ++++ ChangeDefault");
                         //PREPLACE WITH MS.UPDATE
+                        /*
                         mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
                                 DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock());
+                        */
+                        Object[] newValues = new Object[]{DT.getId(), DT.getTable(),
+                              DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock()};
+                        ms.updateRow(DTSQL.defautlTable, 
+                                DTSQL.mainTableColumns, newValues, 1, new UpdateDefaultTable());
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ MCSelectColumns");

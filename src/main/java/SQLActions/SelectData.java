@@ -49,25 +49,25 @@ public class SelectData implements IActions {
       }
 
       @Override
+      public void afterQuery(String string, boolean rsValue) {
+            if (rsValue) {
+                  if (VF_R.getSPL().getRightComponent() != VF_R.getSC_JT()) {
+                        VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
+                  }
+            } else {
+                  System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
+                  VF_R.getLB_JT().setText("NO ROWS DETECTED");
+                  VF_R.getLB_JT().setForeground(Color.RED);
+            }
+      }
+
+      @Override
       public void exception(SQLException ex, String query) {
             System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
                     "SelectData: " + ex.toString(), 8000);
-      }
-
-      @Override
-      public void afterQuery(String string, boolean rsValue) {
-            if (rsValue) {
-                  System.out.println("###Rows: YES");
-
-                  VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
-            } else {
-                  System.out.println("###Rows: NO");
-                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
-                  VF_R.getLB_JT().setText("NO ROWS DETECTED");
-                  VF_R.getLB_JT().setForeground(Color.RED);
-            }
       }
 
 }
