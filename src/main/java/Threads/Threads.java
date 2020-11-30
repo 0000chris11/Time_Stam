@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import java.util.concurrent.BrokenBarrierException;
 import MC.DT;
 import MC.DTSQL;
-import MC.MakeCon;
 import MC.notMyMethods;
 import com.cofii.myMethods.MImage;
 import com.cofii.myMethods.MTable;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 import javax.swing.table.AbstractTableModel;
 import Others.JTCellRenderer;
+import SQLActions.Insert;
 import SQLActions.SelectData;
 import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MList;
@@ -32,7 +32,6 @@ public class Threads {
 
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       //BTNS_MCActionListener BMA = new BTNS_MCActionListener();
@@ -59,38 +58,41 @@ public class Threads {
                         System.out.println("\tADD ++++ addThread starts");
 
                         ArrayList<String> listNewValues = new ArrayList<String>();
-                        //int b = 1;
                         for (int a = 0; a < DT.maxColumns; a++) {
                               if (VF_R.getJTFS()[a].isVisible()) {
-                                    listNewValues.add(VF_R.getJTFS()[a].getText());
-                              } else {
-                                    //ss[a] = tfs_MD[a].getText() + ":" + tfs_MU[a].getText() + ":" + tfs_SD[a].getText();
-                              }
+                                    if ((a + 1) == (int) DT.getExtra()[0]) {//AUTO VALUE REPLACE WITH NULL
+                                          listNewValues.add(null);
+                                    } else {
+                                          listNewValues.add(VF_R.getJTFS()[a].getText());
+                                    }
+                              } 
                         }
                         String[] columns = MList.getListToArray(String.class, DT.getList_C());
                         String[] newValues = MList.getListToArray(String.class, listNewValues);
                         //+++++++++++++++++++++++++++++++++++++++++
                         //CHANGE WHEN THERE IS NO >ID< FIELD
                         int mayor = MTable.getMayorId(VF_R.getJT(), 0);
-
+                        Insert ins = new Insert();
                         for (int a = 0; a < DT.maxColumns; a++) {
                               if (VF_R.getJT().getColumnCount() == a + 1) {
                                     System.out.println("\t\tADD ++++ INSERTING " + (a + 1)
                                             + " COLUMNS");
 
-                                    //ms.insert(DT.getTable(), columns, newValues, a, iu);
-                                    mc.Insert(DT.getTable(), ++mayor, listNewValues);
-                                    ms.selectData(DT.getTable(), new SelectData(a + 1));
+                                    ms.insert(DT.getTable(), columns, newValues, (int) DT.getExtra()[0], ins);
+                                    //mc.Insert(DT.getTable(), ++mayor, listNewValues);
+                                    if (ins.success) {
+                                          ms.selectData(DT.getTable(), new SelectData(a + 1));
+                                    }
                               }
                         }
+                        if (ins.success) {
+                              new LSTD().changeLSTD(DT.getTable(), DT.getDist1(),
+                                      DT.getDist2(), DT.getImageC(), DT.getTag(),
+                                      DT.getClock());
 
-                        new LSTD().changeLSTD(DT.getTable(), DT.getDist1(),
-                                DT.getDist2(), DT.getImageC(), DT.getTag(),
-                                DT.getClock());
-
-                        VF_R.getJT().clearSelection();
-                        n_mm.rez(VF_R.getJT(), DT.autoState);
-
+                              VF_R.getJT().clearSelection();
+                              n_mm.rez(VF_R.getJT(), DT.autoState);
+                        }
                         System.out.println("\tADD ++++ addStar Finished");
                   }
 
@@ -167,7 +169,7 @@ public class Threads {
                         DT.getList_cutUrl().clear();
                         //-------------------------------------------------------------------------------
                         int col = Character.getNumericValue(TB.charAt(1)) - 1;
-                        
+
                         DT.cols[0] = DT.getList_C().get(col);//UNUSED?
                         //++++++++++++++++++++++++++++++++++++++++++++++++++++++
                         Object data;

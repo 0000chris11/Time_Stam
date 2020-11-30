@@ -10,8 +10,6 @@ import smallComponenets.smallLB;
 import MC.DT;
 import MC.CompReset;
 import MC.notMyMethods;
-import MC.MakeCon;
-import MC.Status;
 import views.first.listeners.MainListeners_F;
 import views.first.listeners.JTChanged_AL;
 import com.cofii.myMethods.MText;
@@ -87,8 +85,6 @@ public class VF_R extends VF_R_DataCom {
       MainListeners_F ml = new MainListeners_F();
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);
-      //ArraysM am = new ArraysM();
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
       //++++++++-+++++++++++++++++++++++++++++++++++++
       int state = 1;

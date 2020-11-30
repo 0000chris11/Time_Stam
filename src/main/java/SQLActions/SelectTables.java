@@ -34,7 +34,7 @@ public class SelectTables implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs, int row) throws SQLException {
             DT.getList_id().add(rs.getString(1));
             DT.getList_T().add(rs.getString(2));
             DT.getList_Dist1().add(rs.getString(3));

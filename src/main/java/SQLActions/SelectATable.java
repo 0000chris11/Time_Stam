@@ -26,7 +26,7 @@ public class SelectATable implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException{
+      public void setData(ResultSet rs, int row) throws SQLException{
             DT.setId(rs.getString(1));
             DT.setTable(rs.getString(2));
             DT.setDist1(rs.getString(3));

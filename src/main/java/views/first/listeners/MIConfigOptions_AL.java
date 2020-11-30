@@ -3,11 +3,9 @@ package views.first.listeners;
 import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
-import MC.MakeCon;
 import MC.Status;
 import MC.notMyMethods;
 import SQLActions.SelectConfig;
-import SQLActions.SelectTables;
 import SQLActions.Update;
 import com.cofii.myClasses.MSQL;
 import java.awt.event.ActionEvent;
@@ -20,7 +18,6 @@ import javax.swing.JComponent;
  */
 public class MIConfigOptions_AL implements ActionListener {
 
-      MakeCon mc = new MakeCon(this.getClass().getName(), DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       @Override

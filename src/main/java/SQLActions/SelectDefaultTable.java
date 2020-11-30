@@ -28,7 +28,7 @@ public class SelectDefaultTable implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException{            
+      public void setData(ResultSet rs, int row) throws SQLException{            
             DT.setId(rs.getString(1));
             String table = rs.getString(2);
             DT.setTable(table);

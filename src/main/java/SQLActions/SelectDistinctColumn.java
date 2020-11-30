@@ -5,37 +5,40 @@
  */
 package SQLActions;
 
-import MC.DTSQL;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author C0FII
  */
-public class DefaultTableExist implements IActions{
-      
-      private String table;
+public class SelectDistinctColumn implements IActions{
 
+      private ArrayList<String> List;
+      public boolean rsValues;
+      
+      public SelectDistinctColumn(ArrayList<String> list){
+            List = list;
+      }
+      
       @Override
       public void beforeQuery() {
-            
+            List.clear();
       }
 
       @Override
-      public void setData(ResultSet rs, int row) throws SQLException {
-            table = rs.getString(1);
+      public void setData(ResultSet rs, int i) throws SQLException {
+            List.add(rs.getString(1));
       }
 
       @Override
       public void afterQuery(String string, boolean bln) {
-            if(bln && table.equals(DTSQL.defautlTable)){
-                  System.out.println("Default Table Already Exist");
-                  DTSQL.setDefaultTableExist(true);
+            if(bln){
+                  rsValues = true;
             }else{
-                  System.out.println("Default Table doesn't exist");
-                  DTSQL.setDefaultTableExist(false);
+                  rsValues = false;
             }
       }
 

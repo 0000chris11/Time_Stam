@@ -41,8 +41,11 @@ public class DT {
 
       private static ArrayList<String> list_C = new ArrayList<String>();//COLUMNS
       private static ArrayList<Object> list_R = new ArrayList<Object>();//ROWS
-      private static ArrayList<String> list_TP = new ArrayList<String>();//COL TYPE
-      private static ArrayList<String> list_NL = new ArrayList<String>();//COL NULL
+      private static ArrayList<String> list_Types = new ArrayList<String>();//COL TYPE
+      private static ArrayList<String> list_Nulls = new ArrayList<String>();//COL NULL
+      private static int primaryKey = 0;//SINGLE PRIMARY KEY
+      private static ArrayList<String> list_Defaults = new ArrayList<String>();//COL DEFAULT VALUES
+      private static Object[] extra = new Object[2];
 
       private static ArrayList<String>[] list_DS = new ArrayList[DT.maxColumns];//DISTINC LISTS
       private static ArrayList<String>[] list_MXS = new ArrayList[DT.maxColumns - 1];//MIXED LISTS
@@ -219,14 +222,34 @@ public class DT {
             return list_R;
       }
 
-      public static ArrayList<String> getList_TP() {
-            return list_TP;
+      public static ArrayList<String> getList_Types() {
+            return list_Types;
       }
 
-      public static ArrayList<String> getList_NL() {
-            return list_NL;
+      public static ArrayList<String> getList_Nulls() {
+            return list_Nulls;
       }
 
+      public static int getPrimaryKey(){
+            return primaryKey;
+      }
+      
+      public static void setPrimaryKey(int v){
+            primaryKey = v;
+      }
+      
+      public static ArrayList<String> getList_Defaults(){
+            return list_Defaults;
+      }
+      
+      public static Object[] getExtra(){
+            return extra;
+      }
+      
+      public static void setExtra(int v1, String v2){
+            extra[0] = v1;
+            extra[1] = v2;
+      }
       //=======================================
       public static ArrayList<String>[] getList_DS(){
             return list_DS;

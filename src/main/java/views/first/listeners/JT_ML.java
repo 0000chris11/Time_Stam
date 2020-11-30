@@ -10,7 +10,6 @@ import javax.swing.event.TableModelListener;
 import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
-import MC.MakeCon;
 import Others.LSTD;
 import MC.notMyMethods;
 import SQLActions.Update;
@@ -29,7 +28,6 @@ public class JT_ML implements TableModelListener {
       String CName = this.getClass().getName();
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
       LSTD lstd = new LSTD();
       Threads th = new Threads(CName, DT.CCount++);

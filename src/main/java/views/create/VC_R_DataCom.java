@@ -87,16 +87,18 @@ public class VC_R_DataCom {
 
       static String[] cb_options = new String[]{
             "INT", "FLOAT", "DOUBLE", "VARCHAR", "BOOLEAN/TINYINT(1)", "DATE"};
-      static JComboBox comb = new smallCOMBX(cb_options);
-      static JCheckBox checkb = new smallCHBX();
+      static JComboBox combTypes = new smallCOMBX(cb_options);
+      static JCheckBox checkbNulls = new smallCHBX();
 
-      static JPanel panelType2 = new JPanel();
-      static JRadioButton rbType2 = new JRadioButton();
-      static String[] cbType_options = new String[]{"AUTO INCREMENT", "IDENTITY"};
-      static JComboBox combType2 = new smallCOMBX(cbType_options);
-      static JTextField tfType1 = new NumberOTF();
-      static JTextField tfType2 = new NumberOTF();
+      static JPanel panelExtra = new JPanel();
+      static JRadioButton rbExtra = new JRadioButton();//NO BUTTON GROUP
+      static String[] cbExtra_options = new String[]{"AUTO INCREMENT", "IDENTITY"};
+      static JComboBox combExtra = new smallCOMBX(cbExtra_options);
+      static JTextField tfIDEN1 = new NumberOTF();
+      static JTextField tfIDEN2 = new NumberOTF();
 
+      static J//BUTTON GROUP?????????????
+      
       static JToggleButton btn_Dist = new smallBTN_TG(DT.GP_celesteWhite);
       static JToggleButton btn_Dist2 = new smallBTN_TG(null);
       static JToggleButton btn_ImageC = new smallBTN_TG(DT.GP_greenWhite);

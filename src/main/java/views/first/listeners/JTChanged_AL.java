@@ -5,11 +5,9 @@ import views.first.VF_R;
 import MC.notMyMethods;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import MC.MakeCon;
 import MC.CompReset;
 import MC.DT;
 import MC.DTSQL;
-import MC.DTT;
 import SQLActions.SelectColumns;
 import MC.Status;
 import com.cofii.myMethods.MText;
@@ -43,7 +41,6 @@ public class JTChanged_AL implements ActionListener {
       LSTD lstd = new LSTD();
       MainListeners_F ml = new MainListeners_F();
 
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       @Override

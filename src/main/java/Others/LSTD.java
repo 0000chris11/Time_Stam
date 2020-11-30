@@ -2,14 +2,17 @@ package Others;
 
 import views.first.VF_R;
 import MC.DT;
+import MC.DTSQL;
 import Threads.Threads;
-import MC.MakeCon;
-import com.cofii.myInterfaces.IActions;
+import SQLActions.SelectDistinctColumn;
+import SQLActions.SelectDistinctColumns;
+import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MList;
 import com.cofii.myMethods.MText;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 
 /**
  *
@@ -22,7 +25,7 @@ public class LSTD {
 
       //MethodM mm = new MethodM(CName, DT.CCount++);
       Threads th = new Threads(CName, DT.CCount++);
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
+      MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       public void changeLSTD(String table, String D1, String D2, String IC, String TG1,
               String CK) {
@@ -59,7 +62,16 @@ public class LSTD {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("TG2 = " + TG2);
             changeCK(CK);
-
+            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            int pk = DT.getPrimaryKey();
+            System.out.println("\tPrimary key: C" + pk);
+            if(DT.getPrimaryKey() > 0){
+                  VF_R.getJLBS()[pk - 1].setForeground(Color.YELLOW.darker());
+            }else{
+                  for(JLabel x: VF_R.getJLBS()){
+                        x.setForeground(Color.WHITE);
+                  }
+            }
       }
 
       private void changeLSTDist1(int index, String table, String col) {
@@ -69,6 +81,7 @@ public class LSTD {
             System.out.println("\tindex: " + index);
             System.out.println("\ttable: " + table);
             System.out.println("\tcol: " + col);
+
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (index + 1 == a + 1) {
                         vis = true;
@@ -78,9 +91,15 @@ public class LSTD {
 
                         VF_R.getJTFS()[a].setBackground(DT.TFColor[1]);
                         //+++++++++++++++++++++++++++++++++++++++++++++++
-                        mc.MCInsertSelectD1(table, col, DT.getList_DS()[a]);//listDs[a + 2]
-                        MList.unTagList(DT.getList_DS()[a]);
-                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
+                        SelectDistinctColumn sdc = new SelectDistinctColumn(DT.getList_DS()[a]);
+                        ms.selectDistinctColumn(table, col, sdc);
+                        if (sdc.rsValues) {
+                              //mc.MCInsertSelectD1(table, col, DT.getList_DS()[a]);//listDs[a + 2]
+                              MList.unTagList(DT.getList_DS()[a]);
+                              MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
+                        } else {
+                              System.out.println("\tno elements distinct");
+                        }
                   }
             }
       }
@@ -97,10 +116,16 @@ public class LSTD {
 
                         VF_R.getJTFS()[a + 1].setBackground(DT.TFColor[2]);
 
-                        mc.MCInsertSelectD2(table, col1, col2, DT.getList_DS()[a], DT.getList_DS()[a + 1]);//listDs[a + 2] & listDs[a + 3]
-                        DT.getList_MXS()[a] = MList.mixRowList(DT.getList_DS()[a], DT.getList_DS()[a + 1], ": ");//listSs[a + 2]
-                        MList.unTagList(DT.getList_MXS()[a]);//listSs[a + 2]
-                        MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
+                        SelectDistinctColumns sdc = new SelectDistinctColumns(DT.getList_DS()[a], DT.getList_DS()[a + 1]);
+                        ms.selectDistinctColumns(table, new String[]{col1, col2}, col1, sdc);
+                        if (sdc.rsValues) {
+                              //mc.MCInsertSelectD2(table, col1, col2, DT.getList_DS()[a], DT.getList_DS()[a + 1]);//listDs[a + 2] & listDs[a + 3]
+                              DT.getList_MXS()[a] = MList.mixRowList(DT.getList_DS()[a], DT.getList_DS()[a + 1], ": ");//listSs[a + 2]
+                              MList.unTagList(DT.getList_MXS()[a]);//listSs[a + 2]
+                              MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
+                        }else{
+                              System.out.println("\tno elements distinct (multiple columns)");
+                        }
                   }
             }
       }

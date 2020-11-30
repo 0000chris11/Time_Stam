@@ -28,7 +28,7 @@ public class SelectConfig implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs, int row) throws SQLException {
             DT.getList_TC().add(rs.getString(2));
             DT.getList_BL().add(rs.getBoolean(3));
       }

@@ -6,10 +6,7 @@
 package views.choice;
 
 import views.choice.VO;
-import views.first.VF_R;
-import MC.DT;
 import MC.DTSQL;
-import MC.MakeCon;
 import SQLActions.DeleteTable;
 import com.cofii.myClasses.MSQL;
 import java.awt.event.ActionEvent;
@@ -18,11 +15,10 @@ import smallComponenets.JPanelGradient;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class VO_AL implements ActionListener {
 
-      MakeCon mc = new MakeCon(this.getClass().toString(), DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
       private String QT;
       private String Table;

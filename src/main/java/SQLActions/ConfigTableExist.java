@@ -24,7 +24,7 @@ public class ConfigTableExist implements IActions{
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs, int row) throws SQLException {
             configTable = rs.getString(1);
       }
 

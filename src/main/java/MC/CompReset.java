@@ -18,7 +18,6 @@ import com.cofii.myMethods.MText;
 public class CompReset {
 
       String CName = this.getClass().getName();
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       public void changeLB_TFandSelectData(int cc, ArrayList<String> listC) {

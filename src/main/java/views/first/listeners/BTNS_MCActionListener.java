@@ -6,15 +6,16 @@ import java.util.ArrayList;
 import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
-import MC.MakeCon;
 import MC.Status;
 import MC.notMyMethods;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
+import SQLActions.DeleteRow;
 import SQLActions.SelectData;
 import SQLActions.Update;
 import Threads.Threads;
 import com.cofii.myClasses.MSQL;
+import com.cofii.myMethods.MList;
 import java.awt.Color;
 
 /**
@@ -28,7 +29,6 @@ public class BTNS_MCActionListener implements ActionListener {
       
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
-      MakeCon mc = new MakeCon(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
       Threads th = new Threads(CName, DT.CCount++);
 
@@ -116,7 +116,10 @@ public class BTNS_MCActionListener implements ActionListener {
             DT.bool_Del = true;
             //System.out.println("\nDELETING DATA");
 
-            mc.DeleteRow(DT.getTable(), DT.getList_R().get(0));
+            String[] cols = MList.getListToArray(String.class, DT.getList_C());
+            Object[] values = MList.getListToArray(Object.class, DT.getList_R());
+            ms.deleteRow(DT.getTable(), cols, values, new DeleteRow(values));
+            //mc.DeleteRow(DT.getTable(), DT.getList_R().get(0));
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VF_R.getJT().getColumnCount() == a + 2) {
                         //mc.SelectData(a + 2, DT.getTable());

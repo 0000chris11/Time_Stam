@@ -39,7 +39,7 @@ public class SelectData implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs, int rowN) throws SQLException {
             for (int a = 0; a < Cols; a++) {
                   row[a] = rs.getString(a + 1);
             }

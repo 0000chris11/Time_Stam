@@ -75,13 +75,13 @@ public class VC_R2 extends VC_R_DataCom {
                   headers[a] = new smallLB(headers_t[a]);
             }
 
-            panelType2.setLayout(new BoxLayout(panelType2, BoxLayout.X_AXIS));
+            panelExtra.setLayout(new BoxLayout(panelExtra, BoxLayout.X_AXIS));
 
-            panelType2.add(rbType2);
-            panelType2.add(combType2);
-            panelType2.add(tfType1);
-            panelType2.add(tfType2);
-            panelType2.add(Box.createGlue());
+            panelExtra.add(rbExtra);
+            panelExtra.add(combExtra);
+            panelExtra.add(tfIDEN1);
+            panelExtra.add(tfIDEN2);
+            panelExtra.add(Box.createGlue());
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -265,7 +265,7 @@ public class VC_R2 extends VC_R_DataCom {
             GroupLayout gl = new GroupLayout(JPC);
             JPC.setLayout(gl);
             JComponent[] comps = new JComponent[]{
-                  lb, tf, btn_m, btn_p, comb, checkb, panelType2,
+                  lb, tf, btn_m, btn_p, combTypes, checkbNulls, panelExtra,
                   btn_Dist, btn_Dist2, btn_ImageC, btn_Tag, btn_Clock};
             MLayout.setSerializationExceptionAction(new SerializationExceptionAction() {
                   @Override

@@ -29,7 +29,7 @@ public class MainTableExistFQ implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs) throws SQLException {
+      public void setData(ResultSet rs, int row) throws SQLException {
             MainTableName = rs.getObject(1).toString();
 
       }

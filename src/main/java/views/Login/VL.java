@@ -63,7 +63,7 @@ public class VL extends VL_DataCom {
                   }
 
                   @Override
-                  public void setData(ResultSet rs) throws SQLException {
+                  public void setData(ResultSet rs, int row) throws SQLException {
                         DTSQL.setUser(rs.getString(1));
                         DTSQL.setPassw(rs.getString(2));
                         DTSQL.setDatabase(rs.getString(3));
@@ -96,7 +96,7 @@ public class VL extends VL_DataCom {
                   }
 
                   @Override
-                  public void setData(ResultSet rs) throws SQLException {
+                  public void setData(ResultSet rs, int row) throws SQLException {
                         String data = rs.getString(1);
                         if (!MOthers.getEqualMatchFromStringToArray(data, DTSQL.bandUsers)) {
                               cbUser.addItem(data);
@@ -130,7 +130,7 @@ public class VL extends VL_DataCom {
                   }
 
                   @Override
-                  public void setData(ResultSet rs) throws SQLException {
+                  public void setData(ResultSet rs, int row) throws SQLException {
                         String data = rs.getString(1);
                         if (!MOthers.getEqualMatchFromStringToArray(data, DTSQL.bandDB)) {
                               cbDB.addItem(data);
