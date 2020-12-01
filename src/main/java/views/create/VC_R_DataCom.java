@@ -6,6 +6,7 @@
 package views.create;
 
 import MC.DT;
+import MC.LK;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.Box;
@@ -96,36 +97,42 @@ public class VC_R_DataCom {
       static JComboBox combExtra = new smallCOMBX(cbExtra_options);
       static JTextField tfIDEN1 = new NumberOTF();
       static JTextField tfIDEN2 = new NumberOTF();
-
-      static J//BUTTON GROUP?????????????
+      static JRadioButton rbPK = new JRadioButton();
       
-      static JToggleButton btn_Dist = new smallBTN_TG(DT.GP_celesteWhite);
+      static JToggleButton btn_Dist = new smallBTN_TG(LK.GP_CYAN_AND_WHITE);
       static JToggleButton btn_Dist2 = new smallBTN_TG(null);
-      static JToggleButton btn_ImageC = new smallBTN_TG(DT.GP_greenWhite);
-      static JToggleButton btn_Tag = new smallBTN_TG(DT.GP_celesteWhite);
-      static JToggleButton btn_Clock = new smallBTN_TG(DT.GP_yellowWhite);
+      static JToggleButton btn_ImageC = new smallBTN_TG(LK.GP_GREEN_AND_WHITE);
+      static JToggleButton btn_Tag = new smallBTN_TG(LK.GP_CYAN_AND_WHITE);
+      static JToggleButton btn_Clock = new smallBTN_TG(LK.GP_YELLOW_AND_WHITE);
       //++++++++++++++++++++++++++++++++++++++++++++++
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       static JButton[] btns_p = new smallBTN_C[DT.maxColumns];
       static JButton[] btns_m = new smallBTN_C[DT.maxColumns];
-      static JComboBox[] combTypes1 = new smallCOMBX[DT.maxColumns];
-      static JCheckBox[] checkbs = new smallCHBX[DT.maxColumns];
-      static JPanel[] panelTypes2 = new JPanel[DT.maxColumns];
-      static JRadioButton[] rbTypes2 = new JRadioButton[DT.maxColumns];
-      static int rb_Types2Selected = -1;
-      static JComboBox[] combTypes2 = new smallCOMBX[DT.maxColumns];
-      static JTextField[] tfsTypes1 = new NumberOTF[DT.maxColumns];
-      static JTextField[] tfsTypes2 = new NumberOTF[DT.maxColumns];
+      static JComboBox[] combsTypes = new smallCOMBX[DT.maxColumns];
+      static JCheckBox[] checkbsNull = new smallCHBX[DT.maxColumns];
+      static JPanel[] panelsExtra = new JPanel[DT.maxColumns];
+      
+      static JRadioButton[] rbsExtra = new JRadioButton[DT.maxColumns];
+      static int rb_ExtraSelected = -1;
+      
+      static JComboBox[] combsExtra = new smallCOMBX[DT.maxColumns];
+      static JTextField[] tfsIDEN1 = new NumberOTF[DT.maxColumns];
+      static JTextField[] tfsIDEN2 = new NumberOTF[DT.maxColumns];
       static JToggleButton[] btns_Dist = new smallBTN_TG[DT.maxColumns];
       static JToggleButton[] btns_Dist2 = new smallBTN_TG[DT.maxColumns];
+      
       static JToggleButton[] btns_ImageC = new smallBTN_TG[DT.maxColumns];
       static int btn_ImageCSelected = -1;
-      static int btn_ClockSelected = -1;
+      
       static ButtonGroup imageCGroup;
       static ButtonGroup clockGroup;
       static JToggleButton[] btns_Tag = new smallBTN_TG[DT.maxColumns];
+      
       static JToggleButton[] btns_Clock = new smallBTN_TG[DT.maxColumns];
+      static int btn_ClockSelected = -1;
+      
+      static JRadioButton[] rbsPK = new JRadioButton[DT.maxColumns];
       //++++++++++++++++++++++++++++++++++++++++++
 
       public static JPanel getPC() {
@@ -187,31 +194,31 @@ public class VC_R_DataCom {
       }
 
       public static JComboBox[] getCombTypes1() {
-            return combTypes1;
+            return combsTypes;
       }
 
       public static JCheckBox[] getCheckbs() {
-            return checkbs;
+            return checkbsNull;
       }
 
       public static JPanel[] getPanelTypes2() {
-            return panelTypes2;
+            return panelsExtra;
       }
 
       public static JRadioButton[] getRBTypes2() {
-            return rbTypes2;
+            return rbsExtra;
       }
 
       public static JComboBox[] getCombTypes2() {
-            return combTypes2;
+            return combsExtra;
       }
 
       public static JTextField[] getTFSTypes1() {
-            return tfsTypes1;
+            return tfsIDEN1;
       }
 
       public static JTextField[] getTFSTypes2() {
-            return tfsTypes2;
+            return tfsIDEN2;
       }
 
       public static JToggleButton[] getBTNS_Dist() {
@@ -239,11 +246,11 @@ public class VC_R_DataCom {
       }
       
       public static int getRB_Types2Selected(){
-            return rb_Types2Selected;
+            return rb_ExtraSelected;
       }
       
       public static void setRB_Types2Selected(int v){
-            rb_Types2Selected = v;
+            rb_ExtraSelected = v;
       }
 
       public static JToggleButton[] getBTNS_Tag() {

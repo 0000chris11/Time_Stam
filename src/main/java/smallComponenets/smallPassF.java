@@ -6,6 +6,7 @@
 package smallComponenets;
 
 import MC.DT;
+import MC.LK;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JPasswordField;
@@ -18,10 +19,10 @@ public class smallPassF extends JPasswordField{
       
       public smallPassF(){
             Font f = new Font("Dialog", Font.BOLD, 16);
-            setBackground(DT.TFColor[0]);
+            setBackground(LK.CP_BK_NORMAL);
             setForeground(Color.WHITE);
             
-            setBorder(DT.compoundBorder_N);
+            setBorder(LK.BORDER_LINEMARIGIN_FOCUS_OFF);
             //+++++++++++++++++++++++++++++++++++++++
             setFont(f);
             setEnabled(true);

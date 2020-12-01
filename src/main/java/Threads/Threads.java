@@ -59,11 +59,11 @@ public class Threads {
 
                         ArrayList<String> listNewValues = new ArrayList<String>();
                         for (int a = 0; a < DT.maxColumns; a++) {
-                              if (VF_R.getJTFS()[a].isVisible()) {
+                              if (VF_R.getJCBS()[a].isVisible()) {
                                     if ((a + 1) == (int) DT.getExtra()[0]) {//AUTO VALUE REPLACE WITH NULL
                                           listNewValues.add(null);
                                     } else {
-                                          listNewValues.add(VF_R.getJTFS()[a].getText());
+                                          listNewValues.add(VF_R.getJCBS()[a].getSelectedItem().toString());
                                     }
                               } 
                         }

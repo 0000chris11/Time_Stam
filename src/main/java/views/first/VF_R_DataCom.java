@@ -1,6 +1,7 @@
 package views.first;
 
 import MC.DT;
+import MC.LK;
 import com.cofii.myMethods.MCell;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -23,10 +24,12 @@ import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import java.awt.GradientPaint;
 import java.util.EventObject;
+import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import smallComponenets.JPanelGradient;
+import smallComponenets.MComboBoxE;
 import smallComponenets.smallBTN_C;
 
 /**
@@ -43,7 +46,7 @@ public class VF_R_DataCom {
       static JSplitPane SPL_SUB = new JSplitPane(JSplitPane.VERTICAL_SPLIT);    
       static JPanel PL_U = new JPanel();
       static JPanel PL_UT = new JPanel();
-      static JPanel PL_UC = new JPanelGradient(DT.GP_blackRed);
+      static JPanel PL_UC = new JPanelGradient(LK.GP_BLACK_AND_DARK_RED);
       static JScrollPane sc_PL_UC = new JScrollPane(PL_UC);
       
       static JPanel PL_B = new JPanel();
@@ -120,6 +123,7 @@ public class VF_R_DataCom {
       static JLabel lb_Title = new JLabel("No Table Selected");
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
+      static JComboBox[] cbs = new MComboBoxE[DT.maxColumns];
       static JButton[] btns_C = new JButton[DT.maxColumns];
       static JScrollPane[] scs = new JScrollPane[DT.maxColumns];
       static JList[] lsts = new JList[DT.maxColumns];
@@ -251,8 +255,12 @@ public class VF_R_DataCom {
       public static JLabel[] getJLBS() {
             return lbs;
       }
-
-      public static JTextField[] getJTFS() {
+      
+      public static JComboBox[] getJCBS(){
+            return cbs;
+      }
+      
+      public static JTextField[] getJTFS(){
             return tfs;
       }
 

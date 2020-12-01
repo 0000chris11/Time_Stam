@@ -5,10 +5,10 @@ import static views.first.VF_R_DataCom.JT;
 import static views.first.VF_R_DataCom.btn_plus;
 import static views.first.VF_R_DataCom.btns_MC;
 import static views.first.VF_R_DataCom.lb_Status;
-import static views.first.VF_R_DataCom.tfs;
 import smallComponenets.smallLB;
 import MC.DT;
 import MC.CompReset;
+import MC.LK;
 import MC.notMyMethods;
 import views.first.listeners.MainListeners_F;
 import views.first.listeners.JTChanged_AL;
@@ -68,6 +68,7 @@ import javax.swing.JPopupMenu.Separator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationUtils;
+import smallComponenets.MComboBoxE;
 import views.Login.VL;
 
 /**
@@ -162,7 +163,7 @@ public class VF_R extends VF_R_DataCom {
             }
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setVisible(b);
-                  tfs[a].setVisible(b);
+                  cbs[a].setVisible(b);
 
                   clocks[a].setVisible(b);
                   btns_C[a].setVisible(b);
@@ -177,7 +178,7 @@ public class VF_R extends VF_R_DataCom {
             Font f = JT.getFont();
 
             tf_ce.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
-            tf_ce.setBorder(DT.compoundBorder_N);
+            tf_ce.setBorder(LK.BORDER_LINEMARIGIN_FOCUS_OFF);
             tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
@@ -239,6 +240,7 @@ public class VF_R extends VF_R_DataCom {
             subSplitDownConfig();
             //*++++++++++++++++++++++++++++++++++++++++++++
             setComponentsToArray();
+            getJTextFieldsOfJComboBox();
             componentsVisibility();
             //++++++++++++++++++++++++++
             clockConfig();
@@ -253,7 +255,7 @@ public class VF_R extends VF_R_DataCom {
                   PL_UC.setLayout(gl);
 
                   MLayout ml = new MLayout(gl, DT.maxColumns);
-                  ml.useFiveAndOneSequence(lbs, tfs, clocks, scs, btns_C);
+                  ml.useFiveAndOneSequence(lbs, cbs, clocks, scs, btns_C);
                   componentsGroupLayout();
             }
 
@@ -469,7 +471,7 @@ public class VF_R extends VF_R_DataCom {
             JT.setGridColor(Color.GRAY);
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JT.setRowSelectionAllowed(true);
-            JT.setSelectionBackground(DT.TFColor[2]);
+            JT.setSelectionBackground(LK.CP_BK_DIST2);
             //JT.setPreferredScrollableViewportSize();
             //JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
             //System.out.println("PT size: " + PT.getSize());
@@ -493,7 +495,7 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void clockConfig() {
-            int h = tfs[0].getHeight();
+            int h = cbs[0].getHeight();
             Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
             Color[] c = {new Color(51, 51, 51), Color.WHITE};
@@ -586,9 +588,9 @@ public class VF_R extends VF_R_DataCom {
       }
 
       private void clockNullLayout() {
-            int h = tfs[0].getHeight();
+            int h = cbs[0].getHeight();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  clocks[a].setLocation(tfs[a].getX() + 160, tfs[a].getY());
+                  clocks[a].setLocation(cbs[a].getX() + 160,cbs[a].getY());
                   clocks[a].setSize(196, h);
                   //clocks[a].setSize(130, h);
             }
@@ -596,6 +598,8 @@ public class VF_R extends VF_R_DataCom {
 
       private void componentsGroupLayout() {
             for (int a = 0; a < DT.maxColumns; a++) {
+                  cbs[a].setMinimumSize(new Dimension(100, 27));
+                  cbs[a].setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
                   clocks[a].setMinimumSize(new Dimension(196, 27));
                   clocks[a].setMaximumSize(new Dimension(196, 27));
                   scs[a].setMinimumSize(new Dimension(100, 200));
@@ -678,7 +682,7 @@ public class VF_R extends VF_R_DataCom {
             //=================================
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = new smallLB();
-                  tfs[a] = new smallTF();
+                  cbs[a] = new MComboBoxE();
             }
             //================================
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -693,6 +697,13 @@ public class VF_R extends VF_R_DataCom {
             //++++++++++++++++++++++++++++++++++++++
 
       }
+      
+      private void getJTextFieldsOfJComboBox(){
+            for (int a = 0;a < DT.maxColumns; a++){
+                  tfs[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
+                  tfs[a].setBackground(LK.CP_BK_NORMAL);
+            }
+      }
 
       private void setNullLayoutComponentsSize() {
             int disLY = 0;
@@ -700,14 +711,14 @@ public class VF_R extends VF_R_DataCom {
             System.out.println(SPL.getBackground());
             for (int a = 0; a < DT.maxColumns; a++) {
                   PL_UC.add(lbs[a]);
-                  PL_UC.add(tfs[a]);
+                  PL_UC.add(cbs[a]);
 
                   lbs[a].setBounds(6, 38 + disLY, 100, 27);
                   if (a == 0) {
                         lbs[a].setText("1. Id");
-                        tfs[a].setBounds(107, 38, 110, 27);
+                        cbs[a].setBounds(10,38,110, 27);
                   } else {
-                        tfs[a].setBounds(107, 72 + disTY, 290, 27);
+                        cbs[a].setBounds(107, 72 + disTY, 290, 27);
                         disTY += 33;
                   }
                   disLY += 33;
@@ -719,7 +730,7 @@ public class VF_R extends VF_R_DataCom {
                   PL_UC.add(scs[a]);
                   PL_UC.add(btns_C[a]);
 
-                  btns_C[a].setLocation(402, tfs[a].getY());
+                  btns_C[a].setLocation(402, cbs[a].getY());
             }
       }
 
@@ -792,7 +803,8 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("lbs Length: " + lbs.length);
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setName("LB_" + (a + 1));
-                  tfs[a].setName("TF_" + (a + 1));
+                  cbs[a].setName("CBS_" + (a + 1));
+                  tfs[a].setName("TFS_" + (a + 1));
                   scs[a].setName("SC_" + (a + 1));
                   lsts[a].setName("LST_" + (a + 1));
                   btns_C[a].setName("BTNC_" + (a + 1));
@@ -942,10 +954,10 @@ public class VF_R extends VF_R_DataCom {
                               Logger.getLogger(VF_R.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
-                        JF.setSize(DT.defaultFrameSize);
+                        JF.setSize(LK.MAIN_FRAME_SIZE);
                         MComp.setFrameToCenterOfScreen(JF);
-                        SPL.setSize(DT.defaultFrameSize);//TAKING THE PORCENTAGE OF THE SPLITS
-                        SPL_SUB.setSize(DT.defaultFrameSize);
+                        SPL.setSize(LK.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
+                        SPL_SUB.setSize(LK.MAIN_FRAME_SIZE);
 
                         SPL.setDividerLocation(0.4);
                         if (DT.getImageC() != null) {

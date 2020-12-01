@@ -8,14 +8,12 @@ package views.create;
 import views.create.listeners.BTN_Dists;
 import views.create.listeners.BTN_MP_AL;
 import views.create.listeners.CBType1_IL;
-import views.create.listeners.CBType2_IL;
-import views.create.listeners.RBType2_AL;
+import views.create.listeners.CBExtra_IL;
+import views.create.listeners.RBExtra_AL;
 import views.create.listeners.TFTable_KL_Control;
 import views.create.listeners.TF_KL_Control;
 import views.create.renderers.ComboBoxRenderer;
-import static views.create.VC_R_DataCom.combTypes2;
 import static views.create.VC_R_DataCom.lb_Status;
-import static views.create.VC_R_DataCom.rbTypes2;
 import MC.DT;
 import Others.LimitN;
 import com.cofii.myClasses.MLayout;
@@ -63,6 +61,8 @@ import smallComponenets.smallCOMBX;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
 import smallComponenets.smallTR_JP;
+import static views.create.VC_R_DataCom.rbsExtra;
+import static views.create.VC_R_DataCom.combsExtra;
 
 /**
  *
@@ -119,42 +119,45 @@ public class VC_R2 extends VC_R_DataCom {
                   tfs[a] = (smallTF) getColumn(JComponent.class, compsD, 1)[a + 1];
                   btns_m[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 2)[a + 1];
                   btns_p[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 3)[a + 1];
-                  combTypes1[a] = (smallCOMBX) getColumn(JComponent.class, compsD, 4)[a + 1];
-                  checkbs[a] = (smallCHBX) getColumn(JComponent.class, compsD, 5)[a + 1];
-                  panelTypes2[a] = (JPanel) getColumn(JComponent.class, compsD, 6)[a + 1];
-                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 7)[a + 1];
-                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
-                  btns_ImageC[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
-                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
-                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];
+                  combsTypes[a] = (smallCOMBX) getColumn(JComponent.class, compsD, 4)[a + 1];
+                  checkbsNull[a] = (smallCHBX) getColumn(JComponent.class, compsD, 5)[a + 1];
+                  panelsExtra[a] = (JPanel) getColumn(JComponent.class, compsD, 6)[a + 1];
+                  rbsPK[a] = (JRadioButton) getColumn(JComponent.class, compsD, 7)[a + 1];
+                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
+                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
+                  btns_ImageC[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
+                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];
+                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 12)[a + 1];
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   lbOrigText[a] = "Column " + (a + 1);
                   btns_ImageC[a].setName("btns_ImageC " + (a + 1));
                   btns_Clock[a].setName("btns_Clock " + (a + 1));
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  panelTypes2[a].setBackground(Color.BLACK);
+                  panelsExtra[a].setBackground(Color.BLACK);
+                  rbsPK[a].setBackground(Color.BLACK);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   tfs[a].setMinimumSize(new Dimension(200, 27));
-                  panelTypes2[a].setMinimumSize(new Dimension(40, 27));
+                  panelsExtra[a].setMinimumSize(new Dimension(40, 27));
                   //panelTypes2[a].setPreferredSize(new Dimension(40, 27));
-                  panelTypes2[a].setMaximumSize(new Dimension(320, 27));
+                  panelsExtra[a].setMaximumSize(new Dimension(320, 27));
+                  
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   tfs[a].addKeyListener(tfkl);
                   btns_m[a].addActionListener(btnAC);
                   btns_p[a].addActionListener(btnAC);
-                  combTypes1[a].addItemListener(cbListener1);
+                  combsTypes[a].addItemListener(cbListener1);
                   btns_Dist[a].addActionListener(btnDis);
                   btns_Tag[a].addActionListener(btnDis);
                   btns_ImageC[a].addActionListener(btnDis);
                   btns_Clock[a].addActionListener(btnDis);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  panelTypes2[a].setOpaque(true);
+                  panelsExtra[a].setOpaque(true);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   btns_Dist2[a].setEnabled(false);
             }
             //=======================================================
-            RBType2_AL rbListener = new RBType2_AL();
-            CBType2_IL cbListener2 = new CBType2_IL();
+            RBExtra_AL rbListener = new RBExtra_AL();
+            CBExtra_IL cbListener2 = new CBExtra_IL();
             //ButtonGroup bgRB = new ButtonGroup();
             
             JComponent[] pt2 = new JComponent[4];
@@ -164,58 +167,58 @@ public class VC_R2 extends VC_R_DataCom {
                   int count = 0;
                   int countR = 0;
                   for (int b = 0; b < pt2.length + 1; b++) {
-                        System.out.println("\t" + panelTypes2[a].getComponent(b).getClass().toString());
-                        if (!panelTypes2[a].getComponent(b).getClass().toString().contains("Filler")) {
-                              if (panelTypes2[a].getComponent(b).getClass().toString().contains("Radio")) {
+                        System.out.println("\t" + panelsExtra[a].getComponent(b).getClass().toString());
+                        if (!panelsExtra[a].getComponent(b).getClass().toString().contains("Filler")) {
+                              if (panelsExtra[a].getComponent(b).getClass().toString().contains("Radio")) {
                                     countR++;
                               }
                               if (countR <= 1) {
-                                    pt2[count] = (JComponent) panelTypes2[a].getComponent(b);
+                                    pt2[count] = (JComponent) panelsExtra[a].getComponent(b);
                                     System.out.println("\t\tC" + count + ": " + pt2[count++].getClass());
                               }
                         }
                   }
 
-                  rbTypes2[a] = (JRadioButton) pt2[0];
-                  combTypes2[a] = (smallCOMBX) pt2[1];
-                  tfsTypes1[a] = (NumberOTF) pt2[2];
-                  tfsTypes2[a] = (NumberOTF) pt2[3];
+                  rbsExtra[a] = (JRadioButton) pt2[0];
+                  combsExtra[a] = (smallCOMBX) pt2[1];
+                  tfsIDEN1[a] = (NumberOTF) pt2[2];
+                  tfsIDEN2[a] = (NumberOTF) pt2[3];
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  ((AbstractDocument) tfsTypes1[a].getDocument()).setDocumentFilter(new LimitN());
-                  ((AbstractDocument) tfsTypes2[a].getDocument()).setDocumentFilter(new LimitN());
+                  ((AbstractDocument) tfsIDEN1[a].getDocument()).setDocumentFilter(new LimitN());
+                  ((AbstractDocument) tfsIDEN2[a].getDocument()).setDocumentFilter(new LimitN());
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  rbTypes2[a].setBackground(Color.BLACK);
-                  combTypes2[a].setRenderer(new ComboBoxRenderer());
+                  rbsExtra[a].setBackground(Color.BLACK);
+                  combsExtra[a].setRenderer(new ComboBoxRenderer());
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  rbTypes2[a].addActionListener(rbListener);
-                  combTypes2[a].addItemListener(cbListener2);
+                  rbsExtra[a].addActionListener(rbListener);
+                  combsExtra[a].addItemListener(cbListener2);
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  combTypes2[a].setMinimumSize(new Dimension(100, 27));
-                  combTypes2[a].setMaximumSize(new Dimension(210, 27));
-                  tfsTypes1[a].setMinimumSize(new Dimension(40, 27));
-                  tfsTypes1[a].setPreferredSize(new Dimension(40, 27));
-                  tfsTypes1[a].setMaximumSize(new Dimension(40, 27));
-                  tfsTypes2[a].setMinimumSize(new Dimension(50, 27));
-                  tfsTypes2[a].setPreferredSize(new Dimension(40, 27));
-                  tfsTypes2[a].setMaximumSize(new Dimension(50, 27));
+                  combsExtra[a].setMinimumSize(new Dimension(100, 27));
+                  combsExtra[a].setMaximumSize(new Dimension(210, 27));
+                  tfsIDEN1[a].setMinimumSize(new Dimension(40, 27));
+                  tfsIDEN1[a].setPreferredSize(new Dimension(40, 27));
+                  tfsIDEN1[a].setMaximumSize(new Dimension(40, 27));
+                  tfsIDEN2[a].setMinimumSize(new Dimension(50, 27));
+                  tfsIDEN2[a].setPreferredSize(new Dimension(40, 27));
+                  tfsIDEN2[a].setMaximumSize(new Dimension(50, 27));
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  rbTypes2[a].setOpaque(true);
-                  combTypes2[a].setOpaque(true);
-                  tfsTypes1[a].setOpaque(true);
-                  tfsTypes2[a].setOpaque(true);
+                  rbsExtra[a].setOpaque(true);
+                  combsExtra[a].setOpaque(true);
+                  tfsIDEN1[a].setOpaque(true);
+                  tfsIDEN2[a].setOpaque(true);
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  combTypes2[a].setVisible(false);
-                  tfsTypes1[a].setVisible(false);
-                  tfsTypes2[a].setVisible(false);
+                  combsExtra[a].setVisible(false);
+                  tfsIDEN1[a].setVisible(false);
+                  tfsIDEN2[a].setVisible(false);
 
             }
             //========================================
-            for (int a = 0; a < combTypes1.length; a++) {
-                  //System.out.println((a + 1) + ": count: " + combTypes1[a].getItemCount());
+            for (int a = 0; a < combsTypes.length; a++) {
+                  //System.out.println((a + 1) + ": count: " + combsTypes[a].getItemCount());
                   if (a == 0) {
-                        combTypes1[a].setSelectedIndex(0);
+                        combsTypes[a].setSelectedIndex(0);
                   } else {
-                        combTypes1[a].setSelectedIndex(1);
+                        combsTypes[a].setSelectedIndex(1);
                   }
                   //combTypes2[a]
             }
@@ -223,10 +226,6 @@ public class VC_R2 extends VC_R_DataCom {
             btns_m[0].setEnabled(false);
             btns_p[DT.maxColumns - 1].setEnabled(false);
             headers[8].setForeground(Color.GRAY);
-
-      }
-
-      private void startUpdate() {
 
       }
 
@@ -265,7 +264,7 @@ public class VC_R2 extends VC_R_DataCom {
             GroupLayout gl = new GroupLayout(JPC);
             JPC.setLayout(gl);
             JComponent[] comps = new JComponent[]{
-                  lb, tf, btn_m, btn_p, combTypes, checkbNulls, panelExtra,
+                  lb, tf, btn_m, btn_p, combTypes, checkbNulls, panelExtra, rbPK,
                   btn_Dist, btn_Dist2, btn_ImageC, btn_Tag, btn_Clock};
             MLayout.setSerializationExceptionAction(new SerializationExceptionAction() {
                   @Override
@@ -381,7 +380,7 @@ public class VC_R2 extends VC_R_DataCom {
             if (choice.equals("CREATE")) {
                   startCreate();
             } else if (choice.equals("UPDATE")) {
-                  startUpdate();
+                  //startUpdate();
             }
             //+++++++++++++++++++++++++++++++++++++
 

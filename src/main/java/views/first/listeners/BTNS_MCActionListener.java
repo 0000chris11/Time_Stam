@@ -71,11 +71,11 @@ public class BTNS_MCActionListener implements ActionListener {
                   if (VF_R.getJT().getColumnCount() == a + 1) {
                         for (int b = 0; b < a + 1; b++) {
                               //COMPARING EACH TFS WITH THE SELECTED ROW
-                              if (!DT.getList_R().get(b).equals(VF_R.getJTFS()[b].getText()) 
-                                      && !VF_R.getJTFS()[b].getText().equals("")//CHANGE WHEN U ALLOWED NULL FIELDS
-                                      && VF_R.getJTFS()[b].isVisible()) {
+                              if (!DT.getList_R().get(b).equals(VF_R.getJCBS()[b].getSelectedItem().toString()) 
+                                      && !VF_R.getJCBS()[b].getSelectedItem().toString().equals("")//CHANGE WHEN U ALLOWED NULL FIELDS
+                                      && VF_R.getJCBS()[b].isVisible()) {
                                     
-                                    newData.add(VF_R.getJTFS()[b].getText());
+                                    newData.add(VF_R.getJCBS()[b].getSelectedItem().toString());
                                     colIndexs.add(b);
                                     //hc++;
                               }else{

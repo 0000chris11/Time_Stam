@@ -1,6 +1,7 @@
 package smallComponenets;
 
 import MC.DT;
+import MC.LK;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -40,16 +41,16 @@ public class smallBTN_C extends JButton {
             if (getModel().isEnabled()) {
                   if (getModel().isPressed()) {
                         //System.out.println("\tPRESSED");
-                        g2.setPaint(new GradientPaint(0, 0, DT.GP_whiteCeleste[0],
-                                w, h, DT.GP_whiteCeleste[1].darker()));
+                        g2.setPaint(new GradientPaint(0, 0, LK.GP_WHITE_AND_CYAN[0],
+                                w, h, LK.GP_WHITE_AND_CYAN[1].darker()));
                   } else {
                         //System.out.println("\tNORMAL");
-                        g2.setPaint(new GradientPaint(0, 0, DT.GP_whiteCeleste[0],
-                                w, h, DT.GP_whiteCeleste[1]));
+                        g2.setPaint(new GradientPaint(0, 0, LK.GP_WHITE_AND_CYAN[0],
+                                w, h, LK.GP_WHITE_AND_CYAN[1]));
                   }
             } else {
-                  g2.setPaint(new GradientPaint(0, 0, DT.GP_whiteCeleste[0].darker(),
-                          w, h, DT.GP_whiteCeleste[1].darker()));
+                  g2.setPaint(new GradientPaint(0, 0, LK.GP_WHITE_AND_CYAN[0].darker(),
+                          w, h, LK.GP_WHITE_AND_CYAN[1].darker()));
             }
             g2.fillRect(0, 0, w, h);
             if (Title != null && Outline != null) {

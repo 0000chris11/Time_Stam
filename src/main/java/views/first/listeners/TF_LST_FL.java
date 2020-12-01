@@ -4,6 +4,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import views.first.VF_R;
 import MC.DT;
+import MC.LK;
 import javax.swing.JComponent;
 
 /**
@@ -16,9 +17,9 @@ public class TF_LST_FL implements FocusListener {
       public void focusGained(FocusEvent evt) {
             int forSize = DT.maxColumns - 1;//DEPENDING ON WICH TF HAD THE FOCUS THE REMAINIG (COUNTING UP) WILL BE MOVE
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VF_R.getJTFS()[a].hasFocus()) {
-                        if (VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[1])
-                                || VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[2])) {
+                  if (VF_R.getJCBS()[a].hasFocus()) {
+                        if (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)
+                                || VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST2)) {
                               focusGainedFor(forSize, a + 1);
                         }
                   }
@@ -32,8 +33,8 @@ public class TF_LST_FL implements FocusListener {
             int forSize = DT.maxColumns - 1;
             for (int a = 0; a < DT.maxColumns; a++) {
                   if ((JC.equals("TF_" + (a + 1))
-                          && (VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[1])
-                          || VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[2])))
+                          && (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)
+                          || VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST2)))
                           || JC.equals("LST_" + (a + 1))) {
 
                         focusLostFor(a, forSize);
@@ -51,7 +52,7 @@ public class TF_LST_FL implements FocusListener {
                   int b = 209;//SPACE NEEDED TO FIT LST IN BETWEEN COMPONENTS
                   for (int a = 0; a < forSize; a++) {
                         VF_R.getJLBS()[a + res].setLocation(6, VF_R.getJLBS()[res - 1].getY() + b);
-                        VF_R.getJTFS()[a + res].setLocation(107, VF_R.getJTFS()[res - 1].getY() + b);
+                        VF_R.getJCBS()[a + res].setLocation(107, VF_R.getJCBS()[res - 1].getY() + b);
                         VF_R.getBTNS_C()[a + res].setLocation(402, VF_R.getBTNS_C()[res - 1].getY() + b);
 
                         b += 33;
@@ -60,7 +61,7 @@ public class TF_LST_FL implements FocusListener {
                   ClockFocusGained(forSize, res);
             }
             //00 or 11
-            VF_R.getJSCS()[res - 1].setLocation(107, VF_R.getJTFS()[res - 1].getY() + 33);
+            VF_R.getJSCS()[res - 1].setLocation(107, VF_R.getJCBS()[res - 1].getY() + 33);
             VF_R.getJSCS()[res - 1].setVisible(true);
       }
 
@@ -78,7 +79,7 @@ public class TF_LST_FL implements FocusListener {
                         for (int a = 0; a < forSize; a++) {// 4 to 3
 
                               VF_R.getJLBS()[a + r].setLocation(6, VF_R.getJLBS()[r - 1].getY() + b);
-                              VF_R.getJTFS()[a + r].setLocation(107, VF_R.getJTFS()[r - 1].getY() + b);
+                              VF_R.getJCBS()[a + r].setLocation(107, VF_R.getJCBS()[r - 1].getY() + b);
                               VF_R.getBTNS_C()[a + r].setLocation(402, VF_R.getBTNS_C()[r - 1].getY() + b);
 
                               b += 33;

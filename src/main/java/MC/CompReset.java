@@ -39,7 +39,7 @@ public class CompReset {
                         if (VF_R.JPL_layout.equals("null")) {
                               //IF IS 1 COL THE LB_ICON BE BELLOW TFS[0]
                               VF_R.getLB_Icon().setLocation(VF_R.getLB_Icon().getX(),
-                                      VF_R.getJTFS()[a].getY() + 66);
+                                      VF_R.getJCBS()[a].getY() + 66);
                         }
 
                         //MAKE COMPONENTS UNDER LIMIT VISIBLE
@@ -49,13 +49,13 @@ public class CompReset {
                               MText.shortenLB(VF_R.getJLBS()[b]);
 
                               VF_R.getJLBS()[b].setVisible(true);
-                              VF_R.getJTFS()[b].setVisible(true);
+                              VF_R.getJCBS()[b].setVisible(true);
                               VF_R.getBTNS_C()[b].setVisible(true);
                         }
                         //HIDES OUT LENGTH COMPONENTS
                         for (int b = 0; b < DT.maxColumns - (a + 1); b++) {//4
                               VF_R.getJLBS()[b + (1 + a)].setVisible(false);
-                              VF_R.getJTFS()[b + (1 + a)].setVisible(false);
+                              VF_R.getJCBS()[b + (1 + a)].setVisible(false);
                               VF_R.getBTNS_C()[b + (1 + a)].setVisible(false);
                         }
 

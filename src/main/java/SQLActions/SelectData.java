@@ -66,7 +66,7 @@ public class SelectData implements IActions {
       public void exception(SQLException ex, String query) {
             System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+            Status.startLBStatus(VF_R.getLB_Status(), Color.RED,
                     "SelectData: " + ex.toString(), 8000);
       }
 

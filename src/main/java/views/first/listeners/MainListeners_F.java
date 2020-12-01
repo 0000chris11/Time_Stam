@@ -86,43 +86,30 @@ public class MainListeners_F {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
-      private void addKeyListenerToTFS_OLD() {
-            TFS_KL tkt = new TFS_KL();
-            for (int a = 0; a < VF_R.getJTFS().length; a++) {
-                  if (VF_R.getJTFS()[a].getKeyListeners().length > 0) {
-                        VF_R.getJTFS()[a].removeKeyListener(tkt);
-                  }
-                  if (VF_R.getJTFS()[a].getKeyListeners().length == 0) {
-                        VF_R.getJTFS()[a].addKeyListener(tkt);
-                  }
-
-            }
-      }
-
       private void addMouseListenerToTFS() {
             BTNS_CMouseListener ML = new BTNS_CMouseListener();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJTFS()[a].addMouseListener(ML);
+                  VF_R.getJCBS()[a].addMouseListener(ML);
             }
       }
 
       private void addFocusListenerToTFS_OLD() {
             //System.out.println("-----On Mehod = tf2 FocusListener count: " + tfs[1].getFocusListeners().length);
             TF_LST_FL TFSFL = new TF_LST_FL();
-            for (int a = 0; a < VF_R.getJTFS().length; a++) {
-                  if (VF_R.getJTFS()[a].getFocusListeners().length > 0) {
-                        for (int b = 0; b < VF_R.getJTFS()[a].getFocusListeners().length; b++) {
-                              if (VF_R.getJTFS()[a].getFocusListeners()[b].toString().contains("TF_LST_FL")) {
+            for (int a = 0; a < VF_R.getJCBS().length; a++) {
+                  if (VF_R.getJCBS()[a].getFocusListeners().length > 0) {
+                        for (int b = 0; b < VF_R.getJCBS()[a].getFocusListeners().length; b++) {
+                              if (VF_R.getJCBS()[a].getFocusListeners()[b].toString().contains("TF_LST_FL")) {
                                     //System.out.println("removing: " + tfs[a].getFocusListeners()[b]);
-                                    VF_R.getJTFS()[a].removeFocusListener(VF_R.getJTFS()[a].getFocusListeners()[b]);
+                                    VF_R.getJCBS()[a].removeFocusListener(VF_R.getJCBS()[a].getFocusListeners()[b]);
                               }
                         }
                         //System.out.println("\ttf2 FocusListener count: " + tfs[1].getFocusListeners().length);
                   }
-                  if (VF_R.getJTFS()[a].getFocusListeners().length == 2) {
+                  if (VF_R.getJCBS()[a].getFocusListeners().length == 2) {
                         //System.out.println("\tTF_" + (a + 1) + " adding TFSFL");
                         //System.out.println("adding TF_LST_FL");
-                        VF_R.getJTFS()[a].addFocusListener(TFSFL);
+                        VF_R.getJCBS()[a].addFocusListener(TFSFL);
                   }
             }
       }
@@ -198,7 +185,7 @@ public class MainListeners_F {
       private void addFocusBorderToJC_PC() {
             FocusBorder jcfl = new FocusBorder();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJTFS()[a].addFocusListener(jcfl);
+                  VF_R.getJCBS()[a].addFocusListener(jcfl);
                   VF_R.getJLSTS()[a].addFocusListener(jcfl);
                   VF_R.getTFS_MD()[a].addFocusListener(jcfl);
                   VF_R.getTFS_MU()[a].addFocusListener(jcfl);
@@ -211,7 +198,7 @@ public class MainListeners_F {
       private void addFocusListenersToJC() {
             TF_LST_FL TFSFL = new TF_LST_FL();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJTFS()[a].addFocusListener(TFSFL);
+                  VF_R.getJCBS()[a].addFocusListener(TFSFL);
                   VF_R.getJLSTS()[a].addFocusListener(TFSFL);
 
             }
@@ -220,7 +207,7 @@ public class MainListeners_F {
       private void addFocusListenersToJC_GL() {
             TF_LST_FL_GL FL = new TF_LST_FL_GL();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJTFS()[a].addFocusListener(FL);
+                  VF_R.getJCBS()[a].addFocusListener(FL);
                   VF_R.getJLSTS()[a].addFocusListener(FL);
             }
       }

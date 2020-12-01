@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -166,9 +167,9 @@ public class JTChanged_AL implements ActionListener {
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++
-      private static void resetTF_LB(JTextField tf, JLabel lb) {
-            tf.setBackground(new Color(51, 51, 51));
-            tf.setSize(290, tf.getHeight());
+      private static void resetTF_LB(JComboBox cb, JLabel lb) {
+            cb.setBackground(new Color(51, 51, 51));
+            cb.setSize(290, cb.getHeight());
 
             String l = lb.getText();
             if (l.contains("*")) {//?????????
@@ -193,11 +194,11 @@ public class JTChanged_AL implements ActionListener {
             VF_R.getBTN_Show_All().setSelected(false);
             //CHANGE LB & TFS TO ITS ORIGINAL LOOK
             for (int a = 0; a < DT.maxColumns; a++) {
-                  resetTF_LB(VF_R.getJTFS()[a], VF_R.getJLBS()[a]);
-                  VF_R.getJTFS()[a].setText("");
+                  resetTF_LB(VF_R.getJCBS()[a], VF_R.getJLBS()[a]);
+                  VF_R.getJCBS()[a].setSelectedItem("");
                   //HIDING LBS AND TFS FOR NEXT TABLE-SELECTION
                   VF_R.getJLBS()[a].setVisible(false);
-                  VF_R.getJTFS()[a].setVisible(false);
+                  VF_R.getJCBS()[a].setVisible(false);
                   //LISTS+++++++++++++++++++++++++++
                   DT.getList_DS()[a].clear();
                   if (a != DT.maxColumns - 1) {

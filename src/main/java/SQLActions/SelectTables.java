@@ -53,7 +53,7 @@ public class SelectTables implements IActions {
       @Override
       public void exception(SQLException ex, String query) {
             ex.printStackTrace();
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+            Status.startLBStatus(VF_R.getLB_Status(), Color.RED,
                     "SelectTables: " + ex.toString(), 8000);
 
       }

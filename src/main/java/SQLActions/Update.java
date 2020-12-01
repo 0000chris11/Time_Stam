@@ -10,6 +10,7 @@ import MC.DT;
 import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IUpdates;
+import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JLabel;
 
@@ -30,19 +31,19 @@ public class Update implements IUpdates {
       @Override
       public void executeResultRowN() {
             //FIXXXXXXXXXXXXXXXXX
-            Status.startLBStatus(LB, DT.RGY[1], Msg + ": Done", 4000);
+            Status.startLBStatus(LB, Color.GREEN, Msg + ": Done", 4000);
       }
 
       @Override
       public void executeResult0() {
             //FIXXXXXXXXXXXXXXXXX
-            Status.startLBStatus(LB, DT.RGY[2], Msg + ": Fail" + DT.inter, 8000);
+            Status.startLBStatus(LB, Color.YELLOW, Msg + ": Fail" + DT.inter, 8000);
       }
 
       @Override
       public void exception(SQLException ex) {
             ex.printStackTrace();
-            Status.startLBStatus(LB, DT.RGY[0], Msg + ": " + ex.toString(), 8000);
+            Status.startLBStatus(LB, Color.RED, Msg + ": " + ex.toString(), 8000);
       }
 
 }

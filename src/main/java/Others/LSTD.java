@@ -2,6 +2,7 @@ package Others;
 
 import views.first.VF_R;
 import MC.DT;
+import MC.LK;
 import MC.DTSQL;
 import Threads.Threads;
 import SQLActions.SelectDistinctColumn;
@@ -65,10 +66,14 @@ public class LSTD {
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             int pk = DT.getPrimaryKey();
             System.out.println("\tPrimary key: C" + pk);
-            if(DT.getPrimaryKey() > 0){
-                  VF_R.getJLBS()[pk - 1].setForeground(Color.YELLOW.darker());
-            }else{
-                  for(JLabel x: VF_R.getJLBS()){
+            if (DT.getPrimaryKey() > 0) {
+                  int extra = (int )DT.getExtra()[0];
+                  if (extra > 0) {
+                        VF_R.getJLBS()[pk - 1].setForeground(Color.YELLOW.darker());
+                        VF_R.getJCBS()[extra - 1].setBackground(LK.CP_BK_AUTO_INCR_IDEN);
+                  }
+            } else {
+                  for (JLabel x : VF_R.getJLBS()) {
                         x.setForeground(Color.WHITE);
                   }
             }
@@ -85,11 +90,11 @@ public class LSTD {
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (index + 1 == a + 1) {
                         vis = true;
-                        if (VF_R.getJTFS()[a].getBackground().equals(DT.TFColor[1])) {
+                        if (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)) {
                               vis = false;
                         }
 
-                        VF_R.getJTFS()[a].setBackground(DT.TFColor[1]);
+                        VF_R.getJCBS()[a].setBackground(LK.CP_BK_DIST1);
                         //+++++++++++++++++++++++++++++++++++++++++++++++
                         SelectDistinctColumn sdc = new SelectDistinctColumn(DT.getList_DS()[a]);
                         ms.selectDistinctColumn(table, col, sdc);
@@ -110,11 +115,11 @@ public class LSTD {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (fll1 + 1 == a + 1 && fll2 + 1 == a + 2) {
                         //System.out.println("\ta: " + a);
-                        if (VF_R.getJTFS()[a + 1].getBackground().equals(DT.TFColor[2])) {
+                        if (VF_R.getJCBS()[a + 1].getBackground().equals(LK.CP_BK_DIST2)) {
                               vis = false;
                         }
 
-                        VF_R.getJTFS()[a + 1].setBackground(DT.TFColor[2]);
+                        VF_R.getJCBS()[a + 1].setBackground(LK.CP_BK_DIST2);
 
                         SelectDistinctColumns sdc = new SelectDistinctColumns(DT.getList_DS()[a], DT.getList_DS()[a + 1]);
                         ms.selectDistinctColumns(table, new String[]{col1, col2}, col1, sdc);
@@ -123,7 +128,7 @@ public class LSTD {
                               DT.getList_MXS()[a] = MList.mixRowList(DT.getList_DS()[a], DT.getList_DS()[a + 1], ": ");//listSs[a + 2]
                               MList.unTagList(DT.getList_MXS()[a]);//listSs[a + 2]
                               MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
-                        }else{
+                        } else {
                               System.out.println("\tno elements distinct (multiple columns)");
                         }
                   }
@@ -152,9 +157,9 @@ public class LSTD {
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (a == col) {
                               System.out.println("\t\t###a: " + col);
-                              if (VF_R.getJTFS()[a].getWidth() == 290) {
-                                    VF_R.getJTFS()[a].setSize(160,
-                                            VF_R.getJTFS()[a].getHeight());
+                              if (VF_R.getJCBS()[a].getWidth() == 290) {
+                                    VF_R.getJCBS()[a].setSize(160,
+                                            VF_R.getJCBS()[a].getHeight());
                               }
 
                               VF_R.getClocks()[a].setVisible(true);
@@ -166,7 +171,7 @@ public class LSTD {
                               VF_R.getLB_2DS()[a].setVisible(true);
                                */
                         } else {
-                              VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[a].getHeight());
+                              VF_R.getJCBS()[a].setSize(290, VF_R.getJCBS()[a].getHeight());
 
                               VF_R.getClocks()[a].setVisible(false);
                               /*
@@ -180,7 +185,7 @@ public class LSTD {
                   }
             } else {
                   for (int a = 0; a < DT.maxColumns; a++) {
-                        VF_R.getJTFS()[a].setSize(290, VF_R.getJTFS()[a].getHeight());
+                        VF_R.getJCBS()[a].setSize(290, VF_R.getJCBS()[a].getHeight());
                         VF_R.getTFS_MD()[a].setVisible(false);
                         VF_R.getTFS_MU()[a].setVisible(false);
                         VF_R.getTFS_SD()[a].setVisible(false);

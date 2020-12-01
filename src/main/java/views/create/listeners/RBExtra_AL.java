@@ -15,11 +15,12 @@ import java.awt.event.ActionListener;
  *
  * @author C0FII
  */
-public class RBType2_AL implements ActionListener {
+public class RBExtra_AL implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            int num = MComp.setButtonGroup(e, VC_R2.getRBTypes2()) - 1;
+            int num = MComp.setButtonGroup(e, VC_R2.getRBTypes2()) - 1;//- 1 (INDEX)
+            System.out.println("Button Group num: " + (num + 1));
             VC_R2.setRB_Types2Selected(num + 1);
             boolean visible = false;
             for (int a = 0; a < DT.maxColumns; a++) {

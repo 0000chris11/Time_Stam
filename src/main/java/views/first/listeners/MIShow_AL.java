@@ -62,25 +62,25 @@ public class MIShow_AL implements ActionListener {
             if(ac.equals("JTextFields FL")){
                   System.out.println("\nJTextFields Focus Listeners");
                   for(int a = 0; a < DT.maxColumns; a++){
-                        for(int b = 0; b < VF_R.getJTFS()[a].getFocusListeners().length; b++){
-                              System.out.println(VF_R.getJTFS()[a].getName()
-                              + " " + (b + 1) + ": " + VF_R.getJTFS()[a].getFocusListeners()[b].toString());
+                        for(int b = 0; b < VF_R.getJCBS()[a].getFocusListeners().length; b++){
+                              System.out.println(VF_R.getJCBS()[a].getName()
+                              + " " + (b + 1) + ": " + VF_R.getJCBS()[a].getFocusListeners()[b].toString());
                         }
                   }
             }else if(ac.equals("JTextFields KL")){
                   System.out.println("\nJTextFields Key Listeners");
                   for(int a = 0; a < DT.maxColumns; a++){
-                        for(int b = 0; b < VF_R.getJTFS()[a].getKeyListeners().length; b++){
-                              System.out.println(VF_R.getJTFS()[a].getName()
-                              + " " + (b + 1) + ": " + VF_R.getJTFS()[a].getKeyListeners()[b].toString());
+                        for(int b = 0; b < VF_R.getJCBS()[a].getKeyListeners().length; b++){
+                              System.out.println(VF_R.getJCBS()[a].getName()
+                              + " " + (b + 1) + ": " + VF_R.getJCBS()[a].getKeyListeners()[b].toString());
                         }
                   }
             }else if(ac.equals("JTextFields ML")){
                   System.out.println("\nJTextFields Mouse Listeners");
                   for(int a = 0; a < DT.maxColumns; a++){
-                        for(int b = 0; b < VF_R.getJTFS()[a].getMouseListeners().length; b++){
-                              System.out.println(VF_R.getJTFS()[a].getName()
-                              + " " + (b + 1) + ": " + VF_R.getJTFS()[a].getMouseListeners()[b].toString());
+                        for(int b = 0; b < VF_R.getJCBS()[a].getMouseListeners().length; b++){
+                              System.out.println(VF_R.getJCBS()[a].getName()
+                              + " " + (b + 1) + ": " + VF_R.getJCBS()[a].getMouseListeners()[b].toString());
                         }
                   }
             }else if(ac.equals("JLists LSL")){

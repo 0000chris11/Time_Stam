@@ -6,6 +6,7 @@
 package smallComponenets;
 
 import MC.DT;
+import MC.LK;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -30,10 +31,10 @@ public class NumberOTF extends JFormattedTextField {
       public NumberOTF() {
             Font f = new Font("Dialog", Font.BOLD, 16);
             //setOpaque(false);
-            setBackground(DT.TFColor[0]);
+            setBackground(LK.CP_BK_NORMAL);
             setForeground(Color.WHITE);
             
-            setBorder(DT.compoundBorder_N);
+            setBorder(LK.BORDER_LINEMARIGIN_FOCUS_OFF);
             //+++++++++++++++++++++++++++++++++++++++
             setFont(f);
             setEnabled(true);

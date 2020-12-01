@@ -10,6 +10,7 @@ import MC.DT;
 import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -24,6 +25,9 @@ import javax.swing.table.TableModel;
  */
 public class SelectColumns implements IActions {
 
+      private boolean lockPK = false;//ONLY ONE TIME CAN YOU SET THE VALUE OF PK AND EXTRA
+      private boolean lockEX = false;
+      
       @Override
       public void beforeQuery() {
             DT.getList_C().clear();
@@ -32,8 +36,6 @@ public class SelectColumns implements IActions {
             DT.setPrimaryKey(0);
             DT.getList_Defaults().clear();
             DT.setExtra(0, null);
-
-            System.out.println("SET DATA");
       }
 
       @Override
@@ -42,16 +44,16 @@ public class SelectColumns implements IActions {
             DT.getList_Types().add(rs.getString(2));
             DT.getList_Nulls().add(rs.getString(3));
             DT.getList_Defaults().add(rs.getString(5));
+            
             String pk = rs.getString(4);
-            System.out.println("\t" + row + ": pk value is: " + pk);
-            if (pk != null) {
-                  //System.out.println("\t" + row + ": " + pk);
+            if (pk != null && !lockPK) {
+                  lockPK = true;
                   DT.setPrimaryKey(row);
             }
+            
             String ext = rs.getString(6);
-            System.out.println("\t" + row + ": ext value is: " + ext);
-            if (ext != null) {
-                  //System.out.println("\t" + row + ": " + ext);
+            if (ext != null && !lockEX) {
+                  lockEX = true;
                   DT.setExtra(row, ext);
             }
             
@@ -59,11 +61,7 @@ public class SelectColumns implements IActions {
 
       @Override
       public void afterQuery(String query, boolean value) {
-            if (value) {
-                  System.out.println("AFTER QUERY (Select Columns)");
-                  System.out.println("\tPrimary Key: C" + DT.getPrimaryKey());
-                  System.out.println("\tExtra: C" + DT.getExtra()[0] + " (" + DT.getExtra()[1].toString() + ")");
-                  
+            if (value) {                
                   DefaultTableModel tm = new DefaultTableModel();
                   VF_R.getJT().setModel(tm);
 
@@ -81,7 +79,7 @@ public class SelectColumns implements IActions {
       public void exception(SQLException ex, String query) {
             System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
-            Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+            Status.startLBStatus(VF_R.getLB_Status(), Color.RED,
                     "SelectColumns: " + ex.toString(), 8000);
       }
 

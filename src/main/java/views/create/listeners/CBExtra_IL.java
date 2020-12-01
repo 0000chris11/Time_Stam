@@ -14,7 +14,7 @@ import java.awt.event.ItemListener;
  *
  * @author C0FII
  */
-public class CBType2_IL implements ItemListener {
+public class CBExtra_IL implements ItemListener {
 
       @Override
       public void itemStateChanged(ItemEvent e) {

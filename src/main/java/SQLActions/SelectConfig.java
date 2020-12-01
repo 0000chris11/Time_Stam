@@ -10,6 +10,7 @@ import MC.DT;
 import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class SelectConfig implements IActions {
       public void exception(SQLException ex, String query) {
             System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
-                  Status.startLBStatus(VF_R.getLB_Status(), DT.RGY[0],
+                  Status.startLBStatus(VF_R.getLB_Status(), Color.RED,
                           "SelectConfig: " + ex.toString(), 8000);
       }
 

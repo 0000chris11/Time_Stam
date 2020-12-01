@@ -54,38 +54,7 @@ public class DT {
       private static ArrayList<String> list_IconUrl = new ArrayList<String>();
       private static ArrayList<ImageIcon> list_newIcon = new ArrayList<ImageIcon>();
       private static ArrayList<String> list_cutUrl = new ArrayList<String>();
-
-      
-      //++++++++++++++++++++
-      public static final Font TFDefaultFont = new Font("Dialog", Font.BOLD, 16);
-      
-      private final static Border line1 = BorderFactory.createLineBorder(Color.LIGHT_GRAY);
-      private final static Border line2 = BorderFactory.createLineBorder(Color.WHITE, 2);
-      public final static Border emptyBorder = new EmptyBorder(1, 3, 1, 3);
-      public final static 
-              CompoundBorder compoundBorder_N = new CompoundBorder(line1, emptyBorder);
-      public final static 
-              CompoundBorder compoundBorder_O = new CompoundBorder(line2, emptyBorder);
-
-      public static final Color[] RGY = new Color[]{Color.RED, Color.GREEN, Color.YELLOW};
-      public static final Color[] TFColor = new Color[]{new Color(51, 51, 51), new Color(0, 0, 51),
-            new Color(0, 0, 81)};
-      
-      public static final Color[] GP_blackRed = new Color[]{
-            Color.BLACK, new Color(102,0,0)};
-      public static final Color[] GP_whiteCeleste = new Color[]{
-            Color.WHITE, new Color(37,161,231)};
-      public static final Color[] GP_celesteWhite = new Color[]{
-            new Color(37,161,231), Color.WHITE};
-      public static final Color[] GP_greenWhite = new Color[]{
-            Color.GREEN, Color.WHITE};
-      public static final Color[] GP_yellowWhite = new Color[]{
-            Color.YELLOW, Color.WHITE};
-
-      public static final Color[] cl = {Color.RED, Color.GREEN, Color.YELLOW};
       //++++++++++++++++++++++++++++
-      public static char[] chars = new char[8];
-      public static String[] strings = new String[8];
       public static int[] ints = new int[8];
       public static String[] cols = new String[8];
       //++++++++++++++++++++++++++++++++++++++++++++
@@ -103,7 +72,6 @@ public class DT {
       public static boolean cellSys = true;
 
       public static final String inter = "Nothing Changed";
-      public static final Dimension defaultFrameSize = new Dimension(1270, 627);
       public static final int maxColumns = 6;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private DT(){

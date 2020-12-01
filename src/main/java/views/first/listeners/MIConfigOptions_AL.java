@@ -8,6 +8,7 @@ import MC.notMyMethods;
 import SQLActions.SelectConfig;
 import SQLActions.Update;
 import com.cofii.myClasses.MSQL;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
@@ -53,7 +54,7 @@ public class MIConfigOptions_AL implements ActionListener {
                   }
                   if (c == 0) {
                         Status.startLBStatus(
-                                VF_R.getLB_Status(), DT.RGY[2], "Nothing has changed.", 6000);
+                                VF_R.getLB_Status(), Color.YELLOW, "Nothing has changed.", 6000);
                   } else {
                         //mc.SelectConfig();
                         //ms.selectTables(DT.configTable, new SelectConfig());

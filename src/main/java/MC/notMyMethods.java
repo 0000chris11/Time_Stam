@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableColumnModel;
@@ -51,6 +52,18 @@ public class notMyMethods {
             }
             try {
                   tf.setText(tf.getText() + (String) t.getTransferData(DataFlavor.stringFlavor));
+            } catch (Exception e) {
+                  e.printStackTrace();
+            }//try
+      }
+      public void onPaste(JComboBox cb) {
+            Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
+            Transferable t = c.getContents(this);
+            if (t == null) {
+                  return;
+            }
+            try {
+                  cb.setSelectedItem(cb.getSelectedItem().toString() + (String) t.getTransferData(DataFlavor.stringFlavor));
             } catch (Exception e) {
                   e.printStackTrace();
             }//try

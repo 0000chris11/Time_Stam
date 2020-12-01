@@ -6,6 +6,7 @@
 package smallComponenets;
 
 import MC.DT;
+import MC.LK;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -19,12 +20,12 @@ import javax.swing.border.CompoundBorder;
 public class MComboBoxE extends JComboBox{
       public MComboBoxE(){
             setEditable(true);
-            setFont(DT.TFDefaultFont);
+            setFont(LK.CP_FONT_NORMAL);
             JTextField tfe = (JTextField) getEditor().getEditorComponent();
             CompoundBorder CB = new CompoundBorder(
                     tfe.getBorder(), BorderFactory.createEmptyBorder(2, 4, 1, 4));
             
-            tfe.setBackground(DT.TFColor[0]);
+            tfe.setBackground(LK.CP_BK_NORMAL);
             tfe.setFont(getFont());
             tfe.setForeground(Color.WHITE);
             tfe.setCaretColor(Color.WHITE);
@@ -40,7 +41,7 @@ public class MComboBoxE extends JComboBox{
             JTextField tfe = (JTextField) getEditor().getEditorComponent();
             CompoundBorder CB = new CompoundBorder(tfe.getBorder(), BorderFactory.createEmptyBorder(2, 4, 1, 4));
             
-            tfe.setBackground(DT.TFColor[0]);
+            tfe.setBackground(LK.CP_BK_NORMAL);
             tfe.setForeground(Color.WHITE);
             tfe.setCaretColor(Color.WHITE);
             tfe.setCaretPosition(0);

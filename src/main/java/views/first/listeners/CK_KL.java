@@ -71,13 +71,13 @@ public class CK_KL implements KeyListener {
                                       + VF_R.getTFS_SU()[a].getText();
                               //+++++++++++++++++++++++++++++++++++++++++
                               //IF TF ALLOWES TAGS
-                              if (VF_R.getJTFS()[a].getText().contains("; ")) {
-                                    timeValue = VF_R.getJTFS()[a].getText().substring(0,
-                                            VF_R.getJTFS()[a].getText().lastIndexOf("; ") + 2)
+                              if (VF_R.getJCBS()[a].getSelectedItem().toString().contains("; ")) {
+                                    timeValue = VF_R.getJCBS()[a].getSelectedItem().toString().substring(0,
+                                            VF_R.getJCBS()[a].getSelectedItem().toString().lastIndexOf("; ") + 2)
                                             + timeValue;
                               }
 
-                              VF_R.getJTFS()[a].setText(timeValue);
+                              VF_R.getJCBS()[a].setSelectedItem(timeValue);
                         }
                   }
             }
@@ -147,7 +147,7 @@ public class CK_KL implements KeyListener {
                         VF_R.getTFS_SU()[a].requestFocus();
 
                   } else if (VF_R.getTFS_SU()[a].hasFocus()) {
-                        VF_R.getJTFS()[a].requestFocus();
+                        VF_R.getJCBS()[a].requestFocus();
                   }
             }
       }
@@ -156,7 +156,7 @@ public class CK_KL implements KeyListener {
             //System.out.println("\nChange Focus Right");
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getTFS_MD()[a].hasFocus()) {
-                        VF_R.getJTFS()[a].requestFocus();
+                        VF_R.getJCBS()[a].requestFocus();
 
                   } else if (VF_R.getTFS_MU()[a].hasFocus()) {
                         VF_R.getTFS_MD()[a].requestFocus();
@@ -175,9 +175,9 @@ public class CK_KL implements KeyListener {
                   if (VF_R.getTFS_MD()[a].hasFocus() || VF_R.getTFS_MU()[a].hasFocus()
                           || VF_R.getTFS_SD()[a].hasFocus() || VF_R.getTFS_SU()[a].hasFocus()) {
                         if (a == 0) {
-                              VF_R.getJTFS()[DT.maxColumns - 1].requestFocus();
+                              VF_R.getJCBS()[DT.maxColumns - 1].requestFocus();
                         } else {
-                              VF_R.getJTFS()[a - 1].requestFocus();
+                              VF_R.getJCBS()[a - 1].requestFocus();
                         }
                   }
             }
@@ -188,9 +188,9 @@ public class CK_KL implements KeyListener {
                   if (VF_R.getTFS_MD()[a].hasFocus() || VF_R.getTFS_MU()[a].hasFocus()
                           || VF_R.getTFS_SD()[a].hasFocus() || VF_R.getTFS_SU()[a].hasFocus()) {
                         if (a == DT.maxColumns - 1) {
-                              VF_R.getJTFS()[0].requestFocus();
+                              VF_R.getJCBS()[0].requestFocus();
                         } else {
-                              VF_R.getJTFS()[a + 1].requestFocus();
+                              VF_R.getJCBS()[a + 1].requestFocus();
                         }
                   }
             }

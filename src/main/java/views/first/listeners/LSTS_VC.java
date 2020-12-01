@@ -24,14 +24,17 @@ public class LSTS_VC implements ListSelectionListener {
                   if (VF_R.getJLSTS()[a].isVisible() && VF_R.getJLSTS()[a].hasFocus()) {
                         System.out.println("\tLST_" + (a + 1));
                         if (a == 0) {
+                              /*
                               MKey.lst_ConfigDists_L(VF_R.getJLSTS()[a],
                                       null, VF_R.getJTFS()[a],
                                       VF_R.getJLBS()[a]);
-                              
+                              */
                         }else{
+                              /*
                               MKey.lst_ConfigDists_L(VF_R.getJLSTS()[a], 
                                       VF_R.getJTFS()[a - 1], VF_R.getJTFS()[a], 
                                       VF_R.getJLBS()[a]);
+                              */
                         }
                   }
             }
