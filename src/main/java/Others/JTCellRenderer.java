@@ -5,6 +5,7 @@
  */
 package Others;
 
+import MC.LK;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -51,7 +52,7 @@ public class JTCellRenderer extends DefaultTableCellRenderer {
                    */
             } else {
                   if (column == 0) {
-                        c.setBackground(new Color(0, 0, 51));
+                        c.setBackground(LK.CP_BK_NORMAL);
                   } else if (column == 1) {
                         c.setBackground(Color.BLACK);
                   }

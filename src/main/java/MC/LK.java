@@ -50,4 +50,8 @@ public class LK {
       public static final Color[] GP_CYAN_AND_WHITE = new Color[]{CUSTOM_CYAN, Color.WHITE};
       public static final Color[] GP_GREEN_AND_WHITE = new Color[]{Color.GREEN, Color.WHITE};
       public static final Color[] GP_YELLOW_AND_WHITE = new Color[]{Color.YELLOW, Color.WHITE};
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      public static void setClientProperties(){
+            
+      }
 }

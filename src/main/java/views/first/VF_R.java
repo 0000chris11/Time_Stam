@@ -70,6 +70,7 @@ import javax.swing.text.JTextComponent;
 import org.apache.commons.lang3.SerializationUtils;
 import smallComponenets.MComboBoxE;
 import views.Login.VL;
+import views.first.listeners.JF_FL;
 
 /**
  *
@@ -208,6 +209,7 @@ public class VF_R extends VF_R_DataCom {
             JF.setLayout(new BorderLayout());
             JF.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             JF.setResizable(true);
+            JF.addFocusListener(new JF_FL());
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             menuBarConfig();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -682,7 +684,7 @@ public class VF_R extends VF_R_DataCom {
             //=================================
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = new smallLB();
-                  cbs[a] = new MComboBoxE();
+                  cbs[a] = new MComboBoxE(new String[]{"TEST_A", "TEST_B"});
             }
             //================================
             for (int a = 0; a < DT.maxColumns; a++) {

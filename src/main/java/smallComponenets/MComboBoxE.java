@@ -18,7 +18,18 @@ import javax.swing.border.CompoundBorder;
  * @author C0FII
  */
 public class MComboBoxE extends JComboBox{
+      
       public MComboBoxE(){
+            properties();
+      }
+      public MComboBoxE(String[] data){
+            for(int a = 0; a < data.length; a++){
+                  addItem(data[a]);
+            }
+            properties();
+      }
+      
+      private void properties(){
             setEditable(true);
             setFont(LK.CP_FONT_NORMAL);
             JTextField tfe = (JTextField) getEditor().getEditorComponent();
@@ -31,20 +42,8 @@ public class MComboBoxE extends JComboBox{
             tfe.setCaretColor(Color.WHITE);
             tfe.setCaretPosition(0);
             tfe.setBorder(CB);
-      }
-      public MComboBoxE(String[] data){
-            for(int a = 0; a < data.length; a++){
-                  addItem(data[a]);
-            }
-            
-            setEditable(true);
-            JTextField tfe = (JTextField) getEditor().getEditorComponent();
-            CompoundBorder CB = new CompoundBorder(tfe.getBorder(), BorderFactory.createEmptyBorder(2, 4, 1, 4));
-            
-            tfe.setBackground(LK.CP_BK_NORMAL);
-            tfe.setForeground(Color.WHITE);
-            tfe.setCaretColor(Color.WHITE);
-            tfe.setCaretPosition(0);
-            tfe.setBorder(CB);
+            //+++++++++++++++++++++++++++++++++
+            //comboBox.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
+            putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
       }
 }

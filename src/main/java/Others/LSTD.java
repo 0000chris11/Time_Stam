@@ -69,12 +69,16 @@ public class LSTD {
             if (DT.getPrimaryKey() > 0) {
                   int extra = (int )DT.getExtra()[0];
                   if (extra > 0) {
-                        VF_R.getJLBS()[pk - 1].setForeground(Color.YELLOW.darker());
-                        VF_R.getJCBS()[extra - 1].setBackground(LK.CP_BK_AUTO_INCR_IDEN);
+                        VF_R.getJLBS()[pk - 1].setForeground(Color.YELLOW);
+                        VF_R.getJTFS()[extra - 1].setBackground(LK.CP_BK_AUTO_INCR_IDEN);
+                        VF_R.getJTFS()[extra - 1].setText(LK.CP_TEXT_AUTO_INCREMENT);
                   }
             } else {
-                  for (JLabel x : VF_R.getJLBS()) {
-                        x.setForeground(Color.WHITE);
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        VF_R.getJLBS()[a].setForeground(Color.WHITE);
+                        VF_R.getJTFS()[a].setBackground(LK.CP_BK_NORMAL);
+                        //VF_R.getJTFS()[a].setText("");
+                        VF_R.getJCBS()[a].setSelectedItem("");
                   }
             }
       }
@@ -90,11 +94,11 @@ public class LSTD {
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (index + 1 == a + 1) {
                         vis = true;
-                        if (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)) {
+                        if (VF_R.getJTFS()[a].getBackground().equals(LK.CP_BK_DIST1)) {
                               vis = false;
                         }
 
-                        VF_R.getJCBS()[a].setBackground(LK.CP_BK_DIST1);
+                        VF_R.getJTFS()[a].setBackground(LK.CP_BK_DIST1);
                         //+++++++++++++++++++++++++++++++++++++++++++++++
                         SelectDistinctColumn sdc = new SelectDistinctColumn(DT.getList_DS()[a]);
                         ms.selectDistinctColumn(table, col, sdc);
@@ -115,11 +119,11 @@ public class LSTD {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (fll1 + 1 == a + 1 && fll2 + 1 == a + 2) {
                         //System.out.println("\ta: " + a);
-                        if (VF_R.getJCBS()[a + 1].getBackground().equals(LK.CP_BK_DIST2)) {
+                        if (VF_R.getJTFS()[a + 1].getBackground().equals(LK.CP_BK_DIST2)) {
                               vis = false;
                         }
 
-                        VF_R.getJCBS()[a + 1].setBackground(LK.CP_BK_DIST2);
+                        VF_R.getJTFS()[a + 1].setBackground(LK.CP_BK_DIST2);
 
                         SelectDistinctColumns sdc = new SelectDistinctColumns(DT.getList_DS()[a], DT.getList_DS()[a + 1]);
                         ms.selectDistinctColumns(table, new String[]{col1, col2}, col1, sdc);

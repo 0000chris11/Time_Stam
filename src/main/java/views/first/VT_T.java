@@ -13,6 +13,8 @@ import com.cofii.myMethods.MComp;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import java.util.Properties;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -35,7 +37,7 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn2);
             JButton btn3 = new JButton("Get SPL Components");
             vt.add(btn3);
-            JButton btn4 = new JButton("GET Default Table");
+            JButton btn4 = new JButton("DISABLE TFS");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -78,18 +80,19 @@ public class VT_T extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println("SPL LeftComponent: " + 
-                                VF_R.getSPL().getLeftComponent().getClass());
-                        System.out.println("SPL RightComponent: " + 
-                                VF_R.getSPL().getRightComponent().getClass());
+                        System.out.println("SPL LeftComponent: "
+                                + VF_R.getSPL().getLeftComponent().getClass());
+                        System.out.println("SPL RightComponent: "
+                                + VF_R.getSPL().getRightComponent().getClass());
                   }
 
             });
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println("DefaultTable: " + DT.getDTable());
-                        
+                        Properties pr = new Properties();
+                        Enumeration<?> enu = pr.propertyNames();
+                        System.out.println(enu.nextElement());
                   }
 
             });
