@@ -67,20 +67,34 @@ public class LSTD {
             int pk = DT.getPrimaryKey();
             System.out.println("\tPrimary key: C" + pk);
             if (DT.getPrimaryKey() > 0) {
-                  int extra = (int )DT.getExtra()[0];
-                  if (extra > 0) {
-                        VF_R.getJLBS()[pk - 1].setForeground(Color.YELLOW);
-                        VF_R.getJTFS()[extra - 1].setBackground(LK.CP_BK_AUTO_INCR_IDEN);
-                        VF_R.getJTFS()[extra - 1].setText(LK.CP_TEXT_AUTO_INCREMENT);
-                  }
-            } else {
                   for (int a = 0; a < DT.maxColumns; a++) {
-                        VF_R.getJLBS()[a].setForeground(Color.WHITE);
-                        VF_R.getJTFS()[a].setBackground(LK.CP_BK_NORMAL);
-                        //VF_R.getJTFS()[a].setText("");
-                        VF_R.getJCBS()[a].setSelectedItem("");
+                        if (a == pk - 1) {
+                              VF_R.getJLBS()[a].setForeground(Color.YELLOW);
+                        } else {
+                              VF_R.getJLBS()[a].setForeground(Color.WHITE);
+                        }
                   }
             }
+            int extra = (int) DT.getExtra()[0];
+            if (extra > 0) {
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        if (a == extra - 1) {
+                              VF_R.getJTFS()[a].setBackground(LK.CP_BK_AUTO_INCR_IDEN);
+                              VF_R.getJTFS()[a].setFont(LK.CP_FONT_AUTO_INCREMENT);
+                              String extraT = DT.getExtra()[1].toString();
+                              if (extraT.equals("AUTO_INCREMENT")) {
+                                    VF_R.getJTFS()[a].setText(LK.CP_TEXT_AUTO_INCREMENT);
+                              } else if (extraT.equals("IDENTITY")) {
+                                    VF_R.getJTFS()[a].setText(LK.CP_TEXT_AUTO_IDENTITY);
+                              }
+                        }else{
+                              VF_R.getJTFS()[a].setBackground(LK.CP_BK_NORMAL);
+                              VF_R.getJTFS()[a].setFont(LK.CP_FONT_NORMAL);
+                              VF_R.getJTFS()[a].setText("DD4535");
+                        }
+                  }
+            }
+
       }
 
       private void changeLSTDist1(int index, String table, String col) {

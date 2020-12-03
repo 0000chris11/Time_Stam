@@ -22,14 +22,14 @@ public class Insert implements IUpdates{
       
       @Override
       public void executeResultRowN() {
-            success = false;
-            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, "Fail to Insert on " + DT.getTable(), 5000);
+            success = true;
+            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Inserted on " + DT.getTable(), 5000);
       }
 
       @Override
       public void executeResult0() {
-            success = true;
-            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Insert on " + DT.getTable(), 4000);
+            success = false;
+            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,  "Fail to Insert on " + DT.getTable(), 4000);
       }
 
       @Override

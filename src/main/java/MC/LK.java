@@ -30,8 +30,9 @@ public class LK {
       public static final Color CP_BK_DIST2 = new Color(0, 0, 81);
       public static final Color CP_BK_AUTO_INCR_IDEN = new Color(14, 150, 199);
       
-      public static final Font CP_FONT_NORMAL = new Font("Dialog", Font.BOLD, 16);
+      public static final Font CP_FONT_NORMAL = new Font("Dialog", Font.PLAIN, 16);
       public static final String CP_TEXT_AUTO_INCREMENT = "AUTO_INCREMENT";
+      public static final String CP_TEXT_AUTO_IDENTITY = "IDENTITY";
       public static final Font CP_FONT_AUTO_INCREMENT = new Font("Dialog", Font.ITALIC, 16);
       public static final Color CP_FOREGROUND_AUTO_INCREMENT = Color.GRAY;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

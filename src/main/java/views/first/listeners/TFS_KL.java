@@ -27,32 +27,9 @@ public class TFS_KL implements KeyListener {
       @Override
       public void keyPressed(KeyEvent evt) {
             //LOOP CBS COMPONENTS++++++++++++++++++++++++++++
-            int cc = VF_R.getJT().getColumnCount();
             System.out.println("\nKEYPRESSED");
-
-            for (JComboBox x : VF_R.getJCBS()) {
-                  if (x.getEditor().getEditorComponent().hasFocus()) {
-                        if (evt.isAltDown() || evt.isControlDown()) {
-                              x.setPopupVisible(false);
-
-                        } else if (!evt.isAltDown() && !evt.isControlDown()) {
-                              x.setPopupVisible(true);
-                        }
-                  }
-            }
-
-            int TFN = 0;
+            int cc = VF_R.getJT().getColumnCount();    
             MComp.setLoopComponents(VF_R.getJTFS(), cc, evt);
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  JTextField tf = VF_R.getJTFS()[a];
-                  if (tf.hasFocus()) {
-                        TFN = a;
-                        System.out.println("\t" + tf.getName());
-                        System.out.println("\t\tsetCountComponents: " + tf.getText());
-                        MComp.setCountComponents(tf, evt);
-                        System.out.println("\t\tsetCountComponents: " + tf.getText());
-                  }
-            }
 
             if (KeyEvent.VK_RIGHT == evt.getKeyCode()) {
                   if (evt.isControlDown()) {
@@ -73,8 +50,6 @@ public class TFS_KL implements KeyListener {
                         }
                   }
             }
-            System.out.println("\tsetCountComponents (END): " + VF_R.getJCBS()[TFN].getSelectedItem().toString());
-            System.out.println("\tsetCountComponents (END): " + VF_R.getJTFS()[TFN].getText());
             
       }
 
@@ -84,7 +59,7 @@ public class TFS_KL implements KeyListener {
             if (KeyEvent.VK_RIGHT == evt.getKeyCode()) {
             } else if (KeyEvent.VK_LEFT == evt.getKeyCode()) {
             } else {
-                  //TFAllButR_L(evt);
+                  TFAllButR_L(evt);
             }
 
       }
@@ -94,10 +69,10 @@ public class TFS_KL implements KeyListener {
             if (!evt.isControlDown() || !evt.isAltDown()) {
                   //System.out.println("\tKEY: BUT LEFT & RIGHT");
 
-                  if (VF_R.getJCBS()[1].hasFocus()) {
+                  if (VF_R.getJTFS()[1].hasFocus()) {
                         //System.out.println("\t\tTF_2");
-                        if (VF_R.getJCBS()[1].getBackground().equals(LK.CP_BK_DIST1)
-                                || VF_R.getJCBS()[1].getBackground().equals(LK.CP_BK_DIST2)) {
+                        if (VF_R.getJTFS()[1].getBackground().equals(LK.CP_BK_DIST1)
+                                || VF_R.getJTFS()[1].getBackground().equals(LK.CP_BK_DIST2)) {
                               /*
                               MKey.tf_ConfigDists_K(VF_R.getJLBS()[1],
                                       VF_R.getJCBS()[1], VF_R.getJLSTS()[0],

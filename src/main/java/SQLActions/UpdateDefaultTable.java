@@ -20,13 +20,13 @@ public class UpdateDefaultTable implements IUpdates {
 
       @Override
       public void executeResultRowN() {
-            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Fail to Update Defautl-Table ", 6000);
+            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Default-Table Updated to " + DT.getTable(), 3500);
       }
 
       @Override
       public void executeResult0() {
             DT.setDTable(DT.getTable());
-            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Default-Table Updated to ", 4000);
+            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, "Fail to Update Defautl-Table", 5000);
       }
 
       @Override

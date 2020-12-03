@@ -89,7 +89,7 @@ public class MainListeners_F {
       private void addMouseListenerToTFS() {
             BTNS_CMouseListener ML = new BTNS_CMouseListener();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJCBS()[a].addMouseListener(ML);
+                  VF_R.getJTFS()[a].addMouseListener(ML);
             }
       }
 
@@ -217,6 +217,8 @@ public class MainListeners_F {
             TFS_KL tkt = new TFS_KL();
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFS()[a].addKeyListener(tkt);
+                  //VF_R.getJTFS()[a].addKeyListener(new TF_KL(
+                    //      VF_R.getJCBS()[a], VF_R.getJTFS()[a]));
             }
       }
 

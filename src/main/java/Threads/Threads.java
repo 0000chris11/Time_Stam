@@ -77,7 +77,7 @@ public class Threads {
                               if (VF_R.getJT().getColumnCount() == a + 1) {
                                     System.out.println("\t\tADD ++++ INSERTING " + (a + 1)
                                             + " COLUMNS");
-
+                                    //INSERT INTO Youkai_Watch (, EP, Title, Time, Descr) VALUES ("185-A", "Busters Treasure - 7", "M", "EX X; Komasan; JB; F")
                                     ms.insert(DT.getTable(), columns, newValues, (int) DT.getExtra()[0], ins);
                                     //mc.Insert(DT.getTable(), ++mayor, listNewValues);
                                     if (ins.success) {
