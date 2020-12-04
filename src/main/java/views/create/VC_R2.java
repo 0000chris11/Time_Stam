@@ -282,7 +282,8 @@ public class VC_R2 extends VC_R_DataCom {
                   }
 
             });
-            compsD = MLayout.lineSequenceYClone(gl, headers, comps, DT.maxColumns, 27);
+            MLayout.setComponentsHeight(27);
+            compsD = MLayout.lineSequenceYClone(gl, headers, comps, DT.maxColumns);
       }
 
       private void JPBConfig(String text) {

@@ -50,7 +50,14 @@ public class JT_LSL implements ListSelectionListener {
                         for (int a = 0; a < DT.maxColumns; a++) {
                               if (VF_R.getJT().getColumnCount() == a + 1) {
                                     for (int b = 0; b < a + 1; b++) {
-                                          VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                          //CASE FOR PRIMARY KEY; EVERY OTHER COLUMN CHANGE ITS NAME BUT THE PK ONE
+                                          if (DT.getPrimaryKey() > 0) {
+                                                if(b != DT.getPrimaryKey() - 1){
+                                                      VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                                }
+                                          } else {
+                                                VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                          }
                                     }
                               }
                         }

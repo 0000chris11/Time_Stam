@@ -34,7 +34,7 @@ public class CompReset {
             //++++++++++++++++++++++++++++++++++++++++++++++++
             VF_R.getLB_Title().setText(ed2);
 
-            for (int a = 0; a < DT.maxColumns ; a++) {//Limit of 2 to 6
+            for (int a = 0; a < DT.maxColumns ; a++) {//Limit of 1 to 6
                   if (cc == a + 1) {
                         if (VF_R.JPL_layout.equals("null")) {
                               //IF IS 1 COL THE LB_ICON BE BELLOW TFS[0]
@@ -49,13 +49,18 @@ public class CompReset {
                               MText.shortenLB(VF_R.getJLBS()[b]);
 
                               VF_R.getJLBS()[b].setVisible(true);
-                              VF_R.getJCBS()[b].setVisible(true);
+                              VF_R.getJTFPanel()[b].setVisible(true);
                               VF_R.getBTNS_C()[b].setVisible(true);
+                              
+                              if(VF_R.getJTFPanel()[b].getComponent(0).getName().contains("TF")){
+                                    VF_R.getJTFPanel()[b].remove(VF_R.getJTFS()[b]);
+                                    VF_R.getJTFPanel()[b].add(VF_R.getJCBS()[b], 0);
+                              }
                         }
                         //HIDES OUT LENGTH COMPONENTS
                         for (int b = 0; b < DT.maxColumns - (a + 1); b++) {//4
                               VF_R.getJLBS()[b + (1 + a)].setVisible(false);
-                              VF_R.getJCBS()[b + (1 + a)].setVisible(false);
+                              VF_R.getJTFPanel()[b + (1 + a)].setVisible(false);
                               VF_R.getBTNS_C()[b + (1 + a)].setVisible(false);
                         }
 

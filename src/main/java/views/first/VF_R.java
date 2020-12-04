@@ -61,6 +61,7 @@ import SQLActions.MainTableExistFQ;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
 import com.cofii.myMethods.MComp;
+import com.cofii.myMethods.MList;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,7 +120,7 @@ public class VF_R extends VF_R_DataCom {
                         if (itemText.contains(" ")) {
                               itemText = itemText.replaceAll(" ", "_");
                         }
-                        
+
                         if (itemText.equals(table)
                                 && itemText.equals(dtable)) {
                               JM_Select.getItem(a).setBackground(new Color(100, 100, 100));
@@ -166,7 +167,7 @@ public class VF_R extends VF_R_DataCom {
                   lbs[a].setVisible(b);
                   cbs[a].setVisible(b);
 
-                  clocks[a].setVisible(b);
+                  clocksPanel[a].setVisible(b);
                   btns_C[a].setVisible(b);
 
             }
@@ -241,11 +242,9 @@ public class VF_R extends VF_R_DataCom {
             subSplitUpConfig();
             subSplitDownConfig();
             //*++++++++++++++++++++++++++++++++++++++++++++
-            setComponentsToArray();
-            getJTextFieldsOfJComboBox();
-            componentsVisibility();
+            componentsConfig();
             //++++++++++++++++++++++++++
-            clockConfig();
+            
             if (JPL_layout.equals("null")) {
                   System.out.println("\tNull Layout for LeftPanel");
                   PL_UC.setLayout(null);
@@ -255,14 +254,85 @@ public class VF_R extends VF_R_DataCom {
                   System.out.println("\tGroup Layout for LeftPanel");
                   GroupLayout gl = new GroupLayout(PL_UC);
                   PL_UC.setLayout(gl);
-
-                  MLayout ml = new MLayout(gl, DT.maxColumns);
-                  ml.useFiveAndOneSequence(lbs, cbs, clocks, scs, btns_C);
+                  
+                  JComponent[][] components = new JComponent[DT.maxColumns][3];
+                  for (int a = 0; a < 3; a++) {
+                        for (int b = 0; b < DT.maxColumns; b++) {
+                              if (a == 0) {
+                                    components[b][a] = VF_R.getJLBS()[b];
+                              }else if(a == 1){
+                                    components[b][a] = VF_R.getJTFPanel()[b];
+                              }else if(a == 2){
+                                    components[b][a] = VF_R.getBTNS_C()[b];
+                              }
+                        }
+                  }
+                  
+                  //MList.printFor(components);
+                  //System.out.println("Double Array Components: " + components);
+                  MLayout.lineSequence(gl, components);
+                  //lineSequence(gl, components);
                   componentsGroupLayout();
             }
 
       }
+      /*
+      public static void lineSequence(GroupLayout gl, JComponent[][] components) {
+            int colLength = components[0].length;
+            int rowLength = components.length;
+            GroupLayout.ParallelGroup[] phs = new GroupLayout.ParallelGroup[colLength];
+            for (int a = 0; a < colLength; a++) {
+                  phs[a] = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
+            }
+            //++++++++++++++++++++++++++++++++++++
+            gl.setAutoCreateGaps(true);
+            gl.setAutoCreateContainerGaps(true);
 
+            //HORIZONTAL GROUP = COL NUM
+            if (false) {
+                  phs = new GroupLayout.ParallelGroup[colLength];
+            }
+            //VERTICAL GROUP = ROW LENGHT DETERMINE BY ->rows<-
+            GroupLayout.SequentialGroup sv = gl.createSequentialGroup();
+            //+++++++++++++++++++++++++++++++++++++++++++++
+            //SUB HORIZONTAL GROUP
+            GroupLayout.SequentialGroup sgh = gl.createSequentialGroup();
+
+            //SUB-SUB HORIZONTAL GROUPS (COLS)
+            if (false) {
+                  for (int a = 0; a < colLength; a++) {
+                        phs[a] = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
+                  }
+            }
+            //HORIZONTAL +++++++++++++++++++++++++++++
+            for (int row = 0; row < rowLength; row++) {
+                  for (int col = 0; col < colLength; col++) {
+                        phs[col].addComponent(components[row][col]);
+                  }
+            }
+            System.out.println("PHS LENGTH: " + phs.length);
+            System.out.println("SGH: " + sgh.toString());
+            for (int a = 0; a < colLength; a++) {
+                  sgh.addGroup(phs[a]);
+            }
+            //VERTICAL +++++++++++++++++++++++++++++++
+            for (int a = 0; a < rowLength; a++) {
+                  GroupLayout.ParallelGroup pg = gl.createParallelGroup(GroupLayout.Alignment.LEADING, false);
+                  for (int b = 0; b < colLength; b++) {
+                        pg.addComponent(components[a][b]);
+                  }
+                  sv.addGroup(pg);
+            }
+            //++++++++++++++++++++++++++++++++++++++
+            gl.setHorizontalGroup(
+                    gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(sgh));
+
+            gl.setVerticalGroup(
+                    gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGroup(sv));
+      }
+      */
       private void subSplitUpConfig() {
             PL_U.setLayout(new BorderLayout());
             PL_U.add(PL_UT, BorderLayout.NORTH);
@@ -498,50 +568,26 @@ public class VF_R extends VF_R_DataCom {
 
       private void clockConfig() {
             int h = cbs[0].getHeight();
-            Font FT = new Font("Dialog", Font.BOLD, 20);
             Font FL = new Font("Dialog", Font.BOLD, 26);
-            Color[] c = {new Color(51, 51, 51), Color.WHITE};
             Dimension cks = new Dimension(30, h);
             Dimension cks2 = new Dimension(10, h);
 
-            for (int a = 0; a < DT.maxColumns; a++) {//a: 0 to 4   b: 1 to 5
-                  clocks[a] = new JPanel();
-                  PL_UC.add(clocks[a]);
-                  clocks[a].setLayout(new BoxLayout(clocks[a], BoxLayout.X_AXIS));
-                  clocks[a].setBackground(Color.DARK_GRAY);
-                  //++++++++++++++++++++++++++++++
-                  tfs_MD[a] = new JTextField("0");
-                  tfs_MU[a] = new JTextField("0");
-                  lb_2ds[a] = new JLabel(":", SwingConstants.CENTER);
-                  tfs_SD[a] = new JTextField("0");
-                  tfs_SU[a] = new JTextField("0");
-
-            }
             for (int a = 0; a < DT.maxColumns; a++) {
-
-                  clocks[a].add(SerializationUtils.clone(tfs_MD[a]));
-                  clocks[a].add(SerializationUtils.clone(tfs_MU[a]));
-                  clocks[a].add(SerializationUtils.clone(lb_2ds[a]));
-                  clocks[a].add(SerializationUtils.clone(tfs_SD[a]));
-                  clocks[a].add(SerializationUtils.clone(tfs_SU[a]));
-
-                  clocks[a].setVisible(false);
+                  JTextField MD = tfs_MD[a];
+                  JTextField MU = tfs_MU[a];
+                  JLabel LB2D = lb_2ds[a];
+                  JTextField SD = tfs_SD[a];
+                  JTextField SU = tfs_SU[a];
                   //++++++++++++++++++++++++++++++++++++++++++++
-                  JTextField MD = (JTextField) clocks[a].getComponent(0);
-                  JTextField MU = (JTextField) clocks[a].getComponent(1);
-                  JLabel LB2D = (JLabel) clocks[a].getComponent(2);
-                  JTextField SD = (JTextField) clocks[a].getComponent(3);
-                  JTextField SU = (JTextField) clocks[a].getComponent(4);
-                  //++++++++++++++++++++++++++++++++++++++++++++
-                  MD.setBackground(new Color(51, 51, 51));
-                  MU.setBackground(new Color(51, 51, 51));
-                  SD.setBackground(new Color(51, 51, 51));
-                  SU.setBackground(new Color(51, 51, 51));
-                  MD.setFont(FT);
-                  MU.setFont(FT);
-                  LB2D.setFont(FT);
-                  SD.setFont(FT);
-                  SU.setFont(FT);
+                  MD.setBackground(LK.CP_BK_NORMAL);
+                  MU.setBackground(LK.CP_BK_NORMAL);
+                  SD.setBackground(LK.CP_BK_NORMAL);
+                  SU.setBackground(LK.CP_BK_NORMAL);
+                  MD.setFont(LK.CP_FONT_NORMAL);
+                  MU.setFont(LK.CP_FONT_NORMAL);
+                  LB2D.setFont(LK.CP_FONT_NORMAL);
+                  SD.setFont(LK.CP_FONT_NORMAL);
+                  SU.setFont(LK.CP_FONT_NORMAL);
                   MD.setForeground(Color.WHITE);
                   MU.setForeground(Color.WHITE);
                   LB2D.setForeground(Color.WHITE);
@@ -584,7 +630,6 @@ public class VF_R extends VF_R_DataCom {
                   lb_2ds[a].setFont(FL);
                   lb_2ds[a].setForeground(Color.WHITE);
                   lb_2ds[a].setHorizontalTextPosition(0);
-                  lb_2ds[a].setVisible(false);
             }
 
       }
@@ -592,25 +637,21 @@ public class VF_R extends VF_R_DataCom {
       private void clockNullLayout() {
             int h = cbs[0].getHeight();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  clocks[a].setLocation(cbs[a].getX() + 160,cbs[a].getY());
-                  clocks[a].setSize(196, h);
+                  clocksPanel[a].setLocation(cbs[a].getX() + 160, cbs[a].getY());
+                  clocksPanel[a].setSize(196, h);
                   //clocks[a].setSize(130, h);
             }
       }
-
+      
       private void componentsGroupLayout() {
             for (int a = 0; a < DT.maxColumns; a++) {
-                  cbs[a].setMinimumSize(new Dimension(100, 27));
-                  cbs[a].setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
-                  clocks[a].setMinimumSize(new Dimension(196, 27));
-                  clocks[a].setMaximumSize(new Dimension(196, 27));
-                  scs[a].setMinimumSize(new Dimension(100, 200));
-                  scs[a].setMaximumSize(new Dimension(Short.MAX_VALUE, 200));
+                  tfPanel[a].setMinimumSize(new Dimension(100, 27));
+                  tfPanel[a].setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
                   btns_C[a].setMinimumSize(new Dimension(20, 27));
                   btns_C[a].setMaximumSize(new Dimension(20, 27));
             }
       }
-
+      
       private void actionTBComponents() {
             btns_TB[0].addActionListener(new ActionListener() {
                   public void actionPerformed(ActionEvent evt) {
@@ -660,17 +701,6 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("btn hide_id Bounds: " + hide_id.getBounds());
       }
 
-      private void componentsVisibility() {
-            lb_Title.setVisible(true);
-
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  scs[a].setVisible(false);
-            }
-            //+++++++++++++++++++++++++++++++++++++++++++++
-            btns_MC[1].setEnabled(false);
-            btns_MC[2].setEnabled(false);
-      }
-
       private void setArrayListToArray() {
             for (int a = 0; a < DT.maxColumns; a++) {
                   DT.getList_DS()[a] = new ArrayList<String>();
@@ -679,33 +709,40 @@ public class VF_R extends VF_R_DataCom {
                   }
             }
       }
-
-      private void setComponentsToArray() {
-            //=================================
+      //+++++++++++++++++++++
+      private void componentsConfig() {
+            lb_Title.setVisible(true);
+            btns_MC[1].setEnabled(false);
+            btns_MC[2].setEnabled(false);
+            
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = new smallLB();
-                  cbs[a] = new MComboBoxE(new String[]{"TEST_A", "TEST_B"});
-            }
-            //================================
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  lsts[a] = new smallLST();
-                  scs[a] = new JScrollPane(lsts[a]);
-
-                  scs[a].setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-                  scs[a].setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-                  btns_C[a] = new smallBTN_C(null);
-            }
-            //++++++++++++++++++++++++++++++++++++++
-
-      }
-      
-      private void getJTextFieldsOfJComboBox(){
-            for (int a = 0;a < DT.maxColumns; a++){
+                  tfPanel[a] = new JPanel();
+                  cbs[a] = new MComboBoxE();
                   tfs[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
                   tfs[a].setBackground(LK.CP_BK_NORMAL);
+                  
+                  tfs_MD[a] = new smallTF("0");
+                  tfs_MU[a] = new smallTF("0");
+                  lb_2ds[a] = new JLabel(":", SwingConstants.CENTER);
+                  tfs_SD[a] = new smallTF("0");
+                  tfs_SU[a] = new smallTF("0");
+                  
+                  tfPanel[a].setLayout(new BoxLayout(tfPanel[a], BoxLayout.X_AXIS));
+                  tfPanel[a].setBackground(Color.BLACK);
+                  tfPanel[a].add(cbs[a]);
+                  tfPanel[a].add(tfs_MD[a]);
+                  tfPanel[a].add(tfs_MU[a]);
+                  tfPanel[a].add(lb_2ds[a]);
+                  tfPanel[a].add(tfs_SD[a]);
+                  tfPanel[a].add(tfs_SU[a]);
+                  
+                  btns_C[a] = new smallBTN_C(null);
             }
+            //================================
+            clockConfig();
       }
+      //+++++++++++++++++++++
 
       private void setNullLayoutComponentsSize() {
             int disLY = 0;
@@ -718,7 +755,7 @@ public class VF_R extends VF_R_DataCom {
                   lbs[a].setBounds(6, 38 + disLY, 100, 27);
                   if (a == 0) {
                         lbs[a].setText("1. Id");
-                        cbs[a].setBounds(10,38,110, 27);
+                        cbs[a].setBounds(10, 38, 110, 27);
                   } else {
                         cbs[a].setBounds(107, 72 + disTY, 290, 27);
                         disTY += 33;
@@ -805,13 +842,13 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("lbs Length: " + lbs.length);
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setName("LB_" + (a + 1));
-                  cbs[a].setName("CBS_" + (a + 1));
-                  tfs[a].setName("TFS_" + (a + 1));
-                  scs[a].setName("SC_" + (a + 1));
-                  lsts[a].setName("LST_" + (a + 1));
+                  cbs[a].setName("CB_" + (a + 1));
+                  tfs[a].setName("TF_" + (a + 1));
+                  //scs[a].setName("SC_" + (a + 1));
+                  //lsts[a].setName("LST_" + (a + 1));
                   btns_C[a].setName("BTNC_" + (a + 1));
 
-                  clocks[a].setName("Clock_" + (a + 1));
+                  //clocksPanel[a].setName("Clock_" + (a + 1));
                   tfs_MD[a].setName("TF_MD_" + (a + 1));
                   tfs_MU[a].setName("TF_MU_" + (a + 1));
                   tfs_SD[a].setName("TF_SD_" + (a + 1));
@@ -835,7 +872,7 @@ public class VF_R extends VF_R_DataCom {
                   //SELECTING DEFAULT TABLE++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   ms.selectRowFromTable(DTSQL.defautlTable, 1, new SelectDefaultTable());
-                  
+
                   //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
                   addItemToMenus(DT.getList_id(), DT.getList_T());
                   setColorToDItem(DT.getTable(), DT.getDTable());
@@ -977,7 +1014,7 @@ public class VF_R extends VF_R_DataCom {
 
                         VL.getJF().dispose();
                         JF.setVisible(true);
-                        
+
                         new VT_T();
                   }
 

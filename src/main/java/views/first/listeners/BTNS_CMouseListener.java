@@ -33,7 +33,7 @@ public class BTNS_CMouseListener implements MouseListener {
 
       @Override
       public void mousePressed(MouseEvent evt) {
-            System.out.println("mousePressed");
+            System.out.println("CCCCmousePressed: " + evt.getComponent().getName());
             JComponent jcC = (JComponent) evt.getSource();
             Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
 

@@ -5,11 +5,14 @@
  */
 package views.first.listeners;
 
+import MC.DT;
 import com.cofii.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
+import views.first.VF_R;
 
 /**
  *
@@ -33,33 +36,18 @@ public class TF_KL implements KeyListener {
 
       @Override
       public void keyPressed(KeyEvent e) {
-            System.out.println("\nKEYPRESSED " + ++count + " (" + e.getComponent().getName() + ")");
+            String name = e.getComponent().getName();
+            int index = MComp.getLastDigitCharsCountAtEnd(name);
+            System.out.println("\nkeyPressed " + index);
             popupControl(e);
-            String text = TF.getText();
-            System.out.println("Text: " + text);
-            String ntext = MComp.setCountComponents(TF, e);
-            System.out.println("nText: " + ntext);
-            //System.out.println("CB TEXT: " + CB.getSelectedItem().toString());
-            
-            //System.out.println("CB TEXT: " + CB.getSelectedItem().toString());
-            if (!ntext.isEmpty()) {
-                  System.out.println("\tTHREAD");
-                  new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                              while (true) {
-                                    if (TF.getText().isEmpty() || CB.getSelectedItem().toString().equals("")) {
-                                          if (!TF.getText().equals(ntext)) {
-                                                TF.setText(ntext);
-                                          }
-                                          System.out.println("\t\tTF.getText: " + TF.getText());
-                                          break;
-                                    }
-                              }
-                        }
+            //COUNT UP OR DOWN ++++++++++++++++++++++++++++++++++++
+            TF.setText(MComp.getCountComponents(TF, e));
+            //CLOCK FOCUS CHANGE (CTRL+LEFT OR RIGHT) ++++++++++++++
+            focusChangeRL(e, index);
+            //TF FOCUS CHANGE (CTRL+DOWN OR UP) +++++++++++++++++++
+            int cc = VF_R.getJT().getColumnCount();
+            foucusChangeDU(cc, index, e);
 
-                  }).start();
-            }
       }
 
       @Override
@@ -70,13 +58,81 @@ public class TF_KL implements KeyListener {
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       private void popupControl(KeyEvent e) {
             if (TF.hasFocus()) {
-                  if (e.isAltDown() || e.isControlDown()) {
+                  if (e.isAltDown() || e.isControlDown() || e.isShiftDown()) {
                         CB.setPopupVisible(false);
 
-                  } else if (!e.isAltDown() && !e.isControlDown()) {
+                  } else if (!e.isAltDown() && !e.isControlDown() && e.isShiftDown()) {
                         CB.setPopupVisible(true);
                   }
             }
       }
 
+      private void focusChangeRL(KeyEvent e, int index) {
+
+            if (index > 0) {
+                  //THIS WILL BE IGNORED IF NO CLOCK IS DISPLAYABLE
+                  if (KeyEvent.VK_RIGHT == e.getKeyCode()) {
+                        if (e.isControlDown()) {
+                              VF_R.getTFS_MD()[index - 1].requestFocus();
+                        }
+                  } else if (KeyEvent.VK_LEFT == e.getKeyCode()) {
+                        if (e.isControlDown()) {
+                              VF_R.getTFS_SU()[index - 1].requestFocus();
+                        }
+                  }
+            }
+      }
+      
+      private void foucusChangeDU(int cc, int index, KeyEvent e){
+            if (KeyEvent.VK_DOWN == e.getKeyCode()) {
+                  if (e.isControlDown()) {
+                        for (int a = 0; a < cc; a++) {
+                              if (a == index - 1) {
+                                    int count = 0;//IF ITS THE LAST ONE
+                                    if (a != cc - 1) {//IF NOT THE LAST ONE
+                                          count = a + 1;//NEXT ONE
+                                    }
+                                    while (true) {
+                                          if (VF_R.getJTFS()[count].isEnabled()) {
+                                                VF_R.getJTFS()[count].requestFocus();
+                                                break;
+                                          } else {
+                                                if (count == cc - 1) {//IF ITS REACHES THE LAST ONE
+                                                      count = 0;
+                                                } else {
+                                                      count++;
+                                                }
+                                          }
+                                    }
+
+                              }
+                        }
+                  }
+            }else if(KeyEvent.VK_UP == e.getKeyCode()){
+                  if (e.isControlDown()) {
+                        for (int a = 0; a < cc; a++) {
+                              if (a == index - 1) {
+                                    int count = cc - 1;//IF ITS THE FIST ONE
+                                    if (a != 0) {//IF NOT THE FIRST ONE
+                                          count = a - 1;//PREVIOUS ONE
+                                    }
+                                    while (true) {
+                                          if (VF_R.getJTFS()[count].isEnabled()) {
+                                                VF_R.getJTFS()[count].requestFocus();
+                                                break;
+                                          } else {
+                                                if (count == 0) {//IF ITS REACHES THE FIRST ONE
+                                                      count = cc - 1;
+                                                } else {
+                                                      count--;
+                                                }
+                                          }
+                                    }
+
+                              }
+                        }
+                  }
+            }
+      }
+      //+++++++++++++++++++++++++++++++++++++++++++++++++
 }

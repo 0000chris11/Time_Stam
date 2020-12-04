@@ -210,7 +210,8 @@ public class VL extends VL_DataCom {
 
                   GroupLayout gl = new GroupLayout(JPC);
                   JPC.setLayout(gl);
-                  MLayout.singlelineSequence(gl, components, 28);
+                  MLayout.setComponentsHeight(28);
+                  MLayout.singlelineSequence(gl, components);
                   //+++++++++++++++++++++++++++++++++++++++++
                   JF.getContentPane().add(JPS, BorderLayout.SOUTH);
                   JPS.setBackground(Color.BLACK);

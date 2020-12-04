@@ -122,6 +122,7 @@ public class VF_R_DataCom {
 
       static JLabel lb_Title = new JLabel("No Table Selected");
       static JLabel[] lbs = new JLabel[DT.maxColumns];
+      static JPanel[] tfPanel = new JPanel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
       static JComboBox[] cbs = new MComboBoxE[DT.maxColumns];
       static JButton[] btns_C = new JButton[DT.maxColumns];
@@ -130,7 +131,7 @@ public class VF_R_DataCom {
 
       static JButton[] btns_TB = new JButton[]{new smallBTN_C(""), new smallBTN_C("")};
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      static JPanel[] clocks = new JPanel[DT.maxColumns];
+      static JPanel[] clocksPanel = new JPanel[DT.maxColumns];
       static JTextField[] tfs_MD = new JTextField[DT.maxColumns];
       static JTextField[] tfs_MU = new JTextField[DT.maxColumns];      
       static JTextField[] tfs_SD = new JTextField[DT.maxColumns];
@@ -245,7 +246,7 @@ public class VF_R_DataCom {
       }
       
       public static JPanel[] getClocks(){
-            return clocks;
+            return clocksPanel;
       }
 
       public static JButton[] getBTNS_C() {
@@ -254,6 +255,10 @@ public class VF_R_DataCom {
 
       public static JLabel[] getJLBS() {
             return lbs;
+      }
+      
+      public static JPanel[] getJTFPanel(){
+            return tfPanel;
       }
       
       public static JComboBox[] getJCBS(){

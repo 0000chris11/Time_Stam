@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -35,9 +37,9 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn);
             JButton btn2 = new JButton("Comparing");
             vt.add(btn2);
-            JButton btn3 = new JButton("Get SPL Components");
+            JButton btn3 = new JButton("Get COMPONENT OF JTFPanel");
             vt.add(btn3);
-            JButton btn4 = new JButton("DISABLE TFS");
+            JButton btn4 = new JButton("GET TFS BACKGROUND");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -80,19 +82,18 @@ public class VT_T extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        System.out.println("SPL LeftComponent: "
-                                + VF_R.getSPL().getLeftComponent().getClass());
-                        System.out.println("SPL RightComponent: "
-                                + VF_R.getSPL().getRightComponent().getClass());
+                        for(int a = 0; a < VF_R.getJTFPanel()[3].getComponentCount(); a++){
+                              System.out.println((a + 1) + ": " + VF_R.getJTFPanel()[3].getComponent(a).getName());
+                        }
                   }
 
             });
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        Properties pr = new Properties();
-                        Enumeration<?> enu = pr.propertyNames();
-                        System.out.println(enu.nextElement());
+                        for(int a = 0; a < DT.maxColumns; a++){
+                              System.out.println("TF_" + (a + 1) + ": " + VF_R.getJTFS()[a].getBackground());
+                        }
                   }
 
             });

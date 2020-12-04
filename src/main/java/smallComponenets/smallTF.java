@@ -33,6 +33,14 @@ import javax.swing.border.EmptyBorder;
 public class smallTF extends JTextField {
 
       public smallTF() {
+            config();
+      }
+      public smallTF(String text){
+            config();
+            setText(text);
+      }
+      
+      private void config(){
             Font f = new Font("Dialog", Font.BOLD, 16);
             setBackground(LK.CP_BK_NORMAL);
             setForeground(Color.WHITE);

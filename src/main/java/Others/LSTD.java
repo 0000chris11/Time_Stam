@@ -38,7 +38,9 @@ public class LSTD {
             System.out.println("\tTB: " + IC);
             System.out.println("\tTG1: " + TG1);
             System.out.println("\tCK: " + CK);
-
+            //+++++++++++++++++++++++++++++++++++++++
+            extraConfig();
+            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             filterEquals("Dist1", D1);
             filterEquals("Dist2", D2);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -64,6 +66,10 @@ public class LSTD {
             //System.out.println("TG2 = " + TG2);
             changeCK(CK);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+      }
+
+      private void extraConfig() {
             int pk = DT.getPrimaryKey();
             System.out.println("\tPrimary key: C" + pk);
             if (DT.getPrimaryKey() > 0) {
@@ -79,6 +85,8 @@ public class LSTD {
             if (extra > 0) {
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (a == extra - 1) {
+                              VF_R.getJCBS()[a].removeAllItems();
+                              VF_R.getJCBS()[a].setEnabled(false);
                               VF_R.getJTFS()[a].setBackground(LK.CP_BK_AUTO_INCR_IDEN);
                               VF_R.getJTFS()[a].setFont(LK.CP_FONT_AUTO_INCREMENT);
                               String extraT = DT.getExtra()[1].toString();
@@ -87,20 +95,20 @@ public class LSTD {
                               } else if (extraT.equals("IDENTITY")) {
                                     VF_R.getJTFS()[a].setText(LK.CP_TEXT_AUTO_IDENTITY);
                               }
-                        }else{
+                        } else {
+                              VF_R.getJCBS()[a].setEnabled(true);
                               VF_R.getJTFS()[a].setBackground(LK.CP_BK_NORMAL);
                               VF_R.getJTFS()[a].setFont(LK.CP_FONT_NORMAL);
-                              VF_R.getJTFS()[a].setText("DD4535");
+                              VF_R.getJTFS()[a].setText("");
                         }
                   }
             }
-
       }
 
       private void changeLSTDist1(int index, String table, String col) {
             boolean vis;//NO ADDING THE ELEMENTS AGAIN
 
-            System.out.println("changeLSTDist1");
+            System.out.println("\nchangeLSTDist1");
             System.out.println("\tindex: " + index);
             System.out.println("\ttable: " + table);
             System.out.println("\tcol: " + col);
@@ -112,14 +120,17 @@ public class LSTD {
                               vis = false;
                         }
 
+                        //System.out.println(VF_R.getJTFS()[a].getName() + " change color to RED");
                         VF_R.getJTFS()[a].setBackground(LK.CP_BK_DIST1);
                         //+++++++++++++++++++++++++++++++++++++++++++++++
                         SelectDistinctColumn sdc = new SelectDistinctColumn(DT.getList_DS()[a]);
                         ms.selectDistinctColumn(table, col, sdc);
                         if (sdc.rsValues) {
                               //mc.MCInsertSelectD1(table, col, DT.getList_DS()[a]);//listDs[a + 2]
+                              System.out.println("\tElements To Distinct");
                               MList.unTagList(DT.getList_DS()[a]);
-                              MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
+                              //MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
+                              MList.add_SetListModel(VF_R.getJCBS()[a], DT.getList_DS()[a]);
                         } else {
                               System.out.println("\tno elements distinct");
                         }
@@ -133,10 +144,17 @@ public class LSTD {
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (fll1 + 1 == a + 1 && fll2 + 1 == a + 2) {
                         //System.out.println("\ta: " + a);
+                        if (VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")) {
+                              System.out.println("#######REMOVING CBS AND ADING TFS");
+                              VF_R.getJTFPanel()[a].remove(VF_R.getJCBS()[a]);
+                              VF_R.getJTFPanel()[a].add(VF_R.getJTFS()[a], 0);
+                        }
+
                         if (VF_R.getJTFS()[a + 1].getBackground().equals(LK.CP_BK_DIST2)) {
                               vis = false;
                         }
 
+                        VF_R.getJTFS()[a].setBackground(LK.CP_BK_DIST2);
                         VF_R.getJTFS()[a + 1].setBackground(LK.CP_BK_DIST2);
 
                         SelectDistinctColumns sdc = new SelectDistinctColumns(DT.getList_DS()[a], DT.getList_DS()[a + 1]);
@@ -145,7 +163,8 @@ public class LSTD {
                               //mc.MCInsertSelectD2(table, col1, col2, DT.getList_DS()[a], DT.getList_DS()[a + 1]);//listDs[a + 2] & listDs[a + 3]
                               DT.getList_MXS()[a] = MList.mixRowList(DT.getList_DS()[a], DT.getList_DS()[a + 1], ": ");//listSs[a + 2]
                               MList.unTagList(DT.getList_MXS()[a]);//listSs[a + 2]
-                              MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
+                              //MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
+                              //NOW         MList.add_SetListModel(jcb, al);
                         } else {
                               System.out.println("\tno elements distinct (multiple columns)");
                         }
@@ -174,31 +193,34 @@ public class LSTD {
 
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (a == col) {
-                              System.out.println("\t\t###a: " + col);
-                              if (VF_R.getJCBS()[a].getWidth() == 290) {
-                                    VF_R.getJCBS()[a].setSize(160,
-                                            VF_R.getJCBS()[a].getHeight());
+                              if (VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")) {
+                                    VF_R.getJTFPanel()[a].remove(VF_R.getJCBS()[a]);
+                                    VF_R.getJTFPanel()[a].add(VF_R.getJTFS()[a], 0);
                               }
 
-                              VF_R.getClocks()[a].setVisible(true);
-                              /*
+                              if (VF_R.getJTFS()[a].getWidth() == 290) {
+                                    VF_R.getJTFS()[a].setSize(160,
+                                            VF_R.getJTFS()[a].getHeight());
+                              }
+
+                              //VF_R.getClocks()[a].setVisible(true);
                               VF_R.getTFS_MD()[a].setVisible(true);
                               VF_R.getTFS_MU()[a].setVisible(true);
                               VF_R.getTFS_SD()[a].setVisible(true);
                               VF_R.getTFS_SU()[a].setVisible(true);
                               VF_R.getLB_2DS()[a].setVisible(true);
-                               */
+
                         } else {
+
                               VF_R.getJCBS()[a].setSize(290, VF_R.getJCBS()[a].getHeight());
 
-                              VF_R.getClocks()[a].setVisible(false);
-                              /*
+                              //VF_R.getClocks()[a].setVisible(false);
                               VF_R.getTFS_MD()[a].setVisible(false);
                               VF_R.getTFS_MU()[a].setVisible(false);
                               VF_R.getTFS_SD()[a].setVisible(false);
                               VF_R.getTFS_SU()[a].setVisible(false);
                               VF_R.getLB_2DS()[a].setVisible(false);
-                               */
+
                         }
                   }
             } else {

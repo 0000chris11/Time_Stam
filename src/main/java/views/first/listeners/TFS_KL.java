@@ -30,27 +30,6 @@ public class TFS_KL implements KeyListener {
             System.out.println("\nKEYPRESSED");
             int cc = VF_R.getJT().getColumnCount();    
             MComp.setLoopComponents(VF_R.getJTFS(), cc, evt);
-
-            if (KeyEvent.VK_RIGHT == evt.getKeyCode()) {
-                  if (evt.isControlDown()) {
-                        //System.out.println("\tCTRL + RIGHT");
-                        for (int a = 0; a < DT.maxColumns; a++) {
-                              if (VF_R.getJCBS()[a].hasFocus()) {
-                                    VF_R.getTFS_MD()[a].requestFocus();
-                              }
-                        }
-                  }
-            } else if (KeyEvent.VK_LEFT == evt.getKeyCode()) {
-                  if (evt.isControlDown()) {
-                        //System.out.println("\tCTRL + LEFT");
-                        for (int a = 0; a < DT.maxColumns; a++) {
-                              if (VF_R.getJCBS()[a].hasFocus()) {
-                                    VF_R.getTFS_SU()[a].requestFocus();
-                              }
-                        }
-                  }
-            }
-            
       }
 
       @Override

@@ -206,7 +206,12 @@ public class JTChanged_AL implements ActionListener {
                   }
                   DT.getDLMS()[a].clear();
                   //CLOCK+++++++++++++++++++++++
-                  VF_R.getClocks()[a].setVisible(false);
+                  VF_R.getTFS_MD()[a].setVisible(false);
+                  VF_R.getTFS_MU()[a].setVisible(false);
+                  VF_R.getLB_2DS()[a].setVisible(false);
+                  VF_R.getTFS_SD()[a].setVisible(false);
+                  VF_R.getTFS_SU()[a].setVisible(false);
+                  
                   resetClock(VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a],
                           VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a]);
             }
