@@ -21,7 +21,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import views.Login.VL;
+import static views.first.VF_R_DataCom.cbs;
 
 /**
  *
@@ -37,9 +39,9 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn);
             JButton btn2 = new JButton("Comparing");
             vt.add(btn2);
-            JButton btn3 = new JButton("Get COMPONENT OF JTFPanel");
+            JButton btn3 = new JButton("Get CLIENT PROPERTY");
             vt.add(btn3);
-            JButton btn4 = new JButton("GET TFS BACKGROUND");
+            JButton btn4 = new JButton("GET CBS TFS BACKGROUND");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -64,9 +66,12 @@ public class VT_T extends VF_R_DataCom {
                         System.out.println(btn2.getText());
                         JComponent leftC = (JComponent) VF_R.getSPL().getLeftComponent();
                         JComponent rightC = (JComponent) VF_R.getSPL().getRightComponent();
+                        
                         System.out.println("SPL Divider Location: " + VF_R.getSPL().getDividerLocation());
+                        
                         MComp.printComponentSizeInfo(leftC);
                         MComp.printComponentSizeInfo(rightC);
+                        
                         System.out.println("SPL_SUB Divider Location: " + VF_R.getSPL_SUB().getDividerLocation());
                         JComponent topC = (JComponent) VF_R.getSPL_SUB().getTopComponent();
                         JComponent bottC = (JComponent) VF_R.getSPL_SUB().getBottomComponent();
@@ -82,17 +87,28 @@ public class VT_T extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        for(int a = 0; a < VF_R.getJTFPanel()[3].getComponentCount(); a++){
-                              System.out.println((a + 1) + ": " + VF_R.getJTFPanel()[3].getComponent(a).getName());
+                        for (int a = 0; a < DT.maxColumns; a++) {
+                              //System.out.println(VF_R.getJTFES()[a].getClientProperty("TextField.highlight"));
+                              System.out.println(cbs[a].getEditor().getEditorComponent().getClass().toString());
                         }
+                        System.out.println("TextField.shadow: " + UIManager.get("TextField.shadow"));
+                        System.out.println("TextField.margin: " + UIManager.get("TextField.margin"));
+                        System.out.println("TextField.highlight: " + UIManager.get("TextField.highlight"));
+                        System.out.println("TextField.focusInputMap: " + UIManager.get("TextField.focusInputMap"));
+                        System.out.println("TextField.darkShadow: " + UIManager.get("TextField.darkShadow"));
+                        System.out.println("TextField.border: " + UIManager.get("TextField.border"));
                   }
 
             });
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        for(int a = 0; a < DT.maxColumns; a++){
-                              System.out.println("TF_" + (a + 1) + ": " + VF_R.getJTFS()[a].getBackground());
+                        for (int a = 0; a < DT.maxColumns; a++) {
+                              if (VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")) {
+                                    System.out.println("CB_" + (a + 1) + ": " + VF_R.getJCBS()[a].getBackground());
+                              } else {
+                                    System.out.println("TF_" + (a + 1) + ": " + VF_R.getJTFES()[a].getBackground());
+                              }
                         }
                   }
 

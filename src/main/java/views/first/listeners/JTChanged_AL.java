@@ -216,7 +216,7 @@ public class JTChanged_AL implements ActionListener {
                           VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a]);
             }
 
-            //VF_R.getJTFS()[0].requestFocus();
+            //VF_R.getJTFES()[0].requestFocus();
 
       }
 }

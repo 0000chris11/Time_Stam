@@ -47,18 +47,21 @@ public class CompReset {
                               //1, 2, 3, 4, 5
                               VF_R.getJLBS()[b].setText((b + 1) + ". " + cols[b]);
                               MText.shortenLB(VF_R.getJLBS()[b]);
-
-                              VF_R.getJLBS()[b].setVisible(true);
                               VF_R.getJTFPanel()[b].setVisible(true);
+                              if(VF_R.getJTFPanel()[b].getComponent(0).getName().contains("CB")){
+                                    VF_R.getJTFPanel()[b].remove(VF_R.getJCBS()[b]);
+                                    VF_R.getJTFPanel()[b].add(VF_R.getJTFS()[b], 0);
+                                    
+                                    //VF_R.getJS()[b].setVisible(true);
+                              }
+                              
+                              VF_R.getJLBS()[b].setVisible(true);
+                              VF_R.getJCBS()[b].setVisible(true);
                               VF_R.getBTNS_C()[b].setVisible(true);
                               
-                              if(VF_R.getJTFPanel()[b].getComponent(0).getName().contains("TF")){
-                                    VF_R.getJTFPanel()[b].remove(VF_R.getJTFS()[b]);
-                                    VF_R.getJTFPanel()[b].add(VF_R.getJCBS()[b], 0);
-                              }
                         }
                         //HIDES OUT LENGTH COMPONENTS
-                        for (int b = 0; b < DT.maxColumns - (a + 1); b++) {//4
+                        for (int b = 0; b < DT.maxColumns - (a + 1); b++) {
                               VF_R.getJLBS()[b + (1 + a)].setVisible(false);
                               VF_R.getJTFPanel()[b + (1 + a)].setVisible(false);
                               VF_R.getBTNS_C()[b + (1 + a)].setVisible(false);
@@ -67,6 +70,17 @@ public class CompReset {
                         //mc.SelectData(a + 1, DT.getTable());
                         ms.selectData(DT.getTable(), new SelectData(a + 1));
                   }
+            }
+            for(int a = 0; a < DT.maxColumns; a++){
+                  VF_R.getJCBS()[a].setVisible(true);
+                  /*
+                  System.out.println(VF_R.getJTFPanel()[a].getName() + ": " + VF_R.getJTFPanel()[a].isVisible());
+                  if(VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")){
+                        System.out.println(VF_R.getJCBS()[a].getName() + ": " + VF_R.getJCBS()[a].isVisible());
+                  }else{
+                        System.out.println(VF_R.getJTFES()[a].getName() + ": " + VF_R.getJTFES()[a].isVisible());
+                  }
+                  */
             }
       }
 }

@@ -29,6 +29,11 @@ public class TF_KL implements KeyListener {
             TF = tf;
       }
 
+      public TF_KL(JTextField tf) {
+            TF = tf;
+            CB = null;
+      }
+
       @Override
       public void keyTyped(KeyEvent e) {
 
@@ -39,7 +44,9 @@ public class TF_KL implements KeyListener {
             String name = e.getComponent().getName();
             int index = MComp.getLastDigitCharsCountAtEnd(name);
             System.out.println("\nkeyPressed " + index);
-            popupControl(e);
+            if (CB != null) {
+                  popupControl(e);
+            }
             //COUNT UP OR DOWN ++++++++++++++++++++++++++++++++++++
             TF.setText(MComp.getCountComponents(TF, e));
             //CLOCK FOCUS CHANGE (CTRL+LEFT OR RIGHT) ++++++++++++++
@@ -82,8 +89,8 @@ public class TF_KL implements KeyListener {
                   }
             }
       }
-      
-      private void foucusChangeDU(int cc, int index, KeyEvent e){
+
+      private void foucusChangeDU(int cc, int index, KeyEvent e) {
             if (KeyEvent.VK_DOWN == e.getKeyCode()) {
                   if (e.isControlDown()) {
                         for (int a = 0; a < cc; a++) {
@@ -93,8 +100,8 @@ public class TF_KL implements KeyListener {
                                           count = a + 1;//NEXT ONE
                                     }
                                     while (true) {
-                                          if (VF_R.getJTFS()[count].isEnabled()) {
-                                                VF_R.getJTFS()[count].requestFocus();
+                                          if (VF_R.getJTFES()[count].isEnabled()) {
+                                                VF_R.getJTFES()[count].requestFocus();
                                                 break;
                                           } else {
                                                 if (count == cc - 1) {//IF ITS REACHES THE LAST ONE
@@ -108,7 +115,7 @@ public class TF_KL implements KeyListener {
                               }
                         }
                   }
-            }else if(KeyEvent.VK_UP == e.getKeyCode()){
+            } else if (KeyEvent.VK_UP == e.getKeyCode()) {
                   if (e.isControlDown()) {
                         for (int a = 0; a < cc; a++) {
                               if (a == index - 1) {
@@ -117,8 +124,8 @@ public class TF_KL implements KeyListener {
                                           count = a - 1;//PREVIOUS ONE
                                     }
                                     while (true) {
-                                          if (VF_R.getJTFS()[count].isEnabled()) {
-                                                VF_R.getJTFS()[count].requestFocus();
+                                          if (VF_R.getJTFES()[count].isEnabled()) {
+                                                VF_R.getJTFES()[count].requestFocus();
                                                 break;
                                           } else {
                                                 if (count == 0) {//IF ITS REACHES THE FIRST ONE

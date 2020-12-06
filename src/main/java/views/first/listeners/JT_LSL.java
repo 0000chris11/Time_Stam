@@ -53,10 +53,10 @@ public class JT_LSL implements ListSelectionListener {
                                           //CASE FOR PRIMARY KEY; EVERY OTHER COLUMN CHANGE ITS NAME BUT THE PK ONE
                                           if (DT.getPrimaryKey() > 0) {
                                                 if(b != DT.getPrimaryKey() - 1){
-                                                      VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                                      VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
                                                 }
                                           } else {
-                                                VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                                VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
                                           }
                                     }
                               }

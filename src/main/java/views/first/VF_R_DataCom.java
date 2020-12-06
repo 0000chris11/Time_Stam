@@ -46,7 +46,7 @@ public class VF_R_DataCom {
       static JSplitPane SPL_SUB = new JSplitPane(JSplitPane.VERTICAL_SPLIT);    
       static JPanel PL_U = new JPanel();
       static JPanel PL_UT = new JPanel();
-      static JPanel PL_UC = new JPanelGradient(LK.GP_BLACK_AND_DARK_RED);
+      static JPanel PL_UC = new JPanel();
       static JScrollPane sc_PL_UC = new JScrollPane(PL_UC);
       
       static JPanel PL_B = new JPanel();
@@ -124,6 +124,7 @@ public class VF_R_DataCom {
       static JLabel[] lbs = new JLabel[DT.maxColumns];
       static JPanel[] tfPanel = new JPanel[DT.maxColumns];
       static JTextField[] tfs = new JTextField[DT.maxColumns];
+      static JTextField[] tfsE = new JTextField[DT.maxColumns];
       static JComboBox[] cbs = new MComboBoxE[DT.maxColumns];
       static JButton[] btns_C = new JButton[DT.maxColumns];
       static JScrollPane[] scs = new JScrollPane[DT.maxColumns];
@@ -267,6 +268,10 @@ public class VF_R_DataCom {
       
       public static JTextField[] getJTFS(){
             return tfs;
+      }
+      
+      public static JTextField[] getJTFES(){
+            return tfsE;
       }
 
       public static JScrollPane[] getJSCS() {

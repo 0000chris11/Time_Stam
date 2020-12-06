@@ -41,19 +41,21 @@ public class BTNS_CMouseListener implements MouseListener {
                   //System.out.println(jcC.getName());
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (jcC.getName().equals("BTNC_" + (a + 1))) {
-                              StringSelection ss = new StringSelection(VF_R.getJTFS()[a].getText());
+                              StringSelection ss = new StringSelection(VF_R.getJTFES()[a].getText());
                               cb.setContents(ss, ss);
                         }
                   }
             } else if (evt.getButton() == 3) {
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (jcC.getName().equals("BTNC_" + (a + 1))) {
-                              VF_R.getJTFS()[a].setText("");
+                              VF_R.getJTFES()[a].setText("");
                         }
                         if (jcC.getName().equals("TF_" + (a + 1))) {
-                              System.out.println("TF PASTE");
+                              //System.out.println("TF PASTE");
                               n_mm.onPaste(VF_R.getJTFS()[a]);
                               //mm.tf_ConfigDists_M(lb_2, tf_2, lst_2, dt.getDm_2(), dt.getListD_2());
+                        }else if(jcC.getName().equals("TFE_" + (a + 1))){
+                              n_mm.onPaste(VF_R.getJTFES()[a]);
                         }
                   }
             }
