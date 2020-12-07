@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class JT_LSL implements ListSelectionListener {
 
@@ -52,11 +52,27 @@ public class JT_LSL implements ListSelectionListener {
                                     for (int b = 0; b < a + 1; b++) {
                                           //CASE FOR PRIMARY KEY; EVERY OTHER COLUMN CHANGE ITS NAME BUT THE PK ONE
                                           if (DT.getPrimaryKey() > 0) {
-                                                if(b != DT.getPrimaryKey() - 1){
-                                                      VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
+                                                if (b != DT.getPrimaryKey() - 1) {//IF PK SET TEXT TO ALL BUT PK COLUMN
+                                                      if (VF_R.getJTFPanel()[b].getComponent(0).getName().contains("CB")) {
+                                                            VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
+                                                      }else{
+                                                            VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                                      }
+                                                }
+                                          } else if ((int) DT.getExtra()[0] > 0) {
+                                                if (b != (int) DT.getExtra()[0] - 1) {//IF EXT SET TEXT TO ALL BUT EXT COLUMN
+                                                      if (VF_R.getJTFPanel()[b].getComponent(0).getName().contains("CB")) {
+                                                            VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
+                                                      }else{
+                                                            VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                                      }
                                                 }
                                           } else {
-                                                VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
+                                                if (VF_R.getJTFPanel()[b].getComponent(0).getName().contains("CB")) {
+                                                            VF_R.getJTFES()[b].setText(DT.getList_R().get(b).toString());
+                                                      }else{
+                                                            VF_R.getJTFS()[b].setText(DT.getList_R().get(b).toString());
+                                                      }
                                           }
                                     }
                               }

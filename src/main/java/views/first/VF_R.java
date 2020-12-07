@@ -62,6 +62,7 @@ import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
 import com.cofii.myMethods.MComp;
 import com.cofii.myMethods.MList;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -230,6 +231,7 @@ public class VF_R extends VF_R_DataCom {
 
       private void splitConfig() {
             JF.add(SPL, BorderLayout.CENTER);
+            SPL.setBackground(Color.BLACK);
             SPL.setOneTouchExpandable(true);
             SPL.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
             SPL.setLeftComponent(SPL_SUB);
@@ -552,7 +554,6 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("JT size: " + JT.getSize());
             //+++++++++++++++++++++++++++++++++++++++++++++
             //JF.add(lb_JT);
-            lb_JT.setVisible(false);
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
             lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
@@ -721,9 +722,9 @@ public class VF_R extends VF_R_DataCom {
                   lbs[a] = new smallLB();
                   tfPanel[a] = new JPanel();
                   cbs[a] = new MComboBoxE();
-                  
+
                   tfs[a] = new smallTF();
-                  
+
                   tfsE[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
                   tfsE[a].setBackground(LK.CP_BK_NORMAL);
                   //tfs[a].putClientProperty("TextField.focus", Color.BLACK);
@@ -822,12 +823,15 @@ public class VF_R extends VF_R_DataCom {
 
       private void setNameToComponents() {
             SPL.setName("SPL");
-            PL_U.setName("PL");
+            PL_U.setName("PL_U");
             PL_UT.setName("PL_T");
             PL_UC.setName("PL_C");
             p3.setName("P3");
             sc_JT.setName("SC_JT");
             JT.setName("JT");
+            lb_JT.setName("LB_JT");
+
+            SPL_SUB.setName("SPL_SUB");
             //+++++++++++++++++++++++++++++++
             setNameToMenus();
             //+++++++++++++++++++++++++++++++
@@ -1056,5 +1060,27 @@ public class VF_R extends VF_R_DataCom {
             }
       }
        */
+      public static int DEFAULT_INDEX = 0;
 
+      public static boolean isComponentAt(JPanel jp, JComponent jc) {
+            boolean returnValue = false;
+            if (jp.getComponent(DEFAULT_INDEX) == jc) {
+                  returnValue = true;
+            } else {
+                  returnValue = false;
+            }
+            return returnValue;
+      }
+
+      public static JComponent[] getIndexComponent() {
+            JComponent[] JC = new JComponent[DT.maxColumns];
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (VF_R.isComponentAt(VF_R.getJTFPanel()[a], VF_R.getJTFES()[a])) {
+                        JC[a] = VF_R.getJTFPanel()[a];
+                  } else {
+                        JC[a] = VF_R.getJTFS()[a];
+                  }
+            }
+            return JC;
+      }
 }

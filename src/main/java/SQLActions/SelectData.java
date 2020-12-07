@@ -11,6 +11,7 @@ import MC.Status;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,10 +56,13 @@ public class SelectData implements IActions {
                         VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
                   }
             } else {
-                  System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
+                  System.out.println("\tNo rows detected");
                   VF_R.getLB_JT().setText("NO ROWS DETECTED");
                   VF_R.getLB_JT().setForeground(Color.RED);
+                  
+                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
+                  VF_R.getLB_JT().setPreferredSize(new Dimension(300, 400));
+                  VF_R.getSPL().revalidate();
             }
       }
 

@@ -56,7 +56,7 @@ public class CompReset {
                               }
                               
                               VF_R.getJLBS()[b].setVisible(true);
-                              VF_R.getJCBS()[b].setVisible(true);
+                              VF_R.getJTFS()[b].setVisible(true);
                               VF_R.getBTNS_C()[b].setVisible(true);
                               
                         }

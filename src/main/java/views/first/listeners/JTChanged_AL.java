@@ -54,11 +54,11 @@ public class JTChanged_AL implements ActionListener {
                   DT.setOld_id(DT.getId());
                   DT.bool_Sel = true;
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.println("MIActionListener ++++ resetingAfter");
+                  System.out.println(CC.CYAN + "MIActionListener ++++ resetingAfter" + CC.RESET);
                   resetingAfter();
                   VF_R.getMI_DeleteThisTable().setEnabled(true);
 
-                  System.out.println("MIActionListener ++++ MCSelectATable");
+                  System.out.println(CC.CYAN + "MIActionListener ++++ MCSelectATable" + CC.RESET);
                   if (ac.contains(":")) {
                         ac = ac.substring(ac.indexOf(":") + 2, ac.length());
                         System.out.println("\tcut: " + ac);
@@ -80,7 +80,7 @@ public class JTChanged_AL implements ActionListener {
                   System.out.println("\tClock = " + DT.getClock());
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   if (change == true) {
-                        System.out.println("MIActionListener ++++ ChangeDefault");
+                        System.out.println(CC.CYAN + "MIActionListener ++++ ChangeDefault" + CC.RESET);
                         //PREPLACE WITH MS.UPDATE
                         /*
                         mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
@@ -92,29 +92,29 @@ public class JTChanged_AL implements ActionListener {
                                 DTSQL.mainTableColumns, newValues, 1, new UpdateDefaultTable());
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.println("MIActionListener ++++ MCSelectColumns");
+                  System.out.println(CC.CYAN + "MIActionListener ++++ MCSelectColumns" + CC.RESET);
                   //ms.SelectColumns(DT.getTable());
                   ms.selectColumns(DT.getTable(), new SelectColumns());
 
                   //+++++++++++++++++++++++++++++++++++++++++
-                  System.out.println("MIActionListener ++++ ChangeLB_TF");
+                  System.out.println(CC.CYAN + "MIActionListener ++++ ChangeLB_TF and Select Data" + CC.RESET);
                   cp.changeLB_TFandSelectData(VF_R.getJT().getColumnCount(), DT.getList_C());
                   //VF_R.noRowsDetection();
                   VF_R.getSPL().setDividerLocation(0.4);
                   VF_R.getPL_UC().revalidate();
                   //+++++++++++++++++++++++++++++++++++++++++
 
-                  System.out.println("MIActionListener ++++ ChangeLSTD");
+                  System.out.println(CC.CYAN + "MIActionListener ++++ ChangeLSTD" + CC.RESET);
                   lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(),
                           DT.getTag(), DT.getClock());
 
                   VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
 
-                  System.out.println("MIActionListener ++++ addAllListener");
-                  ml.addAllListenerLoop();
+                  System.out.println(CC.CYAN + "MIActionListener ++++ addAllListener (DELETE)" + CC.RESET);
+                  ml.addAllListenerLoop();//DELETE++++++++++++++++++
 
                   n_mm.rez(VF_R.getJT(), true);
-                  System.out.println("MIActionListener ++++ setRenderer and editor");
+                  System.out.println(CC.CYAN + "MIActionListener ++++ setRenderer and editor (DELETE?)" + CC.RESET);
                   VF_R.setTableRenderer();
                   for (int z = 0; z < VF_R.getJT().getColumnCount(); z++) {
                         VF_R.getJT().getColumnModel().getColumn(z).
@@ -132,7 +132,7 @@ public class JTChanged_AL implements ActionListener {
                         }
                   }.start();
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.print("MIActionListener ++++ LOAD Icon");
+                  System.out.print(CC.CYAN + "MIActionListener ++++ LOAD Icon" + CC.RESET);
                   if (!DT.getImageC().equals("NONE")) {
                         System.out.println(CC.GREEN + "\tYES" + CC.RESET);
                         VF_R.getLB_Icon().setVisible(true);

@@ -11,6 +11,7 @@ import com.cofii.myClasses.MSQL;
 import com.cofii.myMethods.MList;
 import com.cofii.myMethods.MText;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -76,16 +77,23 @@ public class LSTD {
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (a == pk - 1) {
                               VF_R.getJLBS()[a].setForeground(Color.YELLOW);
-                              if(VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")){
+                              if (VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")) {
                                     VF_R.getJTFPanel()[a].remove(VF_R.getJCBS()[a]);
                                     VF_R.getJTFPanel()[a].add(VF_R.getJTFS()[a], 0);
                               }
+                              VF_R.getJTFS()[a].setBackground(LK.CP_BK_PK);
                         } else {
                               VF_R.getJLBS()[a].setForeground(Color.WHITE);
                         }
                   }
+            } else {
+                  for (JLabel x : VF_R.getJLBS()) {
+                        x.setForeground(Color.WHITE);
+                  }
             }
+
             int extra = (int) DT.getExtra()[0];
+            System.out.println("Extra: C" + extra);
             if (extra > 0) {
                   for (int a = 0; a < DT.maxColumns; a++) {
                         if (a == extra - 1) {
@@ -108,14 +116,24 @@ public class LSTD {
                               }
                         } else {
                               VF_R.getJCBS()[a].setEnabled(true);
-                              
+
                               VF_R.getJTFS()[a].setBackground(LK.CP_BK_NORMAL);
                               VF_R.getJTFS()[a].setFont(LK.CP_FONT_NORMAL);
                               VF_R.getJTFS()[a].setText("");
-                              
+
                               VF_R.getJTFES()[a].setBackground(LK.CP_BK_NORMAL);
                               VF_R.getJTFES()[a].setFont(LK.CP_FONT_NORMAL);
                               VF_R.getJTFES()[a].setText("");
+                        }
+                  }
+            } else {
+                  for (int a = 0; a < DT.maxColumns; a++) {
+                        if (pk == 0) {
+                              VF_R.getJTFS()[a].setBackground(LK.CP_BK_NORMAL);
+                              VF_R.getJTFS()[a].setFont(LK.CP_FONT_NORMAL);
+                              VF_R.getJTFS()[a].setForeground(Color.WHITE);
+                              VF_R.getJTFS()[a].setText("");
+                              VF_R.getJTFS()[a].setEnabled(true);
                         }
                   }
             }
@@ -131,7 +149,7 @@ public class LSTD {
 
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (index + 1 == a + 1) {
-                        if(VF_R.getJTFPanel()[a].getComponent(0).getName().contains("TF")){
+                        if (VF_R.getJTFPanel()[a].getComponent(0).getName().contains("TF")) {
                               VF_R.getJTFPanel()[a].remove(VF_R.getJTFS()[a]);
                               VF_R.getJTFPanel()[a].add(VF_R.getJCBS()[a], 0);
                         }
@@ -139,7 +157,8 @@ public class LSTD {
                         if (VF_R.getJTFES()[a].getBackground().equals(LK.CP_BK_DIST1)) {
                               vis = false;
                         }
-                        
+
+                        VF_R.getJCBS()[a].setPreferredSize(new Dimension());
                         VF_R.getJTFES()[a].setBackground(LK.CP_BK_DIST1);
                         //+++++++++++++++++++++++++++++++++++++++++++++++
                         SelectDistinctColumn sdc = new SelectDistinctColumn(DT.getList_DS()[a]);
@@ -168,7 +187,7 @@ public class LSTD {
                               VF_R.getJTFPanel()[a].remove(VF_R.getJCBS()[a]);
                               VF_R.getJTFPanel()[a].add(VF_R.getJTFS()[a], 0);
                         }
-                        if(VF_R.getJTFPanel()[a + 1].getComponent(0).getName().contains("TF")){
+                        if (VF_R.getJTFPanel()[a + 1].getComponent(0).getName().contains("TF")) {
                               VF_R.getJTFPanel()[a + 1].remove(VF_R.getJTFS()[a + 1]);
                               VF_R.getJTFPanel()[a + 1].add(VF_R.getJCBS()[a + 1], 0);
                         }
@@ -268,8 +287,8 @@ public class LSTD {
             int[] colNN = new int[DT.maxColumns];
             String[] coll = new String[DT.maxColumns];
 
-            int colN = 0;//COL INDEX - 1
-            String col = "ERROR";//COL NAME
+            //int colN = 0;//COL INDEX - 1
+            //String col = "ERROR";//COL NAME
             int sp = 0;//SPACE NEEDED BETWEEN DIGITS (X3: 4_5_6) = (4, 5, 6)
 
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -279,33 +298,22 @@ public class LSTD {
                         sp = 2;
                         //FOR DIST1 AND TAG
                         for (int b = 0; b < a + 1; b++) {//IF ITS X1 THAN IS GONNA DO 1 LOOP, TAKING 1 DIGIT, AND SO ON
-                              //DT.ints[b] = Character.getNumericValue(FL.charAt(FL.indexOf(":") + sp)) - 1;
                               colNN[b] = Character.getNumericValue(FL.charAt(FL.indexOf(":") + sp)) - 1;
-                              //DT.cols[b] = DT.getList_C().get(DT.ints[b]);
                               coll[b] = DT.getList_C().get(colNN[b]);
                               sp += 2;
                         }
                         //+++++++++++++++++++++++++++++++++++++++++++
                         if (filter.equals("Dist1")) {
                               for (int b = 0; b < a + 1; b++) {//CHANGE CB-TF PROPERTIES
-                                    //changeLSTDist1(DT.ints[b], DT.getTable(), DT.cols[b]);
                                     changeLSTDist1(colNN[b], DT.getTable(), coll[b]);
                               }
                         } else if (filter.equals("Dist2")) {
 
                               sp = 2;
-                              int e = 0;//TEST TABLE WITH 2 DIST2 +++++++++++++++++++
                               for (int b = 0; b < (a + 1) * 2; b++) {//1L = 2, 2L = 4, 3L = 6, 4L = 8 (X1: 1-2, X2: 3-4_5-6)
-                                    //DT.ints[b] = Character.getNumericValue(FL.charAt(FL.indexOf(":") + sp)) - 1;
                                     colNN[b] = Character.getNumericValue(FL.charAt(FL.indexOf(":") + sp)) - 1;
-                                    //DT.cols[b] = DT.getList_C().get(DT.ints[b]);
                                     coll[b] = DT.getList_C().get(colNN[b]);
                                     sp += 2;
-                                    //+++++++++++++++++++++++++++++++++++++
-                                    //changeLSTDist2(0, 1, table, 0, 1)
-                                    //changeLSTDist2(DT.ints[e++], DT.ints[e--], DT.getTable(),
-                                    //      DT.cols[e++], DT.cols[e++]);
-
                               }
                               int c = 0;
                               for (int b = 0; b < (a + 1); b++) {

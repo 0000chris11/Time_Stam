@@ -11,6 +11,9 @@ import MC.DT;
 import com.cofii.myClasses.VT;
 import com.cofii.myMethods.MComp;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
@@ -20,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import views.Login.VL;
@@ -35,7 +39,7 @@ public class VT_T extends VF_R_DataCom {
             VT vt = new VT(BoxLayout.Y_AXIS);
             //JTextField tf = new JTextField();
             //vt.add(tf);
-            JButton btn = new JButton("Get Info About Component");
+            JButton btn = new JButton("SET RIGHT COMPONENT");
             vt.add(btn);
             JButton btn2 = new JButton("Comparing");
             vt.add(btn2);
@@ -47,15 +51,10 @@ public class VT_T extends VF_R_DataCom {
             btn.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        Class ss = JT.getModel().getClass();
-                        System.out.println("DeclaredFields: " + ss.getDeclaredFields());
-                        printArray(ss.getDeclaredFields());
-                        System.out.println("TypeParameters: " + ss.getTypeParameters());
-                        printArray(ss.getTypeParameters());
-                        System.out.println("Fields: " + ss.getFields());
-                        printArray(ss.getFields());
-                        System.out.println("Methods: " + ss.getMethods());
-                        printArray(ss.getMethods());
+                        for (int a = 0; a < DT.maxColumns; a++) {
+                              MComp.printComponentSizeInfo(VF_R.getJCBS()[a]);
+                              MComp.printComponentSizeInfo(VF_R.getJTFES()[a]);
+                        }
 
                   }
 
@@ -66,12 +65,12 @@ public class VT_T extends VF_R_DataCom {
                         System.out.println(btn2.getText());
                         JComponent leftC = (JComponent) VF_R.getSPL().getLeftComponent();
                         JComponent rightC = (JComponent) VF_R.getSPL().getRightComponent();
-                        
+
                         System.out.println("SPL Divider Location: " + VF_R.getSPL().getDividerLocation());
-                        
+
                         MComp.printComponentSizeInfo(leftC);
                         MComp.printComponentSizeInfo(rightC);
-                        
+
                         System.out.println("SPL_SUB Divider Location: " + VF_R.getSPL_SUB().getDividerLocation());
                         JComponent topC = (JComponent) VF_R.getSPL_SUB().getTopComponent();
                         JComponent bottC = (JComponent) VF_R.getSPL_SUB().getBottomComponent();

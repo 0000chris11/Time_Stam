@@ -46,13 +46,15 @@ public class SelectColumns implements IActions {
             DT.getList_Defaults().add(rs.getString(5));
             
             String pk = rs.getString(4);
-            if (pk != null && !lockPK) {
+            //System.out.println("##################PK: " + pk);
+            if (!pk.equals("") && !lockPK) {
                   lockPK = true;
                   DT.setPrimaryKey(row);
             }
             
             String ext = rs.getString(6);
-            if (ext != null && !lockEX) {
+            System.out.println("##################EXT: " + ext);
+            if (!ext.equals("") && !lockEX) {
                   lockEX = true;
                   DT.setExtra(row, ext);
             }

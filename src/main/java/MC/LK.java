@@ -28,7 +28,8 @@ public class LK {
       public static final Color CP_BK_NORMAL = new Color(51, 51, 51);
       public static final Color CP_BK_DIST1 = new Color(0, 0, 51);
       public static final Color CP_BK_DIST2 = new Color(0, 0, 81);
-      public static final Color CP_BK_AUTO_INCR_IDEN = new Color(14, 150, 199);
+      public static final Color CP_BK_AUTO_INCR_IDEN = new Color(7, 112, 149);
+      public static final Color CP_BK_PK = new Color(166, 178, 3);
       
       public static final Font CP_FONT_NORMAL = new Font("Dialog", Font.BOLD, 16);
       public static final String CP_TEXT_AUTO_INCREMENT = "AUTO_INCREMENT";
