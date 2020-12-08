@@ -336,11 +336,14 @@ public class VF_R extends VF_R_DataCom {
                             .addGroup(sv));
       }
        */
+      
       private void subSplitUpConfig() {
             PL_U.setLayout(new BorderLayout());
             PL_U.add(PL_UT, BorderLayout.NORTH);
             PL_U.add(sc_PL_UC, BorderLayout.CENTER);
 
+            MComp.setActionToPL_U();
+            
             //PL_U+++++++++++++++++++++++++++++++++++++++++
             PL_UT.setLayout(new BoxLayout(PL_UT, BoxLayout.X_AXIS));
             PL_UT.setBackground(Color.BLACK);
@@ -1062,11 +1065,16 @@ public class VF_R extends VF_R_DataCom {
        */
       public static int DEFAULT_INDEX = 0;
 
-      public static boolean isComponentAt(JPanel jp, JComponent jc) {
+      public static boolean isComponentNameAt(JPanel jp, JComponent jc) {
             boolean returnValue = false;
-            if (jp.getComponent(DEFAULT_INDEX) == jc) {
+            //System.out.println("isCA");
+            //System.out.println("\tgetComponent: " + jp.getComponent(DEFAULT_INDEX).getName());
+            //System.out.println("\tJC: " + jc.getName());
+            if (jp.getComponent(DEFAULT_INDEX).getName() == jc.getName()) {
+                  //System.out.println("\ttrue");
                   returnValue = true;
             } else {
+                  //System.out.println("\tfalse");
                   returnValue = false;
             }
             return returnValue;
@@ -1075,10 +1083,10 @@ public class VF_R extends VF_R_DataCom {
       public static JComponent[] getIndexComponent() {
             JComponent[] JC = new JComponent[DT.maxColumns];
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VF_R.isComponentAt(VF_R.getJTFPanel()[a], VF_R.getJTFES()[a])) {
-                        JC[a] = VF_R.getJTFPanel()[a];
-                  } else {
+                  if (VF_R.isComponentNameAt(VF_R.getJTFPanel()[a], VF_R.getJTFS()[a])) {
                         JC[a] = VF_R.getJTFS()[a];
+                  } else {
+                        JC[a] = VF_R.getJTFES()[a];
                   }
             }
             return JC;

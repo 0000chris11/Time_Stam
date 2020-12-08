@@ -169,6 +169,7 @@ public class LSTD {
                               MList.unTagList(DT.getList_DS()[a]);
                               //MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
                               MList.add_SetListModel(VF_R.getJCBS()[a], DT.getList_DS()[a]);
+                              VF_R.getJCBS()[a].setPreferredSize(new Dimension());
                         } else {
                               System.out.println("\tno elements distinct");
                         }
@@ -207,6 +208,8 @@ public class LSTD {
                               MList.unTagList(DT.getList_MXS()[a]);//listSs[a + 2]
                               //MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
                               //NOW         MList.add_SetListModel(jcb, al);
+                              MList.add_SetListModel(VF_R.getJCBS()[a + 1], DT.getList_MXS()[a]);
+                              VF_R.getJCBS()[a + 1].setPreferredSize(new Dimension());
                         } else {
                               System.out.println("\tno elements distinct (multiple columns)");
                         }

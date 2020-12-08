@@ -14,9 +14,12 @@ import views.first.listeners.BTNS_CMouseListener;
 import views.first.VF_R;
 import MC.DT;
 import com.cofii.myClasses.CC;
+import com.cofii.myMethods.MComp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 import views.Login.VL;
 
 /**
@@ -27,7 +30,6 @@ public class MainListeners_F {
 
       //Data dt = new Data("MainListeners_F");
       public void addAllListenerLoop() {
-            addTableModelListenerToJT();
             addListSelectionListenerToJT();
             //addKeyListenerToTFS_OLD();
             //addFocusListenerToTFS_OLD();
@@ -40,11 +42,7 @@ public class MainListeners_F {
       }
 
       public void addAllListener() {
-            if (VF_R.JPL_layout.equals("null")) {
-                  addFocusListenersToJC();
-            } else {
-                  addFocusListenersToJC_GL();
-            }
+            addTableModelListenerToJT();
 
             addFocusBorderToJC_PC();
             addMouseListenerToTFS();
@@ -65,7 +63,6 @@ public class MainListeners_F {
             VF_R.getJT().getModel().addTableModelListener(JTML);
       }
 
-
       private void addListSelectionListenerToJT() {
             JT_LSL JTL = new JT_LSL();
             DefaultListSelectionModel dlsm = (DefaultListSelectionModel) VF_R.getJT().getSelectionModel();
@@ -84,6 +81,9 @@ public class MainListeners_F {
                   VF_R.getJT().getSelectionModel().addListSelectionListener(JTL);
             }
       }
+      private void addListSelectioinListenerToJT(){
+            
+      }
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addMouseListenerToTFS() {
@@ -91,27 +91,6 @@ public class MainListeners_F {
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFES()[a].addMouseListener(ML);
                   VF_R.getJTFS()[a].addMouseListener(ML);
-            }
-      }
-
-      private void addFocusListenerToTFS_OLD() {
-            //System.out.println("-----On Mehod = tf2 FocusListener count: " + tfsE[1].getFocusListeners().length);
-            TF_LST_FL TFSFL = new TF_LST_FL();
-            for (int a = 0; a < VF_R.getJCBS().length; a++) {
-                  if (VF_R.getJCBS()[a].getFocusListeners().length > 0) {
-                        for (int b = 0; b < VF_R.getJCBS()[a].getFocusListeners().length; b++) {
-                              if (VF_R.getJCBS()[a].getFocusListeners()[b].toString().contains("TF_LST_FL")) {
-                                    //System.out.println("removing: " + tfsE[a].getFocusListeners()[b]);
-                                    VF_R.getJCBS()[a].removeFocusListener(VF_R.getJCBS()[a].getFocusListeners()[b]);
-                              }
-                        }
-                        //System.out.println("\ttf2 FocusListener count: " + tfsE[1].getFocusListeners().length);
-                  }
-                  if (VF_R.getJCBS()[a].getFocusListeners().length == 2) {
-                        //System.out.println("\tTF_" + (a + 1) + " adding TFSFL");
-                        //System.out.println("adding TF_LST_FL");
-                        VF_R.getJCBS()[a].addFocusListener(TFSFL);
-                  }
             }
       }
 
@@ -184,27 +163,28 @@ public class MainListeners_F {
 
       ///================================================
       private void addFocusBorderToJC_PC() {
-            FocusBorder jcfl = new FocusBorder();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJCBS()[a].addFocusListener(jcfl);
+                  //VF_R.getJTFES()[a].addFocusListener(new FocusBorderCustom());//BORDER STUCKED WHEN FOCUS
+                  VF_R.getJTFS()[a].addFocusListener(new FocusBorder());
                   //VF_R.getJLSTS()[a].addFocusListener(jcfl);
-                  VF_R.getTFS_MD()[a].addFocusListener(jcfl);
-                  VF_R.getTFS_MU()[a].addFocusListener(jcfl);
-                  VF_R.getTFS_SD()[a].addFocusListener(jcfl);
-                  VF_R.getTFS_SU()[a].addFocusListener(jcfl);
-
+                  VF_R.getTFS_MD()[a].addFocusListener(new FocusBorder());
+                  VF_R.getTFS_MU()[a].addFocusListener(new FocusBorder());
+                  VF_R.getTFS_SD()[a].addFocusListener(new FocusBorder());
+                  VF_R.getTFS_SU()[a].addFocusListener(new FocusBorder());
             }
       }
-
+      
+      /*
       private void addFocusListenersToJC() {
             TF_LST_FL TFSFL = new TF_LST_FL();
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJCBS()[a].addFocusListener(TFSFL);
-                  VF_R.getJLSTS()[a].addFocusListener(TFSFL);
+                  //VF_R.getJLSTS()[a].addFocusListener(TFSFL);
 
             }
       }
 
+      
       private void addFocusListenersToJC_GL() {
             TF_LST_FL_GL FL = new TF_LST_FL_GL();
             for (int a = 0; a < DT.maxColumns; a++) {
@@ -212,26 +192,30 @@ public class MainListeners_F {
                   //VF_R.getJLSTS()[a].addFocusListener(FL);
             }
       }
+      */
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addKeyListenersToTFS() {
             //TFS_KL tkt = new TFS_KL();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJTFS()[a].addKeyListener(new TF_KL(VF_R.getJTFS()[a]));
-                  
-                  VF_R.getJTFES()[a].addKeyListener(new TF_KL(
+                  VF_R.getJTFS()[a].addKeyListener(new TF_KL_Custom(VF_R.getJTFS()[a]));
+
+                  VF_R.getJTFES()[a].addKeyListener(new TF_KL_Custom(
                           VF_R.getJCBS()[a], VF_R.getJTFES()[a]));
-                  
+
             }
       }
 
       private void addKeyListenersToCKS() {
-            CK_KL ckkl = new CK_KL();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getTFS_MD()[a].addKeyListener(ckkl);
-                  VF_R.getTFS_MU()[a].addKeyListener(ckkl);
-                  VF_R.getTFS_SD()[a].addKeyListener(ckkl);
-                  VF_R.getTFS_SU()[a].addKeyListener(ckkl);
+                  JTextField[] clock = MComp.getClock(
+                          VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a], VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a]);
+                  
+                  CK_KL_Custom KL = new CK_KL_Custom(clock);
+
+                  for (JComponent x : clock) {
+                        x.addKeyListener(KL);
+                  }
             }
       }
 
@@ -252,14 +236,14 @@ public class MainListeners_F {
             VF_R.getMI_AutoR().addActionListener(mio);
             VF_R.getMI_Grid().addActionListener(mio);
             VF_R.getSaveOp().addActionListener(mio);
-            
+
             //MAIN QUERYS +++++++++++++++++++++++++++++++++++++
             MITableOptions_AL MITAL = new MITableOptions_AL();
             VF_R.getMI_CreateTable().addActionListener(MITAL);
             VF_R.getMI_UpdateTable().addActionListener(MITAL);
             VF_R.getMI_DeleteThisTable().addActionListener(MITAL);
             VF_R.getMI_DeleteTables().addActionListener(MITAL);
-            
+
             //LOGIN +++++++++++++++++++++++++++++++++++++++++++
             VF_R.getMI_ChangeLogin().addActionListener(new ActionListener() {
                   @Override

@@ -2,17 +2,27 @@ package views.first.listeners;
 
 import views.first.VF_R;
 import MC.DT;
+import com.cofii.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JTextField;
 
 /**
  * KeyListener for the Clock
  *
- * @author Christopher
+ * @author C0FII
  */
 public class CK_KL implements KeyListener {
+
+      private JComponent[] Clock;
+      private boolean ExtrComponent;
+
+      public CK_KL(JComponent[] clock, boolean extrComponent) {
+            Clock = clock;
+            ExtrComponent = extrComponent;
+      }
 
       @Override
       public void keyTyped(KeyEvent arg0) {
@@ -24,18 +34,23 @@ public class CK_KL implements KeyListener {
             if (KeyEvent.VK_RIGHT == evt.getKeyCode()) {
                   if (evt.isControlDown()) {
                         //System.out.println("\tCTRL + RIGHT");
-                        changeFocusRight();
+                        JComponent[] JC = VF_R.getIndexComponent();
+                        for (int a = 0; a < 4; a++) {
+                              if (evt.getComponent().getName().equals(Clock[a].getName())) {
+                                    if(a != 3){//IF ITS NOT THE LAST ONE
+                                          Clock[a + 1].requestFocus();
+                                    }else{
+                                          JC[a].requestFocus();
+                                    }
+                              }
+                        }
                   }
             } else if (KeyEvent.VK_LEFT == evt.getKeyCode()) {
                   if (evt.isControlDown()) {
                         //System.out.println("\tCTRL + LEFT");
                         changeFocusLeft();
                   }
-            } else if (KeyEvent.VK_UP == evt.getKeyCode()) {
-                  changeFocusUp();
-            } else if (KeyEvent.VK_DOWN == evt.getKeyCode()) {
-                  changeFocusDown();
-            }
+            } 
       }
 
       @Override
@@ -136,6 +151,7 @@ public class CK_KL implements KeyListener {
       //+++++++++++++++++++++++++++++++++++++++++++++
       private void changeFocusRight() {
             //System.out.println("\tChange Focus Right");
+
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getTFS_MD()[a].hasFocus()) {
                         VF_R.getTFS_MU()[a].requestFocus();

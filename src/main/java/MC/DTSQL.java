@@ -31,7 +31,7 @@ public class DTSQL {
             "ROOTCONFIG"};
 
       private static String[] bw = {" FROM ", " WHERE ", " SHOW ", " WITH ", "-",
-            " TABLE "};
+            " TABLE ", "*"};
       private static ArrayList<String> bandW = new ArrayList<String>(Arrays.asList(bw));
 
       public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";

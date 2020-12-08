@@ -44,7 +44,7 @@ public class TF_KL_Custom implements KeyListener {
       public void keyPressed(KeyEvent e) {
             String name = e.getComponent().getName();
             int index = MComp.getLastDigitCharsCountAtEnd(name);
-            System.out.println("\nkeyPressed " + index);
+            //System.out.println("\nkeyPressed " + index);
             if (CB != null) {
                   popupControl(e);
             }
@@ -103,8 +103,8 @@ public class TF_KL_Custom implements KeyListener {
                                           count = a + 1;//NEXT ONE
                                     }
                                     while (true) {
-                                          if (/*VF_R.getJTFES()*/JC[count].isEnabled()) {
-                                                /*VF_R.getJTFES()*/JC[count].requestFocus();
+                                          if (JC[count].isEnabled()) {
+                                                JC[count].requestFocus();
                                                 break;
                                           } else {
                                                 if (count == cc - 1) {//IF ITS REACHES THE LAST ONE

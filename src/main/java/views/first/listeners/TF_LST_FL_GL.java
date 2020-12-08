@@ -42,6 +42,7 @@ public class TF_LST_FL_GL implements FocusListener {
                           && (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)
                           || VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST2)))
                           || JC.equals("LST_" + (a + 1))) {
+                        
                         System.out.println("\tLST_" + a);
                         VF_R.getJSCS()[a].setVisible(false);
                         VF_R.getPL_UC().revalidate();

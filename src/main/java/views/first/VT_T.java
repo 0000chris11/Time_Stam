@@ -39,7 +39,7 @@ public class VT_T extends VF_R_DataCom {
             VT vt = new VT(BoxLayout.Y_AXIS);
             //JTextField tf = new JTextField();
             //vt.add(tf);
-            JButton btn = new JButton("SET RIGHT COMPONENT");
+            JButton btn = new JButton("GET JCBS SIZE INFO");
             vt.add(btn);
             JButton btn2 = new JButton("Comparing");
             vt.add(btn2);
@@ -53,7 +53,6 @@ public class VT_T extends VF_R_DataCom {
                   public void actionPerformed(ActionEvent e) {
                         for (int a = 0; a < DT.maxColumns; a++) {
                               MComp.printComponentSizeInfo(VF_R.getJCBS()[a]);
-                              MComp.printComponentSizeInfo(VF_R.getJTFES()[a]);
                         }
 
                   }

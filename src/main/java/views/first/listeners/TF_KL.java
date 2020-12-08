@@ -43,7 +43,7 @@ public class TF_KL implements KeyListener {
       public void keyPressed(KeyEvent e) {
             String name = e.getComponent().getName();
             int index = MComp.getLastDigitCharsCountAtEnd(name);
-            System.out.println("\nkeyPressed " + index);
+            //System.out.println("\nkeyPressed " + index);
             if (CB != null) {
                   popupControl(e);
             }
