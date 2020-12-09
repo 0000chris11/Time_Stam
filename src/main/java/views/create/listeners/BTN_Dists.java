@@ -11,6 +11,7 @@ import com.cofii.myMethods.MComp;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -41,18 +42,18 @@ public class BTN_Dists implements ActionListener {
             //++++++++++++++++++++++++++++++++++++++++++
             int clockN = VC_R2.getBTN_ClockSelected();
             int imageCN = VC_R2.getBTN_ImageCSelected();
-            
+
             String dist = getOutput(colsDist);
             String tag = getOutput(colsTag);
             String imageC = getOutput(imageCN);
             String clock = getOutput(clockN);
-            
+
             //INPUT FOR FOLDER LOCATION (IMAGEC)
             if (imageCN > 0) {
                   VC_R2.getBoxImageC().setVisible(true);
                   VC_R2.getLB_ClockLocation().setVisible(true);
                   //VC_R2.getPR().paintComponents(VC_R2.getPR().getGraphics());
-            }else{
+            } else {
                   VC_R2.getBoxImageC().setVisible(false);
                   VC_R2.getLB_ClockLocation().setVisible(false);
             }
@@ -61,8 +62,8 @@ public class BTN_Dists implements ActionListener {
             setLB(VC_R2.getLB_ADisp()[3], tag);
             setLB(VC_R2.getLB_ADisp()[2], imageC);
             setLB(VC_R2.getLB_ADisp()[4], clock);
-            
-            
+            //+++++++++++++++++++++++++++++++++++
+            clockDistControl(e);
       }
 
       private void setLB(JLabel lb, String var) {
@@ -114,4 +115,16 @@ public class BTN_Dists implements ActionListener {
             }
       }
 
+      //+++++++++++++++++++++++++++++++++++++++++++++
+      private void clockDistControl(ActionEvent e) {
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  if (e.getActionCommand().equals(VC_R2.getBTNS_Dist()[a].getActionCommand())) {
+                        if (VC_R2.getBTNS_Dist()[a].isSelected()) {
+                              VC_R2.getBTNS_Clock()[a].setEnabled(false);
+                        }else{
+                              VC_R2.getBTNS_Clock()[a].setEnabled(true);
+                        }
+                  }
+            }
+      }
 }

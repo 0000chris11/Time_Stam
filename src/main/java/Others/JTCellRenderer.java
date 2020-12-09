@@ -52,7 +52,7 @@ public class JTCellRenderer extends DefaultTableCellRenderer {
                    */
             } else {
                   if (column == 0) {
-                        c.setBackground(LK.CP_BK_NORMAL);
+                        c.setBackground(LK.BK_NORMAL);
                   } else if (column == 1) {
                         c.setBackground(Color.BLACK);
                   }

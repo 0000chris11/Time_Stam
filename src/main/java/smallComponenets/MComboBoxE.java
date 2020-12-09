@@ -31,12 +31,12 @@ public class MComboBoxE extends JComboBox{
       
       private void properties(){
             setEditable(true);
-            setFont(LK.CP_FONT_NORMAL);
+            setFont(LK.FONT_NORMAL);
             JTextField tfe = (JTextField) getEditor().getEditorComponent();
             CompoundBorder CB = new CompoundBorder(
                     tfe.getBorder(), BorderFactory.createEmptyBorder(2, 4, 1, 4));
             
-            tfe.setBackground(LK.CP_BK_NORMAL);
+            tfe.setBackground(LK.BK_NORMAL);
             tfe.setFont(getFont());
             tfe.setForeground(Color.WHITE);
             tfe.setCaretColor(Color.WHITE);

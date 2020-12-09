@@ -31,10 +31,10 @@ public class NumberOTF extends JFormattedTextField {
       public NumberOTF() {
             Font f = new Font("Dialog", Font.BOLD, 16);
             //setOpaque(false);
-            setBackground(LK.CP_BK_NORMAL);
+            setBackground(LK.BK_NORMAL);
             setForeground(Color.WHITE);
             
-            setBorder(LK.BORDER_LINEMARIGIN_FOCUS_OFF);
+            setBorder(LK.BR_LINEMARIGIN_FOCUS_OFF);
             //+++++++++++++++++++++++++++++++++++++++
             setFont(f);
             setEnabled(true);

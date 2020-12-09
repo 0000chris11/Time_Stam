@@ -18,8 +18,8 @@ public class TF_LST_FL implements FocusListener {
             int forSize = DT.maxColumns - 1;//DEPENDING ON WICH TF HAD THE FOCUS THE REMAINIG (COUNTING UP) WILL BE MOVE
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getJCBS()[a].hasFocus()) {
-                        if (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)
-                                || VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST2)) {
+                        if (VF_R.getJCBS()[a].getBackground().equals(LK.BK_DIST1)
+                                || VF_R.getJCBS()[a].getBackground().equals(LK.BK_DIST2)) {
                               focusGainedFor(forSize, a + 1);
                         }
                   }
@@ -33,8 +33,8 @@ public class TF_LST_FL implements FocusListener {
             int forSize = DT.maxColumns - 1;
             for (int a = 0; a < DT.maxColumns; a++) {
                   if ((JC.equals("TF_" + (a + 1))
-                          && (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)
-                          || VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST2)))
+                          && (VF_R.getJCBS()[a].getBackground().equals(LK.BK_DIST1)
+                          || VF_R.getJCBS()[a].getBackground().equals(LK.BK_DIST2)))
                           || JC.equals("LST_" + (a + 1))) {
 
                         focusLostFor(a, forSize);

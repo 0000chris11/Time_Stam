@@ -50,8 +50,8 @@ public class TFS_KL implements KeyListener {
 
                   if (VF_R.getJTFES()[1].hasFocus()) {
                         //System.out.println("\t\tTF_2");
-                        if (VF_R.getJTFES()[1].getBackground().equals(LK.CP_BK_DIST1)
-                                || VF_R.getJTFES()[1].getBackground().equals(LK.CP_BK_DIST2)) {
+                        if (VF_R.getJTFES()[1].getBackground().equals(LK.BK_DIST1)
+                                || VF_R.getJTFES()[1].getBackground().equals(LK.BK_DIST2)) {
                               /*
                               MKey.tf_ConfigDists_K(VF_R.getJLBS()[1],
                                       VF_R.getJCBS()[1], VF_R.getJLSTS()[0],
@@ -65,8 +65,8 @@ public class TFS_KL implements KeyListener {
                         for (int a = 2; a < 6; a++) {
                               if (VF_R.getJCBS()[a].hasFocus()) {
                                     //System.out.println("\t\tTF_" + (a + 1));
-                                    if (VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST1)
-                                            || VF_R.getJCBS()[a].getBackground().equals(LK.CP_BK_DIST2)) {
+                                    if (VF_R.getJCBS()[a].getBackground().equals(LK.BK_DIST1)
+                                            || VF_R.getJCBS()[a].getBackground().equals(LK.BK_DIST2)) {
                                           if (DT.getList_MXS()[a].size() > 0) {
                                                 //System.out.println("\t\tTF_" + (a + 1) + " KeyReleased FUSED");
                                                 /*

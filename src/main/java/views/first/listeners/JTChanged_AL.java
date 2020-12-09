@@ -111,7 +111,6 @@ public class JTChanged_AL implements ActionListener {
                   VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
 
                   System.out.println(CC.CYAN + "MIActionListener ++++ addAllListener (DELETE)" + CC.RESET);
-                  ml.addAllListenerLoop();//DELETE++++++++++++++++++
 
                   n_mm.rez(VF_R.getJT(), true);
                   System.out.println(CC.CYAN + "MIActionListener ++++ setRenderer and editor (DELETE?)" + CC.RESET);

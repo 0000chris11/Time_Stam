@@ -42,7 +42,8 @@ public class TF_KL_Control implements KeyListener {
             boolean bool_SC = false;//SAME COLUMN
 
             //BAND WORDS CONTROL
-            bool_BW = MOthers.getContainMatchFromArrayToList(VC_R2.getTFS(), DTSQL.getBandW());
+            //bool_BW = MOthers.getContainMatchFromArrayToList(VC_R2.getTFS(), DTSQL.getBandW());
+            //bool_BW = MOthers.getContainMatchFromStringToList(VC_R2.getTFS(), DTSQL.getBandW(), false);
             if (bool_BW = true) {
 
             }

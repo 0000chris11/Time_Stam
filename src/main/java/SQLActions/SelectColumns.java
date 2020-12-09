@@ -53,7 +53,7 @@ public class SelectColumns implements IActions {
             }
             
             String ext = rs.getString(6);
-            System.out.println("##################EXT: " + ext);
+            //System.out.println("##################EXT: " + ext);
             if (!ext.equals("") && !lockEX) {
                   lockEX = true;
                   DT.setExtra(row, ext);

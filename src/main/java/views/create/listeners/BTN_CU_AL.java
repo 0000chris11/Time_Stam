@@ -67,22 +67,27 @@ public class BTN_CU_AL implements ActionListener {
                               nulls[a] = VC_R2.getCheckbs()[a].isSelected();
                         }
                         
-                        int colType2 = VC_R2.getRB_Types2Selected();
-                        String type2 = null;
-                        if (colType2 > 0) {
-                              type2 = VC_R2.getCombTypes2()[colType2 - 1].getSelectedItem().toString();
+                        int extraCol = VC_R2.getRB_ExtraSelected();
+                        String extraValue = null;
+                        if (extraCol > 0) {
+                              extraValue = VC_R2.getCombTypes2()[extraCol - 1].getSelectedItem().toString();
                               //IF IS IDENTITY
-                              if(VC_R2.getCombTypes2()[colType2 - 1].getSelectedIndex() == 1){
-                                    type2 += "(" + VC_R2.getTFSTypes1()[colType2 - 1].getText()
-                                            + ", " + VC_R2.getTFSTypes2()[colType2 - 1].getText() + ")";
+                              if(VC_R2.getCombTypes2()[extraCol - 1].getSelectedIndex() == 1){
+                                    extraValue += "(" + VC_R2.getTFSTypes1()[extraCol - 1].getText()
+                                            + ", " + VC_R2.getTFSTypes2()[extraCol - 1].getText() + ")";
                               }
                         }
+                        
+                        String pkCol = colNames[VC_R2.getRB_PKSelected() - 1];
                         //==============================================
                         /*
-                        ms.createTable(table, 
-                                colNames, types, nulls, colType2, type2,
-                                new Update("CreateTable", VC_R2.getLB_Status()));
+                        String table, String[] colNames, String[] types, boolean[] nulls,
+                              int extraCol, String extraValue, String primaryKey, IUpdates iu
                         */
+                        ms.createTable(table, 
+                                colNames, types, nulls, extraCol, extraValue, pkCol,
+                                new Update("CreateTable", VC_R2.getLB_Status()));
+                        
                         //==============================================        
                         //INSERT TABLE ON MAINTTABLES++++++++++++++++++++++++++
                         Object[] newValues = new Object[]{null, table, 
@@ -92,7 +97,7 @@ public class BTN_CU_AL implements ActionListener {
                               VC_R2.getLB_ADisp()[3],//TAG
                               VC_R2.getLB_ADisp()[4]};//CLOCK
                         //==============================================
-                        ms.insert(DTSQL.mainTable, DTSQL.mainTableColumns, newValues, colType2, 
+                        ms.insert(DTSQL.mainTable, DTSQL.mainTableColumns, newValues, extraCol, 
                                 new Update("INSERT", VC_R2.getLB_Status()));
                         //==============================================
                   } else {

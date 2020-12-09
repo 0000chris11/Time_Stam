@@ -18,8 +18,12 @@ import com.cofii.myMethods.MComp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import views.Login.VL;
 
 /**
@@ -28,61 +32,23 @@ import views.Login.VL;
  */
 public class MainListeners_F {
 
-      //Data dt = new Data("MainListeners_F");
-      public void addAllListenerLoop() {
-            addListSelectionListenerToJT();
-            //addKeyListenerToTFS_OLD();
-            //addFocusListenerToTFS_OLD();
-            //addValueChangedListenerToLSTS();
-            //addActionLIstenerToBTN_C();
-            addMouseListenerToBTN_C();
-
-            //addFocusListenerToLSTS_OLD();
-            //addActionListenerToBTNS_MC();
-      }
-
       public void addAllListener() {
-            addTableModelListenerToJT();
+            VF_R.getJT().getModel().addTableModelListener(new JT_ML());
+            VF_R.getJT().getSelectionModel().addListSelectionListener(new JT_LSL());
 
             addFocusBorderToJC_PC();
             addMouseListenerToTFS();
 
             addKeyListenersToTFS();
             addKeyListenersToCKS();
+            addChangeListenerToCB();
 
             addActionListenersToMIS();
 
             addActionListenerToBTNS_MC();
             addActionListenerToBTNS_P_M();
-      }
 
-      //++++++++++++++++++++++++++++++++++++++++++++
-      //CHANGE NEEDED
-      private void addTableModelListenerToJT() {
-            JT_ML JTML = new JT_ML();
-            VF_R.getJT().getModel().addTableModelListener(JTML);
-      }
-
-      private void addListSelectionListenerToJT() {
-            JT_LSL JTL = new JT_LSL();
-            DefaultListSelectionModel dlsm = (DefaultListSelectionModel) VF_R.getJT().getSelectionModel();
-
-            if (dlsm.getListSelectionListeners().length > 0) {
-                  for (int a = 0; a < dlsm.getListSelectionListeners().length; a++) {
-                        if (dlsm.getListSelectionListeners()[a].toString().contains("ListSelectionListener")) {
-                              //System.out.println("JT removes: " + JTL.toString());
-                              VF_R.getJT().getSelectionModel().removeListSelectionListener(JTL);
-                        }
-
-                  }
-            }
-            if (dlsm.getListSelectionListeners().length == 1) {
-                  //System.out.println("JT adds " + JTL.toString());
-                  VF_R.getJT().getSelectionModel().addListSelectionListener(JTL);
-            }
-      }
-      private void addListSelectioinListenerToJT(){
-            
+            addMouseListenerToBTN_C();
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
@@ -129,18 +95,8 @@ public class MainListeners_F {
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addMouseListenerToBTN_C() {
             BTNS_CMouseListener BTNCML = new BTNS_CMouseListener();
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VF_R.getBTNS_C()[a].getMouseListeners().length > 0) {
-                        for (int b = 0; b < VF_R.getBTNS_C()[a].getMouseListeners().length; b++) {
-                              if (VF_R.getBTNS_C()[a].getMouseListeners()[b].toString().contains("MouseListener")) {
-                                    VF_R.getBTNS_C()[a].removeMouseListener(BTNCML);
-                              }
-                        }
-                  }
-                  if (VF_R.getBTNS_C()[a].getMouseListeners().length == 1) {
-                        //System.out.println(btns_C[a].getName() + " adds: " + BTNCML.toString());
-                        VF_R.getBTNS_C()[a].addMouseListener(BTNCML);
-                  }
+            for (JButton x : VF_R.getBTNS_C()) {
+                  x.addMouseListener(BTNCML);
             }
       }
 
@@ -173,7 +129,7 @@ public class MainListeners_F {
                   VF_R.getTFS_SU()[a].addFocusListener(new FocusBorder());
             }
       }
-      
+
       /*
       private void addFocusListenersToJC() {
             TF_LST_FL TFSFL = new TF_LST_FL();
@@ -192,7 +148,25 @@ public class MainListeners_F {
                   //VF_R.getJLSTS()[a].addFocusListener(FL);
             }
       }
-      */
+       */
+      private void addChangeListenerToCB() {
+            /*
+            System.out.println("#########PopupMenu: " + VF_R.getJCBS()[0].getComponentPopupMenu().toString());
+            System.out.println("#########PopupMenu: " + VF_R.getJCBS()[0]);
+            System.out.println("#########PopupMenu's SelectionModel: " + 
+                    VF_R.getJCBS()[0].getComponentPopupMenu().getSelectionModel().toString());
+            
+            for (JComboBox x : VF_R.getJCBS()) {
+                  x.getComponentPopupMenu().getSelectionModel().addChangeListener(new ChangeListener(){
+                        @Override
+                        public void stateChanged(ChangeEvent e) {
+                              System.out.println("CHANGELISTENER " + e.getSource().getClass().getName());
+                        }
+                        
+                  });
+            }
+            */
+      }
 
       //++++++++++++++++++++++++++++++++++++++++++++
       private void addKeyListenersToTFS() {
@@ -210,7 +184,7 @@ public class MainListeners_F {
             for (int a = 0; a < DT.maxColumns; a++) {
                   JTextField[] clock = MComp.getClock(
                           VF_R.getTFS_MD()[a], VF_R.getTFS_MU()[a], VF_R.getTFS_SD()[a], VF_R.getTFS_SU()[a]);
-                  
+
                   CK_KL_Custom KL = new CK_KL_Custom(clock);
 
                   for (JComponent x : clock) {

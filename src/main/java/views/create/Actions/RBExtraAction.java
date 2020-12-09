@@ -3,28 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.create.listeners;
+package views.create.Actions;
 
-import views.create.VC_R2;
 import MC.DT;
-import com.cofii.myMethods.MComp;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import views.create.VC_R2;
+import static views.create.VC_R_DataCom.setRB_ExtraSelected;
 
 /**
  *
  * @author C0FII
  */
-public class RBExtra_AL implements ActionListener {
+public class RBExtraAction implements SelectionAction {
 
       @Override
-      public void actionPerformed(ActionEvent e) {
-            int num = MComp.setButtonGroup(e, VC_R2.getRBTypes2()) - 1;//- 1 (INDEX)
-            System.out.println("Button Group num: " + (num + 1));
-            VC_R2.setRB_Types2Selected(num + 1);
+      public void action(int index) {
+            VC_R2.setRB_ExtraSelected(index + 1);
             boolean visible = false;
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (num == a) {
+                  if (index == a) {
                         visible = true;
                   } else {
                         visible = false;
@@ -32,7 +28,7 @@ public class RBExtra_AL implements ActionListener {
 
                   VC_R2.getCombTypes2()[a].setVisible(visible);
                   //++++++++++++++++++++++++++++++++++++++++++++++
-                  if (num == a) {
+                  if (index == a) {
                         if (VC_R2.getCombTypes2()[a].getSelectedIndex() == 1) {
                               visible = true;
                         } else {

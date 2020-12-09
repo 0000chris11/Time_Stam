@@ -9,6 +9,7 @@ import MC.DT;
 import MC.LK;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -48,7 +49,7 @@ public class VC_R_DataCom {
       //static JPanel JPC = new JPanelGradient(DT.GP_blackRed);
       static JPanel JPC = new JPanel();
       JScrollPane sc_JPC = new JScrollPane(JPC);
-      static JPanel JPB = new JPanel();
+      static JPanel JPB = new JPanel();//STATUS
       //++++++++++++++++++++++++++++++++++++++
       static JPanel JPR = new JPanel();
       static JPanel JPR_U = new JPanelGradient(new Color[]{Color.BLACK, Color.BLUE});
@@ -68,10 +69,14 @@ public class VC_R_DataCom {
       static JLabel lb_Status = new JLabel("Waiting for action...");
       static JButton btn_CU = new JButton();
       //++++++++++++++++++++++++++++++++++++++++++++++
-      String[] headers_t = new String[]{
-            "Columns", "Name", "Sub", "Add", "Type", "Null", "Type 2",
+      static String[] headers_t = new String[]{
+            "Columns", "Names", "Sub", "Add", "Type", "Null", "Extra", "PK",
             "Dist1", "Dist2", "ImageC", "Tag", "Clock"};
-      JLabel[] headers = new JLabel[headers_t.length];
+      /*
+      lb, tf, btn_m, btn_p, combTypes, checkbNulls, panelExtra, rbPK,
+                  btn_Dist, btn_Dist2, btn_ImageC, btn_Tag, btn_Clock
+      */
+      static JLabel[] headers = new JLabel[headers_t.length];
 
       static JComponent[][] compsD;
       //++++++++++++++++++++++++++++++++++++++++++++++
@@ -133,6 +138,9 @@ public class VC_R_DataCom {
       static int btn_ClockSelected = -1;
       
       static JRadioButton[] rbsPK = new JRadioButton[DT.maxColumns];
+      static int rb_PKSelected = -1;
+      //++++++++++++++++++++++++++++++++++++++++++
+      static ArrayList<String> list_C = new ArrayList<String>();
       //++++++++++++++++++++++++++++++++++++++++++
 
       public static JPanel getPC() {
@@ -176,6 +184,10 @@ public class VC_R_DataCom {
             return lbOrigText;
       }
 
+      //++++++++++++++++++++++++++++++++++++++++++++
+      public static JLabel[] getHeaders(){
+            return headers;
+      }
       //++++++++++++++++++++++++++++++++++++++++++++
       public static JLabel[] getLBS() {
             return lbs;
@@ -233,10 +245,7 @@ public class VC_R_DataCom {
             return btns_ImageC;
       }
 
-      public static ButtonGroup getImageCGroup() {
-            return imageCGroup;
-      }
-
+      //++++++++++++++++++++++++++++++++++++++++++++++++++
       public static int getBTN_ImageCSelected() {
             return btn_ImageCSelected;
       }
@@ -245,14 +254,22 @@ public class VC_R_DataCom {
             btn_ImageCSelected = v;
       }
       
-      public static int getRB_Types2Selected(){
+      public static int getRB_ExtraSelected(){
             return rb_ExtraSelected;
       }
       
-      public static void setRB_Types2Selected(int v){
+      public static void setRB_ExtraSelected(int v){
             rb_ExtraSelected = v;
       }
-
+      
+      public static int getRB_PKSelected(){
+            return rb_PKSelected;
+      }
+      
+      public static void setRB_PKSelected(int v){
+            rb_PKSelected = v;
+      }
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++
       public static JToggleButton[] getBTNS_Tag() {
             return btns_Tag;
       }
@@ -285,5 +302,9 @@ public class VC_R_DataCom {
 
       public static JButton getBTN_CU() {
             return btn_CU;
+      }
+      //+++++++++++++++++++++++++++++++++++++++++++
+      public static ArrayList<String> getList_C(){
+            return list_C;
       }
 }

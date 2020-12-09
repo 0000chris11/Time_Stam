@@ -6,6 +6,7 @@
 package views.first.listeners;
 
 import MC.DT;
+import MC.LK;
 import com.cofii.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -43,7 +44,7 @@ public class TF_KL_Custom implements KeyListener {
       @Override
       public void keyPressed(KeyEvent e) {
             String name = e.getComponent().getName();
-            int index = MComp.getLastDigitCharsCountAtEnd(name);
+            int index = MComp.getLastDigitCharsCountAtEnd(name) - 1;
             //System.out.println("\nkeyPressed " + index);
             if (CB != null) {
                   popupControl(e);
@@ -60,7 +61,30 @@ public class TF_KL_Custom implements KeyListener {
 
       @Override
       public void keyReleased(KeyEvent e) {
-
+            String name = e.getComponent().getName();
+            int index = MComp.getLastDigitCharsCountAtEnd(name) - 1;
+            if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP)
+                    && !e.isControlDown() && !e.isShiftDown()) {
+                  System.out.println("Change CB");
+                  if (TF.getBackground().equals(LK.BK_DIST1)) {
+                        if (CB.getSelectedItem() != null) {
+                              int cbIndex = CB.getComponentPopupMenu().getSelectionModel().getSelectedIndex();
+                              
+                              String text = CB.getItemAt(cbIndex).toString();
+                              TF.setText(text);
+                        }
+                  } else if (TF.getBackground().equals(LK.BK_DIST2)) {
+                        if (CB.getSelectedItem() != null) {
+                              String text = CB.getSelectedItem().toString();
+                              System.out.println("\tSelected Item: " + text);
+                              String t1 = text.substring(0, text.indexOf(":"));
+                              String t2 = text.substring(text.indexOf(":"), text.length() - 1);
+                              
+                              VF_R.getJTFS()[index - 1].setText(t1);
+                              TF.setText(t2);
+                        }
+                  }
+            }
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -77,15 +101,15 @@ public class TF_KL_Custom implements KeyListener {
 
       private void focusChangeRL(KeyEvent e, int index) {
 
-            if (index > 0) {
+            if (index > -1) {
                   //THIS WILL BE IGNORED IF NO CLOCK IS DISPLAYABLE
                   if (KeyEvent.VK_RIGHT == e.getKeyCode()) {
                         if (e.isControlDown()) {
-                              VF_R.getTFS_MD()[index - 1].requestFocus();
+                              VF_R.getTFS_MD()[index].requestFocus();
                         }
                   } else if (KeyEvent.VK_LEFT == e.getKeyCode()) {
                         if (e.isControlDown()) {
-                              VF_R.getTFS_SU()[index - 1].requestFocus();
+                              VF_R.getTFS_SU()[index].requestFocus();
                         }
                   }
             }
@@ -97,7 +121,7 @@ public class TF_KL_Custom implements KeyListener {
             if (KeyEvent.VK_DOWN == e.getKeyCode()) {
                   if (e.isControlDown()) {
                         for (int a = 0; a < cc; a++) {
-                              if (a == index - 1) {
+                              if (a == index) {
                                     int count = 0;//IF ITS THE LAST ONE
                                     if (a != cc - 1) {//IF NOT THE LAST ONE
                                           count = a + 1;//NEXT ONE
@@ -121,7 +145,7 @@ public class TF_KL_Custom implements KeyListener {
             } else if (KeyEvent.VK_UP == e.getKeyCode()) {
                   if (e.isControlDown()) {
                         for (int a = 0; a < cc; a++) {
-                              if (a == index - 1) {
+                              if (a == index) {
                                     int count = cc - 1;//IF ITS THE FIST ONE
                                     if (a != 0) {//IF NOT THE FIRST ONE
                                           count = a - 1;//PREVIOUS ONE

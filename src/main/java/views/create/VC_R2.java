@@ -9,12 +9,12 @@ import views.create.listeners.BTN_Dists;
 import views.create.listeners.BTN_MP_AL;
 import views.create.listeners.CBType1_IL;
 import views.create.listeners.CBExtra_IL;
-import views.create.listeners.RBExtra_AL;
-import views.create.listeners.TFTable_KL_Control;
+import views.create.Actions.SingleSelectionButton;
 import views.create.listeners.TF_KL_Control;
 import views.create.renderers.ComboBoxRenderer;
 import static views.create.VC_R_DataCom.lb_Status;
 import MC.DT;
+import MC.DTSQL;
 import Others.LimitN;
 import com.cofii.myClasses.MLayout;
 import com.cofii.myInterfaces.SerializationExceptionAction;
@@ -63,6 +63,14 @@ import smallComponenets.smallTF;
 import smallComponenets.smallTR_JP;
 import static views.create.VC_R_DataCom.rbsExtra;
 import static views.create.VC_R_DataCom.combsExtra;
+import views.create.Actions.PKAction;
+import views.create.Actions.RBExtraAction;
+import views.create.Actions.TFS_KL_ABandWords;
+import views.create.Actions.TFS_KL_ASameColumns;
+import views.create.Actions.Table_KL_ABandWords;
+import views.create.Actions.Table_KL_ASameTable;
+import views.create.listeners.MTF_Control;
+import views.create.listeners.MTF_Control2;
 
 /**
  *
@@ -109,10 +117,11 @@ public class VC_R2 extends VC_R_DataCom {
                   }
             }
 
-            TF_KL_Control tfkl = new TF_KL_Control();
+            //TF_KL_Control tfkl = new TF_KL_Control();
             BTN_MP_AL btnAC = new BTN_MP_AL();
             CBType1_IL cbListener1 = new CBType1_IL();
             BTN_Dists btnDis = new BTN_Dists();
+            SingleSelectionButton rbPKListener = new SingleSelectionButton(rbsPK, new PKAction());
 
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a] = (smallLB) getColumn(JComponent.class, compsD, 0)[a + 1];
@@ -129,6 +138,7 @@ public class VC_R2 extends VC_R_DataCom {
                   btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];
                   btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 12)[a + 1];
                   //+++++++++++++++++++++++++++++++++++++++++++++++
+                  tfs[a].setName("TF_" + (a + 1));
                   lbOrigText[a] = "Column " + (a + 1);
                   btns_ImageC[a].setName("btns_ImageC " + (a + 1));
                   btns_Clock[a].setName("btns_Clock " + (a + 1));
@@ -140,49 +150,58 @@ public class VC_R2 extends VC_R_DataCom {
                   panelsExtra[a].setMinimumSize(new Dimension(40, 27));
                   //panelTypes2[a].setPreferredSize(new Dimension(40, 27));
                   panelsExtra[a].setMaximumSize(new Dimension(320, 27));
-                  
+
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  tfs[a].addKeyListener(tfkl);
+                  //tfs[a].addKeyListener(tfkl);
+                  //tfs[a].addKeyListener(new MTF_Control(DTSQL.getBandW(), VC_R2.getList_C(), new TFS_KL_ABandWords(a + 1)));
+                  tfs[a].addKeyListener(new MTF_Control2(DTSQL.getBandW(), MTF_Control.CONTAIN_MATCH, 
+                          new TFS_KL_ABandWords()));
+                  //tfs[a].addKeyListener(new MTF_Control2(VC_R2.getList_C(), MTF_Control.DUPLICATED_ELEMENTS, 
+                    //      new TFS_KL_ASameColumns(a + 1)));
+                  
                   btns_m[a].addActionListener(btnAC);
                   btns_p[a].addActionListener(btnAC);
                   combsTypes[a].addItemListener(cbListener1);
                   btns_Dist[a].addActionListener(btnDis);
+                  btns_Dist[a].setActionCommand("BTNS_DIST_" + (a + 1));
+                  btns_Dist2[a].setActionCommand("BTNS_DIST2_" + (a + 1));
                   btns_Tag[a].addActionListener(btnDis);
                   btns_ImageC[a].addActionListener(btnDis);
                   btns_Clock[a].addActionListener(btnDis);
+                  rbsPK[a].addActionListener(rbPKListener);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   panelsExtra[a].setOpaque(true);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   btns_Dist2[a].setEnabled(false);
             }
             //=======================================================
-            RBExtra_AL rbListener = new RBExtra_AL();
+            SingleSelectionButton rbExtraListener = new SingleSelectionButton(rbsExtra, new RBExtraAction());
             CBExtra_IL cbListener2 = new CBExtra_IL();
             //ButtonGroup bgRB = new ButtonGroup();
-            
-            JComponent[] pt2 = new JComponent[4];
+
+            JComponent[] extraPanelFilter = new JComponent[4];
 
             for (int a = 0; a < DT.maxColumns; a++) {
-                  System.out.println("################## " + (a + 1));
                   int count = 0;
                   int countR = 0;
-                  for (int b = 0; b < pt2.length + 1; b++) {
-                        System.out.println("\t" + panelsExtra[a].getComponent(b).getClass().toString());
+                  for (int b = 0; b < extraPanelFilter.length + 1; b++) {
+                        //System.out.println("\t" + panelsExtra[a].getComponent(b).getClass().toString());
                         if (!panelsExtra[a].getComponent(b).getClass().toString().contains("Filler")) {
                               if (panelsExtra[a].getComponent(b).getClass().toString().contains("Radio")) {
                                     countR++;
                               }
                               if (countR <= 1) {
-                                    pt2[count] = (JComponent) panelsExtra[a].getComponent(b);
-                                    System.out.println("\t\tC" + count + ": " + pt2[count++].getClass());
+                                    extraPanelFilter[count++] = (JComponent) panelsExtra[a].getComponent(b);
+                                    //System.out.println("\t\tC" + count + ": " + extraPanelFilter[count++].getClass());
+                                    
                               }
                         }
                   }
 
-                  rbsExtra[a] = (JRadioButton) pt2[0];
-                  combsExtra[a] = (smallCOMBX) pt2[1];
-                  tfsIDEN1[a] = (NumberOTF) pt2[2];
-                  tfsIDEN2[a] = (NumberOTF) pt2[3];
+                  rbsExtra[a] = (JRadioButton) extraPanelFilter[0];
+                  combsExtra[a] = (smallCOMBX) extraPanelFilter[1];
+                  tfsIDEN1[a] = (NumberOTF) extraPanelFilter[2];
+                  tfsIDEN2[a] = (NumberOTF) extraPanelFilter[3];
                   //++++++++++++++++++++++++++++++++++++++++++++++++
                   ((AbstractDocument) tfsIDEN1[a].getDocument()).setDocumentFilter(new LimitN());
                   ((AbstractDocument) tfsIDEN2[a].getDocument()).setDocumentFilter(new LimitN());
@@ -190,7 +209,7 @@ public class VC_R2 extends VC_R_DataCom {
                   rbsExtra[a].setBackground(Color.BLACK);
                   combsExtra[a].setRenderer(new ComboBoxRenderer());
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  rbsExtra[a].addActionListener(rbListener);
+                  rbsExtra[a].addActionListener(rbExtraListener);
                   combsExtra[a].addItemListener(cbListener2);
                   //++++++++++++++++++++++++++++++++++++++++++++++++
                   combsExtra[a].setMinimumSize(new Dimension(100, 27));
@@ -248,7 +267,13 @@ public class VC_R2 extends VC_R_DataCom {
             JPU.add(tf_Title);
             tf_Title.setPreferredSize(new Dimension(tf_Title.getPreferredSize().width, 27));
             tf_Title.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
-            tf_Title.addKeyListener(new TFTable_KL_Control());
+            //tf_Title.addKeyListener(new TFTable_KL_Control());
+            //tf_Title.addKeyListener(new MTF_Control(DTSQL.getBandW(), DT.getList_T(), new IKeyMatchActions()));
+            //tf_Title.addKeyListener(new MTF_Control(DTSQL.getBandW(), DT.getList_T(), new Table_KL_ABandWords()));
+            tf_Title.addKeyListener(new MTF_Control2(DTSQL.getBandW(), MTF_Control.CONTAIN_MATCH, 
+                    new Table_KL_ABandWords()));
+            tf_Title.addKeyListener(new MTF_Control2(DT.getList_T(), MTF_Control.EQUAL_MATCH,
+                    new Table_KL_ASameTable()));
             JPU.add(Box.createHorizontalStrut(10));
       }
 
@@ -289,6 +314,7 @@ public class VC_R2 extends VC_R_DataCom {
       private void JPBConfig(String text) {
             JF.add(JPB, BorderLayout.SOUTH);
             JPB.setBackground(Color.BLACK);
+            JPB.setBorder(new LineBorder(Color.WHITE, 1));
             JPB.setPreferredSize(new Dimension(500, 40));
             JPB.setMaximumSize(new Dimension(Short.MAX_VALUE, 42));
             JPB.setLayout(new BoxLayout(JPB, BoxLayout.X_AXIS));
@@ -414,5 +440,5 @@ public class VC_R2 extends VC_R_DataCom {
 
             });
       }
-      */
+       */
 }

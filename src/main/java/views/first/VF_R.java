@@ -181,7 +181,7 @@ public class VF_R extends VF_R_DataCom {
             Font f = JT.getFont();
 
             tf_ce.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
-            tf_ce.setBorder(LK.BORDER_LINEMARIGIN_FOCUS_OFF);
+            tf_ce.setBorder(LK.BR_LINEMARIGIN_FOCUS_OFF);
             tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
@@ -549,7 +549,7 @@ public class VF_R extends VF_R_DataCom {
             JT.setGridColor(Color.GRAY);
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JT.setRowSelectionAllowed(true);
-            JT.setSelectionBackground(LK.CP_BK_DIST2);
+            JT.setSelectionBackground(LK.BK_DIST2);
             //JT.setPreferredScrollableViewportSize();
             //JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
             //System.out.println("PT size: " + PT.getSize());
@@ -584,15 +584,15 @@ public class VF_R extends VF_R_DataCom {
                   JTextField SD = tfs_SD[a];
                   JTextField SU = tfs_SU[a];
                   //++++++++++++++++++++++++++++++++++++++++++++
-                  MD.setBackground(LK.CP_BK_NORMAL);
-                  MU.setBackground(LK.CP_BK_NORMAL);
-                  SD.setBackground(LK.CP_BK_NORMAL);
-                  SU.setBackground(LK.CP_BK_NORMAL);
-                  MD.setFont(LK.CP_FONT_NORMAL);
-                  MU.setFont(LK.CP_FONT_NORMAL);
-                  LB2D.setFont(LK.CP_FONT_NORMAL);
-                  SD.setFont(LK.CP_FONT_NORMAL);
-                  SU.setFont(LK.CP_FONT_NORMAL);
+                  MD.setBackground(LK.BK_NORMAL);
+                  MU.setBackground(LK.BK_NORMAL);
+                  SD.setBackground(LK.BK_NORMAL);
+                  SU.setBackground(LK.BK_NORMAL);
+                  MD.setFont(LK.FONT_NORMAL);
+                  MU.setFont(LK.FONT_NORMAL);
+                  LB2D.setFont(LK.FONT_NORMAL);
+                  SD.setFont(LK.FONT_NORMAL);
+                  SU.setFont(LK.FONT_NORMAL);
                   MD.setForeground(Color.WHITE);
                   MU.setForeground(Color.WHITE);
                   LB2D.setForeground(Color.WHITE);
@@ -729,7 +729,7 @@ public class VF_R extends VF_R_DataCom {
                   tfs[a] = new smallTF();
 
                   tfsE[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
-                  tfsE[a].setBackground(LK.CP_BK_NORMAL);
+                  tfsE[a].setBackground(LK.BK_NORMAL);
                   //tfs[a].putClientProperty("TextField.focus", Color.BLACK);
 
                   tfs_MD[a] = new smallTF("0");
@@ -938,7 +938,6 @@ public class VF_R extends VF_R_DataCom {
             JT.setShowGrid(DT.getList_BL().get(2));
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             System.out.println(CC.CYAN + "MAIN +++++ addAllListenerToCJS" + CC.RESET);
-            ml.addAllListenerLoop();
             ml.addAllListener();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             setTableCellEditor();

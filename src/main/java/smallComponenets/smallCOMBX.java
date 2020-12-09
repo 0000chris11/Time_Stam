@@ -36,7 +36,7 @@ public class smallCOMBX extends JComboBox {
             //setOpaque(false);
             Font f = new Font("Dialog", Font.BOLD, 16);
             setBorder(new EmptyBorder(1, 3, 1, 3));
-            setBackground(LK.CP_BK_NORMAL);
+            setBackground(LK.BK_NORMAL);
             setForeground(Color.WHITE);
             setFont(f);
       }
@@ -44,7 +44,7 @@ public class smallCOMBX extends JComboBox {
       public smallCOMBX(){
             Font f = new Font("Dialog", Font.BOLD, 16);
             setBorder(new EmptyBorder(1, 3, 1, 3));
-            setBackground(LK.CP_BK_NORMAL);
+            setBackground(LK.BK_NORMAL);
             setForeground(Color.WHITE);
             setFont(f);
       }

@@ -20,14 +20,14 @@ public class FocusBorder implements FocusListener{
       public void focusGained(FocusEvent evt) {
             //System.out.println("\n2 - focusGained");
             JComponent JC = (JComponent) evt.getSource();          
-            JC.setBorder(LK.BORDER_LINEMARIGIN_FOCUS_ON);
+            JC.setBorder(LK.BR_LINEMARIGIN_FOCUS_ON);
       }
 
       @Override
       public void focusLost(FocusEvent evt) {
             //System.out.println("\n2 - focusLost");
             JComponent JC = (JComponent) evt.getSource();
-            JC.setBorder(LK.BORDER_LINEMARIGIN_FOCUS_OFF);
+            JC.setBorder(LK.BR_LINEMARIGIN_FOCUS_OFF);
       }
       
 }
