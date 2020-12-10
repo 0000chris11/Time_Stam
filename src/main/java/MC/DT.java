@@ -1,20 +1,9 @@
 package MC;
 
-import Table.CustomTableModel;
 import com.cofii.myClasses.CC;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableModel;
 
 public class DT {
 

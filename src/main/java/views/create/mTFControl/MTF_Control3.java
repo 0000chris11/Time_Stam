@@ -3,40 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.create.listeners;
+package views.create.mTFControl;
 
 import com.cofii.myMethods.MList;
-import com.cofii.myMethods.MOthers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import javax.swing.JTextField;
-import views.create.Actions.IKeyMatchActions;
 import views.create.Actions.IKeyMatchActions2;
 
 /**
  *
  * @author C0FII
  */
-public class MTF_Control2 implements KeyListener {
+public class MTF_Control3 implements KeyListener {
 
-      private ArrayList<String> List1;
-      
-      private int OPTION = 1;
+      private ArrayList<Storage> Lists = new ArrayList<Storage>();
 
       public static final int CONTAIN_MATCH = 1;
       public static final int EQUAL_MATCH = 2;
       public static final int DUPLICATED_ELEMENTS = 3;
 
-      public static int LIST_MINUS_INDEX = -1;
+      public static ArrayList<Integer> list_MI = new ArrayList<Integer>();
 
-      private IKeyMatchActions2 ac;
+      private IKeyMatchActions3 ac;
 
       //+++++++++++++++++++++++++++++++++++++++++++++++
-      public MTF_Control2(ArrayList<String> list1, int option, IKeyMatchActions2 ac) {
-            List1 = list1;
-            OPTION = option;
+      public MTF_Control3(IKeyMatchActions3 ac) {
             this.ac = ac;
       }
 
@@ -57,30 +51,53 @@ public class MTF_Control2 implements KeyListener {
             if (e.getSource() instanceof JTextField) {
                   ac.beforeActions(e);
 
-                  boolean match = false;
+                  boolean[] matches = new boolean[Lists.size()];
                   JTextField tf = (JTextField) e.getSource();
                   String text = tf.getText();
 
-                  List1 = ac.getUpdatedList(List1);//OVERRIDE----------------
-                  if (OPTION == CONTAIN_MATCH) {
-                        System.out.println("\tCONTAIN_MATCH");
-                        match = getContainMatchFromStringToList(text, List1, false, false, false);
-                  } else if (OPTION == EQUAL_MATCH) {
-                        System.out.println("\tEQUAL_MATCH");
-                        int minusIndex = ac.getMinusIndex(e, LIST_MINUS_INDEX);//OVERRIDE------------------
-                        match = getEqualMatchFromStringToList(text, List1, minusIndex, true);
-                  } else if (OPTION == DUPLICATED_ELEMENTS) {
-                        System.out.println("\tDUPLICATED_ELEMENTS");
-                        match = MList.areTheyDuplicatedElementsOnList(List1);
-                  } else {
-                        throw new InvalidParameterException("Option not Found");
+                  int el = 0;
+                  if (Lists.size() != 0) {
+                        for (int a = 0; a < Lists.size(); a++) {
+                              ArrayList<String> list = Lists.get(a).list;
+                              int minusIndex = list_MI.get(a);
+                              int option = Lists.get(a).option;
+
+                              UpdateList ul = ac.getUpdatedList(a, list);
+                              if (ul.IDlist == a) {
+                                    list = ul.list;
+                              }
+
+                              if (option == CONTAIN_MATCH) {
+                                    System.out.println("\tCONTAIN_MATCH (" + (a + 1) + ")");
+                                    matches[el++] = getContainMatchFromStringToList(text, list, false, false, false);
+                              } else if (option == EQUAL_MATCH) {
+                                    System.out.println("\tEQUAL_MATCH (" + (a + 1) + ")");
+                                    matches[el++] = getEqualMatchFromStringToList(text, list, minusIndex, true);
+                              } else if (option == DUPLICATED_ELEMENTS) {
+                                    System.out.println("\tDUPLICATED_ELEMENTS (" + (a + 1) + ")");
+                                    matches[el++] = MList.areTheyDuplicatedElementsOnList(list);
+                              } else {
+                                    throw new InvalidParameterException("Option not Found");
+                              }
+                        }
+                        ac.listsAction(e, matches);
+                  }else{
+                        throw new InvalidParameterException("Empy List");
                   }
 
-                  ac.listAction(e, match);
-                  ac.afterActions();
             } else {
                   throw new InvalidParameterException("this class is only for JTextField to implement the ActionListener");
             }
+      }
+
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++
+      public void addList(ArrayList<String> list, int option) {
+            Lists.add(new Storage(list, option));
+            list_MI.add(-1);
+      }
+
+      public void setMinusIndex(int listID, int minusIndex) {
+            list_MI.set(listID, minusIndex);
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -117,7 +134,7 @@ public class MTF_Control2 implements KeyListener {
 
       public static boolean getContainMatchFromStringToList(String text, ArrayList<String> list,
               boolean caseSensitive, boolean trim, boolean adjust) {
-            System.out.println("getContainMatchFromStringToList");
+            //System.out.println("getContainMatchFromStringToList");
             boolean returnValue = false;
 
             if (adjust) {
@@ -143,8 +160,8 @@ public class MTF_Control2 implements KeyListener {
                         cont.trim();
                   }
 
-                  System.out.println("\ttext: " + text);
-                  System.out.println("\tcont: " + cont);
+                  //System.out.println("\ttext: " + text);
+                  //System.out.println("\tcont: " + cont);
                   if (text.contains(cont)) {
                         returnValue = true;
                   }

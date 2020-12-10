@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import views.create.Actions.TFS_KControl;
 
 /**
  *
@@ -31,9 +32,10 @@ public class BTN_MP_AL implements ActionListener{
                               JC.setVisible(false);
                               if(JC instanceof JTextField){
                                     ((JTextField) JC).setText("");
-                              }else if(JC instanceof JLabel){
                                     JC.setForeground(Color.WHITE);
+                              }else if(JC instanceof JLabel){
                                     ((JLabel) JC).setText("Column " + (row + 2));
+                                    JC.setForeground(Color.WHITE);
                               }
                         }
                         VC_R2.getBTNS_M()[row].setVisible(true);
@@ -50,9 +52,7 @@ public class BTN_MP_AL implements ActionListener{
                   }
             }
             
-            //System.out.println("REVALIDATE");
-            //VC_R2.getPC().revalidate();
-            
+            TFS_KControl.updateListC();
       }
       
 }

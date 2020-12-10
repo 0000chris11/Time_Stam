@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
@@ -60,17 +61,14 @@ import smallComponenets.smallCHBX;
 import smallComponenets.smallCOMBX;
 import smallComponenets.smallLB;
 import smallComponenets.smallTF;
-import smallComponenets.smallTR_JP;
 import static views.create.VC_R_DataCom.rbsExtra;
 import static views.create.VC_R_DataCom.combsExtra;
 import views.create.Actions.PKAction;
 import views.create.Actions.RBExtraAction;
-import views.create.Actions.TFS_KL_ABandWords;
-import views.create.Actions.TFS_KL_ASameColumns;
-import views.create.Actions.Table_KL_ABandWords;
-import views.create.Actions.Table_KL_ASameTable;
-import views.create.listeners.MTF_Control;
-import views.create.listeners.MTF_Control2;
+import views.create.Actions.Table_KControl;
+import views.create.mTFControl.IKeyMatchActions3;
+import views.create.mTFControl.MTF_Control3;
+import views.create.mTFControl.UpdateList;
 
 /**
  *
@@ -152,13 +150,44 @@ public class VC_R2 extends VC_R_DataCom {
                   panelsExtra[a].setMaximumSize(new Dimension(320, 27));
 
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  //tfs[a].addKeyListener(tfkl);
-                  //tfs[a].addKeyListener(new MTF_Control(DTSQL.getBandW(), VC_R2.getList_C(), new TFS_KL_ABandWords(a + 1)));
-                  tfs[a].addKeyListener(new MTF_Control2(DTSQL.getBandW(), MTF_Control.CONTAIN_MATCH, 
-                          new TFS_KL_ABandWords()));
+                  MTF_Control3 mtf = new MTF_Control3(new IKeyMatchActions3() {
+
+                        @Override
+                        public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
+                              updateListC();
+                              return new UpdateList(2, list_C);
+                        }
+
+                        @Override
+                        public void listsAction(KeyEvent e, boolean[] matches) {
+                              System.out.println("Matches length: " + matches.length);
+                              JTextField tf = (JTextField) e.getComponent();
+                              if (matches[0] || matches[1]) {
+                                    tf.setForeground(Color.RED);
+                              } else if (!matches[0] && !matches[1]) {
+                                    tf.setForeground(Color.WHITE);
+                              }
+
+                              if (matches[2]) {
+                                    headers[1].setForeground(Color.RED);
+                                    headers[1].setText("Same Column Detected");
+                              } else {
+                                    headers[1].setForeground(Color.WHITE);
+                                    headers[1].setText("Names");
+                              }
+                        }
+
+                  });
+                  mtf.addList(DTSQL.getBandWE_mysql(), MTF_Control3.EQUAL_MATCH);
+                  mtf.addList(DTSQL.getBandWC_mysql(), MTF_Control3.CONTAIN_MATCH);
+                  mtf.addList(list_C, MTF_Control3.DUPLICATED_ELEMENTS);
+                  mtf.setMinusIndex(2, a);
+
+                  tfs[a].addKeyListener(mtf);
+                  //tfs[a].addKeyListener(new MTF_Control2(DTSQL.getBandWE_mysql(), MTF_Control.CONTAIN_MATCH,
+                  //      new TFS_KL_ABandWords()));
                   //tfs[a].addKeyListener(new MTF_Control2(VC_R2.getList_C(), MTF_Control.DUPLICATED_ELEMENTS, 
-                    //      new TFS_KL_ASameColumns(a + 1)));
-                  
+                  //      new TFS_KL_ASameColumns(a + 1)));
                   btns_m[a].addActionListener(btnAC);
                   btns_p[a].addActionListener(btnAC);
                   combsTypes[a].addItemListener(cbListener1);
@@ -193,7 +222,7 @@ public class VC_R2 extends VC_R_DataCom {
                               if (countR <= 1) {
                                     extraPanelFilter[count++] = (JComponent) panelsExtra[a].getComponent(b);
                                     //System.out.println("\t\tC" + count + ": " + extraPanelFilter[count++].getClass());
-                                    
+
                               }
                         }
                   }
@@ -267,13 +296,14 @@ public class VC_R2 extends VC_R_DataCom {
             JPU.add(tf_Title);
             tf_Title.setPreferredSize(new Dimension(tf_Title.getPreferredSize().width, 27));
             tf_Title.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
-            //tf_Title.addKeyListener(new TFTable_KL_Control());
-            //tf_Title.addKeyListener(new MTF_Control(DTSQL.getBandW(), DT.getList_T(), new IKeyMatchActions()));
-            //tf_Title.addKeyListener(new MTF_Control(DTSQL.getBandW(), DT.getList_T(), new Table_KL_ABandWords()));
-            tf_Title.addKeyListener(new MTF_Control2(DTSQL.getBandW(), MTF_Control.CONTAIN_MATCH, 
-                    new Table_KL_ABandWords()));
-            tf_Title.addKeyListener(new MTF_Control2(DT.getList_T(), MTF_Control.EQUAL_MATCH,
-                    new Table_KL_ASameTable()));
+            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            MTF_Control3 mtf = new MTF_Control3(new Table_KControl());
+            mtf.addList(DTSQL.getBandWE_mysql(), MTF_Control3.EQUAL_MATCH);
+            mtf.addList(DTSQL.getBandWC_mysql(), MTF_Control3.CONTAIN_MATCH);
+            mtf.addList(DT.getList_T(), MTF_Control3.EQUAL_MATCH);
+
+            tf_Title.addKeyListener(mtf);
+            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             JPU.add(Box.createHorizontalStrut(10));
       }
 
