@@ -18,7 +18,7 @@ import javax.swing.tree.TreeCellEditor;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
       
@@ -46,6 +46,7 @@ public class VP_CellEditor extends AbstractCellEditor implements TreeCellEditor{
             return returnValue;
       }
 
+      
       @Override
       public boolean isCellEditable(EventObject anEvent) {
             return MCell.isCellEditableForCheckBoxAndDefaults(anEvent, VP.JTEN);

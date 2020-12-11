@@ -70,7 +70,8 @@ public class VC_R_DataCom {
       static JButton btn_CU = new JButton();
       //++++++++++++++++++++++++++++++++++++++++++++++
       static String[] headers_t = new String[]{
-            "Columns", "Names", "Sub", "Add", "Type", "Null", "Extra", "PK",
+            "Cols Number", 
+            "Field", "Sub", "Add", "Type", "Null", "Key", "Default", "Extra",
             "Dist1", "Dist2", "ImageC", "Tag", "Clock"};
       /*
       lb, tf, btn_m, btn_p, combTypes, checkbNulls, panelExtra, rbPK,
@@ -96,6 +97,10 @@ public class VC_R_DataCom {
       static JComboBox combTypes = new smallCOMBX(cb_options);
       static JCheckBox checkbNulls = new smallCHBX();
 
+      static JPanel panelDefault = new JPanel();
+      static JRadioButton rbDefault = new JRadioButton();
+      static JTextField tfDefault = new smallTF("NULL");
+      
       static JPanel panelExtra = new JPanel();
       static JRadioButton rbExtra = new JRadioButton();//NO BUTTON GROUP
       static String[] cbExtra_options = new String[]{"AUTO INCREMENT", "IDENTITY"};
@@ -119,7 +124,7 @@ public class VC_R_DataCom {
       static JPanel[] panelsExtra = new JPanel[DT.maxColumns];
       
       static JRadioButton[] rbsExtra = new JRadioButton[DT.maxColumns];
-      static int rb_ExtraSelected = -1;
+      static int rb_ExtraSelected = 0;
       
       static JComboBox[] combsExtra = new smallCOMBX[DT.maxColumns];
       static JTextField[] tfsIDEN1 = new NumberOTF[DT.maxColumns];
@@ -128,17 +133,26 @@ public class VC_R_DataCom {
       static JToggleButton[] btns_Dist2 = new smallBTN_TG[DT.maxColumns];
       
       static JToggleButton[] btns_ImageC = new smallBTN_TG[DT.maxColumns];
-      static int btn_ImageCSelected = -1;
+      static int btn_ImageCSelected = 0;
       
       static ButtonGroup imageCGroup;
       static ButtonGroup clockGroup;
       static JToggleButton[] btns_Tag = new smallBTN_TG[DT.maxColumns];
       
       static JToggleButton[] btns_Clock = new smallBTN_TG[DT.maxColumns];
-      static int btn_ClockSelected = -1;
+      static int btn_ClockSelected = 0;
       
       static JRadioButton[] rbsPK = new JRadioButton[DT.maxColumns];
-      static int rb_PKSelected = -1;
+      static int rb_PKSelected = 0;
+      
+      static JPanel[] panelsDefaults = new JPanel[DT.maxColumns];
+      static JRadioButton[] rbDefaults = new JRadioButton[DT.maxColumns];
+      static JTextField[] tfsDefaults = new JTextField[DT.maxColumns];
+      /*
+      static JPanel panelDefault = new JPanel();
+      static JRadioButton rbDefault = new JRadioButton();
+      static JTextField tfDefault = new smallTF("NULL");
+      */
       //++++++++++++++++++++++++++++++++++++++++++
       static ArrayList<String> list_C = new ArrayList<String>();
       //++++++++++++++++++++++++++++++++++++++++++
@@ -205,11 +219,11 @@ public class VC_R_DataCom {
             return btns_m;
       }
 
-      public static JComboBox[] getCombTypes1() {
+      public static JComboBox[] getCombTypes() {
             return combsTypes;
       }
 
-      public static JCheckBox[] getCheckbs() {
+      public static JCheckBox[] getCheckbNulls() {
             return checkbsNull;
       }
 

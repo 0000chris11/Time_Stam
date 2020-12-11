@@ -28,6 +28,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -65,9 +66,14 @@ import static views.create.VC_R_DataCom.rbsExtra;
 import static views.create.VC_R_DataCom.combsExtra;
 import views.create.Actions.PKAction;
 import views.create.Actions.RBExtraAction;
-import views.create.Actions.Table_KControl;
+import views.create.Actions.TFS_KControl;
+import views.create.Actions.Table_KControlException;
+import static views.create.VC_R_DataCom.headers;
+import views.create.listeners.BTN_CU_AL;
 import views.create.mTFControl.IKeyMatchActions3;
+import views.create.mTFControl.MBTN_Control;
 import views.create.mTFControl.MTF_Control3;
+import views.create.mTFControl.MTXControlData;
 import views.create.mTFControl.UpdateList;
 
 /**
@@ -76,7 +82,13 @@ import views.create.mTFControl.UpdateList;
  */
 public class VC_R2 extends VC_R_DataCom {
 
-      private void componentsConfig() {
+      //CHANGE THEM LATER++++++++++++++++++++++++++++++++++++++++++++
+      BTN_MP_AL btnAC = new BTN_MP_AL();
+      CBType1_IL cbListener1 = new CBType1_IL();
+      BTN_Dists btnDis = new BTN_Dists();
+      SingleSelectionButton rbPKListener = new SingleSelectionButton(rbsPK, new PKAction());
+
+      private void beforeComponentsConfig() {
             for (int a = 0; a < headers.length; a++) {
                   headers[a] = new smallLB(headers_t[a]);
             }
@@ -88,6 +100,10 @@ public class VC_R2 extends VC_R_DataCom {
             panelExtra.add(tfIDEN1);
             panelExtra.add(tfIDEN2);
             panelExtra.add(Box.createGlue());
+
+            panelDefault.setLayout(new BoxLayout(panelDefault, BoxLayout.X_AXIS));
+            panelDefault.add(rbDefault, 0);
+            panelDefault.add(tfDefault, 1);
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++++++
@@ -114,90 +130,44 @@ public class VC_R2 extends VC_R_DataCom {
                         }
                   }
             }
+            //++++++++++++++++++++++++++++++++++++
 
-            //TF_KL_Control tfkl = new TF_KL_Control();
-            BTN_MP_AL btnAC = new BTN_MP_AL();
-            CBType1_IL cbListener1 = new CBType1_IL();
-            BTN_Dists btnDis = new BTN_Dists();
-            SingleSelectionButton rbPKListener = new SingleSelectionButton(rbsPK, new PKAction());
+      }
 
+      //+++++++++++++++++++++++++++++++++++++++++++++
+      private void componentsConfig() {
+
+            /*
+            "Cols Number", 
+            "Field", "Sub", "Add", "Type", "Null", "Key", "Default", "Extra",
+            "Dist1", "Dist2", "ImageC", "Tag", "Clock"
+             */
             for (int a = 0; a < DT.maxColumns; a++) {
-                  lbs[a] = (smallLB) getColumn(JComponent.class, compsD, 0)[a + 1];
-                  tfs[a] = (smallTF) getColumn(JComponent.class, compsD, 1)[a + 1];
-                  btns_m[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 2)[a + 1];
-                  btns_p[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 3)[a + 1];
-                  combsTypes[a] = (smallCOMBX) getColumn(JComponent.class, compsD, 4)[a + 1];
-                  checkbsNull[a] = (smallCHBX) getColumn(JComponent.class, compsD, 5)[a + 1];
-                  panelsExtra[a] = (JPanel) getColumn(JComponent.class, compsD, 6)[a + 1];
-                  rbsPK[a] = (JRadioButton) getColumn(JComponent.class, compsD, 7)[a + 1];
-                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 8)[a + 1];
-                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];
-                  btns_ImageC[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];
-                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];
-                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 12)[a + 1];
+                  lbs[a] = (smallLB) getColumn(JComponent.class, compsD, 0)[a + 1];//COLS NUMBER
+                  tfs[a] = (smallTF) getColumn(JComponent.class, compsD, 1)[a + 1];//FIELD
+                  btns_m[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 2)[a + 1];//SUB
+                  btns_p[a] = (smallBTN_C) getColumn(JComponent.class, compsD, 3)[a + 1];//ADD
+                  combsTypes[a] = (smallCOMBX) getColumn(JComponent.class, compsD, 4)[a + 1];//TYPE
+                  checkbsNull[a] = (smallCHBX) getColumn(JComponent.class, compsD, 5)[a + 1];//NULLS
+                  rbsPK[a] = (JRadioButton) getColumn(JComponent.class, compsD, 6)[a + 1];//KEY
+                  panelsDefaults[a] = (JPanel) getColumn(JComponent.class, compsD, 7)[a + 1];//DEFAULT
+                  panelsExtra[a] = (JPanel) getColumn(JComponent.class, compsD, 8)[a + 1];//EXTRA
+                  btns_Dist[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 9)[a + 1];//DIST1
+                  btns_Dist2[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 10)[a + 1];//DIST2
+                  btns_ImageC[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 11)[a + 1];//IMAGEC
+                  btns_Tag[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 12)[a + 1];//TAG
+                  btns_Clock[a] = (smallBTN_TG) getColumn(JComponent.class, compsD, 13)[a + 1];//CLOCK
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  tfs[a].setName("TF_" + (a + 1));
-                  lbOrigText[a] = "Column " + (a + 1);
-                  btns_ImageC[a].setName("btns_ImageC " + (a + 1));
-                  btns_Clock[a].setName("btns_Clock " + (a + 1));
+                  setNames(a);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   panelsExtra[a].setBackground(Color.BLACK);
+                  panelsDefaults[a].setBackground(Color.BLACK);
                   rbsPK[a].setBackground(Color.BLACK);
+                  tfsDefaults[a].setForeground(Color.GRAY);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  tfs[a].setMinimumSize(new Dimension(200, 27));
-                  panelsExtra[a].setMinimumSize(new Dimension(40, 27));
-                  //panelTypes2[a].setPreferredSize(new Dimension(40, 27));
-                  panelsExtra[a].setMaximumSize(new Dimension(320, 27));
-
+                  setSizes(a);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
-                  MTF_Control3 mtf = new MTF_Control3(new IKeyMatchActions3() {
-
-                        @Override
-                        public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
-                              updateListC();
-                              return new UpdateList(2, list_C);
-                        }
-
-                        @Override
-                        public void listsAction(KeyEvent e, boolean[] matches) {
-                              System.out.println("Matches length: " + matches.length);
-                              JTextField tf = (JTextField) e.getComponent();
-                              if (matches[0] || matches[1]) {
-                                    tf.setForeground(Color.RED);
-                              } else if (!matches[0] && !matches[1]) {
-                                    tf.setForeground(Color.WHITE);
-                              }
-
-                              if (matches[2]) {
-                                    headers[1].setForeground(Color.RED);
-                                    headers[1].setText("Same Column Detected");
-                              } else {
-                                    headers[1].setForeground(Color.WHITE);
-                                    headers[1].setText("Names");
-                              }
-                        }
-
-                  });
-                  mtf.addList(DTSQL.getBandWE_mysql(), MTF_Control3.EQUAL_MATCH);
-                  mtf.addList(DTSQL.getBandWC_mysql(), MTF_Control3.CONTAIN_MATCH);
-                  mtf.addList(list_C, MTF_Control3.DUPLICATED_ELEMENTS);
-                  mtf.setMinusIndex(2, a);
-
-                  tfs[a].addKeyListener(mtf);
-                  //tfs[a].addKeyListener(new MTF_Control2(DTSQL.getBandWE_mysql(), MTF_Control.CONTAIN_MATCH,
-                  //      new TFS_KL_ABandWords()));
-                  //tfs[a].addKeyListener(new MTF_Control2(VC_R2.getList_C(), MTF_Control.DUPLICATED_ELEMENTS, 
-                  //      new TFS_KL_ASameColumns(a + 1)));
-                  btns_m[a].addActionListener(btnAC);
-                  btns_p[a].addActionListener(btnAC);
-                  combsTypes[a].addItemListener(cbListener1);
-                  btns_Dist[a].addActionListener(btnDis);
-                  btns_Dist[a].setActionCommand("BTNS_DIST_" + (a + 1));
-                  btns_Dist2[a].setActionCommand("BTNS_DIST2_" + (a + 1));
-                  btns_Tag[a].addActionListener(btnDis);
-                  btns_ImageC[a].addActionListener(btnDis);
-                  btns_Clock[a].addActionListener(btnDis);
-                  rbsPK[a].addActionListener(rbPKListener);
+                  setListeners(a);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
                   panelsExtra[a].setOpaque(true);
                   //+++++++++++++++++++++++++++++++++++++++++++++++
@@ -273,8 +243,86 @@ public class VC_R2 extends VC_R_DataCom {
             //========================================
             btns_m[0].setEnabled(false);
             btns_p[DT.maxColumns - 1].setEnabled(false);
-            headers[8].setForeground(Color.GRAY);
+            headers[10].setForeground(Color.GRAY);//DIST2
+      }
 
+      private void setNames(int a) {
+            lbs[a].setName("LB_" + (a + 1));
+            lbOrigText[a] = "Column " + (a + 1);
+            tfs[a].setName("TF_" + (a + 1));
+            btns_m[a].setName("BTN_M_" + (a + 1));
+            btns_p[a].setName("BTN_P_" + (a + 1));
+            combsTypes[a].setName("COMBTYPE_" + (a + 1));
+            checkbsNull[a].setName("CHECKBNULL_" + (a + 1));
+            rbsPK[a].setName("RBPK_" + (a + 1));
+            panelsDefaults[a].setName("PANEL_D_" + (a + 1));
+            tfsDefaults[a].setName("TFD_" + (a + 1));
+            panelsExtra[a].setName("PANEL_EX_" + (a + 1));
+            btns_Dist[a].setName("BTN_DIST_" + (a + 1));
+            btns_Dist2[a].setName("BTN_DIST2_" + (a + 1));
+            btns_ImageC[a].setName("BTN_IMAGEC_ " + (a + 1));
+            btns_Tag[a].setName("BTN_TAG_" + (a + 1));
+            btns_Clock[a].setName("BTN_CLOCK_ " + (a + 1));
+      }
+
+      private void setSizes(int a) {
+            tfs[a].setMinimumSize(new Dimension(200, 27));
+            panelsExtra[a].setMinimumSize(new Dimension(40, 27));
+            //panelTypes2[a].setPreferredSize(new Dimension(40, 27));
+            panelsExtra[a].setMaximumSize(new Dimension(320, 27));
+            tfsDefaults[a].setMinimumSize(new Dimension(100, 27));
+            tfsDefaults[a].setPreferredSize(new Dimension(100, 27));
+      }
+
+      private void setListeners(int a) {
+            MTF_Control3 mtf = new MTF_Control3(new TFS_KControl());
+            mtf.addList(DTSQL.getBandWE_mysql(), MTF_Control3.EQUAL_MATCH);
+            mtf.addList(DTSQL.getBandWC_mysql(), MTF_Control3.CONTAIN_MATCH);
+            mtf.addList(list_C, MTF_Control3.DUPLICATED_ELEMENTS);
+            mtf.setMinusIndex(2, a);
+
+            tfs[a].addKeyListener(mtf);
+            MBTN_Control mbtn = new MBTN_Control(null, new IKeyMatchActions3() {
+
+                  @Override
+                  public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
+                        TFS_KControl.updateListC();
+                        return new UpdateList(0, list_C);
+                  }
+
+                  @Override
+                  public void listsAction(EventObject e, boolean[] matches) {
+                        if (matches[0]) {
+                              headers[1].setForeground(Color.RED);
+                              headers[1].setText("Same Column Detected");
+                        } else {
+                              headers[1].setForeground(Color.WHITE);
+                              headers[1].setText("Names");
+                        }
+                  }
+
+            });
+            mbtn.addList(list_C, MTXControlData.DUPLICATED_ELEMENTS);
+
+            btns_m[a].addActionListener(mbtn);
+            btns_m[a].addActionListener(btnAC);
+            btns_p[a].addActionListener(mbtn);
+            btns_p[a].addActionListener(btnAC);
+            combsTypes[a].addItemListener(cbListener1);
+            btns_Dist[a].addActionListener(btnDis);
+            btns_Dist[a].setActionCommand("BTNS_DIST_" + (a + 1));
+            btns_Dist2[a].setActionCommand("BTNS_DIST2_" + (a + 1));
+            btns_Tag[a].addActionListener(btnDis);
+            btns_ImageC[a].addActionListener(btnDis);
+            btns_Clock[a].addActionListener(btnDis);
+            rbsPK[a].addActionListener(rbPKListener);
+
+      }
+
+      private void defaultPanels() {
+            for (int a = 0; a < DT.maxColumns; a++) {
+                  rbDefaults[a] = (JRadioButton) panelsDefaults[a].getComponent(0);
+            }
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++
@@ -297,12 +345,14 @@ public class VC_R2 extends VC_R_DataCom {
             tf_Title.setPreferredSize(new Dimension(tf_Title.getPreferredSize().width, 27));
             tf_Title.setMaximumSize(new Dimension(Short.MAX_VALUE, 27));
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            MTF_Control3 mtf = new MTF_Control3(new Table_KControl());
+
+            MTF_Control3 mtf = new MTF_Control3(new Table_KControlException());
             mtf.addList(DTSQL.getBandWE_mysql(), MTF_Control3.EQUAL_MATCH);
             mtf.addList(DTSQL.getBandWC_mysql(), MTF_Control3.CONTAIN_MATCH);
             mtf.addList(DT.getList_T(), MTF_Control3.EQUAL_MATCH);
 
             tf_Title.addKeyListener(mtf);
+
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             JPU.add(Box.createHorizontalStrut(10));
       }
@@ -314,12 +364,17 @@ public class VC_R2 extends VC_R_DataCom {
             sc_JPC.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
             sc_JPC.setBorder(new LineBorder(Color.WHITE, 1));
 
-            componentsConfig();
+            beforeComponentsConfig();
             //+++++++++++++++++++++++++++++++++++++
             GroupLayout gl = new GroupLayout(JPC);
             JPC.setLayout(gl);
+            /*
+            "Cols Number", 
+            "Field", "Sub", "Add", "Type", "Null", "Key", "Default", "Extra",
+            "Dist1", "Dist2", "ImageC", "Tag", "Clock"
+             */
             JComponent[] comps = new JComponent[]{
-                  lb, tf, btn_m, btn_p, combTypes, checkbNulls, panelExtra, rbPK,
+                  lb, tf, btn_m, btn_p, combTypes, checkbNulls, rbPK, panelDefault, panelExtra,
                   btn_Dist, btn_Dist2, btn_ImageC, btn_Tag, btn_Clock};
             MLayout.setSerializationExceptionAction(new SerializationExceptionAction() {
                   @Override
@@ -341,7 +396,7 @@ public class VC_R2 extends VC_R_DataCom {
             compsD = MLayout.lineSequenceYClone(gl, headers, comps, DT.maxColumns);
       }
 
-      private void JPBConfig(String text) {
+      private void JPBConfig(String choice) {
             JF.add(JPB, BorderLayout.SOUTH);
             JPB.setBackground(Color.BLACK);
             JPB.setBorder(new LineBorder(Color.WHITE, 1));
@@ -359,8 +414,9 @@ public class VC_R2 extends VC_R_DataCom {
 
             JPB.add(Box.createHorizontalStrut(6));
             JPB.add(btn_CU);
-            btn_CU.setText(text);
+            btn_CU.setText(choice);
             btn_CU.setMinimumSize(new Dimension(60, 28));
+            btn_CU.addActionListener(new BTN_CU_AL(choice));
             JPB.add(Box.createHorizontalStrut(10));
       }
 

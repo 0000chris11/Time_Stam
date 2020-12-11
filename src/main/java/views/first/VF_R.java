@@ -1022,7 +1022,6 @@ public class VF_R extends VF_R_DataCom {
                         } else {
                               SPL_SUB.setDividerLocation(1.0);
                         }
-                        System.out.println("REVALIDATE!!!!!!!!!!!!!!!!!!");
                         SPL.revalidate();
                         SPL_SUB.revalidate();
 

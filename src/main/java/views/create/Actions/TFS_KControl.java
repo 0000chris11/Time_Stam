@@ -6,8 +6,8 @@
 package views.create.Actions;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.EventObject;
 import javax.swing.JTextField;
 import views.create.VC_R2;
 import views.create.mTFControl.IKeyMatchActions3;
@@ -26,9 +26,8 @@ public class TFS_KControl extends IKeyMatchActions3 {
       }
 
       @Override
-      public void listsAction(KeyEvent e, boolean[] matches) {
-            System.out.println("Matches length: " + matches.length);
-            JTextField tf = (JTextField) e.getComponent();
+      public void listsAction(EventObject e, boolean[] matches) {
+            JTextField tf = (JTextField) e.getSource();
             if (matches[0] || matches[1]) {
                   tf.setForeground(Color.RED);
             } else if (!matches[0] && !matches[1]) {

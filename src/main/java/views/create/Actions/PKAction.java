@@ -19,9 +19,9 @@ public class PKAction implements SelectionAction{
       public void action(int index) {
             VC_R2.setRB_PKSelected(index + 1);
             if(index > -1){
-                  VC_R2.getHeaders()[7].setForeground(Color.YELLOW);
+                  VC_R2.getHeaders()[6].setForeground(Color.YELLOW);
             }else{
-                  VC_R2.getHeaders()[7].setForeground(Color.WHITE);
+                  VC_R2.getHeaders()[6].setForeground(Color.WHITE);
             }
       }
       

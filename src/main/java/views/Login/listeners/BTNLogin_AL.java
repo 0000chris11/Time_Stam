@@ -38,7 +38,7 @@ public class BTNLogin_AL implements ActionListener {
             //System.out.println("User SelectedItem: " + selected);
             int countB = 0;
             if (!selectedUser.isEmpty()
-                    && MOthers.getContainMatchFromStringToList(selectedUser, VL.getUserData())) {
+                    && MOthers.getEqualMatchFromStringToList(selectedUser, VL.getUserData(), -1, true)) {
                   VL.getLBUser().setForeground(Color.WHITE);
                   VL.getLBUser().setText("User");
                   countB++;
@@ -48,7 +48,7 @@ public class BTNLogin_AL implements ActionListener {
             }
 
             if (!selectedDB.isEmpty()
-                    && MOthers.getContainMatchFromStringToList(selectedDB, VL.getDBData())) {
+                    && MOthers.getEqualMatchFromStringToList(selectedDB, VL.getDBData(), -1, true)) {
                   VL.getLBDB().setForeground(Color.WHITE);
                   VL.getLBDB().setText("Database");
                   countB++;

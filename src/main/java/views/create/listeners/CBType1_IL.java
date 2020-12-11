@@ -25,8 +25,8 @@ public class CBType1_IL implements ItemListener {
             Color foreg = Color.WHITE;
             Color selec = Color.BLUE;
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (e.getSource() == VC_R2.getCombTypes1()[a]) {
-                        if (VC_R2.getCombTypes1()[a].getSelectedItem().toString().equals("INT")) {
+                  if (e.getSource() == VC_R2.getCombTypes()[a]) {
+                        if (VC_R2.getCombTypes()[a].getSelectedItem().toString().equals("INT")) {
                               enabled = true;
                               foreg = Color.WHITE;
                               selec = Color.BLUE;

@@ -5,8 +5,8 @@
  */
 package views.create.mTFControl;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.EventObject;
 
 /**
  *
@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public abstract class IKeyMatchActions3 {
       
-      public void beforeActions(KeyEvent e) {}
+      public void beforeActions(EventObject e) {}
       //++++++++++++++++++++++++++++++++++++++++++++
-      public abstract void listsAction(KeyEvent e, boolean[] matches);
+      public abstract void listsAction(EventObject e, boolean[] matches);
       //++++++++++++++++++++++++++++++++++++++++++++
       public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
             return new UpdateList(listID, list);

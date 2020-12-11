@@ -19,21 +19,26 @@ import views.create.Actions.TFS_KControl;
  *
  * @author C0FII
  */
-public class BTN_MP_AL implements ActionListener{
+public class BTN_MP_AL implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            for(int row = 0; row < DT.maxColumns - 1; row++){
+            for (int row = 0; row < DT.maxColumns - 1; row++) {
                   //SUB
-                  if(e.getSource() == VC_R2.getBTNS_M()[row + 1]){//FIRST ONE ALLWAYS DISABLED
-                        for(int col = 0; col < VC_R2.getCompsD()[row].length; col++){
-                              
+                  if (e.getSource() == VC_R2.getBTNS_M()[row + 1]) {//FIRST ONE ALLWAYS DISABLED
+                        for (int col = 0; col < VC_R2.getCompsD()[row].length; col++) {
+
                               JComponent JC = VC_R2.getCompsD()[row + 2][col];
                               JC.setVisible(false);
-                              if(JC instanceof JTextField){
-                                    ((JTextField) JC).setText("");
-                                    JC.setForeground(Color.WHITE);
-                              }else if(JC instanceof JLabel){
+                              if (JC instanceof JTextField) {
+                                    if (JC.getName().contains("TF_")) {
+                                          ((JTextField) JC).setText("");
+                                          JC.setForeground(Color.WHITE);
+                                    }else{
+                                          ((JTextField) JC).setText("NULL");
+                                          JC.setForeground(Color.GRAY);
+                                    }
+                              } else if (JC instanceof JLabel) {
                                     ((JLabel) JC).setText("Column " + (row + 2));
                                     JC.setForeground(Color.WHITE);
                               }
@@ -42,17 +47,17 @@ public class BTN_MP_AL implements ActionListener{
                         VC_R2.getBTNS_P()[row].setVisible(true);
                   }
                   //ADD
-                  if(e.getSource() == VC_R2.getBTNS_P()[row]){//LAST ONE ALLWAYS DISABLED
-                        for(int col = 0; col < VC_R2.getCompsD()[row].length; col++){
+                  if (e.getSource() == VC_R2.getBTNS_P()[row]) {//LAST ONE ALLWAYS DISABLED
+                        for (int col = 0; col < VC_R2.getCompsD()[row].length; col++) {
                               VC_R2.getCompsD()[row + 2][col].setVisible(true);
                         }
                         VC_R2.getBTNS_M()[row].setVisible(false);
                         VC_R2.getBTNS_P()[row].setVisible(false);
-                        
+
                   }
             }
-            
+
             TFS_KControl.updateListC();
       }
-      
+
 }

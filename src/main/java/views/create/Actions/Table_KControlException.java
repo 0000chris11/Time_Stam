@@ -6,7 +6,7 @@
 package views.create.Actions;
 
 import java.awt.Color;
-import java.awt.event.KeyEvent;
+import java.util.EventObject;
 import views.create.VC_R2;
 import views.create.mTFControl.IKeyMatchActions3;
 
@@ -14,11 +14,10 @@ import views.create.mTFControl.IKeyMatchActions3;
  *
  * @author C0FII
  */
-public class Table_KControl extends IKeyMatchActions3 {
-
+public class Table_KControlException extends IKeyMatchActions3 {
+      
       @Override
-      public void listsAction(KeyEvent e, boolean[] matches) {
-            System.out.println("Matches length: " + matches.length);
+      public void listsAction(EventObject e, boolean[] matches) {
             if (matches[0] || matches[1]) {
                   VC_R2.getTF_Title().setForeground(Color.RED);
             } else if (!matches[0] && !matches[1]) {

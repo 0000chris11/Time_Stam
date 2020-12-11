@@ -104,10 +104,10 @@ public class BTN_Dists implements ActionListener {
       private void imageCClockAction(ActionEvent e) {
             String name = ((JComponent) e.getSource()).getName();
             try {
-                  if (name.contains("btns_ImageC")) {
+                  if (name.contains("BTN_IMAGEC")) {
                         VC_R2.setBTN_ImageCSelected(MComp.setButtonGroup(e,
                                 VC_R2.getBTNS_ImageC()));
-                  } else if (name.contains("btns_Clock")) {
+                  } else if (name.contains("BTN_CLOCK")) {
                         VC_R2.setBTN_ClockSelected(MComp.setButtonGroup(e,
                                 VC_R2.getBTNS_Clock()));
                   }
