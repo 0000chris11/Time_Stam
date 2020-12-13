@@ -12,7 +12,7 @@ import java.util.EventObject;
  *
  * @author C0FII
  */
-public abstract class IKeyMatchActions3 {
+public abstract class AKeyMatchActions3 {
       
       public void beforeActions(EventObject e) {}
       //++++++++++++++++++++++++++++++++++++++++++++

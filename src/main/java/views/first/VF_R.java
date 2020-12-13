@@ -8,7 +8,7 @@ import static views.first.VF_R_DataCom.lb_Status;
 import smallComponenets.smallLB;
 import MC.DT;
 import MC.CompReset;
-import MC.LK;
+import MC.LK_F;
 import MC.notMyMethods;
 import views.first.listeners.MainListeners_F;
 import views.first.listeners.JTChanged_AL;
@@ -181,7 +181,7 @@ public class VF_R extends VF_R_DataCom {
             Font f = JT.getFont();
 
             tf_ce.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
-            tf_ce.setBorder(LK.BR_LINEMARIGIN_FOCUS_OFF);
+            tf_ce.setBorder(LK_F.BR_LINEMARIGIN_FOCUS_OFF);
             tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
@@ -549,7 +549,7 @@ public class VF_R extends VF_R_DataCom {
             JT.setGridColor(Color.GRAY);
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JT.setRowSelectionAllowed(true);
-            JT.setSelectionBackground(LK.BK_DIST2);
+            JT.setSelectionBackground(LK_F.BK_DIST2);
             //JT.setPreferredScrollableViewportSize();
             //JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
             //System.out.println("PT size: " + PT.getSize());
@@ -584,15 +584,15 @@ public class VF_R extends VF_R_DataCom {
                   JTextField SD = tfs_SD[a];
                   JTextField SU = tfs_SU[a];
                   //++++++++++++++++++++++++++++++++++++++++++++
-                  MD.setBackground(LK.BK_NORMAL);
-                  MU.setBackground(LK.BK_NORMAL);
-                  SD.setBackground(LK.BK_NORMAL);
-                  SU.setBackground(LK.BK_NORMAL);
-                  MD.setFont(LK.FONT_NORMAL);
-                  MU.setFont(LK.FONT_NORMAL);
-                  LB2D.setFont(LK.FONT_NORMAL);
-                  SD.setFont(LK.FONT_NORMAL);
-                  SU.setFont(LK.FONT_NORMAL);
+                  MD.setBackground(LK_F.BK_NORMAL);
+                  MU.setBackground(LK_F.BK_NORMAL);
+                  SD.setBackground(LK_F.BK_NORMAL);
+                  SU.setBackground(LK_F.BK_NORMAL);
+                  MD.setFont(LK_F.FONT_NORMAL);
+                  MU.setFont(LK_F.FONT_NORMAL);
+                  LB2D.setFont(LK_F.FONT_NORMAL);
+                  SD.setFont(LK_F.FONT_NORMAL);
+                  SU.setFont(LK_F.FONT_NORMAL);
                   MD.setForeground(Color.WHITE);
                   MU.setForeground(Color.WHITE);
                   LB2D.setForeground(Color.WHITE);
@@ -729,7 +729,7 @@ public class VF_R extends VF_R_DataCom {
                   tfs[a] = new smallTF();
 
                   tfsE[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
-                  tfsE[a].setBackground(LK.BK_NORMAL);
+                  tfsE[a].setBackground(LK_F.BK_NORMAL);
                   //tfs[a].putClientProperty("TextField.focus", Color.BLACK);
 
                   tfs_MD[a] = new smallTF("0");
@@ -1007,10 +1007,10 @@ public class VF_R extends VF_R_DataCom {
                               Logger.getLogger(VF_R.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         tfsE[1].putClientProperty("TextField.highlight", Color.RED);
-                        JF.setSize(LK.MAIN_FRAME_SIZE);
+                        JF.setSize(LK_F.MAIN_FRAME_SIZE);
                         MComp.setFrameToCenterOfScreen(JF);
-                        SPL.setSize(LK.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
-                        SPL_SUB.setSize(LK.MAIN_FRAME_SIZE);
+                        SPL.setSize(LK_F.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
+                        SPL_SUB.setSize(LK_F.MAIN_FRAME_SIZE);
 
                         SPL.setDividerLocation(0.4);
                         if (DT.getImageC() != null) {

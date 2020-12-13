@@ -18,9 +18,9 @@ import javax.swing.border.TitledBorder;
  *
  * @author C0FII
  */
-public class LK {
+public class LK_F {
       
-      private LK(){
+      private LK_F(){
             throw new IllegalStateException("Private Constructor");
       }
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

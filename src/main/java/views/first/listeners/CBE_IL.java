@@ -5,7 +5,7 @@
  */
 package views.first.listeners;
 
-import MC.LK;
+import MC.LK_F;
 import com.cofii.myMethods.MComp;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -29,9 +29,9 @@ public class CBE_IL implements ItemListener{
       @Override
       public void itemStateChanged(ItemEvent e) {
             int index = MComp.getLastDigitCharsCountAtEnd(CB.getName()) - 1;
-            if(TFE.getBackground().equals(LK.BK_DIST1)){
+            if(TFE.getBackground().equals(LK_F.BK_DIST1)){
                   //CB.add
-            }else if(TFE.getBackground().equals(LK.BK_DIST2)){
+            }else if(TFE.getBackground().equals(LK_F.BK_DIST2)){
                   
             }
       }

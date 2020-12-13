@@ -6,7 +6,7 @@
 package smallComponenets;
 
 import MC.DT;
-import MC.LK;
+import MC.LK_F;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -36,7 +36,7 @@ public class smallCOMBX extends JComboBox {
             //setOpaque(false);
             Font f = new Font("Dialog", Font.BOLD, 16);
             setBorder(new EmptyBorder(1, 3, 1, 3));
-            setBackground(LK.BK_NORMAL);
+            setBackground(LK_F.BK_NORMAL);
             setForeground(Color.WHITE);
             setFont(f);
       }
@@ -44,7 +44,7 @@ public class smallCOMBX extends JComboBox {
       public smallCOMBX(){
             Font f = new Font("Dialog", Font.BOLD, 16);
             setBorder(new EmptyBorder(1, 3, 1, 3));
-            setBackground(LK.BK_NORMAL);
+            setBackground(LK_F.BK_NORMAL);
             setForeground(Color.WHITE);
             setFont(f);
       }

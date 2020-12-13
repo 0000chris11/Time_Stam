@@ -4,9 +4,18 @@ import com.cofii.myClasses.CC;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import views.create.VC_R2;
 
 public class DT {
 
+      static VC_R2 VC;
+      public static VC_R2 getVC_R2(){
+            return VC;
+      }
+      public static void setVC_R2(VC_R2 vc){
+            VC = vc;
+      }
+      
       private static String Id;
       private static String Old_id;
       private static String Table;

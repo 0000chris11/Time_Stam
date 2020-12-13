@@ -8,28 +8,32 @@ package views.create.Actions;
 import java.awt.Color;
 import java.util.EventObject;
 import views.create.VC_R2;
-import views.create.mTFControl.IKeyMatchActions3;
+import views.create.VC_R_DataCom;
+import views.create.mTFControl.AKeyMatchActions3;
+import views.first.listeners.MITableOptions_AL;
 
 /**
  *
  * @author C0FII
  */
-public class Table_KControlException extends IKeyMatchActions3 {
+public class Table_KControlException extends AKeyMatchActions3 {
+      
+      VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
       
       @Override
       public void listsAction(EventObject e, boolean[] matches) {
             if (matches[0] || matches[1]) {
-                  VC_R2.getTF_Title().setForeground(Color.RED);
+                  dt.getTF_Title().setForeground(Color.RED);
             } else if (!matches[0] && !matches[1]) {
-                  VC_R2.getTF_Title().setForeground(Color.WHITE);
+                  dt.getTF_Title().setForeground(Color.WHITE);
             }
 
             if (matches[2]) {
-                  VC_R2.getLB_Title().setForeground(Color.RED);
-                  VC_R2.getLB_Title().setText("This table already exist");
+                  dt.getLB_Title().setForeground(Color.RED);
+                  dt.getLB_Title().setText("This table already exist");
             } else {
-                  VC_R2.getLB_Title().setForeground(Color.WHITE);
-                  VC_R2.getLB_Title().setText(VC_R2.getLB_TitleOrigText());
+                  dt.getLB_Title().setForeground(Color.WHITE);
+                  dt.getLB_Title().setText(dt.getLB_TitleOrigText());
             }
       }
 

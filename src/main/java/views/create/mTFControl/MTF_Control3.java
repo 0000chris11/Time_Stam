@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  */
 public class MTF_Control3 extends MTXControlData implements KeyListener {
 
-      public MTF_Control3(IKeyMatchActions3 ac) {
+      public MTF_Control3(AKeyMatchActions3 ac) {
             this.ac = ac;
       }
 

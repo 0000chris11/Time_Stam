@@ -11,10 +11,11 @@ import com.cofii.myMethods.MComp;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import views.create.VC_R_DataCom;
+import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -22,6 +23,8 @@ import javax.swing.JLabel;
  */
 public class BTN_Dists implements ActionListener {
 
+      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      
       @Override
       public void actionPerformed(ActionEvent e) {
             imageCClockAction(e);
@@ -32,16 +35,16 @@ public class BTN_Dists implements ActionListener {
             //int colClock = -1;
 
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VC_R2.getBTNS_Dist()[a].isSelected()) {
+                  if (dt.getBTNS_Dist()[a].isSelected()) {
                         colsDist.add(a);
                   }
-                  if (VC_R2.getBTNS_Tag()[a].isSelected()) {
+                  if (dt.getBTNS_Tag()[a].isSelected()) {
                         colsTag.add(a);
                   }
             }
             //++++++++++++++++++++++++++++++++++++++++++
-            int clockN = VC_R2.getBTN_ClockSelected();
-            int imageCN = VC_R2.getBTN_ImageCSelected();
+            int clockN = dt.getBTN_ClockSelected();
+            int imageCN = dt.getBTN_ImageCSelected();
 
             String dist = getOutput(colsDist);
             String tag = getOutput(colsTag);
@@ -50,18 +53,18 @@ public class BTN_Dists implements ActionListener {
 
             //INPUT FOR FOLDER LOCATION (IMAGEC)
             if (imageCN > 0) {
-                  VC_R2.getBoxImageC().setVisible(true);
-                  VC_R2.getLB_ClockLocation().setVisible(true);
+                  dt.getBoxImageC().setVisible(true);
+                  dt.getLB_ClockLocation().setVisible(true);
                   //VC_R2.getPR().paintComponents(VC_R2.getPR().getGraphics());
             } else {
-                  VC_R2.getBoxImageC().setVisible(false);
-                  VC_R2.getLB_ClockLocation().setVisible(false);
+                  dt.getBoxImageC().setVisible(false);
+                  dt.getLB_ClockLocation().setVisible(false);
             }
 
-            setLB(VC_R2.getLB_ADisp()[0], dist);
-            setLB(VC_R2.getLB_ADisp()[3], tag);
-            setLB(VC_R2.getLB_ADisp()[2], imageC);
-            setLB(VC_R2.getLB_ADisp()[4], clock);
+            setLB(dt.getLB_ADisp()[0], dist);
+            setLB(dt.getLB_ADisp()[3], tag);
+            setLB(dt.getLB_ADisp()[2], imageC);
+            setLB(dt.getLB_ADisp()[4], clock);
             //+++++++++++++++++++++++++++++++++++
             clockDistControl(e);
       }
@@ -105,11 +108,11 @@ public class BTN_Dists implements ActionListener {
             String name = ((JComponent) e.getSource()).getName();
             try {
                   if (name.contains("BTN_IMAGEC")) {
-                        VC_R2.setBTN_ImageCSelected(MComp.setButtonGroup(e,
-                                VC_R2.getBTNS_ImageC()));
+                        dt.setBTN_ImageCSelected(MComp.setButtonGroup(e,
+                                dt.getBTNS_ImageC()));
                   } else if (name.contains("BTN_CLOCK")) {
-                        VC_R2.setBTN_ClockSelected(MComp.setButtonGroup(e,
-                                VC_R2.getBTNS_Clock()));
+                        dt.setBTN_ClockSelected(MComp.setButtonGroup(e,
+                                dt.getBTNS_Clock()));
                   }
             } catch (NullPointerException ex) {
             }
@@ -118,11 +121,12 @@ public class BTN_Dists implements ActionListener {
       //+++++++++++++++++++++++++++++++++++++++++++++
       private void clockDistControl(ActionEvent e) {
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (e.getActionCommand().equals(VC_R2.getBTNS_Dist()[a].getActionCommand())) {
-                        if (VC_R2.getBTNS_Dist()[a].isSelected()) {
-                              VC_R2.getBTNS_Clock()[a].setEnabled(false);
+                  JComponent JC = (JComponent) e.getSource();
+                  if (JC.getName().equals(dt.getBTNS_Dist()[a].getName())) {
+                        if (dt.getBTNS_Dist()[a].isSelected()) {
+                              dt.getBTNS_Clock()[a].setEnabled(false);
                         }else{
-                              VC_R2.getBTNS_Clock()[a].setEnabled(true);
+                              dt.getBTNS_Clock()[a].setEnabled(true);
                         }
                   }
             }

@@ -6,7 +6,7 @@
 package views.first.listeners;
 
 import MC.DT;
-import MC.LK;
+import MC.LK_F;
 import com.cofii.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -66,14 +66,14 @@ public class TF_KL_Custom implements KeyListener {
             if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP)
                     && !e.isControlDown() && !e.isShiftDown()) {
                   System.out.println("Change CB");
-                  if (TF.getBackground().equals(LK.BK_DIST1)) {
+                  if (TF.getBackground().equals(LK_F.BK_DIST1)) {
                         if (CB.getSelectedItem() != null) {
                               int cbIndex = CB.getComponentPopupMenu().getSelectionModel().getSelectedIndex();
                               
                               String text = CB.getItemAt(cbIndex).toString();
                               TF.setText(text);
                         }
-                  } else if (TF.getBackground().equals(LK.BK_DIST2)) {
+                  } else if (TF.getBackground().equals(LK_F.BK_DIST2)) {
                         if (CB.getSelectedItem() != null) {
                               String text = CB.getSelectedItem().toString();
                               System.out.println("\tSelected Item: " + text);

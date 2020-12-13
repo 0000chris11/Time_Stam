@@ -7,6 +7,8 @@ package views.create.Actions;
 
 import java.awt.Color;
 import views.create.VC_R2;
+import views.create.VC_R_DataCom;
+import views.first.listeners.MITableOptions_AL;
 
 
 /**
@@ -15,13 +17,15 @@ import views.create.VC_R2;
  */
 public class PKAction implements SelectionAction{
 
+      VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      
       @Override
       public void action(int index) {
-            VC_R2.setRB_PKSelected(index + 1);
+            dt.setRB_PKSelected(index + 1);
             if(index > -1){
-                  VC_R2.getHeaders()[6].setForeground(Color.YELLOW);
+                  dt.getHeaders()[6].setForeground(Color.YELLOW);
             }else{
-                  VC_R2.getHeaders()[6].setForeground(Color.WHITE);
+                  dt.getHeaders()[6].setForeground(Color.WHITE);
             }
       }
       

@@ -6,9 +6,6 @@
 package views.create.listeners;
 
 import views.create.VC_R2;
-import MC.DT;
-import MC.DTSQL;
-import com.cofii.myMethods.MOthers;
 import com.cofii.myMethods.MOthers.Result;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -16,14 +13,17 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
+import views.create.VC_R_DataCom;
+import views.first.listeners.MITableOptions_AL;
 
 /**
  *
  * @author C0FII
  */
 public class TF_KL_Control implements KeyListener {
+      
+      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
 
       @Override
       public void keyTyped(KeyEvent e) {
@@ -49,7 +49,7 @@ public class TF_KL_Control implements KeyListener {
             }
 
             ArrayList<Result> resSC = getEqualsMatchAndPositionFromArray(
-                    VC_R2.getTFS(), true);
+                    dt.getTFS(), true);
 
             //ArrayList<Integer> A = (ArrayList<Integer>) resSC[1];
             //ArrayList<Integer> B = (ArrayList<Integer>) resSC[2];
@@ -58,17 +58,17 @@ public class TF_KL_Control implements KeyListener {
                   if (x.match == true) {
                         bool_SC = true;
                         System.out.println("\tColumn " + (x.a + 1) + " & " + (x.b + 1) + " Match");
-                        VC_R2.getLBS()[x.a].setForeground(Color.RED);
-                        VC_R2.getLBS()[x.a].setText("Same Name");
-                        VC_R2.getLBS()[x.b].setForeground(Color.RED);
-                        VC_R2.getLBS()[x.b].setText("Same Name");
+                        dt.getLBS()[x.a].setForeground(Color.RED);
+                        dt.getLBS()[x.a].setText("Same Name");
+                        dt.getLBS()[x.b].setForeground(Color.RED);
+                        dt.getLBS()[x.b].setText("Same Name");
                   } else {
                         if (bool_SC != true) {
                               System.out.println("\tColumn " + (x.a + 1) + " & " + (x.b + 1) + " Unmatch");
-                              VC_R2.getLBS()[x.a].setForeground(Color.WHITE);
-                              VC_R2.getLBS()[x.a].setText(VC_R2.getLBOrigTexts()[x.a]);
-                              VC_R2.getLBS()[x.b].setForeground(Color.WHITE);
-                              VC_R2.getLBS()[x.b].setText(VC_R2.getLBOrigTexts()[x.b]);
+                              dt.getLBS()[x.a].setForeground(Color.WHITE);
+                              dt.getLBS()[x.a].setText(dt.getLBOrigTexts()[x.a]);
+                              dt.getLBS()[x.b].setForeground(Color.WHITE);
+                              dt.getLBS()[x.b].setText(dt.getLBOrigTexts()[x.b]);
                         }
 
                   }

@@ -20,7 +20,7 @@ public class MBTN_Control extends MTXControlData implements ActionListener {
 
       private String text;
 
-      public MBTN_Control(String text, IKeyMatchActions3 ac) {
+      public MBTN_Control(String text, AKeyMatchActions3 ac) {
             this.ac = ac;
             this.text = text;
       }

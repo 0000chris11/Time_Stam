@@ -1,7 +1,7 @@
 package views.first;
 
 import MC.DT;
-import MC.LK;
+import MC.LK_F;
 import com.cofii.myMethods.MCell;
 import java.awt.Color;
 import java.awt.Graphics;

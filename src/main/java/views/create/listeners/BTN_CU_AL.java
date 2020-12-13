@@ -20,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import views.create.VC_R_DataCom;
+import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -27,6 +29,8 @@ import javax.swing.JTextField;
  */
 public class BTN_CU_AL implements ActionListener {
 
+      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      
       private String Choice;
       private int countO = -1;
 
@@ -55,44 +59,44 @@ public class BTN_CU_AL implements ActionListener {
             int countV = 0;
             //HOW MANY COLS ARE VISIBLE
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VC_R2.getTFS()[a].isVisible()) {
+                  if (dt.getTFS()[a].isVisible()) {
                         countV++;
                   }
             }
             System.out.println("'Columns Visible: " + countV);
 
             TFSControl(countV);
-            boolean tableMatch = tableControl(VC_R2.getTF_Title().getText());
+            boolean tableMatch = tableControl(dt.getTF_Title().getText());
 
             if (countV == countO && tableMatch == false) {
                   System.out.println("\tColumns and table = OK");
                   //GETTING VALUES TO CREATE THE TABLE++++++++++++++++++++++
-                  String table = VC_R2.getTF_Title().getText();
+                  String table = dt.getTF_Title().getText();
                   String[] colNames = new String[countV];
                   String[] types = new String[countV];
                   boolean[] nulls = new boolean[countV];
 
                   for (int a = 0; a < countV; a++) {
-                        colNames[a] = VC_R2.getTFS()[a].getText();
-                        types[a] = VC_R2.getCombTypes()[a].getSelectedItem().toString();
-                        nulls[a] = VC_R2.getCheckbNulls()[a].isSelected();
+                        colNames[a] = dt.getTFS()[a].getText();
+                        types[a] = dt.getCombTypes()[a].getSelectedItem().toString();
+                        nulls[a] = dt.getCheckbNulls()[a].isSelected();
                   }
 
-                  int extraCol = VC_R2.getRB_ExtraSelected();
+                  int extraCol = dt.getRB_ExtraSelected();
                   String extraValue = null;
                   if (extraCol > 0) {
-                        extraValue = VC_R2.getCombTypes2()[extraCol - 1].getSelectedItem().toString();
+                        extraValue = dt.getCombTypes2()[extraCol - 1].getSelectedItem().toString();
                         //IF IS IDENTITY
-                        if (VC_R2.getCombTypes2()[extraCol - 1].getSelectedIndex() == 1) {
-                              extraValue += "(" + VC_R2.getTFSTypes1()[extraCol - 1].getText()
-                                      + ", " + VC_R2.getTFSTypes2()[extraCol - 1].getText() + ")";
+                        if (dt.getCombTypes2()[extraCol - 1].getSelectedIndex() == 1) {
+                              extraValue += "(" + dt.getTFSTypes1()[extraCol - 1].getText()
+                                      + ", " + dt.getTFSTypes2()[extraCol - 1].getText() + ")";
                         }
                   }
 
-                  int pkIndex = VC_R2.getRB_PKSelected();
+                  int pkIndex = dt.getRB_PKSelected();
                   String pkCol = null;
                   if (pkIndex > 0) {
-                        pkCol = colNames[VC_R2.getRB_PKSelected() - 1];
+                        pkCol = colNames[dt.getRB_PKSelected() - 1];
                   }
                   //==============================================
                   /*
@@ -119,16 +123,16 @@ public class BTN_CU_AL implements ActionListener {
                   
                   ms.createTable(table,
                           colNames, types, nulls, extraCol, extraValue, pkCol,
-                          new Update("CreateTable", VC_R2.getLB_Status()));
+                          new Update("CreateTable", dt.getLB_Status()));
                    
                   //==============================================        
                   //INSERT TABLE ON MAINTTABLES++++++++++++++++++++++++++
                   Object[] newValues = new Object[]{null, table,
-                        VC_R2.getLB_ADisp()[0].getText(),//DIST1
-                        VC_R2.getLB_ADisp()[1].getText(),//DIST2
-                        VC_R2.getLB_ADisp()[2].getText(),//IMAGEC
-                        VC_R2.getLB_ADisp()[3].getText(),//TAG
-                        VC_R2.getLB_ADisp()[4].getText()};//CLOCK
+                        dt.getLB_ADisp()[0].getText(),//DIST1
+dt.getLB_ADisp()[1].getText(),//DIST2
+dt.getLB_ADisp()[2].getText(),//IMAGEC
+dt.getLB_ADisp()[3].getText(),//TAG
+dt.getLB_ADisp()[4].getText()};//CLOCK
                   //==============================================
                   System.out.println("\n+++++++INSERT TABLE+++++++");
                   System.out.println("\tTable: " + DTSQL.mainTable);
@@ -143,12 +147,12 @@ public class BTN_CU_AL implements ActionListener {
                   System.out.println("\textraCol: " + 1);
                   
                   ms.insert(DTSQL.mainTable, DTSQL.mainTableColumns, newValues, 1,
-                          new Update("INSERT", VC_R2.getLB_Status()));
+                          new Update("INSERT", dt.getLB_Status()));
 
                   //==============================================
             } else {
                   System.out.println("\tColumns and table = NOT OK");
-                  Status.startLBStatus(VC_R2.getLB_Status(), Color.YELLOW,
+                  Status.startLBStatus(dt.getLB_Status(), Color.YELLOW,
                           "Unable to Create Table ->Check For Errors or Missing Data<-", 5000);
             }
       }
@@ -159,10 +163,10 @@ public class BTN_CU_AL implements ActionListener {
             //IF EACH JTF HAS TEXT AND NO SQL ERRORS
             for (int a = 0; a < cv; a++) {
                   //IF THE COLUMNS ARE CORRECT
-                  JTextField TF = VC_R2.getTFS()[a];
+                  JTextField TF = dt.getTFS()[a];
                   if (!TF.getText().isEmpty()) {
                         if (!TF.getForeground().equals(Color.RED)
-                                && !VC_R2.getHeaders()[1].getForeground().equals(Color.RED)) {
+                                && !dt.getHeaders()[1].getForeground().equals(Color.RED)) {
                               System.out.println("\t\tCNEEDED " + (cv) + " = " + countO);
                               //countC++;
                               countO++;//count up only if it meats these conditions

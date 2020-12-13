@@ -9,27 +9,31 @@ import views.create.VC_R2;
 import MC.DT;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import views.create.VC_R_DataCom;
+import views.first.listeners.MITableOptions_AL;
 
 /**
  *
  * @author C0FII
  */
 public class CBExtra_IL implements ItemListener {
+      
+      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
 
       @Override
       public void itemStateChanged(ItemEvent e) {
             boolean visible = false;
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (e.getSource() == VC_R2.getCombTypes2()[a]) {
-                        if (VC_R2.getCombTypes2()[a].getSelectedIndex() == 1) {
+                  if (e.getSource() == dt.getCombTypes2()[a]) {
+                        if (dt.getCombTypes2()[a].getSelectedIndex() == 1) {
                               visible = true;
                         } else {
                               visible = false;
                         }
-                        VC_R2.getTFSTypes1()[a].setVisible(visible);
-                        VC_R2.getTFSTypes2()[a].setVisible(visible);
+                        dt.getTFSTypes1()[a].setVisible(visible);
+                        dt.getTFSTypes2()[a].setVisible(visible);
                   }
-                  VC_R2.getPanelTypes2()[a].revalidate();
+                  dt.getPanelTypes2()[a].revalidate();
             }
       }
 

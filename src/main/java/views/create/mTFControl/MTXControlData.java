@@ -21,7 +21,7 @@ public class MTXControlData {
 
       public static ArrayList<Integer> list_MI = new ArrayList<Integer>();
 
-      public IKeyMatchActions3 ac;
+      public AKeyMatchActions3 ac;
       
       public void addList(ArrayList<String> list, int option) {
             Lists.add(new Storage(list, option));

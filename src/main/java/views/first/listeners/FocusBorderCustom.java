@@ -3,7 +3,7 @@ package views.first.listeners;
 
 import views.first.VF_R;
 import MC.DT;
-import MC.LK;
+import MC.LK_F;
 import com.cofii.myMethods.MComp;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -23,7 +23,7 @@ public class FocusBorderCustom implements FocusListener{
             JComponent JC = (JComponent) evt.getSource();          
             int index = MComp.getLastDigitCharsCountAtEnd(JC.getName()) - 1;
             
-            VF_R.getJCBS()[index].setBorder(LK.BR_LINEMARIGIN_FOCUS_ON);
+            VF_R.getJCBS()[index].setBorder(LK_F.BR_LINEMARIGIN_FOCUS_ON);
       }
 
       @Override
@@ -31,7 +31,7 @@ public class FocusBorderCustom implements FocusListener{
             //System.out.println("\n2 - focusLost");
             JComponent JC = (JComponent) evt.getSource();
             int index = MComp.getLastDigitCharsCountAtEnd(JC.getName()) - 1;
-             VF_R.getJCBS()[index].setBorder(LK.BR_LINEMARIGIN_FOCUS_OFF);
+             VF_R.getJCBS()[index].setBorder(LK_F.BR_LINEMARIGIN_FOCUS_OFF);
       }
       
 }
