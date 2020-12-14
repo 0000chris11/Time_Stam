@@ -4,6 +4,7 @@ import views.first.VF_R;
 import MC.DT;
 import MC.LK_F;
 import MC.DTSQL;
+import MC.TableInfo;
 import Threads.Threads;
 import SQLActions.SelectDistinctColumn;
 import SQLActions.SelectDistinctColumns;
@@ -22,50 +23,62 @@ import javax.swing.JLabel;
  */
 public class LSTD {
 
-      //Data dt = new Data("LSTD");
       String CName = this.getClass().getName();
 
       //MethodM mm = new MethodM(CName, DT.CCount++);
       Threads th = new Threads(CName, DT.CCount++);
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
+      
+      private String table;
+      private String dist1;
+      private String dist2;
+      private String imageC;
+      private String tag;
+      private String clock;
 
-      public void changeLSTD(String table, String D1, String D2, String IC, String TG1,
-              String CK) {
+      public void changeLSTD(String table, String dist1, String dist2, String imageC, String tag,
+              String clock) {
+            this.table = table;
+            this.dist1 = dist1;
+            this.dist2 = dist2;
+            this.imageC = imageC;
+            this.tag = tag;
+            this.clock = clock;
 
-            DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
+            table = table.replaceAll(" ", "_");
             System.out.println("Table: " + table);
-            System.out.println("D1: " + D1);
-            System.out.println("D2: " + D2);
-            System.out.println("IC: " + IC);
-            System.out.println("TG1: " + TG1);
-            System.out.println("CK: " + CK);
+            System.out.println("D1: " + dist1);
+            System.out.println("D2: " + dist2);
+            System.out.println("IC: " + imageC);
+            System.out.println("TG1: " + tag);
+            System.out.println("CK: " + clock);
             //+++++++++++++++++++++++++++++++++++++++
             extraConfig();
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            filterEquals("Dist1", D1);
-            filterEquals("Dist2", D2);
+            filterEquals("Dist1", dist1);
+            filterEquals("Dist2", dist2);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("Tabl = " + TB);
-            if (IC.equals("NONE")) {
+            if (imageC.equals("NONE")) {
                   //System.out.println("'\nTB = NOTHING");
                   VF_R.getLB_Icon().setIcon(null);
                   VF_R.getLB_Icon().setText("No image for col");
                   //VF_R.getLB_Icon().setVisible(true);
                   VF_R.getSPL_SUB().setDividerLocation(1.0);
-            } else if (IC.contains("C")) {//IMAGE
+            } else if (imageC.contains("C")) {//IMAGE
                   //System.out.println(CC.RED + "TEST: "+ TB + CC.RESET);
                   VF_R.getSPL_SUB().setDividerLocation(0.5);
                   VF_R.getLB_Icon().setText("Loading");
                   VF_R.getJT().setEnabled(false);
                   JTCellRenderer.setForegroundCell(Color.GRAY);
-                  th.addLBIconThread(IC);
+                  th.addLBIconThread(imageC);
             }
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("TG1 = " + TG1);
-            filterEquals("Tag1", TG1);
+            filterEquals("Tag1", tag);
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("TG2 = " + TG2);
-            changeCK(CK);
+            changeCK(clock);
             //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
       }
@@ -308,7 +321,7 @@ public class LSTD {
                         //+++++++++++++++++++++++++++++++++++++++++++
                         if (filter.equals("Dist1")) {
                               for (int b = 0; b < a + 1; b++) {//CHANGE CB-TF PROPERTIES
-                                    changeLSTDist1(colNN[b], DT.getTable(), coll[b]);
+                                    changeLSTDist1(colNN[b], table, coll[b]);
                               }
                         } else if (filter.equals("Dist2")) {
 
@@ -320,7 +333,7 @@ public class LSTD {
                               }
                               int c = 0;
                               for (int b = 0; b < (a + 1); b++) {
-                                    changeLSTDist2(colNN[c++], colNN[c--], DT.getTable(), coll[c++], coll[c++]);
+                                    changeLSTDist2(colNN[c++], colNN[c--], table, coll[c++], coll[c++]);
                               }
 
                         } else if (filter.equals("Tag1")) {

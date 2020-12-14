@@ -29,8 +29,10 @@ public class CompReset {
                   cols[a] = listC.get(a);
             }
 
-            String ed2 = MText.filterTextName(DT.getTable(), "TAKE");
-            DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
+            String table = TableInfo.getTable();
+            
+            String ed2 = MText.filterTextName(table, "TAKE");
+            TableInfo.setTable(MText.filterTextName(table, "ADD"));
             //++++++++++++++++++++++++++++++++++++++++++++++++
             VF_R.getLB_Title().setText(ed2);
 
@@ -68,7 +70,7 @@ public class CompReset {
                         }
 
                         //mc.SelectData(a + 1, DT.getTable());
-                        ms.selectData(DT.getTable(), new SelectData(a + 1));
+                        ms.selectData(table, new SelectData(a + 1));
                   }
             }
             for(int a = 0; a < DT.maxColumns; a++){

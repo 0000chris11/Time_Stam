@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import java.util.concurrent.BrokenBarrierException;
 import MC.DT;
 import MC.DTSQL;
+import MC.TableInfo;
 import MC.notMyMethods;
 import com.cofii.myMethods.MImage;
 import com.cofii.myMethods.MTable;
@@ -55,6 +56,7 @@ public class Threads {
                   @Override
                   public void run() {
                         DT.bool_Add = true;
+                        String table = TableInfo.getTable();
                         System.out.println("\tADD ++++ addThread starts");
 
                         ArrayList<String> listNewValues = new ArrayList<String>();
@@ -78,15 +80,15 @@ public class Threads {
                                     System.out.println("\t\tADD ++++ INSERTING " + (a + 1)
                                             + " COLUMNS");
                                     //INSERT INTO Youkai_Watch (, EP, Title, Time, Descr) VALUES ("185-A", "Busters Treasure - 7", "M", "EX X; Komasan; JB; F")
-                                    ms.insert(DT.getTable(), columns, newValues, (int) DT.getExtra()[0], ins);
+                                    ms.insert(table, columns, newValues, (int) DT.getExtra()[0], ins);
                                     //mc.Insert(DT.getTable(), ++mayor, listNewValues);
                                     if (ins.success) {
-                                          ms.selectData(DT.getTable(), new SelectData(a + 1));
+                                          ms.selectData(table, new SelectData(a + 1));
                                     }
                               }
                         }
                         if (ins.success) {
-                              new LSTD().changeLSTD(DT.getTable(), DT.getDist1(),
+                              new LSTD().changeLSTD(table, DT.getDist1(),
                                       DT.getDist2(), DT.getImageC(), DT.getTag(),
                                       DT.getClock());
 

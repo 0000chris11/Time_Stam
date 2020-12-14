@@ -247,6 +247,17 @@ public class VC_R_DataCom {
       public JTextField[] getTFSTypes2() {
             return tfsIDEN2;
       }
+      
+      public JPanel[] getPanelsDefaults(){
+            return panelsDefaults;
+      }
+      public JRadioButton[] getRBSDefaults(){
+            return rbsDefaults;
+      }
+      
+      public JTextField[] getTFSDefaults(){
+            return tfsDefaults;
+      }
 
       public JToggleButton[] getBTNS_Dist() {
             return btns_Dist;

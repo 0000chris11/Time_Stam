@@ -19,6 +19,7 @@ import views.first.listeners.MITableOptions_AL;
 public class CBExtra_IL implements ItemListener {
       
       private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R2 vc = MITableOptions_AL.getVCreate();
 
       @Override
       public void itemStateChanged(ItemEvent e) {
@@ -35,6 +36,7 @@ public class CBExtra_IL implements ItemListener {
                   }
                   dt.getPanelTypes2()[a].revalidate();
             }
+            vc.toolKitConfig();
       }
 
 }

@@ -8,6 +8,7 @@ package SQLActions;
 import views.first.VF_R;
 import MC.DT;
 import MC.Status;
+import MC.TableInfo;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
@@ -27,7 +28,8 @@ public class SelectATable implements IActions {
       }
 
       @Override
-      public void setData(ResultSet rs, int row) throws SQLException{
+      public void setData(ResultSet rs, int row) throws SQLException {
+            /*
             DT.setId(rs.getString(1));
             DT.setTable(rs.getString(2));
             DT.setDist1(rs.getString(3));
@@ -35,17 +37,21 @@ public class SelectATable implements IActions {
             DT.setImageC(rs.getString(5));
             DT.setTag(rs.getString(6));
             DT.setClock(rs.getString(7));
+            */
+
+            DT.setTableInfo(new TableInfo(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7)));
       }
 
       @Override
       public void afterQuery(String query, boolean rsValue) {
-            System.out.println("###AfterQuery: " + query);
-            System.out.println("Table: " + DT.getTable());
-            System.out.println("Dist1: " + DT.getDist1());
-            System.out.println("Dist2: " + DT.getDist2());
-            System.out.println("ImageC: " + DT.getImageC());
-            System.out.println("Tag: " + DT.getTag());
-            System.out.println("Clock: " + DT.getClock());
+            
       }
 
       @Override
@@ -53,7 +59,7 @@ public class SelectATable implements IActions {
             System.out.println(CC.RED + query + CC.RESET);
             ex.printStackTrace();
             Status.startLBStatus(VF_R.getLB_Status(), Color.RED,
-                          "SelectATable: " + ex.toString(), 8000);
+                    "SelectATable: " + ex.toString(), 8000);
       }
 
 }

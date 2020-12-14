@@ -51,7 +51,7 @@ public class JTChanged_AL implements ActionListener {
                   System.out.println(CC.GREEN + "\n MIActionListener STARS" + CC.RESET);
                   boolean change = false;
                   //SAVING PREVIOUS ID
-                  DT.setOld_id(DT.getId());
+                  DT.setOld_id(DT.getTableInfo().id);
                   DT.bool_Sel = true;
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MIActionListener ++++ resetingAfter" + CC.RESET);
@@ -71,7 +71,7 @@ public class JTChanged_AL implements ActionListener {
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ Data");
                   System.out.println("\told id = " + DT.getOld_id());
-                  System.out.println("\tcurrent id = " + DT.getId());
+                  System.out.println("\tcurrent id = " + DT.getTableInfo().id);
                   System.out.println("\tTable = " + DT.getTable());
                   System.out.println("\tDist1 = " + DT.getDist1());
                   System.out.println("\tDist2 = " + DT.getDist2());
@@ -86,7 +86,7 @@ public class JTChanged_AL implements ActionListener {
                         mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
                                 DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock());
                         */
-                        Object[] newValues = new Object[]{DT.getId(), DT.getTable(),
+                        Object[] newValues = new Object[]{DT.getTableInfo().id, DT.getTable(),
                               DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock()};
                         ms.updateRow(DTSQL.defautlTable, 
                                 DTSQL.mainTableColumns, newValues, 1, new UpdateDefaultTable());

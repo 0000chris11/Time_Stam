@@ -30,7 +30,7 @@ import views.first.listeners.MITableOptions_AL;
 public class BTN_CU_AL implements ActionListener {
 
       private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
-      
+
       private String Choice;
       private int countO = -1;
 
@@ -120,19 +120,19 @@ public class BTN_CU_AL implements ActionListener {
                   System.out.println("\tExtraCol: " + extraCol);
                   System.out.println("\tExtraValue: " + extraValue);
                   System.out.println("\tPKCol: " + pkCol);
-                  
+
                   ms.createTable(table,
                           colNames, types, nulls, extraCol, extraValue, pkCol,
                           new Update("CreateTable", dt.getLB_Status()));
-                   
+
                   //==============================================        
                   //INSERT TABLE ON MAINTTABLES++++++++++++++++++++++++++
                   Object[] newValues = new Object[]{null, table,
                         dt.getLB_ADisp()[0].getText(),//DIST1
-dt.getLB_ADisp()[1].getText(),//DIST2
-dt.getLB_ADisp()[2].getText(),//IMAGEC
-dt.getLB_ADisp()[3].getText(),//TAG
-dt.getLB_ADisp()[4].getText()};//CLOCK
+                        dt.getLB_ADisp()[1].getText(),//DIST2
+                        dt.getLB_ADisp()[2].getText(),//IMAGEC
+                        dt.getLB_ADisp()[3].getText(),//TAG
+                        dt.getLB_ADisp()[4].getText()};//CLOCK
                   //==============================================
                   System.out.println("\n+++++++INSERT TABLE+++++++");
                   System.out.println("\tTable: " + DTSQL.mainTable);
@@ -145,7 +145,7 @@ dt.getLB_ADisp()[4].getText()};//CLOCK
                         System.out.println("\tnewValues " + c++ + ": " + x);
                   }
                   System.out.println("\textraCol: " + 1);
-                  
+
                   ms.insert(DTSQL.mainTable, DTSQL.mainTableColumns, newValues, 1,
                           new Update("INSERT", dt.getLB_Status()));
 

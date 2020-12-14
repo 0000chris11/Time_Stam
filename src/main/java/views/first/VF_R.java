@@ -51,6 +51,7 @@ import static views.first.VF_R_DataCom.PL_U;
 import static views.first.VF_R_DataCom.SPL_SUB;
 import MC.DTSQL;
 import MC.DTT;
+import MC.TableInfo;
 import SQLActions.ConfigTableExist;
 import SQLActions.CreateConfigTable;
 import SQLActions.CreateDefaultTable;
@@ -890,13 +891,13 @@ public class VF_R extends VF_R_DataCom {
 
                   //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
                   addItemToMenus(DT.getList_id(), DT.getList_T());
-                  setColorToDItem(DT.getTable(), DT.getDTable());
+                  setColorToDItem(TableInfo.getTable(), DT.getDTable());
 
                   //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
-                  DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
+                  DT.setTable(MText.filterTextName(TableInfo.getTable(), "ADD"));
 
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
-                  ms.selectColumns(DT.getTable(), new SelectColumns());
+                  ms.selectColumns(TableInfo.getTable(), new SelectColumns());
 
                   //--------------------------------------------------------------------------------------------------------------------
                   System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
@@ -904,7 +905,7 @@ public class VF_R extends VF_R_DataCom {
                   //noRowsDetection();
 
                   System.out.println(CC.CYAN + "\nMAIN +++++ ChangeLSTD" + CC.RESET);
-                  lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
+                  lstd.changeLSTD(TableInfo.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
                           DT.getClock());
                   //--------------------------------------------------------------------------------------------------------------------
             } else {//IF THERE IS NO TABLE ADDED TO MAINTABLES

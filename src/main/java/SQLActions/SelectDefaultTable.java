@@ -7,6 +7,7 @@ package SQLActions;
 
 import MC.DT;
 import MC.DTSQL;
+import MC.TableInfo;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
@@ -29,6 +30,18 @@ public class SelectDefaultTable implements IActions {
 
       @Override
       public void setData(ResultSet rs, int row) throws SQLException{            
+            int id = rs.getInt(1);
+            String table = rs.getString(2);
+            DT.setDTable(table);
+            Table = table;
+            String dist1 = rs.getString(3);
+            String dist2 = rs.getString(4);
+            String imageC = rs.getString(5);
+            String tag = rs.getString(6);
+            String clock = rs.getString(7);
+            
+            DT.setTableInfo(new TableInfo(id, table, dist1, dist2, imageC, tag, clock));
+            /*
             DT.setId(rs.getString(1));
             String table = rs.getString(2);
             DT.setTable(table);
@@ -39,7 +52,10 @@ public class SelectDefaultTable implements IActions {
             DT.setImageC(rs.getString(5));
             DT.setTag(rs.getString(6));
             DT.setClock(rs.getString(7));
+            */
             //GETTING NULLS FROM RESULTSET
+            
+            
       }
 
       @Override

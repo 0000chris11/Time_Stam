@@ -7,6 +7,7 @@ package SQLActions;
 
 import MC.DT;
 import MC.Status;
+import MC.TableInfo;
 import com.cofii.myInterfaces.IUpdates;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -23,13 +24,13 @@ public class Insert implements IUpdates{
       @Override
       public void executeResultRowN() {
             success = true;
-            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Inserted on " + DT.getTable(), 5000);
+            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Inserted on " + TableInfo.getTable(), 5000);
       }
 
       @Override
       public void executeResult0() {
             success = false;
-            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,  "Fail to Insert on " + DT.getTable(), 4000);
+            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,  "Fail to Insert on " + TableInfo.getTable(), 4000);
       }
 
       @Override

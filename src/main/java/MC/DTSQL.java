@@ -32,24 +32,24 @@ public class DTSQL {
 
       private static String[] bwE_mysql = {
             "FROM", "WHERE", "SHOW", "WITH", "TABLE", "DATABASE", "SCHEMA", "COLUMNS", "COLUMN",
-            "ALTER", "ALTER TABLE", "ADD", "ADD COLUMN", "ADD CONSTRAINT", "CONSTRAINT", "AFTER", 
+            "ALTER", "ALTER TABLE", "ADD", "ADD COLUMN", "ADD CONSTRAINT", "CONSTRAINT", "AFTER",
             "SET", "SET DEFAULT", "DEFAULT", "FOREIGN", "FOREIGN KEY", "KEY", "PRIMARY KEY", "REFERENCES",
             "INSERT", "INTO", "INSERT INTO", "VALUES", "SELECT", "AUTO_INCREMENT", "IDENTITY", "RENAME",
             "RENAME COLUMN", "TO", "USE", "CREATE", "CREATE TABLE", "CREATE DATABASE", "DROP", "DROP TABLE",
-            "DROP DATABASE", "DROP COLUMN", "DROP DEFAULT", "DELETE", "DELETE FROM", "LIMIT", 
-            "SHOW COLUMNS FROM", "SHOW TABLES", "SHOW DATABASES", "ORDER", "BY", "ORDER BY", "CURRENT", 
+            "DROP DATABASE", "DROP COLUMN", "DROP DEFAULT", "DELETE", "DELETE FROM", "LIMIT",
+            "SHOW COLUMNS FROM", "SHOW TABLES", "SHOW DATABASES", "ORDER", "BY", "ORDER BY", "CURRENT",
             "CURRENT USER", "SCHEMAS", "SHOW SCHEMAS", "DISTINCT", "SELECT DISTINCT", "SELECT USER FROM",
             "INT", "BIGINT", "BINARY", "BLOB", "TINYINT", "CHAR", "CURSOR", "DECIMAL", "DOUBLE", "FLOAT", "LONGBLOB",
             "MEDIUMBLOB", "MEDIUMINT", "NUMERIC", "NVARCHAR", "REAL", "SMALLINT", "TINYBLOB", "VARBINARY",
             "SQL"};
-      private static String[] bwC_mysql = {"-", "*", "=", "+", "(", ")", ",", ";", ":", "[", "]", "{", "}", ".", "¿", "?", "\"", "¡", "\\", 
+      private static String[] bwC_mysql = {"-", "*", "=", "+", "(", ")", ",", ";", ":", "[", "]", "{", "}", ".", "¿", "?", "\"", "¡", "\\",
             "/", "&", "%", "#", "\"", "!", "|", "~", "^", "@"};
       private static ArrayList<String> bandWE_mysql = new ArrayList<String>(Arrays.asList(bwE_mysql));
       private static ArrayList<String> bandWC_mysql = new ArrayList<String>(Arrays.asList(bwC_mysql));
 
       public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";
 
-      private static final String initDataBase = "RootConfig";
+      private static String initDataBase = "RootConfig";
       private static String dataBase;
 
       public static final String defaultUserTable = "DefaultUser";
@@ -96,7 +96,7 @@ public class DTSQL {
               = "jdbc:" + dbms + "://" + server + ":" + portNumber + "/" + dataBase
               + defaultConnectionProps;
 
-      public static final String initURLConnection
+      public static String initURLConnection
               = "jdbc:" + dbms + "://" + server + ":" + portNumber + "/" + initDataBase
               + defaultConnectionProps;
 
@@ -113,8 +113,8 @@ public class DTSQL {
       public static ArrayList<String> getBandWE_mysql() {
             return bandWE_mysql;
       }
-      
-      public static ArrayList<String> getBandWC_mysql(){
+
+      public static ArrayList<String> getBandWC_mysql() {
             return bandWC_mysql;
       }
 
@@ -142,6 +142,12 @@ public class DTSQL {
             dataBase = db;
             URLConnection
                     = "jdbc:" + dbms + "://" + server + ":" + portNumber + "/" + dataBase
+                    + defaultConnectionProps;
+      }
+
+      public static void setInitDataBase(String database) {
+            initURLConnection
+                    = "jdbc:" + dbms + "://" + server + ":" + portNumber + "/" + database
                     + defaultConnectionProps;
       }
 

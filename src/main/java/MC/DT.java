@@ -7,17 +7,9 @@ import javax.swing.ImageIcon;
 import views.create.VC_R2;
 
 public class DT {
-
-      static VC_R2 VC;
-      public static VC_R2 getVC_R2(){
-            return VC;
-      }
-      public static void setVC_R2(VC_R2 vc){
-            VC = vc;
-      }
       
-      private static String Id;
-      private static String Old_id;
+      private static int Id;
+      private static int Old_id;
       private static String Table;
       private static String DTable;
       private static String Dist1;
@@ -25,6 +17,15 @@ public class DT {
       private static String ImageC;
       private static String Tag;
       private static String Clock;
+      
+      private static TableInfo TI;
+      
+      public static void setTableInfo(TableInfo ti){
+            TI = ti;
+      }
+      public static TableInfo getTableInfo(){
+            return TI;
+      }
 
       private static ArrayList<String> list_TC = new ArrayList<String>();
       private static ArrayList<Boolean> list_BL = new ArrayList<Boolean>();
@@ -76,19 +77,11 @@ public class DT {
             throw new IllegalStateException("Private Constructor");
       }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      public static String getId() {
-            return Id;
-      }
-
-      public static void setId(String id) {
-            Id = id;
-      }
-
-      public static String getOld_id() {
+      public static int getOld_id() {
             return Old_id;
       }
 
-      public static void setOld_id(String old_id) {
+      public static void setOld_id(int old_id) {
             Old_id = old_id;
       }
 
