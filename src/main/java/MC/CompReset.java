@@ -29,14 +29,15 @@ public class CompReset {
                   cols[a] = listC.get(a);
             }
 
-            String table = TableInfo.getTable();
+            String table = TableInfoC.getTable();
             
             String ed2 = MText.filterTextName(table, "TAKE");
-            TableInfo.setTable(MText.filterTextName(table, "ADD"));
+            TableInfoC.setTable(MText.filterTextName(table, "ADD"));
             //++++++++++++++++++++++++++++++++++++++++++++++++
             VF_R.getLB_Title().setText(ed2);
 
             for (int a = 0; a < DT.maxColumns ; a++) {//Limit of 1 to 6
+                  VF_R.getJCBS()[a].removeAllItems();
                   if (cc == a + 1) {
                         if (VF_R.JPL_layout.equals("null")) {
                               //IF IS 1 COL THE LB_ICON BE BELLOW TFS[0]
@@ -70,7 +71,7 @@ public class CompReset {
                         }
 
                         //mc.SelectData(a + 1, DT.getTable());
-                        ms.selectData(table, new SelectData(a + 1));
+                        ms.selectData(table.replaceAll(" ", "_"), new SelectData(a + 1));
                   }
             }
             for(int a = 0; a < DT.maxColumns; a++){

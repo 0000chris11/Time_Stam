@@ -7,6 +7,7 @@ import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
 import MC.Status;
+import MC.TableInfoC;
 import MC.notMyMethods;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
@@ -37,20 +38,20 @@ public class BTNS_MCActionListener implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent evt) {
             //dt.setTable(mm.filterTableName(dt.getTable(), "ADD"));
-
+            String table = TableInfoC.getTable();
             if (evt.getSource() == VF_R.getBTNS_MC()[0]) {
                   System.out.println(CC.GREEN + "\nADD DATA" + CC.RESET);
                   th.addOp();
             } else if (evt.getSource() == VF_R.getBTNS_MC()[1]) {
                   System.out.println(CC.GREEN + "\nUPDATE DATA" + CC.RESET);
-                  updOp();
+                  updOp(table);
             } else if (evt.getSource() == VF_R.getBTNS_MC()[2]) {
                   System.out.println(CC.GREEN + "\nDELETE DATA" + CC.RESET);
-                  delOp();
+                  delOp(table);
             }
       }
       
-      private void updOp() {
+      private void updOp(String table) {
             
             DT.bool_Upd = true;
 
@@ -98,38 +99,37 @@ public class BTNS_MCActionListener implements ActionListener {
                   //System.out.println("\tcols[" + a + "] = " + cols[a]);
             }            
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            
             //mc.UpdateRow(DT.getTable(), cols, newData.toArray(), DT.getList_R().get(0));
-            ms.updateRow(DT.getTable(), cols, newData.toArray(), "id", DT.getList_R().get(0), 
+            ms.updateRow(table, cols, newData.toArray(), "id", DT.getList_R().get(0), 
                     new Update("UpdateRow", VF_R.getLB_Status()));
             //mc.SelectData(colN, DT.getTable());
-            ms.selectData(DT.getTable(), new SelectData(colN));
+            ms.selectData(table, new SelectData(colN));
 
             colIndexs.clear();
-            new LSTD().changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), 
-                    DT.getImageC(), DT.getTag(), DT.getClock());
+            new LSTD().changeLSTD();
 
             DT.bool_Upd = false;
             System.out.println(CC.GREEN + "\n\tUPDATED DATA" + CC.RESET);
       }
 
-      private void delOp() {
+      private void delOp(String table) {
             DT.bool_Del = true;
             //System.out.println("\nDELETING DATA");
 
             String[] cols = MList.getListToArray(String.class, DT.getList_C());
             Object[] values = MList.getListToArray(Object.class, DT.getList_R());
-            ms.deleteRow(DT.getTable(), cols, values, new DeleteRow(values));
+            ms.deleteRow(table, cols, values, new DeleteRow(values));
             //mc.DeleteRow(DT.getTable(), DT.getList_R().get(0));
             for (int a = 0; a < DT.maxColumns - 1; a++) {
                   if (VF_R.getJT().getColumnCount() == a + 2) {
                         //mc.SelectData(a + 2, DT.getTable());
-                        ms.selectData(DT.getTable(), new SelectData(a + 2));
+                        ms.selectData(table, new SelectData(a + 2));
                   }
             }
 
             VF_R.getJT().clearSelection();
-            new LSTD().changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), 
-                    DT.getImageC(), DT.getTag(), DT.getClock());
+            new LSTD().changeLSTD();
 
             //sc_JT.getVerticalScrollBar().setValue(sc_JT.getVerticalScrollBar().getMaximum());
             DT.bool_Del = false;

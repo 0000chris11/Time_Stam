@@ -8,6 +8,8 @@ package SQLActions;
 import views.first.VF_R;
 import MC.DT;
 import MC.Status;
+import MC.TableInfo;
+import MC.TablesInfo;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
@@ -24,25 +26,29 @@ public class SelectTables implements IActions {
 
       @Override
       public void beforeQuery() {
-            DT.getList_id().clear();
-            DT.getList_T().clear();
-            DT.getList_Dist1().clear();
-            DT.getList_Dist2().clear();
-            DT.getList_ImageC().clear();
-            DT.getList_Tag().clear();
-            DT.getList_Clock().clear();
+            TablesInfo.clear();
       }
 
       @Override
       public void setData(ResultSet rs, int row) throws SQLException {
-            DT.getList_id().add(rs.getString(1));
-            DT.getList_T().add(rs.getString(2));
-            DT.getList_Dist1().add(rs.getString(3));
-            DT.getList_Dist2().add(rs.getString(4));
-            DT.getList_ImageC().add(rs.getString(5));
-            DT.getList_Tag().add(rs.getString(6));
-            DT.getList_Clock().add(rs.getString(7));
-
+            
+            int id = rs.getInt(1);
+            String table = rs.getString(2);
+            String dist1 = rs.getString(3);
+            String dist2 = rs.getString(4);
+            String imageC = rs.getString(5);
+            String tag = rs.getString(6);
+            String clock = rs.getString(7);
+            
+            System.out.println("\tid: " + id);
+            System.out.println("\ttable: " + table);
+            System.out.println("\tdist1: " + dist1);
+            System.out.println("\tdist2: " + dist2);
+            System.out.println("\timageC: " + imageC);
+            System.out.println("\ttag: " + tag);
+            System.out.println("\tclock: " + clock);
+            
+            TablesInfo.addlistTI(new TableInfo(id, table, dist1, dist2, imageC, tag, clock));
       }
 
       @Override

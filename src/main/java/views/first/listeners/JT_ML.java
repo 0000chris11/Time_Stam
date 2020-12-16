@@ -10,6 +10,7 @@ import javax.swing.event.TableModelListener;
 import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
+import MC.TableInfoC;
 import Others.LSTD;
 import MC.notMyMethods;
 import SQLActions.Update;
@@ -46,7 +47,8 @@ public class JT_ML implements TableModelListener {
             if (DT.bool_Add == false && DT.bool_Upd == false && DT.bool_Del == false
                     && DT.bool_Sel == false && DT.bool_Chan == false) {
                   if (DT.cellSys == true) {
-
+                        String table = TableInfoC.getTable();
+                        
                         int coln = VF_R.getJT().getSelectedColumn();
                         int rown = VF_R.getJT().getSelectedRow();
                         if (coln < 0 || rown < 0) {
@@ -58,15 +60,12 @@ public class JT_ML implements TableModelListener {
                                     System.out.println("\t+ + + Diferent");
                                     String col = DT.getList_C().get(coln);
 
-                                    DT.setTable(MText.filterTextName(DT.getTable(), "ADD"));
-
                                     //mc.UpdateRow(DT.getTable(), col, data.toString(), DT.getList_R().get(0));
-                                    ms.updateRow(DT.getTable(), col, data, 
+                                    ms.updateRow(table, col, data, 
                                             DT.getList_C().get(0), DT.getList_R().get(0),
                                             new Update("UpdateRow", VF_R.getLB_Status()));
                                     
-                                    lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(),
-                                            DT.getTag(), DT.getClock());
+                                    lstd.changeLSTD();
                                     n_mm.rez(VF_R.getJT(), DT.autoState);
                                     //++++++++++++++++++++++++++++++
                                     th.setValueToCell(data, coln, rown);

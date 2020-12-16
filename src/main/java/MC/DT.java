@@ -8,35 +8,12 @@ import views.create.VC_R2;
 
 public class DT {
       
-      private static int Id;
+      //private static int Id;
       private static int Old_id;
-      private static String Table;
       private static String DTable;
-      private static String Dist1;
-      private static String Dist2;
-      private static String ImageC;
-      private static String Tag;
-      private static String Clock;
-      
-      private static TableInfo TI;
-      
-      public static void setTableInfo(TableInfo ti){
-            TI = ti;
-      }
-      public static TableInfo getTableInfo(){
-            return TI;
-      }
 
       private static ArrayList<String> list_TC = new ArrayList<String>();
       private static ArrayList<Boolean> list_BL = new ArrayList<Boolean>();
-
-      private static ArrayList<String> list_id = new ArrayList<String>();
-      private static ArrayList<String> list_T = new ArrayList<String>();//TABLES
-      private static ArrayList<String> list_Dist1 = new ArrayList<String>();
-      private static ArrayList<String> list_Dist2 = new ArrayList<String>();
-      private static ArrayList<String> list_ImageC = new ArrayList<String>();
-      private static ArrayList<String> list_Tag = new ArrayList<String>();
-      private static ArrayList<String> list_Clock = new ArrayList<String>();
 
       private static ArrayList<String> list_C = new ArrayList<String>();//COLUMNS
       private static ArrayList<Object> list_R = new ArrayList<Object>();//ROWS
@@ -85,54 +62,6 @@ public class DT {
             Old_id = old_id;
       }
 
-      public static String getTable(){
-            return Table;
-      }
-
-      public static void setTable(String table) {
-            Table = table;
-      }
-
-      public static String getDist1(){
-            return Dist1;
-      }
-
-      public static void setDist1(String dist1) {
-            Dist1 = dist1;
-      }
-
-      public static String getDist2(){
-            return Dist2;
-      }
-
-      public static void setDist2(String dist2) {
-            Dist2 = dist2;
-      }
-
-      public static String getImageC(){
-            return ImageC;
-      }
-
-      public static void setImageC(String imagec) {
-            ImageC = imagec;
-      }
-
-      public static String getTag(){
-            return Tag;
-      }
-
-      public static void setTag(String tag) {
-            Tag = tag;
-      }
-
-      public static String getClock(){
-            return Clock;
-      }
-
-      public static void setClock(String clock) {
-            Clock = clock;
-      }
-
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getList_TC() {
             return list_TC;
@@ -140,36 +69,6 @@ public class DT {
 
       public static ArrayList<Boolean> getList_BL() {
             return list_BL;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public static ArrayList<String> getList_id() {
-            return list_id;
-      }
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++
-      public static ArrayList<String> getList_T() {
-            return list_T;
-      }
-
-      public static ArrayList<String> getList_Dist1() {
-            return list_Dist1;
-      }
-
-      public static ArrayList<String> getList_Dist2() {
-            return list_Dist2;
-      }
-
-      public static ArrayList<String> getList_ImageC() {
-            return list_ImageC;
-      }
-
-      public static ArrayList<String> getList_Tag() {
-            return list_Tag;
-      }
-      
-      public static ArrayList<String> getList_Clock(){
-            return list_Clock;
       }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++

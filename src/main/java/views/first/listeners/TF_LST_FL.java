@@ -4,7 +4,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import views.first.VF_R;
 import MC.DT;
-import MC.LK_F;
+import MC.LKCustom;
+import MC.TableInfoC;
 import javax.swing.JComponent;
 
 /**
@@ -18,8 +19,8 @@ public class TF_LST_FL implements FocusListener {
             int forSize = DT.maxColumns - 1;//DEPENDING ON WICH TF HAD THE FOCUS THE REMAINIG (COUNTING UP) WILL BE MOVE
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (VF_R.getJCBS()[a].hasFocus()) {
-                        if (VF_R.getJCBS()[a].getBackground().equals(LK_F.BK_DIST1)
-                                || VF_R.getJCBS()[a].getBackground().equals(LK_F.BK_DIST2)) {
+                        if (VF_R.getJCBS()[a].getBackground().equals(LKCustom.BK_DIST1)
+                                || VF_R.getJCBS()[a].getBackground().equals(LKCustom.BK_DIST2)) {
                               focusGainedFor(forSize, a + 1);
                         }
                   }
@@ -33,8 +34,8 @@ public class TF_LST_FL implements FocusListener {
             int forSize = DT.maxColumns - 1;
             for (int a = 0; a < DT.maxColumns; a++) {
                   if ((JC.equals("TF_" + (a + 1))
-                          && (VF_R.getJCBS()[a].getBackground().equals(LK_F.BK_DIST1)
-                          || VF_R.getJCBS()[a].getBackground().equals(LK_F.BK_DIST2)))
+                          && (VF_R.getJCBS()[a].getBackground().equals(LKCustom.BK_DIST1)
+                          || VF_R.getJCBS()[a].getBackground().equals(LKCustom.BK_DIST2)))
                           || JC.equals("LST_" + (a + 1))) {
 
                         focusLostFor(a, forSize);
@@ -68,7 +69,7 @@ public class TF_LST_FL implements FocusListener {
       private void focusLostFor(int index, int forSize) {
             if (VF_R.getJLSTS()[index].getValueIsAdjusting() == true) {// = 0
             } else {
-                  if (!DT.getImageC().equals("NONE")) {
+                  if (!TableInfoC.getImageC().equals("NONE")) {
                         VF_R.getLB_Icon().setVisible(true);
                   }
 
@@ -90,14 +91,14 @@ public class TF_LST_FL implements FocusListener {
       }
 
       private void ClockFocusGained(int forSize, int index) {
-            String CK = DT.getClock();
-            if (!CK.equals("NONE")) {
+            String clock = TableInfoC.getClock();
+            if (!clock.equals("NONE")) {
                   //DT.chars[0] = CK.charAt(1);
                   //DT.strings[0] = Character.toString(DT.chars[0]);
                   //DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 4 TO 3
 
-                  int col = Character.getNumericValue(CK.charAt(1)) - 1;
-                  System.out.println("\t####COL VALUE: " + col + " (CK: " + CK + ")");
+                  int col = Character.getNumericValue(clock.charAt(1)) - 1;
+                  System.out.println("\t####COL VALUE: " + col + " (CK: " + clock + ")");
                   //FOCUS TF_5
                   //forSize = 1
                   //index = 5
@@ -132,14 +133,14 @@ public class TF_LST_FL implements FocusListener {
       }
 
       private void ClockFocusLost(int forSize, int index) {
-            String CK = DT.getClock();
-            if (!CK.equals("NONE")) {
+            String clock = TableInfoC.getClock();
+            if (!clock.equals("NONE")) {
                   //DT.chars[0] = CK.charAt(1);
                   //DT.strings[0] = Character.toString(DT.chars[0]);
                   //DT.ints[0] = Integer.parseInt(DT.strings[0]) - 1;//EX: 4 TO 3
 
-                  int col = Character.getNumericValue(CK.charAt(1)) - 1;
-                  System.out.println("\t####COL VALUE: " + col + " (CK: " + CK + ")");
+                  int col = Character.getNumericValue(clock.charAt(1)) - 1;
+                  System.out.println("\t####COL VALUE: " + col + " (CK: " + clock + ")");
 
                   //System.out.println("\tClockFocusLost");
                   int d = 5;

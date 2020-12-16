@@ -2,7 +2,7 @@ package smallComponenets;
 
 import views.first.VF_R;
 import MC.DT;
-import MC.LK_F;
+import MC.LKCustom;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -42,10 +42,10 @@ public class smallTF extends JTextField {
       
       private void config(){
             Font f = new Font("Dialog", Font.BOLD, 16);
-            setBackground(LK_F.BK_NORMAL);
+            setBackground(LKCustom.BK_NORMAL);
             setForeground(Color.WHITE);
             
-            setBorder(LK_F.BR_LINEMARIGIN_FOCUS_OFF);
+            setBorder(LKCustom.BR_LINEMARIGIN_FOCUS_OFF);
             //+++++++++++++++++++++++++++++++++++++++
             setFont(f);
             setEnabled(true);

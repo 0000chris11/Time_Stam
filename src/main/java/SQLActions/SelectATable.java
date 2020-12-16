@@ -8,7 +8,7 @@ package SQLActions;
 import views.first.VF_R;
 import MC.DT;
 import MC.Status;
-import MC.TableInfo;
+import MC.TableInfoC;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.awt.Color;
@@ -38,15 +38,21 @@ public class SelectATable implements IActions {
             DT.setTag(rs.getString(6));
             DT.setClock(rs.getString(7));
             */
-
-            DT.setTableInfo(new TableInfo(
-                    rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    rs.getString(7)));
+            int id = rs.getInt(1);
+            String table = rs.getString(2);
+            String dist1 = rs.getString(3);
+            String dist2 = rs.getString(4);
+            String imageC = rs.getString(5);
+            String tag = rs.getString(6);
+            String Clock = rs.getString(7);
+            
+            TableInfoC.setId(id);
+            TableInfoC.setTable(table);
+            TableInfoC.setDist1(dist1);
+            TableInfoC.setDist2(dist2);
+            TableInfoC.setImageC(imageC);
+            TableInfoC.setTag(tag);
+            TableInfoC.setClock(Clock);
       }
 
       @Override

@@ -29,18 +29,17 @@ public class MIShow_AL implements ActionListener {
       
       private void showLists(String ac){
             if (ac.equals("Tables")) {
+                  
+                  /*
+                  REPLACE+++++++++++++++++++
                   System.out.println();
                   MList.printFor(DT.getList_T());
+                  */
             } else if (ac.equals("Columns")) {
                   System.out.println();
                   MList.printFor(DT.getList_C());
             } else if (ac.equals("Dists")) {
-                  System.out.println();
-                  System.out.println("Dist1: " + DT.getDist1());
-                  System.out.println("Dist2: " + DT.getDist2());
-                  System.out.println("ImageC: " + DT.getImageC());
-                  System.out.println("Tag1: " + DT.getTag());
-                  System.out.println("Clock: " + DT.getClock());
+                  //REPLACE+++++++++++++++++++++++++
             } else if (ac.equals("ListD")) {
                   for(int a = 0; a < DT.maxColumns; a++){
                         MList.printFor(DT.getList_DS()[a]);

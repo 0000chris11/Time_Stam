@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import views.first.VF_R;
 import MC.DT;
+import MC.TableInfoC;
 import com.cofii.myMethods.MTable;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -85,10 +86,11 @@ public class JT_LSL implements ListSelectionListener {
       }
 
       private void lb_IconChange() {
-            if (!DT.getImageC().equals("NONE")) {
+            String imageC = TableInfoC.getImageC();
+            if (!imageC.equals("NONE")) {
                   //GET INDEX OF COLUMN FOR ICON RECOG
                   int row = VF_R.getJT().getSelectedRow();
-                  int col = Character.getNumericValue(DT.getImageC().charAt(1)) - 1;
+                  int col = Character.getNumericValue(imageC.charAt(1)) - 1;
 
                   //MATCH CELL VALUE TO ICON URL NAME
                   int z = 0;

@@ -10,6 +10,7 @@ import MC.DT;
 import MC.DTSQL;
 import SQLActions.SelectColumns;
 import MC.Status;
+import MC.TableInfoC;
 import com.cofii.myMethods.MText;
 import com.cofii.myClasses.CC;
 import Others.LSTD;
@@ -47,11 +48,20 @@ public class JTChanged_AL implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent evt) {
             String ac = evt.getActionCommand();
-            if (!ac.equals(DT.getTable().replaceAll("_", " "))) {
+            
+            int id = TableInfoC.getId();
+            String table = TableInfoC.getTable();
+            String dist1 = TableInfoC.getDist1();
+            String dist2 = TableInfoC.getDist2();
+            String imageC = TableInfoC.getImageC();
+            String tag = TableInfoC.getTag();
+            String clock = TableInfoC.getClock();
+            
+            if (!ac.equals(table.replaceAll("_", " "))) {
                   System.out.println(CC.GREEN + "\n MIActionListener STARS" + CC.RESET);
                   boolean change = false;
                   //SAVING PREVIOUS ID
-                  DT.setOld_id(DT.getTableInfo().id);
+                  DT.setOld_id(id);
                   DT.bool_Sel = true;
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MIActionListener ++++ resetingAfter" + CC.RESET);
@@ -65,36 +75,30 @@ public class JTChanged_AL implements ActionListener {
                         change = true;
                   }
 
-                  DT.setTable(MText.filterTextName(ac, "ADD"));//DELETE
-                  ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainTableColumns[1], DT.getTable().replaceAll("_", " "),
+                  table = ac;
+                  ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainTableColumns[1], table.replaceAll("_", " "),
                           new SelectATable());
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println("MIActionListener ++++ Data");
                   System.out.println("\told id = " + DT.getOld_id());
-                  System.out.println("\tcurrent id = " + DT.getTableInfo().id);
-                  System.out.println("\tTable = " + DT.getTable());
-                  System.out.println("\tDist1 = " + DT.getDist1());
-                  System.out.println("\tDist2 = " + DT.getDist2());
-                  System.out.println("\tImageC = " + DT.getImageC());
-                  System.out.println("\tTag1 = " + DT.getTag());
-                  System.out.println("\tClock = " + DT.getClock());
+                  System.out.println("\tcurrent id = " + TableInfoC.getId());
+                  System.out.println("\tTable = " + table);
+                  System.out.println("\tDist1 = " + dist1);
+                  System.out.println("\tDist2 = " + dist2);
+                  System.out.println("\tImageC = " + imageC);
+                  System.out.println("\tTag1 = " + tag);
+                  System.out.println("\tClock = " + clock);
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
                   if (change == true) {
                         System.out.println(CC.CYAN + "MIActionListener ++++ ChangeDefault" + CC.RESET);
-                        //PREPLACE WITH MS.UPDATE
-                        /*
-                        mc.ChangeDefault(DT.getId(), DT.getOld_id(), DT.getTable(), DT.getDist1(),
-                                DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock());
-                        */
-                        Object[] newValues = new Object[]{DT.getTableInfo().id, DT.getTable(),
-                              DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(), DT.getClock()};
+
                         ms.updateRow(DTSQL.defautlTable, 
-                                DTSQL.mainTableColumns, newValues, 1, new UpdateDefaultTable());
+                                DTSQL.mainTableColumns, TableInfoC.toArray(), 1, new UpdateDefaultTable());
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MIActionListener ++++ MCSelectColumns" + CC.RESET);
                   //ms.SelectColumns(DT.getTable());
-                  ms.selectColumns(DT.getTable(), new SelectColumns());
+                  ms.selectColumns(table, new SelectColumns());
 
                   //+++++++++++++++++++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MIActionListener ++++ ChangeLB_TF and Select Data" + CC.RESET);
@@ -105,10 +109,9 @@ public class JTChanged_AL implements ActionListener {
                   //+++++++++++++++++++++++++++++++++++++++++
 
                   System.out.println(CC.CYAN + "MIActionListener ++++ ChangeLSTD" + CC.RESET);
-                  lstd.changeLSTD(DT.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(),
-                          DT.getTag(), DT.getClock());
+                  lstd.changeLSTD();
 
-                  VF_R.setColorToDItem(DT.getTable(), DT.getDTable());
+                  VF_R.setColorToDItem(table, DT.getDTable());
 
                   System.out.println(CC.CYAN + "MIActionListener ++++ addAllListener (DELETE)" + CC.RESET);
 
@@ -132,7 +135,7 @@ public class JTChanged_AL implements ActionListener {
                   }.start();
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
                   System.out.print(CC.CYAN + "MIActionListener ++++ LOAD Icon" + CC.RESET);
-                  if (!DT.getImageC().equals("NONE")) {
+                  if (!TableInfoC.getImageC().equals("NONE")) {
                         System.out.println(CC.GREEN + "\tYES" + CC.RESET);
                         VF_R.getLB_Icon().setVisible(true);
                         VF_R.getLB_Icon().setText("Loading");

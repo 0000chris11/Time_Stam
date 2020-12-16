@@ -7,7 +7,7 @@ package SQLActions;
 
 import MC.DT;
 import MC.DTSQL;
-import MC.TableInfo;
+import MC.TableInfoC;
 import com.cofii.myClasses.CC;
 import com.cofii.myInterfaces.IActions;
 import java.sql.ResultSet;
@@ -19,17 +19,16 @@ import java.util.ArrayList;
  * @author C0FII
  */
 public class SelectDefaultTable implements IActions {
-      
+
       private String Table;
-      
+
       @Override
       public void beforeQuery() {
-
 
       }
 
       @Override
-      public void setData(ResultSet rs, int row) throws SQLException{            
+      public void setData(ResultSet rs, int row) throws SQLException {
             int id = rs.getInt(1);
             String table = rs.getString(2);
             DT.setDTable(table);
@@ -39,40 +38,38 @@ public class SelectDefaultTable implements IActions {
             String imageC = rs.getString(5);
             String tag = rs.getString(6);
             String clock = rs.getString(7);
-            
-            DT.setTableInfo(new TableInfo(id, table, dist1, dist2, imageC, tag, clock));
-            /*
-            DT.setId(rs.getString(1));
-            String table = rs.getString(2);
-            DT.setTable(table);
-            DT.setDTable(table);
-            Table = table;
-            DT.setDist1(rs.getString(3));
-            DT.setDist2(rs.getString(4));
-            DT.setImageC(rs.getString(5));
-            DT.setTag(rs.getString(6));
-            DT.setClock(rs.getString(7));
-            */
-            //GETTING NULLS FROM RESULTSET
-            
-            
+
+            System.out.println("\tid: " + id);
+            System.out.println("\ttable: " + table);
+            System.out.println("\tdist1: " + dist1);
+            System.out.println("\tdist2: " + dist2);
+            System.out.println("\timageC: " + imageC);
+            System.out.println("\ttag: " + tag);
+            System.out.println("\tclock: " + clock);
+
+            TableInfoC.setId(id);
+            TableInfoC.setTable(table);
+            TableInfoC.setDist1(dist1);
+            TableInfoC.setDist2(dist2);
+            TableInfoC.setImageC(imageC);
+            TableInfoC.setTag(tag);
+            TableInfoC.setClock(clock);
+
       }
 
       @Override
       public void afterQuery(String query, boolean value) {
-            if(value){
-               DTSQL.setDefaultTableValue(Table);
-            }else{
+            if (value) {
+                  DTSQL.setDefaultTableValue(Table);
+            } else {
                   DTSQL.setDefaultTableValue(null);
             }
       }
-      
+
       @Override
       public void exception(SQLException sqle, String query) {
             System.out.println(CC.RED + query + CC.RESET);
             sqle.printStackTrace();
       }
-
-      
 
 }

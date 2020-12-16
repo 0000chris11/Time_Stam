@@ -5,7 +5,7 @@
  */
 package Others;
 
-import MC.LK_F;
+import MC.LKCustom;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -17,20 +17,13 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author Christopher
  */
-public class JTCellRenderer extends DefaultTableCellRenderer {
+public class JTCustomCellRenderer extends DefaultTableCellRenderer {
 
-     //private int count = 0;
-     private int columns;
-     private static Color Colr = Color.WHITE;
+     private Color Colr = Color.WHITE;
       
-      public static void setForegroundCell(Color color){
+      public void setForegroundCell(Color color){
             Colr = color;
       }
-/*
-      public JTCellRenderer(int cols) {
-            columns = cols;
-      }
-      */
 
       @Override
       public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -44,20 +37,14 @@ public class JTCellRenderer extends DefaultTableCellRenderer {
             c.setForeground(Colr);
 
             if (isSelected) {
-                  /*
-                  if (count != columns) {
-                        System.out.println("RENDERER SELECTED");
-                        c.setBackground(new Data().TFColor[2]);
-                  }
-                   */
             } else {
                   if (column == 0) {
-                        c.setBackground(LK_F.BK_NORMAL);
+                        c.setBackground(LKCustom.BK_NORMAL);
                   } else if (column == 1) {
                         c.setBackground(Color.BLACK);
                   }
             }
-            //repaint();
+            
             return this;
       }
 }

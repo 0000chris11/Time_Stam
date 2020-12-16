@@ -6,7 +6,7 @@
 package smallComponenets;
 
 import MC.DT;
-import MC.LK_F;
+import MC.LKCustom;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -31,12 +31,12 @@ public class MComboBoxE extends JComboBox{
       
       private void properties(){
             setEditable(true);
-            setFont(LK_F.FONT_NORMAL);
+            setFont(LKCustom.FONT_NORMAL);
             JTextField tfe = (JTextField) getEditor().getEditorComponent();
             CompoundBorder CB = new CompoundBorder(
                     tfe.getBorder(), BorderFactory.createEmptyBorder(2, 4, 1, 4));
             
-            tfe.setBackground(LK_F.BK_NORMAL);
+            tfe.setBackground(LKCustom.BK_NORMAL);
             tfe.setFont(getFont());
             tfe.setForeground(Color.WHITE);
             tfe.setCaretColor(Color.WHITE);

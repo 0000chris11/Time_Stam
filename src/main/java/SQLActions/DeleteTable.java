@@ -7,6 +7,7 @@ package SQLActions;
 
 import MC.DT;
 import MC.Status;
+import MC.TableInfoC;
 import com.cofii.myInterfaces.IUpdates;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -36,7 +37,7 @@ public class DeleteTable implements IUpdates {
             VF_R.tableDeletedState();//HIDE ALL COMPONENTS
             VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
             VF_R.getLB_JT().setText("No Table Selected");
-            DT.setTable(null);
+            TableInfoC.setTable(null);
 
             VF_R.getMI_DeleteThisTable().setEnabled(false);
             //REMOVING TABLE FROM THE MENU

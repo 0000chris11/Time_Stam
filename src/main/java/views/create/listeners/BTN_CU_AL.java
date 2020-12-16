@@ -9,6 +9,7 @@ import views.create.VC_R2;
 import MC.DT;
 import MC.DTSQL;
 import MC.Status;
+import MC.TablesInfo;
 import SQLActions.Update;
 import com.cofii.myClasses.CC;
 import com.cofii.myClasses.MSQL;
@@ -16,6 +17,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -179,9 +181,10 @@ public class BTN_CU_AL implements ActionListener {
       private boolean tableControl(String table) {
             boolean match = false;
             if (!table.isEmpty()) {
-                  for (int b = 0; b < DT.getList_T().size(); b++) {
+                  ArrayList<String> listT = TablesInfo.getTableList();
+                  for (int b = 0; b < listT.size(); b++) {
                         if (table.equalsIgnoreCase(
-                                DT.getList_T().get(b))) {
+                                listT.get(b))) {
                               match = true;
                         } else {
                               if (match != true) {

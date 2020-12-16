@@ -1,7 +1,7 @@
 package views.first;
 
 import MC.DT;
-import MC.LK_F;
+import MC.LKCustom;
 import com.cofii.myMethods.MCell;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -55,7 +55,9 @@ public class VF_R_DataCom {
       
       static JTable JT = new JTable();
       
+      
       static JScrollPane sc_JT = new JScrollPane(JT);
+      
       //============================================================    
       static JPanel p3 = new JPanel();
 
@@ -79,6 +81,7 @@ public class VF_R_DataCom {
       static JMenu JM_Options = new JMenu("Options");
 
       static JMenuItem mi_changeLogin = new JMenuItem("Change Login or DB");
+      static JMenuItem mi_showTablesInfo = new JMenuItem("Show Tables Info");
       
       static JMenu JMS_ShowList = new JMenu("Show List");
       JMenuItem mi_STables = new JMenuItem("Tables");
@@ -317,6 +320,10 @@ public class VF_R_DataCom {
       
       public static JMenuItem getMI_ChangeLogin(){
             return mi_changeLogin;
+      }
+      
+      public static JMenuItem getMI_ShowTablesInfo(){
+            return mi_showTablesInfo;
       }
 
       public static JMenuItem getMI_CreateTable() {

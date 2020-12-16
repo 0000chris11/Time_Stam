@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import views.Login.VL;
+import views.mainTable.VMT;
 
 /**
  *
@@ -57,38 +58,6 @@ public class MainListeners_F {
             for (int a = 0; a < DT.maxColumns; a++) {
                   VF_R.getJTFES()[a].addMouseListener(ML);
                   VF_R.getJTFS()[a].addMouseListener(ML);
-            }
-      }
-
-      //++++++++++++++++++++++++++++++++++++++++++++
-      private void addFocusListenerToLSTS_OLD() {
-            TF_LST_FL TFSFL = new TF_LST_FL();
-            for (int a = 0; a < VF_R.getJLSTS().length; a++) {
-                  if (VF_R.getJLSTS()[a].getFocusListeners().length > 0) {
-                        for (int b = 0; b < VF_R.getJLSTS()[a].getFocusListeners().length; b++) {
-                              if (VF_R.getJLSTS()[a].getFocusListeners()[b].toString().contains("TF_LST_FL")) {
-                                    //System.out.println("removing: " + lsts[a].getFocusListeners()[b]);
-                                    VF_R.getJLSTS()[a].removeFocusListener(VF_R.getJLSTS()[a].getFocusListeners()[b]);
-                              }
-                        }
-                        //System.out.println("\ttf2 FocusListener count: " + tfsE[1].getFocusListeners().length);
-                  }
-                  if (VF_R.getJLSTS()[a].getFocusListeners().length == 1) {
-                        //System.out.println("LST_" + (a + 2) + " adds: " + TFSFL.toString());
-                        VF_R.getJLSTS()[a].addFocusListener(TFSFL);
-                  }
-            }
-      }
-
-      private void addValueChangedListenerToLSTS() {
-            LSTS_VC lstsVC = new LSTS_VC();
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  if (VF_R.getJLSTS()[a].getListSelectionListeners().length > 0) {
-                        VF_R.getJLSTS()[a].removeListSelectionListener(lstsVC);
-                  }
-                  if (VF_R.getJLSTS()[a].getListSelectionListeners().length == 0) {
-                        VF_R.getJLSTS()[a].addListSelectionListener(lstsVC);
-                  }
             }
       }
 
@@ -130,25 +99,6 @@ public class MainListeners_F {
             }
       }
 
-      /*
-      private void addFocusListenersToJC() {
-            TF_LST_FL TFSFL = new TF_LST_FL();
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJCBS()[a].addFocusListener(TFSFL);
-                  //VF_R.getJLSTS()[a].addFocusListener(TFSFL);
-
-            }
-      }
-
-      
-      private void addFocusListenersToJC_GL() {
-            TF_LST_FL_GL FL = new TF_LST_FL_GL();
-            for (int a = 0; a < DT.maxColumns; a++) {
-                  VF_R.getJCBS()[a].addFocusListener(FL);
-                  //VF_R.getJLSTS()[a].addFocusListener(FL);
-            }
-      }
-       */
       private void addChangeListenerToCB() {
             /*
             System.out.println("#########PopupMenu: " + VF_R.getJCBS()[0].getComponentPopupMenu().toString());
@@ -226,6 +176,15 @@ public class MainListeners_F {
                         new VL("Change");
                   }
 
+            });
+            //TABLES INFO +++++++++++++++++++++++++++++++++++++
+            VF_R.getMI_ShowTablesInfo().addActionListener(new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+                        System.out.println(CC.CYAN + "#### VMT STARS ###" + CC.RESET);
+                        new VMT();
+                  }
+                  
             });
       }
 

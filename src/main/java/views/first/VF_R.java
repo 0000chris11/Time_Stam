@@ -8,7 +8,7 @@ import static views.first.VF_R_DataCom.lb_Status;
 import smallComponenets.smallLB;
 import MC.DT;
 import MC.CompReset;
-import MC.LK_F;
+import MC.LKCustom;
 import MC.notMyMethods;
 import views.first.listeners.MainListeners_F;
 import views.first.listeners.JTChanged_AL;
@@ -43,7 +43,7 @@ import SQLActions.SelectColumns;
 import com.cofii.myClasses.MLayout;
 import com.cofii.myMethods.MTable;
 import Others.LimitTextD;
-import Others.JTCellRenderer;
+import Others.JTCustomCellRenderer;
 import Others.LSTD;
 import SQLActions.SelectTables;
 import com.cofii.myClasses.MSQL;
@@ -51,7 +51,8 @@ import static views.first.VF_R_DataCom.PL_U;
 import static views.first.VF_R_DataCom.SPL_SUB;
 import MC.DTSQL;
 import MC.DTT;
-import MC.TableInfo;
+import MC.TableInfoC;
+import MC.TablesInfo;
 import SQLActions.ConfigTableExist;
 import SQLActions.CreateConfigTable;
 import SQLActions.CreateDefaultTable;
@@ -61,6 +62,7 @@ import SQLActions.InsertConfigTable;
 import SQLActions.MainTableExistFQ;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
+import com.cofii.myAClasses.IDText;
 import com.cofii.myMethods.MComp;
 import com.cofii.myMethods.MList;
 import java.awt.event.KeyEvent;
@@ -140,7 +142,7 @@ public class VF_R extends VF_R_DataCom {
             }
       }
 
-      public static void addItemToMenus(ArrayList<String> L_id, ArrayList<String> L_Table) {
+      public static void addItemToMenus(ArrayList<Integer> L_id, ArrayList<String> L_Table) {
             JTChanged_AL MIAL = new JTChanged_AL();
 
             JM_Select.removeAll();
@@ -178,11 +180,12 @@ public class VF_R extends VF_R_DataCom {
       }
 
       //TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++
+      //REPLACE+++++++++++++++++++++++++++++++
       private void setTableCellEditor() {
             Font f = JT.getFont();
 
             tf_ce.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
-            tf_ce.setBorder(LK_F.BR_LINEMARIGIN_FOCUS_OFF);
+            tf_ce.setBorder(LKCustom.BR_LINEMARIGIN_FOCUS_OFF);
             tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
             tf_ce.setMargin(new Insets(1, 2, 1, 2));
 
@@ -194,10 +197,11 @@ public class VF_R extends VF_R_DataCom {
             }
       }
 
+      //REPLACE+++++++++++++++++++++++++++++++
       public static void setTableRenderer() {
             //System.out.println("#######setTableRenderer (column count: " + JT.getColumnCount());
 
-            JTCellRenderer jtcr = new JTCellRenderer();
+            JTCustomCellRenderer jtcr = new JTCustomCellRenderer();
 
             for (int a = 0; a < JT.getColumnCount(); a++) {
                   JT.getColumnModel().getColumn(a).setCellRenderer(jtcr);
@@ -455,6 +459,7 @@ public class VF_R extends VF_R_DataCom {
             //++++++++++++++++++++++++++++++++++++++++
             JMB.add(JM_Options);
             JM_Options.add(mi_changeLogin);
+            JM_Options.add(mi_showTablesInfo);
             JM_Options.add(new Separator());
             JM_Options.add(JMS_ShowList);
             JMS_ShowList.add(mi_STables);
@@ -550,7 +555,7 @@ public class VF_R extends VF_R_DataCom {
             JT.setGridColor(Color.GRAY);
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JT.setRowSelectionAllowed(true);
-            JT.setSelectionBackground(LK_F.BK_DIST2);
+            JT.setSelectionBackground(LKCustom.BK_DIST2);
             //JT.setPreferredScrollableViewportSize();
             //JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
             //System.out.println("PT size: " + PT.getSize());
@@ -585,15 +590,15 @@ public class VF_R extends VF_R_DataCom {
                   JTextField SD = tfs_SD[a];
                   JTextField SU = tfs_SU[a];
                   //++++++++++++++++++++++++++++++++++++++++++++
-                  MD.setBackground(LK_F.BK_NORMAL);
-                  MU.setBackground(LK_F.BK_NORMAL);
-                  SD.setBackground(LK_F.BK_NORMAL);
-                  SU.setBackground(LK_F.BK_NORMAL);
-                  MD.setFont(LK_F.FONT_NORMAL);
-                  MU.setFont(LK_F.FONT_NORMAL);
-                  LB2D.setFont(LK_F.FONT_NORMAL);
-                  SD.setFont(LK_F.FONT_NORMAL);
-                  SU.setFont(LK_F.FONT_NORMAL);
+                  MD.setBackground(LKCustom.BK_NORMAL);
+                  MU.setBackground(LKCustom.BK_NORMAL);
+                  SD.setBackground(LKCustom.BK_NORMAL);
+                  SU.setBackground(LKCustom.BK_NORMAL);
+                  MD.setFont(LKCustom.FONT_NORMAL);
+                  MU.setFont(LKCustom.FONT_NORMAL);
+                  LB2D.setFont(LKCustom.FONT_NORMAL);
+                  SD.setFont(LKCustom.FONT_NORMAL);
+                  SU.setFont(LKCustom.FONT_NORMAL);
                   MD.setForeground(Color.WHITE);
                   MU.setForeground(Color.WHITE);
                   LB2D.setForeground(Color.WHITE);
@@ -730,7 +735,7 @@ public class VF_R extends VF_R_DataCom {
                   tfs[a] = new smallTF();
 
                   tfsE[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
-                  tfsE[a].setBackground(LK_F.BK_NORMAL);
+                  tfsE[a].setBackground(LKCustom.BK_NORMAL);
                   //tfs[a].putClientProperty("TextField.focus", Color.BLACK);
 
                   tfs_MD[a] = new smallTF("0");
@@ -888,25 +893,24 @@ public class VF_R extends VF_R_DataCom {
                   //SELECTING DEFAULT TABLE++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   ms.selectRowFromTable(DTSQL.defautlTable, 1, new SelectDefaultTable());
-
                   //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
-                  addItemToMenus(DT.getList_id(), DT.getList_T());
-                  setColorToDItem(TableInfo.getTable(), DT.getDTable());
+                  String table = TableInfoC.getTable();
+                  addItemToMenus(TablesInfo.getIdList(), TablesInfo.getTableList());
+                  setColorToDItem(table, DT.getDTable());
 
                   //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
-                  DT.setTable(MText.filterTextName(TableInfo.getTable(), "ADD"));
-
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
-                  ms.selectColumns(TableInfo.getTable(), new SelectColumns());
+                  ms.selectColumns(table, new SelectColumns());
 
                   //--------------------------------------------------------------------------------------------------------------------
+                  
                   System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
                   cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
                   //noRowsDetection();
 
+                  
                   System.out.println(CC.CYAN + "\nMAIN +++++ ChangeLSTD" + CC.RESET);
-                  lstd.changeLSTD(TableInfo.getTable(), DT.getDist1(), DT.getDist2(), DT.getImageC(), DT.getTag(),
-                          DT.getClock());
+                  lstd.changeLSTD();
                   //--------------------------------------------------------------------------------------------------------------------
             } else {//IF THERE IS NO TABLE ADDED TO MAINTABLES
                   SPL_SUB.setTopComponent(lb_PL);
@@ -962,13 +966,13 @@ public class VF_R extends VF_R_DataCom {
             if (!DTSQL.getMainTableExist()) {//CREATING MAIN TABLE IF DOESN'T EXIST
                   ms.createTable(DTSQL.mainTable,
                           DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
-                          1, "AUTO_INCREMENT", "id",
+                          new IDText(1, "AUTO_INCREMENT"), "id",
                           new CreateMainTable());
             }
             if (!DTSQL.getConfigTableExist()) {
                   ms.createTable(DTSQL.configTable,
                           DTSQL.configTableColumns, DTSQL.configTableTypes, DTSQL.configTableNulls,
-                          0, null, null,
+                          null, null,
                           new CreateConfigTable());
                   //INSERTING DEFAULT VALUES
                   for (int a = 0; a < DTSQL.configTableValues[0].length; a++) {
@@ -980,7 +984,7 @@ public class VF_R extends VF_R_DataCom {
             if (!DTSQL.getDefaultTableExist()) {
                   ms.createTable(DTSQL.defautlTable,
                           DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
-                          1, "AUTO_INCREMENT", "id",
+                          new IDText(1, "AUTO_INCREMENT"), "id",
                           new CreateDefaultTable());
             }
       }
@@ -1008,14 +1012,15 @@ public class VF_R extends VF_R_DataCom {
                               Logger.getLogger(VF_R.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         tfsE[1].putClientProperty("TextField.highlight", Color.RED);
-                        JF.setSize(LK_F.MAIN_FRAME_SIZE);
+                        JF.setSize(LKCustom.MAIN_FRAME_SIZE);
                         MComp.setFrameToCenterOfScreen(JF);
-                        SPL.setSize(LK_F.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
-                        SPL_SUB.setSize(LK_F.MAIN_FRAME_SIZE);
+                        SPL.setSize(LKCustom.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
+                        SPL_SUB.setSize(LKCustom.MAIN_FRAME_SIZE);
 
                         SPL.setDividerLocation(0.4);
-                        if (DT.getImageC() != null) {
-                              if (DT.getImageC().equals("NONE")) {
+                        String imageC = TableInfoC.getImageC();
+                        if (imageC != null) {
+                              if (imageC.equals("NONE")) {
                                     SPL_SUB.setDividerLocation(1.0);
                               } else {
                                     SPL_SUB.setDividerLocation(0.6);

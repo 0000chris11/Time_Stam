@@ -11,13 +11,13 @@ package MC;
  */
 public class TableInfo {
 
-      private static int id;
-      private static String table;
-      private static String dist1;
-      private static String dist2;
-      private static String imageC;
-      private static String tag;
-      private static String clock;
+      private int id;
+      private String table;
+      private String dist1;
+      private String dist2;
+      private String imageC;
+      private String tag;
+      private String clock;
 
       public TableInfo(int id, String table, String dist1, String dist2, String imageC, String tag, String clock) {
             this.id = id;
@@ -29,46 +29,46 @@ public class TableInfo {
             this.clock = clock;
       }
       
-      public static int getId(){
+      public int getId(){
             return id;
       }
-      public static void setId(int id){
-            TableInfo.id = id;
+      public void setId(int id){
+            this.id = id;
       }
-      public static String getTable(){
+      public String getTable(){
             return table;
       }
-      public static void setTable(String table){
-            TableInfo.table = table;
+      public void setTable(String table){
+            this.table = table;
       }
-      public static String getDist1(){
+      public String getDist1(){
             return dist1;
       }
-      public static void setDist1(String dist1){
-            TableInfo.dist1 = dist1;
+      public void setDist1(String dist1){
+            this.dist1 = dist1;
       }
-      public static String getDist2(){
+      public String getDist2(){
             return dist2;
       }
-      public static void setDist2(String dits2){
-            TableInfo.dist2 = dist2;
+      public void setDist2(String dits2){
+            this.dist2 = dist2;
       }
-      public static String getImageC(){
+      public String getImageC(){
             return imageC;
       }
-      public static void setImageC(String imageC){
-            TableInfo.imageC = imageC;
+      public void setImageC(String imageC){
+            this.imageC = imageC;
       }
-      public static String getTag(){
+      public String getTag(){
             return tag;
       }
-      public static void setTag(String tag){
-            TableInfo.tag = tag;
+      public void setTag(String tag){
+            this.tag = tag;
       }
-      public static String getClock(){
+      public String getClock(){
             return clock;
       }
-      public static void setClock(String clock){
-            TableInfo.clock = clock;
+      public void setClock(String clock){
+            this.clock = clock;
       }
 }

@@ -8,6 +8,7 @@ package views.first.listeners;
 import views.first.VF_R;
 import MC.DT;
 import MC.Status;
+import MC.TableInfoC;
 import java.awt.Color;
 import views.create.VC_R2;
 import views.choice.VO;
@@ -48,7 +49,7 @@ public class MITableOptions_AL implements ActionListener {
                   //NOT YET+++++++++++++++++++++++++
             } else if (ac.equals(VF_R.getMI_DeleteThisTable().getText())) {
                   //System.out.println(VF_R.getMI_DeleteThisTable().getText());
-                  new VO("Delete this table?", DT.getTable());
+                  new VO("Delete this table?", TableInfoC.getTable());
             }
       }
       

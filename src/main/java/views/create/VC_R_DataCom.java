@@ -6,7 +6,7 @@
 package views.create;
 
 import MC.DT;
-import MC.LK_F;
+import MC.LKCustom;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -110,11 +110,11 @@ public class VC_R_DataCom {
       JTextField tfIDEN2 = new NumberOTF();
       JRadioButton rbPK = new JRadioButton();
       
-      JToggleButton btn_Dist = new smallBTN_TG(LK_F.GP_CYAN_AND_WHITE);
+      JToggleButton btn_Dist = new smallBTN_TG(LKCustom.GP_CYAN_AND_WHITE);
       JToggleButton btn_Dist2 = new smallBTN_TG(null);
-      JToggleButton btn_ImageC = new smallBTN_TG(LK_F.GP_GREEN_AND_WHITE);
-      JToggleButton btn_Tag = new smallBTN_TG(LK_F.GP_CYAN_AND_WHITE);
-      JToggleButton btn_Clock = new smallBTN_TG(LK_F.GP_YELLOW_AND_WHITE);
+      JToggleButton btn_ImageC = new smallBTN_TG(LKCustom.GP_GREEN_AND_WHITE);
+      JToggleButton btn_Tag = new smallBTN_TG(LKCustom.GP_CYAN_AND_WHITE);
+      JToggleButton btn_Clock = new smallBTN_TG(LKCustom.GP_YELLOW_AND_WHITE);
       //++++++++++++++++++++++++++++++++++++++++++++++
       JLabel[] lbs = new JLabel[DT.maxColumns];
       JTextField[] tfs = new JTextField[DT.maxColumns];

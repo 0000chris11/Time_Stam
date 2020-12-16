@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import java.util.concurrent.BrokenBarrierException;
 import MC.DT;
 import MC.DTSQL;
-import MC.TableInfo;
+import MC.TableInfoC;
 import MC.notMyMethods;
 import com.cofii.myMethods.MImage;
 import com.cofii.myMethods.MTable;
@@ -16,7 +16,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 import javax.swing.table.AbstractTableModel;
-import Others.JTCellRenderer;
+import Others.JTCustomCellRenderer;
 import SQLActions.Insert;
 import SQLActions.SelectData;
 import com.cofii.myClasses.MSQL;
@@ -56,7 +56,6 @@ public class Threads {
                   @Override
                   public void run() {
                         DT.bool_Add = true;
-                        String table = TableInfo.getTable();
                         System.out.println("\tADD ++++ addThread starts");
 
                         ArrayList<String> listNewValues = new ArrayList<String>();
@@ -71,6 +70,8 @@ public class Threads {
                         }
                         String[] columns = MList.getListToArray(String.class, DT.getList_C());
                         String[] newValues = MList.getListToArray(String.class, listNewValues);
+                        //+++++++++++++++++++++++++++++++++++++++++
+                        String table = TableInfoC.getTable();
                         //+++++++++++++++++++++++++++++++++++++++++
                         //CHANGE WHEN THERE IS NO >ID< FIELD
                         int mayor = MTable.getMayorId(VF_R.getJT(), 0);
@@ -88,9 +89,7 @@ public class Threads {
                               }
                         }
                         if (ins.success) {
-                              new LSTD().changeLSTD(table, DT.getDist1(),
-                                      DT.getDist2(), DT.getImageC(), DT.getTag(),
-                                      DT.getClock());
+                              new LSTD().changeLSTD();
 
                               VF_R.getJT().clearSelection();
                               n_mm.rez(VF_R.getJT(), DT.autoState);
@@ -109,7 +108,7 @@ public class Threads {
                               System.out.println("\tV_sb is waiting for \"addThread\" to finish");
                               Thread.sleep(500);
                               addThread.join();
-                              if (!DT.getImageC().contains("NONE")) {
+                              if (!TableInfoC.getImageC().contains("NONE")) {
                                     System.out.println("\tV_sb is waiting for \"iconThread\" to finish");
                                     iconThread.join();
                               }
@@ -262,7 +261,7 @@ public class Threads {
                         }
                         VF_R.getLB_Icon().setText("Ready!");
 
-                        JTCellRenderer.setForegroundCell(Color.WHITE);
+                        JTCustomCellRenderer.setForegroundCell(Color.WHITE);
                         VF_R.getJT().setEnabled(true);
                   }
             };

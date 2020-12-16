@@ -14,6 +14,7 @@ import views.create.renderers.ComboBoxRenderer;
 import MC.DT;
 import MC.DTSQL;
 import MC.LK_C;
+import MC.TablesInfo;
 import Others.LimitN;
 import com.cofii.myClasses.MLayout;
 import com.cofii.myInterfaces.SerializationExceptionAction;
@@ -357,7 +358,7 @@ public class VC_R2 {
             MTF_Control3 mtf = new MTF_Control3(new Table_KControlException());
             mtf.addList(DTSQL.getBandWE_mysql(), MTF_Control3.EQUAL_MATCH);
             mtf.addList(DTSQL.getBandWC_mysql(), MTF_Control3.CONTAIN_MATCH);
-            mtf.addList(DT.getList_T(), MTF_Control3.EQUAL_MATCH);
+            mtf.addList(TablesInfo.getTableList(), MTF_Control3.EQUAL_MATCH);
 
             dt.tf_Title.addKeyListener(mtf);
 
