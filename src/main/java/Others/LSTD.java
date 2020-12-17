@@ -8,13 +8,11 @@ import MC.TableInfoC;
 import Threads.Threads;
 import SQLActions.SelectDistinctColumn;
 import SQLActions.SelectDistinctColumns;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myMethods.MList;
-import com.cofii.myMethods.MText;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MList;
+import com.cofii2.myMethods.MText;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
 /**

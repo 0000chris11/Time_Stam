@@ -1,23 +1,23 @@
 package views.first.listeners;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
 import MC.Status;
 import MC.TableInfoC;
 import MC.notMyMethods;
-import com.cofii.myClasses.CC;
 import Others.LSTD;
 import SQLActions.DeleteRow;
 import SQLActions.SelectData;
 import SQLActions.Update;
 import Threads.Threads;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myMethods.MList;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MList;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import views.first.VF_R;
 
 /**
  *

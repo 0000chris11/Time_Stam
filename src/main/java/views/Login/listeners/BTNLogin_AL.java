@@ -6,8 +6,8 @@
 package views.Login.listeners;
 
 import MC.DTSQL;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myMethods.MOthers;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MOthers;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

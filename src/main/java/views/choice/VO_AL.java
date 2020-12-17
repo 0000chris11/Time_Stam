@@ -8,10 +8,9 @@ package views.choice;
 import views.choice.VO;
 import MC.DTSQL;
 import SQLActions.DeleteTable;
-import com.cofii.myClasses.MSQL;
+import com.cofii2.myClasses.MSQL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import smallComponenets.JPanelGradient;
 
 /**
  *

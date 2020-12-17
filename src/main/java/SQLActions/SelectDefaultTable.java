@@ -8,11 +8,10 @@ package SQLActions;
 import MC.DT;
 import MC.DTSQL;
 import MC.TableInfoC;
-import com.cofii.myClasses.CC;
-import com.cofii.myInterfaces.IActions;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *

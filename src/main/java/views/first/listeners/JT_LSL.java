@@ -5,14 +5,14 @@
  */
 package views.first.listeners;
 
+import MC.DT;
+import MC.TableInfoC;
+import com.cofii2.myMethods.MTable;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import views.first.VF_R;
-import MC.DT;
-import MC.TableInfoC;
-import com.cofii.myMethods.MTable;
-import java.awt.Color;
-import javax.swing.ImageIcon;
 
 /**
  *

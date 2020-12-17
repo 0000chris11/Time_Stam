@@ -1,13 +1,11 @@
 package views.first.listeners;
 
-import views.first.VF_R;
 import MC.DT;
-import com.cofii.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+import views.first.VF_R;
 
 /**
  * KeyListener for the Clock

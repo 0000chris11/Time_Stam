@@ -10,13 +10,10 @@ import MC.DT;
 import MC.Status;
 import MC.TableInfo;
 import MC.TablesInfo;
-import com.cofii.myClasses.CC;
-import com.cofii.myInterfaces.IActions;
+import com.cofii2.myInterfaces.IActions;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import views.Login.VL;
 
 /**
  *

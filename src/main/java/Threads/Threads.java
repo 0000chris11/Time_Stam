@@ -8,19 +8,18 @@ import MC.DT;
 import MC.DTSQL;
 import MC.TableInfoC;
 import MC.notMyMethods;
-import com.cofii.myMethods.MImage;
-import com.cofii.myMethods.MTable;
-import com.cofii.myClasses.CC;
+import com.cofii2.myMethods.MImage;
+import com.cofii2.myMethods.MTable;
+import com.cofii2.myClasses.CC;
 import Others.LSTD;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.CyclicBarrier;
 import javax.swing.table.AbstractTableModel;
-import Others.JTCustomCellRenderer;
 import SQLActions.Insert;
 import SQLActions.SelectData;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myMethods.MList;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MList;
 
 /**
  *
@@ -261,7 +260,7 @@ public class Threads {
                         }
                         VF_R.getLB_Icon().setText("Ready!");
 
-                        JTCustomCellRenderer.setForegroundCell(Color.WHITE);
+                        VF_R.getJTCL().setForegroundCell(Color.GRAY);
                         VF_R.getJT().setEnabled(true);
                   }
             };

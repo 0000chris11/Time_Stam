@@ -3,14 +3,9 @@ package views.first.listeners;
 import views.first.VF_R;
 import MC.DT;
 import MC.LKCustom;
-import com.cofii.myMethods.MComp;
-import com.cofii.myMethods.MKey;
-import java.awt.Color;
+import com.cofii2.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
 /**
  *

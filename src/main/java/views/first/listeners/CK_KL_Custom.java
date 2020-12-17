@@ -1,11 +1,9 @@
 package views.first.listeners;
 
 import views.first.VF_R;
-import MC.DT;
-import com.cofii.myMethods.MComp;
+import com.cofii2.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 

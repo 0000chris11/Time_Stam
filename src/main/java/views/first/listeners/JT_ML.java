@@ -14,10 +14,9 @@ import MC.TableInfoC;
 import Others.LSTD;
 import MC.notMyMethods;
 import SQLActions.Update;
-import com.cofii.myMethods.MText;
 import Threads.Threads;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myMethods.MTable;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MTable;
 
 /**
  *

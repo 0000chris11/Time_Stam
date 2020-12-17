@@ -11,8 +11,9 @@ import MC.DTSQL;
 import MC.Status;
 import MC.TablesInfo;
 import SQLActions.Update;
-import com.cofii.myClasses.CC;
-import com.cofii.myClasses.MSQL;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myAClasses.IDText;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -124,7 +125,7 @@ public class BTN_CU_AL implements ActionListener {
                   System.out.println("\tPKCol: " + pkCol);
 
                   ms.createTable(table,
-                          colNames, types, nulls, extraCol, extraValue, pkCol,
+                          colNames, types, nulls, new IDText(extraCol, extraValue), pkCol,
                           new Update("CreateTable", dt.getLB_Status()));
 
                   //==============================================        

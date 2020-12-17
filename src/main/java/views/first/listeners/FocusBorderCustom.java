@@ -2,11 +2,8 @@
 package views.first.listeners;
 
 import views.first.VF_R;
-import MC.DT;
 import MC.LKCustom;
-import com.cofii.myMethods.MComp;
-import java.awt.Container;
-import java.awt.Graphics;
+import com.cofii2.myMethods.MComp;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JComponent;

@@ -5,8 +5,8 @@
  */
 package views.create.mTFControl;
 
-import com.cofii.myMethods.MList;
-import com.cofii.myMethods.MOthers;
+import com.cofii2.myMethods.MList;
+import com.cofii2.myMethods.MOthers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.InvalidParameterException;

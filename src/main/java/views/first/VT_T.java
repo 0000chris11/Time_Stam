@@ -5,29 +5,19 @@
  */
 package views.first;
 
-import views.first.VF_R;
-import static views.first.VF_R_DataCom.JT;
 import MC.DT;
-import com.cofii.myClasses.VT;
-import com.cofii.myMethods.MComp;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import com.cofii2.myClasses.VT;
+import com.cofii2.myMethods.MComp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.UIManager;
-import views.Login.VL;
+import javax.swing.table.TableColumnModel;
 import static views.first.VF_R_DataCom.cbs;
+import views.first.listeners.MainListeners_F;
+import views.mainTable.VMT;
 
 /**
  *
@@ -45,7 +35,7 @@ public class VT_T extends VF_R_DataCom {
             vt.add(btn2);
             JButton btn3 = new JButton("Get CLIENT PROPERTY");
             vt.add(btn3);
-            JButton btn4 = new JButton("GET CBS TFS BACKGROUND");
+            JButton btn4 = new JButton("GET JMT COLUMNS SIZE");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
@@ -101,13 +91,10 @@ public class VT_T extends VF_R_DataCom {
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        for (int a = 0; a < DT.maxColumns; a++) {
-                              if (VF_R.getJTFPanel()[a].getComponent(0).getName().contains("CB")) {
-                                    System.out.println("CB_" + (a + 1) + ": " + VF_R.getJCBS()[a].getBackground());
-                              } else {
-                                    System.out.println("TF_" + (a + 1) + ": " + VF_R.getJTFES()[a].getBackground());
-                              }
-                        }
+                       VMT vmt = MainListeners_F.getVMT();
+                       TableColumnModel cm = vmt.getJMT().getColumnModel();
+                       cm.getColumn(0).setMaxWidth(40);
+                       cm.getColumn(1).setMinWidth(300);
                   }
 
             });

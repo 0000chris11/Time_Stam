@@ -5,9 +5,8 @@
  */
 package views.options;
 
-import static views.options.DT.JTEN;
-import com.cofii.myClasses.VT;
-import com.cofii.myMethods.MComp;
+import com.cofii2.myClasses.VT;
+import com.cofii2.myMethods.MComp;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -29,6 +28,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
+import static views.options.DT.JTEN;
 
 /**
  *

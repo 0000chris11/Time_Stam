@@ -1,30 +1,17 @@
 package views.first.listeners;
 
-import views.first.listeners.MITableOptions_AL;
-import views.first.listeners.MIShow_AL;
-import views.first.listeners.MIConfigOptions_AL;
-import views.first.listeners.LSTS_VC;
-import views.first.listeners.JT_ML;
-import views.first.listeners.JT_LSL;
-import views.first.listeners.FocusBorder;
-import views.first.listeners.CK_KL;
-import views.first.listeners.BTNS_TBActionListener;
-import views.first.listeners.BTNS_MCActionListener;
-import views.first.listeners.BTNS_CMouseListener;
-import views.first.VF_R;
 import MC.DT;
-import com.cofii.myClasses.CC;
-import com.cofii.myMethods.MComp;
+import MC.Status;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myMethods.MComp;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import views.Login.VL;
+import views.first.VF_R;
 import views.mainTable.VMT;
 
 /**
@@ -115,7 +102,7 @@ public class MainListeners_F {
                         
                   });
             }
-            */
+             */
       }
 
       //++++++++++++++++++++++++++++++++++++++++++++
@@ -178,14 +165,26 @@ public class MainListeners_F {
 
             });
             //TABLES INFO +++++++++++++++++++++++++++++++++++++
-            VF_R.getMI_ShowTablesInfo().addActionListener(new ActionListener(){
+            VF_R.getMI_ShowTablesInfo().addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
                         System.out.println(CC.CYAN + "#### VMT STARS ###" + CC.RESET);
-                        new VMT();
+                        if (vmt == null) {
+                              vmt = new VMT();
+                        }else{
+                              Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, "Main Table Window is already open", 4000);
+                        }
                   }
-                  
+
             });
+      }
+      private static VMT vmt;
+
+      public static VMT getVMT() {
+            return vmt;
+      }
+      public static void setVMT(VMT vmt){
+            MainListeners_F.vmt = vmt;
       }
 
 }

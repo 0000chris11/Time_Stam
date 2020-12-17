@@ -1,8 +1,8 @@
 package views.first;
 
 import MC.DT;
-import MC.LKCustom;
-import com.cofii.myMethods.MCell;
+import com.cofii2.myMethods.MCell;
+import com.cofii2.custom.JTCustomCellRenderer;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,7 +28,6 @@ import javax.swing.JComboBox;
 import javax.swing.JProgressBar;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-import smallComponenets.JPanelGradient;
 import smallComponenets.MComboBoxE;
 import smallComponenets.smallBTN_C;
 
@@ -149,6 +148,7 @@ public class VF_R_DataCom {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static boolean getDefault = true;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      static JTCustomCellRenderer JTCL = new JTCustomCellRenderer();
       static JTextField tf_ce = new JTextField();
       static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce) {
             @Override
@@ -368,4 +368,7 @@ public class VF_R_DataCom {
             return DTCellEditor;
       }
 
+      public static JTCustomCellRenderer getJTCL(){
+            return JTCL;
+      }
 }

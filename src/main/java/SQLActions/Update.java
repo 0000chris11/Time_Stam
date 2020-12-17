@@ -5,11 +5,9 @@
  */
 package SQLActions;
 
-import views.first.VF_R;
 import MC.DT;
 import MC.Status;
-import com.cofii.myClasses.CC;
-import com.cofii.myInterfaces.IUpdates;
+import com.cofii2.myInterfaces.IUpdates;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JLabel;

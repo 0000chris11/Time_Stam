@@ -1,10 +1,9 @@
 package views.first.listeners;
 
-import views.first.VF_R;
 import MC.DT;
-import com.cofii.myMethods.MKey;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import views.first.VF_R;
 
 /**
  *

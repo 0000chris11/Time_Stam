@@ -5,7 +5,7 @@
  */
 package SQLActions;
 
-import com.cofii.myInterfaces.IUpdates;
+import com.cofii2.myInterfaces.IUpdates;
 import java.sql.SQLException;
 
 /**

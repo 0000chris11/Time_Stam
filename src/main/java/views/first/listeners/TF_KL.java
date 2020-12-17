@@ -5,13 +5,11 @@
  */
 package views.first.listeners;
 
-import MC.DT;
-import com.cofii.myMethods.MComp;
+import com.cofii2.myMethods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 import views.first.VF_R;
 
 /**

@@ -5,8 +5,7 @@
  */
 package views.choice;
 
-import views.first.VF_R;
-import com.cofii.myMethods.MComp;
+import com.cofii2.myMethods.MComp;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
@@ -15,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
+import views.first.VF_R;
 
 /**
  *

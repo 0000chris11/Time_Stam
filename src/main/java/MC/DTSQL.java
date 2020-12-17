@@ -5,6 +5,7 @@
  */
 package MC;
 
+import com.cofii2.myClasses.DString;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -109,6 +110,20 @@ public class DTSQL {
       private static boolean configTableExist;
       private static boolean defaultTableExist;
 
+      //++++++++++++++++++++++++++++++++++++++
+      private static final String table1 = "table_names";
+      private static final String table2 = "table_types";
+      public static final DString match1 = new DString(table1, "id");
+      public static final DString match2 = new DString(table2, "id");
+      public static final DString[] listDS = new DString[]{
+            new DString(table1, "id"), 
+            new DString(table1, "Name"), 
+            new DString(table1, "Dist1"),
+            new DString(table1, "Dist2"),
+            new DString(table1, "ImageC"),
+            new DString(table1, "Tag"),
+            new DString(table1, "Clock"),
+            new DString(table2, "pkc")};
       //++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getBandWE_mysql() {
             return bandWE_mysql;

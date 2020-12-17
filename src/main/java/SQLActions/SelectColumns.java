@@ -8,16 +8,12 @@ package SQLActions;
 import views.first.VF_R;
 import MC.DT;
 import MC.Status;
-import com.cofii.myClasses.CC;
-import com.cofii.myInterfaces.IActions;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myInterfaces.IActions;
 import java.awt.Color;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Types;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *

@@ -1,32 +1,27 @@
 package views.first.listeners;
 
-import views.first.listeners.MainListeners_F;
-import views.first.VF_R;
-import MC.notMyMethods;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import MC.CompReset;
 import MC.DT;
 import MC.DTSQL;
-import SQLActions.SelectColumns;
 import MC.Status;
 import MC.TableInfoC;
-import com.cofii.myMethods.MText;
-import com.cofii.myClasses.CC;
+import MC.notMyMethods;
 import Others.LSTD;
 import SQLActions.SelectATable;
+import SQLActions.SelectColumns;
 import SQLActions.UpdateDefaultTable;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myInterfaces.IActions;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myClasses.MSQL;
 import java.awt.Color;
 import java.awt.Component;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
+import views.first.VF_R;
 
 /**
  *
@@ -117,7 +112,7 @@ public class JTChanged_AL implements ActionListener {
 
                   n_mm.rez(VF_R.getJT(), true);
                   System.out.println(CC.CYAN + "MIActionListener ++++ setRenderer and editor (DELETE?)" + CC.RESET);
-                  VF_R.setTableRenderer();
+                  //VF_R.setTableRenderer();
                   for (int z = 0; z < VF_R.getJT().getColumnCount(); z++) {
                         VF_R.getJT().getColumnModel().getColumn(z).
                                 setCellEditor(VF_R.getDTCellEditor());

@@ -6,7 +6,7 @@
 package SQLActions;
 
 import MC.Status;
-import com.cofii.myInterfaces.IUpdates;
+import com.cofii2.myInterfaces.IUpdates;
 import java.awt.Color;
 import java.sql.SQLException;
 import views.first.VF_R;

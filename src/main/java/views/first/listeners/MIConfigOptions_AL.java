@@ -1,17 +1,17 @@
 package views.first.listeners;
 
-import views.first.VF_R;
 import MC.DT;
 import MC.DTSQL;
 import MC.Status;
 import MC.notMyMethods;
 import SQLActions.SelectConfig;
 import SQLActions.Update;
-import com.cofii.myClasses.MSQL;
+import com.cofii2.myClasses.MSQL;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
+import views.first.VF_R;
 
 /**
  *

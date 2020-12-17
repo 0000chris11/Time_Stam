@@ -8,7 +8,7 @@ package SQLActions;
 import MC.DT;
 import MC.DTSQL;
 import MC.Status;
-import com.cofii.myInterfaces.IActions;
+import com.cofii2.myInterfaces.IActions;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;

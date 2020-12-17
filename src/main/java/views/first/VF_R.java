@@ -1,58 +1,15 @@
 package views.first;
 
-import static views.first.VF_R_DataCom.JF;
-import static views.first.VF_R_DataCom.JT;
-import static views.first.VF_R_DataCom.btn_plus;
-import static views.first.VF_R_DataCom.btns_MC;
-import static views.first.VF_R_DataCom.lb_Status;
-import smallComponenets.smallLB;
-import MC.DT;
 import MC.CompReset;
-import MC.LKCustom;
-import MC.notMyMethods;
-import views.first.listeners.MainListeners_F;
-import views.first.listeners.JTChanged_AL;
-import com.cofii.myMethods.MText;
-import com.cofii.myClasses.CC;
-import Threads.*;
-import javax.swing.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Collections;
-import javax.swing.text.AbstractDocument;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.border.BevelBorder;
-import java.awt.Dimension;
-import java.awt.Insets;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicTableUI;
-import smallComponenets.smallBTN_C;
-import smallComponenets.smallLST;
-import smallComponenets.smallTF;
-import javax.swing.JSeparator;
-import javax.swing.plaf.metal.MetalToolBarUI;
-import com.cofii.myClasses.VT;
-import java.awt.BorderLayout;
-import java.awt.FontMetrics;
-import static views.first.VF_R_DataCom.SPL;
-import SQLActions.SelectColumns;
-import com.cofii.myClasses.MLayout;
-import com.cofii.myMethods.MTable;
-import Others.LimitTextD;
-import Others.JTCustomCellRenderer;
-import Others.LSTD;
-import SQLActions.SelectTables;
-import com.cofii.myClasses.MSQL;
-import static views.first.VF_R_DataCom.PL_U;
-import static views.first.VF_R_DataCom.SPL_SUB;
+import MC.DT;
 import MC.DTSQL;
 import MC.DTT;
+import MC.LKCustom;
 import MC.TableInfoC;
 import MC.TablesInfo;
+import MC.notMyMethods;
+import Others.LSTD;
+import Others.LimitTextD;
 import SQLActions.ConfigTableExist;
 import SQLActions.CreateConfigTable;
 import SQLActions.CreateDefaultTable;
@@ -60,22 +17,46 @@ import SQLActions.CreateMainTable;
 import SQLActions.DefaultTableExist;
 import SQLActions.InsertConfigTable;
 import SQLActions.MainTableExistFQ;
+import SQLActions.SelectColumns;
 import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
-import com.cofii.myAClasses.IDText;
-import com.cofii.myMethods.MComp;
-import com.cofii.myMethods.MList;
-import java.awt.event.KeyEvent;
+import SQLActions.SelectTables;
+import Threads.*;
+import com.cofii2.myAClasses.IDText;
+import com.cofii2.myClasses.CC;
+import com.cofii2.myClasses.MLayout;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MComp;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.*;
 import javax.swing.JPopupMenu.Separator;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicTableUI;
+import javax.swing.plaf.metal.MetalToolBarUI;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.JTextComponent;
-import org.apache.commons.lang3.SerializationUtils;
+import javax.swing.text.AbstractDocument;
 import smallComponenets.MComboBoxE;
+import smallComponenets.smallBTN_C;
+import smallComponenets.smallLB;
+import smallComponenets.smallTF;
 import views.Login.VL;
 import views.first.listeners.JF_FL;
+import views.first.listeners.JTChanged_AL;
+import views.first.listeners.MainListeners_F;
 
 /**
  *
@@ -198,19 +179,18 @@ public class VF_R extends VF_R_DataCom {
       }
 
       //REPLACE+++++++++++++++++++++++++++++++
+      /*
       public static void setTableRenderer() {
             //System.out.println("#######setTableRenderer (column count: " + JT.getColumnCount());
 
-            JTCustomCellRenderer jtcr = new JTCustomCellRenderer();
-
             for (int a = 0; a < JT.getColumnCount(); a++) {
-                  JT.getColumnModel().getColumn(a).setCellRenderer(jtcr);
+                  JT.getColumnModel().getColumn(a).setCellRenderer(JTCL);
             }
 
             //System.out.println("+++++++++++GETFONT: " + JT.getFont());
             //System.out.println("Selection Model: " + JT.getSelectionModel().toString());
       }
-
+      */
       //CONFIG++++++++++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
             JF.setLayout(new BorderLayout());
@@ -283,64 +263,6 @@ public class VF_R extends VF_R_DataCom {
             }
 
       }
-
-      /*
-      public static void lineSequence(GroupLayout gl, JComponent[][] components) {
-            int colLength = components[0].length;
-            int rowLength = components.length;
-            GroupLayout.ParallelGroup[] phs = new GroupLayout.ParallelGroup[colLength];
-            for (int a = 0; a < colLength; a++) {
-                  phs[a] = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-            }
-            //++++++++++++++++++++++++++++++++++++
-            gl.setAutoCreateGaps(true);
-            gl.setAutoCreateContainerGaps(true);
-
-            //HORIZONTAL GROUP = COL NUM
-            if (false) {
-                  phs = new GroupLayout.ParallelGroup[colLength];
-            }
-            //VERTICAL GROUP = ROW LENGHT DETERMINE BY ->rows<-
-            GroupLayout.SequentialGroup sv = gl.createSequentialGroup();
-            //+++++++++++++++++++++++++++++++++++++++++++++
-            //SUB HORIZONTAL GROUP
-            GroupLayout.SequentialGroup sgh = gl.createSequentialGroup();
-
-            //SUB-SUB HORIZONTAL GROUPS (COLS)
-            if (false) {
-                  for (int a = 0; a < colLength; a++) {
-                        phs[a] = gl.createParallelGroup(GroupLayout.Alignment.LEADING, true);
-                  }
-            }
-            //HORIZONTAL +++++++++++++++++++++++++++++
-            for (int row = 0; row < rowLength; row++) {
-                  for (int col = 0; col < colLength; col++) {
-                        phs[col].addComponent(components[row][col]);
-                  }
-            }
-            System.out.println("PHS LENGTH: " + phs.length);
-            System.out.println("SGH: " + sgh.toString());
-            for (int a = 0; a < colLength; a++) {
-                  sgh.addGroup(phs[a]);
-            }
-            //VERTICAL +++++++++++++++++++++++++++++++
-            for (int a = 0; a < rowLength; a++) {
-                  GroupLayout.ParallelGroup pg = gl.createParallelGroup(GroupLayout.Alignment.LEADING, false);
-                  for (int b = 0; b < colLength; b++) {
-                        pg.addComponent(components[a][b]);
-                  }
-                  sv.addGroup(pg);
-            }
-            //++++++++++++++++++++++++++++++++++++++
-            gl.setHorizontalGroup(
-                    gl.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(sgh));
-
-            gl.setVerticalGroup(
-                    gl.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGroup(sv));
-      }
-       */
       
       private void subSplitUpConfig() {
             PL_U.setLayout(new BorderLayout());
@@ -946,7 +868,7 @@ public class VF_R extends VF_R_DataCom {
             ml.addAllListener();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             setTableCellEditor();
-            setTableRenderer();
+            MComp.setTableRenderer(JT);
             //*++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("\nHeap Size: \t" + Runtime.getRuntime().totalMemory());
             //System.out.println("Heap Max Size: \t" + Runtime.getRuntime().maxMemory());
@@ -1040,16 +962,6 @@ public class VF_R extends VF_R_DataCom {
             });
       }
 
-      public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable() {
-                  public void run() {
-                        //VF_R vf = new VF_R();
-                        //vf.getJF().setVisible(true);
-
-                        //new VT_T();
-                  }
-            });
-      }
       //++++++++++++++++++++++++++++++++++++++++++++++
       /*
       public static void noRowsDetection() {

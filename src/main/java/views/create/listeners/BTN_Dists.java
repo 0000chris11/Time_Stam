@@ -5,9 +5,8 @@
  */
 package views.create.listeners;
 
-import views.create.VC_R2;
 import MC.DT;
-import com.cofii.myMethods.MComp;
+import com.cofii2.myMethods.MComp;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

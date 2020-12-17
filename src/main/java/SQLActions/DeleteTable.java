@@ -5,13 +5,11 @@
  */
 package SQLActions;
 
-import MC.DT;
 import MC.Status;
 import MC.TableInfoC;
-import com.cofii.myInterfaces.IUpdates;
+import com.cofii2.myInterfaces.IUpdates;
 import java.awt.Color;
 import java.sql.SQLException;
-import smallComponenets.JPanelGradient;
 import views.first.VF_R;
 
 /**

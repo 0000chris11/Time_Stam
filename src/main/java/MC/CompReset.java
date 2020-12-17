@@ -5,11 +5,11 @@
  */
 package MC;
 
+import SQLActions.SelectData;
+import com.cofii2.myClasses.MSQL;
+import com.cofii2.myMethods.MText;
 import java.util.ArrayList;
 import views.first.VF_R;
-import SQLActions.SelectData;
-import com.cofii.myClasses.MSQL;
-import com.cofii.myMethods.MText;
 
 /**
  *

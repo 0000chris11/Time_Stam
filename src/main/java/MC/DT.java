@@ -1,10 +1,9 @@
 package MC;
 
-import com.cofii.myClasses.CC;
+import com.cofii2.myClasses.CC;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import views.create.VC_R2;
 
 public class DT {
       

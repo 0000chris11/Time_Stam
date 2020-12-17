@@ -5,10 +5,6 @@
  */
 package views.first;
 
-import com.cofii.myClasses.CC;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  *
  * @author C0FII
