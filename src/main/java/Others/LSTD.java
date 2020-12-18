@@ -1,19 +1,19 @@
 package Others;
 
-import views.first.VF_R;
 import MC.DT;
-import MC.LKCustom;
 import MC.DTSQL;
+import MC.LKCustom;
 import MC.TableInfoC;
-import Threads.Threads;
 import SQLActions.SelectDistinctColumn;
 import SQLActions.SelectDistinctColumns;
+import Threads.Threads;
 import com.cofii2.myClasses.MSQL;
 import com.cofii2.myMethods.MList;
 import com.cofii2.myMethods.MText;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JLabel;
+import views.first.VF_R;
 
 /**
  *
@@ -180,6 +180,7 @@ public class LSTD {
                               MList.unTagList(DT.getList_DS()[a]);
                               //MList.add_SetDefaultListModel(VF_R.getJLSTS()[a], DT.getList_DS()[a], vis);//dms[a + 2]
                               MList.add_SetListModel(VF_R.getJCBS()[a], DT.getList_DS()[a]);
+                              VF_R.getJTFES()[a].setText("");
                               VF_R.getJCBS()[a].setPreferredSize(new Dimension());
                         } else {
                               System.out.println("\tno elements distinct");
@@ -220,6 +221,7 @@ public class LSTD {
                               //MList.add_SetDefaultListModel(VF_R.getJLSTS()[a + 1], DT.getList_MXS()[a], vis);//dms[a + 3]
                               //NOW         MList.add_SetListModel(jcb, al);
                               MList.add_SetListModel(VF_R.getJCBS()[a + 1], DT.getList_MXS()[a]);
+                              VF_R.getJTFES()[a + 1].setText("");
                               VF_R.getJCBS()[a + 1].setPreferredSize(new Dimension());
                         } else {
                               System.out.println("\tno elements distinct (multiple columns)");

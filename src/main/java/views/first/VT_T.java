@@ -6,6 +6,7 @@
 package views.first;
 
 import MC.DT;
+import MC.MainInstances;
 import com.cofii2.myClasses.VT;
 import com.cofii2.myMethods.MComp;
 import java.awt.event.ActionEvent;
@@ -14,9 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
-import javax.swing.table.TableColumnModel;
 import static views.first.VF_R_DataCom.cbs;
-import views.first.listeners.MainListeners_F;
 import views.mainTable.VMT;
 
 /**
@@ -91,10 +90,16 @@ public class VT_T extends VF_R_DataCom {
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                       VMT vmt = MainListeners_F.getVMT();
-                       TableColumnModel cm = vmt.getJMT().getColumnModel();
-                       cm.getColumn(0).setMaxWidth(40);
-                       cm.getColumn(1).setMinWidth(300);
+                       VMT vmt = MainInstances.getVMT();
+                       System.out.println(vmt.getSC_JTDists().getParent().toString());
+                       System.out.println("Dist row count: " + vmt.getJTDists().getRowCount());
+                       System.out.println("Dist column count: " + vmt.getJTDists().getColumnCount());
+                       MComp.printComponentSizeInfo(vmt.getSC_JTDists());
+                       System.out.println("###############################");
+                       System.out.println(vmt.getSC_JTTypes().getParent().toString());
+                       System.out.println("Dist row count: " + vmt.getJTTypes().getRowCount());
+                       System.out.println("Dist column count: " + vmt.getJTTypes().getColumnCount());
+                       MComp.printComponentSizeInfo(vmt.getSC_JTTypes());
                   }
 
             });

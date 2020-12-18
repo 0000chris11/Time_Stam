@@ -1,6 +1,7 @@
 package views.first.listeners;
 
 import MC.DT;
+import MC.MainInstances;
 import MC.Status;
 import com.cofii2.myClasses.CC;
 import com.cofii2.myMethods.MComp;
@@ -169,22 +170,14 @@ public class MainListeners_F {
                   @Override
                   public void actionPerformed(ActionEvent e) {
                         System.out.println(CC.CYAN + "#### VMT STARS ###" + CC.RESET);
-                        if (vmt == null) {
-                              vmt = new VMT();
+                        if (MainInstances.getVMT() == null) {
+                              MainInstances.setVMT(new VMT());
                         }else{
                               Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, "Main Table Window is already open", 4000);
                         }
                   }
 
             });
-      }
-      private static VMT vmt;
-
-      public static VMT getVMT() {
-            return vmt;
-      }
-      public static void setVMT(VMT vmt){
-            MainListeners_F.vmt = vmt;
       }
 
 }

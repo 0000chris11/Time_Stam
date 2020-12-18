@@ -5,13 +5,13 @@
  */
 package views.create.Actions;
 
+import MC.MainInstances;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.EventObject;
 import views.create.VC_R_DataCom;
 import views.create.mTFControl.AKeyMatchActions3;
 import views.create.mTFControl.UpdateList;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -19,7 +19,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class BTN_AControl extends AKeyMatchActions3 {
 
-      VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
       
       @Override
       public UpdateList getUpdatedList(int listID, ArrayList<String> list) {

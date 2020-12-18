@@ -6,6 +6,7 @@
 package views.create.listeners;
 
 import MC.DT;
+import MC.MainInstances;
 import com.cofii2.myMethods.MComp;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import views.create.VC_R_DataCom;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -22,7 +22,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class BTN_Dists implements ActionListener {
 
-      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
       
       @Override
       public void actionPerformed(ActionEvent e) {

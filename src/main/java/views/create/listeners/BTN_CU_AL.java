@@ -5,9 +5,9 @@
  */
 package views.create.listeners;
 
-import views.create.VC_R2;
 import MC.DT;
 import MC.DTSQL;
+import MC.MainInstances;
 import MC.Status;
 import MC.TablesInfo;
 import SQLActions.Update;
@@ -21,10 +21,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 import views.create.VC_R_DataCom;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -32,7 +30,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class BTN_CU_AL implements ActionListener {
 
-      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
 
       private String Choice;
       private int countO = -1;

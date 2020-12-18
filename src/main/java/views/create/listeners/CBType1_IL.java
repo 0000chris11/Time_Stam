@@ -5,14 +5,12 @@
  */
 package views.create.listeners;
 
-import views.create.VC_R2;
 import MC.DT;
+import MC.MainInstances;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import javax.swing.JPanel;
 import views.create.VC_R_DataCom;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -20,7 +18,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class CBType1_IL implements ItemListener {
       
-      VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
 
       @Override
       public void itemStateChanged(ItemEvent e) {

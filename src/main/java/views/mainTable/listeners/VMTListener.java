@@ -5,9 +5,9 @@
  */
 package views.mainTable.listeners;
 
+import MC.MainInstances;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import views.first.listeners.MainListeners_F;
 
 /**
  *
@@ -16,6 +16,6 @@ import views.first.listeners.MainListeners_F;
 public class VMTListener extends WindowAdapter{
       @Override
       public void windowClosed​(WindowEvent e){
-            MainListeners_F.setVMT(null);
+            MainInstances.setVMT(null);
       }
 }

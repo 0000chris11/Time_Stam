@@ -5,11 +5,11 @@
  */
 package views.create.listeners;
 
+import MC.MainInstances;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
 import views.create.VC_R_DataCom;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -17,7 +17,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class rbDefault_AL implements ActionListener {
       
-      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
       
       private int index = 0;
       

@@ -14,6 +14,7 @@ import views.create.renderers.ComboBoxRenderer;
 import MC.DT;
 import MC.DTSQL;
 import MC.LK_C;
+import MC.MainInstances;
 import MC.TablesInfo;
 import com.cofii2.myClasses.MLayout;
 import com.cofii2.myInterfaces.SerializationExceptionAction;
@@ -59,7 +60,6 @@ import views.create.listeners.rbDefault_AL;
 import views.create.mTFControl.MBTN_Control;
 import views.create.mTFControl.MTF_Control3;
 import views.create.mTFControl.MTXControlData;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -67,7 +67,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class VC_R2 {
 
-      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
 
       //CHANGE THEM LATER++++++++++++++++++++++++++++++++++++++++++++
       private void beforeComponentsConfig() {

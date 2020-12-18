@@ -18,7 +18,7 @@ import views.first.VF_R;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class VO {
       

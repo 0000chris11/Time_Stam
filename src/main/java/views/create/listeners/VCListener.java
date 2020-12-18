@@ -5,18 +5,19 @@
  */
 package views.create.listeners;
 
+import MC.MainInstances;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
  * @author C0FII
  */
 public class VCListener extends WindowAdapter{
+      
       @Override
       public void windowClosed​(WindowEvent e){
-            MITableOptions_AL.setVCreate(null);
-            MITableOptions_AL.setVCreateData(null);
+            MainInstances.setVC_R2(null);
+            MainInstances.setVC_R_DataCom(null);
       }
 }

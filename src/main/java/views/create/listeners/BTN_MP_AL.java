@@ -5,8 +5,8 @@
  */
 package views.create.listeners;
 
-import views.create.VC_R2;
 import MC.DT;
+import MC.MainInstances;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import views.create.Actions.TFS_KControl;
 import views.create.VC_R_DataCom;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -23,7 +22,7 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class BTN_MP_AL implements ActionListener {
       
-      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
 
       @Override
       public void actionPerformed(ActionEvent e) {

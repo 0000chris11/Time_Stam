@@ -7,10 +7,10 @@ package views.create.listeners;
 
 import views.create.VC_R2;
 import MC.DT;
+import MC.MainInstances;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import views.create.VC_R_DataCom;
-import views.first.listeners.MITableOptions_AL;
 
 /**
  *
@@ -18,8 +18,8 @@ import views.first.listeners.MITableOptions_AL;
  */
 public class CBExtra_IL implements ItemListener {
       
-      private VC_R_DataCom dt = MITableOptions_AL.getVCreateData();
-      private VC_R2 vc = MITableOptions_AL.getVCreate();
+      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private VC_R2 vc = MainInstances.getVC_R2();
 
       @Override
       public void itemStateChanged(ItemEvent e) {
