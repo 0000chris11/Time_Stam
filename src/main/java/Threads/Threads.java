@@ -260,7 +260,7 @@ public class Threads {
                         }
                         VF_R.getLB_Icon().setText("Ready!");
 
-                        VF_R.getJTCL().setForegroundCell(Color.GRAY);
+                        VF_R.getJTCL().setDefaultForeground(Color.GRAY);
                         VF_R.getJT().setEnabled(true);
                   }
             };

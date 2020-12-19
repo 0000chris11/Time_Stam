@@ -5,6 +5,7 @@
  */
 package views.mainTable.listeners;
 
+import MC.MainInstances;
 import com.cofii2.myMethods.MComp;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import views.mainTable.VMT_DataCom;
 
 /**
  *
@@ -19,6 +21,7 @@ import javax.swing.JToggleButton;
  */
 public class BTN_AL implements ActionListener {
 
+      private VMT_DataCom dt = MainInstances.getVMT_DataCom();
       private JToggleButton[] array;
       private JPanel panel;
       private JComboBox cb;
@@ -36,7 +39,11 @@ public class BTN_AL implements ActionListener {
             if (array[0].isSelected()) {
                   cd.show(panel, "DISTS");
             } else if (array[1].isSelected()) {
-                  cd.show(panel, "TYPES");
+                  if (!dt.getJTDists().getSelectionModel().isSelectionEmpty()) {
+                        cd.show(panel, "TYPES");
+                  }else{
+                        cd.show(panel, "LB_TYPES");
+                  }
                   cb.setVisible(true);
             }
       }

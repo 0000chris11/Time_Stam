@@ -10,7 +10,7 @@ import MC.MainInstances;
 import com.cofii2.myInterfaces.IActions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import views.mainTable.VMT;
+import views.mainTable.VMT_DataCom;
 
 /**
  *
@@ -18,7 +18,7 @@ import views.mainTable.VMT;
  */
 public class SelectDists implements IActions {
 
-      private VMT dt = MainInstances.getVMT();
+      private VMT_DataCom dt = MainInstances.getVMT_DataCom();
 
       @Override
       public void beforeQuery() {

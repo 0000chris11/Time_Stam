@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.UIManager;
 import static views.first.VF_R_DataCom.cbs;
-import views.mainTable.VMT;
+import views.mainTable.VMT_DataCom;
 
 /**
  *
@@ -90,7 +90,7 @@ public class VT_T extends VF_R_DataCom {
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                       VMT vmt = MainInstances.getVMT();
+                       VMT_DataCom vmt = MainInstances.getVMT_DataCom();
                        System.out.println(vmt.getSC_JTDists().getParent().toString());
                        System.out.println("Dist row count: " + vmt.getJTDists().getRowCount());
                        System.out.println("Dist column count: " + vmt.getJTDists().getColumnCount());

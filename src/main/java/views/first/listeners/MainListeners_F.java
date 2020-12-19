@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import views.Login.VL;
 import views.first.VF_R;
 import views.mainTable.VMT;
+import views.mainTable.VMT_DataCom;
 
 /**
  *
@@ -171,6 +172,7 @@ public class MainListeners_F {
                   public void actionPerformed(ActionEvent e) {
                         System.out.println(CC.CYAN + "#### VMT STARS ###" + CC.RESET);
                         if (MainInstances.getVMT() == null) {
+                              MainInstances.setVMT_DataCom(new VMT_DataCom());
                               MainInstances.setVMT(new VMT());
                         }else{
                               Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, "Main Table Window is already open", 4000);

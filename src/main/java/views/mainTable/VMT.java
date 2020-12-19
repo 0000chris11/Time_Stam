@@ -6,15 +6,11 @@
 package views.mainTable;
 
 import MC.DTSQL;
-import MC.TablesInfo;
-import com.cofii2.components.swing.Table;
+import MC.MainInstances;
 import com.cofii2.custom.JTCustomCellRenderer;
 import com.cofii2.custom.LKCustom;
-import com.cofii2.myClasses.MSQL;
 import com.cofii2.myMethods.MComp;
-import com.cofii2.myMethods.MList;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -22,19 +18,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
-import smallComponenets.MComboBoxE;
 import views.mainTable.listeners.BTN_AL;
-import views.mainTable.listeners.CBTables_IL;
+import views.mainTable.listeners.JTDists_LSL;
+import views.mainTable.listeners.JT_TML;
 import views.mainTable.listeners.VMTListener;
 import views.mainTable.sql.SelectDists;
 
@@ -44,94 +34,62 @@ import views.mainTable.sql.SelectDists;
  */
 public class VMT {
 
-      private MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
-
-      private JFrame JF = new JFrame();
-
-      private JPanel PU = new JPanel();
-      private JPanel PD = new JPanel();
-
-      private JToggleButton btnDists = new JToggleButton("Dists");
-      private JToggleButton btnTypes = new JToggleButton("Types");
-      private JComboBox cbTables = new MComboBoxE(MList.getListToArray(String.class, TablesInfo.getTableList()));
-
-      private JTable JTTypes = new Table();
-      private JScrollPane sc_JTTypes = new JScrollPane(JTTypes);
-
-      private JTable JTDists = new Table();
-      private JScrollPane sc_JTDists = new JScrollPane(JTDists);
-      //NON-EDITABLE ++++++++++++
-      private DefaultTableModel dtmDists = new DefaultTableModel() {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                  return false;
-            }
-      };
-      private DefaultTableModel dtmTypes = new DefaultTableModel() {
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                  return false;
-            }
-      };
+      private VMT_DataCom dt = MainInstances.getVMT_DataCom();
 
       public VMT() {
-            JF.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            JF.getContentPane().add(sc_JTTypes);
-            JF.addWindowListener(new VMTListener());
+            dt.JF.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            dt.JF.getContentPane().add(dt.sc_JTTypes);
+            dt.JF.addWindowListener(new VMTListener());
 
-            JF.getContentPane().setLayout(new BorderLayout());
-            JF.add(PU, BorderLayout.CENTER);
-            PU.setBackground(Color.BLACK);
-            CardLayout cd = new CardLayout();
-            PU.setLayout(cd);
-            PU.add(sc_JTDists, "DISTS");
-            sc_JTDists.getViewport().setBackground(Color.BLACK);
-            PU.add(sc_JTTypes, "TYPES");
-            sc_JTTypes.getViewport().setBackground(Color.BLACK);
-            cd.show(PU, "DISTS");
+            dt.JF.getContentPane().setLayout(new BorderLayout());
+            dt.JF.add(dt.PU, BorderLayout.CENTER);
+            dt.PU.setBackground(Color.BLACK);
+            dt.PU.setLayout(dt.cd);
+            dt.PU.add(dt.sc_JTDists, "DISTS");
+            dt.sc_JTDists.getViewport().setBackground(Color.BLACK);
+            dt.PU.add(dt.sc_JTTypes, "TYPES");
+            dt.sc_JTTypes.getViewport().setBackground(Color.BLACK);
+            dt.PU.add(dt.lbTypes, "LB_TYPES");
+            dt.lbTypes.setForeground(Color.RED);
+            dt.lbTypes.setFont(LKCustom.FONT_BIG_LB_MESSAGE);
+            dt.cd.show(dt.PU, "DISTS");
 
-            JF.add(PD, BorderLayout.SOUTH);
-            PD.setBackground(Color.BLACK);
-            PD.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
-            PD.setLayout(new BoxLayout(PD, BoxLayout.X_AXIS));
-            JToggleButton[] btns = new JToggleButton[]{btnDists, btnTypes};
-            BTN_AL al = new BTN_AL(btns, PU, cbTables);
-            PD.add(cbTables);
-            cbTables.setVisible(false);
-            PD.add(Box.createHorizontalGlue());
-            PD.add(btnDists);
-            btnDists.setMinimumSize(new Dimension(200, 28));
-            btnDists.setSelected(true);
-            btnDists.addActionListener(al);
-            PD.add(btnTypes);
-            btnTypes.setMinimumSize(new Dimension(200, 28));
-            btnTypes.addActionListener(al);
-
+            dt.JF.add(dt.PD, BorderLayout.SOUTH);
+            dt.PD.setBackground(Color.BLACK);
+            dt.PD.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
+            dt.PD.setLayout(new BoxLayout(dt.PD, BoxLayout.X_AXIS));
+            JToggleButton[] btns = new JToggleButton[]{dt.btnDists, dt.btnTypes};
+            BTN_AL al = new BTN_AL(btns, dt.PU, dt.cbTables);
+            dt.PD.add(dt.cbTables);
+            dt.cbTables.setVisible(false);
+            dt.PD.add(Box.createHorizontalGlue());
+            dt.PD.add(dt.btnDists);
+            dt.btnDists.setMinimumSize(new Dimension(200, 28));
+            dt.btnDists.setSelected(true);
+            dt.btnDists.addActionListener(al);
+            dt.PD.add(dt.btnTypes);
+            dt.btnTypes.setMinimumSize(new Dimension(200, 28));
+            dt.btnTypes.addActionListener(al);
+            //System.out.println("++++++++++VMT " + MainInstances.getVMT());
             //DISTS ++++++++++++++++++++++++++++
-            ms.selectData(DTSQL.mainTable, new SelectDists());
+            dt.ms.selectData(DTSQL.mainTable, new SelectDists());
             //TYPES +++++++++++++++++++++++++++
-            JTextField tf = (JTextField)cbTables.getEditor().getEditorComponent();
+            JTextField tf = (JTextField) dt.cbTables.getEditor().getEditorComponent();
             tf.setText("");
-            cbTables.addItemListener(new CBTables_IL());
             //CLOSE ++++++++++++++++++++++++++++++++++++++
             try {
-                  ms.getConnection().close();
+                  dt.ms.getConnection().close();
             } catch (SQLException ex) {
                   Logger.getLogger(VMT.class.getName()).log(Level.SEVERE, null, ex);
             }
             //CELL RENDERER +++++++++++++++++++++++
-            MComp.setTableRenderer(JTDists);
-            JTCustomCellRenderer cellR = new JTCustomCellRenderer();
-            //cellR.addComponentAt(new OTInts(new JComboBox(), 0, 2));
-            for (int a = 0; a < JTTypes.getColumnCount(); a++) {
-                  JTTypes.getColumnModel().getColumn(a).setCellRenderer(cellR);
-            }
+            MComp.setTableRenderer(dt.JTDists, new JTCustomCellRenderer());
+            dt.JTTypes.getModel().addTableModelListener(new JT_TML());
             //SIZE +++++++++++++++++++++++++++++++++
-            MComp.setTableDefaultColumnWidth(JTDists);
-            MComp.setTableDefaultColumnWidth(JTTypes);
-
+            MComp.setTableDefaultColumnWidth(dt.JTDists);
+            MComp.setTableDefaultColumnWidth(dt.JTTypes);
+            //+++++++++++++++++++++++++++++++++++++
+            dt.JTDists.getSelectionModel().addListSelectionListener(new JTDists_LSL());
             start();
       }
 
@@ -139,45 +97,19 @@ public class VMT {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override
                   public void run() {
-                        JF.setSize(LKCustom.MAINTABLE_FRAME_SIZE);
-                        MComp.setFrameToCenterOfScreen(JF);
-                        sc_JTTypes.setPreferredSize(new Dimension());
-                        JF.setVisible(true);
-                        JF.setAlwaysOnTop(true);
+                        dt.JF.setSize(LKCustom.MAINTABLE_FRAME_SIZE);
+                        MComp.setFrameToCenterOfScreen(dt.JF);
+                        dt.sc_JTTypes.setPreferredSize(new Dimension());
+                        dt.JF.setVisible(true);
+                        dt.JF.setAlwaysOnTop(true);
 
-                        System.out.println(JTTypes.getColumnCount());
-                        System.out.println(JTTypes.getRowCount());
+                        System.out.println(dt.JTTypes.getColumnCount());
+                        System.out.println(dt.JTTypes.getRowCount());
                   }
 
             });
       }
       //+++++++++++++++++++++++++++++++++++
 
-      public JTable getJTDists() {
-            return JTDists;
-      }
-
-      public JTable getJTTypes() {
-            return JTTypes;
-      }
-
-      public JScrollPane getSC_JTDists() {
-            return sc_JTDists;
-      }
-
-      public JScrollPane getSC_JTTypes() {
-            return sc_JTTypes;
-      }
       
-      public DefaultTableModel getDTMDists(){
-            return dtmDists;
-      }
-      
-      public DefaultTableModel getDTMTypes(){
-            return dtmTypes;
-      }
-      
-      public JComboBox getCBTables(){
-            return cbTables;
-      }
 }

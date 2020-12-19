@@ -12,15 +12,19 @@ import javax.swing.JLabel;
  */
 public class smallLB extends JLabel{
       
+      public smallLB(){
+            defaultConfig();
+      }
       public smallLB(String text){
-            Font f = new Font("Dialog", Font.BOLD, 16);
-            
-            setForeground(Color.WHITE);
-            setFont(f);
-            setText(text);
+            super(text);
+            defaultConfig();
+      }
+      public smallLB(String text, int constants){
+            super(text, constants);
+            defaultConfig();
       }
       
-      public smallLB(){
+      private void defaultConfig(){
             Font f = new Font("Dialog", Font.BOLD, 16);
             
             setForeground(Color.WHITE);

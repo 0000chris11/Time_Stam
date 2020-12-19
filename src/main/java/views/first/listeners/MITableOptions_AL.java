@@ -28,10 +28,10 @@ public class MITableOptions_AL implements ActionListener {
             //System.out.println("\n" + ac);
 
             if (ac.equals(VF_R.getMI_CreateTable().getText())) {
-                  //System.out.println(VF_R.getMI_CreateTable().getText());
                   if (MainInstances.getVC_R2() == null) {
                         MainInstances.setVC_R_DataCom(new VC_R_DataCom());
                         MainInstances.setVC_R2(new VC_R2("CREATE"));
+                        
                   } else {
                         Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                                 "There is already an instance of VCreate Window", 4000);

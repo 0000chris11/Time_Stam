@@ -4,7 +4,6 @@ import MC.CompReset;
 import MC.DT;
 import MC.DTSQL;
 import MC.DTT;
-import MC.LKCustom;
 import MC.TableInfoC;
 import MC.TablesInfo;
 import MC.notMyMethods;
@@ -22,6 +21,8 @@ import SQLActions.SelectConfig;
 import SQLActions.SelectDefaultTable;
 import SQLActions.SelectTables;
 import Threads.*;
+import com.cofii2.custom.JTCustomCellRenderer;
+import com.cofii2.custom.LKCustom;
 import com.cofii2.myAClasses.IDText;
 import com.cofii2.myClasses.CC;
 import com.cofii2.myClasses.MLayout;
@@ -487,7 +488,7 @@ public class VF_R extends VF_R_DataCom {
             //JF.add(lb_JT);
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
-            lb_JT.setFont(new Font("Dialog", Font.BOLD, 40));
+            lb_JT.setFont(LKCustom.FONT_BIG_LB_MESSAGE);
 
             //setLB_JTToCenter(lb_JT, sc_JT);
       }
@@ -868,7 +869,7 @@ public class VF_R extends VF_R_DataCom {
             ml.addAllListener();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             setTableCellEditor();
-            MComp.setTableRenderer(JT);
+            MComp.setTableRenderer(JT, new JTCustomCellRenderer());
             //*++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("\nHeap Size: \t" + Runtime.getRuntime().totalMemory());
             //System.out.println("Heap Max Size: \t" + Runtime.getRuntime().maxMemory());

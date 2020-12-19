@@ -8,6 +8,7 @@ package MC;
 import views.create.VC_R2;
 import views.create.VC_R_DataCom;
 import views.mainTable.VMT;
+import views.mainTable.VMT_DataCom;
 
 /**
  *
@@ -18,6 +19,7 @@ public class MainInstances {
       private static VC_R2 vcr2;
       private static VC_R_DataCom vcrd;
       private static VMT vmt;
+      private static VMT_DataCom vmtd;
       //++++++++++++++++++++++++++++++++++++++++++
       public static VC_R2 getVC_R2() {
             return vcr2;
@@ -30,6 +32,10 @@ public class MainInstances {
       public static VMT getVMT() {
             return vmt;
       }
+      
+      public static VMT_DataCom getVMT_DataCom(){
+            return vmtd;
+      }
       //++++++++++++++++++++++++++++++++++++++++++
       public static void setVC_R2(VC_R2 vcr2) {
             MainInstances.vcr2 = vcr2;
@@ -41,5 +47,9 @@ public class MainInstances {
 
       public static void setVMT(VMT vmt) {
             MainInstances.vmt = vmt;
+      }
+      
+      public static void setVMT_DataCom(VMT_DataCom vmtd){
+            MainInstances.vmtd = vmtd;
       }
 }

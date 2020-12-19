@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 public class VMTListener extends WindowAdapter{
       @Override
       public void windowClosed​(WindowEvent e){
+            MainInstances.setVMT_DataCom(null);
             MainInstances.setVMT(null);
       }
 }
