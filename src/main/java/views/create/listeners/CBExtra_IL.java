@@ -5,11 +5,11 @@
  */
 package views.create.listeners;
 
-import views.create.VC_R2;
 import MC.DT;
 import MC.MainInstances;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import views.create.VC_R2;
 import views.create.VC_R_DataCom;
 
 /**
@@ -36,7 +36,6 @@ public class CBExtra_IL implements ItemListener {
                   }
                   dt.getPanelTypes2()[a].revalidate();
             }
-            vc.toolKitConfig();
       }
 
 }

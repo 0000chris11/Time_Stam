@@ -6,12 +6,9 @@
 package views.mainTable;
 
 import MC.DTSQL;
-import MC.TablesInfo;
 import com.cofii2.components.swing.Table;
 import com.cofii2.myClasses.MSQL;
-import com.cofii2.myMethods.MList;
 import java.awt.CardLayout;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,7 +17,6 @@ import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import smallComponenets.MComboBoxE;
 import smallComponenets.smallLB;
 
 /**
@@ -42,7 +38,6 @@ public class VMT_DataCom {
 
       JToggleButton btnDists = new JToggleButton("Dists");
       JToggleButton btnTypes = new JToggleButton("Types");
-      JComboBox cbTables = new MComboBoxE(MList.getListToArray(String.class, TablesInfo.getTableList()));
 
       JTable JTTypes = new Table();
       JScrollPane sc_JTTypes = new JScrollPane(JTTypes);
@@ -97,11 +92,14 @@ public class VMT_DataCom {
             return dtmTypes;
       }
       
-      public JComboBox getCBTables(){
-            return cbTables;
-      }
-      
       public JLabel getLBTypes(){
             return lbTypes;
+      }
+      
+      public JToggleButton getBTNDists(){
+            return btnDists;
+      }
+      public JToggleButton getBTNTypes(){
+            return btnTypes;
       }
 }

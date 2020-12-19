@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -59,10 +58,8 @@ public class VMT {
             dt.PD.setMaximumSize(new Dimension(Short.MAX_VALUE, 30));
             dt.PD.setLayout(new BoxLayout(dt.PD, BoxLayout.X_AXIS));
             JToggleButton[] btns = new JToggleButton[]{dt.btnDists, dt.btnTypes};
-            BTN_AL al = new BTN_AL(btns, dt.PU, dt.cbTables);
-            dt.PD.add(dt.cbTables);
-            dt.cbTables.setVisible(false);
-            dt.PD.add(Box.createHorizontalGlue());
+            BTN_AL al = new BTN_AL(btns);
+            
             dt.PD.add(dt.btnDists);
             dt.btnDists.setMinimumSize(new Dimension(200, 28));
             dt.btnDists.setSelected(true);
@@ -70,12 +67,10 @@ public class VMT {
             dt.PD.add(dt.btnTypes);
             dt.btnTypes.setMinimumSize(new Dimension(200, 28));
             dt.btnTypes.addActionListener(al);
+            dt.PD.add(Box.createHorizontalGlue());
             //System.out.println("++++++++++VMT " + MainInstances.getVMT());
             //DISTS ++++++++++++++++++++++++++++
             dt.ms.selectData(DTSQL.mainTable, new SelectDists());
-            //TYPES +++++++++++++++++++++++++++
-            JTextField tf = (JTextField) dt.cbTables.getEditor().getEditorComponent();
-            tf.setText("");
             //CLOSE ++++++++++++++++++++++++++++++++++++++
             try {
                   dt.ms.getConnection().close();

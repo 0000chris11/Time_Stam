@@ -5,7 +5,6 @@
  */
 package Others;
 
-import java.awt.event.KeyEvent;
 import java.io.Serializable;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -35,14 +34,17 @@ public class LimitTextD extends DocumentFilter implements Serializable{
             }
       }
 
-      public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) {
-            //System.out.println("InsertString");
+      @Override
+      public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+            System.out.println("InsertString");
       }
 
+      @Override
       public void remove(FilterBypass fb, int offset, int length) {
             //System.out.println("remove");
       }
 
+      @Override
       public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) {
             if (Limit != 0) {
                   System.out.println("replace");

@@ -6,11 +6,10 @@
 package views.mainTable.sql;
 
 import MC.MainInstances;
+import com.cofii2.components.swing.LabelX;
 import com.cofii2.custom.JTCustomCellRenderer;
-import com.cofii2.myClasses.STColor;
 import com.cofii2.myInterfaces.IActions;
 import com.cofii2.myMethods.MComp;
-import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import views.mainTable.VMT_DataCom;
@@ -40,12 +39,12 @@ public class SelectColumns implements IActions {
 
       @Override
       public void setData(ResultSet rs, int row) throws SQLException {
-            String field = getStringControl(rs.getString(1));
-            String type = getStringControl(rs.getString(2));
-            String nulll = getStringControl(rs.getString(3));
-            String key = getStringControl(rs.getString(4));
-            String defaultt = getStringControl(rs.getString(5));
-            String extra = getStringControl(rs.getString(6));
+            Object field = getStringControl(rs.getString(1));
+            Object type = getStringControl(rs.getString(2));
+            Object nulll = getStringControl(rs.getString(3));
+            Object key = getStringControl(rs.getString(4));
+            Object defaultt = getStringControl(rs.getString(5));
+            Object extra = getStringControl(rs.getString(6));
             
             Object[] rows = new Object[]{
                   field, type, nulll, key, defaultt, extra};
@@ -57,7 +56,7 @@ public class SelectColumns implements IActions {
       public void afterQuery(String query, boolean rsValue) {
             if(rsValue){
                   JTCustomCellRenderer cr = new JTCustomCellRenderer();
-                  cr.addWordChoice(new STColor("NONE", Color.RED.darker()));
+                  //cr.addWordChoice(new STColor("NONE", Color.RED.darker()));
                   MComp.setTableRenderer(dt.getJTTypes(), cr);
             }
       }
@@ -67,10 +66,10 @@ public class SelectColumns implements IActions {
             ex.printStackTrace();
       }
       //++++++++++++++++++++++++++++++++++++++++++
-      private String getStringControl(String text){
-            String returnValue = text;
-            if(text != null){
-                  returnValue = "NONE";
+      private Object getStringControl(String text){
+            Object returnValue = text;
+            if(text == null || text.isEmpty()){
+                  returnValue = new LabelX();
             }
             return returnValue;
       }

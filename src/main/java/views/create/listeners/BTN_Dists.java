@@ -23,9 +23,10 @@ import views.create.VC_R_DataCom;
 public class BTN_Dists implements ActionListener {
 
       private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
-      
+
       @Override
       public void actionPerformed(ActionEvent e) {
+            clockDistControl(e);
             imageCClockAction(e);
 
             ArrayList<Integer> colsDist = new ArrayList<Integer>();
@@ -65,7 +66,6 @@ public class BTN_Dists implements ActionListener {
             setLB(dt.getLB_ADisp()[2], imageC);
             setLB(dt.getLB_ADisp()[4], clock);
             //+++++++++++++++++++++++++++++++++++
-            clockDistControl(e);
       }
 
       private void setLB(JLabel lb, String var) {
@@ -95,7 +95,7 @@ public class BTN_Dists implements ActionListener {
 
       private String getOutput(int val) {
             String var = "NONE";
-            if (val != -1) {
+            if (val > 0) {
                   var = "C" + (Integer.toString(val));
 
             }
@@ -104,16 +104,19 @@ public class BTN_Dists implements ActionListener {
 
       //+++++++++++++++++++++++++++++++++++++++++++++
       private void imageCClockAction(ActionEvent e) {
-            String name = ((JComponent) e.getSource()).getName();
+            //String name = ((JComponent) e.getSource()).getName();
             try {
-                  if (name.contains("BTN_IMAGEC")) {
-                        dt.setBTN_ImageCSelected(MComp.setButtonGroup(e,
-                                dt.getBTNS_ImageC()));
-                  } else if (name.contains("BTN_CLOCK")) {
-                        dt.setBTN_ClockSelected(MComp.setButtonGroup(e,
-                                dt.getBTNS_Clock()));
-                  }
+
+                  int imageCValue = MComp.setButtonGroup(e, dt.getBTNS_ImageC());
+                  //System.out.println("\nimageCValue: " + imageCValue);
+                  dt.setBTN_ImageCSelected(imageCValue);
+                  
+                  int clockValue = MComp.setButtonGroup(e, dt.getBTNS_Clock());
+                  //System.out.println("clockValue: " + clockValue);
+                  dt.setBTN_ClockSelected(clockValue);
+
             } catch (NullPointerException ex) {
+                  ex.printStackTrace();
             }
       }
 
@@ -124,7 +127,8 @@ public class BTN_Dists implements ActionListener {
                   if (JC.getName().equals(dt.getBTNS_Dist()[a].getName())) {
                         if (dt.getBTNS_Dist()[a].isSelected()) {
                               dt.getBTNS_Clock()[a].setEnabled(false);
-                        }else{
+                              dt.getBTNS_Clock()[a].setSelected(false);
+                        } else {
                               dt.getBTNS_Clock()[a].setEnabled(true);
                         }
                   }

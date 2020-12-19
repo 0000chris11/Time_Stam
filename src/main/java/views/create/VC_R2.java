@@ -5,17 +5,13 @@
  */
 package views.create;
 
-import views.create.listeners.BTN_Dists;
-import views.create.listeners.BTN_MP_AL;
-import views.create.listeners.CBType1_IL;
-import views.create.listeners.CBExtra_IL;
-import views.create.Actions.SingleSelectionButton;
-import views.create.renderers.ComboBoxRenderer;
 import MC.DT;
 import MC.DTSQL;
 import MC.LK_C;
 import MC.MainInstances;
 import MC.TablesInfo;
+import Others.LimitTextD;
+import com.cofii2.myAClasses.MLimitN;
 import com.cofii2.myClasses.MLayout;
 import com.cofii2.myInterfaces.SerializationExceptionAction;
 import com.cofii2.myMethods.MComp;
@@ -41,6 +37,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.PlainDocument;
 import org.apache.commons.lang3.SerializationException;
 import smallComponenets.NumberOTF;
 import smallComponenets.smallBTN_C;
@@ -52,14 +49,20 @@ import smallComponenets.smallTF;
 import views.create.Actions.BTN_AControl;
 import views.create.Actions.PKAction;
 import views.create.Actions.RBExtraAction;
+import views.create.Actions.SingleSelectionButton;
 import views.create.Actions.TFS_KControl;
 import views.create.Actions.Table_KControlException;
 import views.create.listeners.BTN_CU_AL;
+import views.create.listeners.BTN_Dists;
+import views.create.listeners.BTN_MP_AL;
+import views.create.listeners.CBExtra_IL;
+import views.create.listeners.CBType1_IL;
 import views.create.listeners.VCListener;
 import views.create.listeners.rbDefault_AL;
 import views.create.mTFControl.MBTN_Control;
 import views.create.mTFControl.MTF_Control3;
 import views.create.mTFControl.MTXControlData;
+import views.create.renderers.ComboBoxRenderer;
 
 /**
  *
@@ -107,6 +110,7 @@ public class VC_R2 {
             for (int a = 0; a < dt.compsD.length; a++) {
                   for (int b = 0; b < dt.compsD[a].length; b++) {
                         if (a > 1) {
+                              //EVERY ROW BUT THE FIRST ONE
                               dt.compsD[a][b].setVisible(false);
                         }
                   }
@@ -195,6 +199,10 @@ public class VC_R2 {
                   dt.tfsDefaults[a].setForeground(Color.GRAY);
 
                   dt.panelsExtra[a].setOpaque(true);
+                  if (a != 0) {
+                        //ONLY THE FIRST ONE STARTS WITH INT
+                        dt.combsExtra[a].setEnabled(false);
+                  }
                   dt.panelsDefaults[a].setOpaque(true);
                   dt.btns_Dist2[a].setEnabled(false);
                   dt.rbsExtra[a].setOpaque(true);
@@ -301,8 +309,13 @@ public class VC_R2 {
                   dt.tfsIDEN1[a] = (NumberOTF) extraPanelFilter[2];
                   dt.tfsIDEN2[a] = (NumberOTF) extraPanelFilter[3];
                   //++++++++++++++++++++++++++++++++++++++++++++++++
-                  MComp.setOnlyNumbers(dt.tfsIDEN1[a]);
-                  MComp.setOnlyNumbers(dt.tfsIDEN2[a]);
+                  dt.tfsIDEN1[a].setText("1");
+                  dt.tfsIDEN2[a].setText("1");
+                  ((PlainDocument) dt.tfsIDEN1[a].getDocument()).setDocumentFilter(new MLimitN(MLimitN.ONE_TO_));
+                  ((PlainDocument) dt.tfsIDEN2[a].getDocument()).setDocumentFilter(new LimitTextD("U"));
+                  //((AbstractDocument) dt.tfsIDEN2[a].getDocument()).setDocumentFilter(new MLimitN(MLimitN.ONE_TO_));
+                  //MComp.setOnlyNumbersAllowed(dt.tfsIDEN1[a], MLimitN.ONE_TO_);
+                  //MComp.setOnlyNumbersAllowed(dt.tfsIDEN2[a], MLimitN.ONE_TO_);
                   //++++++++++++++++++++++++++++++++++++++++++++++++
                   dt.combsExtra[a].setRenderer(new ComboBoxRenderer());
             }
@@ -434,6 +447,7 @@ public class VC_R2 {
                   }
                   dt.JPR_U.add(dt.lb_TDisp[a]);//HOLD ALL LBS AT THIS TIME
             }
+            dt.JPR_U.add(Box.createVerticalGlue());
             dt.JPR_U.add(dt.lb_ClockLocation);
             dt.lb_ClockLocation.setForeground(Color.YELLOW.darker());
             //lb_ClockLocation.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
@@ -479,7 +493,7 @@ public class VC_R2 {
                   String selected = cb.getSelectedItem().toString();
                   if (!cb.isEnabled() && !dt.rbsPK[a].isSelected() && selected.equals("AUTO_INCREMENT")) {
                         cb.setToolTipText("Auto_increment column needs to be a Primary Key");
-                  }else{
+                  } else {
                         cb.setToolTipText("");
                   }
             }
@@ -505,31 +519,19 @@ public class VC_R2 {
             JPRConfig(choice);
             toolKitConfig();
 
-            updateSwing();
+            start();
       }
 
-      private void updateSwing() {
+      private void start() {
             SwingUtilities.invokeLater(new Runnable() {
                   @Override
                   public void run() {
                         dt.JF.setSize(1100, 500);
+                        MComp.setFrameToCenterOfScreen(dt.JF);
                         dt.JF.setAlwaysOnTop(true);
                         dt.JF.setVisible(true);
                   }
 
             });
       }
-      /*
-      public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable() {
-                  @Override
-                  public void run() {
-                        VC_R2 VC = new VC_R2("CREATE");
-                        VC.JF.setSize(1100, 500);
-                        VC.JF.setAlwaysOnTop(true);
-                  }
-
-            });
-      }
-       */
 }
