@@ -1,7 +1,7 @@
 package views.first.listeners;
 
 import views.first.VF_R;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComponent;

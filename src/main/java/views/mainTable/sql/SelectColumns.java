@@ -9,7 +9,7 @@ import MC.MainInstances;
 import com.cofii2.components.swing.LabelX;
 import com.cofii2.custom.JTCustomCellRenderer;
 import com.cofii2.myInterfaces.IActions;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import views.mainTable.VMT_DataCom;

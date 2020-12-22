@@ -6,7 +6,7 @@ import MC.Status;
 import MC.notMyMethods;
 import SQLActions.SelectConfig;
 import SQLActions.Update;
-import com.cofii2.myClasses.MSQL;
+import com.cofii2.mysql.MSQL;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

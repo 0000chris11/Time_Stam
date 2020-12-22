@@ -6,8 +6,8 @@
 package MC;
 
 import SQLActions.SelectData;
-import com.cofii2.myClasses.MSQL;
-import com.cofii2.myMethods.MText;
+import com.cofii2.mysql.MSQL;
+import com.cofii2.methods.MText;
 import java.util.ArrayList;
 import views.first.VF_R;
 

@@ -14,7 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import views.create.Actions.TFS_KControl;
-import views.create.VC_R_DataCom;
+import views.create.VC_R_Comps;
 
 /**
  *
@@ -22,16 +22,16 @@ import views.create.VC_R_DataCom;
  */
 public class BTN_MP_AL implements ActionListener {
       
-      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private VC_R_Comps c = MainInstances.getVC_R_Comps();
 
       @Override
       public void actionPerformed(ActionEvent e) {
             for (int row = 0; row < DT.maxColumns - 1; row++) {
                   //SUB
-                  if (e.getSource() == dt.getBTNS_M()[row + 1]) {//FIRST ONE ALLWAYS DISABLED
-                        for (int col = 0; col < dt.getCompsD()[row].length; col++) {
+                  if (e.getSource() == c.getBTNS_M()[row + 1]) {//FIRST ONE ALLWAYS DISABLED
+                        for (int col = 0; col < c.getCompsD()[row].length; col++) {
 
-                              JComponent JC = dt.getCompsD()[row + 2][col];
+                              JComponent JC = c.getCompsD()[row + 2][col];
                               JC.setVisible(false);
                               if (JC instanceof JTextField) {
                                     if (JC.getName().contains("TF_")) {
@@ -46,16 +46,16 @@ public class BTN_MP_AL implements ActionListener {
                                     JC.setForeground(Color.WHITE);
                               }
                         }
-                        dt.getBTNS_M()[row].setVisible(true);
-                        dt.getBTNS_P()[row].setVisible(true);
+                        c.getBTNS_M()[row].setVisible(true);
+                        c.getBTNS_P()[row].setVisible(true);
                   }
                   //ADD
-                  if (e.getSource() == dt.getBTNS_P()[row]) {//LAST ONE ALLWAYS DISABLED
-                        for (int col = 0; col < dt.getCompsD()[row].length; col++) {
-                              dt.getCompsD()[row + 2][col].setVisible(true);
+                  if (e.getSource() == c.getBTNS_P()[row]) {//LAST ONE ALLWAYS DISABLED
+                        for (int col = 0; col < c.getCompsD()[row].length; col++) {
+                              c.getCompsD()[row + 2][col].setVisible(true);
                         }
-                        dt.getBTNS_M()[row].setVisible(false);
-                        dt.getBTNS_P()[row].setVisible(false);
+                        c.getBTNS_M()[row].setVisible(false);
+                        c.getBTNS_P()[row].setVisible(false);
 
                   }
             }

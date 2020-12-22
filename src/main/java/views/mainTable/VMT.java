@@ -9,7 +9,7 @@ import MC.DTSQL;
 import MC.MainInstances;
 import com.cofii2.custom.JTCustomCellRenderer;
 import com.cofii2.custom.LKCustom;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

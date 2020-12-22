@@ -11,9 +11,9 @@ import MC.MainInstances;
 import MC.Status;
 import MC.TablesInfo;
 import SQLActions.Update;
-import com.cofii2.myClasses.CC;
-import com.cofii2.myClasses.MSQL;
-import com.cofii2.myAClasses.IDText;
+import com.cofii2.mysql.MSQL;
+import com.cofii2.stores.CC;
+import com.cofii2.stores.IDText;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
+import views.create.VC_R_Comps;
 import views.create.VC_R_DataCom;
 
 /**
@@ -31,6 +32,7 @@ import views.create.VC_R_DataCom;
 public class BTN_CU_AL implements ActionListener {
 
       private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private static VC_R_Comps c = MainInstances.getVC_R_Comps();
 
       private String Choice;
       private int countO = -1;
@@ -60,7 +62,7 @@ public class BTN_CU_AL implements ActionListener {
             int countV = 0;
             //HOW MANY COLS ARE VISIBLE
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (dt.getTFS()[a].isVisible()) {
+                  if (c.getTFS()[a].isVisible()) {
                         countV++;
                   }
             }
@@ -78,26 +80,26 @@ public class BTN_CU_AL implements ActionListener {
                   boolean[] nulls = new boolean[countV];
 
                   for (int a = 0; a < countV; a++) {
-                        colNames[a] = dt.getTFS()[a].getText();
-                        types[a] = dt.getCombTypes()[a].getSelectedItem().toString();
-                        nulls[a] = dt.getCheckbNulls()[a].isSelected();
+                        colNames[a] = c.getTFS()[a].getText();
+                        types[a] = c.getCBSTypes()[a].getSelectedItem().toString();
+                        nulls[a] = c.getCKSNulls()[a].isSelected();
                   }
 
-                  int extraCol = dt.getRB_ExtraSelected();
+                  int extraCol = c.getRB_ExtraSelected();
                   String extraValue = null;
                   if (extraCol > 0) {
-                        extraValue = dt.getCombTypes2()[extraCol - 1].getSelectedItem().toString();
+                        extraValue = c.getCBSExtra()[extraCol - 1].getSelectedItem().toString();
                         //IF IS IDENTITY
-                        if (dt.getCombTypes2()[extraCol - 1].getSelectedIndex() == 1) {
-                              extraValue += "(" + dt.getTFSTypes1()[extraCol - 1].getText()
-                                      + ", " + dt.getTFSTypes2()[extraCol - 1].getText() + ")";
+                        if (c.getCBSExtra()[extraCol - 1].getSelectedIndex() == 1) {
+                              extraValue += "(" + c.getTFSIDEN1()[extraCol - 1].getText()
+                                      + ", " + c.getTFSIDEN2()[extraCol - 1].getText() + ")";
                         }
                   }
 
-                  int pkIndex = dt.getRB_PKSelected();
+                  int pkIndex = c.getRB_PKSelected();
                   String pkCol = null;
                   if (pkIndex > 0) {
-                        pkCol = colNames[dt.getRB_PKSelected() - 1];
+                        pkCol = colNames[c.getRB_PKSelected() - 1];
                   }
                   //==============================================
                   /*
@@ -164,10 +166,10 @@ public class BTN_CU_AL implements ActionListener {
             //IF EACH JTF HAS TEXT AND NO SQL ERRORS
             for (int a = 0; a < cv; a++) {
                   //IF THE COLUMNS ARE CORRECT
-                  JTextField TF = dt.getTFS()[a];
+                  JTextField TF = c.getTFS()[a];
                   if (!TF.getText().isEmpty()) {
                         if (!TF.getForeground().equals(Color.RED)
-                                && !dt.getHeaders()[1].getForeground().equals(Color.RED)) {
+                                && !c.getHeaders()[1].getForeground().equals(Color.RED)) {
                               System.out.println("\t\tCNEEDED " + (cv) + " = " + countO);
                               //countC++;
                               countO++;//count up only if it meats these conditions

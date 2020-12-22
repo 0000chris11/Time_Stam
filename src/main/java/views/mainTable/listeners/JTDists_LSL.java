@@ -7,7 +7,7 @@ package views.mainTable.listeners;
 
 import MC.DTSQL;
 import MC.MainInstances;
-import com.cofii2.myClasses.MSQL;
+import com.cofii2.mysql.MSQL;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import views.mainTable.VMT_DataCom;

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import views.choice.VO;
 import views.create.VC_R2;
+import views.create.VC_R_Comps;
 import views.create.VC_R_DataCom;
 import views.first.VF_R;
 
@@ -30,6 +31,7 @@ public class MITableOptions_AL implements ActionListener {
             if (ac.equals(VF_R.getMI_CreateTable().getText())) {
                   if (MainInstances.getVC_R2() == null) {
                         MainInstances.setVC_R_DataCom(new VC_R_DataCom());
+                        MainInstances.setVC_R_Comps(new VC_R_Comps());
                         MainInstances.setVC_R2(new VC_R2("CREATE"));
                         
                   } else {

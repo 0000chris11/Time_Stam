@@ -7,7 +7,7 @@ package SQLActions;
 
 import views.first.VF_R;
 import MC.Status;
-import com.cofii2.myClasses.CC;
+import com.cofii2.stores.CC;
 import com.cofii2.myInterfaces.IActions;
 import java.awt.Color;
 import java.awt.Dimension;

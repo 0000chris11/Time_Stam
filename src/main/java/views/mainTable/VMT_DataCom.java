@@ -7,7 +7,7 @@ package views.mainTable;
 
 import MC.DTSQL;
 import com.cofii2.components.swing.Table;
-import com.cofii2.myClasses.MSQL;
+import com.cofii2.mysql.MSQL;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;

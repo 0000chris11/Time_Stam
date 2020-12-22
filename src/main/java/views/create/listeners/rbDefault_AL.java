@@ -9,7 +9,7 @@ import MC.MainInstances;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JRadioButton;
-import views.create.VC_R_DataCom;
+import views.create.VC_R_Comps;
 
 /**
  *
@@ -17,7 +17,7 @@ import views.create.VC_R_DataCom;
  */
 public class rbDefault_AL implements ActionListener {
       
-      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private VC_R_Comps c = MainInstances.getVC_R_Comps();
       
       private int index = 0;
       
@@ -29,9 +29,9 @@ public class rbDefault_AL implements ActionListener {
       public void actionPerformed(ActionEvent e) {
             JRadioButton rb = (JRadioButton) e.getSource();
             if (rb.isSelected()) {
-                  dt.getTFSDefaults()[index].setVisible(true);
+                  c.getTFSDefaults()[index].setVisible(true);
             }else{
-                  dt.getTFSDefaults()[index].setVisible(false);
+                  c.getTFSDefaults()[index].setVisible(false);
             }
             
       }

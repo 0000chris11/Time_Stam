@@ -8,7 +8,7 @@ package views.choice;
 import views.choice.VO;
 import MC.DTSQL;
 import SQLActions.DeleteTable;
-import com.cofii2.myClasses.MSQL;
+import com.cofii2.mysql.MSQL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

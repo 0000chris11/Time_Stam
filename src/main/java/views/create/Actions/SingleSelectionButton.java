@@ -5,7 +5,7 @@
  */
 package views.create.Actions;
 
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;

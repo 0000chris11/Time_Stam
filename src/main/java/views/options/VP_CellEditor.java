@@ -5,8 +5,8 @@
  */
 package views.options;
 
-import com.cofii2.myClasses.CC;
-import com.cofii2.myMethods.MCell;
+import com.cofii2.stores.CC;
+import com.cofii2.methods.MCell;
 import java.awt.Component;
 import java.util.EventObject;
 import javax.swing.AbstractCellEditor;

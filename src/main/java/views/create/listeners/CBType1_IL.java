@@ -10,7 +10,7 @@ import MC.MainInstances;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import views.create.VC_R_DataCom;
+import views.create.VC_R_Comps;
 
 /**
  *
@@ -18,7 +18,7 @@ import views.create.VC_R_DataCom;
  */
 public class CBType1_IL implements ItemListener {
       
-      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private VC_R_Comps c = MainInstances.getVC_R_Comps();
 
       @Override
       public void itemStateChanged(ItemEvent e) {
@@ -27,8 +27,8 @@ public class CBType1_IL implements ItemListener {
             Color foreg = Color.WHITE;
             Color selec = Color.BLUE;
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (e.getSource() == dt.getCombTypes()[a]) {
-                        if (dt.getCombTypes()[a].getSelectedItem().toString().equals("INT")) {
+                  if (e.getSource() == c.getCBSTypes()[a]) {
+                        if (c.getCBSTypes()[a].getSelectedItem().toString().equals("INT")) {
                               enabled = true;
                               foreg = Color.WHITE;
                               selec = Color.BLUE;
@@ -38,15 +38,15 @@ public class CBType1_IL implements ItemListener {
                               enabled = false;
                         }
                         
-                        dt.getCombTypes2()[a].setEnabled(enabled);
-                        dt.getCombTypes2()[a].setForeground(foreg);
+                        c.getCBSExtra()[a].setEnabled(enabled);
+                        c.getCBSExtra()[a].setForeground(foreg);
                         //VC_R2.getCombTypes2()[a].setForeground(foreg);
                         
-                        dt.getTFSTypes1()[a].setEnabled(enabled);
-                        dt.getTFSTypes1()[a].setForeground(foreg);
+                        c.getTFSIDEN1()[a].setEnabled(enabled);
+                        c.getTFSIDEN1()[a].setForeground(foreg);
                         
-                        dt.getTFSTypes2()[a].setEnabled(enabled);
-                        dt.getTFSTypes2()[a].setForeground(foreg);
+                        c.getTFSIDEN2()[a].setEnabled(enabled);
+                        c.getTFSIDEN2()[a].setForeground(foreg);
                         
                   }
             }

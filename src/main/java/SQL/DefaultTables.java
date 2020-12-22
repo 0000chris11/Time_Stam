@@ -5,7 +5,7 @@
  */
 package SQL;
 
-import com.cofii2.myClasses.DString;
+import com.cofii2.stores.DString;
 
 /**
  *

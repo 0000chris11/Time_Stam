@@ -15,8 +15,8 @@ import Others.LSTD;
 import MC.notMyMethods;
 import SQLActions.Update;
 import Threads.Threads;
-import com.cofii2.myClasses.MSQL;
-import com.cofii2.myMethods.MTable;
+import com.cofii2.mysql.MSQL;
+import com.cofii2.methods.MTable;
 
 /**
  *

@@ -6,11 +6,11 @@
 package views.Login;
 
 import MC.DTSQL;
-import com.cofii2.myClasses.MLayout;
-import com.cofii2.myClasses.MSQL;
+import com.cofii2.myAClasses.MLayout;
+import com.cofii2.mysql.MSQL;
 import com.cofii2.myInterfaces.IActions;
-import com.cofii2.myMethods.MComp;
-import com.cofii2.myMethods.MOthers;
+import com.cofii2.methods.MComp;
+import com.cofii2.methods.MOthers;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

@@ -6,7 +6,7 @@
 package views.first.listeners;
 
 import MC.LKCustom;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComboBox;

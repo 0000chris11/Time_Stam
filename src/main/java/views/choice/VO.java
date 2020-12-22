@@ -5,7 +5,7 @@
  */
 package views.choice;
 
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;

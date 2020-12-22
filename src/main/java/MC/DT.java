@@ -1,6 +1,6 @@
 package MC;
 
-import com.cofii2.myClasses.CC;
+import com.cofii2.stores.CC;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;

@@ -9,8 +9,7 @@ import MC.DT;
 import MC.MainInstances;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import views.create.VC_R2;
-import views.create.VC_R_DataCom;
+import views.create.VC_R_Comps;
 
 /**
  *
@@ -18,23 +17,22 @@ import views.create.VC_R_DataCom;
  */
 public class CBExtra_IL implements ItemListener {
       
-      private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
-      private VC_R2 vc = MainInstances.getVC_R2();
+      private VC_R_Comps c = MainInstances.getVC_R_Comps();
 
       @Override
       public void itemStateChanged(ItemEvent e) {
             boolean visible = false;
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (e.getSource() == dt.getCombTypes2()[a]) {
-                        if (dt.getCombTypes2()[a].getSelectedIndex() == 1) {
+                  if (e.getSource() == c.getCBSExtra()[a]) {
+                        if (c.getCBSExtra()[a].getSelectedIndex() == 1) {
                               visible = true;
                         } else {
                               visible = false;
                         }
-                        dt.getTFSTypes1()[a].setVisible(visible);
-                        dt.getTFSTypes2()[a].setVisible(visible);
+                        c.getTFSIDEN1()[a].setVisible(visible);
+                        c.getTFSIDEN2()[a].setVisible(visible);
                   }
-                  dt.getPanelTypes2()[a].revalidate();
+                  c.getPanelsExtra()[a].revalidate();
             }
       }
 

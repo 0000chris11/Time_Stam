@@ -5,7 +5,7 @@
  */
 package MC;
 
-import com.cofii2.myClasses.DString;
+import com.cofii2.stores.DString;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -47,6 +47,29 @@ public class DTSQL {
             "/", "&", "%", "#", "\"", "!", "|", "~", "^", "@"};
       private static ArrayList<String> bandWE_mysql = new ArrayList<String>(Arrays.asList(bwE_mysql));
       private static ArrayList<String> bandWC_mysql = new ArrayList<String>(Arrays.asList(bwC_mysql));
+
+      public static final String[] mysqlTypes = new String[]{
+            "INT", "TINYINT", "SMALLINT", "MEDIUMINT", "BIGINT", 
+            "FLOAT", "DOUBLE",
+            "CHAR", "VARCHAR",
+            "BOOLEAN/TINYINT(1)",
+            "DATE", "DATETIME", "TIMESTAMP",
+            "BINARY", "VARBINARY"};
+      public static final boolean[] mysqlTypesFixedSize = new boolean[]{
+            true, true, true, true, true,
+            false,false,
+            true, true,
+            false,
+            false, false, false,
+            false, false};
+
+      public static final int INT_MAX_WIDTH = 11;
+      public static final int TINYINT_MAX_WIDTH = 3;
+      public static final int SMALLINT_MAX_WIDTH = 5;
+      public static final int MEDIUMINT_MAX_WIDTH = 9;
+      public static final int BIGINT_MAX_WIDTH = 20;
+      public static final int CHAR_MAX_WIDTH = 255;
+      public static final int VARCHAR_MAX_WIDTH = 16383;
 
       public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";
 
@@ -116,14 +139,15 @@ public class DTSQL {
       public static final DString match1 = new DString(table1, "id");
       public static final DString match2 = new DString(table2, "id");
       public static final DString[] listDS = new DString[]{
-            new DString(table1, "id"), 
-            new DString(table1, "Name"), 
+            new DString(table1, "id"),
+            new DString(table1, "Name"),
             new DString(table1, "Dist1"),
             new DString(table1, "Dist2"),
             new DString(table1, "ImageC"),
             new DString(table1, "Tag"),
             new DString(table1, "Clock"),
             new DString(table2, "pkc")};
+
       //++++++++++++++++++++++++++++++++++++++
       public static ArrayList<String> getBandWE_mysql() {
             return bandWE_mysql;

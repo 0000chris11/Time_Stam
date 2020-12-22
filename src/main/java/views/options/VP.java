@@ -5,8 +5,8 @@
  */
 package views.options;
 
-import com.cofii2.myClasses.VT;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.myAClasses.VT;
+import com.cofii2.methods.MComp;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

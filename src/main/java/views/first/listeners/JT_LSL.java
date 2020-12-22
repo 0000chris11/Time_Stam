@@ -7,7 +7,7 @@ package views.first.listeners;
 
 import MC.DT;
 import MC.TableInfoC;
-import com.cofii2.myMethods.MTable;
+import com.cofii2.methods.MTable;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.event.ListSelectionEvent;

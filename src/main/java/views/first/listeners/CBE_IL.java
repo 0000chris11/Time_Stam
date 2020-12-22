@@ -6,7 +6,7 @@
 package views.first.listeners;
 
 import MC.LKCustom;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JComboBox;

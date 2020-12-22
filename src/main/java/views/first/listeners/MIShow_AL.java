@@ -1,7 +1,7 @@
 package views.first.listeners;
 
 import MC.DT;
-import com.cofii2.myMethods.MList;
+import com.cofii2.methods.MList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import views.first.VF_R;

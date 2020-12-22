@@ -1,7 +1,7 @@
 package views.first;
 
 import MC.DT;
-import com.cofii2.myMethods.MCell;
+import com.cofii2.methods.MCell;
 import com.cofii2.custom.JTCustomCellRenderer;
 import java.awt.Color;
 import java.awt.Graphics;

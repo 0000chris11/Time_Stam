@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.EventObject;
 import javax.swing.JTextField;
+import views.create.VC_R_Comps;
 import views.create.VC_R_DataCom;
 import views.create.mTFControl.AKeyMatchActions3;
 import views.create.mTFControl.UpdateList;
@@ -21,6 +22,7 @@ import views.create.mTFControl.UpdateList;
 public class TFS_KControl extends AKeyMatchActions3 {
       
       private static VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private static VC_R_Comps c = MainInstances.getVC_R_Comps();
 
       @Override
       public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
@@ -38,17 +40,17 @@ public class TFS_KControl extends AKeyMatchActions3 {
             }
 
             if (matches[2]) {
-                  dt.getHeaders()[1].setForeground(Color.RED);
-                  dt.getHeaders()[1].setText("Same Column Detected");
+                  c.getHeaders()[1].setForeground(Color.RED);
+                  c.getHeaders()[1].setText("Same Column Detected");
             } else {
-                  dt.getHeaders()[1].setForeground(Color.WHITE);
-                  dt.getHeaders()[1].setText("Names");
+                  c.getHeaders()[1].setForeground(Color.WHITE);
+                  c.getHeaders()[1].setText("Names");
             }
       }
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static void updateListC() {
             dt.getList_C().clear();
-            for (JTextField x : dt.getTFS()) {
+            for (JTextField x : c.getTFS()) {
                   if (x.isVisible() && !x.getText().isEmpty()) {
                         dt.getList_C().add(x.getText());
                   }

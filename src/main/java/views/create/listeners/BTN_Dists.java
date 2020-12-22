@@ -7,13 +7,14 @@ package views.create.listeners;
 
 import MC.DT;
 import MC.MainInstances;
-import com.cofii2.myMethods.MComp;
+import com.cofii2.methods.MComp;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import views.create.VC_R_Comps;
 import views.create.VC_R_DataCom;
 
 /**
@@ -23,6 +24,7 @@ import views.create.VC_R_DataCom;
 public class BTN_Dists implements ActionListener {
 
       private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
+      private VC_R_Comps c = MainInstances.getVC_R_Comps();
 
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -35,16 +37,16 @@ public class BTN_Dists implements ActionListener {
             //int colClock = -1;
 
             for (int a = 0; a < DT.maxColumns; a++) {
-                  if (dt.getBTNS_Dist()[a].isSelected()) {
+                  if (c.getBTNS_Dist()[a].isSelected()) {
                         colsDist.add(a);
                   }
-                  if (dt.getBTNS_Tag()[a].isSelected()) {
+                  if (c.getBTNS_Tag()[a].isSelected()) {
                         colsTag.add(a);
                   }
             }
             //++++++++++++++++++++++++++++++++++++++++++
-            int clockN = dt.getBTN_ClockSelected();
-            int imageCN = dt.getBTN_ImageCSelected();
+            int clockN = c.getBTN_ClockSelected();
+            int imageCN = c.getBTN_ImageCSelected();
 
             String dist = getOutput(colsDist);
             String tag = getOutput(colsTag);
@@ -107,13 +109,13 @@ public class BTN_Dists implements ActionListener {
             //String name = ((JComponent) e.getSource()).getName();
             try {
 
-                  int imageCValue = MComp.setButtonGroup(e, dt.getBTNS_ImageC());
+                  int imageCValue = MComp.setButtonGroup(e, c.getBTNS_ImageC());
                   //System.out.println("\nimageCValue: " + imageCValue);
-                  dt.setBTN_ImageCSelected(imageCValue);
+                  c.setBTN_ImageCSelected(imageCValue);
                   
-                  int clockValue = MComp.setButtonGroup(e, dt.getBTNS_Clock());
+                  int clockValue = MComp.setButtonGroup(e, c.getBTNS_Clock());
                   //System.out.println("clockValue: " + clockValue);
-                  dt.setBTN_ClockSelected(clockValue);
+                  c.setBTN_ClockSelected(clockValue);
 
             } catch (NullPointerException ex) {
                   ex.printStackTrace();
@@ -124,12 +126,12 @@ public class BTN_Dists implements ActionListener {
       private void clockDistControl(ActionEvent e) {
             for (int a = 0; a < DT.maxColumns; a++) {
                   JComponent JC = (JComponent) e.getSource();
-                  if (JC.getName().equals(dt.getBTNS_Dist()[a].getName())) {
-                        if (dt.getBTNS_Dist()[a].isSelected()) {
-                              dt.getBTNS_Clock()[a].setEnabled(false);
-                              dt.getBTNS_Clock()[a].setSelected(false);
+                  if (JC.getName().equals(c.getBTNS_Dist()[a].getName())) {
+                        if (c.getBTNS_Dist()[a].isSelected()) {
+                              c.getBTNS_Clock()[a].setEnabled(false);
+                              c.getBTNS_Clock()[a].setSelected(false);
                         } else {
-                              dt.getBTNS_Clock()[a].setEnabled(true);
+                              c.getBTNS_Clock()[a].setEnabled(true);
                         }
                   }
             }
