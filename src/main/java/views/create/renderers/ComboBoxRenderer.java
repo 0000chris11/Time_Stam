@@ -8,7 +8,6 @@ package views.create.renderers;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -23,9 +22,14 @@ public class ComboBoxRenderer extends JLabel implements ListCellRenderer {
             setOpaque(true);
             setBorder(BorderFactory.createEmptyBorder());
       }
+      
+      public void setEnabled(Object object, boolean b){
+            
+      }
 
       @Override
-      public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+      public Component getListCellRendererComponent(
+              JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 
             setText(value.toString());
             Color background;

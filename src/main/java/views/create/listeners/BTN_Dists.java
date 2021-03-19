@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import views.create.VC_R_Comps;
-import views.create.VC_R_DataCom;
+import views.createUpdate.VC_R_Comps;
+import views.createUpdate.VC_R_DataCom;
 
 /**
  *
@@ -28,7 +28,7 @@ public class BTN_Dists implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            clockDistControl(e);
+            //clockDistControl(e);
             imageCClockAction(e);
 
             ArrayList<Integer> colsDist = new ArrayList<Integer>();
@@ -54,19 +54,20 @@ public class BTN_Dists implements ActionListener {
             String clock = getOutput(clockN);
 
             //INPUT FOR FOLDER LOCATION (IMAGEC)
+            System.out.println("TEST BTN_DIST");
+            System.out.println("\timageCN: " + imageCN);
+            String name = ((JComponent) e.getSource()).getName();
+            System.out.println("\tname: " + name);
             if (imageCN > 0) {
-                  dt.getBoxImageC().setVisible(true);
-                  dt.getLB_ClockLocation().setVisible(true);
+                  dt.getPImageC().setVisible(true);
+                  dt.getLBImageC().setVisible(true);
                   //VC_R2.getPR().paintComponents(VC_R2.getPR().getGraphics());
-            } else {
-                  dt.getBoxImageC().setVisible(false);
-                  dt.getLB_ClockLocation().setVisible(false);
+            } else if(name.contains("IMAGEC")){
+                  dt.getPImageC().setVisible(false);
+                  dt.getLBImageC().setVisible(false);
             }
 
-            setLB(dt.getLB_ADisp()[0], dist);
-            setLB(dt.getLB_ADisp()[3], tag);
-            setLB(dt.getLB_ADisp()[2], imageC);
-            setLB(dt.getLB_ADisp()[4], clock);
+            //setLB(dt.getLB_ADisp()[2], imageC);
             //+++++++++++++++++++++++++++++++++++
       }
 
@@ -109,13 +110,14 @@ public class BTN_Dists implements ActionListener {
             //String name = ((JComponent) e.getSource()).getName();
             try {
 
-                  int imageCValue = MComp.setButtonGroup(e, c.getBTNS_ImageC());
+                  int imageCValue = MComp.getSelectedOnAButtonGroup(e, c.getBTNS_ImageC());
+
                   //System.out.println("\nimageCValue: " + imageCValue);
                   c.setBTN_ImageCSelected(imageCValue);
                   
-                  int clockValue = MComp.setButtonGroup(e, c.getBTNS_Clock());
+                  //int clockValue = MComp.getSelectedOnAButtonGroup(e, c.getBTNS_Clock());
                   //System.out.println("clockValue: " + clockValue);
-                  c.setBTN_ClockSelected(clockValue);
+                  //c.setBTN_ClockSelected(clockValue);
 
             } catch (NullPointerException ex) {
                   ex.printStackTrace();

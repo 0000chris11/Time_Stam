@@ -7,7 +7,7 @@ package views.mainTable.sql;
 
 import MC.MainInstances;
 import com.cofii2.components.swing.LabelX;
-import com.cofii2.custom.JTCustomCellRenderer;
+import com.cofii2.custom.TableCellRenderer;
 import com.cofii2.myInterfaces.IActions;
 import com.cofii2.methods.MComp;
 import java.sql.ResultSet;
@@ -55,7 +55,7 @@ public class SelectColumns implements IActions {
       @Override
       public void afterQuery(String query, boolean rsValue) {
             if(rsValue){
-                  JTCustomCellRenderer cr = new JTCustomCellRenderer();
+                  TableCellRenderer cr = new TableCellRenderer();
                   //cr.addWordChoice(new STColor("NONE", Color.RED.darker()));
                   MComp.setTableRenderer(dt.getJTTypes(), cr);
             }

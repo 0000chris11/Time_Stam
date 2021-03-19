@@ -6,27 +6,27 @@
 package views.create.Actions;
 
 import MC.MainInstances;
+import com.cofii2.stores.Int_StringList;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.EventObject;
-import views.create.VC_R_Comps;
-import views.create.VC_R_DataCom;
-import views.create.mTFControl.AKeyMatchActions3;
-import views.create.mTFControl.UpdateList;
+import views.createUpdate.VC_R_Comps;
+import views.createUpdate.VC_R_DataCom;
+import com.cofii2.textControl.AKeyMatchActions;
 
 /**
  *
  * @author C0FII
  */
-public class BTN_AControl extends AKeyMatchActions3 {
+public class BTN_AControl extends AKeyMatchActions {
 
       private VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
       private VC_R_Comps c = MainInstances.getVC_R_Comps();
       
       @Override
-      public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
+      public Int_StringList getUpdatedList(int listID, ArrayList<String> list) {
             TFS_KControl.updateListC();
-            return new UpdateList(0, dt.getList_C());
+            return new Int_StringList(0, dt.getList_C());
       }
 
       @Override

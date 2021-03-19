@@ -5,15 +5,17 @@
  */
 package SQLActions;
 
-import views.first.VF_R;
 import MC.DT;
 import MC.Status;
-import com.cofii2.stores.CC;
+import SQLStores.TableTypeC;
 import com.cofii2.myInterfaces.IActions;
+import com.cofii2.stores.CC;
+import com.cofii2.stores.IntString;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import views.first.VF_R;
 
 /**
  *
@@ -24,35 +26,38 @@ public class SelectColumns implements IActions {
       private boolean lockPK = false;//ONLY ONE TIME CAN YOU SET THE VALUE OF PK AND EXTRA
       private boolean lockEX = false;
       
+      private DefaultTableModel tm;
+      
       @Override
       public void beforeQuery() {
             DT.getList_C().clear();
             DT.getList_Types().clear();
             DT.getList_Nulls().clear();
-            DT.setPrimaryKey(0);
             DT.getList_Defaults().clear();
-            DT.setExtra(0, null);
+            //DEFAULT++++++++++++++++++++++++
+            TableTypeC.setTable(null);
+            TableTypeC.setEX(new IntString(0, null));
+            
+            tm = (DefaultTableModel) VF_R.getJT().getModel();
+            tm.setColumnCount(0);
       }
 
       @Override
       public void setData(ResultSet rs, int row) throws SQLException {
             DT.getList_C().add(rs.getString(1));
             DT.getList_Types().add(rs.getString(2));
-            DT.getList_Nulls().add(rs.getString(3));
-            DT.getList_Defaults().add(rs.getString(5));
-            
-            String pk = rs.getString(4);
-            //System.out.println("##################PK: " + pk);
-            if (!pk.equals("") && !lockPK) {
-                  lockPK = true;
-                  DT.setPrimaryKey(row);
+            String nulll = rs.getString(3);
+            if(nulll.equals("NO")){
+                  DT.getList_Nulls().add(false);
+            }else{
+                  DT.getList_Nulls().add(true);
             }
             
-            String ext = rs.getString(6);
-            //System.out.println("##################EXT: " + ext);
-            if (!ext.equals("") && !lockEX) {
-                  lockEX = true;
-                  DT.setExtra(row, ext);
+            DT.getList_Defaults().add(rs.getString(5));
+            
+            String extra = rs.getString(6);
+            if(extra.equals("auto_increment")){
+                  TableTypeC.setEX(new IntString(row, extra));
             }
             
       }
@@ -60,9 +65,6 @@ public class SelectColumns implements IActions {
       @Override
       public void afterQuery(String query, boolean value) {
             if (value) {                
-                  DefaultTableModel tm = new DefaultTableModel();
-                  VF_R.getJT().setModel(tm);
-
                   for (int a = 0; a < DT.getList_C().size(); a++) {
                         for (int b = 0; b < DT.maxColumns; b++) {
                               if (DT.getList_C().size() == b + 1) {

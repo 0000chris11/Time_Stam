@@ -12,6 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import views.mainTable.VMT_DataCom;
 import views.mainTable.sql.SelectColumns;
+import views.mainTable.sql.SelectIndexs;
 
 /**
  *
@@ -32,8 +33,10 @@ public class JTDists_LSL implements ListSelectionListener {
                         int row = dt.getJTDists().getSelectedRow();
                         String table = dt.getJTDists().getValueAt(row, 1).toString();
                         System.out.println("TABLE: " + table);
+                        //TYPES ++++++++++++++++++++++++++++++++
                         ms.selectColumns(table, new SelectColumns());
-
+                        //INDEXS +++++++++++++++++++++++++++++++
+                        ms.selectIndexs(table, new SelectIndexs());
                   }
             }
       }

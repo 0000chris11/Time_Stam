@@ -19,5 +19,6 @@ public class VCListener extends WindowAdapter{
       public void windowClosed​(WindowEvent e){
             MainInstances.setVC_R2(null);
             MainInstances.setVC_R_DataCom(null);
+            MainInstances.setVC_R_Comps(null);
       }
 }

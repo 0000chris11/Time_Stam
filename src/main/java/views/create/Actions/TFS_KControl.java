@@ -6,33 +6,49 @@
 package views.create.Actions;
 
 import MC.MainInstances;
+import com.cofii2.stores.Int_StringList;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.EventObject;
 import javax.swing.JTextField;
-import views.create.VC_R_Comps;
-import views.create.VC_R_DataCom;
-import views.create.mTFControl.AKeyMatchActions3;
-import views.create.mTFControl.UpdateList;
+import views.createUpdate.VC_R_Comps;
+import views.createUpdate.VC_R_DataCom;
+import com.cofii2.textControl.AKeyMatchActions;
 
 /**
  *
  * @author C0FII
  */
-public class TFS_KControl extends AKeyMatchActions3 {
+public class TFS_KControl extends AKeyMatchActions {
       
       private static VC_R_DataCom dt = MainInstances.getVC_R_DataCom();
       private static VC_R_Comps c = MainInstances.getVC_R_Comps();
+      private int index;
+      
+      public TFS_KControl(int index){
+            this.index = index;
+      }
 
       @Override
-      public UpdateList getUpdatedList(int listID, ArrayList<String> list) {
+      public Int_StringList getUpdatedList(int listID, ArrayList<String> list) {
             updateListC();
-            return new UpdateList(2, dt.getList_C());
+            return new Int_StringList(2, dt.getList_C());
       }
 
       @Override
       public void listsAction(EventObject e, boolean[] matches) {
             JTextField tf = (JTextField) e.getSource();
+            
+            if(c.getUpdateStore() != null){
+                  String columnC = c.getUpdateStore().getColumnNames()[index];
+                  String column = tf.getText().toLowerCase().trim();
+                  if(column.equals(columnC)){
+                        c.getBTNSChange_TFS()[index].setEnabled(false);
+                  }else{
+                        c.getBTNSChange_TFS()[index].setEnabled(true);
+                  }
+            }
+            
             if (matches[0] || matches[1]) {
                   tf.setForeground(Color.RED);
             } else if (!matches[0] && !matches[1]) {

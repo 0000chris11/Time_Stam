@@ -20,7 +20,6 @@ public class JT_TML implements TableModelListener{
       
       @Override
       public void tableChanged(TableModelEvent e) {
-            System.out.println("TABLE CHANGED");
             
       }
       

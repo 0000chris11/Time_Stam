@@ -5,15 +5,14 @@
  */
 package SQLActions;
 
-import views.first.VF_R;
 import MC.Status;
-import com.cofii2.stores.CC;
 import com.cofii2.myInterfaces.IActions;
+import com.cofii2.stores.CC;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
+import views.first.VF_R;
 
 /**
  *
@@ -25,6 +24,8 @@ public class SelectData implements IActions {
       private DefaultTableModel tm;
       Object[] row;
 
+      private int getLastSelectedRow;
+
       public SelectData(int cols) {
             Cols = cols;
       }
@@ -35,6 +36,10 @@ public class SelectData implements IActions {
             tm.setRowCount(0);
 
             row = new Object[Cols];
+
+            getLastSelectedRow = VF_R.getJT().getSelectedRow();
+            //System.out.println("### TEST SelectData");
+
       }
 
       @Override
@@ -49,19 +54,37 @@ public class SelectData implements IActions {
 
       @Override
       public void afterQuery(String string, boolean rsValue) {
+            int dlocation = VF_R.getSPL().getDividerLocation();
             if (rsValue) {
+                  /*
+                  if (getLastSelectedRow > -1) {
+                        VF_R.getJT().setRowSelectionInterval(getLastSelectedRow, getLastSelectedRow);
+                        System.out.println("\tgetLastSelectedRow: " + getLastSelectedRow);
+                  }
+                  */
+
                   if (VF_R.getSPL().getRightComponent() != VF_R.getSC_JT()) {
                         VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
+
                   }
+
             } else {
-                  System.out.println("\tNo rows detected");
+                  //System.out.println("\tNo rows detected");
                   VF_R.getLB_JT().setText("NO ROWS DETECTED");
                   VF_R.getLB_JT().setForeground(Color.RED);
-                  
-                  VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
-                  VF_R.getLB_JT().setPreferredSize(new Dimension(300, 400));
-                  VF_R.getSPL().revalidate();
+
+                  if (VF_R.getSPL().getRightComponent() != VF_R.getLB_JT()) {
+                        VF_R.getSPL().setRightComponent(VF_R.getLB_JT());
+                  }
+                  //VF_R.getLB_JT().setPreferredSize(new Dimension(300, 400));
+
             }
+
+            VF_R.getSPL().setDividerLocation(dlocation);
+            /*
+            VF_R.getSPL().setDividerLocation(0.4);
+            VF_R.getSPL().revalidate();
+             */
       }
 
       @Override

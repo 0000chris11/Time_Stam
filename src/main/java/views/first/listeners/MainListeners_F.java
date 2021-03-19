@@ -3,16 +3,19 @@ package views.first.listeners;
 import MC.DT;
 import MC.MainInstances;
 import MC.Status;
-import com.cofii2.stores.CC;
+import others2.DISTS;
+
 import com.cofii2.methods.MComp;
+import com.cofii2.stores.CC;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import views.Login.VL;
 import views.first.VF_R;
+import views.loginMain.VL;
 import views.mainTable.VMT;
 import views.mainTable.VMT_DataCom;
 
@@ -179,6 +182,24 @@ public class MainListeners_F {
                         }
                   }
 
+            });
+            //TABLES OPTIONS ++++++++++++++++++++++++++++++++++
+            VF_R.getMi_ReloadImageC().addActionListener(new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+                        DISTS.imageCStart();
+                  }
+                  
+            });
+            JCheckBoxMenuItem mi = VF_R.getMI_ClearValuesWhenDeleted();
+            mi.addActionListener(new ActionListener(){
+                  @Override
+                  public void actionPerformed(ActionEvent e) {
+                        if(mi.isSelected()){
+                              
+                        }
+                  }
+                  
             });
       }
 

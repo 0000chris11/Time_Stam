@@ -25,14 +25,22 @@ public class DeleteRow implements IUpdates{
       
       @Override
       public void executeResultRowN() {
-            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, 
-                    "Fail to delete row", 4000);
+            String values = "";
+            for(int a= 0;a < Values.length; a++){
+                  values += Values[a].toString();
+                  if(a != Values.length - 1){
+                        values += ", ";
+                  }
+            }
+            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
+                    "Row [" + values + "] has been deleted", 4000);
+            
       }
 
       @Override
       public void executeResult0() {
-            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, 
-                    "Row [" + Values.toString() + "] has been deleted", 4000);
+            Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW, 
+                    "Fail to delete row", 4000);
       }
 
       @Override

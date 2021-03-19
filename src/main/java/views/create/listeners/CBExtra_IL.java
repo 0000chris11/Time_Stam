@@ -5,14 +5,14 @@
  */
 package views.create.listeners;
 
-import MC.DT;
 import MC.MainInstances;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import views.create.VC_R_Comps;
+import views.createUpdate.VC_R_Comps;
 
 /**
- *
+ *OLD CLASS NOT BEIGN USE
+ * 
  * @author C0FII
  */
 public class CBExtra_IL implements ItemListener {
@@ -21,6 +21,7 @@ public class CBExtra_IL implements ItemListener {
 
       @Override
       public void itemStateChanged(ItemEvent e) {
+            /*
             boolean visible = false;
             for (int a = 0; a < DT.maxColumns; a++) {
                   if (e.getSource() == c.getCBSExtra()[a]) {
@@ -34,6 +35,7 @@ public class CBExtra_IL implements ItemListener {
                   }
                   c.getPanelsExtra()[a].revalidate();
             }
+            */
       }
 
 }

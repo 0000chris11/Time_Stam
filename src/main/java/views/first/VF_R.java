@@ -4,40 +4,49 @@ import MC.CompReset;
 import MC.DT;
 import MC.DTSQL;
 import MC.DTT;
-import MC.TableInfoC;
-import MC.TablesInfo;
 import MC.notMyMethods;
-import Others.LSTD;
-import Others.LimitTextD;
-import SQLActions.ConfigTableExist;
+import SQL.DefaultConnection;
+import SQL.SQLQuerys;
 import SQLActions.CreateConfigTable;
 import SQLActions.CreateDefaultTable;
 import SQLActions.CreateMainTable;
-import SQLActions.DefaultTableExist;
 import SQLActions.InsertConfigTable;
-import SQLActions.MainTableExistFQ;
 import SQLActions.SelectColumns;
 import SQLActions.SelectConfig;
+import SQLActions.SelectCurrentKeys;
 import SQLActions.SelectDefaultTable;
+import SQLActions.SelectKeys;
 import SQLActions.SelectTables;
+import SQLActions.TablesExistFQ;
+import SQLStores.TableDistC;
 import Threads.*;
-import com.cofii2.custom.JTCustomCellRenderer;
-import com.cofii2.custom.LKCustom;
-import com.cofii2.stores.IDText;
-import com.cofii2.stores.CC;
+import others2.DISTS;
+import others2.LimitTextD;
+
+import com.cofii2.components.swing.ButtonGradient;
+import com.cofii2.components.swing.ComboBoxE;
+import com.cofii2.components.swing.LabelCustom;
+import com.cofii2.components.swing.TextFieldClock;
+import com.cofii2.components.swing.TextFieldCustom;
+import com.cofii2.custom.LKCustom2;
+import com.cofii2.methods.MComp;
 import com.cofii2.myAClasses.MLayout;
 import com.cofii2.mysql.MSQL;
-import com.cofii2.methods.MComp;
+import com.cofii2.mysql.MSQL1;
+import com.cofii2.stores.CC;
+import com.cofii2.stores.IntString;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -50,14 +59,10 @@ import javax.swing.plaf.basic.BasicTableUI;
 import javax.swing.plaf.metal.MetalToolBarUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AbstractDocument;
-import smallComponenets.MComboBoxE;
-import smallComponenets.smallBTN_C;
-import smallComponenets.smallLB;
-import smallComponenets.smallTF;
-import views.Login.VL;
+import static views.first.VF_R_DataCom.JMS_ShowList;
 import views.first.listeners.JF_FL;
-import views.first.listeners.JTChanged_AL;
 import views.first.listeners.MainListeners_F;
+import views.loginMain.VL;
 
 /**
  *
@@ -72,126 +77,31 @@ public class VF_R extends VF_R_DataCom {
       CompReset cp = new CompReset();
       notMyMethods n_mm = new notMyMethods();
       MainListeners_F ml = new MainListeners_F();
-      LSTD lstd = new LSTD();
-      Threads th = new Threads(CName, DT.CCount++);
+      Threads th = new Threads();
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
       //++++++++-+++++++++++++++++++++++++++++++++++++
+      private static boolean dropAddColumn = false;
       int state = 1;
-
-      Thread scrollThread;
-      Thread iconThread;
-
-      //JScroller scThread = new JScroller();
-      Thread addThread;
-
-      //MENU+BAR+++++++++++++++++++++++++++++++++++
-      public static void setColorToDItem(String table, String dtable) {
-            //System.out.println("MTH - setColorToDItem");
-            Font F = new Font("Dialog", Font.BOLD, 12);
-            if (JMS_ChangeDTable.getItemCount() == 0) {
-                  //System.out.println("###LTABLE IS NULL");
-            } else {
-                  //System.out.println("###COUNT: " + JMS_ChangeDTable.getItemCount());
-                  for (int a = 0; a < JMS_ChangeDTable.getItemCount(); a++) {
-                        JM_Select.getItem(a).setBackground(Color.BLACK);
-                        JM_Select.getItem(a).setForeground(Color.WHITE);
-                        JMS_ChangeDTable.getItem(a).setBackground(Color.BLACK);
-                        JMS_ChangeDTable.getItem(a).setForeground(Color.WHITE);
-                  }
-                  for (int a = 0; a < JMS_ChangeDTable.getItemCount(); a++) {
-                        String itemText = JM_Select.getItem(a).getText();
-                        //System.out.println(CC.PURPLE + "ItemText: " + itemText + CC.RESET);
-                        //System.out.println(CC.PURPLE + "\tdt.getTable: " + DT.getTable() + CC.RESET);
-                        //System.out.println(CC.PURPLE + "\tdt.getDTable: " + DT.getDTable() + CC.RESET);
-                        if (itemText.contains(" ")) {
-                              itemText = itemText.replaceAll(" ", "_");
-                        }
-
-                        if (itemText.equals(table)
-                                && itemText.equals(dtable)) {
-                              JM_Select.getItem(a).setBackground(new Color(100, 100, 100));
-                              JMS_ChangeDTable.getItem(a).setBackground(new Color(100, 100, 100));
-                        } else if (itemText.equals(table)
-                                && !itemText.equals(dtable)) {
-                              JM_Select.getItem(a).setBackground(new Color(50, 50, 50));
-                              JMS_ChangeDTable.getItem(a).setBackground(new Color(50, 50, 50));
-                        } else if (!itemText.equals(table)
-                                && itemText.equals(dtable)) {
-                              JM_Select.getItem(a).setBackground(new Color(80, 80, 80));
-                              JMS_ChangeDTable.getItem(a).setBackground(new Color(80, 80, 80));
-                        }
-                  }
-            }
-      }
-
-      public static void addItemToMenus(ArrayList<Integer> L_id, ArrayList<String> L_Table) {
-            JTChanged_AL MIAL = new JTChanged_AL();
-
-            JM_Select.removeAll();
-            JMS_ChangeDTable.removeAll();
-
-            Collections.sort(L_Table);
-
-            for (int a = 0; a < L_Table.size(); a++) {
-                  JM_Select.add(new JMenuItem(L_Table.get(a)));
-                  JMS_ChangeDTable.add(new JMenuItem(L_id.get(a) + ": " + L_Table.get(a)));
-                  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  JM_Select.getItem(a).addActionListener(MIAL);
-                  JMS_ChangeDTable.getItem(a).addActionListener(MIAL);
-            }
-
-      }
-
       //+++++++++++++++++++++++++++++++++++++++++++++
       public static void tableDeletedState() {
             boolean b = false;
-            lb_Title.setVisible(b);
+            lb_Title.setText("No table selected");
             for (int a = 0; a < btns_MC.length; a++) {
-                  btns_MC[a].setVisible(b);
+                  btns_MC[a].setEnabled(b);
             }
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setVisible(b);
-                  cbs[a].setVisible(b);
-
-                  clocksPanel[a].setVisible(b);
+                  tfPanel[a].setVisible(b);
+                  
                   btns_C[a].setVisible(b);
-
             }
-            lb_Icon.setVisible(b);
-            JPB.setVisible(b);
+            for (JLabel x : lbs_Icons) {
+                  x.setVisible(b);
+            }
+            lb_JT.setText("No table selected");
+            SPL.setRightComponent(lb_JT);
       }
 
-      //TABLE+++++++++++++++++++++++++++++++++++++++++++++++++++
-      //REPLACE+++++++++++++++++++++++++++++++
-      private void setTableCellEditor() {
-            Font f = JT.getFont();
-
-            tf_ce.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
-            tf_ce.setBorder(LKCustom.BR_LINEMARIGIN_FOCUS_OFF);
-            tf_ce.setFont(new Font(f.getName(), f.getStyle(), f.getSize()));
-            tf_ce.setMargin(new Insets(1, 2, 1, 2));
-
-            //sc_JT.setViewportView(JT);
-            JT.setDefaultEditor(String.class, DTCellEditor);
-
-            for (int i = 0; i < JT.getColumnCount(); i++) {
-                  JT.getColumnModel().getColumn(i).setCellEditor(DTCellEditor);
-            }
-      }
-
-      //REPLACE+++++++++++++++++++++++++++++++
-      /*
-      public static void setTableRenderer() {
-            //System.out.println("#######setTableRenderer (column count: " + JT.getColumnCount());
-
-            for (int a = 0; a < JT.getColumnCount(); a++) {
-                  JT.getColumnModel().getColumn(a).setCellRenderer(JTCL);
-            }
-
-            //System.out.println("+++++++++++GETFONT: " + JT.getFont());
-            //System.out.println("Selection Model: " + JT.getSelectionModel().toString());
-      }
-      */
       //CONFIG++++++++++++++++++++++++++++++++++++++++++++++++++
       private void frameConfig() {
             JF.setLayout(new BorderLayout());
@@ -222,6 +132,7 @@ public class VF_R extends VF_R_DataCom {
             SPL.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
             SPL.setLeftComponent(SPL_SUB);
             SPL.setRightComponent(sc_JT);
+            
 
             SPL_SUB.setOneTouchExpandable(true);
             SPL_SUB.setTopComponent(PL_U);
@@ -234,12 +145,10 @@ public class VF_R extends VF_R_DataCom {
             //++++++++++++++++++++++++++
 
             if (JPL_layout.equals("null")) {
-                  System.out.println("\tNull Layout for LeftPanel");
                   PL_UC.setLayout(null);
                   setNullLayoutComponentsSize();
                   clockNullLayout();
             } else {
-                  System.out.println("\tGroup Layout for LeftPanel");
                   GroupLayout gl = new GroupLayout(PL_UC);
                   PL_UC.setLayout(gl);
 
@@ -264,14 +173,14 @@ public class VF_R extends VF_R_DataCom {
             }
 
       }
-      
+
       private void subSplitUpConfig() {
             PL_U.setLayout(new BorderLayout());
             PL_U.add(PL_UT, BorderLayout.NORTH);
             PL_U.add(sc_PL_UC, BorderLayout.CENTER);
 
             MComp.setActionToPL_U();
-            
+
             //PL_U+++++++++++++++++++++++++++++++++++++++++
             PL_UT.setLayout(new BoxLayout(PL_UT, BoxLayout.X_AXIS));
             PL_UT.setBackground(Color.BLACK);
@@ -300,26 +209,23 @@ public class VF_R extends VF_R_DataCom {
       private void subSplitDownConfig() {
             sc_PL_B.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             sc_PL_B.setPreferredSize(new Dimension(sc_PL_B.getPreferredSize().width, 250));
-            PL_B.setLayout(new BorderLayout());
+            PL_B.setLayout(new FlowLayout());
             //PL_B.setPreferredSize(new Dimension(sc_PL_B.getPreferredSize().width));
             PL_B.setBackground(Color.BLACK);
-            PL_B.add(lb_Icon, BorderLayout.CENTER);
-            PL_B.add(JPB, BorderLayout.SOUTH);
+            for (int a = 0; a < DT.maxIcons; a++) {
+                  lbs_Icons[a] = new JLabel("NO ICON SELECTED");
+
+                  PL_B.add(lbs_Icons[a]);
+                  lbs_Icons[a].setPreferredSize(new Dimension(225, 255));//INITIAL SIZE
+                  lbs_Icons[a].setFont(new Font("Dialog", Font.PLAIN, 24));
+                  lbs_Icons[a].setForeground(Color.WHITE);
+                  lbs_Icons[a].setHorizontalAlignment(0);
+                  lbs_Icons[a].setVerticalTextPosition(0);
+                  //lbs_Icons[a].setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+            }
+
             //+++++++++++++++++++++++++++++++++++++++++
-            lb_Icon.setPreferredSize(new Dimension(225, 255));
-            lb_Icon.setFont(new Font("Dialog", Font.PLAIN, 24));
-            lb_Icon.setForeground(Color.WHITE);
-            lb_Icon.setHorizontalAlignment(0);
-            lb_Icon.setVerticalTextPosition(0);
-            lb_Icon.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-
-            JPB.setMaximumSize(new Dimension(Short.MAX_VALUE, 26));
-            JPB.setBackground(Color.BLACK);
-            JPB.setForeground(Color.RED);
-            JPB.setMinimum(0);
-
-            lb_Icon.setVisible(true);
-            JPB.setVisible(true);
+            lbs_Icons[0].setVisible(true);
       }
 
       private void statusPanelConfig() {
@@ -335,9 +241,19 @@ public class VF_R extends VF_R_DataCom {
             p3.setLayout(new BoxLayout(p3, BoxLayout.X_AXIS));
             p3.setBackground(Color.BLACK);
             //++++++++++++++++++++++++++++++++++++++
-            p3.add(Box.createHorizontalStrut(6));
-            p3.add(lb_Status);
-            lb_Status.setPreferredSize(new Dimension(500, 28));//1172
+            p3.add(Box.createHorizontalStrut(6), 0);
+            p3.add(lb_Status, 1);
+            p3.add(Box.createHorizontalStrut(6), 2);
+            p3.add(btns_MC[2], 3);
+            p3.add(Box.createHorizontalStrut(6), 4);
+            p3.add(btns_MC[1], 5);
+            p3.add(Box.createHorizontalStrut(2), 6);
+            p3.add(btns_MC[3], 7);
+            p3.add(Box.createHorizontalStrut(2), 8);
+            p3.add(btns_MC[0], 9);
+            p3.add(Box.createHorizontalStrut(6), 10);
+
+            lb_Status.setPreferredSize(LKCustom2.P3_1ST_COMPONENT_PREF_SIZE);//1172
             lb_Status.setMaximumSize(new Dimension(Short.MAX_VALUE, 28));
             lb_Status.setForeground(Color.WHITE);
             lb_Status.setFont(new Font("Dialog", Font.BOLD, 16));
@@ -347,20 +263,16 @@ public class VF_R extends VF_R_DataCom {
 
             Dimension d = new Dimension(80, 28);
             Insets in = new Insets(1, 1, 1, 1);
-            p3.add(Box.createHorizontalStrut(6));
-            p3.add(btns_MC[2]);
+
             btns_MC[2].setPreferredSize(d);
             btns_MC[2].setMaximumSize(d);
-            p3.add(Box.createHorizontalStrut(2));
-            p3.add(btns_MC[1]);
+
             btns_MC[1].setPreferredSize(d);
             btns_MC[1].setMaximumSize(d);
-            p3.add(Box.createHorizontalStrut(2));
-            p3.add(btns_MC[3]);
+
             btns_MC[3].setPreferredSize(d);
             btns_MC[3].setMaximumSize(d);
-            p3.add(Box.createHorizontalStrut(2));
-            p3.add(btns_MC[0]);
+
             btns_MC[0].setPreferredSize(d);
             btns_MC[0].setMaximumSize(d);
 
@@ -369,7 +281,6 @@ public class VF_R extends VF_R_DataCom {
             btns_MC[3].setMargin(in);
             btns_MC[0].setMargin(in);
 
-            p3.add(Box.createHorizontalStrut(6));
             //p3.add(btn_Show_All);
             //btn_Show_All.setPreferredSize(new Dimension(80, 24));
             //btn_Show_All.setMargin(new Insets(1, 1, 1, 1));
@@ -408,15 +319,32 @@ public class VF_R extends VF_R_DataCom {
             JMB.add(JM_Select);
             //++++++++++++++++++++++++++++++++++++++++
             JMB.add(JM_Table);
+            JM_Table.add(JMS_TableOptions);
+            JMS_TableOptions.add(mi_ClearValuesWhenDeleted);
+            JMS_TableOptions.add(new Separator());
+            JMS_TableOptions.add(mi_ReloadImageC);
+
+            JM_Table.add(new Separator());
+
             JM_Table.add(JMS_ChangeDTable);
             JM_Table.add(sep3);
             JM_Table.add(mi_CreateTable);
             JM_Table.add(mi_UpdateTable);
             JM_Table.add(mi_DeleteTables);
             JM_Table.add(mi_DeleteThisTable);
-
+            /*
+            if(JMS_ShowList.getParent() instanceof JMenu){
+               JMenuItem mi = (JMenuItem) JMS_ShowList;
+               mi.setBackground(Color.PINK);
+               mi.setForeground(Color.BLACK);
+               //mi.setFont();
+               
+            }
+            */
+            JMS_ShowList.setBackground(Color.BLACK);
+            JM_Options.getMenuComponent(4).setBackground(Color.BLACK);
       }
-
+      //DELETE
       private void menuBarLook() {
             //System.out.println("MTH - menuBarLook");
             Color backgroung = Color.BLACK;
@@ -440,9 +368,11 @@ public class VF_R extends VF_R_DataCom {
                               } else if (str.endsWith("JMenu")) {
                                     if (JM.getMenuComponent(b) instanceof JMenu) {
                                           JMenu JMS = ((JMenu) JM.getMenuComponent(b));
-
+                                          System.out.println("TEST JMS: " + JMS.getText());
                                           JMS.setOpaque(true);
+                                          System.out.println("\tItem Count: " + JMS.getItemCount());
                                           for (int c = 0; c < JMS.getItemCount(); c++) {
+                                                System.out.println("\t\t" + (a + 1) + ": " + JMS.getItem(c).getClass().toString());
                                                 JMS.getItem(c).setBackground(backgroung);
                                                 JMS.getItem(c).setForeground(Color.WHITE);
                                                 JMS.getItem(c).setFont(F);
@@ -467,10 +397,12 @@ public class VF_R extends VF_R_DataCom {
 
             //sc_JT.setSize(766, 522);
             sc_JT.setVerticalScrollBarPolicy(22);
+            sc_JT.getViewport().setBackground(Color.BLACK);
 
             //JT.setBounds(6, 6, 758, 516);
             //JT.setPreferredSize(new Dimension(758, JT.getHeight()));
             JT.setBackground(Color.BLACK);
+            JT.setForeground(Color.WHITE);
             JT.setFont(new Font("Dialog", Font.PLAIN, 20));
             JT.setRowHeight(23);
             //JT.setForeground(Color.WHITE);
@@ -478,21 +410,14 @@ public class VF_R extends VF_R_DataCom {
             JT.setGridColor(Color.GRAY);
             JT.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JT.setRowSelectionAllowed(true);
-            JT.setSelectionBackground(LKCustom.BK_DIST2);
-            //JT.setPreferredScrollableViewportSize();
-            //JT.setPreferredScrollableViewportSize(PT.getPreferredSize());
-            //System.out.println("PT size: " + PT.getSize());
-            //System.out.println("SC_JT size: " + sc_JT.getSize());
-            //System.out.println("JT size: " + JT.getSize());
-            //+++++++++++++++++++++++++++++++++++++++++++++
-            //JF.add(lb_JT);
+            JT.setSelectionBackground(LKCustom2.BK_DIST2);
+
             lb_JT.setSize(600, 70);
             lb_JT.setForeground(Color.BLACK);
-            lb_JT.setFont(LKCustom.FONT_BIG_LB_MESSAGE);
+            lb_JT.setFont(LKCustom2.FONT_BIG_LB_MESSAGE);
 
-            //setLB_JTToCenter(lb_JT, sc_JT);
       }
-
+      //DELETE
       private void setDTMS() {
             for (int a = 0; a < DT.maxColumns; a++) {
                   DTT.getDTMS()[a] = new DefaultTableModel();
@@ -509,19 +434,19 @@ public class VF_R extends VF_R_DataCom {
             for (int a = 0; a < DT.maxColumns; a++) {
                   JTextField MD = tfs_MD[a];
                   JTextField MU = tfs_MU[a];
-                  JLabel LB2D = lb_2ds[a];
-                  JTextField SD = tfs_SD[a];
+                  JLabel LB2D = lb_2ds[a];;
+                  JTextField SD = tfs_SD[a];;
                   JTextField SU = tfs_SU[a];
                   //++++++++++++++++++++++++++++++++++++++++++++
-                  MD.setBackground(LKCustom.BK_NORMAL);
-                  MU.setBackground(LKCustom.BK_NORMAL);
-                  SD.setBackground(LKCustom.BK_NORMAL);
-                  SU.setBackground(LKCustom.BK_NORMAL);
-                  MD.setFont(LKCustom.FONT_NORMAL);
-                  MU.setFont(LKCustom.FONT_NORMAL);
-                  LB2D.setFont(LKCustom.FONT_NORMAL);
-                  SD.setFont(LKCustom.FONT_NORMAL);
-                  SU.setFont(LKCustom.FONT_NORMAL);
+                  MD.setBackground(LKCustom2.BK_NORMAL);
+                  MU.setBackground(LKCustom2.BK_NORMAL);
+                  SD.setBackground(LKCustom2.BK_NORMAL);
+                  SU.setBackground(LKCustom2.BK_NORMAL);
+                  MD.setFont(LKCustom2.FONT_NORMAL);
+                  MU.setFont(LKCustom2.FONT_NORMAL);
+                  LB2D.setFont(LKCustom2.FONT_NORMAL);
+                  SD.setFont(LKCustom2.FONT_NORMAL);
+                  SU.setFont(LKCustom2.FONT_NORMAL);
                   MD.setForeground(Color.WHITE);
                   MU.setForeground(Color.WHITE);
                   LB2D.setForeground(Color.WHITE);
@@ -536,9 +461,9 @@ public class VF_R extends VF_R_DataCom {
                   MD.setMaximumSize(cks);
                   MU.setPreferredSize(cks);
                   MU.setMaximumSize(cks);
-                  LB2D.setMinimumSize(new Dimension(16, h));
-                  LB2D.setPreferredSize(new Dimension(16, h));
-                  LB2D.setMaximumSize(new Dimension(16, h));
+                  LB2D.setMinimumSize(new Dimension(16, 27));
+                  LB2D.setPreferredSize(new Dimension(16, 27));
+                  LB2D.setMaximumSize(new Dimension(16, 27));
                   SD.setPreferredSize(cks);
                   SD.setMaximumSize(cks);
                   SU.setPreferredSize(cks);
@@ -559,11 +484,11 @@ public class VF_R extends VF_R_DataCom {
                   //SD.addFocusListener(CF);
                   //SU.addFocusListener(CF);
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  lb_2ds[a].setPreferredSize(lb2);
-                  lb_2ds[a].setMaximumSize(lb2);
-                  lb_2ds[a].setFont(FL);
-                  lb_2ds[a].setForeground(Color.WHITE);
-                  lb_2ds[a].setHorizontalTextPosition(0);
+                  LB2D.setPreferredSize(lb2);
+                  LB2D.setMaximumSize(lb2);
+                  LB2D.setFont(FL);
+                  LB2D.setForeground(Color.WHITE);
+                  LB2D.setHorizontalTextPosition(0);
             }
 
       }
@@ -571,8 +496,8 @@ public class VF_R extends VF_R_DataCom {
       private void clockNullLayout() {
             int h = cbs[0].getHeight();
             for (int a = 0; a < DT.maxColumns; a++) {
-                  clocksPanel[a].setLocation(cbs[a].getX() + 160, cbs[a].getY());
-                  clocksPanel[a].setSize(196, h);
+                  //clocksPanel[a].setLocation(cbs[a].getX() + 160, cbs[a].getY());
+                  //clocksPanel[a].setSize(196, h);
                   //clocks[a].setSize(130, h);
             }
       }
@@ -585,7 +510,7 @@ public class VF_R extends VF_R_DataCom {
                   btns_C[a].setMaximumSize(new Dimension(20, 27));
             }
       }
-
+      //DELETE
       private void actionTBComponents() {
             btns_TB[0].addActionListener(new ActionListener() {
                   public void actionPerformed(ActionEvent evt) {
@@ -594,7 +519,7 @@ public class VF_R extends VF_R_DataCom {
                   }
             });
       }
-
+      //DELETE
       private void toolbarConfig() {
             MetalToolBarUI mtbUI = new MetalToolBarUI();
             //UIManager.getDefaults()
@@ -634,7 +559,7 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("TB Bounds: " + TB.getBounds());
             //System.out.println("btn hide_id Bounds: " + hide_id.getBounds());
       }
-
+      //DELETE
       private void setArrayListToArray() {
             for (int a = 0; a < DT.maxColumns; a++) {
                   DT.getList_DS()[a] = new ArrayList<String>();
@@ -651,38 +576,63 @@ public class VF_R extends VF_R_DataCom {
             btns_MC[2].setEnabled(false);
 
             for (int a = 0; a < DT.maxColumns; a++) {
-                  lbs[a] = new smallLB();
-                  tfPanel[a] = new JPanel();
-                  cbs[a] = new MComboBoxE();
+                  lbs[a] = new LabelCustom();
 
-                  tfs[a] = new smallTF();
+                  tfPanel[a] = new JPanel();
+                  tfPanel[a].setName("TFPANEL_" + (a + 1));
+                  tfs[a] = new TextFieldCustom();
+                  cbs[a] = new ComboBoxE();
+                  pClocks[a] = new TextFieldClock();
 
                   tfsE[a] = (JTextField) cbs[a].getEditor().getEditorComponent();
-                  tfsE[a].setBackground(LKCustom.BK_NORMAL);
+                  tfsE[a].setBackground(LKCustom2.BK_NORMAL);
                   //tfs[a].putClientProperty("TextField.focus", Color.BLACK);
 
-                  tfs_MD[a] = new smallTF("0");
-                  tfs_MU[a] = new smallTF("0");
-                  lb_2ds[a] = new JLabel(":", SwingConstants.CENTER);
-                  tfs_SD[a] = new smallTF("0");
-                  tfs_SU[a] = new smallTF("0");
+                  tfClocks[a] = ((TextFieldClock) pClocks[a]).getTF();
+                  tfs_MD[a] = ((TextFieldClock) pClocks[a]).getMD();
+                  tfs_MU[a] = ((TextFieldClock) pClocks[a]).getMU();
+                  lb_2ds[a] = ((TextFieldClock) pClocks[a]).getLB2();
+                  tfs_SD[a] = ((TextFieldClock) pClocks[a]).getSD();
+                  tfs_SU[a] = ((TextFieldClock) pClocks[a]).getSU();
 
-                  tfPanel[a].setLayout(new BoxLayout(tfPanel[a], BoxLayout.X_AXIS));
+                  //tfPanel[a].setLayout(new BoxLayout(tfPanel[a], BoxLayout.X_AXIS));
                   tfPanel[a].setBackground(Color.BLACK);
+
+                  tfCL[a] = new CardLayout() {
+                        @Override
+                        public void show(Container parent, String name) {
+                              super.show(parent, name);
+                              for (int a = 0; a < DT.maxColumns; a++) {
+                                    if (parent.getName().equals("TFPANEL_" + (a + 1))) {
+                                          tfPanelSelected[a] = name;
+                                    }
+                              }
+
+                        }
+
+                  };
+                  tfPanel[a].setLayout(tfCL[a]);
+                  tfPanel[a].add(tfs[a], tfPanelTypes[0]);
+                  tfPanel[a].add(cbs[a], tfPanelTypes[1]);
+                  tfPanel[a].add(pClocks[a], tfPanelTypes[2]);
+
+                  tfCL[a].show(tfPanel[a], tfPanelTypes[0]);
+                  /*
                   tfPanel[a].add(cbs[a]);
                   tfPanel[a].add(tfs_MD[a]);
                   tfPanel[a].add(tfs_MU[a]);
                   tfPanel[a].add(lb_2ds[a]);
                   tfPanel[a].add(tfs_SD[a]);
                   tfPanel[a].add(tfs_SU[a]);
+                   */
 
-                  btns_C[a] = new smallBTN_C(null);
+                  btns_C[a] = new ButtonGradient();
             }
             //================================
             clockConfig();
       }
       //+++++++++++++++++++++
-
+      //DELETE
       private void setNullLayoutComponentsSize() {
             int disLY = 0;
             int disTY = 0;
@@ -770,7 +720,10 @@ public class VF_R extends VF_R_DataCom {
             TB.setName("TB");
             //+++++++++++++++++++++++++++++++
             lb_Title.setName("lb_Title");
-            lb_Icon.setName("lb_Icon");
+            int c = 0;
+            for (JLabel x : lbs_Icons) {
+                  x.setName("lb_Icon_" + ++c);
+            }
             JPB.setName("JPB");
             //+++++++++++++++++++++++++++++++++++++++
             btns_TB[0].setName("BTN_H");
@@ -784,20 +737,21 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("lbs Length: " + lbs.length);
             for (int a = 0; a < DT.maxColumns; a++) {
                   lbs[a].setName("LB_" + (a + 1));
-                  tfPanel[a].setName("TFPANEL_" + (a + 1));
+                  //tfPanel[a].setName("TFPANEL_" + (a + 1));
                   cbs[a].setName("CB_" + (a + 1));
                   tfs[a].setName("TF_" + (a + 1));
                   tfsE[a].setName("TFE_" + (a + 1));
+                  tfClocks[a].setName("TFC_" + (a + 1));
                   //scs[a].setName("SC_" + (a + 1));
                   //lsts[a].setName("LST_" + (a + 1));
                   btns_C[a].setName("BTNC_" + (a + 1));
 
-                  //clocksPanel[a].setName("Clock_" + (a + 1));
                   tfs_MD[a].setName("TF_MD_" + (a + 1));
                   tfs_MU[a].setName("TF_MU_" + (a + 1));
                   tfs_SD[a].setName("TF_SD_" + (a + 1));
                   tfs_SU[a].setName("TF_SU_" + (a + 1));
                   lb_2ds[a].setName("LB_2D_" + (a + 1));
+
             }
             //++++++++++++++++++++++++++++++++
             JM_Select.setName("JM_Select");
@@ -807,6 +761,8 @@ public class VF_R extends VF_R_DataCom {
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void afterFirstQuerySuccess() {
+            SQLQuerys.setSchemaForKeys(DTSQL.getDatabase());
+            getTypes();
             creatingNeededTables();
             //++++++++++++++++++++++++++++++++++
             System.out.println(CC.CYAN + "\nMAIN +++++ SELECT TABLES" + CC.RESET);
@@ -816,24 +772,26 @@ public class VF_R extends VF_R_DataCom {
                   //SELECTING DEFAULT TABLE++++++++++++++++++++++++
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT DEFAULT TABLE" + CC.RESET);
                   ms.selectRowFromTable(DTSQL.defautlTable, 1, new SelectDefaultTable());
+                  SQLQuerys.setTableForCurrentKeys(TableDistC.getTable().replaceAll(" ", "_"));
+                  MSQL1 ms1 = new MSQL1(new DefaultConnection());
+                  ms1.select(SQLQuerys.SELECT_KEYS_FROM_CURRENT, new SelectCurrentKeys());
                   //ADDING ITEM TO THE JMENU FROM TABLE_NAMES+++++++++++++++++
-                  String table = TableInfoC.getTable();
-                  addItemToMenus(TablesInfo.getIdList(), TablesInfo.getTableList());
-                  setColorToDItem(table, DT.getDTable());
+                  String table = TableDistC.getTable();
+                  MENU.addItemToMenus();
+                  MENU.setColorToDItem(table, DT.getDTable());
 
                   //ADDING COLUMNS AND ROWS FROM DEFAULT_TABLE++++++++++++++++++
                   System.out.println(CC.CYAN + "MAIN +++++ SELECT COLUMNS AND ROWS" + CC.RESET);
                   ms.selectColumns(table, new SelectColumns());
-
                   //--------------------------------------------------------------------------------------------------------------------
-                  
                   System.out.println(CC.CYAN + "MAIN +++++ ChangeLB_TF and SelectData" + CC.RESET);
                   cp.changeLB_TFandSelectData(JT.getColumnCount(), DT.getList_C());
+                  MComp.setCustomTableCellRenderer(JT);
+                  MComp.setCustomTableCellEditor(JT);
                   //noRowsDetection();
 
-                  
                   System.out.println(CC.CYAN + "\nMAIN +++++ ChangeLSTD" + CC.RESET);
-                  lstd.changeLSTD();
+                  DISTS.start(true, true);
                   //--------------------------------------------------------------------------------------------------------------------
             } else {//IF THERE IS NO TABLE ADDED TO MAINTABLES
                   SPL_SUB.setTopComponent(lb_PL);
@@ -846,7 +804,7 @@ public class VF_R extends VF_R_DataCom {
                   mi.setEnabled(false);
                   JM_Select.add(mi);
             }
-            menuBarLook();
+            //menuBarLook();
             //+++++++++++++++++++++++++++++++++++++++++++++++++
             System.out.println(CC.CYAN + "MAIN +++++ SELECT CONFIG" + CC.RESET);
             //mc.SelectConfig();
@@ -867,9 +825,6 @@ public class VF_R extends VF_R_DataCom {
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
             System.out.println(CC.CYAN + "MAIN +++++ addAllListenerToCJS" + CC.RESET);
             ml.addAllListener();
-            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++        
-            setTableCellEditor();
-            MComp.setTableRenderer(JT, new JTCustomCellRenderer());
             //*++++++++++++++++++++++++++++++++++++++++++++++++++++
             //System.out.println("\nHeap Size: \t" + Runtime.getRuntime().totalMemory());
             //System.out.println("Heap Max Size: \t" + Runtime.getRuntime().maxMemory());
@@ -885,17 +840,25 @@ public class VF_R extends VF_R_DataCom {
             //System.out.println("Table: " + dt.getTable());
       }
 
+      private void getTypes() {
+            DefaultConnection dc = new DefaultConnection();
+
+            MSQL1 ms1 = new MSQL1(dc);
+            ms1.select(SQLQuerys.SELECT_KEYS, new SelectKeys());
+
+      }
+
       private void creatingNeededTables() {
             if (!DTSQL.getMainTableExist()) {//CREATING MAIN TABLE IF DOESN'T EXIST
                   ms.createTable(DTSQL.mainTable,
                           DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
-                          new IDText(1, "AUTO_INCREMENT"), "id",
+                          "id", null, null, new IntString(1, "AUTO_INCREMENT"),
                           new CreateMainTable());
             }
             if (!DTSQL.getConfigTableExist()) {
                   ms.createTable(DTSQL.configTable,
                           DTSQL.configTableColumns, DTSQL.configTableTypes, DTSQL.configTableNulls,
-                          null, null,
+                          null, null, null,
                           new CreateConfigTable());
                   //INSERTING DEFAULT VALUES
                   for (int a = 0; a < DTSQL.configTableValues[0].length; a++) {
@@ -907,7 +870,7 @@ public class VF_R extends VF_R_DataCom {
             if (!DTSQL.getDefaultTableExist()) {
                   ms.createTable(DTSQL.defautlTable,
                           DTSQL.mainTableColumns, DTSQL.mainTableTypes, DTSQL.mainTableNulls,
-                          new IDText(1, "AUTO_INCREMENT"), "id",
+                          "id", null, null, new IntString(1, "AUTO_INCREMENT"),
                           new CreateDefaultTable());
             }
       }
@@ -917,9 +880,8 @@ public class VF_R extends VF_R_DataCom {
             frameConfig();
             //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             System.out.println(CC.CYAN + "CHECKING IF MAIN TABLE EXIST (FIRST QUERY) ++++++++++++++++" + CC.RESET);
-            ms.doesThisTableExist(DTSQL.mainTable, new MainTableExistFQ());
-            ms.doesThisTableExist(DTSQL.configTable, new ConfigTableExist());
-            ms.doesThisTableExist(DTSQL.defautlTable, new DefaultTableExist());
+
+            ms.selectTables(new TablesExistFQ());
             if (!DT.getWrongPassword()) {//IF FIRST QUERY FAILS BC WRONG PASSWORD
                   afterFirstQuerySuccess();
             }
@@ -935,13 +897,13 @@ public class VF_R extends VF_R_DataCom {
                               Logger.getLogger(VF_R.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         tfsE[1].putClientProperty("TextField.highlight", Color.RED);
-                        JF.setSize(LKCustom.MAIN_FRAME_SIZE);
+                        JF.setSize(LKCustom2.MAIN_FRAME_SIZE);
                         MComp.setFrameToCenterOfScreen(JF);
-                        SPL.setSize(LKCustom.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
-                        SPL_SUB.setSize(LKCustom.MAIN_FRAME_SIZE);
+                        SPL.setSize(LKCustom2.MAIN_FRAME_SIZE);//TAKING THE PORCENTAGE OF THE SPLITS
+                        SPL_SUB.setSize(LKCustom2.MAIN_FRAME_SIZE);
 
                         SPL.setDividerLocation(0.4);
-                        String imageC = TableInfoC.getImageC();
+                        String imageC = TableDistC.getImageC();
                         if (imageC != null) {
                               if (imageC.equals("NONE")) {
                                     SPL_SUB.setDividerLocation(1.0);
@@ -957,6 +919,8 @@ public class VF_R extends VF_R_DataCom {
                         VL.getJF().dispose();
                         JF.setVisible(true);
 
+                        
+                        //System.out.println("### SHOW LIST BACKGROUND: " + JMS_ShowList.getBackground());
                         new VT_T();
                   }
 
@@ -980,6 +944,13 @@ public class VF_R extends VF_R_DataCom {
             }
       }
        */
+      public static boolean getDropAddColumn(){
+            return dropAddColumn;
+      }
+      public static void setDropAddColumn(boolean dropAddColumn){
+            VF_R.dropAddColumn = dropAddColumn;
+      }
+      
       public static int DEFAULT_INDEX = 0;
 
       public static boolean isComponentNameAt(JPanel jp, JComponent jc) {

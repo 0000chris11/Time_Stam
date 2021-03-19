@@ -6,7 +6,7 @@
 package SQLActions;
 
 import MC.Status;
-import MC.TableInfoC;
+import SQLStores.TableDistC;
 import com.cofii2.myInterfaces.IUpdates;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ public class UpdateDefaultTable implements IUpdates {
 
       @Override
       public void executeResultRowN() {
-            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Default-Table Updated to " + TableInfoC.getTable(), 3500);
+            Status.startLBStatus(VF_R.getLB_Status(), Color.GREEN, "Default-Table Updated to " + TableDistC.getTable(), 3500);
       }
 
       @Override

@@ -10,5 +10,6 @@ package views.create.Actions;
  * @author C0FII
  */
 public interface SelectionAction {
+      
       public void action(int index);
 }

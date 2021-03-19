@@ -4,14 +4,20 @@ import MC.CompReset;
 import MC.DT;
 import MC.DTSQL;
 import MC.Status;
-import MC.TableInfoC;
 import MC.notMyMethods;
-import Others.LSTD;
+import SQL.DefaultConnection;
+import SQL.SQLQuerys;
 import SQLActions.SelectATable;
 import SQLActions.SelectColumns;
+import SQLActions.SelectCurrentKeys;
 import SQLActions.UpdateDefaultTable;
-import com.cofii2.stores.CC;
+import SQLStores.TableDistC;
+import others2.DISTS;
+
+import com.cofii2.methods.MComp;
 import com.cofii2.mysql.MSQL;
+import com.cofii2.mysql.MSQL1;
+import com.cofii2.stores.CC;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -21,11 +27,12 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
+import views.first.MENU;
 import views.first.VF_R;
 
 /**
  *
- * @author Christopher
+ * @author C0FII
  */
 public class JTChanged_AL implements ActionListener {
 
@@ -33,37 +40,39 @@ public class JTChanged_AL implements ActionListener {
       String CName = this.getClass().getName();
 
       //MethodM mm = new MethodM(CName, DT.CCount++);
-      notMyMethods n_mm = new notMyMethods();
-      CompReset cp = new CompReset();
-      LSTD lstd = new LSTD();
+      private static notMyMethods n_mm = new notMyMethods();
+      private static CompReset cp = new CompReset();
       MainListeners_F ml = new MainListeners_F();
 
-      MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
+      private static MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
 
       @Override
       public void actionPerformed(ActionEvent evt) {
-            String ac = evt.getActionCommand();
+            action(evt.getActionCommand());
+      }
+
+      public static void action(String ac){ 
+            int id = TableDistC.getId();
+            String table = TableDistC.getTable();
+            String dist1 = TableDistC.getDist1();
+            String dist2 = TableDistC.getDist2();
+            String imageC = TableDistC.getImageC();
+            String imageCPath = TableDistC.getImageCPath();
+            String tag = TableDistC.getTag();
+            String clock = TableDistC.getClock();
             
-            int id = TableInfoC.getId();
-            String table = TableInfoC.getTable();
-            String dist1 = TableInfoC.getDist1();
-            String dist2 = TableInfoC.getDist2();
-            String imageC = TableInfoC.getImageC();
-            String tag = TableInfoC.getTag();
-            String clock = TableInfoC.getClock();
-            
-            if (!ac.equals(table.replaceAll("_", " "))) {
-                  System.out.println(CC.GREEN + "\n MIActionListener STARS" + CC.RESET);
+            if (!ac.equals(table.replaceAll("_", " ")) || VF_R.getDropAddColumn()) {
+                  System.out.println(CC.GREEN + "\n### MIActionListener ###" + CC.RESET);
                   boolean change = false;
                   //SAVING PREVIOUS ID
                   DT.setOld_id(id);
                   DT.bool_Sel = true;
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.println(CC.CYAN + "MIActionListener ++++ resetingAfter" + CC.RESET);
+                  System.out.println("\tMIActionListener ++++ resetingAfter");
                   resetingAfter();
                   VF_R.getMI_DeleteThisTable().setEnabled(true);
 
-                  System.out.println(CC.CYAN + "MIActionListener ++++ MCSelectATable" + CC.RESET);
+                  System.out.println("\tMIActionListener ++++ MCSelectATable");
                   if (ac.contains(":")) {
                         ac = ac.substring(ac.indexOf(":") + 2, ac.length());
                         System.out.println("\tcut: " + ac);
@@ -73,81 +82,52 @@ public class JTChanged_AL implements ActionListener {
                   table = ac;
                   ms.selectRowFromTable(DTSQL.mainTable, DTSQL.mainTableColumns[1], table.replaceAll("_", " "),
                           new SelectATable());
+                  SQLQuerys.setTableForCurrentKeys(table.replaceAll(" ", "_"));
+                  MSQL1 ms1 = new MSQL1(new DefaultConnection());
+                  ms1.select(SQLQuerys.SELECT_KEYS_FROM_CURRENT, new SelectCurrentKeys());
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.println("MIActionListener ++++ Data");
-                  System.out.println("\told id = " + DT.getOld_id());
-                  System.out.println("\tcurrent id = " + TableInfoC.getId());
-                  System.out.println("\tTable = " + table);
-                  System.out.println("\tDist1 = " + dist1);
-                  System.out.println("\tDist2 = " + dist2);
-                  System.out.println("\tImageC = " + imageC);
-                  System.out.println("\tTag1 = " + tag);
-                  System.out.println("\tClock = " + clock);
+                  System.out.println("\t\told id = " + DT.getOld_id());
+                  System.out.println("\t\tcurrent id = " + TableDistC.getId());
+                  System.out.println("\t\tTable = " + table);
+                  System.out.println("\t\tDist1 = " + dist1);
+                  System.out.println("\t\tDist2 = " + dist2);
+                  System.out.println("\t\tImageC = " + imageC);
+                  System.out.println("\t\tImageCPath = " + imageCPath);
+                  System.out.println("\t\tTag1 = " + tag);
+                  System.out.println("\t\tClock = " + clock);
                   //++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  if (change == true) {
+                  if (change) {
                         System.out.println(CC.CYAN + "MIActionListener ++++ ChangeDefault" + CC.RESET);
 
                         ms.updateRow(DTSQL.defautlTable, 
-                                DTSQL.mainTableColumns, TableInfoC.toArray(), 1, new UpdateDefaultTable());
+                                DTSQL.mainTableColumns, TableDistC.toArray(), 1, new UpdateDefaultTable());
                   }
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.println(CC.CYAN + "MIActionListener ++++ MCSelectColumns" + CC.RESET);
+                  System.out.println("\tMIActionListener ++++ MCSelectColumns");
                   //ms.SelectColumns(DT.getTable());
                   ms.selectColumns(table, new SelectColumns());
-
                   //+++++++++++++++++++++++++++++++++++++++++
-                  System.out.println(CC.CYAN + "MIActionListener ++++ ChangeLB_TF and Select Data" + CC.RESET);
+                  System.out.println("\tMIActionListener ++++ ChangeLB_TF and Select Data");
                   cp.changeLB_TFandSelectData(VF_R.getJT().getColumnCount(), DT.getList_C());
+                  MComp.setCustomTableCellRenderer(VF_R.getJT());
+                  MComp.setCustomTableCellEditor(VF_R.getJT());
                   //VF_R.noRowsDetection();
                   VF_R.getSPL().setDividerLocation(0.4);
                   VF_R.getPL_UC().revalidate();
-                  //+++++++++++++++++++++++++++++++++++++++++
+                  //+++++++++++++++++++++++++++++++++++++++++         
+                  DISTS.start(true, true);
 
-                  System.out.println(CC.CYAN + "MIActionListener ++++ ChangeLSTD" + CC.RESET);
-                  lstd.changeLSTD();
-
-                  VF_R.setColorToDItem(table, DT.getDTable());
-
-                  System.out.println(CC.CYAN + "MIActionListener ++++ addAllListener (DELETE)" + CC.RESET);
-
+                  MENU.setColorToDItem(table, DT.getDTable());
                   n_mm.rez(VF_R.getJT(), true);
-                  System.out.println(CC.CYAN + "MIActionListener ++++ setRenderer and editor (DELETE?)" + CC.RESET);
-                  //VF_R.setTableRenderer();
-                  for (int z = 0; z < VF_R.getJT().getColumnCount(); z++) {
-                        VF_R.getJT().getColumnModel().getColumn(z).
-                                setCellEditor(VF_R.getDTCellEditor());
-                  }
-                  new Thread() {
-                        public void run() {
-                              try {
-                                    Thread.sleep(1000);
-                              } catch (InterruptedException ex) {
-                                    ex.printStackTrace();
-                              }
-                              VF_R.getJT().setPreferredScrollableViewportSize(VF_R.getJT().getSize());
-                              //System.out.println("JT preferredSize: " + VF_R.getJT().getSize());
-                        }
-                  }.start();
                   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                  System.out.print(CC.CYAN + "MIActionListener ++++ LOAD Icon" + CC.RESET);
-                  if (!TableInfoC.getImageC().equals("NONE")) {
-                        System.out.println(CC.GREEN + "\tYES" + CC.RESET);
-                        VF_R.getLB_Icon().setVisible(true);
-                        VF_R.getLB_Icon().setText("Loading");
-                        VF_R.getJT().setEnabled(false);
-                  } else {
-                        System.out.println(CC.RED + "\tNO" + CC.RESET);
-                  }
                   DT.bool_Sel = false;
-                  System.out.println(CC.GREEN + "\n MIActionListener ENDS" + CC.RESET);
+                  System.out.println(CC.GREEN + "\nMIActionListener ENDS" + CC.RESET);
 
             } else {
                   Status.startLBStatus(VF_R.getLB_Status(), Color.YELLOW,
                           "This Table is already selected", 3000);
             }
-
       }
-
       //++++++++++++++++++++++++++++++++++++++++++++++++++++
       private void setBackgroundToTable() {
             JTable JT = VF_R.getJT();
@@ -183,7 +163,7 @@ public class JTChanged_AL implements ActionListener {
             SU.setText("0");
       }
 
-      private void resetingAfter() {
+      private static void resetingAfter() {
             VF_R.getJPB().setVisible(false);
             VF_R.getJPB().setForeground(Color.RED);
             VF_R.getJPB().setValue(0);

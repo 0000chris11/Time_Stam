@@ -27,7 +27,7 @@ public class BTN_AL implements ActionListener {
 
       @Override
       public void actionPerformed(ActionEvent e) {
-            MComp.setButtonGroup(e, array);
+            MComp.getSelectedOnAButtonGroup(e, array);
             
             if (dt.getBTNDists().isSelected()) {
                   dt.getCD().show(dt.getPU(), "DISTS");
@@ -35,7 +35,13 @@ public class BTN_AL implements ActionListener {
                   if (!dt.getJTDists().getSelectionModel().isSelectionEmpty()) {
                         dt.getCD().show(dt.getPU(), "TYPES");
                   }else{
-                        dt.getCD().show(dt.getPU(), "LB_TYPES");
+                        dt.getCD().show(dt.getPU(), "LB_ERRORS");
+                  }
+            }else if(dt.getBTNIndexs().isSelected()){
+                  if (!dt.getJTDists().getSelectionModel().isSelectionEmpty()) {
+                        dt.getCD().show(dt.getPU(), "INDEXS");
+                  }else{
+                        dt.getCD().show(dt.getPU(), "LB_ERRORS");
                   }
             }
       }

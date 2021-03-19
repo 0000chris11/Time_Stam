@@ -1,15 +1,16 @@
 package views.first.listeners;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import views.first.VF_R;
 import MC.DT;
 import MC.LKCustom;
-import MC.TableInfoC;
+import SQLStores.TableDistC;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JComponent;
+import views.first.VF_R;
 
 /**
- *
+ *CLASS NOT BEING USED
+ * 
  * @author Christopher
  */
 public class TF_LST_FL implements FocusListener {
@@ -46,7 +47,7 @@ public class TF_LST_FL implements FocusListener {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++
       private void focusGainedFor(int forSize, int res) {
-            VF_R.getLB_Icon().setVisible(false);
+            //VF_R.getLB_Icon().setVisible(false);
 
             //int r = getNumToSum(forSize);
             if (forSize != 0) {//IF THE LAST TF HAD THE FOCUS THEN YOU CAN'T MOVE OTHERS
@@ -69,8 +70,8 @@ public class TF_LST_FL implements FocusListener {
       private void focusLostFor(int index, int forSize) {
             if (VF_R.getJLSTS()[index].getValueIsAdjusting() == true) {// = 0
             } else {
-                  if (!TableInfoC.getImageC().equals("NONE")) {
-                        VF_R.getLB_Icon().setVisible(true);
+                  if (!TableDistC.getImageC().equals("NONE")) {
+                        //VF_R.getLB_Icon().setVisible(true);
                   }
 
                   VF_R.getJSCS()[index].setVisible(false);
@@ -91,7 +92,7 @@ public class TF_LST_FL implements FocusListener {
       }
 
       private void ClockFocusGained(int forSize, int index) {
-            String clock = TableInfoC.getClock();
+            String clock = TableDistC.getClock();
             if (!clock.equals("NONE")) {
                   //DT.chars[0] = CK.charAt(1);
                   //DT.strings[0] = Character.toString(DT.chars[0]);
@@ -108,7 +109,7 @@ public class TF_LST_FL implements FocusListener {
                         if (col == d) {//FINDING THE CLOCK
                               int dis = getDistance(index, col + 1, 209);
 
-                              VF_R.getClocks()[col].setLocation(270, VF_R.getTFS_MD()[index - 1].getY() + dis);
+                              //VF_R.getClocks()[col].setLocation(270, VF_R.getTFS_MD()[index - 1].getY() + dis);
                               /*
                               VF_R.getTFS_MD()[col].setLocation(
                                       270, VF_R.getTFS_MD()[index - 1].getY() + dis);//res - 2
@@ -133,7 +134,7 @@ public class TF_LST_FL implements FocusListener {
       }
 
       private void ClockFocusLost(int forSize, int index) {
-            String clock = TableInfoC.getClock();
+            String clock = TableDistC.getClock();
             if (!clock.equals("NONE")) {
                   //DT.chars[0] = CK.charAt(1);
                   //DT.strings[0] = Character.toString(DT.chars[0]);
@@ -148,8 +149,8 @@ public class TF_LST_FL implements FocusListener {
                         if (col == d) {
                               int dis = getDistance(index, col + 1, 33);
                               //System.out.println("\t\tCK is on: C" + (1 + d));
-                              VF_R.getClocks()[col].setLocation(
-                                      270, VF_R.getTFS_MD()[index - 1].getY() + dis);
+                              //VF_R.getClocks()[col].setLocation(
+                                //      270, VF_R.getTFS_MD()[index - 1].getY() + dis);
                               /*
                               VF_R.getTFS_MD()[col].setLocation(
                                       270, VF_R.getTFS_MD()[index - 1].getY() + dis);//5

@@ -5,15 +5,15 @@
  */
 package SQLActions;
 
-import views.first.VF_R;
 import MC.DT;
 import MC.Status;
-import MC.TableInfo;
-import MC.TablesInfo;
+import SQLStores.TableDist;
+import SQLStores.TablesDists;
 import com.cofii2.myInterfaces.IActions;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import views.first.VF_R;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SelectTables implements IActions {
 
       @Override
       public void beforeQuery() {
-            TablesInfo.clear();
+            TablesDists.clear();
       }
 
       @Override
@@ -34,18 +34,21 @@ public class SelectTables implements IActions {
             String dist1 = rs.getString(3);
             String dist2 = rs.getString(4);
             String imageC = rs.getString(5);
-            String tag = rs.getString(6);
-            String clock = rs.getString(7);
-            
+            String imageCPath = rs.getString(6);
+            String tag = rs.getString(7);
+            String clock = rs.getString(8);
+            /*
             System.out.println("\tid: " + id);
             System.out.println("\ttable: " + table);
             System.out.println("\tdist1: " + dist1);
             System.out.println("\tdist2: " + dist2);
             System.out.println("\timageC: " + imageC);
+            System.out.println("\timageCPath: " + imageCPath);
             System.out.println("\ttag: " + tag);
             System.out.println("\tclock: " + clock);
+            */
             
-            TablesInfo.addlistTI(new TableInfo(id, table, dist1, dist2, imageC, tag, clock));
+            TablesDists.addlistTI(new TableDist(id, table, dist1, dist2, imageC, imageCPath, tag, clock));
       }
 
       @Override

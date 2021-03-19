@@ -23,8 +23,10 @@ public class DTSQL {
             "mysql.infoschema",
             "mysql.session",
             "mysql.sys"};
+      public static final String INFORMATION_SCHEMA = "INFORMATION_SCHEMA";
+      public static final String KEY_COLUMN_USAGE = "KEY_COLUMN_USAGE";
       public static final String[] bandDB = new String[]{
-            "INFORMATION_SCHEMA",
+            INFORMATION_SCHEMA,
             "MYSQL",
             "PERFORMANCE_SCHEMA",
             "SYS",
@@ -44,33 +46,98 @@ public class DTSQL {
             "MEDIUMBLOB", "MEDIUMINT", "NUMERIC", "NVARCHAR", "REAL", "SMALLINT", "TINYBLOB", "VARBINARY",
             "SQL"};
       private static String[] bwC_mysql = {"-", "*", "=", "+", "(", ")", ",", ";", ":", "[", "]", "{", "}", ".", "¿", "?", "\"", "¡", "\\",
-            "/", "&", "%", "#", "\"", "!", "|", "~", "^", "@"};
+            "/", "&", "%", "#", "\"", "!", "|", "~", "^", "@", "__"};
       private static ArrayList<String> bandWE_mysql = new ArrayList<String>(Arrays.asList(bwE_mysql));
       private static ArrayList<String> bandWC_mysql = new ArrayList<String>(Arrays.asList(bwC_mysql));
+      //++++++++++++++++++++++++++++++++++++++++++++
+      public static final int INT_MIN_WIDTH = 1;
+      public static final int TINYINT_MIN_WIDTH = 1;
+      public static final int SMALLINT_MIN_WIDTH = 1;
+      public static final int MEDIUMINT_MIN_WIDTH = 1;
+      public static final int BIGINT_MIN_WIDTH = 1;
+      public static final int CHAR_MIN_WIDTH = 1;
+      public static final int VARCHAR_MIN_WIDTH = 1;
+      
+      public static final int INT_DEFAULT_WIDTH = 11;
+      public static final int TINYINT_DEFAULT_WIDTH = 4;
+      public static final int SMALLINT_DEFAULT_WIDTH = 6;
+      public static final int MEDIUMINT_DEFAULT_WIDTH = 9;
+      public static final int BIGINT_DEFAULT_WIDTH = 20;
+      public static final int CHAR_DEFAULT_WIDTH = 1;
+      public static final int VARCHAR_DEFAULT_WIDTH = 80;
+      
+      public static final int INT_MAX_WIDTH = 11;
+      public static final int TINYINT_MAX_WIDTH = 4;
+      public static final int SMALLINT_MAX_WIDTH = 6;
+      public static final int MEDIUMINT_MAX_WIDTH = 9;
+      public static final int BIGINT_MAX_WIDTH = 20;
+      public static final int CHAR_MAX_WIDTH = 255;
+      public static final int VARCHAR_MAX_WIDTH = 16383;
 
       public static final String[] mysqlTypes = new String[]{
             "INT", "TINYINT", "SMALLINT", "MEDIUMINT", "BIGINT", 
             "FLOAT", "DOUBLE",
             "CHAR", "VARCHAR",
             "BOOLEAN/TINYINT(1)",
-            "DATE", "DATETIME", "TIMESTAMP",
+            "TIME", "DATE", "DATETIME", "TIMESTAMP",
+            "BINARY", "VARBINARY"}; 
+      
+      public static final String[] mysqlTypesFixedWidth = new String[]{
+            "INT", "TINYINT", "SMALLINT", "MEDIUMINT", "BIGINT", 
+            "CHAR", "VARCHAR",
+            "TIME", "DATE", "DATETIME", "TIMESTAMP",
             "BINARY", "VARBINARY"};
+      
       public static final boolean[] mysqlTypesFixedSize = new boolean[]{
             true, true, true, true, true,
             false,false,
             true, true,
             false,
-            false, false, false,
+            false, false, false, false,
             false, false};
+      public static final int[] mysql_TypesIntMinSize = {
+            INT_MIN_WIDTH, TINYINT_MIN_WIDTH, SMALLINT_MIN_WIDTH, MEDIUMINT_MIN_WIDTH, BIGINT_MIN_WIDTH,
+            -1, -1,
+            CHAR_MIN_WIDTH, VARCHAR_MIN_WIDTH
+            -1,
+            -1, -1, -1, -1,
+            -1, -1};
+      public static final int[] mysql_TypesIntDefaultSize = new int[]{
+            INT_DEFAULT_WIDTH, TINYINT_DEFAULT_WIDTH, SMALLINT_DEFAULT_WIDTH, MEDIUMINT_DEFAULT_WIDTH, BIGINT_DEFAULT_WIDTH,
+            -1, -1,
+            CHAR_DEFAULT_WIDTH, VARCHAR_DEFAULT_WIDTH, 
+            -1,
+            -1, -1, -1, -1,
+            -1, -1};
+      public static final int[] mysql_TypesIntMaxSize = new int[]{
+            INT_MAX_WIDTH, TINYINT_MAX_WIDTH, SMALLINT_MAX_WIDTH, MEDIUMINT_MAX_WIDTH, BIGINT_MAX_WIDTH,
+            -1, -1,
+            CHAR_MAX_WIDTH, VARCHAR_MAX_WIDTH, 
+            -1,
+            -1, -1, -1, -1,
+            -1, -1};
 
-      public static final int INT_MAX_WIDTH = 11;
-      public static final int TINYINT_MAX_WIDTH = 3;
-      public static final int SMALLINT_MAX_WIDTH = 5;
-      public static final int MEDIUMINT_MAX_WIDTH = 9;
-      public static final int BIGINT_MAX_WIDTH = 20;
-      public static final int CHAR_MAX_WIDTH = 255;
-      public static final int VARCHAR_MAX_WIDTH = 16383;
-
+      /*
+      "INT", "TINYINT", "SMALLINT", "MEDIUMINT", "BIGINT", 
+            "FLOAT", "DOUBLE",
+            "CHAR", "VARCHAR",
+            "BOOLEAN/TINYINT(1)",
+            "TIME", "DATE", "DATETIME", "TIMESTAMP",
+            "BINARY", "VARBINARY"
+      */
+      
+      //VC_R CONTROL +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      public static final String[] extraTypes = {"INT", "TINYINT", "SMALLINT", "MEDIUMINT", "BIGINT"};
+      public static final String[] distTypes = {"CHAR", "VARCHAR"};
+      public static final String[] dist2Types = {"INT", "TINYINT", "SMALLINT", "MEDIUMINT", "BIGINT",
+            "FLOAT", "DOUBLE",
+            "CHAR", "VARCHAR",
+            "BOOLEAN/TINYINT(1)",
+            "TIME", "DATE", "DATETIME", "TIMESTAMP",};
+      public static final String[] clockTypes = {"CHAR", "VARCHAR", "TIME", "DATETIME", "TIMESTAMP"};
+      public static final String[] tagTypes = {"CHAR", "VARCHAR"};
+      public static final String[] imageCTypes = {"CHAR", "VARCHAR"};
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static final String IconURL = "C:\\C0F\\About Music\\Album Front\\";
 
       private static String initDataBase = "RootConfig";
@@ -82,13 +149,13 @@ public class DTSQL {
       //MAIN TABLE VARIABLES ++++++++++++++++++++++++++++++++
       public static final String mainTable = "Table_Names";
       public static final String[] mainTableColumns = new String[]{
-            "id", "Name", "Dist1", "Dist2", "ImageC", "Tag", "Clock"};
+            "id", "Name", "Dist1", "Dist2", "ImageC", "ImageC_Path", "Tag", "Clock"};
       public static final String[] mainTableTypes = new String[]{
             "INT(11)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(100)", "VARCHAR(200)",
             "VARCHAR(100)", "VARCHAR(50)"};
       public static final boolean[] mainTableNulls = new boolean[]{
             false, false, false, false, false, false, false};
-
+      
       public static final String defautlTable = "Default_Table";
       private static String defaultTableValue;
       //SAME COLUMNS AS mainTableColumns
@@ -105,6 +172,11 @@ public class DTSQL {
       public static final Object[][] configTableValues = new Object[][]{
             {1, "AlwaysOnTop", false}, {2, "AutoReziseTable", false}, {3, "ShowGrid", false}};
 
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      public static final String[] fixedTables = {
+            mainTable,
+            defautlTable,
+            configTable};
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private static final String dbms = "mysql";
       private static final String server = "localhost";
@@ -130,6 +202,7 @@ public class DTSQL {
       public static final String rootPassw = "ccfmps00112";
       //++++++++++++++++++++++++++++++++++++++
       private static boolean mainTableExist;
+      private static boolean PKTableExist;
       private static boolean configTableExist;
       private static boolean defaultTableExist;
 
@@ -211,6 +284,14 @@ public class DTSQL {
 
       public static void setMainTableExist(boolean v) {
             mainTableExist = v;
+      }
+      
+      public static boolean getPKTableExist(){
+            return PKTableExist;
+      }
+      
+      public static void setPKTableExist(boolean v){
+            PKTableExist = v;
       }
 
       public static boolean getConfigTableExist() {

@@ -11,7 +11,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
-import views.Login.VL;
+import views.loginMain.VL;
 
 /**
  *

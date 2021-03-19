@@ -14,7 +14,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import views.create.Actions.TFS_KControl;
-import views.create.VC_R_Comps;
+import views.createUpdate.VC_R_Comps;
 
 /**
  *

@@ -6,6 +6,7 @@
 package views.mainTable;
 
 import MC.DTSQL;
+import com.cofii2.components.swing.LabelCustom;
 import com.cofii2.components.swing.Table;
 import com.cofii2.mysql.MSQL;
 import java.awt.CardLayout;
@@ -17,7 +18,6 @@ import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-import smallComponenets.smallLB;
 
 /**
  *
@@ -34,16 +34,20 @@ public class VMT_DataCom {
       
       CardLayout cd = new CardLayout();
       
-      JLabel lbTypes = new smallLB("No Table Selected on Dists", SwingConstants.CENTER);
+      JLabel lbErrors = new LabelCustom("No Table Selected on Dists", SwingConstants.CENTER);
 
       JToggleButton btnDists = new JToggleButton("Dists");
       JToggleButton btnTypes = new JToggleButton("Types");
+      JToggleButton btnIndexs = new JToggleButton("Indexs");
 
       JTable JTTypes = new Table();
       JScrollPane sc_JTTypes = new JScrollPane(JTTypes);
 
       JTable JTDists = new Table();
       JScrollPane sc_JTDists = new JScrollPane(JTDists);
+      
+      JTable JTIndexs = new Table();
+      JScrollPane sc_JTIndexs = new JScrollPane(JTIndexs);
       //NON-EDITABLE ++++++++++++
       DefaultTableModel dtmDists = new DefaultTableModel() {
 
@@ -53,6 +57,13 @@ public class VMT_DataCom {
             }
       };
       DefaultTableModel dtmTypes = new DefaultTableModel() {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                  return false;
+            }
+      };
+      DefaultTableModel dtmIndexs = new DefaultTableModel() {
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -75,6 +86,10 @@ public class VMT_DataCom {
       public JTable getJTTypes() {
             return JTTypes;
       }
+      
+      public JTable getJTIndexs(){
+            return JTIndexs;
+      }
 
       public JScrollPane getSC_JTDists() {
             return sc_JTDists;
@@ -82,6 +97,10 @@ public class VMT_DataCom {
 
       public JScrollPane getSC_JTTypes() {
             return sc_JTTypes;
+      }
+      
+      public JScrollPane getSC_JTIndexs(){
+            return sc_JTIndexs;
       }
       
       public DefaultTableModel getDTMDists(){
@@ -92,8 +111,12 @@ public class VMT_DataCom {
             return dtmTypes;
       }
       
-      public JLabel getLBTypes(){
-            return lbTypes;
+      public DefaultTableModel getDTMIndexs(){
+            return dtmIndexs;
+      }
+      
+      public JLabel getLBErrors(){
+            return lbErrors;
       }
       
       public JToggleButton getBTNDists(){
@@ -101,5 +124,8 @@ public class VMT_DataCom {
       }
       public JToggleButton getBTNTypes(){
             return btnTypes;
+      }
+      public JToggleButton getBTNIndexs(){
+            return btnIndexs;
       }
 }

@@ -17,7 +17,7 @@ public class DT {
       private static ArrayList<String> list_C = new ArrayList<String>();//COLUMNS
       private static ArrayList<Object> list_R = new ArrayList<Object>();//ROWS
       private static ArrayList<String> list_Types = new ArrayList<String>();//COL TYPE
-      private static ArrayList<String> list_Nulls = new ArrayList<String>();//COL NULL
+      private static ArrayList<Boolean> list_Nulls = new ArrayList<Boolean>();//COL NULL
       private static int primaryKey = 0;//SINGLE PRIMARY KEY
       private static ArrayList<String> list_Defaults = new ArrayList<String>();//COL DEFAULT VALUES
       private static Object[] extra = new Object[2];
@@ -27,8 +27,12 @@ public class DT {
       private static DefaultListModel[] dlms = new DefaultListModel[DT.maxColumns];
 
       private static ArrayList<String> list_IconUrl = new ArrayList<String>();
-      private static ArrayList<ImageIcon> list_newIcon = new ArrayList<ImageIcon>();
+      private static ArrayList<ImageIcon> list_Icon = new ArrayList<ImageIcon>();
       private static ArrayList<String> list_cutUrl = new ArrayList<String>();
+      
+      //NEW
+      private static ArrayList<String> list_IconUrl2 = new ArrayList<String>();
+      private static ArrayList<String> list_IconName = new ArrayList<String>();
       //++++++++++++++++++++++++++++
       public static int[] ints = new int[8];
       public static String[] cols = new String[8];
@@ -48,6 +52,7 @@ public class DT {
 
       public static final String inter = "Nothing Changed";
       public static final int maxColumns = 6;
+      public static final int maxIcons = 2;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       private DT(){
             throw new IllegalStateException("Private Constructor");
@@ -83,7 +88,7 @@ public class DT {
             return list_Types;
       }
 
-      public static ArrayList<String> getList_Nulls() {
+      public static ArrayList<Boolean> getList_Nulls() {
             return list_Nulls;
       }
 
@@ -121,14 +126,22 @@ public class DT {
             return list_IconUrl;
       }
 
-      public static ArrayList<ImageIcon> getList_newIcon(){
-            return list_newIcon;
+      public static ArrayList<ImageIcon> getList_Icon(){
+            return list_Icon;
       }
 
       public static ArrayList<String> getList_cutUrl(){
             return list_cutUrl;
       }
 
+      
+      public static ArrayList<String> getList_IconHolePath(){
+            return list_IconUrl2;
+      }
+      
+      public static ArrayList<String> getList_IconName(){
+            return list_IconName;
+      }
 
       //+++++++++++++++++++++++++++++++++++++++++++++++
       

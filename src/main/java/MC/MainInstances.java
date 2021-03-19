@@ -5,9 +5,10 @@
  */
 package MC;
 
-import views.create.VC_R2;
-import views.create.VC_R_Comps;
-import views.create.VC_R_DataCom;
+import views.createUpdate.VC_R2;
+import views.createUpdate.VC_R_Comps;
+import views.createUpdate.VC_R_DataCom;
+import views.delete.VD;
 import views.mainTable.VMT;
 import views.mainTable.VMT_DataCom;
 
@@ -20,6 +21,9 @@ public class MainInstances {
       private static VC_R2 vcr2;
       private static VC_R_DataCom vcrd;
       private static VC_R_Comps vcrc;
+      
+      private static VD vd;
+      
       private static VMT vmt;
       private static VMT_DataCom vmtd;
       //++++++++++++++++++++++++++++++++++++++++++
@@ -33,6 +37,10 @@ public class MainInstances {
       
       public static VC_R_Comps getVC_R_Comps(){
             return vcrc;
+      }
+      
+      public static VD getVD(){
+            return vd;
       }
 
       public static VMT getVMT() {
@@ -53,6 +61,10 @@ public class MainInstances {
       
       public static void setVC_R_Comps(VC_R_Comps vcrc){
             MainInstances.vcrc = vcrc;
+      }
+      
+      public static void setVD(VD vd){
+            MainInstances.vd = vd;
       }
 
       public static void setVMT(VMT vmt) {

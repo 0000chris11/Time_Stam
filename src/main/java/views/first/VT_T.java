@@ -7,16 +7,15 @@ package views.first;
 
 import MC.DT;
 import MC.MainInstances;
-import com.cofii2.myAClasses.VT;
 import com.cofii2.methods.MComp;
+import com.cofii2.myAClasses.VT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.UIManager;
-import static views.first.VF_R_DataCom.cbs;
-import views.mainTable.VMT_DataCom;
+import views.createUpdate.VC_R_Comps;
+import views.createUpdate.VC_R_DataCom;
 
 /**
  *
@@ -24,25 +23,27 @@ import views.mainTable.VMT_DataCom;
  */
 public class VT_T extends VF_R_DataCom {
 
+      private int count = 0;
+      
       public VT_T() {
             VT vt = new VT(BoxLayout.Y_AXIS);
             //JTextField tf = new JTextField();
             //vt.add(tf);
-            JButton btn = new JButton("GET JCBS SIZE INFO");
+            JButton btn = new JButton("GET CB COLOR INFO");
             vt.add(btn);
             JButton btn2 = new JButton("Comparing");
             vt.add(btn2);
-            JButton btn3 = new JButton("Get CLIENT PROPERTY");
+            JButton btn3 = new JButton("GET LISTENERS");
             vt.add(btn3);
-            JButton btn4 = new JButton("GET JMT COLUMNS SIZE");
+            JButton btn4 = new JButton("DIST BUTTONS");
             vt.add(btn4);
 
             btn.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                        for (int a = 0; a < DT.maxColumns; a++) {
-                              MComp.printComponentSizeInfo(VF_R.getJCBS()[a]);
-                        }
+                        VC_R_Comps c = MainInstances.getVC_R_Comps();
+                        MComp.printComboBoxColorInfo(c.getCBS_Customs()[0]);
+                        MComp.printComboBoxColorInfo(c.getCBS_Customs()[1]);
 
                   }
 
@@ -74,32 +75,28 @@ public class VT_T extends VF_R_DataCom {
             btn3.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
+                        VC_R_Comps c = MainInstances.getVC_R_Comps();
                         for (int a = 0; a < DT.maxColumns; a++) {
-                              //System.out.println(VF_R.getJTFES()[a].getClientProperty("TextField.highlight"));
-                              System.out.println(cbs[a].getEditor().getEditorComponent().getClass().toString());
+                              for (int b = 0; b < c.getBTNS_ImageC()[a].getActionListeners().length; b++) {
+                                    System.out.println((a + 1) + ": " + c.getBTNS_ImageC()[a].
+                                            getActionListeners()[b].getClass().toString());
+                              }
                         }
-                        System.out.println("TextField.shadow: " + UIManager.get("TextField.shadow"));
-                        System.out.println("TextField.margin: " + UIManager.get("TextField.margin"));
-                        System.out.println("TextField.highlight: " + UIManager.get("TextField.highlight"));
-                        System.out.println("TextField.focusInputMap: " + UIManager.get("TextField.focusInputMap"));
-                        System.out.println("TextField.darkShadow: " + UIManager.get("TextField.darkShadow"));
-                        System.out.println("TextField.border: " + UIManager.get("TextField.border"));
                   }
 
             });
             btn4.addActionListener(new ActionListener() {
                   @Override
                   public void actionPerformed(ActionEvent e) {
-                       VMT_DataCom vmt = MainInstances.getVMT_DataCom();
-                       System.out.println(vmt.getSC_JTDists().getParent().toString());
-                       System.out.println("Dist row count: " + vmt.getJTDists().getRowCount());
-                       System.out.println("Dist column count: " + vmt.getJTDists().getColumnCount());
-                       MComp.printComponentSizeInfo(vmt.getSC_JTDists());
-                       System.out.println("###############################");
-                       System.out.println(vmt.getSC_JTTypes().getParent().toString());
-                       System.out.println("Dist row count: " + vmt.getJTTypes().getRowCount());
-                       System.out.println("Dist column count: " + vmt.getJTTypes().getColumnCount());
-                       MComp.printComponentSizeInfo(vmt.getSC_JTTypes());
+                        VC_R_DataCom d = MainInstances.getVC_R_DataCom();
+                        VC_R_Comps c = MainInstances.getVC_R_Comps();
+                        System.out.println("PCD_U HEIGHT: " + d.getPCD_U().getHeight());
+                        System.out.println("\tPCD_UDist HEIGHT: " + d.getPCD_UDist().getHeight());
+                        System.out.println("\tPCD_UDist2 HEIGHT: " + d.getPCD_UDist2().getHeight());
+                        System.out.println("\tPCD_UImageC HEIGHT: " + d.getPCD_UImageC().getHeight());
+                        System.out.println("\tPCD_UTag HEIGHT: " + d.getPCD_UTag().getHeight());
+                        System.out.println("\tPCD_UClock HEIGHT: " + d.getPCD_UClock().getHeight());
+
                   }
 
             });

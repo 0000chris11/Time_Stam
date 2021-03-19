@@ -5,14 +5,14 @@
  */
 package SQLActions;
 
-import views.first.VF_R;
 import MC.Status;
-import MC.TableInfoC;
-import com.cofii2.stores.CC;
+import SQLStores.TableDistC;
 import com.cofii2.myInterfaces.IActions;
+import com.cofii2.stores.CC;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import views.first.VF_R;
 
 /**
  *
@@ -41,16 +41,18 @@ public class SelectATable implements IActions {
             String dist1 = rs.getString(3);
             String dist2 = rs.getString(4);
             String imageC = rs.getString(5);
-            String tag = rs.getString(6);
-            String Clock = rs.getString(7);
+            String imageCPath = rs.getString(6);
+            String tag = rs.getString(7);
+            String Clock = rs.getString(8);
             
-            TableInfoC.setId(id);
-            TableInfoC.setTable(table);
-            TableInfoC.setDist1(dist1);
-            TableInfoC.setDist2(dist2);
-            TableInfoC.setImageC(imageC);
-            TableInfoC.setTag(tag);
-            TableInfoC.setClock(Clock);
+            TableDistC.setId(id);
+            TableDistC.setTable(table);
+            TableDistC.setDist1(dist1);
+            TableDistC.setDist2(dist2);
+            TableDistC.setImageC(imageC);
+            TableDistC.setImageCPath(imageCPath);
+            TableDistC.setTag(tag);
+            TableDistC.setClock(Clock);
       }
 
       @Override

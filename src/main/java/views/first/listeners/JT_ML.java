@@ -5,18 +5,20 @@
  */
 package views.first.listeners;
 
+import MC.DT;
+import MC.DTSQL;
+import MC.notMyMethods;
+import SQLActions.Update;
+import SQLStores.TableDistC;
+import Threads.Threads;
+import others2.DISTS;
+
+import com.cofii2.methods.MTable;
+import com.cofii2.mysql.MSQL;
+import com.cofii2.stores.CC;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import views.first.VF_R;
-import MC.DT;
-import MC.DTSQL;
-import MC.TableInfoC;
-import Others.LSTD;
-import MC.notMyMethods;
-import SQLActions.Update;
-import Threads.Threads;
-import com.cofii2.mysql.MSQL;
-import com.cofii2.methods.MTable;
 
 /**
  *
@@ -29,12 +31,11 @@ public class JT_ML implements TableModelListener {
       //MethodM mm = new MethodM(CName, DT.CCount++);
       notMyMethods n_mm = new notMyMethods();
       MSQL ms = new MSQL(DTSQL.getURLConnection(), DTSQL.getUser(), DTSQL.getPassw());
-      LSTD lstd = new LSTD();
-      Threads th = new Threads(CName, DT.CCount++);
+      Threads th = new Threads();
 
       @Override
       public void tableChanged(TableModelEvent evt) {
-            System.out.println("tableChanged");
+            System.out.println(CC.PURPLE + "tableChanged" + CC.RESET);
             /*
             System.out.println("+++TableChanged: "
                     + " \nbool_Add: " + Data.bool_Add
@@ -46,7 +47,7 @@ public class JT_ML implements TableModelListener {
             if (DT.bool_Add == false && DT.bool_Upd == false && DT.bool_Del == false
                     && DT.bool_Sel == false && DT.bool_Chan == false) {
                   if (DT.cellSys == true) {
-                        String table = TableInfoC.getTable();
+                        String table = TableDistC.getTable();
                         
                         int coln = VF_R.getJT().getSelectedColumn();
                         int rown = VF_R.getJT().getSelectedRow();
@@ -64,7 +65,7 @@ public class JT_ML implements TableModelListener {
                                             DT.getList_C().get(0), DT.getList_R().get(0),
                                             new Update("UpdateRow", VF_R.getLB_Status()));
                                     
-                                    lstd.changeLSTD();
+                                    DISTS.start(false, false);
                                     n_mm.rez(VF_R.getJT(), DT.autoState);
                                     //++++++++++++++++++++++++++++++
                                     th.setValueToCell(data, coln, rown);
@@ -78,7 +79,6 @@ public class JT_ML implements TableModelListener {
                   }
             }
             DT.cellSys = true;
-            //System.out.println("TableChanged END");
       }
 
 }

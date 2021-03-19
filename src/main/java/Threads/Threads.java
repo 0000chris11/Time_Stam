@@ -1,25 +1,23 @@
 package Threads;
 
-import views.first.VF_R;
-import java.io.File;
-import javax.swing.ImageIcon;
-import java.util.concurrent.BrokenBarrierException;
 import MC.DT;
 import MC.DTSQL;
-import MC.TableInfoC;
 import MC.notMyMethods;
-import com.cofii2.methods.MImage;
-import com.cofii2.methods.MTable;
-import com.cofii2.stores.CC;
-import Others.LSTD;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.concurrent.CyclicBarrier;
-import javax.swing.table.AbstractTableModel;
 import SQLActions.Insert;
 import SQLActions.SelectData;
-import com.cofii2.mysql.MSQL;
+import SQLStores.TableDistC;
+import SQLStores.TableTypeC;
+import others2.DISTS;
+
 import com.cofii2.methods.MList;
+import com.cofii2.mysql.MSQL;
+import java.util.ArrayList;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
+import views.first.VF_R;
 
 /**
  *
@@ -38,16 +36,10 @@ public class Threads {
       private static CyclicBarrier cyb = new CyclicBarrier(2);
 
       private static Thread addThread;
-      private static Thread iconThread;
       private static Thread scrollThread;
       private static Thread fireDataThread;
 
       private static Thread cellUpdate;
-
-      //+++++++++++++++++++++++++++++++++++++++++++++++++++
-      public Threads(String from, int CC) {
-            DT.getConstructorName(DT.cons, CName, from, CC);
-      }
       //+++++++++++++++++++++++++++++++++++++++++++++++++++
 
       public void addOp() {
@@ -55,73 +47,71 @@ public class Threads {
                   @Override
                   public void run() {
                         DT.bool_Add = true;
-                        System.out.println("\tADD ++++ addThread starts");
-
+                        System.out.println("##1# TEST TF_1 TEXT: " + VF_R.getJTFS()[0].getText());
                         ArrayList<String> listNewValues = new ArrayList<String>();
+                        boolean breakk = false;
                         for (int a = 0; a < DT.maxColumns; a++) {
-                              if (VF_R.getJCBS()[a].isVisible()) {
-                                    if ((a + 1) == (int) DT.getExtra()[0]) {//AUTO VALUE REPLACE WITH NULL
-                                          listNewValues.add(null);
-                                    } else {
-                                          listNewValues.add(VF_R.getJCBS()[a].getSelectedItem().toString());
-                                    }
-                              } 
+                              breakk = wichComponent(a, listNewValues);
+                              if(!breakk){
+                                    break;
+                              }
                         }
                         String[] columns = MList.getListToArray(String.class, DT.getList_C());
                         String[] newValues = MList.getListToArray(String.class, listNewValues);
                         //+++++++++++++++++++++++++++++++++++++++++
-                        String table = TableInfoC.getTable();
+                        String table = TableDistC.getTable();
                         //+++++++++++++++++++++++++++++++++++++++++
                         //CHANGE WHEN THERE IS NO >ID< FIELD
-                        int mayor = MTable.getMayorId(VF_R.getJT(), 0);
+                        //int mayor = MTable.getMayorId(VF_R.getJT(), 0);
                         Insert ins = new Insert();
                         for (int a = 0; a < DT.maxColumns; a++) {
                               if (VF_R.getJT().getColumnCount() == a + 1) {
                                     System.out.println("\t\tADD ++++ INSERTING " + (a + 1)
                                             + " COLUMNS");
                                     //INSERT INTO Youkai_Watch (, EP, Title, Time, Descr) VALUES ("185-A", "Busters Treasure - 7", "M", "EX X; Komasan; JB; F")
-                                    ms.insert(table, columns, newValues, (int) DT.getExtra()[0], ins);
+                                    ms.insert(table, columns, newValues, TableTypeC.getEX().index, ins);
                                     //mc.Insert(DT.getTable(), ++mayor, listNewValues);
                                     if (ins.success) {
                                           ms.selectData(table, new SelectData(a + 1));
                                     }
                               }
                         }
+                        System.out.println("##2# TEST TF_1 TEXT: " + VF_R.getJTFS()[0].getText());
                         if (ins.success) {
-                              new LSTD().changeLSTD();
-
-                              VF_R.getJT().clearSelection();
+                              DISTS.start(false, false);
+                              /*
+                              if (VF_R.getSPL().getRightComponent().getName().equals("LB_JT")) {
+                                    VF_R.getSPL().setRightComponent(VF_R.getSC_JT());
+                                    VF_R.getSPL().revalidate();
+                              }
+                              */
+                              //VF_R.getJT().clearSelection();
                               n_mm.rez(VF_R.getJT(), DT.autoState);
+                              System.out.println("##3# TEST TF_1 TEXT: " + VF_R.getJTFS()[0].getText());
                         }
-                        System.out.println("\tADD ++++ addStar Finished");
                   }
 
             });
             addThread.start();
+
             scrollThread = new Thread(new Runnable() {
                   @Override
                   public void run() {
                         try {
                               cyb.await();
-                              System.out.println("\nV_sb STARTS");
-                              System.out.println("\tV_sb is waiting for \"addThread\" to finish");
                               Thread.sleep(500);
                               addThread.join();
-                              if (!TableInfoC.getImageC().contains("NONE")) {
-                                    System.out.println("\tV_sb is waiting for \"iconThread\" to finish");
-                                    iconThread.join();
+                              if (!TableDistC.getImageC().contains("NONE")) {
+                                    //iconThread.join();
                               }
                               Thread.sleep(200);
                               VF_R.getSC_JT().getVerticalScrollBar().setValue(
                                       VF_R.getSC_JT().getVerticalScrollBar().getMaximum());
                         } catch (InterruptedException ex) {
-                              System.err.println("\tVs_sb... Fail... Horrible");
                               ex.printStackTrace();
                         } catch (BrokenBarrierException bbe) {
-                              System.err.println("\tVs_sb... Fail... Horrible");
                               bbe.printStackTrace();
                         }
-                        System.out.println("\tV_sb finished");
                   }
 
             });
@@ -132,139 +122,51 @@ public class Threads {
                         try {
                               cyb.await();
                               DT.bool_Add = true;
-                              System.out.println("\nfireData STARTS // " + DT.bool_Add);
-                              System.out.println("\tfireData is waiting for \"scrollThread\" to end");
                               scrollThread.join();
                               ((AbstractTableModel) VF_R.getJT().getModel()).fireTableDataChanged();
                               Thread.sleep(500);
                         } catch (InterruptedException ie) {
-                              System.err.println("\tfireData... Fail... Horrible");
                               ie.printStackTrace();
                         } catch (BrokenBarrierException bbe) {
-                              System.err.println("\tfireData... Fail... Horrible");
                               bbe.printStackTrace();
                         }
                         DT.bool_Add = false;
-                        System.out.println(CC.GREEN + "\tfireData finished (ADD FINISH)"
-                                + CC.RESET);
                   }
 
             });
             fireDataThread.start();
+
       }
 
-      public void addLBIconThread(String TB) {
-            System.out.println(CC.RED + "addLBIconThread" + CC.RESET);
-            iconThread = new Thread() {
-                  public void run() {
-                        //Data dt = new Data();
-                        VF_R.getJPB().setMaximum(VF_R.getJT().getRowCount());
-                        VF_R.getJPB().setValue(0);
-                        VF_R.getJPB().setVisible(true);
-                        //System.out.println(CC.RED + "\tRUN" + CC.RESET);
-                        //System.out.println(CC.RED + "\tJPB is visible: " + VF_R.getJPB().isVisible() 
-                        //+ CC.RESET);
-                        DT.getList_IconUrl().clear();
-                        DT.getList_newIcon().clear();
-                        DT.getList_cutUrl().clear();
-                        //-------------------------------------------------------------------------------
-                        int col = Character.getNumericValue(TB.charAt(1)) - 1;
+      /**
+       * 
+       * @param a index of each column
+       * @param listNewValues new values to add
+       * @return continue
+       */
+      private boolean wichComponent(int a, ArrayList<String> listNewValues) {
+            JTextField tf = null;
+            JPanel jp = VF_R.getJTFPanel()[a];
+            if (VF_R.tfPanelSelected[a].equalsIgnoreCase(VF_R.tfPanelTypes[0])) {
+                  tf = VF_R.getJTFS()[a];
 
-                        DT.cols[0] = DT.getList_C().get(col);//UNUSED?
-                        //++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                        Object data;
-                        String textIcon = "ERROR";
-                        String textUrl = "ERROR";
-                        File file;
-                        ImageIcon icon;
-                        for (int a = 0; a < VF_R.getJT().getRowCount(); a++) {
-                              VF_R.getJPB().setValue((a + 1));
+            } else if (VF_R.tfPanelSelected[a].equalsIgnoreCase(VF_R.tfPanelTypes[1])) {
+                  tf = VF_R.getJTFES()[a];
 
-                              data = VF_R.getJT().getValueAt(a, col);
-                              if (data.toString().contains("; ")) {
+            } else if (VF_R.tfPanelSelected[a].equalsIgnoreCase(VF_R.tfPanelTypes[2])) {
+                  tf = VF_R.getJTF_CKS()[a];
+            }
 
-                                    textIcon = data.toString();
-                                    textIcon = DTSQL.IconURL + textIcon.substring(
-                                            textIcon.indexOf(";") + 2, textIcon.length()) + ".jpg";
-                                    textUrl = textIcon;
-
-                              } else {
-                                    textUrl = DTSQL.IconURL + data.toString() + ".jpg";
-                                    textIcon = DTSQL.IconURL + data.toString() + ".jpg";
-                              }
-                              //++++++++++++++++++++++++++++++++++++++++++++
-                              if (textIcon.contains("/")) {
-                                    //System.out.println("\tData/Text contains >>/<<");
-                                    textIcon = textIcon.replaceAll("/", "Slash");
-                              }
-                              if (textIcon.contains("<")) {
-                                    //System.out.println("\tData/Text contains >> < <<");
-                                    textIcon = textIcon.replaceAll("<", "Bracket");
-                              }
-                              if (textIcon.contains("?")) {
-                                    //System.out.println("\tData/Text contains >>?<<");
-                                    textIcon = textIcon.replace("?", "");
-                              }
-                              if (textIcon.contains(": ")) {
-                                    //System.out.println("\tData/Text contains >>: <<");
-                                    textIcon = textIcon.replaceAll(": ", " ");
-
-                              }
-                              //++++++++++++++++++++++++++++++++++++++++++++
-                              //System.out.println("\tData/Text: " + textIcon + " or .png");
-                              //++++++++++++++++++++++++++++++++++++++++++++
-                              if (textIcon.contains("-SINGLE-") || textIcon.contains("NO ALBUM")) {
-                                    VF_R.getLB_Icon().setIcon(null);
-                                    //System.out.println("\t\tNO ALBUM ICON FOR " + textIcon);
-                              } else {
-                                    file = new File(textIcon);
-                                    if (file.exists()) {
-                                          if (DT.getList_IconUrl().contains(textUrl)) {
-                                          } else {
-                                                //System.out.println("\t\tFile Exists!!!!!!! - jpg");
-                                                //list_Icon.add(resizeIcon(new ImageIcon(file.getPath())));
-                                                icon = new ImageIcon(file.getPath());
-                                                DT.getList_IconUrl().add(textUrl);
-                                                DT.getList_newIcon().add(MImage.resizeIcon(icon));
-                                          }
-                                    } else {
-                                          textIcon = DTSQL.IconURL + data.toString() + ".png";
-                                          file = new File(textIcon);
-                                          if (file.exists()) {
-                                                if (DT.getList_IconUrl().contains(textUrl)) {
-                                                } else {
-                                                      icon = new ImageIcon(file.getPath());
-                                                      DT.getList_IconUrl().add(textUrl);
-                                                      DT.getList_newIcon().add(MImage.resizeIcon(icon));
-                                                }
-                                          } else {
-                                                //System.out.println("\t\tFile NOT FOUND");
-                                          }
-                                    }
-                              }
-                              //System.out.println();
-                        }
-
-                        //TEST BOTH ARRAY (iconUrl & newicon) PATHS, TO COMPARE THEM
-                        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                        String holePath;
-                        String cutPath;
-                        for (int a = 0; a < DT.getList_IconUrl().size(); a++) {
-                              holePath = DT.getList_IconUrl().get(a).toString();
-                              cutPath = holePath.substring(holePath.indexOf("Front\\") + 6, holePath.length() - 4);
-                              System.out.println("cutPath " + a + ": " + cutPath);
-                              DT.getList_cutUrl().add(cutPath);
-                        }
-                        if (VF_R.getJPB().getValue() == VF_R.getJT().getRowCount()) {
-                              VF_R.getJPB().setForeground(Color.GREEN);
-                        }
-                        VF_R.getLB_Icon().setText("Ready!");
-
-                        VF_R.getJTCL().setDefaultForeground(Color.GRAY);
-                        VF_R.getJT().setEnabled(true);
+            if (jp.isVisible()) {
+                  if ((a + 1) == TableTypeC.getEX().index) {//IF THE COLUMN IS AN AUTO_INCREMENT THE VALUE SHOULD BE AUTOMATIC
+                        listNewValues.add(null);
+                  } else {
+                        listNewValues.add(tf.getText());
                   }
-            };
-            iconThread.start();
+                  return true;
+            }else{
+                  return false;
+            }
       }
 
       public void setValueToCell(Object data, int coln, int rown) {

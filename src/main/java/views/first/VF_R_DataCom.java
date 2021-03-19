@@ -1,14 +1,21 @@
 package views.first;
 
 import MC.DT;
-import com.cofii2.methods.MCell;
-import com.cofii2.custom.JTCustomCellRenderer;
+import com.cofii2.components.swing.ButtonGradient;
+import com.cofii2.components.swing.CheckBoxMenuItemCustom;
+import com.cofii2.components.swing.ComboBoxE;
+import com.cofii2.components.swing.MenuBarCustom;
+import com.cofii2.components.swing.MenuCustom;
+import com.cofii2.components.swing.MenuItemCustom;
+import com.cofii2.custom.TableCellRenderer;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,19 +24,14 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu.Separator;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
-import java.awt.GradientPaint;
-import java.util.EventObject;
-import javax.swing.JComboBox;
-import javax.swing.JProgressBar;
-import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-import smallComponenets.MComboBoxE;
-import smallComponenets.smallBTN_C;
 
 /**
  *
@@ -53,8 +55,6 @@ public class VF_R_DataCom {
       static JProgressBar JPB = new JProgressBar();
       
       static JTable JT = new JTable();
-      
-      
       static JScrollPane sc_JT = new JScrollPane(JT);
       
       //============================================================    
@@ -75,66 +75,82 @@ public class VF_R_DataCom {
       //+++++++++++++++++++++++++++++++++++
       public static final String JPL_layout = "Group Layout";
       //+++++++++++++++++++++++++++++++++++
-      static JMenuBar JMB = new JMenuBar();
+      static JMenuBar JMB = new MenuBarCustom();
 
-      static JMenu JM_Options = new JMenu("Options");
+      static JMenu JM_Options = new MenuCustom("Options");
 
-      static JMenuItem mi_changeLogin = new JMenuItem("Change Login or DB");
-      static JMenuItem mi_showTablesInfo = new JMenuItem("Show Tables Info");
+      static JMenuItem mi_changeLogin = new MenuItemCustom("Change Login or DB");
+      static JMenuItem mi_showTablesInfo = new MenuItemCustom("Show Tables Info");
       
-      static JMenu JMS_ShowList = new JMenu("Show List");
-      JMenuItem mi_STables = new JMenuItem("Tables");
-      JMenuItem mi_SColumns = new JMenuItem("Columns");
-      JMenuItem mi_SDists = new JMenuItem("Dists");
-      JMenuItem mi_SListD = new JMenuItem("ListD");
-      JMenuItem mi_SJFComponents = new JMenuItem("JF Components");
-      JMenuItem mi_SP1Components = new JMenuItem("P1 Components");
+      static JMenu JMS_ShowList = new MenuCustom("Show List");
+      JMenuItem mi_STables = new MenuItemCustom("Tables");
+      JMenuItem mi_SColumns = new MenuItemCustom("Columns");
+      JMenuItem mi_SDists = new MenuItemCustom("Dists");
+      JMenuItem mi_SListD = new MenuItemCustom("ListD");
+      JMenuItem mi_SJFComponents = new MenuItemCustom("JF Components");
+      JMenuItem mi_SP1Components = new MenuItemCustom("P1 Components");
 
-      static JMenu JMS_ShowListeners = new JMenu("Show Listener");
-      JMenuItem mi_S_JTFS_FL = new JMenuItem("JTextFields FL");
-      JMenuItem mi_S_JTFS_KL = new JMenuItem("JTextFields KL");
-      JMenuItem mi_S_JTFS_ML = new JMenuItem("JTextFields ML");
-      JMenuItem mi_S_JLSTS_LSL = new JMenuItem("JLists LSL");
-      JMenuItem mi_S_JLSTS_FL = new JMenuItem("JLists FL");
+      static JMenu JMS_ShowListeners = new MenuCustom("Show Listener");
+      JMenuItem mi_S_JTFS_FL = new MenuItemCustom("JTextFields FL");
+      JMenuItem mi_S_JTFS_KL = new MenuItemCustom("JTextFields KL");
+      JMenuItem mi_S_JTFS_ML = new MenuItemCustom("JTextFields ML");
+      JMenuItem mi_S_JLSTS_LSL = new MenuItemCustom("JLists LSL");
+      JMenuItem mi_S_JLSTS_FL = new MenuItemCustom("JLists FL");
 
       Separator sep0 = new Separator();
-      static JCheckBoxMenuItem mi_AOT = new JCheckBoxMenuItem("Always On Top");
-      static JCheckBoxMenuItem mi_AutoR = new JCheckBoxMenuItem("Auto-Resize");
-      static JCheckBoxMenuItem mi_Grid = new JCheckBoxMenuItem("Show Grid");
+      static JCheckBoxMenuItem mi_AOT = new CheckBoxMenuItemCustom("Always On Top");
+      static JCheckBoxMenuItem mi_AutoR = new CheckBoxMenuItemCustom("Auto-Resize");
+      static JCheckBoxMenuItem mi_Grid = new CheckBoxMenuItemCustom("Show Grid");
       Separator sep1 = new Separator();
-      static JMenuItem mi_SaveOp = new JMenuItem("Save Options");
+      static JMenuItem mi_SaveOp = new MenuItemCustom("Save Options");
 
-      static JMenu JM_Select = new JMenu("Select");
+      static JMenu JM_Select = new MenuCustom("Select");
 
-      JMenu JM_Table = new JMenu("Table");
-      static JMenu JMS_ChangeDTable = new JMenu("Change Default Table");
+      JMenu JM_Table = new MenuCustom("Table");
+      static JMenu JMS_TableOptions = new MenuCustom("Options");
+      static JCheckBoxMenuItem mi_ClearValuesWhenDeleted = new CheckBoxMenuItemCustom("Clear values when a row is deleted");
+      static JMenuItem mi_ReloadImageC = new MenuItemCustom("Reload Current ImageC Directory");
+      
+      static JMenu JMS_ChangeDTable = new MenuCustom("Change Default Table");
       Separator sep3 = new Separator();
-      static JMenuItem mi_CreateTable = new JMenuItem("Create Table");
-      static JMenuItem mi_UpdateTable = new JMenuItem("Update Table");
-      static JMenuItem mi_DeleteTables = new JMenuItem("Delete Tables");
-      static JMenuItem mi_DeleteThisTable = new JMenuItem("Delete this Table");
+      static JMenuItem mi_CreateTable = new MenuItemCustom("Create Table");
+      static JMenuItem mi_UpdateTable = new MenuItemCustom("Update Table");
+      static JMenuItem mi_DeleteTables = new MenuItemCustom("Delete Tables");
+      static JMenuItem mi_DeleteThisTable = new MenuItemCustom("Delete this Table");
       //+++++++++++++++++++++++++++++++++++
-      static JButton btn_minus = new smallBTN_C("-");
-      static JButton btn_plus = new smallBTN_C("+");
+      static JButton btn_minus = new ButtonGradient("-");
+      static JButton btn_plus = new ButtonGradient("+");
       static JButton[] btns_MC = new JButton[]{
-            new smallBTN_C("ADD"), new smallBTN_C("UPDATE"),
-            new smallBTN_C("DELETE"), new smallBTN_C("FIND")};
+            new ButtonGradient("ADD"), new ButtonGradient("UPDATE"),
+            new ButtonGradient("DELETE"), new ButtonGradient("FIND")};
       //+++++++++++++++++++++++++++++++++++
       static JToggleButton btn_Show_All = new JToggleButton("Show All");
 
       static JLabel lb_Title = new JLabel("No Table Selected");
       static JLabel[] lbs = new JLabel[DT.maxColumns];
+      
       static JPanel[] tfPanel = new JPanel[DT.maxColumns];
+      public static final String[] tfPanelTypes = {"JTextField", "JComboBox", "JTextField_Clock"};
+      public static final String[] tfPanelATypes = {"JTextField", "JComboBox", "JPanel"};
+      static CardLayout[] tfCL = new CardLayout[DT.maxColumns];
+      public static String[] tfPanelSelected = new String[]{
+            "JTextField", "JTextField", "JTextField", "JTextField", "JTextField", "JTextField"};
+      
       static JTextField[] tfs = new JTextField[DT.maxColumns];
+      
       static JTextField[] tfsE = new JTextField[DT.maxColumns];
-      static JComboBox[] cbs = new MComboBoxE[DT.maxColumns];
+      static JComboBox[] cbs = new ComboBoxE[DT.maxColumns];
+      
+      static JPanel[] pClocks = new JPanel[DT.maxColumns];
+      static JTextField[] tfClocks = new JTextField[DT.maxColumns];
+      
       static JButton[] btns_C = new JButton[DT.maxColumns];
       static JScrollPane[] scs = new JScrollPane[DT.maxColumns];
       static JList[] lsts = new JList[DT.maxColumns];
 
-      static JButton[] btns_TB = new JButton[]{new smallBTN_C(""), new smallBTN_C("")};
+      static JButton[] btns_TB = new JButton[]{new ButtonGradient(""), new ButtonGradient("")};
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      static JPanel[] clocksPanel = new JPanel[DT.maxColumns];
+      //static JPanel[] clocksPanel = new JPanel[DT.maxColumns];
       static JTextField[] tfs_MD = new JTextField[DT.maxColumns];
       static JTextField[] tfs_MU = new JTextField[DT.maxColumns];      
       static JTextField[] tfs_SD = new JTextField[DT.maxColumns];
@@ -142,21 +158,16 @@ public class VF_R_DataCom {
       static JLabel[] lb_2ds = new JLabel[DT.maxColumns];
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static JLabel lb_Status = new JLabel("Waiting for Action...");
+      
+      static JLabel[] lbs_Icons = new JLabel[DT.maxIcons];
       static JLabel lb_Icon = new JLabel("NO ICON SELECTED");
       static JLabel lb_PL = new JLabel("No Table Selected", SwingConstants.CENTER);
       static JLabel lb_JT = new JLabel("NO ROWS INSERTED", SwingConstants.CENTER);
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
       static boolean getDefault = true;
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-      static JTCustomCellRenderer JTCL = new JTCustomCellRenderer();
+      static TableCellRenderer JTCL = new TableCellRenderer();
       static JTextField tf_ce = new JTextField();
-      static DefaultCellEditor DTCellEditor = new DefaultCellEditor(tf_ce) {
-            @Override
-            public boolean isCellEditable(EventObject anEvent) {                  
-                  return MCell.getCharacterInputandDefault(anEvent, 
-                          super.isCellEditable(anEvent));
-            }
-      };
 
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
       public static JFrame getJF() {
@@ -219,6 +230,10 @@ public class VF_R_DataCom {
       public static JLabel getLB_Icon() {
             return lb_Icon;
       }
+      
+      public static JLabel[] getLBSIcons(){
+            return lbs_Icons;
+      }
 
       public static JProgressBar getJPB() {
             return JPB;
@@ -248,10 +263,6 @@ public class VF_R_DataCom {
       public static JLabel[] getLB_2DS() {
             return lb_2ds;
       }
-      
-      public static JPanel[] getClocks(){
-            return clocksPanel;
-      }
 
       public static JButton[] getBTNS_C() {
             return btns_C;
@@ -264,6 +275,9 @@ public class VF_R_DataCom {
       public static JPanel[] getJTFPanel(){
             return tfPanel;
       }
+      public static CardLayout[] getJTFPanelCL(){
+            return tfCL;
+      }
       
       public static JComboBox[] getJCBS(){
             return cbs;
@@ -275,6 +289,10 @@ public class VF_R_DataCom {
       
       public static JTextField[] getJTFES(){
             return tfsE;
+      }
+      
+      public static JTextField[] getJTF_CKS(){
+            return tfClocks;
       }
 
       public static JScrollPane[] getJSCS() {
@@ -325,6 +343,14 @@ public class VF_R_DataCom {
       public static JMenuItem getMI_ShowTablesInfo(){
             return mi_showTablesInfo;
       }
+      
+      public static JMenuItem getMi_ReloadImageC(){
+            return mi_ReloadImageC;
+      }
+      
+      public static JCheckBoxMenuItem getMI_ClearValuesWhenDeleted(){
+            return mi_ClearValuesWhenDeleted;
+      }
 
       public static JMenuItem getMI_CreateTable() {
             return mi_CreateTable;
@@ -364,11 +390,7 @@ public class VF_R_DataCom {
             return tf_ce;
       }
 
-      public static DefaultCellEditor getDTCellEditor() {
-            return DTCellEditor;
-      }
-
-      public static JTCustomCellRenderer getJTCL(){
+      public static TableCellRenderer getJTCL(){
             return JTCL;
       }
 }

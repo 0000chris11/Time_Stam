@@ -31,7 +31,6 @@ public class notMyMethods {
                         DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
                         TableColumn col = colModel.getColumn(i);
                         int width = 0;
-
                         TableCellRenderer renderer = col.getHeaderRenderer();
                         for (int r = 0; r < table.getRowCount(); r++) {
                               renderer = table.getCellRenderer(r, i);
