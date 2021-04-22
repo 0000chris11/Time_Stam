@@ -199,7 +199,7 @@ public class DTSQL {
       private static String User;
       public static final String rootUser = "root";
       private static String Passw;
-      public static final String rootPassw = "ccfmps00112";
+      public static final String rootPassw = null;
       //++++++++++++++++++++++++++++++++++++++
       private static boolean mainTableExist;
       private static boolean PKTableExist;
